@@ -4,14 +4,14 @@
 ## Codificação ##
 ###### As dúvidas devem ser retiradas junto dos colegas do grupo, é melhor para nós enquanto grupo, a dúvida de um pode ser a dúvida de todos e assim sabemos aquilo que cada um está a fazer, e onde tem mais dificuldades. ######
 ###### No caso de ninguém no grupo ser capaz de esclarecer uma dúvida, então ai sim devemos pedir ajuda ao docente que está na sala e comunicar aos outros a solução. ######
-##### Sempre que seja codificado um método, se se justificar, devemos pedir ao colega que reveja o código, de forma a verificar a sua legibilidade, ou até se é possível realizar uma simplificação. 
+###### Sempre que seja codificado um método, se se justificar, devemos pedir ao colega que reveja o código, de forma a verificar a sua legibilidade, ou até se é possível realizar uma simplificação. ######
 
 ## Testes Unitários ##
 ###### É obrigatório testar todos os métodos implementados no projeto, não é à toa que a empresa se chama "TestasOuChumbas". Não temos necessidade de perder pontos por preguiça, quando muitos dos testes são de fácil implementação. Os únicos métodos que não requerem testes, pertencem à UI e aos métodos de leitura e escrita de ficheiros (ainda que estes últimos, deviam também ser testados). ######
 
 ## Commits ##
 ###### Os commits devem ser, se possível, pequenos e bem comentados. #######
-* {{{ Implementado o método xpto(), que tem como função imprimir uma String de números. }}}
+* ```Implementado o método xpto(), que tem como função imprimir uma String de números. ```
 ###### Nunca se deve fazer commit de código que não esteja a funcionar a 100%, ou seja, TESTADO!!! ######
 ###### Todos os commits de métodos devem incluir, ser precedidos ou sucedidos dos testes unitários, sendo que o mais correto será fazer o commmit dos testes antes do método em si. #######
 
@@ -84,6 +84,3 @@ toString - Deve ser criada uma String com o resultado esperado e comparado ao m�
 
 ### Padrão adotado para a implementação(codificação, testes e commits) ###
 ###### A implementação do projeto será por *Use Cases*, estando os mesmos neste momento listados como issues, o facto de um determinado membro escolher implementar um *Use Case* especifico não significa que seja o único a trabalhar no mesmo, mas assume a responsabilidade de garantir que o mesmo contém tudo o que lhe é necessário para funcionar corretamente. ######
-
-
-
