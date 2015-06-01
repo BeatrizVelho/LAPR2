@@ -74,9 +74,55 @@
 ```
 
 ### Padrão adotado para os Testes Unitários ###
-...
 
-Construtores - Não se testam construtores a menos que estes tenham lógica.
-Setters & Getters - Devem ser testados em conjunto.
-toString - Deve ser criada uma String com o resultado esperado e comparado ao método.
+## Construtores ##
+###### Não se testam construtores a menos que estes tenham lógica.
 
+## Setters & Getters ##
+```
+#!java
+/*
+ * Teste dos métodos set e get do atributo [atributo], da classe [nome da classe].
+ */
+@Test
+public void testSetAndGet[atributo]() {
+  System.out.println("setAndGet[atributo]");
+  [nome da classe] instance = new [nome da classe]();
+  String texto = "texto";
+  instance.set[atributo](texto);
+  assertEquals(texto, instance.get[atributo]());
+}
+```
+###### Devem ser testados em conjunto. ######
+## toString ##
+Deve ser criada uma String com o resultado esperado e comparado ao método.
+```
+#!java
+/**
+ * Teste do método toString, da classe [nome da classe].
+ */
+@Test
+public void testToString() {
+  System.out.println("toString");
+  [nome da classe] instance = new [nome da classe]();
+  String expResult = "Texto esperado.";
+  String result = instance.toString();
+  assertEquals(expResult, result);
+}
+```
+## equals ##
+Devem ser criados dois objetos com os mesmo atributos e comparados através do método equals.
+```
+#!java
+/**
+ * Teste do método equals, da classe [nome da classe].
+ */
+@Test
+public void testEquals() {
+  System.out.println("equals");
+  Object outroObjeto = new [nome da classe]();
+  [nome da classe] instance = new [nome da classe]();
+  boolean expResult = true;
+  assertEquals(expResult, instance.equals(outroObjeto));
+}
+```
