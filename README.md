@@ -1,5 +1,7 @@
 # Sistema de Gestão de Eventos Científicos #
 
+### Padrão adotado para a implementação(codificação, testes e commits) ###
+###### A implementação do projeto será por *Use Cases*, estando os mesmos neste momento listados como issues, o facto de um determinado membro escolher implementar um *Use Case* especifico não significa que seja o único a trabalhar no mesmo, mas assume a responsabilidade de garantir que o mesmo contém tudo o que lhe é necessário para funcionar corretamente. ###
 
 ## Codificação ##
 ###### As dúvidas devem ser retiradas junto dos colegas do grupo, é melhor para nós enquanto grupo, a dúvida de um pode ser a dúvida de todos e assim sabemos aquilo que cada um está a fazer, e onde tem mais dificuldades. ######
@@ -78,9 +80,3 @@ Construtores - Não se testam construtores a menos que estes tenham lógica.
 Setters & Getters - Devem ser testados em conjunto.
 toString - Deve ser criada uma String com o resultado esperado e comparado ao método.
 
-
-
-
-
-### Padrão adotado para a implementação(codificação, testes e commits) ###
-###### A implementação do projeto será por *Use Cases*, estando os mesmos neste momento listados como issues, o facto de um determinado membro escolher implementar um *Use Case* especifico não significa que seja o único a trabalhar no mesmo, mas assume a responsabilidade de garantir que o mesmo contém tudo o que lhe é necessário para funcionar corretamente. ######
