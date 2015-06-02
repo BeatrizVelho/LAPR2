@@ -33,22 +33,22 @@ public class Utilizador implements Serializable {
     /**
      * Nome do Utilizador por omissão.
      */
-    private static final String NOME_POR_OMISSAO = "";
+    private static final String NOME_POR_OMISSAO = "Sem nome";
 
     /**
      * Email do Utilizador por omissão.
      */
-    private static final String EMAIL_POR_OMISSAO = "";
+    private static final String EMAIL_POR_OMISSAO = "Sem email";
 
     /**
      * Username do Utilizador por omissão.
      */
-    private static final String USERNAME_POR_OMISSAO = "";
+    private static final String USERNAME_POR_OMISSAO = "Sem username";
 
     /**
      * Password do Utilizador por omissão.
      */
-    private static final String PASSWORD_POR_OMISSAO = "";
+    private static final String PASSWORD_POR_OMISSAO = "Sem password";
 
     /**
      * Constrói uma instância de utilizador recebendo um nome, um email, um
@@ -60,10 +60,10 @@ public class Utilizador implements Serializable {
      * @param password Password do utilizador.
      */
     public Utilizador(String nome, String email, String username, String password) {
-        this.nome = nome;
-        this.email = email;
-        this.username = username;
-        this.password = password;
+        setNome(nome);
+        setEmail(email);
+        setUsername(username);
+        setPassword(password);
     }
 
     /**
@@ -116,7 +116,22 @@ public class Utilizador implements Serializable {
      */
     public void setNome(String nome) {
         if (nome.trim().isEmpty()) {
-            throw new IllegalArgumentException("Nome do utilizador invalido!");
+            throw new IllegalArgumentException("Nome do utilizador nao pode"
+                                + " estar vazio");
+        }
+        if (nome.contains("[0-9]+")) {
+
+            throw new IllegalArgumentException("Nome do utilizador nao pode "
+                                + "conter numeros");
+        }
+        if (nome.length() < 2) {
+            throw new IllegalArgumentException("Nome do utilizador tem de"
+                                + " ter pelo menos 2 letras");
+
+        }
+        if (nome.contains("[()<>,;:.\\[\\]{}]\\\\\\\\")) {
+            throw new IllegalArgumentException("Nome do utilizador nao pode "
+                                + "conter caracteres");
         }
         this.nome = nome;
     }
@@ -128,8 +143,19 @@ public class Utilizador implements Serializable {
      */
     public void setEmail(String email) {
         if (email.trim().isEmpty()) {
-            throw new IllegalArgumentException("Email do utilizador invalido!");
+            throw new IllegalArgumentException("Email do utilizador não "
+                                + "pode estar vazio.");
         }
+        if (email.contains("[()<>,;:.\\[\\]{}]\\\\\\\\")) {
+            throw new IllegalArgumentException("Email do "
+                                + "utilizador não pode conter "
+                                + "caracteres.");
+        }
+        if (!(email.matches(".+@.+\\..{2,}"))) {
+            throw new IllegalArgumentException("Email do utilizador"
+                                + " tem de obedecer a estrutura");
+        }
+
         this.email = email;
     }
 
@@ -140,9 +166,15 @@ public class Utilizador implements Serializable {
      */
     public void setUsername(String username) {
         if (username.trim().isEmpty()) {
-            throw new IllegalArgumentException(
-                                "Username do utilizador invalido!");
+            throw new IllegalArgumentException("Username do utilizador não "
+                                + "pode estar vazio.");
         }
+        if (username.contains("[()<>,;:.\\[\\]{}]\\\\\\\\")) {
+            throw new IllegalArgumentException("Username do "
+                                + "utilizador não pode conter "
+                                + "caracteres.");
+        }
+
         this.username = username;
     }
 
@@ -153,10 +185,40 @@ public class Utilizador implements Serializable {
      */
     public void setPassword(String password) {
         if (password.trim().isEmpty()) {
+            throw new IllegalArgumentException("Password do utilizador não "
+                                + "pode estar vazio.");
+        }
+        if (password.contains("[()<>,;:.\\[\\]{}]\\\\\\\\")) {
+            throw new IllegalArgumentException("Password do "
+                                + "utilizador não pode conter "
+                                + "caracteres.");
+        }
+        if (password.trim().isEmpty()) {
             throw new IllegalArgumentException(
                                 "Password do utilizador invalida!");
         }
         this.password = password;
+    }
+/**
+ * Valida a instancia de Utilizador, verificando se todos os seus atributos se
+ * encontram devidamente preenchidos, se o username e email não forem iguais 
+ * e se todos os atributos forem diferentes dos valores por omissão
+ * @return false se não cumprir os criterios pretendidos e true se cumprir 
+ * todos os criterios 
+ */
+    public boolean validaUtilizador() {
+        if (this.nome.isEmpty() && this.nome == NOME_POR_OMISSAO) {
+            return false;
+        }
+        if (this.email.isEmpty() && this.email == this.username && this.email == EMAIL_POR_OMISSAO) {
+            return false;
+        }
+        if (this.username.isEmpty() && this.username == USERNAME_POR_OMISSAO) {
+        }
+        if (this.password.isEmpty() && this.password == PASSWORD_POR_OMISSAO) {
+            return false;
+        }
+        return true;
     }
 
     /**
