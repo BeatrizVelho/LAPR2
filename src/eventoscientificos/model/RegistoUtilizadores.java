@@ -12,11 +12,11 @@ import java.util.List;
  *
  * @author G01
  */
-public class RegistoUtilizador {
+public class RegistoUtilizadores {
 
     private List<Utilizador> listaUtilizadores;
 
-    public RegistoUtilizador() {
+    public RegistoUtilizadores() {
 
         this.listaUtilizadores = new ArrayList<>();
     }
@@ -55,7 +55,7 @@ public class RegistoUtilizador {
     }
 
     public static void main(String[] args) {
-        RegistoUtilizador ru = new RegistoUtilizador();
+        RegistoUtilizadores ru = new RegistoUtilizadores();
         Utilizador u = ru.novoUtilizador("susana", "mail@mail.com", "susu", "1234");
         boolean adicionado = ru.adicionaUtilizador(u);
         System.out.println(adicionado);
