@@ -51,5 +51,34 @@ public class RevisorTest {
 
     }
 
+    /**
+     * Teste do método equals, da classe Revisor.
+     */
+    @Test
+    public void testEquals() {
+        System.out.println("equals");
+        Object outroObjeto = new Revisor(new Utilizador(
+                "Tiago", "1131658@isep.ipp.pt", "tiago", "1234"));
+        Revisor instance = new Revisor(new Utilizador(
+                "Tiago", "1131658@isep.ipp.pt", "tiago", "1234"));
+        boolean expResult = true;
+        boolean result = instance.equals(outroObjeto);
+        assertEquals(expResult, result);
+    }
 
+    /**
+     * Teste do método equals, da classe Revisor, para revisores diferentes.
+     */
+    @Test
+    public void testEqualsNot() {
+        System.out.println("equalsNot");
+        Object outroObjeto = new Revisor(new Utilizador(
+                "Miguel", "0000000@isep.ipp.pt", "miguel", "4321"));
+        Revisor instance = new Revisor(new Utilizador(
+                "Tiago", "1131658@isep.ipp.pt", "tiago", "1234"));
+        boolean expResult = false;
+        boolean result = instance.equals(outroObjeto);
+        assertEquals(expResult, result);
+
+    }
 }
