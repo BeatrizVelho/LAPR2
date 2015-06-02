@@ -13,16 +13,16 @@ import static org.junit.Assert.*;
  *
  * @author G01
  */
-public class RegistoUtilizadorTest {
+public class RegistoUtilizadoresTest {
 
     /**
      * Construtor do registoUtilizador teste
      */
-    public RegistoUtilizadorTest() {
+    public RegistoUtilizadoresTest() {
     }
 
     /**
-     * Teste ao metodo novoUtilizador da classe RegistoUtilizador.
+     * Teste ao metodo novoUtilizador da classe RegistoUtilizadores.
      */
     @Test
     public void testNovoUtilizador() {
@@ -31,7 +31,7 @@ public class RegistoUtilizadorTest {
         String email = "rita_susana@email.com";
         String username = "rita";
         String password = "1234";
-        RegistoUtilizador instance = new RegistoUtilizador();
+        RegistoUtilizadores instance = new RegistoUtilizadores();
         Utilizador expResult = new Utilizador(nome, email, username, password);
         Utilizador result = instance.novoUtilizador(nome, email, username, password);
         assertEquals(expResult, result);
@@ -39,14 +39,14 @@ public class RegistoUtilizadorTest {
     }
 
     /**
-     * Teste ao metodo AdicionarUtilizador da classe RegistoUtilizador.
+     * Teste ao metodo AdicionarUtilizador da classe RegistoUtilizadores.
      *
      */
     @Test
     public void testAdicionaUtilizador() {
         System.out.println("adicionaUtilizador");
         Utilizador u = new Utilizador("Sususana", "email@gmail.com", "susus", "1234");
-        RegistoUtilizador instance = new RegistoUtilizador();
+        RegistoUtilizadores instance = new RegistoUtilizadores();
         boolean expResult = true;
         boolean result = instance.adicionaUtilizador(u);
         assertEquals(expResult, result);
