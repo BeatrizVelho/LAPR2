@@ -32,20 +32,6 @@ public class Proponente {
         return this.utilizador;
     }
 
-    /**
-     * Valida um proponente de forma a garantir que o mesmo possui os dados
-     * corretos.
-     *
-     * @return Verdadeiro se possuir os dados corretos e falso caso não possua.
-     */
-    public boolean validarProponente() {
-        if (this.utilizador == null) {
-            throw new NullPointerException("O utilizador não pode estar vazio");
-        }
-
-        return true;
-    }
-
     /*
      * Compara dois objetos entre si. Comparando primariamente a posição de 
      * memória, seguida do conteudo e das classes as quais cada um deles 
@@ -68,6 +54,20 @@ public class Proponente {
         Proponente outroProponente = (Proponente) outroObjeto;
 
         return this.getUtilizador().equals(outroProponente.getUtilizador());
+    }
+
+    /**
+     * Valida um proponente de forma a garantir que o mesmo possui os dados
+     * corretos.
+     *
+     * @return Verdadeiro se possuir os dados corretos e falso caso não possua.
+     */
+    public boolean validarProponente() {
+        if (this.utilizador == null) {
+            throw new NullPointerException("O utilizador não pode estar vazio");
+        }
+
+        return true;
     }
 
 }
