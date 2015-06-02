@@ -45,6 +45,28 @@ public class Revisor {
         return true;
     }
 
-    
+    /**
+     * Compara dois objetos entre si. Comparando primariamente a posição de
+     * memória, seguida do conteudo e das classes as quais cada um deles
+     * pertence, e finalmente o utilizador que assume o papel de revisor em cada
+     * um deles.
+     *
+     * @param outroObjeto Revisor que vai ser usado na comparação.
+     * @return Verdadeiro caso os objetos comparados sejam iguais e falso caso
+     * não o sejam.
+     */
+    public boolean equals(Object outroObjeto) {
+        if (this == outroObjeto) {
+            return true;
+        }
+
+        if (outroObjeto == null || this.getClass() != outroObjeto.getClass()) {
+            return false;
+        }
+
+        Revisor outroRevisor = (Revisor) outroObjeto;
+
+        return this.getUtilizador().equals(outroRevisor.getUtilizador());
+    }
 
 }
