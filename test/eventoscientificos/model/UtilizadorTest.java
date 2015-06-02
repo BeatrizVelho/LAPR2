@@ -145,15 +145,15 @@ public class UtilizadorTest {
     }
 
     /**
-     * Teste do método validaUtilizador, da classe Utilizador, serve para
-     * veificar se o utilizador esta completamente preenchido
+     * Teste do método validarUtilizador, da classe Utilizador, serve para
+ veificar se o utilizador esta completamente preenchido
      */
     @Test
     public void testValidaUtilizador() {
         System.out.println("validaUtilizador");
         Utilizador instance = new Utilizador("susana", "freitas@gmail.com", "susu", "12345");
         boolean expResult = true;
-        boolean result = instance.validaUtilizador();
+        boolean result = instance.validarUtilizador();
         assertEquals(expResult, result);
 
     }
