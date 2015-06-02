@@ -41,7 +41,7 @@ public class RegistoUtilizadores {
      */
     public Utilizador novoUtilizador(String nome, String email, String username, String password) {
         Utilizador u = new Utilizador(nome, email, username, password);
-        if (!u.validaUtilizador()) {
+        if (!u.validarUtilizador()) {
             throw new IllegalArgumentException(" Utilizador invalido");
         }
         if (!validarUtilizador(u)) {

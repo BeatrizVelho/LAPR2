@@ -205,7 +205,7 @@ public class Utilizador {
      *
      * @return Verdadeiro se o objeto for válido e falso caso não seja.
      */
-    public boolean validaUtilizador() {
+    public boolean validarUtilizador() {
         return (this.nome.equals(NOME_POR_OMISSAO)
                             || this.email.equals(EMAIL_POR_OMISSAO)
                             || this.username.equals(USERNAME_POR_OMISSAO)
