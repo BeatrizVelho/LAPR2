@@ -1,14 +1,12 @@
 package eventoscientificos.model;
 
-import java.io.Serializable;
-
 /**
  * Representa uma instância de um utilizador através de um nome, de um email, de
  * um username e de uma password.
  *
  * @author G01
  */
-public class Utilizador implements Serializable {
+public class Utilizador {
 
     /**
      * Nome do Utilizador.
@@ -60,7 +58,7 @@ public class Utilizador implements Serializable {
      * @param password Password do utilizador.
      */
     public Utilizador(
-            String nome, String email, String username, String password) {
+                        String nome, String email, String username, String password) {
         setNome(nome);
         setEmail(email);
         setUsername(username);
@@ -72,10 +70,10 @@ public class Utilizador implements Serializable {
      */
     public Utilizador() {
         this(
-                Utilizador.NOME_POR_OMISSAO,
-                Utilizador.EMAIL_POR_OMISSAO,
-                Utilizador.USERNAME_POR_OMISSAO,
-                Utilizador.PASSWORD_POR_OMISSAO);
+                            Utilizador.NOME_POR_OMISSAO,
+                            Utilizador.EMAIL_POR_OMISSAO,
+                            Utilizador.USERNAME_POR_OMISSAO,
+                            Utilizador.PASSWORD_POR_OMISSAO);
     }
 
     /**
@@ -122,21 +120,21 @@ public class Utilizador implements Serializable {
     public void setNome(String nome) {
         if (nome.trim().isEmpty()) {
             throw new IllegalArgumentException("Nome do utilizador nao pode"
-                    + " estar vazio");
+                                + " estar vazio");
         }
         if (nome.contains("[0-9]+")) {
 
             throw new IllegalArgumentException("Nome do utilizador nao pode "
-                    + "conter numeros");
+                                + "conter numeros");
         }
         if (nome.length() < 2) {
             throw new IllegalArgumentException("Nome do utilizador tem de"
-                    + " ter pelo menos 2 letras");
+                                + " ter pelo menos 2 letras");
 
         }
         if (nome.contains("[()<>,;:.\\[\\]{}]\\\\\\\\")) {
             throw new IllegalArgumentException("Nome do utilizador nao pode "
-                    + "conter caracteres");
+                                + "conter caracteres");
         }
         this.nome = nome;
     }
@@ -149,16 +147,16 @@ public class Utilizador implements Serializable {
     public void setEmail(String email) {
         if (email.trim().isEmpty()) {
             throw new IllegalArgumentException("Email do utilizador não "
-                    + "pode estar vazio.");
+                                + "pode estar vazio.");
         }
         if (email.contains("[()<>,;:.\\[\\]{}]\\\\\\\\")) {
             throw new IllegalArgumentException("Email do "
-                    + "utilizador não pode conter "
-                    + "caracteres.");
+                                + "utilizador não pode conter "
+                                + "caracteres.");
         }
         if (!(email.matches(".+@.+\\..{2,}"))) {
             throw new IllegalArgumentException("Email do utilizador"
-                    + " tem de obedecer a estrutura");
+                                + " tem de obedecer a estrutura");
         }
 
         this.email = email;
@@ -172,12 +170,12 @@ public class Utilizador implements Serializable {
     public void setUsername(String username) {
         if (username.trim().isEmpty()) {
             throw new IllegalArgumentException("Username do utilizador não "
-                    + "pode estar vazio.");
+                                + "pode estar vazio.");
         }
         if (username.contains("[()<>,;:.\\[\\]{}]\\\\\\\\")) {
             throw new IllegalArgumentException("Username do "
-                    + "utilizador não pode conter "
-                    + "caracteres.");
+                                + "utilizador não pode conter "
+                                + "caracteres.");
         }
 
         this.username = username;
@@ -191,12 +189,12 @@ public class Utilizador implements Serializable {
     public void setPassword(String password) {
         if (password.trim().isEmpty()) {
             throw new IllegalArgumentException("Password do utilizador não "
-                    + "pode estar vazia.");
+                                + "pode estar vazia.");
         }
         if (password.contains("[()<>,;:.\\[\\]{}]\\\\\\\\")) {
             throw new IllegalArgumentException("Password do "
-                    + "utilizador não pode conter "
-                    + "caracteres.");
+                                + "utilizador não pode conter "
+                                + "caracteres.");
         }
         this.password = password;
     }
@@ -208,20 +206,10 @@ public class Utilizador implements Serializable {
      * @return Verdadeiro se o objeto for válido e falso caso não seja.
      */
     public boolean validaUtilizador() {
-        if (this.nome.equals(NOME_POR_OMISSAO)) {
-            return false;
-        }
-        if (this.email.equals(EMAIL_POR_OMISSAO)) {
-            return false;
-        }
-        if (this.username.equals(USERNAME_POR_OMISSAO)) {
-            return false;
-        }
-        if (this.password.equals(PASSWORD_POR_OMISSAO)) {
-            return false;
-        }
-        
-        return true;
+        return (this.nome.equals(NOME_POR_OMISSAO)
+                            || this.email.equals(EMAIL_POR_OMISSAO)
+                            || this.username.equals(USERNAME_POR_OMISSAO)
+                            || this.password.equals(PASSWORD_POR_OMISSAO));
     }
 
     /**
@@ -257,10 +245,10 @@ public class Utilizador implements Serializable {
     @Override
     public String toString() {
         return String.format(""
-                + "O utlizador esta registado com os seguintes "
-                + "dados: nome %s, username %s, o email %s "
-                + "e as password %s", this.nome,
-                this.username, this.email, this.password);
+                            + "O utlizador esta registado com os seguintes "
+                            + "dados: nome %s, username %s, o email %s "
+                            + "e as password %s", this.nome,
+                            this.username, this.email, this.password);
     }
 
 }
