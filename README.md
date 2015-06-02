@@ -111,7 +111,7 @@ public void testToString() {
 }
 ```
 ## equals ##
-Devem ser criados dois objetos com os mesmo atributos e comparados através do método equals.
+Devem ser criados dois objetos com os mesmo atributos e comparados através do método equals de duas maneiras.
 ```
 #!java
 /**
@@ -123,6 +123,20 @@ public void testEquals() {
   Object outroObjeto = new [nome da classe]();
   [nome da classe] instance = new [nome da classe]();
   boolean expResult = true;
+  assertEquals(expResult, instance.equals(outroObjeto));
+}
+```
+
+#!java
+/**
+ * Teste do método equals, da classe [nome da classe].
+ */
+@Test
+public void testEqualsNot() {
+  System.out.println("equalsNot");
+  Object outroObjeto = new [nome da classe]();
+  [nome da classe] instance = new [nome da classe]();
+  boolean expResult = false;
   assertEquals(expResult, instance.equals(outroObjeto));
 }
 ```
