@@ -1,11 +1,12 @@
 package eventoscientificos.model;
 
+import Model.EventoState.EventoState;
 import java.util.Date;
 
 /**
  * @author G01
  */
-public class Evento {
+public class Evento implements EventoState {
 
     /**
      * Título do Evento
@@ -47,6 +48,11 @@ public class Evento {
      */
     private Date dataInicioDistribuicao;
 
+    /**
+     * Instância de EventoState
+     */
+    private EventoState e_state;
+    
     /**
      * Título do Evento por omissao
      */
@@ -136,8 +142,9 @@ public class Evento {
     }
 
     /**
+     * Modifica o titulo do evento
      * 
-     * @param titulo 
+     * @param titulo Novo titulo do evento
      */
     public void setTitulo(String titulo) {
         if (titulo.trim().isEmpty()) {
@@ -145,4 +152,87 @@ public class Evento {
         }
         this.titulo = titulo;
     }
+    
+    /**
+     * Modific a descricao do evento
+     * 
+     * @param descricao Nova descricao do evento
+     */
+    public void setDescricao(String descricao) {
+        if(descricao.trim().isEmpty()) {
+            throw new IllegalArgumentException("A desricao não pode estar vazia");
+        }
+        this.descricao = descricao;
+    }
+
+    @Override
+    public boolean setEventoCriado() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean setEventoRegistado() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean setEventoSTcriada() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean setEventoCPCriada() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean setEventoEmSubmissao() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean setEventoSubmetido() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean setEventoEmDetecaoConflitos() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean setEventoEmLicitacao() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean setEventoLicitado() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean setEventoEmDistribuicao() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean setEventoDistribuido() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean setEventoFaseDecisao() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean setEventoDecidico() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean valida() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }
