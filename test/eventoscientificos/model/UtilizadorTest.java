@@ -17,8 +17,8 @@ public class UtilizadorTest {
     @Test
     public void testSetAndGetNome() {
         System.out.println("SetAndGetNome");
-        Utilizador instance = new Utilizador();
-        String expResult = "Pedro";
+        Utilizador instance = new Utilizador("Pedro", "email@gmail.com", "username", "password");
+        String expResult = "Susana";
         instance.setNome(expResult);
         assertEquals(expResult, instance.getNome());
     }
@@ -29,7 +29,7 @@ public class UtilizadorTest {
     @Test
     public void testSetAndGetEmail() {
         System.out.println("SetAndGetEmail");
-        Utilizador instance = new Utilizador();
+        Utilizador instance = new Utilizador("Pedro", "email@gmail.com", "username", "password");
         String expResult = "freitas.soraia@gmail.com";
         instance.setEmail(expResult);
         assertEquals(expResult, instance.getEmail());
@@ -41,7 +41,7 @@ public class UtilizadorTest {
     @Test
     public void testSetAndGetUsername() {
         System.out.println("SetAndGetUsername");
-        Utilizador instance = new Utilizador();
+        Utilizador instance = new Utilizador("Pedro", "email@gmail.com", "username", "password");
         String expResult = "frafra";
         instance.setUsername(expResult);
         assertEquals(expResult, instance.getUsername());
@@ -53,7 +53,7 @@ public class UtilizadorTest {
     @Test
     public void testSetAndGetPassword() {
         System.out.println("SetAndGetPassword");
-        Utilizador instance = new Utilizador();
+        Utilizador instance = new Utilizador("Pedro", "email@gmail.com", "username", "password");
         String expResult = "1234";
         instance.setPassword(expResult);
         assertEquals(expResult, instance.getPassword());
@@ -130,9 +130,9 @@ public class UtilizadorTest {
         boolean expResult = true;
         assertEquals(expResult, instance.equals(outroObjeto));
     }
-    
+
     /**
-     * Teste do método equals, da classe Utilizador, para utilizadores 
+     * Teste do método equals, da classe Utilizador, para utilizadores
      * diferentes.
      */
     @Test
@@ -142,6 +142,20 @@ public class UtilizadorTest {
         Utilizador instance = new Utilizador("Soraia", "freitas.soraia@gmal.com", "frafra", "1234");
         boolean expResult = false;
         assertEquals(expResult, instance.equals(outroObjeto));
+    }
+
+    /**
+     * Teste do método validaUtilizador, da classe Utilizador, serve para
+     * veificar se o utilizador esta completamente preenchido
+     */
+    @Test
+    public void testValidaUtilizador() {
+        System.out.println("validaUtilizador");
+        Utilizador instance = new Utilizador("susana", "freitas@gmail.com", "susu", "12345");
+        boolean expResult = true;
+        boolean result = instance.validaUtilizador();
+        assertEquals(expResult, result);
+
     }
 
 }
