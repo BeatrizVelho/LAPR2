@@ -1,6 +1,5 @@
 package eventoscientificos.model;
 
-import eventoscientificos.EventoState.EventoCriadoState;
 import eventoscientificos.EventoState.EventoState;
 import java.util.ArrayList;
 import java.util.List;
@@ -62,6 +61,11 @@ public class Evento {
     private EventoState estado;
 
     /**
+     * CP do evento.
+     */
+    private CP cp;
+
+    /**
      * Constrói uma instância de evento recebendo um titulo, descricao, local,
      * data de inicio, data de fim, data de inicio de submissao, data fim de
      * submissao, data de inicio de distribuicao.
@@ -86,7 +90,6 @@ public class Evento {
         setDataInicioDistribuicao(dataInicioDistribuicao);;
         setDataInicio(dataInicio);
         setDataFim(dataFim);
-        setState(new EventoCriadoState(this));
         this.listaOrganizadores = new ArrayList<>();
     }
 
@@ -116,6 +119,7 @@ public class Evento {
     public Local getLocal() {
         return this.local;
     }
+
     /**
      * Devolve a data de inicio de submissao do evento.
      *
@@ -142,7 +146,7 @@ public class Evento {
     public Data getDataInicioDistribuicao() {
         return this.dataInicioDistribuicao;
     }
-    
+
     /**
      * Devolve a data de inicio do evento.
      *
@@ -162,12 +166,12 @@ public class Evento {
     }
 
     /**
-     * Devolve o estado do evento.
-     * 
-     * @return Estado do evento.
+     * Devolve a CP da sessão temática.
+     *
+     * @return CP do evento.
      */
-    public EventoState getEstado() {
-        return this.estado;
+    public CP getCP() {
+        return this.cp;
     }
 
     /**
@@ -202,7 +206,7 @@ public class Evento {
     public void setLocal(Local local) {
         this.local = local;
     }
-    
+
     /**
      * Modifica a data de inicio de submissao do evento.
      *
@@ -213,7 +217,7 @@ public class Evento {
             throw new NullPointerException("A data de inicio de submissão não pode"
                     + "estar vazia.");
         }
-        if(!dataInicioSubmissao.isMaior(Data.dataAtual())) {
+        if (!dataInicioSubmissao.isMaior(Data.dataAtual())) {
             throw new IllegalArgumentException("Data de inicio de submissao "
                     + "invalida");
         }
@@ -230,8 +234,8 @@ public class Evento {
             throw new NullPointerException("A data de fim de submissão não pode"
                     + "estar vazia.");
         }
-        
-        if(!dataFimSubmissao.isMaior(this.dataInicioSubmissao)) {
+
+        if (!dataFimSubmissao.isMaior(this.dataInicioSubmissao)) {
             throw new IllegalArgumentException("Data de fim de submissao "
                     + "invalida");
         }
@@ -249,7 +253,7 @@ public class Evento {
             throw new NullPointerException("A data de inicio de distribuicao não"
                     + " pode estar vazia.");
         }
-        if(!dataInicioDistribuicao.isMaior(this.dataFimSubmissao)) {
+        if (!dataInicioDistribuicao.isMaior(this.dataFimSubmissao)) {
             throw new IllegalArgumentException("Data de inicio de distribuicao "
                     + "invalida");
         }
@@ -266,7 +270,7 @@ public class Evento {
             throw new NullPointerException("A data de inicio do evento não pode"
                     + "estar vazia.");
         }
-        if(!dataInicio.isMaior(this.dataInicioDistribuicao)) {
+        if (!dataInicio.isMaior(this.dataInicioDistribuicao)) {
             throw new IllegalArgumentException("Data de inicio do evento "
                     + "invalida");
         }
@@ -283,7 +287,7 @@ public class Evento {
             throw new NullPointerException("A data de fim do evento não pode"
                     + "estar vazia.");
         }
-        if(!dataFim.isMaior(dataInicio)) {
+        if (!dataFim.isMaior(dataInicio)) {
             throw new IllegalArgumentException("Data de fim do evento "
                     + "invalida");
         }
@@ -291,12 +295,21 @@ public class Evento {
     }
 
     /**
-     * Modifica o estado do evento.
+     * Muda o estado do evento.
      *
      * @param novoEstado Novo estado do evento.
      */
     public void setState(EventoState novoEstado) {
         this.estado = novoEstado;
+    }
+
+    /**
+     * Modifica a CP do evento.
+     *
+     * @param cp Nova CP do evento.
+     */
+    public void setCp(CP cp) {
+        this.cp = cp;
     }
 
     /**
