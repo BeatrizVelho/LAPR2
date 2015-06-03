@@ -100,7 +100,8 @@ public class EventoTest {
     }
 
     /**
-     * Teste dos metodos set e get da data de fim de submissao, da classe Evento.
+     * Teste dos metodos set e get da data de fim de submissao, da classe
+     * Evento.
      */
     @Test
     public void testSetAndGetDataFimSubmissao() {
@@ -125,7 +126,19 @@ public class EventoTest {
         Data result = instance.getDataInicioDistribuicao();
         assertEquals(expResult, result);
     }
-    
+
+    /**
+     * Teste dos metodos set e get da CP,da classe Evento.
+     */
+    @Test
+    public void testSetAndGetCP() {
+        System.out.println("setAndGetCP");
+        Evento instance = this.evento;
+        CP expResult = new CP();
+        instance.setCp(expResult);
+        assertEquals(expResult, instance.getCP());
+    }
+
     /**
      * Teste do metodo setTitulo, da classe Evento.
      */
