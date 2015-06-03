@@ -178,7 +178,7 @@ public class Evento {
 
     /**
      * Devolve o estado do evento.
-     * 
+     *
      * @return Estado do evento.
      */
     public EventoState getEstado() {
@@ -397,6 +397,28 @@ public class Evento {
      * @return Verdadeiro se o objeto for válido e falso caso não seja.
      */
     public boolean validarEvento() {
+        return true;
+    }
+
+    /**
+     * Cria uma instância de CP vazia.
+     *
+     * @return CP
+     */
+    public CP novaCp() {
+        return new CP();
+    }
+
+    /**
+     * Adiciona uma nova CP ao evento.
+     *
+     * @param cp CP a adicionar ao evento.
+     * @return Verdadeiro caso a CP tenha sido adicionada à sessão temática e
+     * falso se a adição falhar.
+     */
+    public boolean adicionarCP(CP cp) {
+        setCp(cp);
+
         return true;
     }
 
