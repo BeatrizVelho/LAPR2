@@ -126,7 +126,7 @@ public void testEquals() {
   assertEquals(expResult, instance.equals(outroObjeto));
 }
 ```
-
+```
 #!java
 /**
  * Teste do método equals, da classe [nome da classe].
