@@ -311,6 +311,15 @@ public class Evento {
         }
         this.dataInicioDistribuicao = dataInicioDistribuicao;
     }
+    
+    /**
+     * Muda o estado do evento
+     * 
+     * @param e_state Novo estado do evento
+     */
+    public void setState(EventoState e_state) {
+        this.e_state = e_state;
+    }
 
     /**
      * Compara dois objetos entre si. Comparando primariamente a posição de
