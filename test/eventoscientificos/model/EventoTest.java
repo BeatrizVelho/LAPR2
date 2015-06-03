@@ -316,4 +316,29 @@ public class EventoTest {
         assertEquals(expResult, result);
     }
 
+    /**
+     * Teste do método novaCP, da classe Evento.
+     */
+    @Test
+    public void testNovaCP() {
+        System.out.println("novaCP");
+        Evento instance = this.evento;
+        CP expResult = new CP();
+        CP result = instance.novaCp();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste ao metodo adicionarCP, da classe Evento.
+     */
+    @Test
+    public void testAdicionarCP() {
+        System.out.println("adicionarCP");
+        Evento instance = this.evento;
+        CP cp = new CP();
+        boolean expResult = true;
+        boolean result = instance.adicionarCP(cp);
+        assertEquals(expResult, result);
+    }
+
 }
