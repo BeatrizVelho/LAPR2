@@ -24,7 +24,7 @@ public class LocalTest {
     }
 
     /**
-     * Teste do método toString, da classe Local.
+     * Teste do método toString, da classe Local..
      */
     @Test
     public void testToString() {
@@ -34,5 +34,17 @@ public class LocalTest {
         String result = instance.toString();
         assertEquals(expResult, result);
     }
+    
+        /**
+     * Teste do metodo setLocal, da classe Evento.
+     */
+    @Test(expected = NullPointerException.class)
+    public void testSetLocalNull() {
+        System.out.println("setLocalNull");
+        String local = null;
+        Local instance = new Local("isep");
+        instance.setNomeLocal(local);
+    }
+    
     
 }
