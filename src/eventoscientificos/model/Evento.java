@@ -1,8 +1,7 @@
 package eventoscientificos.model;
 
-import Model.EventoState.EventoState;
+import eventoscientificos.EventoState.EventoState;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import utils.Data;
 
@@ -57,9 +56,9 @@ public class Evento {
     private List<Organizador> listaOrganizadores;
 
     /**
-     * Instância de EventoState
+     * Estado do evento
      */
-    private EventoState e_state;
+    private EventoState estado;
 
     /**
      * Título do Evento por omissao
@@ -315,10 +314,10 @@ public class Evento {
     /**
      * Muda o estado do evento
      * 
-     * @param e_state Novo estado do evento
+     * @param novoEstado Novo estado do evento
      */
-    public void setState(EventoState e_state) {
-        this.e_state = e_state;
+    public void setState(EventoState novoEstado ){
+        this.estado = novoEstado;
     }
 
     /**
@@ -372,7 +371,7 @@ public class Evento {
      * @param organizador instancia de organizador a verificar
      * @return true caso nao conste na lista e false se conste
      */
-    public boolean validarOrganizador(Organizador organizador) {
+    private boolean validarOrganizador(Organizador organizador) {
         return !this.listaOrganizadores.contains(organizador);
     }
 
@@ -383,8 +382,25 @@ public class Evento {
      * @param o instancia de organizador a adicionar
      * @return true caso seja adicionado e false se nao for adicionado
      */
-    public boolean adicionarOganizador(Organizador o) {
+    private boolean adicionarOganizador(Organizador o) {
         return this.listaOrganizadores.add(o);
     }
 
+    /**
+     * Valida o Evento, verificando se todos os seus atributos se
+     * encontram devidamente preenchidos.
+     * 
+     * @return Verdadeiro se o objeto for válido e falso caso não seja.
+     */
+    public boolean validarEvento() {
+        return !(this.getTitulo().equals(TITULO_POR_OMISSAO) ||
+                this.getDescricao().equals(DESCRICAO_POR_OMISSAO) ||
+                this.getLocal().equals(LOCAL_POR_OMISSAO) ||
+                this.getDataInicio().equals(DATAINICIO_POR_OMISSAO) ||
+                this.getDataFim().equals(DATAFIM_POR_OMISSAO) ||
+                this.getDataInicioSubmissao().equals(DATAINICIOSUBMISSAO_POR_OMISSAO) ||
+                this.getDataFimSubmissao().equals(DATAFIMSUBMISSAO_POR_OMISSAO) ||
+                this.getDataInicioDistribuicao().equals(DATAINICIODISTRIBUICAO_POR_OMISSAO));
+    }
+    
 }
