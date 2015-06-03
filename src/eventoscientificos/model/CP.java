@@ -23,6 +23,29 @@ public class CP {
     }
 
     /**
+     * Compara dois objetos entre si. Comparando primariamente a posição de
+     * memória, seguida do conteudo e das classes as quais cada um deles
+     * pertence, e finalmente a lista de revisores da CP.
+     *
+     * @param outroObjeto CP que vai ser usado na comparação.
+     * @return Verdadeiro caso os objetos comparados sejam iguais e falso caso
+     * não o sejam.
+     */
+    public boolean equals(Object outroObjeto) {
+        if (this == outroObjeto) {
+            return true;
+        }
+
+        if (outroObjeto == null || this.getClass() != outroObjeto.getClass()) {
+            return false;
+        }
+
+        CP outraCP = (CP) outroObjeto;
+
+        return this.listaRevisores.equals(outraCP.listaRevisores);
+    }
+
+    /**
      * Cria um objeto do tipo Revisor através de um utilizador.
      *
      * @param utilizador Utilizador que é revisor.
@@ -63,6 +86,16 @@ public class CP {
      */
     private boolean validarRevisor(Revisor revisor) {
         return !this.listaRevisores.contains(revisor);
+    }
+
+    /**
+     * Verifica se a lista de revisores está vazia.
+     *
+     * @return Verdadeiro caso a lista não esteja vazia e false caso esteja
+     * vazia.
+     */
+    public boolean validarCP() {
+        return !(this.listaRevisores.size() == 0);
     }
 
 }

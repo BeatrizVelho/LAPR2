@@ -38,6 +38,11 @@ public class SessaoTematica {
     private List<Proponente> listaProponentes;
 
     /**
+     * CP de sessão temática.
+     */
+    private CP cp;
+
+    /**
      * Código único da sessão temática por omissão.
      */
     private static String CODIGOUNICO_POR_OMISSAO = "Sem código único";
@@ -63,10 +68,11 @@ public class SessaoTematica {
      *
      * @param codigoUnico Código único da sessão temática.
      * @param descricao Descrição da sessão temática.
-     * @param dataInicioSubmissao Data de inicio de submissão da sessão temática.
+     * @param dataInicioSubmissao Data de inicio de submissão da sessão
+     * temática.
      * @param dataFimSubmissao Data de fim de submissão da sessão temática.
      */
-     public SessaoTematica(
+    public SessaoTematica(
             String codigoUnico,
             String descricao,
             Data dataInicioSubmissao,
@@ -89,6 +95,7 @@ public class SessaoTematica {
                 DATAINICIOSUBMISSAO_POR_OMISSAO,
                 DATAFIMSUBMISSAO_POR_OMISSAO);
         this.listaProponentes = new ArrayList();
+        this.cp = null;
 
     }
 
@@ -109,7 +116,7 @@ public class SessaoTematica {
     public String getDescricao() {
         return this.descricao;
     }
-    
+
     /**
      * Devolve a data de inicio de submissão da sessão temática.
      *
@@ -155,7 +162,7 @@ public class SessaoTematica {
 
         this.descricao = descricao;
     }
-    
+
     /**
      * Modifica a data de inicio de submissão da sessão temática.
      *
@@ -220,32 +227,32 @@ public class SessaoTematica {
     }
 
     /**
-     * 
-     * 
+     *
+     *
      * @param utilizador Utilizador que assume o papel de proponente.
      * @return Verdadeiro se o proponente for criado e adicionado à lista com
      * sucesso e falso caso não seja.
      */
     public boolean novoProponente(Utilizador utilizador) {
         Proponente proponente = new Proponente(utilizador);
-        
-        if(!proponente.validarProponente()) {
+
+        if (!proponente.validarProponente()) {
             throw new IllegalArgumentException("Não introduziu um proponente"
                     + "válido.");
         }
 
-        if(!validarProponente(proponente)) {
+        if (!validarProponente(proponente)) {
             throw new IllegalArgumentException("O proponente introduzido já"
                     + "se encontra na lista.");
         }
-            
+
         return adicionarProponente(proponente);
     }
 
     /**
      * Valida uma instância de proponente verificando se o mesmo já existe numa
      * lista.
-     * 
+     *
      * @param proponente Proponente que vai ser procurado na lista.
      * @return Verdadeiro se o proponente não existir na lista e falso caso
      * exista.
@@ -256,7 +263,7 @@ public class SessaoTematica {
 
     /**
      * Adiciona uma instância de proponente a uma lista.
-     * 
+     *
      * @param proponente Proponente que vai ser adicionado na lista.
      * @return Verdadeiro caso o proponente seja adicionado à lista e falso caso
      * a adição falhe.
@@ -278,6 +285,46 @@ public class SessaoTematica {
                         DATAINICIOSUBMISSAO_POR_OMISSAO)
                 || this.getDataFimSubmissao().equals(
                         DATAFIMSUBMISSAO_POR_OMISSAO));
+    }
+
+    /**
+     * Cria uma instância de CP vazia.
+     *
+     * @return CP
+     */
+    public CP novaCp() {
+        return new CP();
+    }
+
+    /**
+     * Devolve a CP da sessão temática.
+     *
+     * @return CP da sessão temática.
+     */
+    public CP getCP() {
+        return this.cp;
+    }
+
+    /**
+     * Modifica a CP da sessão temática.
+     *
+     * @param cp Nova CP da sessão temática.
+     */
+    public void setCp(CP cp) {
+        this.cp = cp;
+    }
+
+    /**
+     * Adiciona uma nova CP à sessão temática.
+     *
+     * @param cp CP a adicionar à sessão temática.
+     * @return Verdadeiro caso a CP tenha sido adicionada à sessão temática e
+     * falso se a adição falhar.
+     */
+    public boolean adicionarCP(CP cp) {
+        setCp(cp);
+
+        return true;
     }
 
 }

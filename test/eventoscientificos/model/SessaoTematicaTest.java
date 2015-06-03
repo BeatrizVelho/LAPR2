@@ -67,6 +67,18 @@ public class SessaoTematicaTest {
     }
 
     /**
+     * Teste dos metodos set e get da CP, da classe SessaoTematica.
+     */
+    @Test
+    public void testSetAndGetCP() {
+        System.out.println("setAndGetCP");
+        SessaoTematica instance = new SessaoTematica();
+        CP expResult = new CP();
+        instance.setCp(expResult);
+        assertEquals(expResult, instance.getCP());
+    }
+
+    /**
      * Teste do método setCodigoUnico, da classe SessaoTematica.
      */
     @Test(expected = IllegalArgumentException.class)
@@ -196,6 +208,31 @@ public class SessaoTematicaTest {
                 new Data(2016, 05, 22), new Data(2016, 05, 22));
         boolean expResult = true;
         boolean result = instance.validarSessaoTematica();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método novaCP, da classe SessaoTematica.
+     */
+    @Test
+    public void testNovaCP() {
+        System.out.println("novaCP");
+        SessaoTematica instance = new SessaoTematica();
+        CP expResult = new CP();
+        CP result = instance.novaCp();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste ao metodo adicionarCP da classe SessaoTematica.
+     */
+    @Test
+    public void testAdicionarCP() {
+        System.out.println("adicionarCP");
+        SessaoTematica instance = new SessaoTematica();
+        CP cp = new CP();
+        boolean expResult = true;
+        boolean result = instance.adicionarCP(cp);
         assertEquals(expResult, result);
     }
 

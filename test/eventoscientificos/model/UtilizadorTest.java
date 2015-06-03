@@ -146,16 +146,33 @@ public class UtilizadorTest {
 
     /**
      * Teste do método validarUtilizador, da classe Utilizador, serve para
- veificar se o utilizador esta completamente preenchido
+     * verificar se o utilizador esta completamente preenchido
      */
     @Test
     public void testValidaUtilizador() {
         System.out.println("validaUtilizador");
-        Utilizador instance = new Utilizador("susana", "freitas@gmail.com", "susu", "12345");
+        Utilizador instance = new Utilizador(
+                "susana", "freitas@gmail.com", "susu", "12345");
         boolean expResult = true;
         boolean result = instance.validarUtilizador();
         assertEquals(expResult, result);
 
+    }
+    
+    /**
+     * 
+     */
+    @Test
+    public void testCriarCloneUtilizador() {
+        System.out.println("criarCloneUtilizador");
+        Utilizador instance = new Utilizador(
+                "luis", "1140356@isep.ipp.pt", "politico", "12345");
+        Utilizador novaInstance = instance.criarCloneUtilizador();
+        novaInstance.setEmail("1140357@isep.ipp.pt");
+        novaInstance.setUsername("carlosvieira");
+        boolean expResult = false;
+        boolean result = instance.equals(novaInstance);
+        assertEquals(expResult, result);
     }
 
 }
