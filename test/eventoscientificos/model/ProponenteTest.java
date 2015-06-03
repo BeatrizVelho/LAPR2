@@ -7,8 +7,12 @@ import static org.junit.Assert.*;
  * @author G01
  */
 public class ProponenteTest {
+    
+    private Utilizador utilizador;
 
     public ProponenteTest() {
+        this.utilizador = new Utilizador(
+                "Pedro", "1140781@isep.ipp.pt", "pedro", "1234");
     }
 
     /**
@@ -17,10 +21,8 @@ public class ProponenteTest {
     @Test
     public void testGetUtilizador() {
         System.out.println("getUtilizador");
-        Proponente instance = new Proponente(new Utilizador(
-                "Pedro", "1140781@isep.ipp.pt", "pedro", "1234"));
-        Utilizador expResult = new Utilizador(
-                "Pedro", "1140781@isep.ipp.pt", "pedro", "1234");
+        Proponente instance = new Proponente(this.utilizador);
+        Utilizador expResult = this.utilizador;
         Utilizador result = instance.getUtilizador();
         assertEquals(expResult, result);
     }
@@ -31,8 +33,7 @@ public class ProponenteTest {
     @Test
     public void testValidarProponente() {
         System.out.println("validarProponente");
-        Proponente instance = new Proponente(new Utilizador(
-                "Pedro", "1140781@isep.ipp.pt", "pedro", "1234"));
+        Proponente instance = new Proponente(this.utilizador);
         boolean expResult = true;
         boolean result = instance.validarProponente();
         assertEquals(expResult, result);
@@ -55,10 +56,8 @@ public class ProponenteTest {
     @Test
     public void testEquals() {
         System.out.println("equals");
-        Object outroObjeto = new Proponente(new Utilizador(
-                "Pedro", "1140781@isep.ipp.pt", "pedro", "1234"));
-        Proponente instance = new Proponente(new Utilizador(
-                "Pedro", "1140781@isep.ipp.pt", "pedro", "1234"));
+        Object outroObjeto = new Proponente(this.utilizador);
+        Proponente instance = new Proponente(this.utilizador);
         boolean expResult = true;
         boolean result = instance.equals(outroObjeto);
         assertEquals(expResult, result);
@@ -71,8 +70,7 @@ public class ProponenteTest {
     @Test
     public void testEqualsNot() {
         System.out.println("equalsNot");
-        Object outroObjeto = new Proponente(new Utilizador(
-                "Pedro", "1140781@isep.ipp.pt", "pedro", "1234"));
+        Object outroObjeto = new Proponente(this.utilizador);
         Proponente instance = new Proponente(new Utilizador(
                 "Pedro", "0000000@isep.ipp.pt", "user", "1234"));
         boolean expResult = false;
