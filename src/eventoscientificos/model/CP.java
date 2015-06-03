@@ -51,11 +51,7 @@ public class CP {
      * falso se a adição falhar.
      */
     private boolean adicionarRevisor(Revisor revisor) {
-        if (validarRevisor(revisor)) {
-            return this.listaRevisores.add(revisor);
-        }
-
-        return false;
+        return this.listaRevisores.add(revisor);
     }
 
     /**
