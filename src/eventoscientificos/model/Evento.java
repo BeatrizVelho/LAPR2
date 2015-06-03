@@ -1,5 +1,6 @@
 package eventoscientificos.model;
 
+import eventoscientificos.EventoState.EventoCriadoState;
 import eventoscientificos.EventoState.EventoState;
 import java.util.ArrayList;
 import java.util.List;
@@ -90,6 +91,7 @@ public class Evento {
         setDataInicioDistribuicao(dataInicioDistribuicao);;
         setDataInicio(dataInicio);
         setDataFim(dataFim);
+        setState(new EventoCriadoState(this));
         this.listaOrganizadores = new ArrayList<>();
     }
 
@@ -166,12 +168,21 @@ public class Evento {
     }
 
     /**
-     * Devolve a CP da sessão temática.
+     * Devolve a CP do evento.
      *
      * @return CP do evento.
      */
     public CP getCP() {
         return this.cp;
+    }
+
+    /**
+     * Devolve o estado do evento.
+     * 
+     * @return Estado do evento.
+     */
+    public EventoState getEstado() {
+        return this.estado;
     }
 
     /**
