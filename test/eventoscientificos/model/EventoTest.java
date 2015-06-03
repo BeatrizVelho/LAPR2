@@ -1,6 +1,5 @@
 package eventoscientificos.model;
 
-import Model.EventoState.EventoState;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import utils.Data;
