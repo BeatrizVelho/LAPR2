@@ -68,11 +68,11 @@ public class Evento {
      * @param titulo Titulo do evento.
      * @param descricao Descricao do evento.
      * @param local Local do evento.
-     * @param dataInicio Data de inicio do evento.
-     * @param dataFim Data de fim do evento.
      * @param dataInicioSubmissao Data de inicio de submissao do evento.
      * @param dataFimSubmissao Data fim de submissao do evento.
      * @param dataInicioDistribuicao Data de inicio de distribuicao do evento.
+     * @param dataInicio Data de inicio do evento.
+     * @param dataFim Data de fim do evento.
      */
     public Evento(String titulo, String descricao, Local local,
             Data dataInicioSubmissao, Data dataFimSubmissao,
@@ -238,7 +238,7 @@ public class Evento {
             throw new NullPointerException("A data de inicio de distribuicao não"
                     + " pode estar vazia.");
         }
-        if(!dataInicioDistribuicao.isMaior(dataFimSubmissao)) {
+        if(!dataInicioDistribuicao.isMaior(this.dataFimSubmissao)) {
             throw new IllegalArgumentException("Data de inicio de distribuicao "
                     + "invalida");
         }
@@ -255,7 +255,7 @@ public class Evento {
             throw new NullPointerException("A data de inicio do evento não pode"
                     + "estar vazia.");
         }
-        if(!dataInicio.isMaior(dataInicioDistribuicao)) {
+        if(!dataInicio.isMaior(this.dataInicioDistribuicao)) {
             throw new IllegalArgumentException("Data de inicio do evento "
                     + "invalida");
         }
