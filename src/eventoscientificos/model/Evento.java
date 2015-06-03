@@ -1,12 +1,15 @@
 package eventoscientificos.model;
 
 import Model.EventoState.EventoState;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import utils.Data;
 
 /**
  * @author G01
  */
-public class Evento implements EventoState {
+public class Evento {
 
     /**
      * Título do Evento
@@ -26,33 +29,38 @@ public class Evento implements EventoState {
     /**
      * Data de Início do Evento
      */
-    private Date dataInicio;
+    private Data dataInicio;
 
     /**
      * Data de Fim do Evento
      */
-    private Date dataFim;
+    private Data dataFim;
 
     /**
      * Data de Início de Submissão do Evento
      */
-    private Date dataInicioSubmissao;
+    private Data dataInicioSubmissao;
 
     /**
-     * Data Limite de Submissão do Evento
+     * Data Fim de Submissão do Evento
      */
-    private Date dataLimiteSubmissao;
+    private Data dataFimSubmissao;
 
     /**
      * Data de Início de Distribuição do Evento
      */
-    private Date dataInicioDistribuicao;
+    private Data dataInicioDistribuicao;
+
+    /**
+     * Lista de Orgazanidores do Evento
+     */
+    private List<Organizador> listaOrganizadores;
 
     /**
      * Instância de EventoState
      */
     private EventoState e_state;
-    
+
     /**
      * Título do Evento por omissao
      */
@@ -62,11 +70,75 @@ public class Evento implements EventoState {
      * Descricao do evento por omissao
      */
     private static final String DESCRICAO_POR_OMISSAO = "Sem descricao";
-
-    public Evento(String titulo, String descricao, Local local, Date dataInicio,
-            Date dataFim, Date dataInicioSubmissao, Date dataLimiteSubmissao,
-            Date dataInicioDistribuicao) {
-
+    
+    /**
+     * Local de realizacao do evento por omissao
+     */
+    private static Local LOCAL_POR_OMISSAO = new Local("Porto");
+    
+    /**
+     * Data de inicio do evento por omissão.
+     */
+    private static Data DATAINICIO_POR_OMISSAO = new Data();
+    
+    /**
+     * Data de fim do evento por omissão.
+     */
+    private static Data DATAFIM_POR_OMISSAO = new Data();
+    
+    /**
+     * Data de inicio de submissão do evento por omissão.
+     */
+    private static Data DATAINICIOSUBMISSAO_POR_OMISSAO = new Data();
+    
+    /**
+     * Data fim de submissão do evento por omissão.
+     */
+    private static Data DATAFIMSUBMISSAO_POR_OMISSAO = new Data();
+    
+    /**
+     * Data de inicio de distribuicao do evento por omissão.
+     */
+    private static Data DATAINICIODISTRIBUICAO_POR_OMISSAO = new Data();
+    
+    /**
+     * Constrói uma instância de evento recebendo um titulo, descricao, local,
+     * data de inicio, data de fim, data de inicio de submissao, data fim de
+     * submissao, data de inicio de distribuicao
+     *
+     * @param titulo Titulo do evento
+     * @param descricao Descricao do evento
+     * @param local Local do evento
+     * @param dataInicio Data de inicio do evento
+     * @param dataFim Data de fim do evento
+     * @param dataInicioSubmissao Data de inicio de submissao do evento
+     * @param dataFimSubmissao Data fim de submissao do evento
+     * @param dataInicioDistribuicao Data de inicio de distribuicao do evento
+     */
+    public Evento(String titulo, String descricao, Local local, Data dataInicio,
+            Data dataFim, Data dataInicioSubmissao, Data dataFimSubmissao,
+            Data dataInicioDistribuicao) {
+        setTitulo(titulo);
+        setDescricao(descricao);
+        setLocal(titulo);
+        setDataInicio(dataInicio);
+        setDataFim(dataFim);
+        setDataInicioSubmissao(dataInicioSubmissao);
+        setDataFimSubmissao(dataFimSubmissao);
+        setDataInicioDistribuicao(dataInicioDistribuicao);
+        this.listaOrganizadores = new ArrayList<>();
+    }
+    
+    /**
+     * Constrói uma instância de um evento com os parametros por
+     * omissão.
+     */
+    public Evento() {
+        this(TITULO_POR_OMISSAO, DESCRICAO_POR_OMISSAO, LOCAL_POR_OMISSAO, 
+                DATAINICIO_POR_OMISSAO, DATAFIM_POR_OMISSAO, 
+                DATAINICIOSUBMISSAO_POR_OMISSAO, DATAFIMSUBMISSAO_POR_OMISSAO, 
+                DATAINICIODISTRIBUICAO_POR_OMISSAO);
+        this.listaOrganizadores = new ArrayList<>();
     }
 
     /**
@@ -101,7 +173,7 @@ public class Evento implements EventoState {
      *
      * @return Data de inicio do evento
      */
-    public Date getDataInicio() {
+    public Data getDataInicio() {
         return this.dataInicio;
     }
 
@@ -110,7 +182,7 @@ public class Evento implements EventoState {
      *
      * @return Data de fim do evento
      */
-    public Date getDataFim() {
+    public Data getDataFim() {
         return this.dataFim;
     }
 
@@ -119,31 +191,31 @@ public class Evento implements EventoState {
      *
      * @return Data de inicio de submissao do evento
      */
-    public Date getDataInicioSubmissao() {
+    public Data getDataInicioSubmissao() {
         return this.dataInicioSubmissao;
     }
 
     /**
-     * Devolve a data limite de submissao do evento
+     * Devolve a data fim de submissao do evento
      *
-     * @return Data limite de submissao do evento
+     * @return Data fim de submissao do evento
      */
-    public Date getDataLimiteSubmissao() {
-        return this.dataLimiteSubmissao;
+    public Data getDataFimSubmissao() {
+        return this.dataFimSubmissao;
     }
 
     /**
      * Devolve a data de inicio de distribuicao do evento
      *
-     * @return Date de inicio de distribuicao do evento
+     * @return Data de inicio de distribuicao do evento
      */
-    public Date getDataInicioDistribuicao() {
+    public Data getDataInicioDistribuicao() {
         return this.dataInicioDistribuicao;
     }
 
     /**
      * Modifica o titulo do evento
-     * 
+     *
      * @param titulo Novo titulo do evento
      */
     public void setTitulo(String titulo) {
@@ -152,87 +224,167 @@ public class Evento implements EventoState {
         }
         this.titulo = titulo;
     }
-    
+
     /**
-     * Modific a descricao do evento
-     * 
+     * Modifica a descricao do evento
+     *
      * @param descricao Nova descricao do evento
      */
     public void setDescricao(String descricao) {
-        if(descricao.trim().isEmpty()) {
+        if (descricao.trim().isEmpty()) {
             throw new IllegalArgumentException("A desricao não pode estar vazia");
         }
         this.descricao = descricao;
     }
 
-    @Override
-    public boolean setEventoCriado() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    /**
+     * Modifica o local do evento
+     *
+     * @param local Novo local do evento
+     */
+    public void setLocal(String local) {
+        this.local.setNomeLocal(local);
     }
 
-    @Override
-    public boolean setEventoRegistado() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    /**
+     * Modifica a data de inicio do evento
+     *
+     * @param dataInicio Nova data de inicio do evento
+     */
+    public void setDataInicio(Data dataInicio) {
+        if (dataInicio == null) {
+            throw new NullPointerException("A data de inicio do evento não pode"
+                    + "estar vazia.");
+        }
+        this.dataInicio = dataInicio;
     }
 
-    @Override
-    public boolean setEventoSTcriada() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    /**
+     * Modifica a data de fim do evento
+     *
+     * @param dataFim Nova data de fim do evento
+     */
+    public void setDataFim(Data dataFim) {
+        if (dataFim == null) {
+            throw new NullPointerException("A data de fim do evento não pode"
+                    + "estar vazia.");
+        }
+        this.dataFim = dataFim;
     }
 
-    @Override
-    public boolean setEventoCPCriada() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    /**
+     * Modifica a data de inicio de submissao do evento
+     *
+     * @param dataInicioSubmissao Nova data de inicio de submissao do evento
+     */
+    public void setDataInicioSubmissao(Data dataInicioSubmissao) {
+        if (dataInicioSubmissao == null) {
+            throw new NullPointerException("A data de inicio de submissão não pode"
+                    + "estar vazia.");
+        }
+        this.dataInicioSubmissao = dataInicioSubmissao;
     }
 
-    @Override
-    public boolean setEventoEmSubmissao() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    /**
+     * Modifica a data fim de submissao do evento
+     *
+     * @param dataFimSubmissao Nova data fim de submissao do evento
+     */
+    public void setDataFimSubmissao(Data dataFimSubmissao) {
+        if (dataFimSubmissao == null) {
+            throw new NullPointerException("A data de fim de submissão não pode"
+                    + "estar vazia.");
+        }
+        this.dataFimSubmissao = dataFimSubmissao;
     }
 
-    @Override
-    public boolean setEventoSubmetido() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    /**
+     * Modifica a data de inicio de distribuicao do evento
+     *
+     * @param dataInicioDistribuicao Nova data de inicio de distribuicao do
+     * evento
+     */
+    public void setDataInicioDistribuicao(Data dataInicioDistribuicao) {
+        if (dataInicioDistribuicao == null) {
+            throw new NullPointerException("A data de inicio de distribuicao não"
+                    + " pode estar vazia.");
+        }
+        this.dataInicioDistribuicao = dataInicioDistribuicao;
+    }
+    
+    /**
+     * Muda o estado do evento
+     * 
+     * @param e_state Novo estado do evento
+     */
+    public void setState(EventoState e_state) {
+        this.e_state = e_state;
     }
 
+    /**
+     * Compara dois objetos entre si. Comparando primariamente a posição de
+     * memória, seguida do conteudo e das classes as quais cada um deles
+     * pertence, e finalmente os seus atributos, titulo.
+     * 
+     * @param outroObjeto Evento que vai ser usado na comparação.
+     * @return Verdadeiro caso os objetos comparados sejam iguais e falso caso
+     * não o sejam.
+     */
     @Override
-    public boolean setEventoEmDetecaoConflitos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean equals(Object outroObjeto) {
+        if(this == outroObjeto) {
+            return true;
+        }
+        
+        if(outroObjeto == null || this.getClass() != outroObjeto.getClass()) {
+            return false;
+        }
+        
+        Evento outroEvento = (Evento) outroObjeto;
+        
+        return this.getTitulo().equals(outroEvento.getTitulo());
+    }
+    /**
+     * Constroi uma instancia de organizador recebendo um utilizador
+     *
+     * @param utilizador Utilizador
+     * @return true se o organizador for adicionado a lista de organizadores e
+     * false se nao for adicionado
+     */
+    public boolean novoOrganizador(Utilizador utilizador) {
+        Organizador o = new Organizador(utilizador);
+        if (!o.validarOrganizador()) {
+            throw new IllegalArgumentException("O organizador não pode estar "
+                    + "invalido");
+        }
+        if (!validarOrganizador(o)) {
+            throw new IllegalArgumentException("O organizador introduzido ja "
+                    + "se encontra na lista");
+        }
+        
+        return adicionarOganizador(o);
     }
 
-    @Override
-    public boolean setEventoEmLicitacao() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    /**
+     * Verifica se o organizador passado por parametro ja consta na lista de
+     * organizadores
+     *
+     * @param organizador instancia de organizador a verificar
+     * @return true caso nao conste na lista e false se conste
+     */
+    public boolean validarOrganizador(Organizador organizador) {
+        return !this.listaOrganizadores.contains(organizador);
     }
 
-    @Override
-    public boolean setEventoLicitado() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean setEventoEmDistribuicao() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean setEventoDistribuido() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean setEventoFaseDecisao() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean setEventoDecidico() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean valida() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    /**
+     * Adiciona o organizador passado por parametro a lista de organizadores
+     * caso este nao conste na lista
+     *
+     * @param o instancia de organizador a adicionar
+     * @return true caso seja adicionado e false se nao for adicionado
+     */
+    public boolean adicionarOganizador(Organizador o) {
+        return this.listaOrganizadores.add(o);
     }
 
 }
