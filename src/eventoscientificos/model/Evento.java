@@ -175,7 +175,7 @@ public class Evento {
     }
 
     /**
-     * Devolve a lista de tessões temáticas do evento.
+     * Devolve a lista de sessões temáticas do evento.
      * 
      * @return Lista de sessões temáticas do evento.
      */
