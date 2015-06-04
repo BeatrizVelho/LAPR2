@@ -1,5 +1,7 @@
 package eventoscientificos.model;
 
+import eventoscientificos.model.StateSessaoTematica.SessaoTematicaCriadaState;
+import eventoscientificos.model.StateSessaoTematica.SessaoTematicaState;
 import java.util.ArrayList;
 import java.util.List;
 import utils.Data;
@@ -45,7 +47,7 @@ public class SessaoTematica {
     /**
      * Estado da sessão temática.
      */
-    private SessaoTematica estado;
+    private SessaoTematicaState estado;
 
     /**
      * Constrói uma instância de uma sessão temática recebendo um código único,
@@ -67,7 +69,9 @@ public class SessaoTematica {
         setDataInicioSubmissao(dataInicioSubmissao);
         setDataFimSubmissao(dataFimSubmissao);
         this.listaProponentes = new ArrayList();
-        this.cp = null;
+        setCp(null);
+        setEstado(new SessaoTematicaCriadaState(this));
+        
     }
 
     /**
@@ -113,6 +117,15 @@ public class SessaoTematica {
      */
     public CP getCP() {
         return this.cp;
+    }
+
+    /**
+     * Devolve o estado da sessão temática.
+     * 
+     * @return Estado da sessão temática.
+     */
+    public SessaoTematicaState getEstado() {
+        return this.estado;
     }
 
     /**
@@ -189,6 +202,15 @@ public class SessaoTematica {
      */
     public void setCp(CP cp) {
         this.cp = cp;
+    }
+
+    /**
+     * Modifica o estado da sessão temática.
+     * 
+     * @param estado Novo estado da sessão temática.
+     */
+    public void setEstado(SessaoTematicaState estado) {
+        this.estado = estado;
     }
 
     /**
@@ -269,7 +291,7 @@ public class SessaoTematica {
      * @return Verdadeiro se o objeto for válido e falso caso não seja.
      */
     public boolean validarSessaoTematica() {
-        return true;
+        return this.estado.setRegistada();
     }
 
     /**
