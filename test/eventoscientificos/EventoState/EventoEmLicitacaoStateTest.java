@@ -27,7 +27,7 @@ public class EventoEmLicitacaoStateTest {
                             new Data(2016, 6, 8), new Data(2016, 6, 20),
                             new Data(2016, 7, 7), new Data(2016, 8, 1),
                             new Data(2017, 6, 10));
-        e.setState(new EventoEmLicitacaoState(e));
+        e.setEstado(new EventoEmLicitacaoState(e));
     }
 
     /**
