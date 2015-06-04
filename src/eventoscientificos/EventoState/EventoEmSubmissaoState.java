@@ -6,14 +6,15 @@
 package eventoscientificos.EventoState;
 
 import eventoscientificos.model.Evento;
+import utils.Data;
 
 /**
- * Representa uma instância de EventoCriadoState tendo acesso ao respetivo
+ * Representa uma instância de EventoEmSubmissaoState tendo acesso ao respetivo
  * Evento através do objeto Evento que tem como atributo.
  *
  * @author G01
  */
-public class EventoCriadoState implements EventoState {
+public class EventoEmSubmissaoState implements EventoState {
 
     /**
      * Instancia de Evento
@@ -21,36 +22,32 @@ public class EventoCriadoState implements EventoState {
     private Evento e;
 
     /**
-     * Constroi uma instância de EventoCriadoState recebendo um Evento
+     *Constroi uma instância de EventoEmSubmissaoState recebendo um Evento
      * como parametro.
      *
      * @param Evento objeto evento
      */
-    public EventoCriadoState(Evento e) {
+    public EventoEmSubmissaoState(Evento e) {
         this.e = e;
     }
 
     /**
      * Modifica o estado do evento para o estado Evento Criado
      *
-     * @return verdadeiro pois corresponde ao estado atual
+     * @return falso visto ja se encontrar num estado mais avançado
      */
     @Override
     public boolean setCriado() {
-        return true;
+        return false;
     }
 
     /**
      * Modifica o estado do evento para o estado Evento Registado
      *
-     * @return verdadeiro se mudou de estado e falso se nao mudou de estado
+     * @return falso visto ja se encontrar num estado mais avançado
      */
     @Override
     public boolean setRegistado() {
-        if (valida()) {
-            e.setEstado(new EventoRegistadoState(this.e));
-            return true;
-        }
         return false;
     }
 
@@ -58,7 +55,7 @@ public class EventoCriadoState implements EventoState {
      * Modifica o estado do evento para o estado Evento Sessoes Tematicas
      * Definidas
      *
-     * @return falso visto ja se encontrar num estado anterior
+     * @return falso visto ja se encontrar num estado mais avançado
      */
     @Override
     public boolean setSessoesTematicasDefinidas() {
@@ -69,7 +66,7 @@ public class EventoCriadoState implements EventoState {
     /**
      * Modifica o estado do evento para o estado Evento CP definida
      *
-     * @return falso visto ja se encontrar num estado anterior
+     * @return falso visto ja se encontrar num estado mais avançado
      */
     @Override
     public boolean setCPDefinida() {
@@ -79,20 +76,24 @@ public class EventoCriadoState implements EventoState {
     /**
      * Modifica o estado do evento para o estado Evento Em Submissao
      *
-     * @return falso visto ja se encontrar num estado anterior
+     * @return verdadeiro pois corresponde ao estado atual
      */
     @Override
     public boolean setEmSubmissao() {
-        return false;
+        return true;
     }
 
     /**
      * Modifica o estado do evento para o estado Evento Em Detecao
      *
-     * @return falso visto ja se encontrar num estado anterior
+     * @return verdadeiro se mudou de estado e falso se nao mudou de estado
      */
     @Override
     public boolean setEmDetecao() {
+        if (valida()) {
+            e.setEstado(new EventoEmDetecaoConflitos(this.e));
+            return true;
+        }
         return false;
     }
 
@@ -166,6 +167,6 @@ public class EventoCriadoState implements EventoState {
      */
     @Override
     public boolean valida() {
-        return true;
+        return Data.dataAtual().isMaior(e.getDataFimSubmissao());
     }
 }

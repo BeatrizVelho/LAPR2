@@ -12,62 +12,63 @@ import static org.junit.Assert.*;
 import utils.Data;
 
 /**
- * Testa a classe EventoCPDefinidaState
+ * Testa a classe Evento Registado State Test.
  *
  * @author G01
  */
-public class EventoCPDefinidaStateTest {
+public class EventoRegistadoStateTest {
 
     /**
-     * Instancia de evento
+     * Instancia de Evento
      */
     private Evento e;
 
     /**
-     * Constroi instancia de EventoCPDefinidaStateTest recebendo uma instancia
-     * de evento
+     * Constroi uma instância de EventoRegistadoStateTest recebendo um Evento
+     * como parametro.
+     *
      */
-    public EventoCPDefinidaStateTest() {
+    public EventoRegistadoStateTest() {
         this.e = new Evento("titulo", "descricao", new Local("local"),
                             new Data(2016, 6, 8), new Data(2016, 6, 20),
                             new Data(2016, 7, 7), new Data(2016, 8, 1),
                             new Data(2017, 6, 10));
-        e.setEstado(new EventoCPDefinidaState(e));
+        e.setEstado(new EventoRegistadoState(e));
     }
 
     /**
-     * Teste do metodo setCriado, da classe EventoCPDefinidaState.
+     * Teste do metodo setCriado, da classe EventoRegistadoState.
      */
     @Test
     public void testSetCriado() {
         System.out.println("setCriado");
-        e.setEstado(new EventoCPDefinidaState(e));
-        EventoCPDefinidaState instance = new EventoCPDefinidaState(e);
+        EventoState instance = e.getEstado();
         boolean expResult = false;
         boolean result = instance.setCriado();
         assertEquals(expResult, result);
     }
 
     /**
-     * Teste do metodo setRegistado, da classe EventoCPDefinidaState.
+     * Teste do metodo setRegistado, da classe EventoRegistadoState.
      */
     @Test
     public void testSetRegistado() {
         System.out.println("setRegistado");
-        EventoCPDefinidaState instance = new EventoCPDefinidaState(e);
-        boolean expResult = false;
+        EventoState instance = e.getEstado();
+        boolean expResult = true;
         boolean result = instance.setRegistado();
         assertEquals(expResult, result);
+
     }
 
     /**
      * Teste do metodo setSessoesTematicasDefinidas, da classe
-     * EventoCPDefinidaState.
+     * EventoRegistadoState.
      */
     @Test
     public void testSetSessoesTematicasDefinidas() {
         System.out.println("setSessoesTematicasDefinidas");
-        EventoCPDefinidaState instance = new EventoCPDefinidaState(e);
+        EventoState instance = e.getEstado();
         boolean expResult = false;
         boolean result = instance.setSessoesTematicasDefinidas();
         assertEquals(expResult, result);
@@ -75,31 +76,33 @@ public class EventoCPDefinidaStateTest {
     }
 
     /**
-     * Teste do metodo setCPDefinida, da classe EventoCPDefinidaState.
+     * Teste do metodo setCPDefinida, da classe EventoRegistadoState.
      */
     @Test
     public void testSetCPDefinida() {
         System.out.println("setCPDefinida");
         EventoState instance = e.getEstado();
-        boolean expResult = true;
+        boolean expResult = false;
         boolean result = instance.setCPDefinida();
         assertEquals(expResult, result);
+
     }
 
     /**
-     * Teste do metodo setEmSubmissao, da classe EventoCPDefinidaState.
+     * Teste do metodo setEmSubmissao, da classe EventoRegistadoState.
      */
     @Test
     public void testSetEmSubmissao() {
         System.out.println("setEmSubmissao");
         EventoState instance = e.getEstado();
-        boolean expResult = true;
+        boolean expResult = false;
         boolean result = instance.setEmSubmissao();
         assertEquals(expResult, result);
+
     }
 
     /**
-     * Teste do metodo setEmDetecao, da classe EventoCPDefinidaState.
+     * Teste do metodo setEmDetecao, da classe EventoRegistadoState.
      */
     @Test
     public void testSetEmDetecao() {
@@ -108,10 +111,11 @@ public class EventoCPDefinidaStateTest {
         boolean expResult = false;
         boolean result = instance.setEmDetecao();
         assertEquals(expResult, result);
+
     }
 
     /**
-     * Teste do metodo setEmLicitacao, da classe EventoCPDefinidaState.
+     * Teste do metodo setEmLicitacao, da classe EventoRegistadoState.
      */
     @Test
     public void testSetEmLicitacao() {
@@ -120,10 +124,11 @@ public class EventoCPDefinidaStateTest {
         boolean expResult = false;
         boolean result = instance.setEmLicitacao();
         assertEquals(expResult, result);
+
     }
 
     /**
-     * Teste do metodo setEmDistribuicao, da classe EventoCPDefinidaState.
+     * Teste do metodo setEmDistribuicao, da classe EventoRegistadoState.
      */
     @Test
     public void testSetEmDistribuicao() {
@@ -132,10 +137,11 @@ public class EventoCPDefinidaStateTest {
         boolean expResult = false;
         boolean result = instance.setEmDistribuicao();
         assertEquals(expResult, result);
+
     }
 
     /**
-     * Teste do metodo setEmRevisao, da classe EventoCPDefinidaState.
+     * Teste do metodo setEmRevisao, da classe EventoRegistadoState.
      */
     @Test
     public void testSetEmRevisao() {
@@ -144,10 +150,11 @@ public class EventoCPDefinidaStateTest {
         boolean expResult = false;
         boolean result = instance.setEmRevisao();
         assertEquals(expResult, result);
+
     }
 
     /**
-     * Teste do metodo setFaseDecisao, da classe EventoCPDefinidaState.
+     * Teste do metodo setFaseDecisao, da classe EventoRegistadoState.
      */
     @Test
     public void testSetFaseDecisao() {
@@ -156,11 +163,11 @@ public class EventoCPDefinidaStateTest {
         boolean expResult = false;
         boolean result = instance.setFaseDecisao();
         assertEquals(expResult, result);
+
     }
 
     /**
-     * Teste do metodo setEmSubmissaoCameraReady da classe
-     * EventoCPDefinidaState.
+     * Teste do metodo setEmSubmissaoCameraReady da classe EventoRegistadoState.
      */
     @Test
     public void testSetEmSubmissaoCameraReady() {
@@ -169,10 +176,11 @@ public class EventoCPDefinidaStateTest {
         boolean expResult = false;
         boolean result = instance.setEmSubmissaoCameraReady();
         assertEquals(expResult, result);
+
     }
 
     /**
-     * Teste do metodo setCameraReady, da classe EventoCPDefinidaState.
+     * Teste do metodo setCameraReady, da classe EventoRegistadoState.
      */
     @Test
     public void testSetCameraReady() {
@@ -181,18 +189,19 @@ public class EventoCPDefinidaStateTest {
         boolean expResult = false;
         boolean result = instance.setCameraReady();
         assertEquals(expResult, result);
+
     }
 
     /**
-     * Teste ao metodo valida, da classe EventoCPDefinidaState.
+     * Teste ao metodo valida, da classe EventoRegistadoState.
      */
     @Test
     public void testValida() {
-        System.out.println("valida");
         EventoState instance = e.getEstado();
-        boolean expResult = true;
+        boolean expResult = false;
         boolean result = instance.valida();
         assertEquals(expResult, result);
+
     }
 
 }

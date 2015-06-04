@@ -16,9 +16,9 @@ public class EventoTest {
 
     public EventoTest() {
         this.evento = new Evento("titulo", "descricao", new Local("local"),
-                new Data(2016, 6, 8), new Data(2016, 6, 20),
-                new Data(2016, 7, 7), new Data(2016, 8, 1),
-                new Data(2017, 6, 10));
+                            new Data(2016, 6, 8), new Data(2016, 6, 20),
+                            new Data(2016, 7, 7), new Data(2016, 8, 1),
+                            new Data(2017, 6, 10));
     }
 
     /**
@@ -127,7 +127,7 @@ public class EventoTest {
         Data result = instance.getDataInicioDistribuicao();
         assertEquals(expResult, result);
     }
-    
+
     /**
      * Teste dos métodos set e get do estado do evento, da classe evento.
      */
@@ -164,7 +164,7 @@ public class EventoTest {
         ListaSessoesTematicas result = instance.getListaSessoesTematicas();
         assertEquals(expResult, result);
     }
-    
+
     /**
      * Teste do metodo setTitulo, da classe Evento.
      */
@@ -276,6 +276,17 @@ public class EventoTest {
     }
 
     /**
+     * Teste do método temSessoesTematicasDefinidas, da classe Evento.
+     */
+    @Test
+    public void testTemSessoesTematicasDefinidas() {
+        System.out.println("temSessoesTematicasDefinidas");
+        boolean expResult = false;
+        boolean result = this.evento.temSessoesTematicasDefinidas();
+        assertEquals(expResult, result);
+    }
+
+    /**
      * Teste do método equals, da classe Evento.
      */
     @Test
@@ -295,10 +306,10 @@ public class EventoTest {
     public void testEqualsNot() {
         System.out.println("equalsNot");
         Object outroObjeto = new Evento("Sem titulo", "Sem descricao",
-                new Local("local"),
-                new Data(2016, 6, 8), new Data(2016, 6, 20),
-                new Data(2016, 7, 7), new Data(2016, 8, 1),
-                new Data(2017, 6, 10));
+                            new Local("local"),
+                            new Data(2016, 6, 8), new Data(2016, 6, 20),
+                            new Data(2016, 7, 7), new Data(2016, 8, 1),
+                            new Data(2017, 6, 10));
         Evento instance = this.evento;
         boolean expResult = false;
         boolean result = instance.equals(outroObjeto);
@@ -314,7 +325,7 @@ public class EventoTest {
         Evento instance = this.evento;
         boolean expResult = true;
         boolean result = instance.novoOrganizador(new Utilizador("Bea",
-                "1140587@isep.ipp.pt", "beatriz", "111"));
+                            "1140587@isep.ipp.pt", "beatriz", "111"));
         assertEquals(expResult, result);
     }
 
@@ -326,9 +337,9 @@ public class EventoTest {
         System.out.println("novoOrganizadorExists");
         Evento instance = this.evento;
         instance.novoOrganizador(new Utilizador(
-                "Beatriz", "1140587@isep.ipp.pt", "bea", "1234"));
+                            "Beatriz", "1140587@isep.ipp.pt", "bea", "1234"));
         instance.novoOrganizador(new Utilizador(
-                "Beatriz", "1140587@isep.ipp.pt", "bea", "1234"));
+                            "Beatriz", "1140587@isep.ipp.pt", "bea", "1234"));
     }
 
     /**

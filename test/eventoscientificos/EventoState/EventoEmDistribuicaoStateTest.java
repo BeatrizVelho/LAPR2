@@ -12,11 +12,11 @@ import static org.junit.Assert.*;
 import utils.Data;
 
 /**
- * Testa a classe EventoCPDefinidaState
+ * Testa a classe EventoEmDistribuicaoState
  *
  * @author G01
  */
-public class EventoCPDefinidaStateTest {
+public class EventoEmDistribuicaoStateTest {
 
     /**
      * Instancia de evento
@@ -24,37 +24,36 @@ public class EventoCPDefinidaStateTest {
     private Evento e;
 
     /**
-     * Constroi instancia de EventoCPDefinidaStateTest recebendo uma instancia
-     * de evento
+     * Constroi instancia de EventoEmDistribuicaoStateTest recebendo uma
+     * instancia de evento
      */
-    public EventoCPDefinidaStateTest() {
+    public EventoEmDistribuicaoStateTest() {
         this.e = new Evento("titulo", "descricao", new Local("local"),
                             new Data(2016, 6, 8), new Data(2016, 6, 20),
                             new Data(2016, 7, 7), new Data(2016, 8, 1),
                             new Data(2017, 6, 10));
-        e.setEstado(new EventoCPDefinidaState(e));
+        e.setEstado(new EventoEmDistribuicaoState(e));
     }
 
     /**
-     * Teste do metodo setCriado, da classe EventoCPDefinidaState.
+     * Teste do metodo setCriado, da classe EventoEmDistribuicaoState.
      */
     @Test
     public void testSetCriado() {
         System.out.println("setCriado");
-        e.setEstado(new EventoCPDefinidaState(e));
-        EventoCPDefinidaState instance = new EventoCPDefinidaState(e);
+        EventoState instance = e.getEstado();
         boolean expResult = false;
         boolean result = instance.setCriado();
         assertEquals(expResult, result);
     }
 
     /**
-     * Teste do metodo setRegistado, da classe EventoCPDefinidaState.
+     * Teste do metodo setRegistado, da classe EventoEmDistribuicaoState.
      */
     @Test
     public void testSetRegistado() {
         System.out.println("setRegistado");
-        EventoCPDefinidaState instance = new EventoCPDefinidaState(e);
+        EventoState instance = e.getEstado();
         boolean expResult = false;
         boolean result = instance.setRegistado();
         assertEquals(expResult, result);
@@ -62,44 +61,43 @@ public class EventoCPDefinidaStateTest {
 
     /**
      * Teste do metodo setSessoesTematicasDefinidas, da classe
-     * EventoCPDefinidaState.
+     * EventoEmDistribuicaoState.
      */
     @Test
     public void testSetSessoesTematicasDefinidas() {
         System.out.println("setSessoesTematicasDefinidas");
-        EventoCPDefinidaState instance = new EventoCPDefinidaState(e);
+        EventoState instance = e.getEstado();
         boolean expResult = false;
         boolean result = instance.setSessoesTematicasDefinidas();
         assertEquals(expResult, result);
-
     }
 
     /**
-     * Teste do metodo setCPDefinida, da classe EventoCPDefinidaState.
+     * Teste do metodo setCPDefinida, da classe EventoEmDistribuicaoState.
      */
     @Test
     public void testSetCPDefinida() {
         System.out.println("setCPDefinida");
         EventoState instance = e.getEstado();
-        boolean expResult = true;
+        boolean expResult = false;
         boolean result = instance.setCPDefinida();
         assertEquals(expResult, result);
     }
 
     /**
-     * Teste do metodo setEmSubmissao, da classe EventoCPDefinidaState.
+     * Teste do metodo setEmSubmissao, da classe EventoEmDistribuicaoState.
      */
     @Test
     public void testSetEmSubmissao() {
         System.out.println("setEmSubmissao");
         EventoState instance = e.getEstado();
-        boolean expResult = true;
+        boolean expResult = false;
         boolean result = instance.setEmSubmissao();
         assertEquals(expResult, result);
     }
 
     /**
-     * Teste do metodo setEmDetecao, da classe EventoCPDefinidaState.
+     * Teste do metodo setEmDetecao, da classe EventoEmDistribuicaoState.
      */
     @Test
     public void testSetEmDetecao() {
@@ -111,7 +109,7 @@ public class EventoCPDefinidaStateTest {
     }
 
     /**
-     * Teste do metodo setEmLicitacao, da classe EventoCPDefinidaState.
+     * Teste do metodo setEmLicitacao, da classe EventoEmDistribuicaoState.
      */
     @Test
     public void testSetEmLicitacao() {
@@ -123,19 +121,19 @@ public class EventoCPDefinidaStateTest {
     }
 
     /**
-     * Teste do metodo setEmDistribuicao, da classe EventoCPDefinidaState.
+     * Teste do metodo setEmDistribuicao, da classe EventoEmDistribuicaoState.
      */
     @Test
     public void testSetEmDistribuicao() {
         System.out.println("setEmDistribuicao");
         EventoState instance = e.getEstado();
-        boolean expResult = false;
+        boolean expResult = true;
         boolean result = instance.setEmDistribuicao();
         assertEquals(expResult, result);
     }
 
     /**
-     * Teste do metodo setEmRevisao, da classe EventoCPDefinidaState.
+     * Teste do metodo setEmRevisao, da classe EventoEmDistribuicaoState.
      */
     @Test
     public void testSetEmRevisao() {
@@ -147,7 +145,7 @@ public class EventoCPDefinidaStateTest {
     }
 
     /**
-     * Teste do metodo setFaseDecisao, da classe EventoCPDefinidaState.
+     * Teste do metodo setFaseDecisao, da classe EventoEmDistribuicaoState.
      */
     @Test
     public void testSetFaseDecisao() {
@@ -160,7 +158,7 @@ public class EventoCPDefinidaStateTest {
 
     /**
      * Teste do metodo setEmSubmissaoCameraReady da classe
-     * EventoCPDefinidaState.
+     * EventoEmDistribuicaoState.
      */
     @Test
     public void testSetEmSubmissaoCameraReady() {
@@ -172,7 +170,7 @@ public class EventoCPDefinidaStateTest {
     }
 
     /**
-     * Teste do metodo setCameraReady, da classe EventoCPDefinidaState.
+     * Teste do metodo setCameraReady, da classe EventoEmDistribuicaoState.
      */
     @Test
     public void testSetCameraReady() {
@@ -184,13 +182,13 @@ public class EventoCPDefinidaStateTest {
     }
 
     /**
-     * Teste ao metodo valida, da classe EventoCPDefinidaState.
+     * Teste ao metodo valida, da classe EventoEmDistribuicaoState.
      */
     @Test
     public void testValida() {
         System.out.println("valida");
         EventoState instance = e.getEstado();
-        boolean expResult = true;
+        boolean expResult = false;
         boolean result = instance.valida();
         assertEquals(expResult, result);
     }

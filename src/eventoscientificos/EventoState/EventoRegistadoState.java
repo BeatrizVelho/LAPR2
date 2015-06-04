@@ -8,12 +8,12 @@ package eventoscientificos.EventoState;
 import eventoscientificos.model.Evento;
 
 /**
- * Representa uma instância de EventoCriadoState tendo acesso ao respetivo
+ * Representa uma instância de EventoRegistadoState tendo acesso ao respetivo
  * Evento através do objeto Evento que tem como atributo.
  *
  * @author G01
  */
-public class EventoCriadoState implements EventoState {
+public class EventoRegistadoState implements EventoState {
 
     /**
      * Instancia de Evento
@@ -21,49 +21,48 @@ public class EventoCriadoState implements EventoState {
     private Evento e;
 
     /**
-     * Constroi uma instância de EventoCriadoState recebendo um Evento
-     * como parametro.
+     * Constroi uma instância de EventoRegistadoState recebendo um Evento como
+     * parametro.
      *
      * @param Evento objeto evento
      */
-    public EventoCriadoState(Evento e) {
+    public EventoRegistadoState(Evento e) {
         this.e = e;
     }
 
     /**
      * Modifica o estado do evento para o estado Evento Criado
      *
-     * @return verdadeiro pois corresponde ao estado atual
+     * @return falso visto ja se encontrar num estado avançado
      */
     @Override
     public boolean setCriado() {
-        return true;
+        return false;
     }
 
     /**
      * Modifica o estado do evento para o estado Evento Registado
      *
-     * @return verdadeiro se mudou de estado e falso se nao mudou de estado
+     * @return verdadeiro pois corresponde ao estado atual
      */
     @Override
     public boolean setRegistado() {
-        if (valida()) {
-            e.setEstado(new EventoRegistadoState(this.e));
-            return true;
-        }
-        return false;
+        return true;
     }
 
     /**
      * Modifica o estado do evento para o estado Evento Sessoes Tematicas
      * Definidas
      *
-     * @return falso visto ja se encontrar num estado anterior
+     * @return verdadeiro se mudou de estado e falso se nao mudou de estado
      */
     @Override
     public boolean setSessoesTematicasDefinidas() {
+        if (valida()) {
+            e.setEstado(new EventoSessoesTematicasDefinidasState(this.e));
+            return true;
+        }
         return false;
-
     }
 
     /**
@@ -74,6 +73,7 @@ public class EventoCriadoState implements EventoState {
     @Override
     public boolean setCPDefinida() {
         return false;
+
     }
 
     /**
@@ -84,6 +84,7 @@ public class EventoCriadoState implements EventoState {
     @Override
     public boolean setEmSubmissao() {
         return false;
+
     }
 
     /**
@@ -94,6 +95,7 @@ public class EventoCriadoState implements EventoState {
     @Override
     public boolean setEmDetecao() {
         return false;
+
     }
 
     /**
@@ -104,6 +106,7 @@ public class EventoCriadoState implements EventoState {
     @Override
     public boolean setEmLicitacao() {
         return false;
+
     }
 
     /**
@@ -114,6 +117,7 @@ public class EventoCriadoState implements EventoState {
     @Override
     public boolean setEmDistribuicao() {
         return false;
+
     }
 
     /**
@@ -124,6 +128,7 @@ public class EventoCriadoState implements EventoState {
     @Override
     public boolean setEmRevisao() {
         return false;
+
     }
 
     /**
@@ -134,6 +139,7 @@ public class EventoCriadoState implements EventoState {
     @Override
     public boolean setFaseDecisao() {
         return false;
+
     }
 
     /**
@@ -145,6 +151,7 @@ public class EventoCriadoState implements EventoState {
     @Override
     public boolean setEmSubmissaoCameraReady() {
         return false;
+
     }
 
     /**
@@ -155,6 +162,7 @@ public class EventoCriadoState implements EventoState {
     @Override
     public boolean setCameraReady() {
         return false;
+
     }
 
     /**
@@ -166,6 +174,6 @@ public class EventoCriadoState implements EventoState {
      */
     @Override
     public boolean valida() {
-        return true;
+        return this.e.temSessoesTematicasDefinidas();
     }
 }
