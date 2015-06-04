@@ -9,7 +9,17 @@ import utils.Data;
  */
 public class SessaoTematicaTest {
 
+    private SessaoTematica sessaoTematica;
+    private Utilizador utilizador;
+
     public SessaoTematicaTest() {
+        this.sessaoTematica = new SessaoTematica(
+                "#A9D24R",
+                "LAPR2",
+                new Data(2016, 5, 22),
+                new Data(2016, 5, 28));
+        this.utilizador = new Utilizador(
+                "Pedro", "1140781@isep.ipp.pt", "pedro", "1234");
     }
 
     /**
@@ -18,7 +28,7 @@ public class SessaoTematicaTest {
     @Test
     public void testSetAndGetCodigoUnico() {
         System.out.println("setAndGetCodigoUnico");
-        SessaoTematica instance = new SessaoTematica();
+        SessaoTematica instance = this.sessaoTematica;
         String expResult = "#123456";
         instance.setCodigoUnico(expResult);
         String result = instance.getCodigoUnico();
@@ -31,7 +41,7 @@ public class SessaoTematicaTest {
     @Test
     public void testSetAndGetDescricao() {
         System.out.println("setAndGetDescricao");
-        SessaoTematica instance = new SessaoTematica();
+        SessaoTematica instance = this.sessaoTematica;
         String expResult = "uma descrição";
         instance.setDescricao(expResult);
         String result = instance.getDescricao();
@@ -45,8 +55,8 @@ public class SessaoTematicaTest {
     @Test
     public void testSetAndGetDataInicioSubmissao() {
         System.out.println("setAndGetDataInicioSubmissao");
-        SessaoTematica instance = new SessaoTematica();
-        Data expResult = new Data();
+        SessaoTematica instance = this.sessaoTematica;
+        Data expResult = new Data(2016, 5, 23);
         instance.setDataInicioSubmissao(expResult);
         Data result = instance.getDataInicioSubmissao();
         assertEquals(expResult, result);
@@ -59,8 +69,8 @@ public class SessaoTematicaTest {
     @Test
     public void testSetAndGetDataFimSubmissao() {
         System.out.println("setAndGetDataFimSubmissao");
-        SessaoTematica instance = new SessaoTematica();
-        Data expResult = new Data();
+        SessaoTematica instance = this.sessaoTematica;
+        Data expResult = new Data(2016, 5, 29);
         instance.setDataFimSubmissao(expResult);
         Data result = instance.getDataFimSubmissao();
         assertEquals(expResult, result);
@@ -72,7 +82,7 @@ public class SessaoTematicaTest {
     @Test
     public void testSetAndGetCP() {
         System.out.println("setAndGetCP");
-        SessaoTematica instance = new SessaoTematica();
+        SessaoTematica instance = this.sessaoTematica;
         CP expResult = new CP();
         instance.setCp(expResult);
         assertEquals(expResult, instance.getCP());
@@ -84,8 +94,8 @@ public class SessaoTematicaTest {
     @Test(expected = IllegalArgumentException.class)
     public void testSetCodigoUnicoEmpty() {
         System.out.println("setCodigoUnicoEmpty");
+        SessaoTematica instance = this.sessaoTematica;
         String codigoUnico = "";
-        SessaoTematica instance = new SessaoTematica();
         instance.setCodigoUnico(codigoUnico);
     }
 
@@ -95,8 +105,8 @@ public class SessaoTematicaTest {
     @Test(expected = IllegalArgumentException.class)
     public void testSetDescricaoEmpty() {
         System.out.println("setDescricao");
+        SessaoTematica instance = this.sessaoTematica;
         String descricao = "";
-        SessaoTematica instance = new SessaoTematica();
         instance.setDescricao(descricao);
     }
 
@@ -106,9 +116,9 @@ public class SessaoTematicaTest {
     @Test(expected = NullPointerException.class)
     public void testSetDataInicioSubmissaoNull() {
         System.out.println("setDataInicioSubmissaoNull");
-        Data dataLimiteSubmissao = null;
-        SessaoTematica instance = new SessaoTematica();
-        instance.setDataInicioSubmissao(dataLimiteSubmissao);
+        SessaoTematica instance = this.sessaoTematica;
+        Data dataInicioSubmissao = null;
+        instance.setDataInicioSubmissao(dataInicioSubmissao);
     }
 
     /**
@@ -117,9 +127,9 @@ public class SessaoTematicaTest {
     @Test(expected = IllegalArgumentException.class)
     public void testSetDataInicioSubmissaoDatePassed() {
         System.out.println("setDataInicioSubmissaoDatePassed");
-        Data dataLimiteSubmissao = new Data(1, 1, 1);
-        SessaoTematica instance = new SessaoTematica();
-        instance.setDataInicioSubmissao(dataLimiteSubmissao);
+        SessaoTematica instance = this.sessaoTematica;
+        Data dataInicioSubmissao = new Data(2015, 5, 22);
+        instance.setDataInicioSubmissao(dataInicioSubmissao);
     }
 
     /**
@@ -128,19 +138,19 @@ public class SessaoTematicaTest {
     @Test(expected = NullPointerException.class)
     public void testSetDataFimSubmissaoNull() {
         System.out.println("setDataFimSubmissaoNull");
-        Data dataLimiteSubmissao = null;
-        SessaoTematica instance = new SessaoTematica();
-        instance.setDataFimSubmissao(dataLimiteSubmissao);
+        SessaoTematica instance = this.sessaoTematica;
+        Data dataFimSubmissao = null;
+        instance.setDataFimSubmissao(dataFimSubmissao);
     }
 
     /**
      * Teste do método setDataInicioSubmissao, da classe SessaoTematica.
      */
     @Test(expected = IllegalArgumentException.class)
-    public void testSetDataFimSubmissaoDatePassed() {
-        System.out.println("setDataFimSubmissaoDatePassed");
-        Data dataFimSubmissao = new Data(1, 1, 1);
-        SessaoTematica instance = new SessaoTematica();
+    public void testSetDataFimSubmissaoDateInferior() {
+        System.out.println("setDataFimSubmissaoDateInferior");
+        SessaoTematica instance = this.sessaoTematica;
+        Data dataFimSubmissao = new Data(2015, 05, 22);
         instance.setDataInicioSubmissao(dataFimSubmissao);
     }
 
@@ -150,8 +160,8 @@ public class SessaoTematicaTest {
     @Test
     public void testEquals() {
         System.out.println("equals");
-        Object outroObjeto = new SessaoTematica();
-        SessaoTematica instance = new SessaoTematica();
+        Object outroObjeto = this.sessaoTematica;
+        SessaoTematica instance = this.sessaoTematica;
         boolean expResult = true;
         boolean result = instance.equals(outroObjeto);
         assertEquals(expResult, result);
@@ -164,8 +174,8 @@ public class SessaoTematicaTest {
     public void testEqualsNot() {
         System.out.println("equalsNot");
         Object outroObjeto = new SessaoTematica("#1234", "Sem descrição",
-                new Data(), new Data());
-        SessaoTematica instance = new SessaoTematica();
+                new Data(2016, 1, 1), new Data(2016, 1, 7));
+        SessaoTematica instance = this.sessaoTematica;
         boolean expResult = false;
         boolean result = instance.equals(outroObjeto);
         assertEquals(expResult, result);
@@ -177,10 +187,9 @@ public class SessaoTematicaTest {
     @Test
     public void testNovoProponente() {
         System.out.println("novoProponente");
-        SessaoTematica instance = new SessaoTematica();
+        SessaoTematica instance = this.sessaoTematica;
         boolean expResult = true;
-        boolean result = instance.novoProponente(new Utilizador(
-                "Pedro", "1140781@isep.ipp.pt", "pedro", "1234"));
+        boolean result = instance.novoProponente(this.utilizador);
         assertEquals(expResult, result);
     }
 
@@ -190,11 +199,9 @@ public class SessaoTematicaTest {
     @Test(expected = IllegalArgumentException.class)
     public void testNovoProponenteExists() {
         System.out.println("novoProponenteExists");
-        SessaoTematica instance = new SessaoTematica();
-        instance.novoProponente(new Utilizador(
-                "Pedro", "1140781@isep.ipp.pt", "pedro", "1234"));
-        instance.novoProponente(new Utilizador(
-                "Pedro", "1140781@isep.ipp.pt", "pedro", "1234"));
+        SessaoTematica instance = this.sessaoTematica;
+        instance.novoProponente(this.utilizador);
+        instance.novoProponente(this.utilizador);
     }
 
     /**
@@ -203,9 +210,7 @@ public class SessaoTematicaTest {
     @Test
     public void testValidarSessaoTematica() {
         System.out.println("validarSessaoTematica");
-        SessaoTematica instance = new SessaoTematica(
-                "#123456", "Uma descrição",
-                new Data(2016, 05, 22), new Data(2016, 05, 22));
+        SessaoTematica instance = this.sessaoTematica;
         boolean expResult = true;
         boolean result = instance.validarSessaoTematica();
         assertEquals(expResult, result);
@@ -217,7 +222,7 @@ public class SessaoTematicaTest {
     @Test
     public void testNovaCP() {
         System.out.println("novaCP");
-        SessaoTematica instance = new SessaoTematica();
+        SessaoTematica instance = this.sessaoTematica;
         CP expResult = new CP();
         CP result = instance.novaCp();
         assertEquals(expResult, result);
@@ -229,7 +234,7 @@ public class SessaoTematicaTest {
     @Test
     public void testAdicionarCP() {
         System.out.println("adicionarCP");
-        SessaoTematica instance = new SessaoTematica();
+        SessaoTematica instance = this.sessaoTematica;
         CP cp = new CP();
         boolean expResult = true;
         boolean result = instance.adicionarCP(cp);
