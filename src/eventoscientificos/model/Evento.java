@@ -338,7 +338,15 @@ public class Evento {
     public void setCp(CP cp) {
         this.cp = cp;
     }
-
+  /**
+     * Verifica se existem sessões temáticas definidas no evento.
+     *
+     * @return Verdadeiro caso existam Sessões Temáticas definidas na
+     * ListaSessõesTemáticas e falso caso esteja vazia.
+     */
+    public boolean temSessoesTematicasDefinidas() {
+        return this.listaSessoesTematicas.temSessoesTematicasDefinidas();
+    }
     /**
      * Compara dois objetos entre si. Comparando primariamente a posição de
      * memória, seguida do conteudo e das classes as quais cada um deles
