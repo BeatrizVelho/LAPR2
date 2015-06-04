@@ -1,6 +1,7 @@
 package eventoscientificos.model.StateSessaoTematica;
 
 import eventoscientificos.model.SessaoTematica;
+import utils.Data;
 
 /**
  * Representa uma instância de SessaoTematicaCPDefinidaState através de uma
@@ -25,66 +26,132 @@ public class SessaoTematicaCPDefinidaState implements SessaoTematicaState {
         this.sessaoTematica = sessaoTematica;
     }
 
+    /**
+     * Método que permite a mudança de estado para Criada.
+     *
+     * @return Falso, não deve ser possível mudar de CPDefinida para Criada.
+     */
     @Override
     public boolean setCriada() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return false;
     }
 
+    /**
+     * Método que permite a mudança de estado para CPDefinida.
+     *
+     * @return Falso, não deve ser possível mudar de CPDefinida para Registada.
+     */
     @Override
     public boolean setRegistada() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return false;
     }
 
+    /**
+     * Método que permite a mudança de estado para CPDefinida.
+     *
+     * @return Verdadeiro, a sessão temática encontra-se neste estado.
+     */
     @Override
     public boolean setCPDefinida() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return true;
     }
 
+    /**
+     * Método que permite a mudança de estado para EmSubmissao.
+     *
+     * @return Verdadeiro se for possivel alterar o estado para EmSubmisao e
+     * falso caso não seja.
+     */
     @Override
     public boolean setEmSubmissao() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (validarEstado()) {
+            this.sessaoTematica.setEstado(
+                    new SessaoTematicaEmSubmissaoState(this.sessaoTematica));
+            return true;
+        }
+
+        return false;
     }
 
+    /**
+     * Método que permite a mudança de estado para EmDetecao.
+     *
+     * @return Falso, não deve ser possível mudar de CPDefinida para EmDetecao.
+     */
     @Override
     public boolean setEmDetecao() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return false;
     }
 
+    /**
+     * Método que permite a mudança de estado para EmLicitacao.
+     *
+     * @return Falso, não deve ser possível mudar de CPDefinida para EmLicitacao.
+     */
     @Override
     public boolean setEmLicitacao() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return false;
     }
 
+    /**
+     * Método que permite a mudança de estado para EmDistribuicao.
+     *
+     * @return Falso, não deve ser possível mudar de CPDefinida para EmDistribuicao.
+     */
     @Override
     public boolean setEmDistribuicao() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return false;
     }
 
+    /**
+     * Método que permite a mudança de estado para EmRevisão.
+     *
+     * @return Falso, não deve ser possível mudar de CPDefinida para EmRevisão.
+     */
     @Override
     public boolean setEmRevisao() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return false;
     }
 
+    /**
+     * Método que permite a mudança de estado para FaseDecisao.
+     *
+     * @return Falso, não deve ser possível mudar de CPDefinida para FaseDecisao.
+     */
     @Override
     public boolean setFaseDecisao() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return false;
     }
 
+    /**
+     * Método que permite a mudança de estado para EmSubmissaoCameraReady.
+     *
+     * @return Falso, não deve ser possível mudar de CPDefinida para
+     * EmSubmissaoCameraReady.
+     */
     @Override
     public boolean setEmSubmissaoCameraReady() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return false;
     }
 
+    /**
+     * Método que permite a mudança de estado para CameraReady.
+     *
+     * @return Falso, não deve ser possível mudar de CPDefinida para CameraReady.
+     */
     @Override
     public boolean setCameraReady() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return false;
     }
 
+    /**
+     * Método que permite validar uma tentativa de mudança de estado.
+     *
+     * @return Verdadeiro se a mudança for possível e falso caso não seja.
+     */
     @Override
     public boolean validarEstado() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return Data.dataAtual().isMaior(
+                this.sessaoTematica.getDataInicioSubmissao());
     }
-    
-    
-    
 }
