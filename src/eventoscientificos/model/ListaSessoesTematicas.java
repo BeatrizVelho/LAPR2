@@ -27,28 +27,28 @@ public class ListaSessoesTematicas {
     /**
      * Cria uma instância de sessão temática com um código único, uma descrição,
      * uma data de inicio de submissão e data de fim de submissão.
-     * 
+     *
      * @param codigoUnico Código único da Sessão Temática.
      * @param descricao Descrição da Sessão Temátiica.
-     * @param dataInicioSubmissao Data de inicio do periodo de submissão da 
+     * @param dataInicioSubmissao Data de inicio do periodo de submissão da
      * Sessão Temática.
      * @param dataFimSubmissao Data de fim do periodo de submissão da Sessão
      * Temática.
      * @return Sessão Temática.
      */
     public SessaoTematica novaSessaoTematica(
-            String codigoUnico,
-            String descricao,
-            Data dataInicioSubmissao,
-            Data dataFimSubmissao) {
+                        String codigoUnico,
+                        String descricao,
+                        Data dataInicioSubmissao,
+                        Data dataFimSubmissao) {
         return new SessaoTematica(
-                codigoUnico, descricao, dataInicioSubmissao, dataFimSubmissao);
+                            codigoUnico, descricao, dataInicioSubmissao, dataFimSubmissao);
     }
 
     /**
      * Valida uma instância de Sessão Temática verificando se a mesma já existe
      * numa lista.
-     * 
+     *
      * @param sessaoTematica Sessão Temática que vai ser procurada na lista.
      * @return Verdadeiro se a Sessão Temática já existir na lista e falso caso
      * não exista.
@@ -59,7 +59,7 @@ public class ListaSessoesTematicas {
 
     /**
      * Adiciona uma instância de uma Sessão Temática a uma lista.
-     * 
+     *
      * @param sessaoTematica Sessão Temática que vai ser adicionada à lista.
      * @return Verdadeiro caso a Sessão Temática seja adicionada à lista e falso
      * caso a adição falhe.
@@ -67,7 +67,7 @@ public class ListaSessoesTematicas {
     public boolean adicionarSessaoTematica(SessaoTematica sessaoTematica) {
         return this.listaSessoesTematicas.add(sessaoTematica);
     }
-    
+
     /**
      * Compara dois objetos entre si. Comparando primariamente a posição de
      * memória, seguida do conteudo e das classes as quais cada um deles
@@ -82,16 +82,26 @@ public class ListaSessoesTematicas {
         if (this == outroObjeto) {
             return true;
         }
-        
+
         if (outroObjeto == null || this.getClass() != outroObjeto.getClass()) {
             return false;
         }
-        
+
         ListaSessoesTematicas outraListaSessoesTematicas
-                = (ListaSessoesTematicas) outroObjeto;
-        
+                            = (ListaSessoesTematicas) outroObjeto;
+
         return this.listaSessoesTematicas.equals(
-                outraListaSessoesTematicas.listaSessoesTematicas);
+                            outraListaSessoesTematicas.listaSessoesTematicas);
+    }
+
+    /**
+     * Verifica se existem Sessões Temáticas a uma lista.
+     *
+     * @return Verdadeiro caso existam Sessões Temáticas definidas na lista e
+     * falso caso esteja vazia.
+     */
+    public boolean temSessoesTematicasDefinidas() {
+        return this.listaSessoesTematicas.size() > 0;
     }
 
 }
