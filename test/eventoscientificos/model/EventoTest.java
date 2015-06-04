@@ -1,6 +1,5 @@
 package eventoscientificos.model;
 
-import Model.EventoState.EventoState;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import utils.Data;
@@ -100,7 +99,8 @@ public class EventoTest {
     }
 
     /**
-     * Teste dos metodos set e get da data de fim de submissao, da classe Evento.
+     * Teste dos metodos set e get da data de fim de submissao, da classe
+     * Evento.
      */
     @Test
     public void testSetAndGetDataFimSubmissao() {
@@ -125,7 +125,19 @@ public class EventoTest {
         Data result = instance.getDataInicioDistribuicao();
         assertEquals(expResult, result);
     }
-    
+
+    /**
+     * Teste dos metodos set e get da CP, da classe Evento.
+     */
+    @Test
+    public void testSetAndGetCP() {
+        System.out.println("setAndGetCP");
+        Evento instance = this.evento;
+        CP expResult = new CP();
+        instance.setCp(expResult);
+        assertEquals(expResult, instance.getCP());
+    }
+
     /**
      * Teste do metodo setTitulo, da classe Evento.
      */
@@ -301,6 +313,31 @@ public class EventoTest {
         Evento instance = this.evento;
         boolean expResult = true;
         boolean result = instance.validarEvento();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método novaCP, da classe Evento.
+     */
+    @Test
+    public void testNovaCP() {
+        System.out.println("novaCP");
+        Evento instance = this.evento;
+        CP expResult = new CP();
+        CP result = instance.novaCp();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste ao metodo adicionarCP, da classe Evento.
+     */
+    @Test
+    public void testAdicionarCP() {
+        System.out.println("adicionarCP");
+        Evento instance = this.evento;
+        CP cp = new CP();
+        boolean expResult = true;
+        boolean result = instance.adicionarCP(cp);
         assertEquals(expResult, result);
     }
 
