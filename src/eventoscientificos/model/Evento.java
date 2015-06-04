@@ -57,14 +57,19 @@ public class Evento {
     private List<Organizador> listaOrganizadores;
 
     /**
-     * Estado do evento.
+     * Lista de Sessões Temáticas do Evento.
      */
-    private EventoState estado;
-
+    private ListaSessoesTematicas listaSessoesTematicas;
+    
     /**
      * CP do evento.
      */
     private CP cp;
+
+    /**
+     * Estado do evento.
+     */
+    private EventoState estado;
 
     /**
      * Constrói uma instância de evento recebendo um titulo, descricao, local,
@@ -91,8 +96,10 @@ public class Evento {
         setDataInicioDistribuicao(dataInicioDistribuicao);;
         setDataInicio(dataInicio);
         setDataFim(dataFim);
-        setState(new EventoCriadoState(this));
-        this.listaOrganizadores = new ArrayList<>();
+        this.listaOrganizadores = new ArrayList();
+        this.listaSessoesTematicas = new ListaSessoesTematicas();
+        this.cp = null;
+        setEstado(new EventoCriadoState(this));
     }
 
     /**
@@ -165,6 +172,15 @@ public class Evento {
      */
     public Data getDataFim() {
         return this.dataFim;
+    }
+
+    /**
+     * Devolve a lista de tessões temáticas do evento.
+     * 
+     * @return Lista de sessões temáticas do evento.
+     */
+    public ListaSessoesTematicas getListaSessoesTematicas() {
+        return this.listaSessoesTematicas;
     }
 
     /**
@@ -308,10 +324,10 @@ public class Evento {
     /**
      * Muda o estado do evento.
      *
-     * @param novoEstado Novo estado do evento.
+     * @param estado Novo estado do evento.
      */
-    public void setState(EventoState novoEstado) {
-        this.estado = novoEstado;
+    public void setEstado(EventoState estado) {
+        this.estado = estado;
     }
 
     /**
