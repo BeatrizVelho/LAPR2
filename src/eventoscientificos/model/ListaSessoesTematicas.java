@@ -58,7 +58,6 @@ public class ListaSessoesTematicas {
     }
 
     /**
-     * 
      * Adiciona uma instância de uma Sessão Temática a uma lista.
      * 
      * @param sessaoTematica Sessão Temática que vai ser adicionada à lista.
@@ -67,6 +66,32 @@ public class ListaSessoesTematicas {
      */
     public boolean adicionarSessaoTematica(SessaoTematica sessaoTematica) {
         return this.listaSessoesTematicas.add(sessaoTematica);
+    }
+    
+    /**
+     * Compara dois objetos entre si. Comparando primariamente a posição de
+     * memória, seguida do conteudo e das classes as quais cada um deles
+     * pertence, e finalmente os seus atributos, lista de sessões temáticas.
+     *
+     * @param outroObjeto ListaSessoesTematicas que vai ser usada na comparação.
+     * @return Verdadeiro caso os objetos comparados sejam iguais e falso caso
+     * não o sejam.
+     */
+    @Override
+    public boolean equals(Object outroObjeto) {
+        if (this == outroObjeto) {
+            return true;
+        }
+        
+        if (outroObjeto == null || this.getClass() != outroObjeto.getClass()) {
+            return false;
+        }
+        
+        ListaSessoesTematicas outraListaSessoesTematicas
+                = (ListaSessoesTematicas) outroObjeto;
+        
+        return this.listaSessoesTematicas.equals(
+                outraListaSessoesTematicas.listaSessoesTematicas);
     }
 
 }
