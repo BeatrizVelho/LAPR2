@@ -32,7 +32,7 @@ public class EventoCPDefinidaStateTest {
                             new Data(2016, 6, 8), new Data(2016, 6, 20),
                             new Data(2016, 7, 7), new Data(2016, 8, 1),
                             new Data(2017, 6, 10));
-        e.setState(new EventoCPDefinidaState(e));
+        e.setEstado(new EventoCPDefinidaState(e));
     }
 
     /**
@@ -41,7 +41,7 @@ public class EventoCPDefinidaStateTest {
     @Test
     public void testSetCriado() {
         System.out.println("setCriado");
-        e.setState(new EventoCPDefinidaState(e));
+        e.setEstado(new EventoCPDefinidaState(e));
         EventoCPDefinidaState instance = new EventoCPDefinidaState(e);
         boolean expResult = false;
         boolean result = instance.setCriado();
