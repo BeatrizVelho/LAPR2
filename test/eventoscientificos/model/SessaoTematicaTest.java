@@ -1,5 +1,8 @@
 package eventoscientificos.model;
 
+import eventoscientificos.EventoState.EventoState;
+import eventoscientificos.model.StateSessaoTematica.SessaoTematicaCriadaState;
+import eventoscientificos.model.StateSessaoTematica.SessaoTematicaState;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import utils.Data;
@@ -86,6 +89,21 @@ public class SessaoTematicaTest {
         CP expResult = new CP();
         instance.setCp(expResult);
         assertEquals(expResult, instance.getCP());
+    }
+
+    /**
+     * Teste do método setAndGetEstado, da classe SessaoTematica.
+     */
+    @Test
+    public void testSetAndGetEstado() {
+        System.out.println("setAndGetEstado");
+        SessaoTematica instance = this.sessaoTematica;
+        SessaoTematicaState estado
+                = new SessaoTematicaCriadaState(this.sessaoTematica);
+        Class<? extends SessaoTematicaState> expResult = estado.getClass();
+        Class<? extends SessaoTematicaState> result
+                = instance.getEstado().getClass();
+        assertEquals(expResult, result);
     }
 
     /**
