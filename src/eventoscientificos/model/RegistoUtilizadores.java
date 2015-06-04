@@ -104,5 +104,24 @@ public class RegistoUtilizadores {
 
         return this.listaUtilizadores.equals(outroRegisto.listaUtilizadores);
     }
+    
+    /**
+     * Procura um utilizador na lista de utilizadores através dos seus
+     * identificadores (username ou email).
+     * 
+     * @param id ID do utilizador, pode ser o seu utilizador ou email
+     * @return Um objeto do tipo utilizador, caso o mesmo exista, senão retorna
+     * null.
+     */
+    public Utilizador getUtilizador(String id) {
+        for (Utilizador utilizador : this.listaUtilizadores) {
+            if (utilizador.getEmail().equals(id)
+                    || utilizador.getUsername().equals(id)) {
+                return utilizador;
+            }
+        }
+
+        return null;
+    }
 
 }

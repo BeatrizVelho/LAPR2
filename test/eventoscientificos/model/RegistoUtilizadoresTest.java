@@ -52,5 +52,35 @@ public class RegistoUtilizadoresTest {
         assertEquals(expResult, result);
 
     }
+    
+    /**
+     * Teste ao metodo getUtilizador da classe RegistoUtilizadores.
+     *
+     */
+    @Test
+    public void testgetUtilizadorUsername() {
+        System.out.println("getUtilizadorUsername");
+        RegistoUtilizadores instance = new RegistoUtilizadores();
+        Utilizador expResult = new Utilizador("Sususana", "email@gmail.com", "susus", "1234");
+        instance.adicionaUtilizador(expResult);
+        Utilizador result = instance.getUtilizador("susus");
+        assertEquals(expResult, result);
+
+    }
+    
+    /**
+     * Teste ao metodo getUtilizador da classe RegistoUtilizadores.
+     *
+     */
+    @Test
+    public void testgetUtilizadorEmail() {
+        System.out.println("getUtilizadorEmail");
+        RegistoUtilizadores instance = new RegistoUtilizadores();
+        Utilizador expResult = new Utilizador("Sususana", "email@gmail.com", "susus", "1234");
+        instance.adicionaUtilizador(expResult);
+        Utilizador result = instance.getUtilizador("email@gmail.com");
+        assertEquals(expResult, result);
+
+    }
 
 }
