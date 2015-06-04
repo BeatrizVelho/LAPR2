@@ -9,15 +9,15 @@ import utils.Data;
  * @author G01
  */
 public class ListaSessoesTematicasTest {
-    
+
     private SessaoTematica sessaoTematica;
 
     public ListaSessoesTematicasTest() {
         this.sessaoTematica = new SessaoTematica(
-                "#123456",
-                "Uma descrição",
-                new Data(2016, 05, 22),
-                new Data(2017, 05, 22));
+                            "#123456",
+                            "Uma descrição",
+                            new Data(2016, 05, 22),
+                            new Data(2017, 05, 22));
     }
 
     /**
@@ -29,10 +29,10 @@ public class ListaSessoesTematicasTest {
         System.out.println("novaSessaoTematica");
         SessaoTematica expResult = this.sessaoTematica;
         SessaoTematica result = instance.novaSessaoTematica(
-                "#123456",
-                "Uma descrição",
-                new Data(2016, 05, 22),
-                new Data(2017, 05, 22));
+                            "#123456",
+                            "Uma descrição",
+                            new Data(2016, 05, 22),
+                            new Data(2017, 05, 22));
         assertEquals(expResult, result);
     }
 
@@ -87,7 +87,7 @@ public class ListaSessoesTematicasTest {
         boolean result = instance.equals(outroObject);
         assertEquals(expResult, result);
     }
-    
+
     /**
      * Teste do método equals, da classe ListaSessoesTematicas.
      */
@@ -102,4 +102,30 @@ public class ListaSessoesTematicasTest {
         assertEquals(expResult, result);
     }
 
+    /**
+     * Teste do método temSessoesTematicasDefinidasPreenchida, da classe
+     * ListaSessoesTematicas.
+     */
+    @Test
+    public void testTemSessoesTematicasDefinidasPreenchida() {
+        System.out.println("temSessoesTematicasDefinidasPreenchida");
+        ListaSessoesTematicas instance = new ListaSessoesTematicas();
+        instance.adicionarSessaoTematica(sessaoTematica);
+        boolean expResult = true;
+        boolean result = instance.temSessoesTematicasDefinidas();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método temSessoesTematicasDefinidasVazia, da classe
+     * ListaSessoesTematicas.
+     */
+    @Test
+    public void testTemSessoesTematicasDefinidasVazia() {
+        System.out.println("temSessoesTematicasDefinidasVazia");
+        ListaSessoesTematicas instance = new ListaSessoesTematicas();
+        boolean expResult = false;
+        boolean result = instance.temSessoesTematicasDefinidas();
+        assertEquals(expResult, result);
+    }
 }
