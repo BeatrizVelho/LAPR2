@@ -168,11 +168,6 @@ public class SessaoTematica {
                     + "pode estar vazia.");
         }
 
-        if (!dataInicioSubmissao.isMaior(Data.dataAtual())) {
-            throw new IllegalArgumentException("A data de inicio de submissão"
-                    + " não pode ser menor que a data atual.");
-        }
-
         this.dataInicioSubmissao = dataInicioSubmissao;
     }
 
