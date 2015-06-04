@@ -77,7 +77,7 @@ public class EventoCPDefinidaState implements EventoState {
     @Override
     public boolean setEmSubmissao() {
         if (valida()) {
-            e.setState(new EventoEmSubmissaoState(e));
+            e.setEstado(new EventoEmSubmissaoState(e));
             return true;
         }
         return false;

@@ -48,7 +48,7 @@ public class EventoCriadoState implements EventoState {
     @Override
     public boolean setRegistado() {
         if (valida()) {
-            e.setState(new EventoRegistadoState(this.e));
+            e.setEstado(new EventoRegistadoState(this.e));
             return true;
         }
         return false;
