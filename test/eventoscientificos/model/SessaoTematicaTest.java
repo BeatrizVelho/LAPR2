@@ -142,17 +142,6 @@ public class SessaoTematicaTest {
     /**
      * Teste do método setDataInicioSubmissao, da classe SessaoTematica.
      */
-    @Test(expected = IllegalArgumentException.class)
-    public void testSetDataInicioSubmissaoDatePassed() {
-        System.out.println("setDataInicioSubmissaoDatePassed");
-        SessaoTematica instance = this.sessaoTematica;
-        Data dataInicioSubmissao = new Data(2015, 5, 22);
-        instance.setDataInicioSubmissao(dataInicioSubmissao);
-    }
-
-    /**
-     * Teste do método setDataInicioSubmissao, da classe SessaoTematica.
-     */
     @Test(expected = NullPointerException.class)
     public void testSetDataFimSubmissaoNull() {
         System.out.println("setDataFimSubmissaoNull");
