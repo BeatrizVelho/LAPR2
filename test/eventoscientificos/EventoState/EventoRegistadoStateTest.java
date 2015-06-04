@@ -27,7 +27,6 @@ public class EventoRegistadoStateTest {
      * Constroi uma instância de EventoRegistadoStateTest recebendo um Evento
      * como parametro.
      *
-     * @param Evento objeto evento
      */
     public EventoRegistadoStateTest() {
         this.e = new Evento("titulo", "descricao", new Local("local"),
