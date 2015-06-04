@@ -1,7 +1,7 @@
 package eventoscientificos.model;
 
-import eventoscientificos.EventoState.EventoState;
 import eventoscientificos.model.StateSessaoTematica.SessaoTematicaCriadaState;
+import eventoscientificos.model.StateSessaoTematica.SessaoTematicaRegistadaState;
 import eventoscientificos.model.StateSessaoTematica.SessaoTematicaState;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -253,6 +253,8 @@ public class SessaoTematicaTest {
     public void testAdicionarCP() {
         System.out.println("adicionarCP");
         SessaoTematica instance = this.sessaoTematica;
+        sessaoTematica.setEstado(
+                new SessaoTematicaRegistadaState(sessaoTematica));
         CP cp = new CP();
         boolean expResult = true;
         boolean result = instance.adicionarCP(cp);
