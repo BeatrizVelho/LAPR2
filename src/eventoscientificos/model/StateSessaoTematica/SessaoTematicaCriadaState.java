@@ -1,20 +1,26 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package eventoscientificos.model.StateSessaoTematica;
 
 import eventoscientificos.model.SessaoTematica;
 
 /**
- *
- * @author Pedro
+ * Representa uma instância de SessaoTematicaCriadaState através de uma sessão
+ * temática.
+ * 
+ * @author G01
  */
 public class SessaoTematicaCriadaState implements SessaoTematicaState {
 
+    /**
+     * Sessão temática que adota o estado.
+     */
     private SessaoTematica sessaoTematica;
 
+    /**
+     * Constrói uma instância de SessaoTematicaCriadaState recebendo uma sessão
+     * temática.
+     * 
+     * @param sessaoTematica Sessão Temática que adota o estado.
+     */
     public SessaoTematicaCriadaState(SessaoTematica sessaoTematica) {
         this.sessaoTematica = sessaoTematica;
     }
