@@ -313,7 +313,7 @@ public class SessaoTematica {
     public boolean adicionarCP(CP cp) {
         setCp(cp);
 
-        return true;
+        return this.estado.setCPDefinida();
     }
 
 }
