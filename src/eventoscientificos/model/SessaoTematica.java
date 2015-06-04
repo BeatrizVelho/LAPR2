@@ -1,5 +1,7 @@
 package eventoscientificos.model;
 
+import eventoscientificos.model.StateSessaoTematica.SessaoTematicaCriadaState;
+import eventoscientificos.model.StateSessaoTematica.SessaoTematicaState;
 import java.util.ArrayList;
 import java.util.List;
 import utils.Data;
@@ -43,24 +45,9 @@ public class SessaoTematica {
     private CP cp;
 
     /**
-     * Código único da sessão temática por omissão.
+     * Estado da sessão temática.
      */
-    private static String CODIGOUNICO_POR_OMISSAO = "Sem código único";
-
-    /**
-     * Descrição da sessão temática por omissão.
-     */
-    private static String DESCRICAO_POR_OMISSAO = "Sem descrição";
-
-    /**
-     * Data de inicio de submissão da sessão temática por omissão.
-     */
-    private static Data DATAINICIOSUBMISSAO_POR_OMISSAO = new Data();
-
-    /**
-     * Data de fim de submissão da sessão temática por omissão.
-     */
-    private static Data DATAFIMSUBMISSAO_POR_OMISSAO = new Data();
+    private SessaoTematicaState estado;
 
     /**
      * Constrói uma instância de uma sessão temática recebendo um código único,
@@ -82,21 +69,9 @@ public class SessaoTematica {
         setDataInicioSubmissao(dataInicioSubmissao);
         setDataFimSubmissao(dataFimSubmissao);
         this.listaProponentes = new ArrayList();
-    }
-
-    /**
-     * Constrói uma instância de uma sessão temática com os parametros por
-     * omissão.
-     */
-    public SessaoTematica() {
-        this(
-                CODIGOUNICO_POR_OMISSAO,
-                DESCRICAO_POR_OMISSAO,
-                DATAINICIOSUBMISSAO_POR_OMISSAO,
-                DATAFIMSUBMISSAO_POR_OMISSAO);
-        this.listaProponentes = new ArrayList();
-        this.cp = null;
-
+        setCp(null);
+        setEstado(new SessaoTematicaCriadaState(this));
+        
     }
 
     /**
@@ -133,6 +108,24 @@ public class SessaoTematica {
      */
     public Data getDataFimSubmissao() {
         return this.dataFimSubmissao;
+    }
+
+    /**
+     * Devolve a CP da sessão temática.
+     *
+     * @return CP da sessão temática.
+     */
+    public CP getCP() {
+        return this.cp;
+    }
+
+    /**
+     * Devolve o estado da sessão temática.
+     * 
+     * @return Estado da sessão temática.
+     */
+    public SessaoTematicaState getEstado() {
+        return this.estado;
     }
 
     /**
@@ -194,12 +187,30 @@ public class SessaoTematica {
             throw new NullPointerException("A data de fim de submissão não pode"
                     + "estar vazia.");
         }
-        if (!dataFinalSubmissao.isMaior(Data.dataAtual())) {
+        if (!dataFinalSubmissao.isMaior(this.dataInicioSubmissao)) {
             throw new IllegalArgumentException("A data de fim de submissão não"
-                    + "pode ser menor que a data atual.");
+                    + "pode ser menor que a data de inicio de submissão.");
         }
 
         this.dataFimSubmissao = dataFinalSubmissao;
+    }
+    
+    /**
+     * Modifica a CP da sessão temática.
+     *
+     * @param cp Nova CP da sessão temática.
+     */
+    public void setCp(CP cp) {
+        this.cp = cp;
+    }
+
+    /**
+     * Modifica o estado da sessão temática.
+     * 
+     * @param estado Novo estado da sessão temática.
+     */
+    public void setEstado(SessaoTematicaState estado) {
+        this.estado = estado;
     }
 
     /**
@@ -227,7 +238,8 @@ public class SessaoTematica {
     }
 
     /**
-     *
+     * Cria uma instância de proponente através de um utilizador que assume esse
+     * papel.
      *
      * @param utilizador Utilizador que assume o papel de proponente.
      * @return Verdadeiro se o proponente for criado e adicionado à lista com
@@ -279,12 +291,7 @@ public class SessaoTematica {
      * @return Verdadeiro se o objeto for válido e falso caso não seja.
      */
     public boolean validarSessaoTematica() {
-        return !(this.getCodigoUnico().equals(CODIGOUNICO_POR_OMISSAO)
-                || this.getDescricao().equals(DESCRICAO_POR_OMISSAO)
-                || this.getDataInicioSubmissao().equals(
-                        DATAINICIOSUBMISSAO_POR_OMISSAO)
-                || this.getDataFimSubmissao().equals(
-                        DATAFIMSUBMISSAO_POR_OMISSAO));
+        return this.estado.setRegistada();
     }
 
     /**
@@ -294,24 +301,6 @@ public class SessaoTematica {
      */
     public CP novaCp() {
         return new CP();
-    }
-
-    /**
-     * Devolve a CP da sessão temática.
-     *
-     * @return CP da sessão temática.
-     */
-    public CP getCP() {
-        return this.cp;
-    }
-
-    /**
-     * Modifica a CP da sessão temática.
-     *
-     * @param cp Nova CP da sessão temática.
-     */
-    public void setCp(CP cp) {
-        this.cp = cp;
     }
 
     /**

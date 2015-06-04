@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package eventoscientificos.controllers;
 
 import eventoscientificos.model.Empresa;
@@ -11,53 +6,53 @@ import eventoscientificos.model.Utilizador;
 
 /**
  * Representa uma instância de RegistarUtilizadorController através de
- * RegistoUtilizadores e Utilizador .
+ * RegistoUtilizadores e Utilizador.
  *
  * @author G01
  */
 public class RegistarUtilizadorController {
 
     /**
-     * Instancia de RegistoUtilizadores
+     * Instancia de RegistoUtilizadores.
      */
-    private RegistoUtilizadores ru;
+    private RegistoUtilizadores registoUtilizadores;
 
     /**
-     * Instancia de Utilizador
+     * Instancia de Utilizador.
      */
-    private Utilizador u;
+    private Utilizador utilizador;
 
     /**
      * Constrói uma instância de RegistarUtilizadorController recebendo uma
      * empresa por parametro.
      */
     public RegistarUtilizadorController(Empresa empresa) {
-        this.ru = empresa.getRegistoUtilizadores();
+        this.registoUtilizadores = empresa.getRegistoUtilizadores();
     }
 
     /**
-     * Devolve instancia de RegistoUtilizadores
+     * Devolve instancia de RegistoUtilizadores.
      *
-     * @return RegistoUtilizadores
+     * @return RegistoUtilizadores.
      */
     public RegistoUtilizadores getRegistoUtilizadores() {
-        return this.ru;
+        return this.registoUtilizadores;
     }
 
     /**
      * Cria uma instancia de Utilizador recebendo como parametro uma String
-     * nome, String email, String username,String password
+     * nome, String email, String username,String password.
      *
-     * @param nome nome do novo utilizador
-     * @param email email do novo utilizador
-     * @param username username do novo utilizador
-     * @param password password do novo utilizador
-     * @return nova instancia de utilizador
+     * @param nome nome do novo utilizador.
+     * @param email email do novo utilizador.
+     * @param username username do novo utilizador.
+     * @param password password do novo utilizador.
+     * @return nova instancia de utilizador.
      */
     public boolean novoUtilizador(String nome, String email, String username,
                         String password) {
         try {
-            this.u = ru.novoUtilizador(nome, email, username, password);
+            this.utilizador = registoUtilizadores.novoUtilizador(nome, email, username, password);
         } catch (IllegalArgumentException e) {
             e.getMessage();
             return false;
@@ -67,12 +62,13 @@ public class RegistarUtilizadorController {
 
     /**
      * Adiciona a instancia de utilizador a lista de utilizadores do
-     * RegistoUtilizadores
+     * RegistoUtilizadores.
      *
      * @return verdadeiro se for adicionado e falso se nao for possivel
-     * adiciona-lo
+     * adiciona-lo.
      */
     public boolean adicionarUtilizador() {
-        return ru.adicionaUtilizador(this.u);
+        return registoUtilizadores.adicionaUtilizador(this.utilizador);
     }
+ 
 }

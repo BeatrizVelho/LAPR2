@@ -6,12 +6,12 @@ package eventoscientificos.model;
 public class Local {
 
     /**
-     * Nome do local de realização do evento
+     * Nome do local de realização do evento.
      */
     private String nomeLocal;
-
+    
     /**
-     * Constrói uma instância de local, recebendo como parâmetro o nome do Local
+     * Constrói uma instância de local, recebendo como parâmetro o nome do Local.
      *
      * @param nomeLocal
      */
@@ -20,18 +20,18 @@ public class Local {
     }
 
     /**
-     * Devolve o nome do local de realização do evento
+     * Devolve o nome do local de realização do evento.
      *
-     * @return Nome do local de realização do Evento
+     * @return Nome do local de realização do Evento.
      */
     public String getNomeLocal() {
         return this.nomeLocal;
     }
 
     /**
-     * Modifica o nome do local de realização do evento
+     * Modifica o nome do local de realização do evento.
      *
-     * @param nomeLocal Novo nome do local de realização do evento
+     * @param nomeLocal Novo nome do local de realização do evento.
      */
     public void setNomeLocal(String nomeLocal) {
         if (nomeLocal.trim().isEmpty()) {
@@ -42,9 +42,9 @@ public class Local {
 
     /**
      * Devolve a descrição textual do nome do local no formato: O nome do local 
-     * de realização do Evento é x
+     * de realização do Evento é x.
      * 
-     * @return Nome do local 
+     * @return Nome do local.
      */
     @Override
     public String toString() {

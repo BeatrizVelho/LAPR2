@@ -1,5 +1,7 @@
 package eventoscientificos.model;
 
+import eventoscientificos.EventoState.EventoCriadoState;
+import eventoscientificos.EventoState.EventoState;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import utils.Data;
@@ -125,6 +127,19 @@ public class EventoTest {
         Data result = instance.getDataInicioDistribuicao();
         assertEquals(expResult, result);
     }
+    
+    /**
+     * Teste dos métodos set e get do estado do evento, da classe evento.
+     */
+    @Test
+    public void testSetAndGetEstado() {
+        System.out.println("setAndGetEstado");
+        Evento instance = this.evento;
+        EventoState estado = new EventoCriadoState(this.evento);
+        Class<? extends EventoState> expResult = estado.getClass();
+        Class<? extends EventoState> result = instance.getEstado().getClass();
+        assertEquals(expResult, result);
+    }
 
     /**
      * Teste dos metodos set e get da CP, da classe Evento.
@@ -138,6 +153,18 @@ public class EventoTest {
         assertEquals(expResult, instance.getCP());
     }
 
+    /**
+     * Teste do método getListaSessoesTematicas, da classe Evento.
+     */
+    @Test
+    public void testGetListaSessoesTematica() {
+        System.out.println("getListaSessoesTematicas");
+        Evento instance = this.evento;
+        ListaSessoesTematicas expResult = new ListaSessoesTematicas();
+        ListaSessoesTematicas result = instance.getListaSessoesTematicas();
+        assertEquals(expResult, result);
+    }
+    
     /**
      * Teste do metodo setTitulo, da classe Evento.
      */
@@ -313,6 +340,31 @@ public class EventoTest {
         Evento instance = this.evento;
         boolean expResult = true;
         boolean result = instance.validarEvento();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método novaCP, da classe Evento.
+     */
+    @Test
+    public void testNovaCP() {
+        System.out.println("novaCP");
+        Evento instance = this.evento;
+        CP expResult = new CP();
+        CP result = instance.novaCp();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste ao metodo adicionarCP, da classe Evento.
+     */
+    @Test
+    public void testAdicionarCP() {
+        System.out.println("adicionarCP");
+        Evento instance = this.evento;
+        CP cp = new CP();
+        boolean expResult = true;
+        boolean result = instance.adicionarCP(cp);
         assertEquals(expResult, result);
     }
 

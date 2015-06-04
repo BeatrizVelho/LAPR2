@@ -57,14 +57,19 @@ public class Evento {
     private List<Organizador> listaOrganizadores;
 
     /**
-     * Estado do evento.
+     * Lista de Sessões Temáticas do Evento.
      */
-    private EventoState estado;
-
+    private ListaSessoesTematicas listaSessoesTematicas;
+    
     /**
      * CP do evento.
      */
     private CP cp;
+
+    /**
+     * Estado do evento.
+     */
+    private EventoState estado;
 
     /**
      * Constrói uma instância de evento recebendo um titulo, descricao, local,
@@ -91,8 +96,10 @@ public class Evento {
         setDataInicioDistribuicao(dataInicioDistribuicao);;
         setDataInicio(dataInicio);
         setDataFim(dataFim);
-        setState(new EventoCriadoState(this));
-        this.listaOrganizadores = new ArrayList<>();
+        this.listaOrganizadores = new ArrayList();
+        this.listaSessoesTematicas = new ListaSessoesTematicas();
+        this.cp = null;
+        setEstado(new EventoCriadoState(this));
     }
 
     /**
@@ -168,6 +175,15 @@ public class Evento {
     }
 
     /**
+     * Devolve a lista de tessões temáticas do evento.
+     * 
+     * @return Lista de sessões temáticas do evento.
+     */
+    public ListaSessoesTematicas getListaSessoesTematicas() {
+        return this.listaSessoesTematicas;
+    }
+
+    /**
      * Devolve a CP do evento.
      *
      * @return CP do evento.
@@ -178,7 +194,7 @@ public class Evento {
 
     /**
      * Devolve o estado do evento.
-     * 
+     *
      * @return Estado do evento.
      */
     public EventoState getEstado() {
@@ -308,10 +324,10 @@ public class Evento {
     /**
      * Muda o estado do evento.
      *
-     * @param novoEstado Novo estado do evento.
+     * @param estado Novo estado do evento.
      */
-    public void setState(EventoState novoEstado) {
-        this.estado = novoEstado;
+    public void setEstado(EventoState estado) {
+        this.estado = estado;
     }
 
     /**
@@ -397,6 +413,28 @@ public class Evento {
      * @return Verdadeiro se o objeto for válido e falso caso não seja.
      */
     public boolean validarEvento() {
+        return true;
+    }
+
+    /**
+     * Cria uma instância de CP vazia.
+     *
+     * @return CP
+     */
+    public CP novaCp() {
+        return new CP();
+    }
+
+    /**
+     * Adiciona uma nova CP ao evento.
+     *
+     * @param cp CP a adicionar ao evento.
+     * @return Verdadeiro caso a CP tenha sido adicionada à sessão temática e
+     * falso se a adição falhar.
+     */
+    public boolean adicionarCP(CP cp) {
+        setCp(cp);
+
         return true;
     }
 
