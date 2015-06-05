@@ -44,6 +44,13 @@ public class InstituicaoAfiliacao {
     }
     
     /**
+     * Verifica se o nome da instituição de afiliação 
+     */
+    public boolean validarInstituicaoAfiliacao() {
+        return true;
+    }
+    
+    /**
      * Devolve a descrição textual da instituiçao de afiliação no formato: nome.
      * 
      * @return Caracteristicas da instituição de afiliação.
