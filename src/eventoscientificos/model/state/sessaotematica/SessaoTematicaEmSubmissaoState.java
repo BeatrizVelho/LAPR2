@@ -4,7 +4,8 @@ import eventoscientificos.model.SessaoTematica;
 import utils.Data;
 
 /**
- * 
+ * Representa uma instância de SessaoTEmaticaEmSubmissaoState através de uma
+ * Sessão Temática.
  *
  * @author G01
  */
