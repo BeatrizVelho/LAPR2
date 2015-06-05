@@ -5,12 +5,10 @@
  */
 package eventoscientificos.controllers;
 
-import eventoscientificos.model.CP;
 import eventoscientificos.model.SessaoTematica;
-import eventoscientificos.model.StateSessaoTematica.SessaoTematicaCPDefinidaState;
-import eventoscientificos.model.StateSessaoTematica.SessaoTematicaEmSubmissaoState;
-import eventoscientificos.model.StateSessaoTematica.SessaoTematicaRegistadaState;
-import eventoscientificos.model.StateSessaoTematica.SessaoTematicaState;
+import eventoscientificos.model.state.sessaotematica.SessaoTematicaCPDefinidaState;
+import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmSubmissaoState;
+import eventoscientificos.model.state.sessaotematica.SessaoTematicaState;
 import eventoscientificos.model.Submissivel;
 import java.util.TimerTask;
 import org.junit.Test;
