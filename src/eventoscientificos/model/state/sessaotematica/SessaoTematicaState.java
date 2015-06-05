@@ -1,4 +1,4 @@
-package eventoscientificos.model.StateSessaoTematica;
+package eventoscientificos.model.state.sessaotematica;
 
 /**
  * Interface implementada pelas várias classes que representam o estado da 

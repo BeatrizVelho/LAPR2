@@ -1,14 +1,20 @@
-package eventoscientificos.model.StateSessaoTematica;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package eventoscientificos.model.state.sessaotematica;
 
 import eventoscientificos.model.SessaoTematica;
+import utils.Data;
 
 /**
- * Representa uma instância de SessaoTematicaRegistadaState, recebendo uma
- * sessão temática.
+ * Representa uma instância de SessaoTematicaEmDetecaoState através de uma
+ * Sessão Temática.
  *
  * @author G01
  */
-public class SessaoTematicaRegistadaState implements SessaoTematicaState {
+public class SessaoTematicaEmDetecaoState implements SessaoTematicaState {
 
     /**
      * Sessão Temática que adota o estado.
@@ -16,19 +22,19 @@ public class SessaoTematicaRegistadaState implements SessaoTematicaState {
     private SessaoTematica sessaoTematica;
 
     /**
-     * Constrói uma instância de SessaoTematicaRegistadaState recebendo uma
-     * sessão temática.
-     *
-     * @param sessaoTematica Sessão Temática que adota o estado.
+     * Constrói uma instância de SessaoTematicaEmDetecaoState recebendo uma
+     * Sessão Temática.
+     * 
+     * @param sessaoTematica Sessão Temática que adota o estado. 
      */
-    public SessaoTematicaRegistadaState(SessaoTematica sessaoTematica) {
+    public SessaoTematicaEmDetecaoState(SessaoTematica sessaoTematica) {
         this.sessaoTematica = sessaoTematica;
     }
 
     /**
      * Método que permite a mudança de estado para Criada.
      *
-     * @return Falso, não deve ser possível mudar de Registada para Criada.
+     * @return Falso, não deve ser possível mudar de EmDetecao para Criada.
      */
     @Override
     public boolean setCriada() {
@@ -38,34 +44,27 @@ public class SessaoTematicaRegistadaState implements SessaoTematicaState {
     /**
      * Método que permite a mudança de estado para CPDefinida.
      *
-     * @return Verdadeiro, a sessão temática encontra-se neste estado.
+     * @return Falso, não deve ser possível mudar de EmDetecao para Registada.
      */
     @Override
     public boolean setRegistada() {
-        return true;
+        return false;
     }
 
     /**
      * Método que permite a mudança de estado para CPDefinida.
      *
-     * @return Verdadeiro se for possivel alterar o estado para CPDefinida e
-     * falso caso não seja.
+     * @return Falso, não deve ser possível mudar de EmDetecao para Criada.
      */
     @Override
     public boolean setCPDefinida() {
-        if (validarEstado()) {
-            this.sessaoTematica.setEstado(
-                    new SessaoTematicaCPDefinidaState(this.sessaoTematica));
-            return true;
-        }
-
         return false;
     }
 
     /**
      * Método que permite a mudança de estado para EmSubmissao.
      *
-     * @return Falso, não deve ser possível mudar de Registada para EmSubmissao.
+     * @return Falso, não deve ser possível mudar de EmDetecao para EmSubmissao.
      */
     @Override
     public boolean setEmSubmissao() {
@@ -75,27 +74,36 @@ public class SessaoTematicaRegistadaState implements SessaoTematicaState {
     /**
      * Método que permite a mudança de estado para EmDetecao.
      *
-     * @return Falso, não deve ser possível mudar de Registada para EmDetecao.
+     * @return Verdadeiro, a sessão temática encontra-se neste estado.
      */
     @Override
     public boolean setEmDetecao() {
-        return false;
+        return true;
     }
 
     /**
      * Método que permite a mudança de estado para EmLicitacao.
      *
-     * @return Falso, não deve ser possível mudar de Registada para EmLicitacao.
+     * @return Verdadeiro se for possivel alterar o estado para EmLicitacao e
+     * falso caso não seja.
      */
     @Override
     public boolean setEmLicitacao() {
+        
+        if (validarEstado()) {
+            this.sessaoTematica.setEstado(
+                    new SessaoTematicaEmLicitacaoState(this.sessaoTematica));
+            return true;
+        }
+        
         return false;
     }
 
     /**
      * Método que permite a mudança de estado para EmDistribuicao.
      *
-     * @return Falso, não deve ser possível mudar de Registada para EmDistribuicao.
+     * @return Falso, não deve ser possível mudar de EmDetecao para
+     * EmDistribuicao.
      */
     @Override
     public boolean setEmDistribuicao() {
@@ -105,7 +113,7 @@ public class SessaoTematicaRegistadaState implements SessaoTematicaState {
     /**
      * Método que permite a mudança de estado para EmRevisão.
      *
-     * @return Falso, não deve ser possível mudar de Registada para EmRevisão.
+     * @return Falso, não deve ser possível mudar de EmDetecao para EmRevisão.
      */
     @Override
     public boolean setEmRevisao() {
@@ -115,7 +123,7 @@ public class SessaoTematicaRegistadaState implements SessaoTematicaState {
     /**
      * Método que permite a mudança de estado para FaseDecisao.
      *
-     * @return Falso, não deve ser possível mudar de Registada para FaseDecisao.
+     * @return Falso, não deve ser possível mudar de EmDetecao para FaseDecisao.
      */
     @Override
     public boolean setFaseDecisao() {
@@ -125,7 +133,7 @@ public class SessaoTematicaRegistadaState implements SessaoTematicaState {
     /**
      * Método que permite a mudança de estado para EmSubmissaoCameraReady.
      *
-     * @return Falso, não deve ser possível mudar de Registada para
+     * @return Falso, não deve ser possível mudar de EmDetecao para
      * EmSubmissaoCameraReady.
      */
     @Override
@@ -136,7 +144,7 @@ public class SessaoTematicaRegistadaState implements SessaoTematicaState {
     /**
      * Método que permite a mudança de estado para CameraReady.
      *
-     * @return Falso, não deve ser possível mudar de Registada para CameraReady.
+     * @return Falso, não deve ser possível mudar de EmDetecao para CameraReady.
      */
     @Override
     public boolean setCameraReady() {
@@ -150,6 +158,7 @@ public class SessaoTematicaRegistadaState implements SessaoTematicaState {
      */
     @Override
     public boolean validarEstado() {
-        return this.sessaoTematica.getCP() != null;
+        return true;
     }
+
 }

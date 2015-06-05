@@ -168,11 +168,6 @@ public class SessaoTematica {
                     + "pode estar vazia.");
         }
 
-        if (!dataInicioSubmissao.isMaior(Data.dataAtual())) {
-            throw new IllegalArgumentException("A data de inicio de submissão"
-                    + " não pode ser menor que a data atual.");
-        }
-
         this.dataInicioSubmissao = dataInicioSubmissao;
     }
 
@@ -313,7 +308,7 @@ public class SessaoTematica {
     public boolean adicionarCP(CP cp) {
         setCp(cp);
 
-        return true;
+        return this.estado.setCPDefinida();
     }
 
 }

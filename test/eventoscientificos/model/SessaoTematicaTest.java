@@ -1,8 +1,9 @@
 package eventoscientificos.model;
 
-import eventoscientificos.EventoState.EventoState;
-import eventoscientificos.model.StateSessaoTematica.SessaoTematicaCriadaState;
-import eventoscientificos.model.StateSessaoTematica.SessaoTematicaState;
+import eventoscientificos.model.state.sessaotematica.SessaoTematicaCPDefinidaState;
+import eventoscientificos.model.state.sessaotematica.SessaoTematicaCriadaState;
+import eventoscientificos.model.state.sessaotematica.SessaoTematicaRegistadaState;
+import eventoscientificos.model.state.sessaotematica.SessaoTematicaState;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import utils.Data;
@@ -19,8 +20,8 @@ public class SessaoTematicaTest {
         this.sessaoTematica = new SessaoTematica(
                 "#A9D24R",
                 "LAPR2",
-                new Data(2016, 5, 22),
-                new Data(2016, 5, 28));
+                new Data(2015, 5, 22),
+                new Data(2015, 5, 28));
         this.utilizador = new Utilizador(
                 "Pedro", "1140781@isep.ipp.pt", "pedro", "1234");
     }
@@ -107,6 +108,18 @@ public class SessaoTematicaTest {
     }
 
     /**
+     * Teste do método getListaSubmissoes, da classe SessaoTematica.
+     */
+    @Test
+    public void testGetListaSubmissoes() {
+        System.out.println("getListaSubmissoes");
+        SessaoTematica instance = this.sessaoTematica;
+        ListaSubmissoes expResult = new ListaSubmissoes();
+        ListaSubmissoes result = instance.getListaSubmissoes();
+        assertEquals(expResult, result);
+    }
+
+    /**
      * Teste do método setCodigoUnico, da classe SessaoTematica.
      */
     @Test(expected = IllegalArgumentException.class)
@@ -142,17 +155,6 @@ public class SessaoTematicaTest {
     /**
      * Teste do método setDataInicioSubmissao, da classe SessaoTematica.
      */
-    @Test(expected = IllegalArgumentException.class)
-    public void testSetDataInicioSubmissaoDatePassed() {
-        System.out.println("setDataInicioSubmissaoDatePassed");
-        SessaoTematica instance = this.sessaoTematica;
-        Data dataInicioSubmissao = new Data(2015, 5, 22);
-        instance.setDataInicioSubmissao(dataInicioSubmissao);
-    }
-
-    /**
-     * Teste do método setDataInicioSubmissao, da classe SessaoTematica.
-     */
     @Test(expected = NullPointerException.class)
     public void testSetDataFimSubmissaoNull() {
         System.out.println("setDataFimSubmissaoNull");
@@ -168,8 +170,8 @@ public class SessaoTematicaTest {
     public void testSetDataFimSubmissaoDateInferior() {
         System.out.println("setDataFimSubmissaoDateInferior");
         SessaoTematica instance = this.sessaoTematica;
-        Data dataFimSubmissao = new Data(2015, 05, 22);
-        instance.setDataInicioSubmissao(dataFimSubmissao);
+        Data dataFimSubmissao = new Data(2014, 05, 22);
+        instance.setDataFimSubmissao(dataFimSubmissao);
     }
 
     /**
@@ -247,15 +249,30 @@ public class SessaoTematicaTest {
     }
 
     /**
-     * Teste ao metodo adicionarCP da classe SessaoTematica.
+     * Teste ao metodo adicionarCP, da classe SessaoTematica.
      */
     @Test
     public void testAdicionarCP() {
         System.out.println("adicionarCP");
         SessaoTematica instance = this.sessaoTematica;
+        sessaoTematica.setEstado(
+                new SessaoTematicaRegistadaState(sessaoTematica));
         CP cp = new CP();
         boolean expResult = true;
         boolean result = instance.adicionarCP(cp);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste ao método setEmSubmissao, da classe SessaoTematica.
+     */
+    @Test
+    public void testSetEmSubmissao() {
+        System.out.println("setEmSubmissao");
+        SessaoTematica instance = this.sessaoTematica;
+        instance.setEstado(new SessaoTematicaCPDefinidaState(instance));
+        boolean expResult = true;
+        boolean result = instance.setEmSubmissao();
         assertEquals(expResult, result);
     }
 

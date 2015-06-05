@@ -1,75 +1,92 @@
-package eventoscientificos.model.StateSessaoTematica;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package eventoscientificos.model.state.sessaotematica;
 
+import eventoscientificos.model.state.sessaotematica.SessaoTematicaState;
+import eventoscientificos.model.state.sessaotematica.SessaoTematicaRegistadaState;
+import eventoscientificos.model.CP;
 import eventoscientificos.model.SessaoTematica;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import utils.Data;
 
 /**
- * @author G01
+ *
+ * @author Pedro
  */
-public class SessaoTematicaCriadaStateTest {
+public class SessaoTematicaCPDefinidaStateTest {
+    
+private SessaoTematica sessaoTematica;
 
-    private SessaoTematica sessaoTematica;
-
-    public SessaoTematicaCriadaStateTest() {
-        this.sessaoTematica = new SessaoTematica(
+    public SessaoTematicaCPDefinidaStateTest() {
+        SessaoTematica sessaoTematica = new SessaoTematica(
                 "#A9D24R",
                 "LAPR2",
-                new Data(2016, 5, 22),
-                new Data(2016, 5, 28));
+                new Data(2015, 5, 22),
+                new Data(2015, 5, 28));
+        sessaoTematica.setEstado(
+                new SessaoTematicaRegistadaState(sessaoTematica));
+        sessaoTematica.adicionarCP(new CP());
+        
+        this.sessaoTematica = sessaoTematica;
     }
 
     /**
-     * Teste do método setCriada, da classe SessaoTematicaCriadaStateTest.
+     * Teste do método setCriada, da classe SessaoTematicaCPDefinidaStateTest.
      */
     @Test
     public void testSetCriada() {
         System.out.println("setCriada");
         SessaoTematicaState instance = this.sessaoTematica.getEstado();
-        boolean expResult = true;
+        boolean expResult = false;
         boolean result = instance.setCriada();
         assertEquals(expResult, result);
     }
 
     /**
-     * Teste do método setRegistada, da classe SessaoTematicaCriadaState.
+     * Teste do método setRegistada, da classe
+     * SessaoTematicaCPDefinidaStateTest.
      */
     @Test
     public void testSetRegistada() {
         System.out.println("setRegistada");
         SessaoTematicaState instance = this.sessaoTematica.getEstado();
-        boolean expResult = true;
+        boolean expResult = false;
         boolean result = instance.setRegistada();
         assertEquals(expResult, result);
     }
 
     /**
-     * Test do método setCPDefinida, da classe SessaoTematicaCriadaState.
+     * Test do método setCPDefinida, da classe
+     * SessaoTematicaCPDefinidaStateTest.
      */
     @Test
     public void testSetCPDefinida() {
         System.out.println("setCPDefinida");
         SessaoTematicaState instance = this.sessaoTematica.getEstado();
-        boolean expResult = false;
+        boolean expResult = true;
         boolean result = instance.setCPDefinida();
         assertEquals(expResult, result);
     }
 
     /**
-     * Teste do método setEmSubmissao, da classe SessaoTematicaCriadaState.
+     * Teste do método setEmSubmissao, da classe 
+     * SessaoTematicaCPDefinidaStateTest.
      */
     @Test
     public void testSetEmSubmissao() {
         System.out.println("setEmSubmissao");
         SessaoTematicaState instance = this.sessaoTematica.getEstado();
-        boolean expResult = false;
+        boolean expResult = true;
         boolean result = instance.setEmSubmissao();
         assertEquals(expResult, result);
     }
 
     /**
-     * Test of setEmDetecao method, of class SessaoTematicaCriadaState.
+     * Test of setEmDetecao method, of class SessaoTematicaCPDefinidaStateTest.
      */
     @Test
     public void testSetEmDetecao() {
@@ -81,7 +98,8 @@ public class SessaoTematicaCriadaStateTest {
     }
 
     /**
-     * Teste do méotodo setEmLicitacao, da classe SessaoTematicaCriadaState.
+     * Teste do méotodo setEmLicitacao, da classe 
+     * SessaoTematicaCPDefinidaStateTest.
      */
     @Test
     public void testSetEmLicitacao() {
@@ -93,7 +111,8 @@ public class SessaoTematicaCriadaStateTest {
     }
 
     /**
-     * Teste do método setEmDistribuicao, da classe SessaoTematicaCriadaState.
+     * Teste do método setEmDistribuicao, da classe 
+     * SessaoTematicaCPDefinidaStateTest.
      */
     @Test
     public void testSetEmDistribuicao() {
@@ -105,7 +124,8 @@ public class SessaoTematicaCriadaStateTest {
     }
 
     /**
-     * Teste do método setEmRevisao, da classe SessaoTematicaCriadaState.
+     * Teste do método setEmRevisao, da classe
+     * SessaoTematicaCPDefinidaStateTest.
      */
     @Test
     public void testSetEmRevisao() {
@@ -117,7 +137,8 @@ public class SessaoTematicaCriadaStateTest {
     }
 
     /**
-     * Teste do método setFaseDecisao, da classe SessaoTematicaCriadaState.
+     * Teste do método setFaseDecisao, da classe
+     * SessaoTematicaCPDefinidaStateTest.
      */
     @Test
     public void testSetFaseDecisao() {
@@ -130,7 +151,7 @@ public class SessaoTematicaCriadaStateTest {
 
     /**
      * Teste do método setEmSubmissaoCameraReady, da classe
-     * SessaoTematicaCriadaState.
+     * SessaoTematicaCPDefinidaStateTest.
      */
     @Test
     public void testSetEmSubmissaoCameraReady() {
@@ -142,7 +163,8 @@ public class SessaoTematicaCriadaStateTest {
     }
 
     /**
-     * Teste do método setCameraReady, da classe SessaoTematicaCriadaState.
+     * Teste do método setCameraReady, da classe
+     * SessaoTematicaCPDefinidaStateTest.
      */
     @Test
     public void testSetCameraReady() {
@@ -154,7 +176,8 @@ public class SessaoTematicaCriadaStateTest {
     }
 
     /**
-     * Teste do método validarEstado, da classe SessaoTematicaCriadaState.
+     * Teste do método validarEstado, da classe
+     * SessaoTematicaCPDefinidaStateTest.
      */
     @Test
     public void testValidarEstado() {
