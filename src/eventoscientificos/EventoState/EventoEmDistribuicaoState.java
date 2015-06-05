@@ -118,7 +118,8 @@ public class EventoEmDistribuicaoState implements EventoState {
     /**
      * Modifica o estado do evento para o estado Evento Em Revisao
      *
-     * @return falso visto ja se encontrar num estado anterior
+     * @return verdadeiro se puder mudar para o estado EventoEmRevisaoState e
+     * falso se não puder
      */
     @Override
     public boolean setEmRevisao() {
