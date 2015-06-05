@@ -136,5 +136,17 @@ public class AutorTest {
         String result = instance.toString();
         assertEquals(expResult, result);
     }
+
+    /**
+     * Teste do método validarAutor, da classe Autor.
+     */
+    @Test
+    public void testValidarAutor() {
+        System.out.println("validarAutor");
+        Autor instance = this.autor;
+        boolean expResult = true;
+        boolean result = instance.validarAutor();
+        assertEquals(expResult, result);
+    }
     
 }
