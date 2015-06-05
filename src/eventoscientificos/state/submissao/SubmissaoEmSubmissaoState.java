@@ -10,19 +10,7 @@ import eventoscientificos.model.Submissao;
  */
 public class SubmissaoEmSubmissaoState implements SubmissaoState {
 
-    /**
-     * Submissao que adota o estado.
-     */
-    private Submissao submissao;
-
-    /**
-     * Constroi uma instância de SubmissaoEmSubmissaoState recebendo uma
-     * Submissao
-     *
-     * @param submissao Submissao que adota o estado.
-     */
     public SubmissaoEmSubmissaoState(Submissao submissao) {
-        this.submissao = submissao;
     }
 
     /**
