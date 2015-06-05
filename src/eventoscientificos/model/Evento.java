@@ -246,7 +246,7 @@ public class Evento {
         }
         if (!dataInicioSubmissao.isMaior(Data.dataAtual())) {
             throw new IllegalArgumentException("Data de inicio de submissao "
-                    + "invalida");
+                    + "nõ pode ser menor que a data atual");
         }
         this.dataInicioSubmissao = dataInicioSubmissao;
     }
@@ -264,7 +264,7 @@ public class Evento {
 
         if (!dataFimSubmissao.isMaior(this.dataInicioSubmissao)) {
             throw new IllegalArgumentException("Data de fim de submissao "
-                    + "invalida");
+                    + "não pode ser menor que a data de inicio de submissao");
         }
         this.dataFimSubmissao = dataFimSubmissao;
     }
@@ -282,7 +282,7 @@ public class Evento {
         }
         if (!dataInicioDistribuicao.isMaior(this.dataFimSubmissao)) {
             throw new IllegalArgumentException("Data de inicio de distribuicao "
-                    + "invalida");
+                    + "nao pode ser menor que a data de fim de submissao");
         }
         this.dataInicioDistribuicao = dataInicioDistribuicao;
     }
@@ -299,7 +299,7 @@ public class Evento {
         }
         if (!dataInicio.isMaior(this.dataInicioDistribuicao)) {
             throw new IllegalArgumentException("Data de inicio do evento "
-                    + "invalida");
+                    + "nao pode ser menor que a data de inicio de distribuicao");
         }
         this.dataInicio = dataInicio;
     }
@@ -316,7 +316,7 @@ public class Evento {
         }
         if (!dataFim.isMaior(dataInicio)) {
             throw new IllegalArgumentException("Data de fim do evento "
-                    + "invalida");
+                    + "nao pode ser menor que a data de inicio");
         }
         this.dataFim = dataFim;
     }
@@ -421,7 +421,7 @@ public class Evento {
      * @return Verdadeiro se o objeto for válido e falso caso não seja.
      */
     public boolean validarEvento() {
-        return true;
+        return this.estado.setRegistado();
     }
 
     /**
