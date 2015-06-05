@@ -115,7 +115,7 @@ public class SubmissaoCriadaState implements SubmissaoState {
      * @return Falso, não deve ser possível mudar de Criada para EmCameraReady.
      */
     @Override
-    public boolean setEmCameraRedy() {
+    public boolean setEmCameraReady() {
         return false;
     }
 
