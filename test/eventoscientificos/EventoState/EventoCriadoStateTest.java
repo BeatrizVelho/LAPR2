@@ -34,18 +34,7 @@ public class EventoCriadoStateTest {
                             new Data(2017, 6, 10));
         e.setEstado(new EventoCriadoState(e));
     }
-    
-    /**
-     * Teste ao metodo valida, da classe EventoCriadoState.
-     */
-    @Test
-    public void testValida() {
-        System.out.println("valida");
-        EventoState instance = e.getEstado();
-        boolean expResult = true;
-        boolean result = instance.valida();
-        assertEquals(expResult, result);
-    }
+
     /**
      * Teste do metodo setCriado, da classe EventoCriadoState.
      */
@@ -193,6 +182,16 @@ public class EventoCriadoStateTest {
         assertEquals(expResult, result);
     }
 
-
+    /**
+     * Teste ao metodo valida, da classe EventoCriadoState.
+     */
+    @Test
+    public void testValida() {
+        System.out.println("valida");
+        EventoState instance = e.getEstado();
+        boolean expResult = true;
+        boolean result = instance.valida();
+        assertEquals(expResult, result);
+    }
 
 }
