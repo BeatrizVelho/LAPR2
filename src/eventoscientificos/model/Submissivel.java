@@ -14,7 +14,7 @@ public interface Submissivel {
      * 
      * @return Devolve a lista de submissões do submissivel.
      */
-    boolean getListaSubmissoes();
+    ListaSubmissoes getListaSubmissoes();
 
     /**
      * Altera o estado do submissivel quando o mesmo atinge a data de inicio de
