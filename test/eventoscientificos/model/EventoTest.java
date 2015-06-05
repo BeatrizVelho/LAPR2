@@ -7,18 +7,20 @@ import static org.junit.Assert.*;
 import utils.Data;
 
 /**
- *
  * @author G01
  */
 public class EventoTest {
 
     private Evento evento;
+    private Utilizador utilizador;
 
     public EventoTest() {
         this.evento = new Evento("titulo", "descricao", new Local("local"),
                             new Data(2016, 6, 8), new Data(2016, 6, 20),
                             new Data(2016, 7, 7), new Data(2016, 8, 1),
                             new Data(2017, 6, 10));
+        this.utilizador = new Utilizador(
+                "Pedro", "1140781@isep.ipp.pt", "pedro", "12345");
     }
 
     /**
@@ -376,6 +378,19 @@ public class EventoTest {
         CP cp = new CP();
         boolean expResult = true;
         boolean result = instance.adicionarCP(cp);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste ao método isOrganizador, da classe Evento.
+     */
+    @Test
+    public void testIsOrganizador() {
+        System.out.println("isOrganizador");
+        Evento instance = this.evento;
+        instance.novoOrganizador(this.utilizador);
+        boolean expResult = true;
+        boolean result = instance.isOrganizador(this.utilizador);
         assertEquals(expResult, result);
     }
 
