@@ -150,6 +150,10 @@ public class Autor {
         this.instituicaoAfiliacao = instituicaoAfiliacao;
     }
     
+    public boolean validarAutor() {
+        return true;
+    }
+    
     /**
      * Faz a comparação entre dois autores, comparando primeiro a posição de
      * memória entre ambos, de seguida as classes e, se o segundo é ou não nulo
