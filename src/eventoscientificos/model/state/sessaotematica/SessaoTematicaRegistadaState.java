@@ -1,4 +1,4 @@
-package eventoscientificos.model.StateSessaoTematica;
+package eventoscientificos.model.state.sessaotematica;
 
 import eventoscientificos.model.SessaoTematica;
 

@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package eventoscientificos.model.StateSessaoTematica;
+package eventoscientificos.model.state.sessaotematica;
 
+import eventoscientificos.model.state.sessaotematica.SessaoTematicaState;
+import eventoscientificos.model.state.sessaotematica.SessaoTematicaRegistadaState;
 import eventoscientificos.model.CP;
 import eventoscientificos.model.SessaoTematica;
 import org.junit.Test;
