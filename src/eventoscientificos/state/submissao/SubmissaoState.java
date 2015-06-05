@@ -1,6 +1,9 @@
 package eventoscientificos.state.submissao;
 
 /** 
+ * Interface implementada pelas várias classes que representam o estado da 
+ * Submissão numa dada altura.
+ * 
  * @author G01
  */
 public interface SubmissaoState {
@@ -21,7 +24,7 @@ public interface SubmissaoState {
     
     boolean setRejeitada();
     
-    boolean setEmCameraRedy();
+    boolean setEmCameraReady();
     
     boolean setSemArtigoFinal();
     
