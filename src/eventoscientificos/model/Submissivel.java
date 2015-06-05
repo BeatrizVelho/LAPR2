@@ -19,7 +19,10 @@ public interface Submissivel {
     /**
      * Altera o estado do submissivel quando o mesmo atinge a data de inicio de
      * submissão.
+     * 
+     * @return Verdadeiro se for possível alterar o estado e falso caso não 
+     * seja.
      */
-    void setEmSubmissao();
+    boolean setEmSubmissao();
     
 }
