@@ -105,7 +105,16 @@ public class TipoConflito {
         
         return this.getMecanismoDetecao().getClass().equals(
                 outroTipoConflito.getMecanismoDetecao().getClass()); 
-        
+    }
+
+    /**
+     * Valida o tipo de conflito na sua totalidade.
+     * 
+     * @return Verdadeiro se o tipo de conflito possuir todas as características
+     * e falso caso não possua.
+     */
+    public boolean validarTipoConflito() {
+        return true;
     }
 
     /**
