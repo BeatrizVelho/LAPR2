@@ -95,6 +95,18 @@ public class TipoConflitoTest {
     }
 
     /**
+     * Teste do método validarTipoConflito, da classe TipoConflito.
+     */
+    @Test
+    public void testValidarTipoConflito() {
+        System.out.println("validarTipoConflito");
+        TipoConflito instance = this.tipoConflito;
+        boolean expResult = true;
+        boolean result = instance.validarTipoConflito();
+        assertEquals(expResult, result);
+    }
+
+    /**
      * Teste do método temMecanismo, da classe TipoConflito.
      */
     @Test
