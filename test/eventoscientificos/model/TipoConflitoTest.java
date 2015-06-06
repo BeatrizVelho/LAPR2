@@ -15,7 +15,7 @@ public class TipoConflitoTest {
     
     public TipoConflitoTest() {
         this.tipoConflito = new TipoConflito(
-                new MecanismoDetecao1(), "Um descrição");
+                new MecanismoDetecao1(), "Uma descrição");
     }
 
     /**
@@ -53,6 +53,45 @@ public class TipoConflitoTest {
         String descricao = "";
         TipoConflito instance = this.tipoConflito;
         instance.setDescricao(descricao);
+    }
+    
+    /**
+     * Teste do método equals, da classe Tipo Conflitto.
+     */
+    @Test
+    public void testEqualsDescricao() {
+        System.out.println("equalsDescricao");
+        Object outroObjeto = new TipoConflito(null, "Uma descrição");
+        TipoConflito instance = this.tipoConflito;
+        boolean expResult = true;
+        boolean result = instance.equals(outroObjeto);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método equals, da classe Tipo Conflitto.
+     */
+    @Test
+    public void testEqualsMecanimo() {
+        System.out.println("equalsMecanismo");
+        Object outroObjeto = new TipoConflito(new MecanismoDetecao1(), "Descrição");
+        TipoConflito instance = this.tipoConflito;
+        boolean expResult = true;
+        boolean result = instance.equals(outroObjeto);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método equals, da classe Tipo Conflitto.
+     */
+    @Test
+    public void testEqualsNot() {
+        System.out.println("equalsNot");
+        Object outroObjeto = new TipoConflito(null, "Descrição");
+        TipoConflito instance = this.tipoConflito;
+        boolean expResult = false;
+        boolean result = instance.equals(outroObjeto);
+        assertEquals(expResult, result);
     }
 
     /**
