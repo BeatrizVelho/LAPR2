@@ -25,7 +25,7 @@ public class EmpresaTest {
         RegistoUtilizadores result = instance.getRegistoUtilizadores();
         assertEquals(expResult, result);
     }
-    
+
     /**
      * Testa o metodo getRegistoEventos da classe Empresa.
      */
@@ -37,5 +37,17 @@ public class EmpresaTest {
         RegistoEventos result = instance.getRegistoEventos();
         assertEquals(expResult, result);
     }
-    
+
+    /**
+     * Testa o metodo getRegistoTiposConflito da classe Empresa.
+     */
+    @Test
+    public void testGetRegistoTiposConflito() {
+        System.out.println("getRegistoTiposConflito");
+        Empresa instance = new Empresa();
+        RegistoTiposConflito expResult = new RegistoTiposConflito();
+        RegistoTiposConflito result = instance.getRegistoTiposConflito();
+        assertEquals(expResult, result);
+    }
+
 }
