@@ -1,7 +1,7 @@
 package eventoscientificos.model;
 
-import eventoscientificos.model.StateSessaoTematica.SessaoTematicaCriadaState;
-import eventoscientificos.model.StateSessaoTematica.SessaoTematicaState;
+import eventoscientificos.model.state.sessaotematica.SessaoTematicaCriadaState;
+import eventoscientificos.model.state.sessaotematica.SessaoTematicaState;
 import java.util.ArrayList;
 import java.util.List;
 import utils.Data;
@@ -12,7 +12,7 @@ import utils.Data;
  *
  * @author G01
  */
-public class SessaoTematica {
+public class SessaoTematica implements Submissivel {
 
     /**
      * Código único da Sessão Temática.
@@ -45,6 +45,11 @@ public class SessaoTematica {
     private CP cp;
 
     /**
+     * Lista de submissões da sessão temática.
+     */
+    private ListaSubmissoes listaSubmissoes;
+
+    /**
      * Estado da sessão temática.
      */
     private SessaoTematicaState estado;
@@ -70,6 +75,7 @@ public class SessaoTematica {
         setDataFimSubmissao(dataFimSubmissao);
         this.listaProponentes = new ArrayList();
         setCp(null);
+        this.listaSubmissoes = new ListaSubmissoes();
         setEstado(new SessaoTematicaCriadaState(this));
         
     }
@@ -117,6 +123,16 @@ public class SessaoTematica {
      */
     public CP getCP() {
         return this.cp;
+    }
+
+    /**
+     * Devolve a lista de submissões da sessão temática.
+     * 
+     * @return Lista de submissões da sessão temática.
+     */
+    @Override
+    public ListaSubmissoes getListaSubmissoes() {
+        return this.listaSubmissoes;
     }
 
     /**
@@ -309,6 +325,14 @@ public class SessaoTematica {
         setCp(cp);
 
         return this.estado.setCPDefinida();
+    }
+
+    /**
+     * Método que altera o estado da Sessão Temática para em Submissão.
+     */
+    @Override
+    public boolean setEmSubmissao() {
+        return this.estado.setEmSubmissao();
     }
 
 }
