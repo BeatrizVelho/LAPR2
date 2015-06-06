@@ -78,6 +78,37 @@ public class TipoConflito {
     }
 
     /**
+     * Compara dois objetos entre si. Comparando primariamente a posição de
+     * memória, seguida do conteudo e das classes as quais cada um deles
+     * pertence, e finalmente os seus atributos lista de eventos.
+     * 
+     * @param outroObjeto Tipo de conflito que vai ser usado na comparação.
+     * @return Verdadeiro caso os objetos comparados sejam iguais e falso caso
+     * não o sejam.
+     */
+    @Override
+    public boolean equals(Object outroObjeto) {
+        if (this == outroObjeto) {
+            return true;
+        }
+        
+        if (outroObjeto == null || this.getClass() != outroObjeto.getClass()) {
+            return false;
+        }
+        
+        TipoConflito outroTipoConflito = (TipoConflito) outroObjeto;
+        
+        if (this.getMecanismoDetecao() == null
+                || outroTipoConflito.getMecanismoDetecao() == null) {
+            return this.getDescricao().equals(outroTipoConflito.getDescricao());
+        }
+        
+        return this.getMecanismoDetecao().getClass().equals(
+                outroTipoConflito.getMecanismoDetecao().getClass()); 
+        
+    }
+
+    /**
      * Verifica se o tipo de conflito tem um mecanismo de deteção associado a si
      * mesmo.
      * 
