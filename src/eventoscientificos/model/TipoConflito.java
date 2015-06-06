@@ -80,7 +80,8 @@ public class TipoConflito {
     /**
      * Compara dois objetos entre si. Comparando primariamente a posição de
      * memória, seguida do conteudo e das classes as quais cada um deles
-     * pertence, e finalmente os seus atributos lista de eventos.
+     * pertence, e finalmente os seus atributos, o mecanismo de deteção e a
+     * descrição.
      * 
      * @param outroObjeto Tipo de conflito que vai ser usado na comparação.
      * @return Verdadeiro caso os objetos comparados sejam iguais e falso caso
