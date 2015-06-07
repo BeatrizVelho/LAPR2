@@ -1,28 +1,27 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package eventoscientificos.model;
 
+import eventoscientificos.EventoState.EventoRegistadoState;
 import java.util.ArrayList;
+import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import utils.Data;
 
 /**
- *
- * @author Beatriz
+ * @author G01
  */
 public class RegistoEventosTest {
     
     private Evento evento;
+    private Utilizador utilizador;
     
     public RegistoEventosTest() {
         this.evento = new Evento("titulo", "descricao", new Local("local"),
                 new Data(2016, 6, 8), new Data(2016, 6, 20),
                 new Data(2016, 7, 7), new Data(2016, 8, 1),
                 new Data(2017, 6, 10));
+        this.utilizador = new Utilizador(
+                "pedro", "1140781@isep.ipp.pt", "pedro", "12345");
     }
 
     /**
@@ -41,7 +40,9 @@ public class RegistoEventosTest {
         Data dataFim = new Data(2017, 6, 10);
         RegistoEventos instance = new RegistoEventos();
         Evento expResult = this.evento;
-        Evento result = instance.novoEvento(titulo, descricao, local, dataInicioSubmissao, dataFimSubmissao, dataInicioDistribuicao, dataInicio, dataFim);
+        Evento result = instance.novoEvento(
+                titulo, descricao, local, dataInicioSubmissao, dataFimSubmissao,
+                dataInicioDistribuicao, dataInicio, dataFim);
         assertEquals(expResult, result);
     }
 
@@ -100,4 +101,21 @@ public class RegistoEventosTest {
         boolean result = instance.equals(outroObjeto);
         assertEquals(expResult, result);
     }
+
+    /**
+     * Teste do método getListaEventosOrganizador, da classe RegistoEventos.
+     */
+    @Test
+    public void testGetListaEventosOrganizador() {
+        this.evento.setEstado(new EventoRegistadoState(this.evento));
+        this.evento.novoOrganizador(this.utilizador);
+        RegistoEventos instance = new RegistoEventos();
+        instance.adicionarEvento(evento);
+        List<Evento> expResult = new ArrayList();
+        expResult.add(this.evento);
+        List<Evento> result 
+                = instance.getListaEventosOrganizador(this.utilizador);
+        assertEquals(expResult, result);
+    }
+
 }
