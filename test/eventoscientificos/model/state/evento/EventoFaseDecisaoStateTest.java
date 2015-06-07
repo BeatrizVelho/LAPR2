@@ -184,14 +184,14 @@ public class EventoFaseDecisaoStateTest {
     }
 
     /**
-     * Test of validaEstado method, of class EventoFaseDecisaoState.
+     * Test of validarEstado method, of class EventoFaseDecisaoState.
      */
     @Test
     public void testValida() {
         System.out.println("valida");
         EventoState instance = e.getEstado();
         boolean expResult = false;
-        boolean result = instance.validaEstado();
+        boolean result = instance.validarEstado();
         assertEquals(expResult, result);
     }
 

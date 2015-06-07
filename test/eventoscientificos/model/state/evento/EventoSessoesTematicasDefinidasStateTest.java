@@ -195,14 +195,14 @@ public class EventoSessoesTematicasDefinidasStateTest {
     }
 
     /**
-     * Teste ao metodo validaEstado, da classe EventoSessoesTematicasDefinidasState.
+     * Teste ao metodo validarEstado, da classe EventoSessoesTematicasDefinidasState.
      */
     @Test
     public void testValida() {
         System.out.println("valida");
         EventoState instance = e.getEstado();
         boolean expResult = false;
-        boolean result = instance.validaEstado();
+        boolean result = instance.validarEstado();
         assertEquals(expResult, result);
     }
 

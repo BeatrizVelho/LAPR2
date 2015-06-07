@@ -186,14 +186,14 @@ public class EventoCPDefinidaStateTest {
     }
 
     /**
-     * Teste ao metodo validaEstado, da classe EventoCPDefinidaState.
+     * Teste ao metodo validarEstado, da classe EventoCPDefinidaState.
      */
     @Test
     public void testValida() {
         System.out.println("valida");
         EventoState instance = e.getEstado();
         boolean expResult = true;
-        boolean result = instance.validaEstado();
+        boolean result = instance.validarEstado();
         assertEquals(expResult, result);
     }
 

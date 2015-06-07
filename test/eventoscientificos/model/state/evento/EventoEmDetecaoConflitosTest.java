@@ -184,14 +184,14 @@ public class EventoEmDetecaoConflitosTest {
     }
 
     /**
-     * Teste ao metodo validaEstado, da classe EventoEmDetecaoConflitos.
+     * Teste ao metodo validarEstado, da classe EventoEmDetecaoConflitos.
      */
     @Test
     public void testValida() {
         System.out.println("valida");
         EventoState instance = e.getEstado();
         boolean expResult = false;
-        boolean result = instance.validaEstado();
+        boolean result = instance.validarEstado();
         assertEquals(expResult, result);
     }
 

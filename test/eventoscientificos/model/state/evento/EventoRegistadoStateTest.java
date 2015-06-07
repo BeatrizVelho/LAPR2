@@ -195,13 +195,13 @@ public class EventoRegistadoStateTest {
     }
 
     /**
-     * Teste ao metodo validaEstado, da classe EventoRegistadoState.
+     * Teste ao metodo validarEstado, da classe EventoRegistadoState.
      */
     @Test
     public void testValida() {
         EventoState instance = e.getEstado();
         boolean expResult = false;
-        boolean result = instance.validaEstado();
+        boolean result = instance.validarEstado();
         assertEquals(expResult, result);
 
     }

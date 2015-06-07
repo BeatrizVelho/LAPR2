@@ -185,14 +185,14 @@ public class EventoEmCameraReadyStateTest {
     }
 
     /**
-     * Teste ao metodo validaEstado, da classe EventoEmCameraReadyState.
+     * Teste ao metodo validarEstado, da classe EventoEmCameraReadyState.
      */
     @Test
     public void testValida() {
         System.out.println("valida");
         EventoState instance = e.getEstado();
         boolean expResult = true;
-        boolean result = instance.validaEstado();
+        boolean result = instance.validarEstado();
         assertEquals(expResult, result);
     }
 

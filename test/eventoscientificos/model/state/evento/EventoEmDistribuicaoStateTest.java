@@ -184,14 +184,14 @@ public class EventoEmDistribuicaoStateTest {
     }
 
     /**
-     * Teste ao metodo validaEstado, da classe EventoEmDistribuicaoState.
+     * Teste ao metodo validarEstado, da classe EventoEmDistribuicaoState.
      */
     @Test
     public void testValida() {
         System.out.println("valida");
         EventoState instance = e.getEstado();
         boolean expResult = false;
-        boolean result = instance.validaEstado();
+        boolean result = instance.validarEstado();
         assertEquals(expResult, result);
     }
 
