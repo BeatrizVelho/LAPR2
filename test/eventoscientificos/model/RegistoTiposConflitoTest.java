@@ -1,5 +1,8 @@
 package eventoscientificos.model;
 
+import eventoscientificos.model.mecanismo.detecao.MecanismoDetecao1;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -9,10 +12,13 @@ import static org.junit.Assert.*;
 public class RegistoTiposConflitoTest {
 
     private TipoConflito tipoConflito;
+    private TipoConflito outroTipoConflito;
     private RegistoTiposConflito registoTiposConflito;
     
     public RegistoTiposConflitoTest() {
         this.tipoConflito = new TipoConflito("Um tipo de conflito");
+        this.outroTipoConflito = new TipoConflito(
+                new MecanismoDetecao1(), "Um tipo de conflito com mecanismo");
         RegistoTiposConflito registoTiposConflito = new RegistoTiposConflito();
         this.registoTiposConflito = registoTiposConflito;
     }
@@ -69,6 +75,22 @@ public class RegistoTiposConflitoTest {
         assertEquals(expResult, result);
     }
 
+    /**
+     * Teste do  método getListaTiposConflitoComMecanismo, da classe
+     * RegistoTiposConflito.
+     */
+    @Test
+    public void testGetListaTiposConflitoComMecanismo() {
+        System.out.println("getListaTiposConflitoComMecanismo");
+        RegistoTiposConflito instance = this.registoTiposConflito;
+        instance.adicionarTipoConflito(this.tipoConflito);
+        instance.adicionarTipoConflito(this.outroTipoConflito);
+        List<TipoConflito> listaConflitosComMecanismo = new ArrayList();
+        listaConflitosComMecanismo.add(this.outroTipoConflito);
+        List<TipoConflito> expResult = listaConflitosComMecanismo;
+        List<TipoConflito> result = instance.getListaTiposConflitoComMecanismo();
+        assertEquals(expResult, result);
+    }
     
     
 }
