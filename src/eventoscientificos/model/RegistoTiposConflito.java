@@ -51,6 +51,24 @@ public class RegistoTiposConflito {
     }
 
     /**
+     * Devolve uma lista de tipos de conflito com mecanismo de deteção
+     * associado.
+     *
+     * @return Lista de tipos de conflito com mecanismo de deteção associado.
+     */
+    public List<TipoConflito> getListaTiposConflitoComMecanismo() {
+        List<TipoConflito> listaTiposConflitoComMecanismo = new ArrayList();
+
+        for (TipoConflito tipoConflito : this.listaTiposConflito) {
+            if (tipoConflito.temMecanismo()) {
+                listaTiposConflitoComMecanismo.add(tipoConflito);
+            }
+        }
+
+        return listaTiposConflitoComMecanismo;
+    }
+
+    /**
      * Cria e valida uma instância de tipo de conflito recebendo uma descrição.
      *
      * @param descricao Descrição do tipo de conflito.
