@@ -28,6 +28,27 @@ public class Artigo {
      * Lista de autores.
      */
     private ListaAutores listaAutores;
+    
+    /**
+     * Titulo do artigo por omissão.
+     */
+    private static final String TITULO_POR_OMISSAO = "Sem Titulo!";
+
+    /**
+     * Resumo do artigo por omissão.
+     */
+    private static final String RESUMO_POR_OMISSAO = "Sem Resumo!";
+
+    /**
+     * Caminho para o ficheiro com o artigo por omissão.
+     */
+    private static final String FICHEIRO_POR__OMISSAO = "Sem Ficheiro!";
+
+    /**
+     * Lista de autores do artigo por omissão.
+     */
+    private static final ListaAutores LISTA_AUTORES_POR_OMISSAO
+            = new ListaAutores();
 
     /**
      * Constroi uma instancia de artigo com o titulo, o resumo e o ficheiro.
@@ -40,6 +61,13 @@ public class Artigo {
         setResumo(resumo);
         setFicheiro(ficheiro);
         this.listaAutores = new ListaAutores();
+    }
+    
+    public Artigo() {
+        this.titulo = TITULO_POR_OMISSAO;
+        this.resumo = RESUMO_POR_OMISSAO;
+        this.ficheiro = FICHEIRO_POR__OMISSAO;
+        this.listaAutores =  LISTA_AUTORES_POR_OMISSAO;      
     }
 
     /**
