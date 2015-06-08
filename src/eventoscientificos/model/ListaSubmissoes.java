@@ -1,8 +1,80 @@
 package eventoscientificos.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author G01
  */
 public class ListaSubmissoes {
+
+    /**
+     * Lista das submissões.
+     */
+    private List<Submissao> listaSubmissoes;
     
+    /**
+     * Constroi uma instancia de Lista de submissoes em que a lista de
+     * submissoes se encontra vazia.
+     */
+    public ListaSubmissoes() {
+        this.listaSubmissoes = new ArrayList();
+    }
+
+    /**
+     * Cria e retorna uma instância de submissao.
+     *
+     * @return Submissao com os dados vazios
+     */
+    public Submissao novaSubmissao() {
+        return new Submissao();
+    }
+    
+    /**
+     * Valida a lista de submissoes verificando se a lista já possui uma
+     * submissão igual à passada por parametro.
+     *
+     * @param submissao Submissao de artigo
+     * @return Verdadeiro se a lista de submissoes nao tem a submissao
+     * e falso se tiver.
+     */
+    public boolean validarSubmissao(Submissao submissao) {
+        return !this.listaSubmissoes.contains(submissao);
+    }
+
+    /**
+     * Adiciona à lista de submissoes a submissao passada por parametro.
+     *
+     * @param submissao Submissao de artigo
+     */
+    public boolean adicionarSubmissao(Submissao submissao) {
+        return this.listaSubmissoes.add(submissao);
+    }
+    
+    /**
+     * Compara dois objetos entre si. Comparando primariamente a posição de
+     * memória, seguida do conteudo e das classes as quais cada um deles
+     * pertence, e finalmente os seus atributos, lista de submissoes.
+     *
+     * @param outroObjeto ListaSubmissoes que vai ser usada na comparação.
+     * @return Verdadeiro caso os objetos comparados sejam iguais e falso caso
+     * não o sejam.
+     */
+    @Override
+    public boolean equals(Object outroObjeto) {
+        if (this == outroObjeto) {
+            return true;
+        }
+
+        if (outroObjeto == null || this.getClass() != outroObjeto.getClass()) {
+            return false;
+        }
+
+        ListaSubmissoes outraListaSubmissoes
+                            = (ListaSubmissoes) outroObjeto;
+
+        return this.listaSubmissoes.equals(
+                            outraListaSubmissoes.listaSubmissoes);
+    }
+
 }
