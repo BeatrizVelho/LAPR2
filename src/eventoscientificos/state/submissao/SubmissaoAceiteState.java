@@ -14,7 +14,7 @@ public class SubmissaoAceiteState implements SubmissaoState {
     private Submissao submissao;
 
     /**
-     * Constroi uma instância de SubmissaoCriadaState recebendo uma Submissao
+     * Constroi uma instância de SubmissaoAceiteState recebendo uma Submissao
      *
      * @param submissao Submissao que adota o estado.
      */
@@ -25,7 +25,7 @@ public class SubmissaoAceiteState implements SubmissaoState {
     /**
      * Modifica o estado da submissão para o estado Submissão Criada
      * 
-     * @return Verdadeiro, a submissão encontra-se neste estado.
+     * @return Falso, não deve ser possível mudar de Aceite para Criada.
      */
     @Override
     public boolean setCriada() {
@@ -35,8 +35,7 @@ public class SubmissaoAceiteState implements SubmissaoState {
     /**
      * Modifica o estado da submissão para o estado Submissão Em Submissão.
      * 
-     * @return Verdadeiro se for possivel alterar o estado para EmSubmissao e
-     * falso caso não seja.
+     * @return Falso, não deve ser possível mudar de Aceite para EmSubmissao.
      */
     @Override
     public boolean setEmSubmissao() {
@@ -46,7 +45,7 @@ public class SubmissaoAceiteState implements SubmissaoState {
     /**
      * Modifica o estado da submissão para o estado Submissão Em Licitacao.
      * 
-     * @return Falso, não deve ser possível mudar de Criada para EmLicitacao.
+     * @return Falso, não deve ser possível mudar de Aceite para EmLicitacao.
      */
     @Override
     public boolean setEmLicitacao() {
@@ -56,7 +55,7 @@ public class SubmissaoAceiteState implements SubmissaoState {
     /**
      * Modifica o estado da submissão para o estado Submissão Em Revisão.
      * 
-     * @return Falso, não deve ser possível mudar de Criada para EmRevisão.
+     * @return Falso, não deve ser possível mudar de Aceite para EmRevisão.
      */
     @Override
     public boolean setEmRevisao() {
@@ -66,7 +65,7 @@ public class SubmissaoAceiteState implements SubmissaoState {
     /**
      * Modifica o estado da submissão para o estado Submissão Revista.
      * 
-     * @return Falso, não deve ser possível mudar de Criada para Revista.
+     * @return Falso, não deve ser possível mudar de Aceite para Revista.
      */
     @Override
     public boolean setRevista() {
@@ -76,7 +75,7 @@ public class SubmissaoAceiteState implements SubmissaoState {
     /**
      * Modifica o estado da submissão para o estado Submissão NaoRevista.
      * 
-     * @return Falso, não deve ser possível mudar de Criada para NaoRevista.
+     * @return Falso, não deve ser possível mudar de Aceite para NaoRevista.
      */
     @Override
     public boolean setNaoRevista() {
@@ -86,7 +85,7 @@ public class SubmissaoAceiteState implements SubmissaoState {
     /**
      * Modifica o estado da submissão para o estado Submissão Aceite.
      * 
-     * @return Falso, não deve ser possível mudar de Criada para Aceite.
+     * @return Verdadeiro, a submissão encontra-se neste estado.
      */
     @Override
     public boolean setAceite() {
@@ -96,7 +95,7 @@ public class SubmissaoAceiteState implements SubmissaoState {
     /**
      * Modifica o estado da submissão para o estado Submissão Rejeitada.
      * 
-     * @return Falso, não deve ser possível mudar de Criada para Rejeitada.
+     * @return Falso, não deve ser possível mudar de Aceite para Rejeitada.
      */
     @Override
     public boolean setRejeitada() {
@@ -106,7 +105,8 @@ public class SubmissaoAceiteState implements SubmissaoState {
     /**
      * Modifica o estado da submissão para o estado Submissão EmCameraReady.
      * 
-     * @return Falso, não deve ser possível mudar de Criada para EmCameraReady.
+     * @return Verdadeiro se for possivel alterar o estado para EmCameraReady e
+     * falso caso não seja.     
      */
     @Override
     public boolean setEmCameraReady() {
@@ -121,7 +121,7 @@ public class SubmissaoAceiteState implements SubmissaoState {
     /**
      * Modifica o estado da submissão para o estado Submissão SemArtigoFinal.
      * 
-     * @return Falso, não deve ser possível mudar de Criada para SemArtigoFinal.
+     * @return Falso, não deve ser possível mudar de EmCameraReady para SemArtigoFinal.
      */
     @Override
     public boolean setSemArtigoFinal() {
@@ -131,8 +131,8 @@ public class SubmissaoAceiteState implements SubmissaoState {
     /**
      * Modifica o estado da submissão para o estado Submissão Removida.
      * 
-     * @return Falso, não deve ser possível mudar de Criada para Removida.
-     */
+     * @return verdadeiro, deve ser possível mudar de EmCameraReady para Removida.
+     */ 
     @Override
     public boolean setRemovida() {
         return true;
@@ -142,8 +142,8 @@ public class SubmissaoAceiteState implements SubmissaoState {
      * valida se cumpre as condicoes necessarias para efetuar a mudanca de
      * estado pretendida
      *
-     * @return verdadeiro se poder passar de estado e falso se nao cumprir as
-     * condicoes necessarias de mudanca de estado
+     * @return Verdadeiro se for possivel alterar o estado para EmCameraReady e
+     * falso caso não seja. 
      */
     @Override
     public boolean validarEstado() {
