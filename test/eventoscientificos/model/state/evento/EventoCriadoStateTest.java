@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package eventoscientificos.EventoState;
+package eventoscientificos.model.state.evento;
 
+import eventoscientificos.model.state.evento.EventoState;
+import eventoscientificos.model.state.evento.EventoCriadoState;
 import eventoscientificos.model.Evento;
 import eventoscientificos.model.Local;
 import org.junit.Test;
@@ -183,14 +185,14 @@ public class EventoCriadoStateTest {
     }
 
     /**
-     * Teste ao metodo valida, da classe EventoCriadoState.
+     * Teste ao metodo validarEstado, da classe EventoCriadoState.
      */
     @Test
     public void testValida() {
         System.out.println("valida");
         EventoState instance = e.getEstado();
         boolean expResult = true;
-        boolean result = instance.valida();
+        boolean result = instance.validarEstado();
         assertEquals(expResult, result);
     }
 

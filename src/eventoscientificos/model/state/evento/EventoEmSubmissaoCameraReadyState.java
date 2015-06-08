@@ -3,18 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package eventoscientificos.EventoState;
+package eventoscientificos.model.state.evento;
 
 import eventoscientificos.model.Evento;
-import utils.Data;
 
 /**
- * Representa uma instância de EventoEmDistribuicaoState tendo acesso ao
+ * Representa uma instância de EventoEmSubmissaoCameraReadyState tendo acesso ao
  * respetivo Evento através do objeto Evento que tem como atributo.
  *
  * @author G01
  */
-public class EventoEmDistribuicaoState implements EventoState {
+public class EventoEmSubmissaoCameraReadyState implements EventoState {
 
     /**
      * Instancia de Evento
@@ -22,19 +21,19 @@ public class EventoEmDistribuicaoState implements EventoState {
     private Evento e;
 
     /**
-     * Constroi uma instância de EventoEmDistribuicaoState recebendo um Evento
+     * Constroi uma instância de EventoEmCameraReadyState recebendo um Evento
      * como parametro.
      *
      * @param Evento objeto evento
      */
-    public EventoEmDistribuicaoState(Evento e) {
+    public EventoEmSubmissaoCameraReadyState(Evento e) {
         this.e = e;
     }
 
     /**
-     * Modifica o estado do evento para o estado Evento Criado.
+     * Modifica o estado do evento para o estado Evento Criado
      *
-     * @return falso visto ja se encontrar num estado mais avançado.
+     * @return falso visto ja se encontrar num estado avançado
      */
     @Override
     public boolean setCriado() {
@@ -42,9 +41,9 @@ public class EventoEmDistribuicaoState implements EventoState {
     }
 
     /**
-     * Modifica o estado do evento para o estado Evento Registado.
+     * Modifica o estado do evento para o estado Evento Registado
      *
-     * @return falso visto ja se encontrar num estado mais avançado.
+     * @return falso visto ja se encontrar num estado avançado
      */
     @Override
     public boolean setRegistado() {
@@ -53,9 +52,9 @@ public class EventoEmDistribuicaoState implements EventoState {
 
     /**
      * Modifica o estado do evento para o estado Evento Sessoes Tematicas
-     * Definidas.
+     * Definidas
      *
-     * @return falso visto ja se encontrar num estado mais avançado.
+     * @return falso visto ja se encontrar num estado avançado
      */
     @Override
     public boolean setSessoesTematicasDefinidas() {
@@ -66,7 +65,7 @@ public class EventoEmDistribuicaoState implements EventoState {
     /**
      * Modifica o estado do evento para o estado Evento CP definida
      *
-     * @return falso visto ja se encontrar num estado mais avançado
+     * @return falso visto ja se encontrar num estado avançado
      */
     @Override
     public boolean setCPDefinida() {
@@ -76,18 +75,17 @@ public class EventoEmDistribuicaoState implements EventoState {
     /**
      * Modifica o estado do evento para o estado Evento Em Submissao
      *
-     * @return falso visto ja se encontrar num estado mais avançado
+     * @return falso visto ja se encontrar num estado avançado
      */
     @Override
     public boolean setEmSubmissao() {
         return false;
-
     }
 
     /**
      * Modifica o estado do evento para o estado Evento Em Detecao
      *
-     * @return falso visto ja se encontrar num estado mais avançado
+     * @return falso visto ja se encontrar num estado avançado
      */
     @Override
     public boolean setEmDetecao() {
@@ -97,43 +95,37 @@ public class EventoEmDistribuicaoState implements EventoState {
     /**
      * Modifica o estado do evento para o estado Evento Em Licitacao
      *
-     * @return falso visto ja se encontrar num estado mais avançado
+     * @return falso visto ja se encontrar num estado avançado
      */
     @Override
     public boolean setEmLicitacao() {
         return false;
-
     }
 
     /**
      * Modifica o estado do evento para o estado Evento Em Distribuicao
      *
-     * @return verdadeiro pois corresponde ao estado atual
+     * @return falso visto ja se encontrar num estado avançado
      */
     @Override
     public boolean setEmDistribuicao() {
-        return true;
+        return false;
     }
 
     /**
      * Modifica o estado do evento para o estado Evento Em Revisao
      *
-     * @return verdadeiro se puder mudar para o estado EventoEmRevisaoState e
-     * falso se não puder
+     * @return falso visto ja se encontrar num estado avançado
      */
     @Override
     public boolean setEmRevisao() {
-        if (valida()) {
-            e.setEstado(new EventoEmRevisaoState(e));
-            return true;
-        }
         return false;
     }
 
     /**
      * Modifica o estado do evento para o estado Evento Em Fase de Decisao
      *
-     * @return falso visto ja se encontrar num estado anterior
+     * @return falso visto ja se encontrar num estado avançado
      */
     @Override
     public boolean setFaseDecisao() {
@@ -144,34 +136,38 @@ public class EventoEmDistribuicaoState implements EventoState {
      * Modifica o estado do evento para o estado Evento Em Submissao Camera
      * Ready
      *
-     * @return falso visto ja se encontrar num estado anterior
+     * @return verdadeiro pois corresponde ao estado atual
      */
     @Override
     public boolean setEmSubmissaoCameraReady() {
-        return false;
+        return true;
     }
 
     /**
      * Modifica o estado do evento para o estado Evento Camera Ready
      *
-     * @return falso visto ja se encontrar num estado anterior
+     * @return verdadeiro se mudou de estado e falso se nao mudou de estado
      */
     @Override
     public boolean setCameraReady() {
+        if (validarEstado()) {
+            e.setEstado(new EventoEmCameraReadyState(e));
+            return true;
+        }
         return false;
     }
 
     /**
-     * valida se cumpre as condicoes necessarias para efetuar a mudanca de
-     * estado pretendida
+     * validarEstado se cumpre as condicoes necessarias para efetuar a mudanca de
+ estado pretendida
      *
      * @return verdadeiro se poder passar de estado e falso se nao cumprir as
      * condicoes necessarias de mudanca de estado
      */
     @Override
-    public boolean valida() {
-      // implementar quando UC8 completo (precisa-se do processo distribuição)
+    public boolean validarEstado() {
+        //implementar quando tiver o método que deteta se fora introduzido o 
+        //artigo final
         return false;
-       
     }
 }

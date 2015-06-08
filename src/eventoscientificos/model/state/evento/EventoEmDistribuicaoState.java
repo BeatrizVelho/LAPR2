@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package eventoscientificos.EventoState;
+package eventoscientificos.model.state.evento;
 
 import eventoscientificos.model.Evento;
 import utils.Data;
@@ -123,7 +123,7 @@ public class EventoEmDistribuicaoState implements EventoState {
      */
     @Override
     public boolean setEmRevisao() {
-        if (valida()) {
+        if (validarEstado()) {
             e.setEstado(new EventoEmRevisaoState(e));
             return true;
         }
@@ -162,14 +162,14 @@ public class EventoEmDistribuicaoState implements EventoState {
     }
 
     /**
-     * valida se cumpre as condicoes necessarias para efetuar a mudanca de
-     * estado pretendida
+     * validarEstado se cumpre as condicoes necessarias para efetuar a mudanca de
+ estado pretendida
      *
      * @return verdadeiro se poder passar de estado e falso se nao cumprir as
      * condicoes necessarias de mudanca de estado
      */
     @Override
-    public boolean valida() {
+    public boolean validarEstado() {
       // implementar quando UC8 completo (precisa-se do processo distribuição)
         return false;
        

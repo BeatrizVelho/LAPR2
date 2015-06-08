@@ -9,12 +9,12 @@ import eventoscientificos.model.Evento;
 import utils.Data;
 
 /**
- * Representa uma instância de EventoEmDistribuicaoState tendo acesso ao
- * respetivo Evento através do objeto Evento que tem como atributo.
+ * Representa uma instância de EventoEmRevisaoState tendo acesso ao respetivo
+ * Evento através do objeto Evento que tem como atributo.
  *
  * @author G01
  */
-public class EventoEmDistribuicaoState implements EventoState {
+public class EventoEmRevisaoState implements EventoState {
 
     /**
      * Instancia de Evento
@@ -22,19 +22,19 @@ public class EventoEmDistribuicaoState implements EventoState {
     private Evento e;
 
     /**
-     * Constroi uma instância de EventoEmDistribuicaoState recebendo um Evento
-     * como parametro.
+     * Constroi uma instância de EventoEmRevisaoState recebendo um Evento como
+     * parametro.
      *
      * @param Evento objeto evento
      */
-    public EventoEmDistribuicaoState(Evento e) {
+    public EventoEmRevisaoState(Evento e) {
         this.e = e;
     }
 
     /**
-     * Modifica o estado do evento para o estado Evento Criado.
+     * Modifica o estado do evento para o estado Evento Criado
      *
-     * @return falso visto ja se encontrar num estado mais avançado.
+     * @return falso visto ja se encontrar num estado mais avançado
      */
     @Override
     public boolean setCriado() {
@@ -42,9 +42,9 @@ public class EventoEmDistribuicaoState implements EventoState {
     }
 
     /**
-     * Modifica o estado do evento para o estado Evento Registado.
+     * Modifica o estado do evento para o estado Evento Registado
      *
-     * @return falso visto ja se encontrar num estado mais avançado.
+     * @return falso visto ja se encontrar num estado mais avançado
      */
     @Override
     public boolean setRegistado() {
@@ -53,9 +53,9 @@ public class EventoEmDistribuicaoState implements EventoState {
 
     /**
      * Modifica o estado do evento para o estado Evento Sessoes Tematicas
-     * Definidas.
+     * Definidas
      *
-     * @return falso visto ja se encontrar num estado mais avançado.
+     * @return falso visto ja se encontrar num estado mais avançado
      */
     @Override
     public boolean setSessoesTematicasDefinidas() {
@@ -81,7 +81,6 @@ public class EventoEmDistribuicaoState implements EventoState {
     @Override
     public boolean setEmSubmissao() {
         return false;
-
     }
 
     /**
@@ -102,41 +101,39 @@ public class EventoEmDistribuicaoState implements EventoState {
     @Override
     public boolean setEmLicitacao() {
         return false;
-
     }
 
     /**
      * Modifica o estado do evento para o estado Evento Em Distribuicao
      *
-     * @return verdadeiro pois corresponde ao estado atual
+     * @return falso visto ja se encontrar num estado mais avançado
      */
     @Override
     public boolean setEmDistribuicao() {
-        return true;
+        return false;
     }
 
     /**
      * Modifica o estado do evento para o estado Evento Em Revisao
      *
-     * @return verdadeiro se puder mudar para o estado EventoEmRevisaoState e
-     * falso se não puder
+     * @return verdadeiro pois corresponde ao estado atual
      */
     @Override
     public boolean setEmRevisao() {
-        if (valida()) {
-            e.setEstado(new EventoEmRevisaoState(e));
-            return true;
-        }
-        return false;
+        return true;
     }
 
     /**
      * Modifica o estado do evento para o estado Evento Em Fase de Decisao
      *
-     * @return falso visto ja se encontrar num estado anterior
+     * @return verdadeiro se mudou de estado e falso se nao mudou de estado
      */
     @Override
     public boolean setFaseDecisao() {
+        if (valida()) {
+            e.setEstado(new EventoFaseDecisaoState(e));
+            return true;
+        }
         return false;
     }
 
@@ -170,8 +167,8 @@ public class EventoEmDistribuicaoState implements EventoState {
      */
     @Override
     public boolean valida() {
-      // implementar quando UC8 completo (precisa-se do processo distribuição)
+        // implementar qd houver método no evento/st que pesquise na lista 
+        //se submissões em estado revista
         return false;
-       
     }
 }

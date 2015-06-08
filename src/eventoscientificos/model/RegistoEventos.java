@@ -1,5 +1,6 @@
 package eventoscientificos.model;
 
+import eventoscientificos.model.state.evento.EventoRegistadoState;
 import java.util.ArrayList;
 import java.util.List;
 import utils.Data;
@@ -67,6 +68,26 @@ public class RegistoEventos {
      */
     public boolean adicionarEvento(Evento evento) {
         return this.listaEventos.add(evento);
+    }
+
+    /**
+     * Devolve uma lista de eventos onde o utilizador é organizador, onde ainda
+     * é possível criar Sessões Temáticas.
+     * 
+     * @param utilizador Utilizador que se quer verificar se é organizador.
+     * @return Lista de eventos onde o utilizador é organizador.
+     */
+    public List<Evento> getListaEventosOrganizador(Utilizador utilizador) {
+        List<Evento> listaEventosOrganizador = new ArrayList();
+
+        for (Evento evento : this.listaEventos) {
+            if (evento.isOrganizador(utilizador)
+                    && evento.getEstado() instanceof EventoRegistadoState) {
+                listaEventosOrganizador.add(evento);
+            }
+        }
+
+        return listaEventosOrganizador;
     }
 
     /**

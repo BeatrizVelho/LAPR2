@@ -1,7 +1,7 @@
 package eventoscientificos.model;
 
-import eventoscientificos.EventoState.EventoCriadoState;
-import eventoscientificos.EventoState.EventoState;
+import eventoscientificos.model.state.evento.EventoCriadoState;
+import eventoscientificos.model.state.evento.EventoState;
 import java.util.ArrayList;
 import java.util.List;
 import utils.Data;
@@ -60,7 +60,7 @@ public class Evento {
      * Lista de Sessões Temáticas do Evento.
      */
     private ListaSessoesTematicas listaSessoesTematicas;
-    
+
     /**
      * CP do evento.
      */
@@ -176,7 +176,7 @@ public class Evento {
 
     /**
      * Devolve a lista de sessões temáticas do evento.
-     * 
+     *
      * @return Lista de sessões temáticas do evento.
      */
     public ListaSessoesTematicas getListaSessoesTematicas() {
@@ -338,7 +338,8 @@ public class Evento {
     public void setCp(CP cp) {
         this.cp = cp;
     }
-  /**
+
+    /**
      * Verifica se existem sessões temáticas definidas no evento.
      *
      * @return Verdadeiro caso existam Sessões Temáticas definidas na
@@ -347,6 +348,23 @@ public class Evento {
     public boolean temSessoesTematicasDefinidas() {
         return this.listaSessoesTematicas.temSessoesTematicasDefinidas();
     }
+
+    /**
+     * Verifica se determinado utilizador é organizador do evento.
+     *
+     * @param utilizador Utilizador que se pretende verificar.
+     * @return Verdadeiro caso seja e falso se não for.
+     */
+    public boolean isOrganizador(Utilizador utilizador) {
+        for (Organizador organizador : this.listaOrganizadores) {
+            if (utilizador.equals(organizador.getUtilizador())) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     /**
      * Compara dois objetos entre si. Comparando primariamente a posição de
      * memória, seguida do conteudo e das classes as quais cada um deles

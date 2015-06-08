@@ -27,7 +27,7 @@ public class AlterarStateParaEmSubmissao extends TimerTask {
     }
 
     /**
-     * Método que o processo de alteração de estado do submissivel.
+     * Método que despoleta o processo de alteração de estado do submissivel.
      */
     @Override
     public void run() {
