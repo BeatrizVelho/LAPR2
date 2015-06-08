@@ -1,7 +1,7 @@
 package eventoscientificos.model;
 
-import eventoscientificos.EventoState.EventoCriadoState;
-import eventoscientificos.EventoState.EventoState;
+import eventoscientificos.model.state.evento.EventoCriadoState;
+import eventoscientificos.model.state.evento.EventoState;
 import java.util.ArrayList;
 import java.util.List;
 import utils.Data;
