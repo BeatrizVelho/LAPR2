@@ -120,7 +120,8 @@ public class SubmissaoAceiteStateTest {
     public void testSetEmCameraReady() {
         System.out.println("setEmCameraReady");
         SubmissaoState instance = this.submissao.getEstado();
-        boolean expResult = false;
+        this.submissao.setArtigoFinal(new Artigo());
+        boolean expResult = true;
         boolean result = instance.setEmCameraReady();
         assertEquals(expResult, result);
     }
