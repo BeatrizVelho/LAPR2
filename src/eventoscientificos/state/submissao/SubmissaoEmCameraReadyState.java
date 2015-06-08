@@ -125,11 +125,11 @@ public class SubmissaoEmCameraReadyState implements SubmissaoState {
     /**
      * Modifica o estado da submissão para o estado Submissão Removida.
      *
-     * @return Verdadeiro, deve ser possível mudar de EmCameraReady para Removida.
+     * @return Falso, não deve ser possível mudar de EmCameraReady para Removida.
      */
     @Override
     public boolean setRemovida() {
-        return true;
+        return false;
     }
 
     /**
