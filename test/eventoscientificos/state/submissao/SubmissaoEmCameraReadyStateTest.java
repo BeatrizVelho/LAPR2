@@ -144,7 +144,7 @@ public class SubmissaoEmCameraReadyStateTest {
     public void testSetRemovida() {
         System.out.println("setRemovida");
         SubmissaoState instance = this.submissao.getEstado();
-        boolean expResult = true;
+        boolean expResult = false;
         boolean result = instance.setRemovida();
         assertEquals(expResult, result);
     }
