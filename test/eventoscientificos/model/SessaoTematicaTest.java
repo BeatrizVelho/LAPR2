@@ -276,4 +276,18 @@ public class SessaoTematicaTest {
         assertEquals(expResult, result);
     }
 
+    /**
+     * Teste ao método isProponente, da classe SessaoTematica.
+     */
+    @Test
+    public void testIsProponente() {
+        System.out.println("isProponente");
+        SessaoTematica instance = this.sessaoTematica;
+        instance.novoProponente(this.utilizador);
+        boolean expResult = true;
+        boolean result = instance.isProponente(this.utilizador);
+        assertEquals(expResult, result);
+    }
+
+
 }
