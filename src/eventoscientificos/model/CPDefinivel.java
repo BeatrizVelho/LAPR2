@@ -17,10 +17,8 @@ public interface CPDefinivel {
 
     /**
      * Modifica a CP.
-     *
-     * @return CP
      */
-    CP setCP();
+    void setCP();
 
     /**
      * Cria uma instância de CP com uma lista de revisores vazia.
