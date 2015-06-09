@@ -1,6 +1,7 @@
 package eventoscientificos.model;
 
 import eventoscientificos.model.state.evento.EventoCriadoState;
+import eventoscientificos.model.state.evento.EventoSessoesTematicasDefinidasState;
 import eventoscientificos.model.state.evento.EventoState;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -150,9 +151,10 @@ public class EventoTest {
     public void testSetAndGetCP() {
         System.out.println("setAndGetCP");
         Evento instance = this.evento;
+        instance.setCP(new CP());
         CP expResult = new CP();
-        instance.setCp(expResult);
-        assertEquals(expResult, instance.getCP());
+        CP result = instance.getCP();
+        assertEquals(expResult, result);
     }
 
     /**
@@ -364,7 +366,7 @@ public class EventoTest {
         System.out.println("novaCP");
         Evento instance = this.evento;
         CP expResult = new CP();
-        CP result = instance.novaCp();
+        CP result = instance.novaCP();
         assertEquals(expResult, result);
     }
 
@@ -375,6 +377,7 @@ public class EventoTest {
     public void testAdicionarCP() {
         System.out.println("adicionarCP");
         Evento instance = this.evento;
+        instance.setEstado(new EventoSessoesTematicasDefinidasState(instance));
         CP cp = new CP();
         boolean expResult = true;
         boolean result = instance.adicionarCP(cp);
