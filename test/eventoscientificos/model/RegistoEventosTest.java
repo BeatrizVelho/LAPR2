@@ -1,6 +1,6 @@
 package eventoscientificos.model;
 
-import eventoscientificos.EventoState.EventoRegistadoState;
+import eventoscientificos.model.state.evento.EventoRegistadoState;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
