@@ -88,7 +88,7 @@ public class SessaoTematicaTest {
         System.out.println("setAndGetCP");
         SessaoTematica instance = this.sessaoTematica;
         CP expResult = new CP();
-        instance.setCp(expResult);
+        instance.setCP(expResult);
         assertEquals(expResult, instance.getCP());
     }
 
@@ -244,7 +244,7 @@ public class SessaoTematicaTest {
         System.out.println("novaCP");
         SessaoTematica instance = this.sessaoTematica;
         CP expResult = new CP();
-        CP result = instance.novaCp();
+        CP result = instance.novaCP();
         assertEquals(expResult, result);
     }
 
