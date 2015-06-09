@@ -335,4 +335,20 @@ public class SessaoTematica implements Submissivel {
         return this.estado.setEmSubmissao();
     }
 
+    /**
+     * Verifica se determinado utilizador é proponente de sessão temática.
+     *
+     * @param utilizador Utilizador que se pretende verificar.
+     * @return Verdadeiro caso seja e falso se não for.
+     */
+    public boolean isProponente(Utilizador utilizador) {
+        for (Proponente proponente : this.listaProponentes) {
+            if (utilizador.equals(proponente.getUtilizador())) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 }
