@@ -1,7 +1,7 @@
 package eventoscientificos.model;
 
-import eventoscientificos.EventoState.EventoCriadoState;
-import eventoscientificos.EventoState.EventoState;
+import eventoscientificos.model.state.evento.EventoCriadoState;
+import eventoscientificos.model.state.evento.EventoState;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import utils.Data;
