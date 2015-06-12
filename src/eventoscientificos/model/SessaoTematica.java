@@ -350,5 +350,13 @@ public class SessaoTematica implements Submissivel, CPDefinivel {
 
         return false;
     }
-
+    
+    /**
+     * Verifica se a sessão temática está registada.
+     * 
+     * @return Verdadeira se estiver registada e falso se não estiver.
+     */
+    public boolean isRegistada(){
+        return estado.setRegistada();
+    }
 }
