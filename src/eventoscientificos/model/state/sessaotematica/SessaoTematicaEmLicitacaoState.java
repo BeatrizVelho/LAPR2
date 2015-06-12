@@ -96,7 +96,7 @@ public class SessaoTematicaEmLicitacaoState implements SessaoTematicaState {
     public boolean setEmDistribuicao() {
         if (validarEstado()) {
             this.sessaoTematica.setEstado(
-                    new SessaoTematicaEmDetecaoState(this.sessaoTematica));
+                    new SessaoTematicaEmDistribuicaoState(this.sessaoTematica));
             return true;
         }
         
@@ -152,6 +152,7 @@ public class SessaoTematicaEmLicitacaoState implements SessaoTematicaState {
      */
     @Override
     public boolean validarEstado() {
+        // Adicionar validação de negócio
         return true;
     }
     
