@@ -193,7 +193,8 @@ public class EventoEmSubmissaoStateTest {
         boolean result = instance.validarEstado();
         assertEquals(expResult, result);
     }
-   /**
+
+    /**
      * Teste ao método isStateValidoParaRemover, da classe
      * EventoEmSubmissaoState.
      */
@@ -230,8 +231,7 @@ public class EventoEmSubmissaoStateTest {
     public void testIsStateValidoParaSubmeter() {
         System.out.println("isStateValidoParaSubmeter");
         EventoState instance = e.getEstado();
-        e.setEstado(new EventoEmSubmissaoState(e));
-        boolean expResult = false;
+        boolean expResult = true;
         boolean result = instance.isStateValidoParaSubmeter();
         assertEquals(expResult, result);
     }
@@ -243,6 +243,7 @@ public class EventoEmSubmissaoStateTest {
     @Test
     public void testIsStateValidoParaSubmeterNot() {
         System.out.println("isStateValidoParaSubmeterNot");
+        e.setEstado(new EventoEmSubmissaoCameraReadyState(e));
         EventoState instance = e.getEstado();
         boolean expResult = false;
         boolean result = instance.isStateValidoParaSubmeter();
@@ -257,7 +258,7 @@ public class EventoEmSubmissaoStateTest {
     public void testIsStateValidoParaAlterar() {
         System.out.println("isStateValidoParaAlterar");
         EventoState instance = e.getEstado();
-        boolean expResult = false;
+        boolean expResult = true;
         boolean result = instance.isStateValidoParaAlterar();
         assertEquals(expResult, result);
     }
