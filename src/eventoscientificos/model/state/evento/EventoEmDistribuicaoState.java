@@ -192,9 +192,8 @@ public class EventoEmDistribuicaoState implements EventoState {
      */
     @Override
     public boolean isStateValidoParaSubmeter() {
-        return (Data.dataAtual().isMaior(e.getDataInicioSubmissao())
-                            && e.getDataFimSubmissao().isMaior(Data.dataAtual())
-                            && setCPDefinida());
+               return setEmSubmissao();
+
     }
 
     /**
@@ -205,9 +204,8 @@ public class EventoEmDistribuicaoState implements EventoState {
      */
     @Override
     public boolean isStateValidoParaAlterar() {
-        return (Data.dataAtual().isMaior(e.getDataInicioSubmissao())
-                            && e.getDataFimSubmissao().isMaior(Data.dataAtual())
-                            && setCPDefinida());
+               return setEmSubmissao();
+
     }
 
     /**
