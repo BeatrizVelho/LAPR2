@@ -21,7 +21,10 @@ public class SessaoTematicaTest {
                 "#A9D24R",
                 "LAPR2",
                 new Data(2015, 5, 22),
-                new Data(2015, 5, 28));
+                new Data(2015, 5, 28),
+                new Data(2015, 6, 20),
+                new Data(2015, 6, 24),
+                new Data(2015, 6, 28));
         this.utilizador = new Utilizador(
                 "Pedro", "1140781@isep.ipp.pt", "pedro", "1234");
     }
@@ -77,6 +80,46 @@ public class SessaoTematicaTest {
         Data expResult = new Data(2016, 5, 29);
         instance.setDataFimSubmissao(expResult);
         Data result = instance.getDataFimSubmissao();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste dos metodos set e get da data de fim submissão CameraReady, da
+     * classe SessaoTematica.
+     */
+    @Test
+    public void testSetAndGetDataFimSubmissaoCameraReady() {
+        System.out.println("setAndGetDataFimSubmissaoCameraReady");
+        SessaoTematica instance = this.sessaoTematica;
+        Data expResult = new Data(2016, 6, 21);
+        instance.setDataFimSubmissaoCameraReady(expResult);
+        Data result = instance.getDataFimSubmissaoCameraReady();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste dos metodos set e get da data de inicio, da classe SessaoTematica.
+     */
+    @Test
+    public void testSetAndGetDataInicio() {
+        System.out.println("setAndGetDataInicio");
+        SessaoTematica instance = this.sessaoTematica;
+        Data expResult = new Data(2016, 6, 25);
+        instance.setDataInicio(expResult);
+        Data result = instance.getDataInicio();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste dos metodos set e get da data de fim, da classe SessaoTematica.
+     */
+    @Test
+    public void testSetAndGetDataFim() {
+        System.out.println("setAndGetDataFim");
+        SessaoTematica instance = this.sessaoTematica;
+        Data expResult = new Data(2016, 6, 29);
+        instance.setDataFim(expResult);
+        Data result = instance.getDataFim();
         assertEquals(expResult, result);
     }
 
@@ -153,7 +196,7 @@ public class SessaoTematicaTest {
     }
 
     /**
-     * Teste do método setDataInicioSubmissao, da classe SessaoTematica.
+     * Teste do método setDataFimSubmissao, da classe SessaoTematica.
      */
     @Test(expected = NullPointerException.class)
     public void testSetDataFimSubmissaoNull() {
@@ -164,14 +207,36 @@ public class SessaoTematicaTest {
     }
 
     /**
-     * Teste do método setDataInicioSubmissao, da classe SessaoTematica.
+     * Teste do método setDataFimSubmissaoCameraReady, da classe SessaoTematica.
      */
-    @Test(expected = IllegalArgumentException.class)
-    public void testSetDataFimSubmissaoDateInferior() {
-        System.out.println("setDataFimSubmissaoDateInferior");
+    @Test(expected = NullPointerException.class)
+    public void testSetDataFimSubmissaoCameraReadyNull() {
+        System.out.println("setDataFimSubmissaoCameraReadyNull");
         SessaoTematica instance = this.sessaoTematica;
-        Data dataFimSubmissao = new Data(2014, 05, 22);
-        instance.setDataFimSubmissao(dataFimSubmissao);
+        Data dataFimSubmissaoCameraReady = null;
+        instance.setDataFimSubmissaoCameraReady(dataFimSubmissaoCameraReady);
+    }
+
+    /**
+     * Teste do método setDataInicio, da classe SessaoTematica.
+     */
+    @Test(expected = NullPointerException.class)
+    public void testSetDataInicioNull() {
+        System.out.println("setDataInicioNull");
+        SessaoTematica instance = this.sessaoTematica;
+        Data dataInicio = null;
+        instance.setDataInicio(dataInicio);
+    }
+
+    /**
+     * Teste do método setDataFim, da classe SessaoTematica.
+     */
+    @Test(expected = NullPointerException.class)
+    public void testSetDataFimNull() {
+        System.out.println("setDataNull");
+        SessaoTematica instance = this.sessaoTematica;
+        Data dataFim = null;
+        instance.setDataFim(dataFim);
     }
 
     /**
@@ -194,7 +259,9 @@ public class SessaoTematicaTest {
     public void testEqualsNot() {
         System.out.println("equalsNot");
         Object outroObjeto = new SessaoTematica("#1234", "Sem descrição",
-                new Data(2016, 1, 1), new Data(2016, 1, 7));
+                new Data(2016, 1, 1), new Data(2016, 1, 7),
+                new Data(2016, 1, 9), new Data(2016, 2, 4),
+                new Data(2016, 2, 6));
         SessaoTematica instance = this.sessaoTematica;
         boolean expResult = false;
         boolean result = instance.equals(outroObjeto);
@@ -288,6 +355,5 @@ public class SessaoTematicaTest {
         boolean result = instance.isProponente(this.utilizador);
         assertEquals(expResult, result);
     }
-
 
 }
