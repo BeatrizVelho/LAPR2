@@ -52,7 +52,7 @@ public class Evento implements CPDefinivel {
     private Data dataFim;
 
     /**
-     * Lista de Orgazanidores do Evento.
+     * Lista de Organizadores do Evento.
      */
     private List<Organizador> listaOrganizadores;
 
@@ -247,7 +247,7 @@ public class Evento implements CPDefinivel {
         }
         if (!dataInicioSubmissao.isMaior(Data.dataAtual())) {
             throw new IllegalArgumentException("Data de inicio de submissao "
-                    + "nõ pode ser menor que a data atual");
+                    + "não pode ser menor que a data atual");
         }
         this.dataInicioSubmissao = dataInicioSubmissao;
     }
@@ -466,6 +466,15 @@ public class Evento implements CPDefinivel {
         setCP(cp);
 
         return this.estado.setCPDefinida();
+    }
+    
+    /**
+     * Verifica se o evento tem sessões temáticas definidas.
+     * 
+     * @return Verdadeiro se tiver sessão temática e falso se não tiver.
+     */
+    public boolean isSessoesTematicasDefinidas(){
+        return estado.setSessoesTematicasDefinidas();
     }
 
 }

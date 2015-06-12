@@ -1,5 +1,7 @@
 package eventoscientificos.model;
 
+import eventoscientificos.model.state.sessaotematica.SessaoTematicaCPDefinidaState;
+import eventoscientificos.model.state.sessaotematica.SessaoTematicaRegistadaState;
 import java.util.ArrayList;
 import java.util.List;
 import utils.Data;
@@ -141,6 +143,28 @@ public class ListaSessoesTematicas {
      */
     public boolean temSessoesTematicasDefinidas() {
         return this.listaSessoesTematicas.size() > 0;
+    }
+
+    /**
+     * Devolve uma lista de sessão temáticas que se encontrem sem CP
+     * definida e onde o utilizador é proponente.
+     * 
+     * @param utilizador Utilizador a verificar se é proponente.
+     * @return Lista de sessao temática onde o utilizador
+     * é proponente.
+     */
+    public List<CPDefinivel> getListaCPDefiniveisSemCPOrganizadorProponente
+        (Utilizador utilizador) {
+        List<CPDefinivel> listaSemCPDefinida = new ArrayList();
+        
+        for(SessaoTematica sessaoTematica : this.listaSessoesTematicas){
+            if(sessaoTematica.getEstado() instanceof SessaoTematicaRegistadaState
+                    && sessaoTematica.isProponente(utilizador)){
+                listaSemCPDefinida.add(sessaoTematica);
+            }
+        }
+        
+        return listaSemCPDefinida;
     }
 
 }

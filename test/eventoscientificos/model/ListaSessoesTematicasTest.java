@@ -1,5 +1,7 @@
 package eventoscientificos.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import utils.Data;
@@ -131,6 +133,22 @@ public class ListaSessoesTematicasTest {
         ListaSessoesTematicas instance = new ListaSessoesTematicas(this.evento);
         boolean expResult = false;
         boolean result = instance.temSessoesTematicasDefinidas();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método getListaCPDefiniveisSemCPOrganizadorProponente,
+     * da classe ListaSessoesTematicas.
+     */
+    @Test
+    public void testGetListaCPDefiniveisSemCPOrganizadorProponente() {
+        System.out.println("getListaCPDefiniveisSemCPOrganizadorProponente");
+        Utilizador utilizador = new Utilizador(
+                "pedro", "1140781@isep.ipp.pt", "pedro", "12345");
+        Proponente prop = new Proponente(utilizador);
+        ListaSessoesTematicas instance = new ListaSessoesTematicas();
+        List<CPDefinivel> expResult = new ArrayList<>();
+        List<CPDefinivel> result = instance.getListaCPDefiniveisSemCPOrganizadorProponente(utilizador);
         assertEquals(expResult, result);
     }
 }

@@ -1,6 +1,7 @@
 package eventoscientificos.model;
 
 import eventoscientificos.model.state.evento.EventoRegistadoState;
+import eventoscientificos.model.state.evento.EventoSessoesTematicasDefinidasState;
 import java.util.ArrayList;
 import java.util.List;
 import utils.Data;
@@ -73,7 +74,7 @@ public class RegistoEventos {
     /**
      * Devolve uma lista de eventos onde o utilizador é organizador, onde ainda
      * é possível criar Sessões Temáticas.
-     * 
+     *
      * @param utilizador Utilizador que se quer verificar se é organizador.
      * @return Lista de eventos onde o utilizador é organizador.
      */
@@ -91,10 +92,35 @@ public class RegistoEventos {
     }
 
     /**
+     * Devolve uma lista de eventoes/sessões temáticas que se encontrem sem CP
+     * definida e onde o utilizador é organizador/proponente.
+     * 
+     * @param utilizador Utilizador a verificar se é organizador/proponente.
+     * @return Lista de evento/sessao temática onde o utilizador
+     * é organizador/proponente.
+     */
+    public List<CPDefinivel> getListaCPDefiniveisSemCPOrganizadorProponente(Utilizador utilizador) {
+        List<CPDefinivel> listaSemCPDefinida = new ArrayList();
+
+        for (Evento evento : this.listaEventos) {
+            if (evento.getEstado() instanceof EventoSessoesTematicasDefinidasState
+                    && evento.isOrganizador(utilizador)) {
+                listaSemCPDefinida.add(evento);
+                List<CPDefinivel> listaSessoesTematicas = (evento.getListaSessoesTematicas()).getListaCPDefiniveisSemCPOrganizadorProponente(utilizador);
+                listaSemCPDefinida.addAll(listaSessoesTematicas);
+            }
+
+        }
+
+        return listaSemCPDefinida;
+
+    }
+
+    /**
      * Compara dois objetos entre si. Comparando primariamente a posição de
      * memória, seguida do conteudo e das classes as quais cada um deles
      * pertence, e finalmente os seus atributos lista de eventos.
-     * 
+     *
      * @param outroObjeto Evento que vai ser usado na comparação.
      * @return Verdadeiro caso os objetos comparados sejam iguais e falso caso
      * não o sejam.
@@ -115,4 +141,3 @@ public class RegistoEventos {
     }
 
 }
-

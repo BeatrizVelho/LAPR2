@@ -1,6 +1,7 @@
 package eventoscientificos.model;
 
 import eventoscientificos.model.state.evento.EventoCriadoState;
+import eventoscientificos.model.state.evento.EventoRegistadoState;
 import eventoscientificos.model.state.evento.EventoSessoesTematicasDefinidasState;
 import eventoscientificos.model.state.evento.EventoState;
 import org.junit.Test;
@@ -17,9 +18,9 @@ public class EventoTest {
 
     public EventoTest() {
         this.evento = new Evento("titulo", "descricao", new Local("local"),
-                            new Data(2016, 6, 8), new Data(2016, 6, 20),
-                            new Data(2016, 7, 7), new Data(2016, 8, 1),
-                            new Data(2017, 6, 10));
+                new Data(2016, 6, 8), new Data(2016, 6, 20),
+                new Data(2016, 7, 7), new Data(2016, 8, 1),
+                new Data(2017, 6, 10));
         this.utilizador = new Utilizador(
                 "Pedro", "1140781@isep.ipp.pt", "pedro", "12345");
     }
@@ -311,10 +312,10 @@ public class EventoTest {
     public void testEqualsNot() {
         System.out.println("equalsNot");
         Object outroObjeto = new Evento("Sem titulo", "Sem descricao",
-                            new Local("local"),
-                            new Data(2016, 6, 8), new Data(2016, 6, 20),
-                            new Data(2016, 7, 7), new Data(2016, 8, 1),
-                            new Data(2017, 6, 10));
+                new Local("local"),
+                new Data(2016, 6, 8), new Data(2016, 6, 20),
+                new Data(2016, 7, 7), new Data(2016, 8, 1),
+                new Data(2017, 6, 10));
         Evento instance = this.evento;
         boolean expResult = false;
         boolean result = instance.equals(outroObjeto);
@@ -330,7 +331,7 @@ public class EventoTest {
         Evento instance = this.evento;
         boolean expResult = true;
         boolean result = instance.novoOrganizador(new Utilizador("Bea",
-                            "1140587@isep.ipp.pt", "beatriz", "111"));
+                "1140587@isep.ipp.pt", "beatriz", "111"));
         assertEquals(expResult, result);
     }
 
@@ -342,9 +343,9 @@ public class EventoTest {
         System.out.println("novoOrganizadorExists");
         Evento instance = this.evento;
         instance.novoOrganizador(new Utilizador(
-                            "Beatriz", "1140587@isep.ipp.pt", "bea", "1234"));
+                "Beatriz", "1140587@isep.ipp.pt", "bea", "1234"));
         instance.novoOrganizador(new Utilizador(
-                            "Beatriz", "1140587@isep.ipp.pt", "bea", "1234"));
+                "Beatriz", "1140587@isep.ipp.pt", "bea", "1234"));
     }
 
     /**
@@ -397,5 +398,30 @@ public class EventoTest {
         boolean result = instance.isOrganizador(this.utilizador);
         assertEquals(expResult, result);
     }
+    
+    /**
+     * Teste ao método isSessoesTematicasDefinidas, da classe Evento.
+     */
+    @Test
+    public void testIsSessoesTematicasDefinidasSemSessoesDefinidas() {
+        System.out.println("isSessoesTematicasDefinidasSemSessoesDefinidas");
+        Evento instance = this.evento;
+        instance.setEstado(new EventoRegistadoState(evento));
+        boolean expResult = false;
+        boolean result = instance.isSessoesTematicasDefinidas();
+        assertEquals(expResult, result);
+    }
 
+    /**
+     * Teste ao método isSessoesTematicasDefinidas, da classe Evento.
+     */
+    @Test
+    public void testIsSessoesTematicasDefinidasComSessoesDefinidas() {
+        System.out.println("isSessoesTematicasDefinidasComSessoesDefinidas");
+        Evento instance = this.evento;
+        instance.setEstado(new EventoSessoesTematicasDefinidasState(evento));
+        boolean expResult = true;
+        boolean result = instance.isSessoesTematicasDefinidas();
+        assertEquals(expResult, result);
+    }
 }

@@ -118,4 +118,18 @@ public class RegistoEventosTest {
         assertEquals(expResult, result);
     }
 
+    /**
+     * Teste do método getListaCPDefiniveisSemCPOrganizadorProponente,
+     * da classe RegistoEventos.
+     */
+    @Test
+    public void testGetListaCPDefiniveisSemCPOrganizadorProponente() {
+        System.out.println("getListaCPDefiniveisSemOrganizadorProponente");
+        Organizador org = new Organizador(this.utilizador);
+        RegistoEventos instance = new RegistoEventos();
+        List<CPDefinivel> expResult = new ArrayList<>();
+        List<CPDefinivel> result = instance.getListaCPDefiniveisSemCPOrganizadorProponente(this.utilizador);
+        assertEquals(expResult, result);
+    }
+
 }
