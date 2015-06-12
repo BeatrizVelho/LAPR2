@@ -22,6 +22,7 @@ public class SessaoTematicaTest {
                 "LAPR2",
                 new Data(2015, 5, 22),
                 new Data(2015, 5, 28),
+                new Data(2015, 6, 10),
                 new Data(2015, 6, 20),
                 new Data(2015, 6, 24),
                 new Data(2015, 6, 28));
@@ -66,6 +67,20 @@ public class SessaoTematicaTest {
         Data expResult = new Data(2016, 5, 23);
         instance.setDataInicioSubmissao(expResult);
         Data result = instance.getDataInicioSubmissao();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste dos metodos set e get da data de início de distribuição, da classe
+     * SessaoTematica.
+     */
+    @Test
+    public void testSetAndGetDataInicioDistribuicao() {
+        System.out.println("setAndGetDataInicioDistribuicao");
+        SessaoTematica instance = this.sessaoTematica;
+        Data expResult = new Data(2016, 5, 29);
+        instance.setDataInicioDistribuicao(expResult);
+        Data result = instance.getDataInicioDistribuicao();
         assertEquals(expResult, result);
     }
 
@@ -205,6 +220,17 @@ public class SessaoTematicaTest {
         Data dataFimSubmissao = null;
         instance.setDataFimSubmissao(dataFimSubmissao);
     }
+    
+    /**
+     * Teste do método setDataInicioDistribuicao, da classe SessaoTematica.
+     */
+    @Test(expected = NullPointerException.class)
+    public void testSetDataInicioDistribuicaoNull() {
+        System.out.println("setDataInicioDistribuicao");
+        SessaoTematica instance = this.sessaoTematica;
+        Data dataInicioDistribuicao = null;
+        instance.setDataInicioDistribuicao(dataInicioDistribuicao);
+    }
 
     /**
      * Teste do método setDataFimSubmissaoCameraReady, da classe SessaoTematica.
@@ -260,8 +286,8 @@ public class SessaoTematicaTest {
         System.out.println("equalsNot");
         Object outroObjeto = new SessaoTematica("#1234", "Sem descrição",
                 new Data(2016, 1, 1), new Data(2016, 1, 7),
-                new Data(2016, 1, 9), new Data(2016, 2, 4),
-                new Data(2016, 2, 6));
+                new Data(2016, 1, 9), new Data(2016, 1, 26),
+                new Data(2016, 2, 4), new Data(2016, 2, 6));
         SessaoTematica instance = this.sessaoTematica;
         boolean expResult = false;
         boolean result = instance.equals(outroObjeto);
