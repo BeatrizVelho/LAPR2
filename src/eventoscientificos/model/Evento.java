@@ -467,5 +467,14 @@ public class Evento implements CPDefinivel {
 
         return this.estado.setCPDefinida();
     }
+    
+    /**
+     * Verifica se o evento tem sessões temáticas definidas.
+     * 
+     * @return Verdadeiro se tiver sessão temática e falso se não tiver.
+     */
+    public boolean isSessoesTematicasDefinidas(){
+        return estado.setSessoesTematicasDefinidas();
+    }
 
 }
