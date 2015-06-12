@@ -88,7 +88,7 @@ public class SessaoTematicaTest {
         System.out.println("setAndGetCP");
         SessaoTematica instance = this.sessaoTematica;
         CP expResult = new CP();
-        instance.setCp(expResult);
+        instance.setCP(expResult);
         assertEquals(expResult, instance.getCP());
     }
 
@@ -244,7 +244,7 @@ public class SessaoTematicaTest {
         System.out.println("novaCP");
         SessaoTematica instance = this.sessaoTematica;
         CP expResult = new CP();
-        CP result = instance.novaCp();
+        CP result = instance.novaCP();
         assertEquals(expResult, result);
     }
 
@@ -273,6 +273,32 @@ public class SessaoTematicaTest {
         instance.setEstado(new SessaoTematicaCPDefinidaState(instance));
         boolean expResult = true;
         boolean result = instance.setEmSubmissao();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste ao método isProponente, da classe SessaoTematica.
+     */
+    @Test
+    public void testIsProponente() {
+        System.out.println("isProponente");
+        SessaoTematica instance = this.sessaoTematica;
+        instance.novoProponente(this.utilizador);
+        boolean expResult = true;
+        boolean result = instance.isProponente(this.utilizador);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método isRegistada, da classe SessaoTematica.
+     */
+    @Test
+    public void testIsRegistada() {
+        System.out.println("isRegistada");
+        SessaoTematica instance = this.sessaoTematica;
+        instance.setEstado(new SessaoTematicaCriadaState(sessaoTematica));
+        boolean expResult = true;
+        boolean result = instance.isRegistada();
         assertEquals(expResult, result);
     }
 

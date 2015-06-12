@@ -9,7 +9,7 @@ import utils.Data;
 /**
  * @author G01
  */
-public class Evento {
+public class Evento implements CPDefinivel {
 
     /**
      * Título do Evento.
@@ -188,6 +188,7 @@ public class Evento {
      *
      * @return CP do evento.
      */
+    @Override
     public CP getCP() {
         return this.cp;
     }
@@ -335,7 +336,8 @@ public class Evento {
      *
      * @param cp Nova CP do evento.
      */
-    public void setCp(CP cp) {
+    @Override
+    public void setCP(CP cp) {
         this.cp = cp;
     }
 
@@ -447,7 +449,8 @@ public class Evento {
      *
      * @return CP
      */
-    public CP novaCp() {
+    @Override
+    public CP novaCP() {
         return new CP();
     }
 
@@ -458,10 +461,20 @@ public class Evento {
      * @return Verdadeiro caso a CP tenha sido adicionada à sessão temática e
      * falso se a adição falhar.
      */
+    @Override
     public boolean adicionarCP(CP cp) {
-        setCp(cp);
+        setCP(cp);
 
-        return true;
+        return this.estado.setCPDefinida();
+    }
+    
+    /**
+     * Verifica se o evento tem sessões temáticas definidas.
+     * 
+     * @return Verdadeiro se tiver sessão temática e falso se não tiver.
+     */
+    public boolean isSessoesTematicasDefinidas(){
+        return estado.setSessoesTematicasDefinidas();
     }
 
 }

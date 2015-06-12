@@ -13,14 +13,14 @@ public interface CPDefinivel {
      *
      * @return CP
      */
-    CP getCp();
+    CP getCP();
 
     /**
      * Modifica a CP.
-     *
-     * @return CP
+     * 
+     * @param cp Nova CP
      */
-    CP setCP();
+    void setCP(CP cp);
 
     /**
      * Cria uma instância de CP com uma lista de revisores vazia.

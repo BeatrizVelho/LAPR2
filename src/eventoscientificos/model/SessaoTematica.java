@@ -12,7 +12,7 @@ import utils.Data;
  *
  * @author G01
  */
-public class SessaoTematica implements Submissivel {
+public class SessaoTematica implements Submissivel, CPDefinivel {
 
     /**
      * Código único da Sessão Temática.
@@ -74,10 +74,10 @@ public class SessaoTematica implements Submissivel {
         setDataInicioSubmissao(dataInicioSubmissao);
         setDataFimSubmissao(dataFimSubmissao);
         this.listaProponentes = new ArrayList();
-        setCp(null);
+        setCP(null);
         this.listaSubmissoes = new ListaSubmissoes();
         setEstado(new SessaoTematicaCriadaState(this));
-        
+
     }
 
     /**
@@ -127,7 +127,7 @@ public class SessaoTematica implements Submissivel {
 
     /**
      * Devolve a lista de submissões da sessão temática.
-     * 
+     *
      * @return Lista de submissões da sessão temática.
      */
     @Override
@@ -137,7 +137,7 @@ public class SessaoTematica implements Submissivel {
 
     /**
      * Devolve o estado da sessão temática.
-     * 
+     *
      * @return Estado da sessão temática.
      */
     public SessaoTematicaState getEstado() {
@@ -205,19 +205,19 @@ public class SessaoTematica implements Submissivel {
 
         this.dataFimSubmissao = dataFinalSubmissao;
     }
-    
+
     /**
      * Modifica a CP da sessão temática.
      *
      * @param cp Nova CP da sessão temática.
      */
-    public void setCp(CP cp) {
+    public void setCP(CP cp) {
         this.cp = cp;
     }
 
     /**
      * Modifica o estado da sessão temática.
-     * 
+     *
      * @param estado Novo estado da sessão temática.
      */
     public void setEstado(SessaoTematicaState estado) {
@@ -310,7 +310,7 @@ public class SessaoTematica implements Submissivel {
      *
      * @return CP
      */
-    public CP novaCp() {
+    public CP novaCP() {
         return new CP();
     }
 
@@ -322,7 +322,7 @@ public class SessaoTematica implements Submissivel {
      * falso se a adição falhar.
      */
     public boolean adicionarCP(CP cp) {
-        setCp(cp);
+        setCP(cp);
 
         return this.estado.setCPDefinida();
     }
@@ -335,4 +335,28 @@ public class SessaoTematica implements Submissivel {
         return this.estado.setEmSubmissao();
     }
 
+    /**
+     * Verifica se determinado utilizador é proponente de sessão temática.
+     *
+     * @param utilizador Utilizador que se pretende verificar.
+     * @return Verdadeiro caso seja e falso se não for.
+     */
+    public boolean isProponente(Utilizador utilizador) {
+        for (Proponente proponente : this.listaProponentes) {
+            if (utilizador.equals(proponente.getUtilizador())) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+    
+    /**
+     * Verifica se a sessão temática está registada.
+     * 
+     * @return Verdadeira se estiver registada e falso se não estiver.
+     */
+    public boolean isRegistada(){
+        return estado.setRegistada();
+    }
 }
