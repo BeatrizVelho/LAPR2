@@ -289,5 +289,17 @@ public class SessaoTematicaTest {
         assertEquals(expResult, result);
     }
 
+    /**
+     * Teste do método isRegistada, da classe SessaoTematica.
+     */
+    @Test
+    public void testIsRegistada() {
+        System.out.println("isRegistada");
+        SessaoTematica instance = this.sessaoTematica;
+        instance.setEstado(new SessaoTematicaCriadaState(sessaoTematica));
+        boolean expResult = true;
+        boolean result = instance.isRegistada();
+        assertEquals(expResult, result);
+    }
 
 }
