@@ -193,10 +193,11 @@ public class EventoEmSubmissaoCameraReadyStateTest {
     }
 
     /**
-     * Teste ao metodo validarEstado, da classe EventoEmSubmissaoCameraReadyState.
+     * Teste ao metodo validarEstado, da classe
+     * EventoEmSubmissaoCameraReadyState.
      */
     @Test
-    public void testValida() {
+    public void testValidarEstado() {
         System.out.println("valida");
         EventoState instance = e.getEstado();
         boolean expResult = false;
@@ -204,4 +205,100 @@ public class EventoEmSubmissaoCameraReadyStateTest {
         assertEquals(expResult, result);
     }
 
+    /**
+     * Teste ao método isStateValidoParaRemover, da classe
+     * EventoEmSubmissaoCameraReadyState.
+     */
+    @Test
+    public void testIsStateValidoParaRemover() {
+        System.out.println("isStateValidoParaRemover");
+        EventoState instance = e.getEstado();
+        boolean expResult = true;
+        boolean result = instance.isStateValidoParaRemover();
+        assertEquals(expResult, result);
+
+    }
+
+    /**
+     * Teste ao método testIsStateValidoParaRemoverNot, da classe
+     * EventoEmSubmissaoCameraReadyState.
+     */
+    @Test
+    public void testIsStateValidoParaRemoverNot() {
+        System.out.println("isStateValidoParaRemoverNot");
+        e.setEstado(new EventoEmCameraReadyState(e));
+        EventoState instance = e.getEstado();
+        boolean expResult = false;
+        boolean result = instance.isStateValidoParaRemover();
+        assertEquals(expResult, result);
+
+    }
+
+    /**
+     * Teste ao método testIsStateValidoParaSubmeter, da classe
+     * EventoEmSubmissaoCameraReadyState.
+     */
+    @Test
+    public void testIsStateValidoParaSubmeter() {
+        System.out.println("isStateValidoParaSubmeter");
+        EventoState instance = e.getEstado();
+        e.setEstado(new EventoEmSubmissaoState(e));
+        boolean expResult = false;
+        boolean result = instance.isStateValidoParaSubmeter();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste ao método testIsStateValidoParaSubmeterNot, da classe
+     * EventoEmSubmissaoCameraReadyState.
+     */
+    @Test
+    public void testIsStateValidoParaSubmeterNot() {
+        System.out.println("isStateValidoParaSubmeterNot");
+        EventoState instance = e.getEstado();
+        boolean expResult = false;
+        boolean result = instance.isStateValidoParaSubmeter();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste ao método testIsStateValidoParaAlterar, da classe
+     * EventoEmSubmissaoCameraReadyState.
+     */
+    @Test
+    public void testIsStateValidoParaAlterar() {
+        System.out.println("isStateValidoParaAlterar");
+        EventoState instance = e.getEstado();
+        boolean expResult = false;
+        boolean result = instance.isStateValidoParaAlterar();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste ao método testIsStateValidoParaLicitar, da classe
+     * EventoEmSubmissaoCameraReadyState.
+     */
+    @Test
+    public void testIsStateValidoParaLicitar() {
+        System.out.println("isStateValidoParaLicitar");
+        e.setEstado(new EventoEmLicitacaoState(e));
+        EventoState instance = e.getEstado();
+        boolean expResult = true;
+        boolean result = instance.isStateValidoParaLicitar();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste ao método testIsStateValidoParaDistribuir, da classe
+     * EventoEmSubmissaoCameraReadyState.
+     */
+    @Test
+    public void testIsStateValidoParaDistribuir() {
+        System.out.println("isStateValidoParaDistribuir");
+        e.setEstado(new EventoEmDistribuicaoState(e));
+        EventoState instance = e.getEstado();
+        boolean expResult = true;
+        boolean result = instance.isStateValidoParaDistribuir();
+        assertEquals(expResult, result);
+    }
 }
