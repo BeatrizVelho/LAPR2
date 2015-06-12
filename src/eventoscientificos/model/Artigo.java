@@ -138,6 +138,10 @@ public class Artigo {
 
         this.ficheiro = ficheiro;
     }
+    
+    public boolean validarArtigo() {
+        return true;
+    }
 
     /**
      * Compara dois objetos entre si. Comparando primariamente a posição de
