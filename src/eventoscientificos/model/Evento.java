@@ -52,7 +52,7 @@ public class Evento {
     private Data dataFim;
 
     /**
-     * Lista de Orgazanidores do Evento.
+     * Lista de Organizadores do Evento.
      */
     private List<Organizador> listaOrganizadores;
 
@@ -246,7 +246,7 @@ public class Evento {
         }
         if (!dataInicioSubmissao.isMaior(Data.dataAtual())) {
             throw new IllegalArgumentException("Data de inicio de submissao "
-                    + "nõ pode ser menor que a data atual");
+                    + "não pode ser menor que a data atual");
         }
         this.dataInicioSubmissao = dataInicioSubmissao;
     }
