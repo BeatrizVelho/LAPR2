@@ -1,6 +1,7 @@
 package eventoscientificos.model.state.evento;
 
 import eventoscientificos.model.Evento;
+import utils.Data;
 
 /**
  * Representa uma instância de EventoSessoesTematicasDefinidasState tendo acesso
@@ -162,8 +163,8 @@ public class EventoSessoesTematicasDefinidasState implements EventoState {
     }
 
     /**
-     * validarEstado se cumpre as condicoes necessarias para efetuar a mudanca de
- estado pretendida
+     * validarEstado se cumpre as condicoes necessarias para efetuar a mudanca
+     * de estado pretendida
      *
      * @return verdadeiro se poder passar de estado e falso se nao cumprir as
      * condicoes necessarias de mudanca de estado
@@ -171,6 +172,63 @@ public class EventoSessoesTematicasDefinidasState implements EventoState {
     @Override
     public boolean validarEstado() {
         return e.getCP() != null;
+    }
+
+    /**
+     * Valida se o evento se encontra num estado válido para ser removido
+     *
+     * @return verdadeiro se estiver no estado correto e falso se não estiver
+     */
+    @Override
+    public boolean isStateValidoParaRemover() {
+        return (!(setCriado() || setRegistado() || setSessoesTematicasDefinidas() || setCPDefinida() || setCameraReady()));
+
+    }
+
+    /**
+     * Valida se o evento se encontra num estado válido para submeter artigos
+     *
+     * @return verdadeiro se estiver no estado correto e falso se não estiver
+     */
+    @Override
+    public boolean isStateValidoParaSubmeter() {
+        return (Data.dataAtual().isMaior(e.getDataInicioSubmissao())
+                            && e.getDataFimSubmissao().isMaior(Data.dataAtual())
+                            && setCPDefinida());
+    }
+
+    /**
+     * Valida se o evento se encontra num estado válido para efetuar alterações
+     * nos artigos
+     *
+     * @return verdadeiro se estiver no estado correto e falso se não estiver
+     */
+    @Override
+    public boolean isStateValidoParaAlterar() {
+        return (Data.dataAtual().isMaior(e.getDataInicioSubmissao())
+                            && e.getDataFimSubmissao().isMaior(Data.dataAtual())
+                            && setCPDefinida());
+    }
+
+    /**
+     * Valida se o evento se encontra num estado válido para os revisores
+     * licitarem as artigos
+     *
+     * @return verdadeiro se estiver no estado correto e falso se não estiver
+     */
+    @Override
+    public boolean isStateValidoParaLicitar() {
+        return setEmLicitacao();
+    }
+
+    /**
+     * Valida se o evento se encontra num estado válido para distribuir revisões
+     *
+     * @return verdadeiro se estiver no estado correto e falso se não estiver
+     */
+    @Override
+    public boolean isStateValidoParaDistribuir() {
+        return setEmDistribuicao();
     }
 
 }
