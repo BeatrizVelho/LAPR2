@@ -97,7 +97,7 @@ public class Evento implements CPDefinivel {
         setDataInicio(dataInicio);
         setDataFim(dataFim);
         this.listaOrganizadores = new ArrayList();
-        this.listaSessoesTematicas = new ListaSessoesTematicas();
+        this.listaSessoesTematicas = new ListaSessoesTematicas(this);
         this.cp = null;
         setEstado(new EventoCriadoState(this));
     }
