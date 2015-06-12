@@ -19,8 +19,11 @@ public class SessaoTematicaRegistadaStateTest {
         SessaoTematica sessaoTematica = new SessaoTematica(
                 "#A9D24R",
                 "LAPR2",
-                new Data(2016, 5, 22),
-                new Data(2016, 5, 28));
+                new Data(2015, 5, 22),
+                new Data(2015, 5, 28),
+                new Data(2015, 6, 20),
+                new Data(2015, 6, 24),
+                new Data(2015, 6, 28));
         sessaoTematica.setEstado(
                 new SessaoTematicaRegistadaState(sessaoTematica));
         sessaoTematica.adicionarCP(new CP());
