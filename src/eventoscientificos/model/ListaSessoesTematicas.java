@@ -119,7 +119,7 @@ public class ListaSessoesTematicas {
         List<CPDefinivel> listaSemCPDefinida = new ArrayList();
         
         for(SessaoTematica sessaoTematica : this.listaSessoesTematicas){
-            if(sessaoTematica.getEstado() instanceof SessaoTematicaRegistadaState
+            if(sessaoTematica.isRegistada()
                     && sessaoTematica.isProponente(utilizador)){
                 listaSemCPDefinida.add(sessaoTematica);
             }
