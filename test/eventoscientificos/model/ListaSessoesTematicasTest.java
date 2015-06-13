@@ -146,7 +146,7 @@ public class ListaSessoesTematicasTest {
         Utilizador utilizador = new Utilizador(
                 "pedro", "1140781@isep.ipp.pt", "pedro", "12345");
         Proponente prop = new Proponente(utilizador);
-        ListaSessoesTematicas instance = new ListaSessoesTematicas();
+        ListaSessoesTematicas instance = new ListaSessoesTematicas(this.evento);
         List<CPDefinivel> expResult = new ArrayList<>();
         List<CPDefinivel> result = instance.getListaCPDefiniveisSemCPOrganizadorProponente(utilizador);
         assertEquals(expResult, result);
