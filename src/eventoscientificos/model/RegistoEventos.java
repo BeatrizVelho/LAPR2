@@ -1,7 +1,6 @@
 package eventoscientificos.model;
 
 import eventoscientificos.model.state.evento.EventoRegistadoState;
-import eventoscientificos.model.state.evento.EventoSessoesTematicasDefinidasState;
 import java.util.ArrayList;
 import java.util.List;
 import utils.Data;
@@ -83,7 +82,7 @@ public class RegistoEventos {
 
         for (Evento evento : this.listaEventos) {
             if (evento.isOrganizador(utilizador)
-                    && evento.getEstado() instanceof EventoRegistadoState) {
+                    && evento.isRegistadoOuSessoesTematicasDefinidas()) {
                 listaEventosOrganizador.add(evento);
             }
         }
