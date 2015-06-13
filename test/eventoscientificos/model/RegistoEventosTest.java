@@ -134,9 +134,10 @@ public class RegistoEventosTest {
         evento.setEstado(new EventoSessoesTematicasDefinidasState(evento));
         evento.novoOrganizador(this.utilizador);
         SessaoTematica sessao = new SessaoTematica(
-                            "#123456", "Uma descrição", new Data(2016, 5, 9),
-                            new Data(2016, 6, 21), new Data(2016, 7, 8),
-                            new Data(2016, 9, 24), new Data(2017, 5, 28));
+                "#123456", "Uma descrição", new Data(2016, 5, 9),
+                new Data(2016, 6, 21), new Data(2016, 7, 8),
+                new Data(2016, 7, 20), new Data(2016, 9, 24),
+                new Data(2017, 5, 28));
         sessao.setEstado(new SessaoTematicaRegistadaState(sessao));
         sessao.novoProponente(this.utilizador);
         evento.getListaSessoesTematicas().adicionarSessaoTematica(sessao);
