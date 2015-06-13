@@ -17,8 +17,11 @@ public class SessaoTematicaEmSubmissaoStateTest {
         SessaoTematica sessaoTematica = new SessaoTematica(
                 "#12345",
                 "Um descrição",
-                new Data(2015, 05, 22),
-                new Data(2015, 05, 28));
+                new Data(2015, 5, 22),
+                new Data(2015, 5, 28),
+                new Data(2015, 6, 20),
+                new Data(2015, 6, 24),
+                new Data(2015, 6, 28));
         sessaoTematica.setEstado(
                 new SessaoTematicaEmSubmissaoState(sessaoTematica));
 

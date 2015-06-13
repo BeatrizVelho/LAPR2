@@ -165,7 +165,8 @@ public class EventoTest {
     public void testGetListaSessoesTematica() {
         System.out.println("getListaSessoesTematicas");
         Evento instance = this.evento;
-        ListaSessoesTematicas expResult = new ListaSessoesTematicas();
+        ListaSessoesTematicas expResult
+                = new ListaSessoesTematicas(this.evento);
         ListaSessoesTematicas result = instance.getListaSessoesTematicas();
         assertEquals(expResult, result);
     }

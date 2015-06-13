@@ -1,5 +1,8 @@
 package utils;
 
+import java.math.BigDecimal;
+import java.sql.Date;
+import java.time.Instant;
 import java.util.Calendar;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -156,6 +159,18 @@ public class DataTest {
         Data instance = new Data();
         boolean expResult = false;
         boolean result = instance.isMaior(outraData);
+        assertEquals(expResult, result);
+    }
+    
+    /**
+     * Teste do método toMilisegundos, da classe Data.
+     */
+    @Test
+    public void testToMilisegundos() {
+        System.out.println("toMilisegundos");
+        Data instance = new Data(1989, 5, 22);
+        long expResult = 611798400000L;
+        long result = instance.toMilisegundos();
         assertEquals(expResult, result);
     }
 

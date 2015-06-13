@@ -15,65 +15,31 @@ import utils.Data;
 public class ListaSessoesTematicas {
 
     /**
+     * Evento ao qual a Lista de Sessões Temáticas pertence.
+     */
+    private Evento evento;
+
+    /**
      * Lista de Sessões Temáticas.
      */
     private List<SessaoTematica> listaSessoesTematicas;
 
     /**
-     * Constrói uma instância de uma lista de Sessões Temáticas vazia.
+     * Constrói uma instância de uma lista de Sessões Temáticas recebendo o
+     * evento à qual pertence.
+     *
+     * @param evento Evento ao qual a Lista de Sessões Temáticas pertence.
      */
-    public ListaSessoesTematicas() {
+    public ListaSessoesTematicas(Evento evento) {
+        this.evento = evento;
         this.listaSessoesTematicas = new ArrayList();
-    }
-
-    /**
-     * Cria uma instância de sessão temática com um código único, uma descrição,
-     * uma data de inicio de submissão e data de fim de submissão.
-     *
-     * @param codigoUnico Código único da Sessão Temática.
-     * @param descricao Descrição da Sessão Temátiica.
-     * @param dataInicioSubmissao Data de inicio do periodo de submissão da
-     * Sessão Temática.
-     * @param dataFimSubmissao Data de fim do periodo de submissão da Sessão
-     * Temática.
-     * @return Sessão Temática.
-     */
-    public SessaoTematica novaSessaoTematica(
-                        String codigoUnico,
-                        String descricao,
-                        Data dataInicioSubmissao,
-                        Data dataFimSubmissao) {
-        return new SessaoTematica(
-                            codigoUnico, descricao, dataInicioSubmissao, dataFimSubmissao);
-    }
-
-    /**
-     * Valida uma instância de Sessão Temática verificando se a mesma já existe
-     * numa lista.
-     *
-     * @param sessaoTematica Sessão Temática que vai ser procurada na lista.
-     * @return Verdadeiro se a Sessão Temática já existir na lista e falso caso
-     * não exista.
-     */
-    public boolean validarSessaoTematica(SessaoTematica sessaoTematica) {
-        return !this.listaSessoesTematicas.contains(sessaoTematica);
-    }
-
-    /**
-     * Adiciona uma instância de uma Sessão Temática a uma lista.
-     *
-     * @param sessaoTematica Sessão Temática que vai ser adicionada à lista.
-     * @return Verdadeiro caso a Sessão Temática seja adicionada à lista e falso
-     * caso a adição falhe.
-     */
-    public boolean adicionarSessaoTematica(SessaoTematica sessaoTematica) {
-        return this.listaSessoesTematicas.add(sessaoTematica);
     }
 
     /**
      * Compara dois objetos entre si. Comparando primariamente a posição de
      * memória, seguida do conteudo e das classes as quais cada um deles
-     * pertence, e finalmente os seus atributos, lista de sessões temáticas.
+     * pertence, e finalmente os seus atributos, evento que a contém e as suas
+     * sessões temáticas.
      *
      * @param outroObjeto ListaSessoesTematicas que vai ser usada na comparação.
      * @return Verdadeiro caso os objetos comparados sejam iguais e falso caso
@@ -90,10 +56,83 @@ public class ListaSessoesTematicas {
         }
 
         ListaSessoesTematicas outraListaSessoesTematicas
-                            = (ListaSessoesTematicas) outroObjeto;
+                = (ListaSessoesTematicas) outroObjeto;
 
-        return this.listaSessoesTematicas.equals(
-                            outraListaSessoesTematicas.listaSessoesTematicas);
+        return this.evento.equals(outraListaSessoesTematicas.evento)
+                && this.listaSessoesTematicas.equals(
+                        outraListaSessoesTematicas.listaSessoesTematicas);
+    }
+
+    /**
+     * Cria uma instância de sessão temática com um código único, uma descrição,
+     * uma data de inicio de submissão e data de fim de submissão.
+     *
+     * @param codigoUnico Código único da Sessão Temática.
+     * @param descricao Descrição da Sessão Temátiica.
+     * @param dataInicioSubmissao Data de inicio do periodo de submissão da
+     * Sessão Temática.
+     * @param dataFimSubmissao Data de fim do periodo de submissão da Sessão
+     * Temática.
+     * @param dataFimSubmissaoCameraReady Data de fim do periodo de submissão do
+     * artigo final da Sessão Temática.
+     * @param dataInicio Data de início da Sessão Temática.
+     * @param dataFim Data de fim da Sessão Temática.
+     * @return Sessão Temática.
+     */
+    public SessaoTematica novaSessaoTematica(
+            String codigoUnico,
+            String descricao,
+            Data dataInicioSubmissao,
+            Data dataFimSubmissao,
+            Data dataFimSubmissaoCameraReady,
+            Data dataInicio,
+            Data dataFim) {
+        return new SessaoTematica(
+                codigoUnico, descricao, dataInicioSubmissao, dataFimSubmissao,
+                dataFimSubmissaoCameraReady, dataInicio, dataFim);
+    }
+
+    /**
+     * Valida uma instância de Sessão Temática verificando se a mesma já existe
+     * numa lista e se as suas datas estão dentro das do evento.
+     *
+     * @param sessaoTematica Sessão Temática que vai ser procurada na lista e
+     * validada contra o evento.
+     * @return Verdadeiro se a Sessão Temática não existir na lista e as suas
+     * datas estiverem dentro das do evento e falso caso já esteja na lista.
+     */
+    public boolean validarSessaoTematica(SessaoTematica sessaoTematica) {
+        if (this.evento.getDataInicioSubmissao().isMaior(
+                sessaoTematica.getDataInicioSubmissao())) {
+            throw new IllegalArgumentException("A data de inicio de submissão "
+                    + "da sessão temática não pode ser menor que a do evento");
+        }
+
+        if (this.evento.getDataFimSubmissao().isMaior(
+                sessaoTematica.getDataFimSubmissao())) {
+            throw new IllegalArgumentException("A data de fim de submissão da "
+                    + "sessão temática não pode ser menor que a do evento");
+        }
+
+        if (this.evento.getDataInicio().isMaior(sessaoTematica.getDataInicio())
+                || sessaoTematica.getDataFim().isMaior(
+                        this.evento.getDataFim())) {
+            throw new IllegalArgumentException("A sessão temática deve ocorrer "
+                    + "dentro do periodo do evento.");
+        }
+
+        return !this.listaSessoesTematicas.contains(sessaoTematica);
+    }
+
+    /**
+     * Adiciona uma instância de uma Sessão Temática a uma lista.
+     *
+     * @param sessaoTematica Sessão Temática que vai ser adicionada à lista.
+     * @return Verdadeiro caso a Sessão Temática seja adicionada à lista e falso
+     * caso a adição falhe.
+     */
+    public boolean adicionarSessaoTematica(SessaoTematica sessaoTematica) {
+        return this.listaSessoesTematicas.add(sessaoTematica);
     }
 
     /**

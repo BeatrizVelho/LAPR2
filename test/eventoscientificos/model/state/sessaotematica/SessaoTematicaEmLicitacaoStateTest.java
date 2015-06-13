@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package eventoscientificos.model.state.sessaotematica;
 
 import eventoscientificos.model.SessaoTematica;
@@ -21,10 +16,13 @@ public class SessaoTematicaEmLicitacaoStateTest {
         SessaoTematica sessaoTematica = new SessaoTematica(
                 "#12345",
                 "Um descrição",
-                new Data(2015, 05, 22),
-                new Data(2015, 05, 28));
+                new Data(2015, 5, 22),
+                new Data(2015, 5, 28),
+                new Data(2015, 6, 20),
+                new Data(2015, 6, 24),
+                new Data(2015, 6, 28));
         sessaoTematica.setEstado(
-                new SessaoTematicaEmDetecaoState(sessaoTematica));
+                new SessaoTematicaEmLicitacaoState(sessaoTematica));
 
         this.sessaoTematica = sessaoTematica;
     }
@@ -87,7 +85,7 @@ public class SessaoTematicaEmLicitacaoStateTest {
     public void testSetEmDetecao() {
         System.out.println("setEmDetecao");
         SessaoTematicaState instance = this.sessaoTematica.getEstado();
-        boolean expResult = true;
+        boolean expResult = false;
         boolean result = instance.setEmDetecao();
         assertEquals(expResult, result);
     }
@@ -113,7 +111,7 @@ public class SessaoTematicaEmLicitacaoStateTest {
     public void testSetEmDistribuicao() {
         System.out.println("setEmDistribuicao");
         SessaoTematicaState instance = this.sessaoTematica.getEstado();
-        boolean expResult = false;
+        boolean expResult = true;
         boolean result = instance.setEmDistribuicao();
         assertEquals(expResult, result);
     }
@@ -183,5 +181,4 @@ public class SessaoTematicaEmLicitacaoStateTest {
         assertEquals(expResult, result);
     }
 
-    
 }

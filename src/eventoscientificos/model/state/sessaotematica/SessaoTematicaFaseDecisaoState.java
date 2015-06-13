@@ -3,12 +3,12 @@ package eventoscientificos.model.state.sessaotematica;
 import eventoscientificos.model.SessaoTematica;
 
 /**
- * Representa uma instância de SessaoTematicaEmLicitacaoState atráves de uma
+ * Representa uma instância de SessaoTematicaFaseDecisaoState atráves de uma
  * SessãoTemática.
  *
  * @author G01
  */
-public class SessaoTematicaEmLicitacaoState implements SessaoTematicaState {
+public class SessaoTematicaFaseDecisaoState implements SessaoTematicaState {
 
     /**
      * Sessão Temática que adota o estado.
@@ -16,19 +16,19 @@ public class SessaoTematicaEmLicitacaoState implements SessaoTematicaState {
     private SessaoTematica sessaoTematica;
 
     /**
-     * Constrói uma instância de SessaoTematicaEmLicitacaoState recebendo uma
+     * Constrói uma instância de SessaoTematicaFaseDecisaoState recebendo uma
      * Sessão Temática.
      * 
      * @param sessaoTematica Sessão Temática que adota o estado. 
      */
-    public SessaoTematicaEmLicitacaoState(SessaoTematica sessaoTematica) {
+    public SessaoTematicaFaseDecisaoState(SessaoTematica sessaoTematica) {
         this.sessaoTematica = sessaoTematica;
     }
 
     /**
      * Método que permite a mudança de estado para Criada.
      *
-     * @return Falso, não deve ser possível mudar de EmLicitacao para Criada.
+     * @return Falso, não deve ser possível mudar de FaseDecisao para Criada.
      */
     @Override
     public boolean setCriada() {
@@ -38,7 +38,8 @@ public class SessaoTematicaEmLicitacaoState implements SessaoTematicaState {
     /**
      * Método que permite a mudança de estado para Registada.
      *
-     * @return Falso, não deve ser possível mudar de EmLicitacao para Registada.
+     * @return Falso, não deve ser possível mudar de FaseDecisao para 
+     * Registada.
      */
     @Override
     public boolean setRegistada() {
@@ -48,7 +49,7 @@ public class SessaoTematicaEmLicitacaoState implements SessaoTematicaState {
     /**
      * Método que permite a mudança de estado para CPDefinida.
      *
-     * @return Falso, não deve ser possível mudar de EmLicitacao para Criada.
+     * @return Falso, não deve ser possível mudar de FaseDecisao para CPDefinida.
      */
     @Override
     public boolean setCPDefinida() {
@@ -58,7 +59,7 @@ public class SessaoTematicaEmLicitacaoState implements SessaoTematicaState {
     /**
      * Método que permite a mudança de estado para EmSubmissao.
      *
-     * @return Falso, não deve ser possível mudar de EmLicitacao para
+     * @return Falso, não deve ser possível mudar de FaseDecisao para
      * EmSubmissao.
      */
     @Override
@@ -69,7 +70,8 @@ public class SessaoTematicaEmLicitacaoState implements SessaoTematicaState {
     /**
      * Método que permite a mudança de estado para EmDetecao.
      *
-     * @return Falso, não deve ser possível mudar de EmLicitacao para EmDetecao.
+     * @return Falso, não deve ser possível mudar de FaseDecisao para 
+     * EmDetecao.
      */
     @Override
     public boolean setEmDetecao() {
@@ -79,34 +81,30 @@ public class SessaoTematicaEmLicitacaoState implements SessaoTematicaState {
     /**
      * Método que permite a mudança de estado para EmLicitacao.
      *
-     * @return Verdadeiro, a sessão temática encontra-se neste estado.
+     * @return Falso, não deve ser possível mudar de FaseDecisao para 
+     * EmLicitacao.
      */
     @Override
     public boolean setEmLicitacao() {
-        return true;
+        return false;
     }
 
     /**
      * Método que permite a mudança de estado para EmDistribuicao.
      *
-     * @return Verdadeiro se for possivel alterar o estado para EmDetecao e
-     * falso caso não seja.
+     * @return Falso, não deve ser possível mudar de FaseDecisao para 
+     * EmDistribuicao.
      */
     @Override
     public boolean setEmDistribuicao() {
-        if (validarEstado()) {
-            this.sessaoTematica.setEstado(
-                    new SessaoTematicaEmDistribuicaoState(this.sessaoTematica));
-            return true;
-        }
-        
         return false;
     }
 
     /**
      * Método que permite a mudança de estado para EmRevisão.
      *
-     * @return Falso, não deve ser possível mudar de EmLicitacao para EmRevisão.
+     * @return Falso, não deve ser possível mudar de FaseDecisao para 
+     * EmRevisao.
      */
     @Override
     public boolean setEmRevisao() {
@@ -116,28 +114,34 @@ public class SessaoTematicaEmLicitacaoState implements SessaoTematicaState {
     /**
      * Método que permite a mudança de estado para FaseDecisao.
      *
-     * @return Falso, não deve ser possível mudar de EmLicitacao para FaseDecisao.
+     * @return  Verdadeiro, a sessão temática encontra-se neste estado.
      */
     @Override
     public boolean setFaseDecisao() {
-        return false;
+        return true;
     }
 
     /**
      * Método que permite a mudança de estado para EmSubmissaoCameraReady.
      *
-     * @return Falso, não deve ser possível mudar de EmLicitacao para
-     * EmSubmissaoCameraReady.
+     * @return Verdadeiro se for possivel alterar o estado para EmRevisao e
+     * falso caso não seja.
      */
     @Override
     public boolean setEmSubmissaoCameraReady() {
+        if (validarEstado()) {
+            this.sessaoTematica.setEstado(
+                    new SessaoTematicaEmDistribuicaoState(this.sessaoTematica));
+            return true;
+        }
+
         return false;
     }
 
     /**
      * Método que permite a mudança de estado para CameraReady.
      *
-     * @return Falso, não deve ser possível mudar de EmLicitacao para 
+     * @return Falso, não deve ser possível mudar de FaseDecisao para 
      * CameraReady.
      */
     @Override
@@ -152,7 +156,7 @@ public class SessaoTematicaEmLicitacaoState implements SessaoTematicaState {
      */
     @Override
     public boolean validarEstado() {
-        // Adicionar validação de negócio
+        // Adicionar validações de negócio.
         return true;
     }
     
