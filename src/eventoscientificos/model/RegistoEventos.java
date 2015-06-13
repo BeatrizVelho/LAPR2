@@ -103,10 +103,10 @@ public class RegistoEventos {
         List<CPDefinivel> listaSemCPDefinida = new ArrayList();
 
         for (Evento evento : this.listaEventos) {
-            if (evento.getEstado() instanceof EventoSessoesTematicasDefinidasState
+            if (evento.isSessoesTematicasDefinidas()
                     && evento.isOrganizador(utilizador)) {
                 listaSemCPDefinida.add(evento);
-                List<CPDefinivel> listaSessoesTematicas = (evento.getListaSessoesTematicas()).getListaCPDefiniveisSemCPOrganizadorProponente(utilizador);
+                List<CPDefinivel> listaSessoesTematicas = evento.getListaCPDefiniveisSemCPOrganizadorProponente(utilizador);
                 listaSemCPDefinida.addAll(listaSessoesTematicas);
             }
 

@@ -4,6 +4,8 @@ import eventoscientificos.model.state.evento.EventoCriadoState;
 import eventoscientificos.model.state.evento.EventoRegistadoState;
 import eventoscientificos.model.state.evento.EventoSessoesTematicasDefinidasState;
 import eventoscientificos.model.state.evento.EventoState;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import utils.Data;
@@ -435,6 +437,24 @@ public class EventoTest {
         instance.setEstado(new EventoSessoesTematicasDefinidasState(evento));
         boolean expResult = true;
         boolean result = instance.isSessoesTematicasDefinidas();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método getListaCPDefiniveisSemCPOrganizadorProponente,
+     * da classe Evento.
+     */
+    @Test
+    public void testGetListaCPDefiniveisSemCPOrganizadorProponente() {
+        System.out.println("getListaCPDefiniveisSemCPOrganizadorProponente");
+        Utilizador utilizador = new Utilizador(this.utilizador);
+        Evento instance = new Evento("titulo", "descricao", new Local("local"),
+                new Data(2016, 6, 8), new Data(2016, 6, 20),
+                new Data(2016, 7, 7), new Data(2016, 8, 1),
+                new Data(2017, 6, 10));
+        Proponente prop = new Proponente(utilizador);
+        List<CPDefinivel> expResult = new ArrayList<>();
+        List<CPDefinivel> result = instance.getListaCPDefiniveisSemCPOrganizadorProponente(utilizador);
         assertEquals(expResult, result);
     }
 }
