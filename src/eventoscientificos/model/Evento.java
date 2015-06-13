@@ -477,4 +477,16 @@ public class Evento implements CPDefinivel {
         return estado.setSessoesTematicasDefinidas();
     }
 
+    /**
+     * Devolve uma lista de sessões temáticas que se encontrem sem CP
+     * definida e onde o utilizador é proponente.
+     * 
+     * @param utilizador Utilizador a verificar se é proponente.
+     * @return Lista de sessao temática onde o utilizador
+     * é proponente.
+     */
+    public List<CPDefinivel> getListaCPDefiniveisSemCPOrganizadorProponente(Utilizador utilizador) {
+       return listaSessoesTematicas.getListaCPDefiniveisSemCPOrganizadorProponente(utilizador);
+    }
+
 }
