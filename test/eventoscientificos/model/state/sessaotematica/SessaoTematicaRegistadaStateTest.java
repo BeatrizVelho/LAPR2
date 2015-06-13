@@ -23,10 +23,11 @@ public class SessaoTematicaRegistadaStateTest {
                 new Data(2015, 5, 28),
                 new Data(2015, 6, 20),
                 new Data(2015, 6, 24),
-                new Data(2015, 6, 28));
+                new Data(2015, 6, 28),
+                new Data(2016, 7, 1));
         sessaoTematica.setEstado(
                 new SessaoTematicaRegistadaState(sessaoTematica));
-        sessaoTematica.adicionarCP(new CP());
+        sessaoTematica.setCP(new CP());
         
         this.sessaoTematica = sessaoTematica;
     }

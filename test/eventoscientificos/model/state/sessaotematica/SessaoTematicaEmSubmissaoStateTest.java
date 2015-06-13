@@ -19,6 +19,7 @@ public class SessaoTematicaEmSubmissaoStateTest {
                 "Um descrição",
                 new Data(2015, 5, 22),
                 new Data(2015, 5, 28),
+                new Data(2015, 6, 10),
                 new Data(2015, 6, 20),
                 new Data(2015, 6, 24),
                 new Data(2015, 6, 28));

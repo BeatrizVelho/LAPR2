@@ -5,8 +5,6 @@
  */
 package eventoscientificos.model.state.sessaotematica;
 
-import eventoscientificos.model.state.sessaotematica.SessaoTematicaState;
-import eventoscientificos.model.state.sessaotematica.SessaoTematicaRegistadaState;
 import eventoscientificos.model.CP;
 import eventoscientificos.model.SessaoTematica;
 import org.junit.Test;
@@ -27,6 +25,7 @@ private SessaoTematica sessaoTematica;
                 "LAPR2",
                 new Data(2015, 5, 22),
                 new Data(2015, 5, 28),
+                new Data(2015, 6, 10),
                 new Data(2015, 6, 20),
                 new Data(2015, 6, 24),
                 new Data(2015, 6, 28));

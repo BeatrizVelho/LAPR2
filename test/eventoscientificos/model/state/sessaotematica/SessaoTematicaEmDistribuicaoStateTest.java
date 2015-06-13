@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
 import utils.Data;
 
 /**
- * @author Pedro
+ * @author G01
  */
 public class SessaoTematicaEmDistribuicaoStateTest {
 
@@ -18,17 +18,18 @@ public class SessaoTematicaEmDistribuicaoStateTest {
                 "Um descrição",
                 new Data(2015, 5, 22),
                 new Data(2015, 5, 28),
+                new Data(2015, 6, 10),
                 new Data(2015, 6, 20),
                 new Data(2015, 6, 24),
                 new Data(2015, 6, 28));
         sessaoTematica.setEstado(
-                new SessaoTematicaEmDetecaoState(sessaoTematica));
+                new SessaoTematicaEmDistribuicaoState(sessaoTematica));
 
         this.sessaoTematica = sessaoTematica;
     }
 
     /**
-     * Teste do método setCriada, da classe 
+     * Teste do método setCriada, da classe
      * SessaoTematicaEmDistribuicaoStateTest.
      */
     @Test
@@ -80,7 +81,7 @@ public class SessaoTematicaEmDistribuicaoStateTest {
     }
 
     /**
-     * Teste do método setEmDetecao, da classe 
+     * Teste do método setEmDetecao, da classe
      * SessaoTematicaEmDistribuicaoStateTest.
      */
     @Test
