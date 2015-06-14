@@ -1,6 +1,5 @@
 package eventoscientificos.model;
 
-import java.util.ArrayList;
 
 /**
  * Representa uma instância de Artigo
