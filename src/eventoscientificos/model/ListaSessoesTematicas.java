@@ -35,13 +35,13 @@ public class ListaSessoesTematicas {
 
     /**
      * Devolve uma lista de sessões tméticas.
-     * 
+     *
      * @return Lista de Sessões Temáticas.
      */
     public List<SessaoTematica> getListaSessoesTematicas() {
         return this.listaSessoesTematicas;
     }
-    
+
     /**
      * Cria uma instância de sessão temática com um código único, uma descrição,
      * uma data de inicio de submissão e data de fim de submissão.
@@ -61,14 +61,14 @@ public class ListaSessoesTematicas {
      * @return Sessão Temática.
      */
     public SessaoTematica novaSessaoTematica(
-                        String codigoUnico,
-                        String descricao,
-                        Data dataInicioSubmissao,
-                        Data dataFimSubmissao, Data dataInicioDistribuicao,
-                        Data dataFimSubmissaoCameraReady, Data dataInicio, 
-                        Data dataFim) {
+            String codigoUnico,
+            String descricao,
+            Data dataInicioSubmissao,
+            Data dataFimSubmissao, Data dataInicioDistribuicao,
+            Data dataFimSubmissaoCameraReady, Data dataInicio,
+            Data dataFim) {
         return new SessaoTematica(
-                            codigoUnico, descricao, dataInicioSubmissao, dataFimSubmissao, dataInicioDistribuicao, dataFimSubmissaoCameraReady, dataInicio, dataFim);
+                codigoUnico, descricao, dataInicioSubmissao, dataFimSubmissao, dataInicioDistribuicao, dataFimSubmissaoCameraReady, dataInicio, dataFim);
     }
 
     /**
@@ -147,19 +147,19 @@ public class ListaSessoesTematicas {
 
         return !this.listaSessoesTematicas.contains(sessaoTematica);
     }
-    
+
     /**
      * Devolve uma lista de submissiveis nos quais ainda é possivel submeter
      * artigos
-     * 
-     * 
+     *
+     *
      * @return Lista de Submisiveis que aceitam submisoes
      */
     public List<Submissivel> getListaSubmissiveisAceitarArtigo() {
         List<Submissivel> listaSubmissiveis = new ArrayList<>();
-        
-        for(SessaoTematica sessaoTematica : this.listaSessoesTematicas) {
-            if(sessaoTematica.isStateValidoParaSubmeter()) {
+
+        for (SessaoTematica sessaoTematica : this.listaSessoesTematicas) {
+            if (sessaoTematica.isStateValidoParaSubmeter()) {
                 listaSubmissiveis.add(sessaoTematica);
             }
         }
@@ -184,7 +184,23 @@ public class ListaSessoesTematicas {
 //        }
 //    }
 
+    /**
+     * Devolve uma lista de sessão temáticas que se encontrem sem CP definida e
+     * onde o utilizador é proponente.
+     *
+     * @param utilizador Utilizador a verificar se é proponente.
+     * @return Lista de sessao temática onde o utilizador é proponente.
+     */
     List<CPDefinivel> getListaCPDefiniveisSemCPOrganizadorProponente(Utilizador utilizador) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<CPDefinivel> listaSemCPDefinida = new ArrayList();
+
+        for (SessaoTematica sessaoTematica : this.listaSessoesTematicas) {
+            if (sessaoTematica.isRegistada()
+                    && sessaoTematica.isProponente(utilizador)) {
+                listaSemCPDefinida.add(sessaoTematica);
+            }
+        }
+
+        return listaSemCPDefinida;
     }
 }
