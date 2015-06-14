@@ -202,6 +202,32 @@ public class Data {
     }
 
     /**
+     * Devolve o valor de uma data, em milisegundos ,a contar desde 1 de Janeiro
+     * de 1970.
+     * 
+     * @return Valor de uma data, em milisegundos, a contar desde 1 de Janeiro 
+     * de 1970.
+     */
+    public long toMilisegundos() {
+        int totalDias = 0;
+
+        for (int i = 1970; i < this.getAno(); i++) {
+            totalDias += Data.isAnoBissexto(i) ? 366 : 365;
+        }
+
+        for (int i = 1; i < this.getMes(); i++) {
+            totalDias += Data.diasPorMes[i];
+        }
+        
+        for (int i = 1; i < this.getDia(); i++) {
+            totalDias += 1;
+        }
+        totalDias += (Data.isAnoBissexto(this.getAno()) && this.getMes() > 2) ? 1 : 0;
+        
+        return (long) totalDias * 24 * 60 * 60 * 1000;
+    }
+
+    /**
      * Verifica se o ano passado por parametro é ou não um ano bissexto.
      *
      * @param ano o ano a validar.

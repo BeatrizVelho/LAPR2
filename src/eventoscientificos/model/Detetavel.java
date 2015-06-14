@@ -1,5 +1,7 @@
 package eventoscientificos.model;
 
+import java.util.List;
+
 /**
  * Todas as classes que implementam esta interface, herdam a responsabilidade de
  * guardar todos os conflitos detetados entre revisores e artigos, ficando
@@ -8,7 +10,7 @@ package eventoscientificos.model;
  * @author G01
  */
 public interface Detetavel {
-    
+
     /**
      * Devolve o Processo de Deteção.
      * 
@@ -24,19 +26,11 @@ public interface Detetavel {
     void setProcessoDetecao(ProcessoDetecao processoDetecao);
 
     /**
-     * Cria uma instância de uma processo de deteção com uma lista de conflitos
-     * de interesse vazia.
-     * 
-     * @return Processo de Deteção.
+     * Inicia o Processo de Deteção de um detetável, recebendo uma lista de 
+     * tipos de conflito.
+     *
+     * @param listaTiposConflito Lista de tipos de conflito. 
      */
-    ProcessoDetecao novoProcessoDetecao();
+    public void iniciarProcessoDeteca(List<TipoConflito> listaTiposConflito);
 
-    /**
-     * Adiciona um Processo de Deteção.
-     * 
-     * @param processoDetecao Processo de Deteção que vai ser adicionado.
-     * @return Verdadeiro se a adição for feita e falso se falhar.
-     */
-    boolean adicionarProcessoDetecao(ProcessoDetecao processoDetecao);
-    
 }

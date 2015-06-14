@@ -13,27 +13,47 @@ import utils.Data;
  *
  * @author G01
  */
-public class SessaoTematica implements Submissivel {
+public class SessaoTematica implements Submissivel, CPDefinivel {
 
     /**
-     * Código único da Sessão Temática.
+     * Código único da sessão temática.
      */
     private String codigoUnico;
 
     /**
-     * Descrição da Sessão Temática.
+     * Descrição da sessão temática.
      */
     private String descricao;
 
     /**
-     * Data de inicio de submissão da Sessão Temática.
+     * Data de inicio de submissão da sessão temática.
      */
     private Data dataInicioSubmissao;
 
     /**
-     * Data de fim de submissão da Sessão Temática.
+     * Data de fim de submissão da sessão temática.
      */
     private Data dataFimSubmissao;
+
+    /**
+     * Data de início de distribuição da sessão temática. 
+     */
+    private Data dataInicioDistribuicao;
+
+    /**
+     * Data de fim de submissão CameraReady da sessão temática.
+     */
+    private Data dataFimSubmissaoCameraReady;
+
+    /**
+     * Data de inicio da sessão temática.
+     */
+    private Data dataInicio;
+
+    /**
+     * Data de fim da sessão temática
+     */
+    private Data dataFim;
 
     /**
      * Lista de proponentes da sessão temática.
@@ -64,21 +84,35 @@ public class SessaoTematica implements Submissivel {
      * @param dataInicioSubmissao Data de inicio de submissão da sessão
      * temática.
      * @param dataFimSubmissao Data de fim de submissão da sessão temática.
+     * @param dataInicioDistribuicao Data de início de distribuição da sessão
+     * temática.
+     * @param dataFimSubmissaoCameraReady Data de fim de submissão de artigo 
+     * final da sessão temática.
+     * @param dataInicio Data de início da sessão temática.
+     * @param dataFim Data de fim da sessão temática.
      */
     public SessaoTematica(
             String codigoUnico,
             String descricao,
             Data dataInicioSubmissao,
-            Data dataFimSubmissao) {
+            Data dataFimSubmissao,
+            Data dataInicioDistribuicao,
+            Data dataFimSubmissaoCameraReady,
+            Data dataInicio,
+            Data dataFim) {
         setCodigoUnico(codigoUnico);
         setDescricao(descricao);
         setDataInicioSubmissao(dataInicioSubmissao);
         setDataFimSubmissao(dataFimSubmissao);
+        setDataInicioDistribuicao(dataInicioDistribuicao);
+        setDataFimSubmissaoCameraReady(dataFimSubmissaoCameraReady);
+        setDataInicio(dataInicio);
+        setDataFim(dataFim);
         this.listaProponentes = new ArrayList();
-        setCp(null);
+        setCP(null);
         this.listaSubmissoes = new ListaSubmissoes();
         setEstado(new SessaoTematicaCriadaState(this));
-        
+
     }
 
     /**
@@ -118,6 +152,42 @@ public class SessaoTematica implements Submissivel {
     }
 
     /**
+     * Devolve a data de inicio de distribuição da sessão temática.
+     * 
+     * @return Data de início de distribuição da sessão temática.
+     */
+    public Data getDataInicioDistribuicao() {
+        return this.dataInicioDistribuicao;
+    }
+
+    /**
+     * Devolve a data de fim de submissão CameraReady da sessão temática.
+     * 
+     * @return Data de fim de submissão CameraReady da sessão temática.
+     */
+    public Data getDataFimSubmissaoCameraReady() {
+        return this.dataFimSubmissaoCameraReady;
+    }
+
+    /**
+     * Devolve a data de inicio da sessão temática.
+     * 
+     * @return Data de início da sessão temática.
+     */
+    public Data getDataInicio() {
+        return dataInicio;
+    }
+
+    /**
+     * Devolve a data de fim da sessão temática.
+     * 
+     * @return Data de fim da sessão temática.
+     */
+    public Data getDataFim() {
+        return dataFim;
+    }
+
+    /**
      * Devolve a CP da sessão temática.
      *
      * @return CP da sessão temática.
@@ -128,7 +198,7 @@ public class SessaoTematica implements Submissivel {
 
     /**
      * Devolve a lista de submissões da sessão temática.
-     * 
+     *
      * @return Lista de submissões da sessão temática.
      */
     @Override
@@ -138,7 +208,7 @@ public class SessaoTematica implements Submissivel {
 
     /**
      * Devolve o estado da sessão temática.
-     * 
+     *
      * @return Estado da sessão temática.
      */
     public SessaoTematicaState getEstado() {
@@ -199,26 +269,81 @@ public class SessaoTematica implements Submissivel {
             throw new NullPointerException("A data de fim de submissão não pode"
                     + "estar vazia.");
         }
-        if (!dataFinalSubmissao.isMaior(this.dataInicioSubmissao)) {
-            throw new IllegalArgumentException("A data de fim de submissão não"
-                    + "pode ser menor que a data de inicio de submissão.");
-        }
 
         this.dataFimSubmissao = dataFinalSubmissao;
     }
-    
+
+    /**
+     * Modifica a data de início de distribuição da sessão temática.
+     * 
+     * @param dataInicioDistribuicao Nova data de início de distribuição da
+     * sessão temática.
+     */
+    public void setDataInicioDistribuicao(Data dataInicioDistribuicao) {
+        if (dataInicioDistribuicao == null) {
+            throw new NullPointerException("A data de início de distribuição "
+                    + "não pode estar vazia.");
+        }
+        
+        this.dataInicioDistribuicao = dataInicioDistribuicao;
+    } 
+
+    /**
+     * Modifica a data de fim de submissão da sessão temática.
+     * 
+     * @param dataFimSubmissaoCameraReady Nova data de fim de submissão 
+     * CameraReady da sessão temática.
+     */
+    public void setDataFimSubmissaoCameraReady(
+            Data dataFimSubmissaoCameraReady) {
+        if (dataFimSubmissaoCameraReady == null) {
+            throw new NullPointerException("A data de fim de submissão "
+                    + "CameraReady não pode estar vazia.");
+        }
+        
+        this.dataFimSubmissaoCameraReady = dataFimSubmissaoCameraReady;
+    }
+
+    /**
+     * Modifica a data de início da sessão temática.
+     * 
+     * @param dataInicio Nova data de início da sessão temática.
+     */
+    public void setDataInicio(Data dataInicio) {
+        if (dataInicio  == null) {
+            throw new NullPointerException("A data de início não pode estar"
+                    + "vazia.");
+        }
+
+        this.dataInicio = dataInicio;
+    }
+
+    /**
+     * Modifica a data de fim da sessão temática.
+     * 
+     * @param dataFim Nova data de fim da sessão temática.
+     */
+    public void setDataFim(Data dataFim) {
+        if (dataFim == null) {
+            throw new NullPointerException("A data de fim não pode estar"
+                    + "vazia.");
+        }
+
+        this.dataFim = dataFim;
+    }
+
     /**
      * Modifica a CP da sessão temática.
      *
      * @param cp Nova CP da sessão temática.
      */
-    public void setCp(CP cp) {
+    public void setCP(CP cp) {
         this.cp = cp;
     }
 
     /**
      * Modifica o estado da sessão temática.
-     * 
+     *
      * @param estado Novo estado da sessão temática.
      */
     public void setEstado(SessaoTematicaState estado) {
@@ -303,6 +428,32 @@ public class SessaoTematica implements Submissivel {
      * @return Verdadeiro se o objeto for válido e falso caso não seja.
      */
     public boolean validarSessaoTematica() {
+        if (getDataInicioSubmissao().isMaior(getDataFimSubmissao())) {
+            throw new IllegalArgumentException("A data de fim de submissão não "
+                    + "pode ser menor que a data de inicio de submissão.");
+        }
+
+        if (getDataFimSubmissao().isMaior(getDataInicioDistribuicao())) {
+            throw new IllegalArgumentException("A data de inicio de distribuição"
+                    + " não pode ser menor que a data de fim de submissão.");
+        }
+        
+        if (getDataInicioDistribuicao().isMaior(getDataFimSubmissaoCameraReady())) {
+            throw new IllegalArgumentException("A data de fim de submissão "
+                    + "CameraReady não pode ser menor que a data de início de"
+                    + "distribuição.");
+        }
+        
+        if (getDataFimSubmissaoCameraReady().isMaior(getDataInicio())) {
+            throw new IllegalArgumentException("A data de início não pode ser"
+                    + "menor que a data de submissão CameraReady.");            
+        }
+
+        if (getDataInicio().isMaior(getDataFim())) {
+            throw new IllegalArgumentException("A data de fim não pode ser menor"
+                    + " que a data de inicio.");            
+        }
+
         return this.estado.setRegistada();
     }
 
@@ -311,7 +462,7 @@ public class SessaoTematica implements Submissivel {
      *
      * @return CP
      */
-    public CP novaCp() {
+    public CP novaCP() {
         return new CP();
     }
 
@@ -323,7 +474,7 @@ public class SessaoTematica implements Submissivel {
      * falso se a adição falhar.
      */
     public boolean adicionarCP(CP cp) {
-        setCp(cp);
+        setCP(cp);
 
         return this.estado.setCPDefinida();
     }
@@ -345,4 +496,28 @@ public class SessaoTematica implements Submissivel {
         return getEstado() instanceof SessaoTematicaEmSubmissaoState;
     }
 
+    /**
+     * Verifica se determinado utilizador é proponente de sessão temática.
+     *
+     * @param utilizador Utilizador que se pretende verificar.
+     * @return Verdadeiro caso seja e falso se não for.
+     */
+    public boolean isProponente(Utilizador utilizador) {
+        for (Proponente proponente : this.listaProponentes) {
+            if (utilizador.equals(proponente.getUtilizador())) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+    
+    /**
+     * Verifica se a sessão temática está registada.
+     * 
+     * @return Verdadeira se estiver registada e falso se não estiver.
+     */
+    public boolean isRegistada(){
+        return estado.setRegistada();
+    }
 }

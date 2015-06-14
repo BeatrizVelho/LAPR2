@@ -58,6 +58,43 @@ public class Licitacao {
     }
 
     /**
+     * Devolve a lista de conflitos reconhecidos pelo revisor em relação ao
+     * artigo
+     *
+     * @return lista de conflitos reconhecidos pelo revisor
+     */
+    public List<Conflito> getListaConflitos() {
+        return listaConflitos;
+    }
+
+    /**
+     * Devolve o grau de interesse apresentado pelo revisor na revisão do artigo
+     *
+     * @return grau de interesse na revisão do artigo
+     */
+    public int getGrauInteresse() {
+        return grauInteresse;
+    }
+
+    /**
+     * Devolve o revisor licitador
+     *
+     * @return o objeto revisor que licita o artigo
+     */
+    public Revisor getRevisor() {
+        return revisor;
+    }
+
+    /**
+     * Devolve o artigo alvo de licitação por parte do revisor
+     *
+     * @return o artigo licitável
+     */
+    public Artigo getArtigo() {
+        return artigo;
+    }
+
+    /**
      * Modifica o grau de interesse do revisor rever o artigo
      *
      * @param grauInteresse grau de interesse indicado pelo revisor
@@ -90,8 +127,34 @@ public class Licitacao {
      * falso se não uma licitação válida
      */
     public boolean validarLicitacao() {
-        return (this.artigo!=null && this.revisor!=null);
+        return (this.artigo != null && this.revisor != null);
 
     }
 
+    /**
+     * Compara dois objetos entre si. Comparando primariamente a posição de
+     * memória, seguida do conteudo e das classes as quais cada um deles
+     * pertence, e finalmente os seus atributos revisor, artigo, grau de
+     * interesse e conflitos.
+     *
+     * @param outroObjeto Licitação a comparar
+     * @return Verdadeiro caso os objetos comparados sejam iguais e falso caso
+     * não o sejam.
+     */
+    public boolean equals(Object outroObjeto) {
+        if (this == outroObjeto) {
+            return true;
+        }
+
+        if (outroObjeto == null || this.getClass() != outroObjeto.getClass()) {
+            return false;
+        }
+
+        Licitacao outraLicitacao = (Licitacao) outroObjeto;
+
+        return this.revisor.equals(outraLicitacao.revisor)
+                            && this.artigo.equals(outraLicitacao.artigo)
+                            && this.grauInteresse == outraLicitacao.grauInteresse
+                            && this.listaConflitos == outraLicitacao.listaConflitos;
+    }
 }

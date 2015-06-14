@@ -3,59 +3,56 @@ package eventoscientificos.model.state.sessaotematica;
 import eventoscientificos.model.SessaoTematica;
 
 /**
- * Representa uma instância de SessaoTematicaCriadaState através de uma sessão
- * temática.
+ * Representa uma instância de SessaoTematicaEmSubmissaoCameraReadyState atráves
+ * de uma SessãoTemática.
  *
  * @author G01
  */
-public class SessaoTematicaCriadaState implements SessaoTematicaState {
+public class SessaoTematicaEmSubmissaoCameraReadyState implements SessaoTematicaState {
 
     /**
-     * Sessão temática que adota o estado.
+     * Sessão Temática que adota o estado.
      */
     private SessaoTematica sessaoTematica;
 
     /**
-     * Constrói uma instância de SessaoTematicaCriadaState recebendo uma sessão
-     * temática.
+     * Constrói uma instância de SessaoTematicaEmSubmissaoCameraReadyState
+     * recebendo uma Sessão Temática.
      *
      * @param sessaoTematica Sessão Temática que adota o estado.
      */
-    public SessaoTematicaCriadaState(SessaoTematica sessaoTematica) {
+    public SessaoTematicaEmSubmissaoCameraReadyState(
+                        SessaoTematica sessaoTematica) {
         this.sessaoTematica = sessaoTematica;
     }
 
     /**
      * Método que permite a mudança de estado para Criada.
      *
-     * @return Verdadeiro, a sessão temática encontra-se neste estado.
+     * @return Falso, não deve ser possível mudar de EmSubmissaoCameraReady para
+     * Criada.
      */
     @Override
     public boolean setCriada() {
-        return true;
+        return false;
     }
 
     /**
-     * Método que permite a mudança de estado para CPDefinida.
+     * Método que permite a mudança de estado para Registada.
      *
-     * @return Verdadeiro se for possivel alterar o estado para Registada e
-     * falso caso não seja.
+     * @return Falso, não deve ser possível mudar de EmSubmissaoCameraReady para
+     * Registada.
      */
     @Override
     public boolean setRegistada() {
-        if (validarEstado()) {
-            this.sessaoTematica.setEstado(
-                                new SessaoTematicaRegistadaState(this.sessaoTematica));
-            return true;
-        }
-
         return false;
     }
 
     /**
      * Método que permite a mudança de estado para CPDefinida.
      *
-     * @return Falso, não deve ser possível mudar de Criada para CPDefinida.
+     * @return Falso, não deve ser possível mudar de EmSubmissaoCameraReady para
+     * CPDefinida.
      */
     @Override
     public boolean setCPDefinida() {
@@ -65,7 +62,8 @@ public class SessaoTematicaCriadaState implements SessaoTematicaState {
     /**
      * Método que permite a mudança de estado para EmSubmissao.
      *
-     * @return Falso, não deve ser possível mudar de Criada para EmSubmissao.
+     * @return Falso, não deve ser possível mudar de EmSubmissaoCameraReady para
+     * EmSubmissao.
      */
     @Override
     public boolean setEmSubmissao() {
@@ -75,7 +73,8 @@ public class SessaoTematicaCriadaState implements SessaoTematicaState {
     /**
      * Método que permite a mudança de estado para EmDetecao.
      *
-     * @return Falso, não deve ser possível mudar de Criada para EmDetecao.
+     * @return Falso, não deve ser possível mudar de EmSubmissaoCameraReady para
+     * EmDetecao.
      */
     @Override
     public boolean setEmDetecao() {
@@ -85,7 +84,8 @@ public class SessaoTematicaCriadaState implements SessaoTematicaState {
     /**
      * Método que permite a mudança de estado para EmLicitacao.
      *
-     * @return Falso, não deve ser possível mudar de Criada para EmLicitacao.
+     * @return Falso, não deve ser possível mudar de EmSubmissaoCameraReady para
+     * EmLicitacao.
      */
     @Override
     public boolean setEmLicitacao() {
@@ -95,7 +95,8 @@ public class SessaoTematicaCriadaState implements SessaoTematicaState {
     /**
      * Método que permite a mudança de estado para EmDistribuicao.
      *
-     * @return Falso, não deve ser possível mudar de Criada para EmDistribuicao.
+     * @return Falso, não deve ser possível mudar de EmSubmissaoCameraReady para
+     * EmDistribuicao.
      */
     @Override
     public boolean setEmDistribuicao() {
@@ -105,7 +106,8 @@ public class SessaoTematicaCriadaState implements SessaoTematicaState {
     /**
      * Método que permite a mudança de estado para EmRevisão.
      *
-     * @return Falso, não deve ser possível mudar de Criada para EmRevisão.
+     * @return Falso, não deve ser possível mudar de EmSubmissaoCameraReady para
+     * EmRevisao.
      */
     @Override
     public boolean setEmRevisao() {
@@ -115,7 +117,8 @@ public class SessaoTematicaCriadaState implements SessaoTematicaState {
     /**
      * Método que permite a mudança de estado para FaseDecisao.
      *
-     * @return Falso, não deve ser possível mudar de Criada para FaseDecisao.
+     * @return Falso, não deve ser possível mudar de EmSubmissaoCameraReady para
+     * FaseDecisao.
      */
     @Override
     public boolean setFaseDecisao() {
@@ -125,32 +128,39 @@ public class SessaoTematicaCriadaState implements SessaoTematicaState {
     /**
      * Método que permite a mudança de estado para EmSubmissaoCameraReady.
      *
-     * @return Falso, não deve ser possível mudar de Criada para
-     * EmSubmissaoCameraReady.
+     * @return Verdadeiro, a sessão temática encontra-se neste estado.
      */
     @Override
     public boolean setEmSubmissaoCameraReady() {
-        return false;
+        return true;
     }
 
     /**
      * Método que permite a mudança de estado para CameraReady.
      *
-     * @return Falso, não deve ser possível mudar de Criada para CameraReady.
+     * @return Verdadeiro se for possivel alterar o estado para EmRevisao e
+     * falso caso não seja.
      */
     @Override
     public boolean setCameraReady() {
+        if (validarEstado()) {
+            this.sessaoTematica.setEstado(
+                                new SessaoTematicaEmDistribuicaoState(this.sessaoTematica));
+            return true;
+        }
+
         return false;
     }
 
     /**
      * Método que permite validar uma tentativa de mudança de estado.
      *
-     * @return Verdadeiro se a mudança for possível e falso caso não seja..
+     * @return Verdadeiro se a mudança for possível e falso caso não seja.
      */
     @Override
     public boolean validarEstado() {
-        return true;
+        // Adicionar validações de negócio.
+        return false;
     }
 
     /**

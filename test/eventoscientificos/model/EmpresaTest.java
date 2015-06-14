@@ -13,6 +13,21 @@ public class EmpresaTest {
      */
     public EmpresaTest() {
     }
+    
+    /**
+     * Testa o método set e get UtilizadorAutenticado, da classe Empresa.
+     */
+    @Test
+    public void testSetAndGetUtilizadorAutenticado() {
+        System.out.println("setAndGetUtilizadorAutenticado");
+        Empresa instance = new Empresa();
+        Utilizador utilizador = new Utilizador(
+                "Pedro Moreira", "1140781@isep.ipp.pt", "pedro", "1234");
+        instance.setUtilizadorAutenticado(utilizador);
+        Utilizador expResult = utilizador;
+        Utilizador result = instance.getUtilizadorAutenticado();
+        assertEquals(expResult, result);
+    }
 
     /**
      * Testa o metodo getRegistoUtilizadores da classe Empresa.

@@ -150,9 +150,10 @@ public class EventoTest {
     public void testSetAndGetCP() {
         System.out.println("setAndGetCP");
         Evento instance = this.evento;
+        instance.setCP(new CP());
         CP expResult = new CP();
-        instance.setCp(expResult);
-        assertEquals(expResult, instance.getCP());
+        CP result = instance.getCP();
+        assertEquals(expResult, result);
     }
 
     /**
@@ -162,7 +163,8 @@ public class EventoTest {
     public void testGetListaSessoesTematica() {
         System.out.println("getListaSessoesTematicas");
         Evento instance = this.evento;
-        ListaSessoesTematicas expResult = new ListaSessoesTematicas();
+        ListaSessoesTematicas expResult
+                = new ListaSessoesTematicas(this.evento);
         ListaSessoesTematicas result = instance.getListaSessoesTematicas();
         assertEquals(expResult, result);
     }
@@ -326,7 +328,7 @@ public class EventoTest {
         Evento instance = this.evento;
         boolean expResult = true;
         boolean result = instance.novoOrganizador(new Utilizador("Bea",
-                            "1140587@isep.ipp.pt", "beatriz", "111"));
+                "1140587@isep.ipp.pt", "beatriz", "111"));
         assertEquals(expResult, result);
     }
 
@@ -338,9 +340,9 @@ public class EventoTest {
         System.out.println("novoOrganizadorExists");
         Evento instance = this.evento;
         instance.novoOrganizador(new Utilizador(
-                            "Beatriz", "1140587@isep.ipp.pt", "bea", "1234"));
+                "Beatriz", "1140587@isep.ipp.pt", "bea", "1234"));
         instance.novoOrganizador(new Utilizador(
-                            "Beatriz", "1140587@isep.ipp.pt", "bea", "1234"));
+                "Beatriz", "1140587@isep.ipp.pt", "bea", "1234"));
     }
 
     /**
@@ -363,7 +365,7 @@ public class EventoTest {
         System.out.println("novaCP");
         Evento instance = this.evento;
         CP expResult = new CP();
-        CP result = instance.novaCp();
+        CP result = instance.novaCP();
         assertEquals(expResult, result);
     }
 
@@ -374,6 +376,7 @@ public class EventoTest {
     public void testAdicionarCP() {
         System.out.println("adicionarCP");
         Evento instance = this.evento;
+        instance.setEstado(new EventoSessoesTematicasDefinidasState(instance));
         CP cp = new CP();
         boolean expResult = true;
         boolean result = instance.adicionarCP(cp);
@@ -393,4 +396,60 @@ public class EventoTest {
         assertEquals(expResult, result);
     }
 
+    /**
+     * Teste ao método isRegistadoOuSessoesTematicasDefinidas, da classe evento.
+     */
+    @Test
+    public void testIsRegistadoOuSessoesTematicasDefinidas() {
+        System.out.println("isRegistadoOuSessoesTematicasDefinidas");
+        Evento instance = this.evento;
+        instance.setEstado(new EventoRegistadoState(instance));
+        boolean expResult = true;
+        boolean result = instance.isRegistadoOuSessoesTematicasDefinidas();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste ao método isSessoesTematicasDefinidas, da classe Evento.
+     */
+    @Test
+    public void testTemSessoesTematicasDefinidasSemSessoesDefinidas() {
+        System.out.println("temSessoesTematicasDefinidasSemSessoesDefinidas");
+        Evento instance = this.evento;
+        instance.setEstado(new EventoRegistadoState(evento));
+        boolean expResult = false;
+        boolean result = instance.isSessoesTematicasDefinidas();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste ao método isSessoesTematicasDefinidas, da classe Evento.
+     */
+    @Test
+    public void testIsSessoesTematicasDefinidasComSessoesDefinidas() {
+        System.out.println("isSessoesTematicasDefinidasComSessoesDefinidas");
+        Evento instance = this.evento;
+        instance.setEstado(new EventoSessoesTematicasDefinidasState(evento));
+        boolean expResult = true;
+        boolean result = instance.isSessoesTematicasDefinidas();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método getListaCPDefiniveisSemCPOrganizadorProponente,
+     * da classe Evento.
+     */
+    @Test
+    public void testGetListaCPDefiniveisSemCPOrganizadorProponente() {
+        System.out.println("getListaCPDefiniveisSemCPOrganizadorProponente");
+        Utilizador utilizador = new Utilizador(this.utilizador);
+        Evento instance = new Evento("titulo", "descricao", new Local("local"),
+                new Data(2016, 6, 8), new Data(2016, 6, 20),
+                new Data(2016, 7, 7), new Data(2016, 8, 1),
+                new Data(2017, 6, 10));
+        Proponente prop = new Proponente(utilizador);
+        List<CPDefinivel> expResult = new ArrayList<>();
+        List<CPDefinivel> result = instance.getListaCPDefiniveisSemCPOrganizadorProponente(utilizador);
+        assertEquals(expResult, result);
+    }
 }

@@ -2,6 +2,8 @@ package eventoscientificos.model;
 
 import eventoscientificos.model.state.evento.EventoCriadoState;
 import eventoscientificos.model.state.evento.EventoEmSubmissaoState;
+import eventoscientificos.model.state.evento.EventoRegistadoState;
+import eventoscientificos.model.state.evento.EventoSessoesTematicasDefinidasState;
 import eventoscientificos.model.state.evento.EventoState;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +12,9 @@ import utils.Data;
 /**
  * @author G01
  */
-public class Evento implements Submissivel {
+
+public class Evento implements Submissivel, CPDefinivel {
+
 
     /**
      * Título do Evento.
@@ -58,7 +62,7 @@ public class Evento implements Submissivel {
     private Data dataFim;
 
     /**
-     * Lista de Orgazanidores do Evento.
+     * Lista de Organizadores do Evento.
      */
     private List<Organizador> listaOrganizadores;
 
@@ -112,8 +116,8 @@ public class Evento implements Submissivel {
         setDataInicio(dataInicio);
         setDataFim(dataFim);
         this.listaOrganizadores = new ArrayList();
-        this.listaSessoesTematicas = new ListaSessoesTematicas();
         this.listaSubmissoes = new ListaSubmissoes();
+        this.listaSessoesTematicas = new ListaSessoesTematicas(this);
         this.cp = null;
         setEstado(new EventoCriadoState(this));
     }
@@ -223,6 +227,7 @@ public class Evento implements Submissivel {
      *
      * @return CP do evento.
      */
+    @Override
     public CP getCP() {
         return this.cp;
     }
@@ -281,7 +286,7 @@ public class Evento implements Submissivel {
         }
         if (!dataInicioSubmissao.isMaior(Data.dataAtual())) {
             throw new IllegalArgumentException("Data de inicio de submissao "
-                    + "nõ pode ser menor que a data atual");
+                    + "não pode ser menor que a data atual");
         }
         this.dataInicioSubmissao = dataInicioSubmissao;
     }
@@ -398,34 +403,9 @@ public class Evento implements Submissivel {
      *
      * @param cp Nova CP do evento.
      */
-    public void setCp(CP cp) {
+    @Override
+    public void setCP(CP cp) {
         this.cp = cp;
-    }
-
-    /**
-     * Verifica se existem sessões temáticas definidas no evento.
-     *
-     * @return Verdadeiro caso existam Sessões Temáticas definidas na
-     * ListaSessõesTemáticas e falso caso esteja vazia.
-     */
-    public boolean temSessoesTematicasDefinidas() {
-        return this.listaSessoesTematicas.temSessoesTematicasDefinidas();
-    }
-
-    /**
-     * Verifica se determinado utilizador é organizador do evento.
-     *
-     * @param utilizador Utilizador que se pretende verificar.
-     * @return Verdadeiro caso seja e falso se não for.
-     */
-    public boolean isOrganizador(Utilizador utilizador) {
-        for (Organizador organizador : this.listaOrganizadores) {
-            if (utilizador.equals(organizador.getUtilizador())) {
-                return true;
-            }
-        }
-
-        return false;
     }
 
     /**
@@ -507,11 +487,49 @@ public class Evento implements Submissivel {
     }
 
     /**
+     * Verifica se determinado utilizador é organizador do evento.
+     *
+     * @param utilizador Utilizador que se pretende verificar.
+     * @return Verdadeiro caso seja e falso se não for.
+     */
+    public boolean isOrganizador(Utilizador utilizador) {
+        for (Organizador organizador : this.listaOrganizadores) {
+            if (utilizador.equals(organizador.getUtilizador())) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Verifica se o evento está num estado que permite criar sessões temáticas.
+     * 
+     * @return Verdadeiro se for possível criar sessões temáticas e falso caso
+     * não seja.
+     */
+    public boolean isRegistadoOuSessoesTematicasDefinidas() {
+        return this.getEstado() instanceof EventoRegistadoState 
+                || this.getEstado() instanceof EventoSessoesTematicasDefinidasState;
+    }
+
+    /**
+     * Verifica se existem sessões temáticas definidas no evento.
+     *
+     * @return Verdadeiro caso existam Sessões Temáticas definidas na
+     * ListaSessõesTemáticas e falso caso esteja vazia.
+     */
+    public boolean temSessoesTematicasDefinidas() {
+        return this.listaSessoesTematicas.temSessoesTematicasDefinidas();
+    }
+
+    /**
      * Cria uma instância de CP vazia.
      *
      * @return CP
      */
-    public CP novaCp() {
+    @Override
+    public CP novaCP() {
         return new CP();
     }
 
@@ -522,10 +540,32 @@ public class Evento implements Submissivel {
      * @return Verdadeiro caso a CP tenha sido adicionada à sessão temática e
      * falso se a adição falhar.
      */
+    @Override
     public boolean adicionarCP(CP cp) {
-        setCp(cp);
+        setCP(cp);
 
-        return true;
+        return this.estado.setCPDefinida();
+    }
+    
+    /**
+     * Verifica se o evento tem sessões temáticas definidas.
+     * 
+     * @return Verdadeiro se tiver sessão temática e falso se não tiver.
+     */
+    public boolean isSessoesTematicasDefinidas(){
+        return estado.setSessoesTematicasDefinidas();
+    }
+
+    /**
+     * Devolve uma lista de sessões temáticas que se encontrem sem CP
+     * definida e onde o utilizador é proponente.
+     * 
+     * @param utilizador Utilizador a verificar se é proponente.
+     * @return Lista de sessao temática onde o utilizador
+     * é proponente.
+     */
+    public List<CPDefinivel> getListaCPDefiniveisSemCPOrganizadorProponente(Utilizador utilizador) {
+       return listaSessoesTematicas.getListaCPDefiniveisSemCPOrganizadorProponente(utilizador);
     }
 
     /**

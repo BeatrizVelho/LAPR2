@@ -1,6 +1,8 @@
 package eventoscientificos.model;
 
-import eventoscientificos.EventoState.EventoRegistadoState;
+import eventoscientificos.model.state.evento.EventoRegistadoState;
+import eventoscientificos.model.state.evento.EventoSessoesTematicasDefinidasState;
+import eventoscientificos.model.state.sessaotematica.SessaoTematicaRegistadaState;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
@@ -11,10 +13,10 @@ import utils.Data;
  * @author G01
  */
 public class RegistoEventosTest {
-    
+
     private Evento evento;
     private Utilizador utilizador;
-    
+
     public RegistoEventosTest() {
         this.evento = new Evento("titulo", "descricao", new Local("local"),
                 new Data(2016, 6, 8), new Data(2016, 6, 20),
@@ -47,7 +49,7 @@ public class RegistoEventosTest {
     }
 
     /**
-     *Teste do método validarEvento, da classe RegistoEventos.
+     * Teste do método validarEvento, da classe RegistoEventos.
      */
     @Test
     public void testValidarEvento() {
@@ -79,7 +81,7 @@ public class RegistoEventosTest {
     public void testEquals() {
         System.out.println("equals");
         RegistoEventos outroObjeto = new RegistoEventos();
-        
+
         outroObjeto.adicionarEvento(this.evento);
         RegistoEventos instance = new RegistoEventos();
         instance.adicionarEvento(this.evento);
@@ -87,7 +89,7 @@ public class RegistoEventosTest {
         boolean result = instance.equals(outroObjeto);
         assertEquals(expResult, result);
     }
-    
+
     /**
      * Teste do método equals, da classe RegistoEventos.
      */
@@ -113,8 +115,36 @@ public class RegistoEventosTest {
         instance.adicionarEvento(evento);
         List<Evento> expResult = new ArrayList();
         expResult.add(this.evento);
-        List<Evento> result 
+        List<Evento> result
                 = instance.getListaEventosOrganizador(this.utilizador);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método getListaCPDefiniveisSemCPOrganizadorProponente, da classe
+     * RegistoEventos.
+     */
+    @Test
+    public void testGetListaCPDefiniveisSemCPOrganizadorProponente() {
+        System.out.println("getListaCPDefiniveisSemOrganizadorProponente");
+        Evento evento = new Evento("titulo", "descricao", new Local("local"),
+                new Data(2016, 6, 8), new Data(2016, 6, 20),
+                new Data(2016, 7, 7), new Data(2016, 8, 1),
+                new Data(2017, 6, 10));
+        evento.setEstado(new EventoSessoesTematicasDefinidasState(evento));
+        evento.novoOrganizador(this.utilizador);
+        SessaoTematica sessao = new SessaoTematica(
+                "#123456", "Uma descrição", new Data(2016, 5, 9),
+                new Data(2016, 6, 21), new Data(2016, 7, 8),
+                new Data(2016, 7, 20), new Data(2016, 9, 24),
+                new Data(2017, 5, 28));
+        sessao.setEstado(new SessaoTematicaRegistadaState(sessao));
+        sessao.novoProponente(this.utilizador);
+        evento.getListaSessoesTematicas().adicionarSessaoTematica(sessao);
+        RegistoEventos instance = new RegistoEventos();
+        instance.adicionarEvento(evento);
+        int expResult = 2;
+        int result = (instance.getListaCPDefiniveisSemCPOrganizadorProponente(this.utilizador)).size();
         assertEquals(expResult, result);
     }
 

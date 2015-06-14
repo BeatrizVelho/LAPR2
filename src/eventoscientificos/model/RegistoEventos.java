@@ -85,7 +85,7 @@ public class RegistoEventos {
 
         for (Evento evento : this.listaEventos) {
             if (evento.isOrganizador(utilizador)
-                    && evento.getEstado() instanceof EventoRegistadoState) {
+                    && evento.isRegistadoOuSessoesTematicasDefinidas()) {
                 listaEventosOrganizador.add(evento);
             }
         }
@@ -124,6 +124,29 @@ public class RegistoEventos {
 //                    evento.getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador(utilizador));
 //        }
 //    }
+     * Devolve uma lista de eventoes/sessões temáticas que se encontrem sem CP
+     * definida e onde o utilizador é organizador/proponente.
+     * 
+     * @param utilizador Utilizador a verificar se é organizador/proponente.
+     * @return Lista de evento/sessao temática onde o utilizador
+     * é organizador/proponente.
+     */
+    public List<CPDefinivel> getListaCPDefiniveisSemCPOrganizadorProponente(Utilizador utilizador) {
+        List<CPDefinivel> listaSemCPDefinida = new ArrayList();
+
+        for (Evento evento : this.listaEventos) {
+            if (evento.isSessoesTematicasDefinidas()
+                    && evento.isOrganizador(utilizador)) {
+                listaSemCPDefinida.add(evento);
+                List<CPDefinivel> listaSessoesTematicas = evento.getListaCPDefiniveisSemCPOrganizadorProponente(utilizador);
+                listaSemCPDefinida.addAll(listaSessoesTematicas);
+            }
+
+        }
+
+        return listaSemCPDefinida;
+
+    }
 
     /**
      * Compara dois objetos entre si. Comparando primariamente a posição de
