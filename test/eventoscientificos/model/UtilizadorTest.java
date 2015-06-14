@@ -152,21 +152,21 @@ public class UtilizadorTest {
     public void testValidaUtilizador() {
         System.out.println("validaUtilizador");
         Utilizador instance = new Utilizador(
-                "susana", "freitas@gmail.com", "susu", "12345");
+                            "susana", "freitas@gmail.com", "susu", "12345");
         boolean expResult = true;
         boolean result = instance.validarUtilizador();
         assertEquals(expResult, result);
 
     }
-    
+
     /**
-     * 
+     *
      */
     @Test
     public void testCriarCloneUtilizador() {
         System.out.println("criarCloneUtilizador");
         Utilizador instance = new Utilizador(
-                "luis", "1140356@isep.ipp.pt", "politico", "12345");
+                            "luis", "1140356@isep.ipp.pt", "politico", "12345");
         Utilizador novaInstance = instance.criarCloneUtilizador();
         novaInstance.setEmail("1140357@isep.ipp.pt");
         novaInstance.setUsername("carlosvieira");
