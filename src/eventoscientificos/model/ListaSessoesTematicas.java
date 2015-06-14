@@ -41,6 +41,7 @@ public class ListaSessoesTematicas {
     public List<SessaoTematica> getListaSessoesTematicas() {
         return this.listaSessoesTematicas;
     }
+    
     /**
      * Cria uma instância de sessão temática com um código único, uma descrição,
      * uma data de inicio de submissão e data de fim de submissão.
@@ -51,27 +52,23 @@ public class ListaSessoesTematicas {
      * Sessão Temática.
      * @param dataFimSubmissao Data de fim do periodo de submissão da Sessão
      * Temática.
+     * @param dataInicioDistribuicao Data de início de distribuição da Sessão
+     * Temática.
+     * @param dataFimSubmissaoCameraReady Data de fim do periodo de submissão do
+     * artigo final da Sessão Temática.
+     * @param dataInicio Data de início da Sessão Temática.
+     * @param dataFim Data de fim da Sessão Temática.
      * @return Sessão Temática.
      */
     public SessaoTematica novaSessaoTematica(
                         String codigoUnico,
                         String descricao,
                         Data dataInicioSubmissao,
-                        Data dataFimSubmissao) {
+                        Data dataFimSubmissao, Data dataInicioDistribuicao,
+                        Data dataFimSubmissaoCameraReady, Data dataInicio, 
+                        Data dataFim) {
         return new SessaoTematica(
-                            codigoUnico, descricao, dataInicioSubmissao, dataFimSubmissao);
-    }
-
-    /**
-     * Valida uma instância de Sessão Temática verificando se a mesma já existe
-     * numa lista.
-     *
-     * @param sessaoTematica Sessão Temática que vai ser procurada na lista.
-     * @return Verdadeiro se a Sessão Temática já existir na lista e falso caso
-     * não exista.
-     */
-    public boolean validarSessaoTematica(SessaoTematica sessaoTematica) {
-        return !this.listaSessoesTematicas.contains(sessaoTematica);
+                            codigoUnico, descricao, dataInicioSubmissao, dataFimSubmissao, dataInicioDistribuicao, dataFimSubmissaoCameraReady, dataInicio, dataFim);
     }
 
     /**
@@ -114,39 +111,6 @@ public class ListaSessoesTematicas {
     }
 
     /**
-     * Cria uma instância de sessão temática com um código único, uma descrição,
-     * uma data de inicio de submissão e data de fim de submissão.
-     *
-     * @param codigoUnico Código único da Sessão Temática.
-     * @param descricao Descrição da Sessão Temátiica.
-     * @param dataInicioSubmissao Data de inicio do periodo de submissão da
-     * Sessão Temática.
-     * @param dataFimSubmissao Data de fim do periodo de submissão da Sessão
-     * Temática.
-     * @param dataInicioDistribuicao Data de início de distribuição da Sessão
-     * Temática.
-     * @param dataFimSubmissaoCameraReady Data de fim do periodo de submissão do
-     * artigo final da Sessão Temática.
-     * @param dataInicio Data de início da Sessão Temática.
-     * @param dataFim Data de fim da Sessão Temática.
-     * @return Sessão Temática.
-     */
-    public SessaoTematica novaSessaoTematica(
-            String codigoUnico,
-            String descricao,
-            Data dataInicioSubmissao,
-            Data dataFimSubmissao,
-            Data dataInicioDistribuicao,
-            Data dataFimSubmissaoCameraReady,
-            Data dataInicio,
-            Data dataFim) {
-        return new SessaoTematica(
-                codigoUnico, descricao, dataInicioSubmissao, dataFimSubmissao,
-                dataInicioDistribuicao, dataFimSubmissaoCameraReady, dataInicio,
-                dataFim);
-    }
-
-    /**
      * Valida uma instância de Sessão Temática verificando se a mesma já existe
      * numa lista e se as suas datas estão dentro das do evento.
      *
@@ -183,21 +147,11 @@ public class ListaSessoesTematicas {
 
         return !this.listaSessoesTematicas.contains(sessaoTematica);
     }
-
-    /**
-     * Adiciona uma instância de uma Sessão Temática a uma lista.
-     *
-     * @param sessaoTematica Sessão Temática que vai ser adicionada à lista.
-     * @return Verdadeiro caso a Sessão Temática seja adicionada à lista e falso
-     * caso a adição falhe.
-     */
-    public boolean adicionarSessaoTematica(SessaoTematica sessaoTematica) {
-        return this.listaSessoesTematicas.add(sessaoTematica);
-    }
     
     /**
      * Devolve uma lista de submissiveis nos quais ainda é possivel submeter
      * artigos
+     * 
      * 
      * @return Lista de Submisiveis que aceitam submisoes
      */
@@ -229,4 +183,8 @@ public class ListaSessoesTematicas {
 //            if(sessaoTematica.isStateValidoParaAlterar() && sessaoTematica.)
 //        }
 //    }
+
+    List<CPDefinivel> getListaCPDefiniveisSemCPOrganizadorProponente(Utilizador utilizador) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

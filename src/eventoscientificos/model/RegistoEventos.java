@@ -124,7 +124,7 @@ public class RegistoEventos {
 //                    evento.getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador(utilizador));
 //        }
 //    }
-     * Devolve uma lista de eventoes/sessões temáticas que se encontrem sem CP
+    /** Devolve uma lista de eventoes/sessões temáticas que se encontrem sem CP
      * definida e onde o utilizador é organizador/proponente.
      * 
      * @param utilizador Utilizador a verificar se é organizador/proponente.
