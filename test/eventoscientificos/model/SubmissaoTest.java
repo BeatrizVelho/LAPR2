@@ -107,14 +107,14 @@ public class SubmissaoTest {
     }
 
     /**
-     * Teste do método validarSubmissao, da classe Submissao.
+     * Teste do método alterarEstadoSubmissao, da classe Submissao.
      */
     @Test
     public void testValidarSubmissao() {
         System.out.println("validarSubmissao");
         Submissao instance = new Submissao();
         boolean expResult = true;
-        boolean result = instance.validarSubmissao();
+        boolean result = instance.alterarEstadoSubmissao();
         System.out.println(instance.getEstado());
         assertEquals(expResult, result);
     }
@@ -166,6 +166,20 @@ public class SubmissaoTest {
         boolean result = instance.equals(outroObjecto);
         assertEquals(expResult, result);
     }
+    
+        
+//    /**
+//     * Test of equals method, of class Submissao.
+//     */
+//    @Test
+//    public void testEquals() {
+//        System.out.println("equals");
+//        Object outroObjecto = new Submissao();
+//        Submissao instance = new Submissao();
+//        boolean expResult = true;
+//        boolean result = instance.equals(outroObjecto);
+//        assertEquals(expResult, result);
+//    }
 
     /**
      * Teste do método equals, da classe Submissao.
@@ -181,4 +195,17 @@ public class SubmissaoTest {
         boolean result = instance.equals(outroObjecto);
         assertEquals(expResult, result);
     }
+
+     /**
+     * Teste do método novoArtigo method, da classe Submissao.
+     */
+    @Test
+    public void testNovoArtigo() {
+        System.out.println("novoArtigo");
+        Submissao instance = new Submissao();
+        Artigo expResult = this.artigoInicial;
+        Artigo result = instance.novoArtigo();
+        assertEquals(expResult, result);
+    }
+
 }

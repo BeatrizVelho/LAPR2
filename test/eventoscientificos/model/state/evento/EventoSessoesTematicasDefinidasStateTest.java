@@ -32,9 +32,9 @@ public class EventoSessoesTematicasDefinidasStateTest {
      */
     public EventoSessoesTematicasDefinidasStateTest() {
         this.e = new Evento("titulo", "descricao", new Local("local"),
-                            new Data(2016, 6, 8), new Data(2016, 6, 20),
-                            new Data(2016, 7, 7), new Data(2016, 8, 1),
-                            new Data(2017, 6, 10));
+                new Data(2016, 6, 8), new Data(2016, 6, 20),
+                new Data(2016, 7, 7), new Data(2016, 9, 10),
+                new Data(2016, 10, 1), new Data(2017, 6, 10));
         e.setEstado(new EventoSessoesTematicasDefinidasState(e));
     }
 

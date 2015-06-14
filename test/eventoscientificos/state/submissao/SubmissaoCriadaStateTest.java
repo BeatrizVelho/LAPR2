@@ -48,7 +48,7 @@ public class SubmissaoCriadaStateTest {
     @Test
     public void testSetEmLicitacao() {
         System.out.println("setEmLicitacao");
-        SubmissaoCriadaState instance = new SubmissaoCriadaState(this.submissao);
+        SubmissaoState instance = this.submissao.getEstado();
         boolean expResult = false;
         boolean result = instance.setEmLicitacao();
         assertEquals(expResult, result);
@@ -115,14 +115,14 @@ public class SubmissaoCriadaStateTest {
     }
 
     /**
-     * Teste do método setEmCameraRedy, da classe SubmissaoCriadaState.
+     * Teste do método setEmCameraReady, da classe SubmissaoCriadaState.
      */
     @Test
     public void testSetEmCameraRedy() {
         System.out.println("setEmCameraRedy");
         SubmissaoState instance = this.submissao.getEstado();
         boolean expResult = false;
-        boolean result = instance.setEmCameraRedy();
+        boolean result = instance.setEmCameraReady();
         assertEquals(expResult, result);
     }
 
