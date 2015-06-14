@@ -24,8 +24,8 @@ public class SessaoTematicaEmDetecaoState implements SessaoTematicaState {
     /**
      * Constrói uma instância de SessaoTematicaEmDetecaoState recebendo uma
      * Sessão Temática.
-     * 
-     * @param sessaoTematica Sessão Temática que adota o estado. 
+     *
+     * @param sessaoTematica Sessão Temática que adota o estado.
      */
     public SessaoTematicaEmDetecaoState(SessaoTematica sessaoTematica) {
         this.sessaoTematica = sessaoTematica;
@@ -89,13 +89,13 @@ public class SessaoTematicaEmDetecaoState implements SessaoTematicaState {
      */
     @Override
     public boolean setEmLicitacao() {
-        
+
         if (validarEstado()) {
             this.sessaoTematica.setEstado(
-                    new SessaoTematicaEmLicitacaoState(this.sessaoTematica));
+                                new SessaoTematicaEmLicitacaoState(this.sessaoTematica));
             return true;
         }
-        
+
         return false;
     }
 
@@ -161,4 +161,57 @@ public class SessaoTematicaEmDetecaoState implements SessaoTematicaState {
         return true;
     }
 
+    /**
+     * Valida se o evento se encontra num estado válido para ser removido
+     *
+     * @return verdadeiro se estiver no estado correto e falso se não estiver
+     */
+    @Override
+    public boolean isStateValidoParaRemover() {
+        return (!(setCriada() || setRegistada() || setCPDefinida() || setCameraReady()));
+    }
+
+    /**
+     * Valida se o evento se encontra num estado válido para submeter artigos
+     *
+     * @return verdadeiro se estiver no estado correto e falso se não estiver
+     */
+    @Override
+    public boolean isStateValidoParaSubmeter() {
+        return setEmSubmissao();
+
+    }
+
+    /**
+     * Valida se o evento se encontra num estado válido para efetuar alterações
+     * nos artigos
+     *
+     * @return verdadeiro se estiver no estado correto e falso se não estiver
+     */
+    @Override
+    public boolean isStateValidoParaAlterar() {
+        return setEmSubmissao();
+
+    }
+
+    /**
+     * Valida se o evento se encontra num estado válido para os revisores
+     * licitarem as artigos
+     *
+     * @return verdadeiro se estiver no estado correto e falso se não estiver
+     */
+    @Override
+    public boolean isStateValidoParaLicitar() {
+        return setEmLicitacao();
+    }
+
+    /**
+     * Valida se o evento se encontra num estado válido para distribuir revisões
+     *
+     * @return verdadeiro se estiver no estado correto e falso se não estiver
+     */
+    @Override
+    public boolean isStateValidoParaDistribuir() {
+        return setEmDistribuicao();
+    }
 }

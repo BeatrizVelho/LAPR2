@@ -19,8 +19,8 @@ public class SessaoTematicaCPDefinidaState implements SessaoTematicaState {
     /**
      * Constrói uma instância de SessaoTematicaCPDefinidaState recebendo uma
      * Sessão Temática.
-     * 
-     * @param sessaoTematica Sessão Temática que adota o estado. 
+     *
+     * @param sessaoTematica Sessão Temática que adota o estado.
      */
     public SessaoTematicaCPDefinidaState(SessaoTematica sessaoTematica) {
         this.sessaoTematica = sessaoTematica;
@@ -66,10 +66,10 @@ public class SessaoTematicaCPDefinidaState implements SessaoTematicaState {
     public boolean setEmSubmissao() {
         if (validarEstado()) {
             this.sessaoTematica.setEstado(
-                    new SessaoTematicaEmSubmissaoState(this.sessaoTematica));
+                                new SessaoTematicaEmSubmissaoState(this.sessaoTematica));
             return true;
         }
-
+        
         return false;
     }
 
@@ -86,7 +86,8 @@ public class SessaoTematicaCPDefinidaState implements SessaoTematicaState {
     /**
      * Método que permite a mudança de estado para EmLicitacao.
      *
-     * @return Falso, não deve ser possível mudar de CPDefinida para EmLicitacao.
+     * @return Falso, não deve ser possível mudar de CPDefinida para
+     * EmLicitacao.
      */
     @Override
     public boolean setEmLicitacao() {
@@ -96,7 +97,8 @@ public class SessaoTematicaCPDefinidaState implements SessaoTematicaState {
     /**
      * Método que permite a mudança de estado para EmDistribuicao.
      *
-     * @return Falso, não deve ser possível mudar de CPDefinida para EmDistribuicao.
+     * @return Falso, não deve ser possível mudar de CPDefinida para
+     * EmDistribuicao.
      */
     @Override
     public boolean setEmDistribuicao() {
@@ -116,7 +118,8 @@ public class SessaoTematicaCPDefinidaState implements SessaoTematicaState {
     /**
      * Método que permite a mudança de estado para FaseDecisao.
      *
-     * @return Falso, não deve ser possível mudar de CPDefinida para FaseDecisao.
+     * @return Falso, não deve ser possível mudar de CPDefinida para
+     * FaseDecisao.
      */
     @Override
     public boolean setFaseDecisao() {
@@ -137,7 +140,8 @@ public class SessaoTematicaCPDefinidaState implements SessaoTematicaState {
     /**
      * Método que permite a mudança de estado para CameraReady.
      *
-     * @return Falso, não deve ser possível mudar de CPDefinida para CameraReady.
+     * @return Falso, não deve ser possível mudar de CPDefinida para
+     * CameraReady.
      */
     @Override
     public boolean setCameraReady() {
@@ -152,6 +156,60 @@ public class SessaoTematicaCPDefinidaState implements SessaoTematicaState {
     @Override
     public boolean validarEstado() {
         return Data.dataAtual().isMaior(
-                this.sessaoTematica.getDataInicioSubmissao());
+                            this.sessaoTematica.getDataInicioSubmissao()) && this.sessaoTematica.getDataFimSubmissao().isMaior(Data.dataAtual());
+    }
+
+    /**
+     * Valida se o evento se encontra num estado válido para ser removido
+     *
+     * @return verdadeiro se estiver no estado correto e falso se não estiver
+     */
+    @Override
+    public boolean isStateValidoParaRemover() {
+        return (!(setCriada() || setRegistada() || setCPDefinida() || setCameraReady()));
+    }
+
+    /**
+     * Valida se o evento se encontra num estado válido para submeter artigos
+     *
+     * @return verdadeiro se estiver no estado correto e falso se não estiver
+     */
+    @Override
+    public boolean isStateValidoParaSubmeter() {
+        return setEmSubmissao();
+        
+    }
+
+    /**
+     * Valida se o evento se encontra num estado válido para efetuar alterações
+     * nos artigos
+     *
+     * @return verdadeiro se estiver no estado correto e falso se não estiver
+     */
+    @Override
+    public boolean isStateValidoParaAlterar() {
+        return setEmSubmissao();
+        
+    }
+
+    /**
+     * Valida se o evento se encontra num estado válido para os revisores
+     * licitarem as artigos
+     *
+     * @return verdadeiro se estiver no estado correto e falso se não estiver
+     */
+    @Override
+    public boolean isStateValidoParaLicitar() {
+        return setEmLicitacao();
+    }
+
+    /**
+     * Valida se o evento se encontra num estado válido para distribuir revisões
+     *
+     * @return verdadeiro se estiver no estado correto e falso se não estiver
+     */
+    @Override
+    public boolean isStateValidoParaDistribuir() {
+        return setEmDistribuicao();
     }
 }
