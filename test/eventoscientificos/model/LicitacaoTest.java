@@ -85,4 +85,38 @@ public class LicitacaoTest {
 
     }
 
+    /**
+     * Test of equals method, of class Licitacao.
+     */
+    @Test
+    public void testEquals() {
+        System.out.println("equals");
+        Object outroObjeto = new Licitacao(new Revisor(new Utilizador(
+                            "fatima", "ola@iml.com", "fafa", "1234")),
+                            new Artigo(), 0, null);;
+        Licitacao instance = new Licitacao(new Revisor(new Utilizador(
+                            "fatima", "ola@iml.com", "fafa", "1234")),
+                            new Artigo(), 0, null);;
+        boolean expResult = true;
+        boolean result = instance.equals(outroObjeto);
+        assertEquals(expResult, result);
+
+    }
+/**
+     * Test of equals method, of class Licitacao.
+     */
+    @Test
+    public void testEqualsNot() {
+        System.out.println("equalsNot");
+        Object outroObjeto = new Licitacao(new Revisor(new Utilizador(
+                            "fatima", "ola@iml.com", "fafa", "1234")),
+                            new Artigo(), 0, null);;
+        Licitacao instance = new Licitacao(new Revisor(new Utilizador(
+                            "fatima", "fifi@iml.com", "fafa", "1234")),
+                            new Artigo(), 0, null);;
+        boolean expResult = false;
+        boolean result = instance.equals(outroObjeto);
+        assertEquals(expResult, result);
+
+    }
 }
