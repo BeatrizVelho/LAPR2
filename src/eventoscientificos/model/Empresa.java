@@ -13,6 +13,11 @@ import java.util.TimerTask;
 public class Empresa {
 
     /**
+     * Utilizador autenticado da empresa.
+     */
+    private Utilizador utilizadorAutenticado;
+
+    /**
      * Registo de utilizadores da empresa.
      */
     private RegistoUtilizadores registoUtilizadores;
@@ -44,6 +49,15 @@ public class Empresa {
     }
 
     /**
+     * Devolve o Utilizador Autenticado.
+     * 
+     * @return Utilizador Autenticado.
+     */
+    public Utilizador getUtilizadorAutenticado() {
+        return this.utilizadorAutenticado;
+    }
+
+    /**
      * Devolve o Registo de Utilizadores.
      *
      * @return Registo de Utilizadores.
@@ -62,10 +76,21 @@ public class Empresa {
     }
 
     /**
-     * Devolve o Registo de Tipos de Confllito.
+     * Devolve o Registo de Tipos de Conflito.
+     *
+     * @return Registo de Tipos de Conflito.
      */
     public RegistoTiposConflito getRegistoTiposConflito() {
         return this.registoTiposConflito;
+    }
+
+    /**
+     * Modifica o Utilizador Autenticado.
+     * 
+     * @param utilizadorAutenticado Novo Utilizador Autenticado.
+     */
+    public void setUtilizadorAutenticado(Utilizador utilizadorAutenticado) {
+        this.utilizadorAutenticado = utilizadorAutenticado;
     }
 
     /**
