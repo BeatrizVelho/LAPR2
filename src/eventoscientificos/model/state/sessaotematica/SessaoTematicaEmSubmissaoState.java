@@ -19,8 +19,8 @@ public class SessaoTematicaEmSubmissaoState implements SessaoTematicaState {
     /**
      * Constrói uma instância de SessaoTematicaCPDefinidaState recebendo uma
      * Sessão Temática.
-     * 
-     * @param sessaoTematica Sessão Temática que adota o estado. 
+     *
+     * @param sessaoTematica Sessão Temática que adota o estado.
      */
     public SessaoTematicaEmSubmissaoState(SessaoTematica sessaoTematica) {
         this.sessaoTematica = sessaoTematica;
@@ -76,7 +76,7 @@ public class SessaoTematicaEmSubmissaoState implements SessaoTematicaState {
     public boolean setEmDetecao() {
         if (validarEstado()) {
             this.sessaoTematica.setEstado(
-                    new SessaoTematicaEmDetecaoState(this.sessaoTematica));
+                                new SessaoTematicaEmDetecaoState(this.sessaoTematica));
             return true;
         }
 
@@ -97,7 +97,8 @@ public class SessaoTematicaEmSubmissaoState implements SessaoTematicaState {
     /**
      * Método que permite a mudança de estado para EmDistribuicao.
      *
-     * @return Falso, não deve ser possível mudar de EmSubmissao para EmDistribuicao.
+     * @return Falso, não deve ser possível mudar de EmSubmissao para
+     * EmDistribuicao.
      */
     @Override
     public boolean setEmDistribuicao() {
@@ -117,7 +118,8 @@ public class SessaoTematicaEmSubmissaoState implements SessaoTematicaState {
     /**
      * Método que permite a mudança de estado para FaseDecisao.
      *
-     * @return Falso, não deve ser possível mudar de EmSubmissao para FaseDecisao.
+     * @return Falso, não deve ser possível mudar de EmSubmissao para
+     * FaseDecisao.
      */
     @Override
     public boolean setFaseDecisao() {
@@ -138,7 +140,8 @@ public class SessaoTematicaEmSubmissaoState implements SessaoTematicaState {
     /**
      * Método que permite a mudança de estado para CameraReady.
      *
-     * @return Falso, não deve ser possível mudar de EmSubmissao para CameraReady.
+     * @return Falso, não deve ser possível mudar de EmSubmissao para
+     * CameraReady.
      */
     @Override
     public boolean setCameraReady() {
@@ -153,7 +156,60 @@ public class SessaoTematicaEmSubmissaoState implements SessaoTematicaState {
     @Override
     public boolean validarEstado() {
         return Data.dataAtual().isMaior(
-                this.sessaoTematica.getDataFimSubmissao());
+                            this.sessaoTematica.getDataFimSubmissao());
     }
 
+    /**
+     * Valida se o evento se encontra num estado válido para ser removido
+     *
+     * @return verdadeiro se estiver no estado correto e falso se não estiver
+     */
+    @Override
+    public boolean isStateValidoParaRemover() {
+        return (!(setCriada() || setRegistada() || setCPDefinida() || setCameraReady()));
+    }
+
+    /**
+     * Valida se o evento se encontra num estado válido para submeter artigos
+     *
+     * @return verdadeiro se estiver no estado correto e falso se não estiver
+     */
+    @Override
+    public boolean isStateValidoParaSubmeter() {
+        return setEmSubmissao();
+
+    }
+
+    /**
+     * Valida se o evento se encontra num estado válido para efetuar alterações
+     * nos artigos
+     *
+     * @return verdadeiro se estiver no estado correto e falso se não estiver
+     */
+    @Override
+    public boolean isStateValidoParaAlterar() {
+        return setEmSubmissao();
+
+    }
+
+    /**
+     * Valida se o evento se encontra num estado válido para os revisores
+     * licitarem as artigos
+     *
+     * @return verdadeiro se estiver no estado correto e falso se não estiver
+     */
+    @Override
+    public boolean isStateValidoParaLicitar() {
+        return setEmLicitacao();
+    }
+
+    /**
+     * Valida se o evento se encontra num estado válido para distribuir revisões
+     *
+     * @return verdadeiro se estiver no estado correto e falso se não estiver
+     */
+    @Override
+    public boolean isStateValidoParaDistribuir() {
+        return setEmDistribuicao();
+    }
 }

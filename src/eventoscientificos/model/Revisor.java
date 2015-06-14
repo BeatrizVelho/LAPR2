@@ -66,7 +66,7 @@ public class Revisor {
 
         Revisor outroRevisor = (Revisor) outroObjeto;
 
-        return this.getUtilizador().equals(outroRevisor.getUtilizador());
+        return this.utilizador.equals(outroRevisor.utilizador);
     }
 
 }

@@ -245,7 +245,7 @@ public class Utilizador {
 
         Utilizador outroUtilizador = (Utilizador) outroObjeto;
 
-        return this.getEmail().equals(outroUtilizador.getEmail()) || this.getUsername().equals(outroUtilizador.getUsername());
+        return this.email.equals(outroUtilizador.email) && this.username.equals(outroUtilizador.username);
     }
 
     /**

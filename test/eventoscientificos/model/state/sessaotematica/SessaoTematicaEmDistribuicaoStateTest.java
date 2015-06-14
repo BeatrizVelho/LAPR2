@@ -29,8 +29,8 @@ public class SessaoTematicaEmDistribuicaoStateTest {
     }
 
     /**
-     * Teste do método setCriada, da classe
-     * SessaoTematicaEmDistribuicaoStateTest.
+     * Teste do método setCriada, da classe 
+     * SessaoTematicaEmDistribuicaoState.
      */
     @Test
     public void testSetCriada() {
@@ -43,7 +43,7 @@ public class SessaoTematicaEmDistribuicaoStateTest {
 
     /**
      * Teste do método setRegistada, da classe
-     * SessaoTematicaEmDistribuicaoStateTest.
+     * SessaoTematicaEmDistribuicaoState.
      */
     @Test
     public void testSetRegistada() {
@@ -56,7 +56,7 @@ public class SessaoTematicaEmDistribuicaoStateTest {
 
     /**
      * Test do método setCPDefinida, da classe
-     * SessaoTematicaEmDistribuicaoStateTest.
+     * SessaoTematicaEmDistribuicaoState.
      */
     @Test
     public void testSetCPDefinida() {
@@ -69,7 +69,7 @@ public class SessaoTematicaEmDistribuicaoStateTest {
 
     /**
      * Teste do método setEmSubmissao, da classe
-     * SessaoTematicaEmDistribuicaoStateTest.
+     * SessaoTematicaEmDistribuicaoState.
      */
     @Test
     public void testSetEmSubmissao() {
@@ -81,8 +81,8 @@ public class SessaoTematicaEmDistribuicaoStateTest {
     }
 
     /**
-     * Teste do método setEmDetecao, da classe
-     * SessaoTematicaEmDistribuicaoStateTest.
+     * Teste do método setEmDetecao, da classe 
+     * SessaoTematicaEmDistribuicaoState.
      */
     @Test
     public void testSetEmDetecao() {
@@ -95,20 +95,20 @@ public class SessaoTematicaEmDistribuicaoStateTest {
 
     /**
      * Teste do méotodo setEmLicitacao, da classe
-     * SessaoTematicaEmDistribuicaoStateTest.
+     * SessaoTematicaEmDistribuicaoState.
      */
     @Test
     public void testSetEmLicitacao() {
         System.out.println("setEmLicitacao");
         SessaoTematicaState instance = this.sessaoTematica.getEstado();
-        boolean expResult = false;
+        boolean expResult = true;
         boolean result = instance.setEmLicitacao();
         assertEquals(expResult, result);
     }
 
     /**
      * Teste do método setEmDistribuicao, da classe
-     * SessaoTematicaEmDistribuicaoStateTest.
+     * SessaoTematicaEmDistribuicaoState.
      */
     @Test
     public void testSetEmDistribuicao() {
@@ -121,7 +121,7 @@ public class SessaoTematicaEmDistribuicaoStateTest {
 
     /**
      * Teste do método setEmRevisao, da classe
-     * SessaoTematicaEmDistribuicaoStateTest.
+     * SessaoTematicaEmDistribuicaoState.
      */
     @Test
     public void testSetEmRevisao() {
@@ -134,7 +134,7 @@ public class SessaoTematicaEmDistribuicaoStateTest {
 
     /**
      * Teste do método setFaseDecisao, da classe
-     * SessaoTematicaEmDistribuicaoStateTest.
+     * SessaoTematicaEmDistribuicaoState.
      */
     @Test
     public void testSetFaseDecisao() {
@@ -147,7 +147,7 @@ public class SessaoTematicaEmDistribuicaoStateTest {
 
     /**
      * Teste do método setEmSubmissaoCameraReady, da classe
-     * SessaoTematicaEmDistribuicaoStateTest.
+     * SessaoTematicaEmDistribuicaoState.
      */
     @Test
     public void testSetEmSubmissaoCameraReady() {
@@ -160,7 +160,7 @@ public class SessaoTematicaEmDistribuicaoStateTest {
 
     /**
      * Teste do método setCameraReady, da classe
-     * SessaoTematicaEmDistribuicaoStateTest.
+     * SessaoTematicaEmDistribuicaoState.
      */
     @Test
     public void testSetCameraReady() {
@@ -173,7 +173,7 @@ public class SessaoTematicaEmDistribuicaoStateTest {
 
     /**
      * Teste do método validarEstado, da classe
-     * SessaoTematicaEmDistribuicaoStateTest.
+     * SessaoTematicaEmDistribuicaoState.
      */
     @Test
     public void testValidarEstado() {
@@ -183,5 +183,105 @@ public class SessaoTematicaEmDistribuicaoStateTest {
         boolean result = instance.validarEstado();
         assertEquals(expResult, result);
     }
+
+ /**
+     * Teste ao método isStateValidoParaRemover, da classe
+     * SessaoTematicaEmDistribuicaoState.
+     */
+    @Test
+    public void testIsStateValidoParaRemover() {
+        System.out.println("isStateValidoParaRemover");
+        SessaoTematicaState instance = this.sessaoTematica.getEstado();
+
+        boolean expResult = true;
+        boolean result = instance.isStateValidoParaRemover();
+        assertEquals(expResult, result);
+
+    }
+
+    /**
+     * Teste ao método testIsStateValidoParaRemoverNot, da classe
+     * SessaoTematicaEmDistribuicaoState.
+     */
+    @Test
+    public void testIsStateValidoParaRemoverNot() {
+        System.out.println("isStateValidoParaRemoverNot");
+        sessaoTematica.setEstado(new SessaoTematicaCriadaState(sessaoTematica));
+        SessaoTematicaState instance = this.sessaoTematica.getEstado();
+        boolean expResult = false;
+        boolean result = instance.isStateValidoParaRemover();
+        assertEquals(expResult, result);
+
+    }
+
+    /**
+     * Teste ao método testIsStateValidoParaSubmeter, da classe
+     * SessaoTematicaEmDistribuicaoState.
+     */
+    @Test
+    public void testIsStateValidoParaSubmeter() {
+        System.out.println("isStateValidoParaSubmeter");
+        sessaoTematica.setEstado(new SessaoTematicaEmSubmissaoState(sessaoTematica));
+        SessaoTematicaState instance = this.sessaoTematica.getEstado();
+        boolean expResult = true;
+        boolean result = instance.isStateValidoParaSubmeter();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste ao método testIsStateValidoParaSubmeterNot, da classe
+     * SessaoTematicaEmDistribuicaoState.
+     */
+    @Test
+    public void testIsStateValidoParaSubmeterNot() {
+        System.out.println("isStateValidoParaSubmeterNot");
+        SessaoTematicaState instance = sessaoTematica.getEstado();
+        boolean expResult = false;
+        boolean result = instance.isStateValidoParaSubmeter();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste ao método testIsStateValidoParaAlterar, da classe
+     * SessaoTematicaEmDistribuicaoState.
+     */
+    @Test
+    public void testIsStateValidoParaAlterar() {
+        System.out.println("isStateValidoParaAlterar");
+        SessaoTematicaState instance = sessaoTematica.getEstado();
+        boolean expResult = false;
+        boolean result = instance.isStateValidoParaAlterar();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste ao método testIsStateValidoParaLicitar, da classe
+     * SessaoTematicaEmDistribuicaoState.
+     */
+    @Test
+    public void testIsStateValidoParaLicitar() {
+        System.out.println("isStateValidoParaLicitar");
+        sessaoTematica.setEstado(new SessaoTematicaEmLicitacaoState(sessaoTematica));
+        SessaoTematicaState instance = sessaoTematica.getEstado();
+        boolean expResult = true;
+        boolean result = instance.isStateValidoParaLicitar();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste ao método testIsStateValidoParaDistribuir, da classe
+     * SessaoTematicaEmDistribuicaoState.
+     */
+    @Test
+    public void testIsStateValidoParaDistribuir() {
+        System.out.println("isStateValidoParaDistribuir");
+        sessaoTematica.setEstado(new SessaoTematicaEmDistribuicaoState(sessaoTematica));
+        SessaoTematicaState instance = sessaoTematica.getEstado();
+        boolean expResult = true;
+        boolean result = instance.isStateValidoParaDistribuir();
+        assertEquals(expResult, result);
+
+    }
+
 
 }

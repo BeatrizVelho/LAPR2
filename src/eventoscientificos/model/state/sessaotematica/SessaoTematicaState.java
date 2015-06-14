@@ -1,7 +1,7 @@
 package eventoscientificos.model.state.sessaotematica;
 
 /**
- * Interface implementada pelas várias classes que representam o estado da 
+ * Interface implementada pelas várias classes que representam o estado da
  * Sessão Temática numa dada altura.
  *
  * @author G01
@@ -30,6 +30,16 @@ public interface SessaoTematicaState {
 
     boolean setCameraReady();
 
-    boolean validarEstado();    
-    
+    boolean validarEstado();
+
+    boolean isStateValidoParaRemover();
+
+    boolean isStateValidoParaSubmeter();
+
+    boolean isStateValidoParaAlterar();
+
+    boolean isStateValidoParaLicitar();
+
+    boolean isStateValidoParaDistribuir();
+
 }
