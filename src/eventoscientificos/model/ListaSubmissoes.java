@@ -12,7 +12,7 @@ public class ListaSubmissoes {
      * Lista das submissões.
      */
     private List<Submissao> listaSubmissoes;
-    
+
     /**
      * Constroi uma instancia de Lista de submissoes em que a lista de
      * submissoes se encontra vazia.
@@ -29,17 +29,20 @@ public class ListaSubmissoes {
     public Submissao novaSubmissao() {
         return new Submissao();
     }
-    
+
     /**
      * Valida a lista de submissoes verificando se a lista já possui uma
      * submissão igual à passada por parametro.
      *
      * @param submissao Submissao de artigo
-     * @return Verdadeiro se a lista de submissoes nao tem a submissao
-     * e falso se tiver.
+     * @return Verdadeiro se a lista de submissoes nao tem a submissao e falso
+     * se tiver.
      */
     public boolean validarSubmissao(Submissao submissao) {
-        return !this.listaSubmissoes.contains(submissao);
+        if (submissao.validarArtigo()) {
+            return !this.listaSubmissoes.contains(submissao);
+        }
+        return false;
     }
 
     /**
@@ -48,9 +51,22 @@ public class ListaSubmissoes {
      * @param submissao Submissao de artigo
      */
     public boolean adicionarSubmissao(Submissao submissao) {
+        submissao.alterarEstadoSubmissao();
         return this.listaSubmissoes.add(submissao);
     }
-    
+
+    public List<Submissao> getListaSubmissoesUtilizador(Utilizador utilizador) {
+        List<Submissao> listaSubmissoesUtilizador = new ArrayList<>();
+
+        for (Submissao submissao : this.listaSubmissoes) {
+            if (submissao.isAutor(utilizador)) {
+                listaSubmissoesUtilizador.add(submissao);
+            }
+        }
+        return listaSubmissoesUtilizador;
+    }
+
+
     /**
      * Compara dois objetos entre si. Comparando primariamente a posição de
      * memória, seguida do conteudo e das classes as quais cada um deles
@@ -71,10 +87,10 @@ public class ListaSubmissoes {
         }
 
         ListaSubmissoes outraListaSubmissoes
-                            = (ListaSubmissoes) outroObjeto;
+                = (ListaSubmissoes) outroObjeto;
 
         return this.listaSubmissoes.equals(
-                            outraListaSubmissoes.listaSubmissoes);
+                outraListaSubmissoes.listaSubmissoes);
     }
 
 }

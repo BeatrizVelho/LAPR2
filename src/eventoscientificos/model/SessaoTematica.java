@@ -1,6 +1,7 @@
 package eventoscientificos.model;
 
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaCriadaState;
+import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmSubmissaoState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaState;
 import java.util.ArrayList;
 import java.util.List;
@@ -333,6 +334,15 @@ public class SessaoTematica implements Submissivel {
     @Override
     public boolean setEmSubmissao() {
         return this.estado.setEmSubmissao();
+    }
+
+    @Override
+    public boolean isStateValidoParaSubmeter() {
+        return getEstado() instanceof SessaoTematicaEmSubmissaoState;
+    }
+    
+    public boolean isStateValidoParaAlterar() {
+        return getEstado() instanceof SessaoTematicaEmSubmissaoState;
     }
 
 }

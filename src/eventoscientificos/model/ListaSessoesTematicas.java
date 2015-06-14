@@ -25,6 +25,14 @@ public class ListaSessoesTematicas {
     }
 
     /**
+     * Devolve uma lista de sessões tméticas.
+     * 
+     * @return Lista de Sessões Temáticas.
+     */
+    public List<SessaoTematica> getListaSessoesTematicas() {
+        return this.listaSessoesTematicas;
+    }
+    /**
      * Cria uma instância de sessão temática com um código único, uma descrição,
      * uma data de inicio de submissão e data de fim de submissão.
      *
@@ -93,6 +101,23 @@ public class ListaSessoesTematicas {
         return this.listaSessoesTematicas.equals(
                             outraListaSessoesTematicas.listaSessoesTematicas);
     }
+    
+    /**
+     * Devolve uma lista de submissiveis nos quais ainda é possivel submeter
+     * artigos
+     * 
+     * @return Lista de Submisiveis que aceitam submisoes
+     */
+    public List<Submissivel> getListaSubmissiveisAceitarArtigo() {
+        List<Submissivel> listaSubmissiveis = new ArrayList<>();
+        
+        for(SessaoTematica sessaoTematica : this.listaSessoesTematicas) {
+            if(sessaoTematica.isStateValidoParaSubmeter()) {
+                listaSubmissiveis.add(sessaoTematica);
+            }
+        }
+        return listaSubmissiveis;
+    }
 
     /**
      * Verifica se existem Sessões Temáticas a uma lista.
@@ -103,5 +128,12 @@ public class ListaSessoesTematicas {
     public boolean temSessoesTematicasDefinidas() {
         return this.listaSessoesTematicas.size() > 0;
     }
-
+//
+//    public List<Submissivel> getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador(Utilizador utilizador) {
+//        List<Submissivel> listalistaSubmissiveisUtilizador = new ArrayList<>();
+//        
+//        for(SessaoTematica sessaoTematica : this.listaSessoesTematicas) {
+//            if(sessaoTematica.isStateValidoParaAlterar() && sessaoTematica.)
+//        }
+//    }
 }

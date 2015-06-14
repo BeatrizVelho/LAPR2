@@ -1,6 +1,7 @@
 package eventoscientificos.model;
 
 import eventoscientificos.model.state.evento.EventoCriadoState;
+import eventoscientificos.model.state.evento.EventoEmSubmissaoState;
 import eventoscientificos.model.state.evento.EventoState;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +10,7 @@ import utils.Data;
 /**
  * @author G01
  */
-public class Evento {
+public class Evento implements Submissivel {
 
     /**
      * Título do Evento.
@@ -42,6 +43,11 @@ public class Evento {
     private Data dataInicioDistribuicao;
 
     /**
+     * Data de Fim da Submissao Camera Ready do Evento.
+     */
+    private Data dataFimSubmissaoCameraReady;
+
+    /**
      * Data de Início do Evento.
      */
     private Data dataInicio;
@@ -60,6 +66,11 @@ public class Evento {
      * Lista de Sessões Temáticas do Evento.
      */
     private ListaSessoesTematicas listaSessoesTematicas;
+
+    /**
+     * Lista de submissões do evento.
+     */
+    private ListaSubmissoes listaSubmissoes;
 
     /**
      * CP do evento.
@@ -82,22 +93,27 @@ public class Evento {
      * @param dataInicioSubmissao Data de inicio de submissao do evento.
      * @param dataFimSubmissao Data fim de submissao do evento.
      * @param dataInicioDistribuicao Data de inicio de distribuicao do evento.
+     * @param dataFimSubmissaoCameraReady Data fim da submissao camera ready do
+     * evento.
      * @param dataInicio Data de inicio do evento.
      * @param dataFim Data de fim do evento.
      */
     public Evento(String titulo, String descricao, Local local,
             Data dataInicioSubmissao, Data dataFimSubmissao,
-            Data dataInicioDistribuicao, Data dataInicio, Data dataFim) {
+            Data dataInicioDistribuicao, Data dataFimSubmissaoCameraReady,
+            Data dataInicio, Data dataFim) {
         setTitulo(titulo);
         setDescricao(descricao);
         setLocal(local);
         setDataInicioSubmissao(dataInicioSubmissao);
         setDataFimSubmissao(dataFimSubmissao);
-        setDataInicioDistribuicao(dataInicioDistribuicao);;
+        setDataInicioDistribuicao(dataInicioDistribuicao);
+        setDataFimSubmissaoCameraReady(dataFimSubmissaoCameraReady);
         setDataInicio(dataInicio);
         setDataFim(dataFim);
         this.listaOrganizadores = new ArrayList();
         this.listaSessoesTematicas = new ListaSessoesTematicas();
+        this.listaSubmissoes = new ListaSubmissoes();
         this.cp = null;
         setEstado(new EventoCriadoState(this));
     }
@@ -157,6 +173,15 @@ public class Evento {
     }
 
     /**
+     * Devolve a data fim de submissao camera ready do evento.
+     *
+     * @return Data fim de submissao camera ready do evento.
+     */
+    public Data getDataFimSubmissaoCameraReady() {
+        return this.dataFimSubmissaoCameraReady;
+    }
+
+    /**
      * Devolve a data de inicio do evento.
      *
      * @return Data de inicio do evento.
@@ -181,6 +206,16 @@ public class Evento {
      */
     public ListaSessoesTematicas getListaSessoesTematicas() {
         return this.listaSessoesTematicas;
+    }
+
+    /**
+     * Devolve a lista de submissões do evento.
+     *
+     * @return Lista de submissões do evento.
+     */
+    @Override
+    public ListaSubmissoes getListaSubmissoes() {
+        return this.listaSubmissoes;
     }
 
     /**
@@ -288,6 +323,26 @@ public class Evento {
     }
 
     /**
+     * Modifica a data fim de submissao camera ready do evento.
+     *
+     * @param dataFimSubmissaoCameraReady Nova data fim de submissao camera
+     * ready do evento.
+     */
+    public void setDataFimSubmissaoCameraReady(Data dataFimSubmissaoCameraReady) {
+        if (dataFimSubmissaoCameraReady == null) {
+            throw new NullPointerException("A data de fim de submissão camera "
+                    + "ready não pode estar vazia.");
+        }
+
+        if (!dataFimSubmissaoCameraReady.isMaior(this.dataInicioDistribuicao)) {
+            throw new IllegalArgumentException("Data de fim de submissao "
+                    + "camera ready não pode ser menor que a data "
+                    + "de inicio de distribuição.");
+        }
+        this.dataFimSubmissaoCameraReady = dataFimSubmissaoCameraReady;
+    }
+
+    /**
      * Modifica a data de inicio do evento.
      *
      * @param dataInicio Nova data de inicio do evento.
@@ -328,6 +383,14 @@ public class Evento {
      */
     public void setEstado(EventoState estado) {
         this.estado = estado;
+    }
+
+    /**
+     * Método que altera o estado do Evento para em Submissão.
+     */
+    @Override
+    public boolean setEmSubmissao() {
+        return this.estado.setEmSubmissao();
     }
 
     /**
@@ -386,7 +449,8 @@ public class Evento {
 
         Evento outroEvento = (Evento) outroObjeto;
 
-        return this.getTitulo().equals(outroEvento.getTitulo());
+        return this.getTitulo().equals(outroEvento.getTitulo()) 
+                && this.getDataInicio().equals(outroEvento.getDataInicio());
     }
 
     /**
@@ -464,4 +528,35 @@ public class Evento {
         return true;
     }
 
+    /**
+     * Verifica se o Evento está no estado EmSubmissao.
+     *
+     * @return Verdadeiro se está no estado EmSubmissao e falso se não está.
+     */
+    @Override
+    public boolean isStateValidoParaSubmeter() {
+        return getEstado() instanceof EventoEmSubmissaoState;
+    }
+    
+    /**
+     * Verifica se o Evento está no estado EmSubmissao.
+     *
+     * @return Verdadeiro se está no estado EmSubmissao e falso se não está.
+     */
+    public boolean isStateValidoParaAlterar() {
+        return getEstado() instanceof EventoEmSubmissaoState;
+    }
+    /**
+     * Devolve uma lista de submissiveis nos quais ainda é possivel submeter
+     * artigos
+     *
+     * @return Lista de Submisiveis que aceitam submisoes
+     */
+    public List<Submissivel> getListaSubmissiveisAceitarArtigo() {
+        return this.listaSessoesTematicas.getListaSubmissiveisAceitarArtigo();
+    }
+//
+//    public List<Submissivel> getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador(Utilizador utilizador) {
+//        return this.listaSessoesTematicas.getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador(utilizador);
+//    }
 }

@@ -1,7 +1,5 @@
 package eventoscientificos.model;
 
-import java.util.ArrayList;
-
 /**
  * Representa uma instância de Artigo
  *
@@ -141,6 +139,10 @@ public class Artigo {
     
     public boolean validarArtigo() {
         return true;
+    }
+    
+    public boolean isAutor(Utilizador utilizador) {
+        return this.listaAutores.isAutor(utilizador);
     }
 
     /**

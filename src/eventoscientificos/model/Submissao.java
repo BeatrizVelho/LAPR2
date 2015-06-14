@@ -2,6 +2,7 @@ package eventoscientificos.model;
 
 import eventoscientificos.state.submissao.SubmissaoAceiteState;
 import eventoscientificos.state.submissao.SubmissaoCriadaState;
+import eventoscientificos.state.submissao.SubmissaoEmCameraReadyState;
 import eventoscientificos.state.submissao.SubmissaoEmSubmissaoState;
 import eventoscientificos.state.submissao.SubmissaoState;
 
@@ -41,11 +42,24 @@ public class Submissao {
     private SubmissaoState estado;
 
     /**
-     *
+     * Constói uma instância de Submissão.
      */
     public Submissao() {
-        this.artigoInicial = new Artigo();
         setEstado(new SubmissaoCriadaState(this));
+    }
+
+    /**
+     * Constrói uma instância de submissao recebendo uma outra submissao.
+     *
+     * @param submissao Submissao que irá ser copiada.
+     */
+    public Submissao(Submissao submissao) {
+        setArtigoInicial(submissao.getArtigoInicial());
+        setArtigoFinal(submissao.getArtigoFinal());
+        setAutorCorrespondente(submissao.getAutorCorrespondente());
+        setAutorSubmissorInicial(submissao.getAutorSubmissorInicial());
+        setAutorSubmissorFinal(submissao.getAutorSubmissorFinal());
+        setEstado(submissao.getEstado());
     }
 
     /**
@@ -157,17 +171,24 @@ public class Submissao {
     }
 
     /**
-     * Valida a Submissão, verificando se todos os seus atributos se encontram
-     * devidamente preenchidos.
+     * Cria e retorna uma instância de Artigo
      *
-     * @return Verdadeiro se o objeto for válido e falso caso não seja.
+     * @return Artigo com os dados vazios
      */
-    public boolean validarSubmissao() {
+    public Artigo novoArtigo() {
+        return this.artigoInicial = new Artigo();
+    }
+
+    public boolean alterarEstadoSubmissao() {
         if (this.estado instanceof SubmissaoCriadaState) {
             this.estado.setEmSubmissao();
         }
-        
+
         return true;
+    }
+
+    public boolean validarArtigo() {
+        return this.artigoInicial.validarArtigo();
     }
 
     public boolean adicionarArtigo(Artigo artigo) {
@@ -181,6 +202,30 @@ public class Submissao {
         }
 
         return true;
+    }
+
+    /**
+     * Método que através dos atributos de Submissao instancia uma nova
+     * Submissao (um clone) usando o construtor cópia.
+     *
+     * @return Submisado clone.
+     */
+    public Submissao criarCloneSubmissao() {
+        return new Submissao(this);
+    }
+
+    public boolean isAutor(Utilizador utilizador) {
+        if (this.estado instanceof SubmissaoEmSubmissaoState
+                && this.getArtigoInicial().isAutor(utilizador)) {
+            return true;
+        }
+
+        if (this.estado instanceof SubmissaoEmCameraReadyState
+                && this.artigoFinal.isAutor(utilizador)) {
+            return true;
+        }
+        
+        return false;
     }
 
     /**
@@ -205,6 +250,6 @@ public class Submissao {
         Submissao outraSubmissao = (Submissao) outroObjecto;
 
         return this.getArtigoInicial().equals(outraSubmissao.getArtigoInicial())
-                && this.getArtigoFinal().equals(outraSubmissao.getArtigoFinal());
+                || this.getArtigoFinal().equals(outraSubmissao.getArtigoFinal());
     }
 }

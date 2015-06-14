@@ -25,4 +25,12 @@ public interface Submissivel {
      */
     boolean setEmSubmissao();
     
+    /**
+     * Verifica se um evento ou sessão temática estão a aceitar submissões 
+     * de artigos.
+     * 
+     * @return Verdadeiro se é possivel submeter e falso se não é possível
+     */
+    boolean isStateValidoParaSubmeter();
+    
 }
