@@ -467,13 +467,13 @@ public class Evento implements CPDefinivel, Licitavel {
 
     /**
      * Verifica se o evento está num estado que permite criar sessões temáticas.
-     * 
+     *
      * @return Verdadeiro se for possível criar sessões temáticas e falso caso
      * não seja.
      */
     public boolean isRegistadoOuSessoesTematicasDefinidas() {
-        return this.getEstado() instanceof EventoRegistadoState 
-                || this.getEstado() instanceof EventoSessoesTematicasDefinidasState;
+        return this.getEstado() instanceof EventoRegistadoState
+                            || this.getEstado() instanceof EventoSessoesTematicasDefinidasState;
     }
 
     /**
@@ -531,15 +531,17 @@ public class Evento implements CPDefinivel, Licitavel {
     }
 
     /**
-     * Devolve a lista de conflitos detetados entre o revisor e artigo passados por paramêtros
-     * @param revisor revisor 
-     * @param submissao submissão 
+     * Devolve a lista de conflitos detetados entre o revisor e artigo passados
+     * por paramêtros
+     *
+     * @param revisor revisor
+     * @param submissao submissão
      * @return
      */
     @Override
     public List<Conflito> getConflitoRevisorArtigo(Revisor revisor, Submissao submissao) {
         List<Conflito> listaConflitos = new ArrayList<>();
-
+        return listaConflitos;
     }
 
 }
