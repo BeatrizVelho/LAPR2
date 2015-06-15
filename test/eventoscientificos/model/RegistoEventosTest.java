@@ -19,11 +19,11 @@ public class RegistoEventosTest {
 
     public RegistoEventosTest() {
         this.evento = new Evento("titulo", "descricao", new Local("local"),
-                new Data(2016, 6, 8), new Data(2016, 6, 20),
-                new Data(2016, 7, 7), new Data(2016, 8, 1),
-                new Data(2017, 6, 10));
+                            new Data(2016, 6, 8), new Data(2016, 6, 20),
+                            new Data(2016, 7, 7), new Data(2016, 8, 1),
+                            new Data(2017, 6, 10), new Data(2017, 6, 13));
         this.utilizador = new Utilizador(
-                "pedro", "1140781@isep.ipp.pt", "pedro", "12345");
+                            "pedro", "1140781@isep.ipp.pt", "pedro", "12345");
     }
 
     /**
@@ -32,19 +32,20 @@ public class RegistoEventosTest {
     @Test
     public void testNovoEvento() {
         System.out.println("novoEvento");
-        String titulo = "titulo";
+        String titulo = "sem titulo";
         String descricao = "descricao";
         Local local = new Local("local");
         Data dataInicioSubmissao = new Data(2016, 6, 8);
         Data dataFimSubmissao = new Data(2016, 6, 20);
         Data dataInicioDistribuicao = new Data(2016, 7, 30);
-        Data dataInicio = new Data(2016, 8, 1);
+        Data dataFimSubmissaoCameraReady = new Data(2016, 8, 30);
+        Data dataInicio = new Data(2016, 10, 9);
         Data dataFim = new Data(2017, 6, 10);
         RegistoEventos instance = new RegistoEventos();
         Evento expResult = this.evento;
         Evento result = instance.novoEvento(
-                titulo, descricao, local, dataInicioSubmissao, dataFimSubmissao,
-                dataInicioDistribuicao, dataInicio, dataFim);
+                            titulo, descricao, local, dataInicioSubmissao, dataFimSubmissao,
+                            dataInicioDistribuicao, dataFimSubmissaoCameraReady, dataInicio, dataFim);
         assertEquals(expResult, result);
     }
 
@@ -116,7 +117,7 @@ public class RegistoEventosTest {
         List<Evento> expResult = new ArrayList();
         expResult.add(this.evento);
         List<Evento> result
-                = instance.getListaEventosOrganizador(this.utilizador);
+                            = instance.getListaEventosOrganizador(this.utilizador);
         assertEquals(expResult, result);
     }
 
@@ -128,16 +129,16 @@ public class RegistoEventosTest {
     public void testGetListaCPDefiniveisSemCPOrganizadorProponente() {
         System.out.println("getListaCPDefiniveisSemOrganizadorProponente");
         Evento evento = new Evento("titulo", "descricao", new Local("local"),
-                new Data(2016, 6, 8), new Data(2016, 6, 20),
-                new Data(2016, 7, 7), new Data(2016, 8, 1),
-                new Data(2017, 6, 10));
+                            new Data(2016, 6, 8), new Data(2016, 6, 20),
+                            new Data(2016, 7, 7), new Data(2016, 7, 14), new Data(2016, 8, 1),
+                            new Data(2017, 6, 10));
         evento.setEstado(new EventoSessoesTematicasDefinidasState(evento));
         evento.novoOrganizador(this.utilizador);
         SessaoTematica sessao = new SessaoTematica(
-                "#123456", "Uma descrição", new Data(2016, 5, 9),
-                new Data(2016, 6, 21), new Data(2016, 7, 8),
-                new Data(2016, 7, 20), new Data(2016, 9, 24),
-                new Data(2017, 5, 28));
+                            "#123456", "Uma descrição", new Data(2016, 5, 9),
+                            new Data(2016, 6, 21), new Data(2016, 7, 8),
+                            new Data(2016, 7, 20), new Data(2016, 9, 24),
+                            new Data(2017, 5, 28));
         sessao.setEstado(new SessaoTematicaRegistadaState(sessao));
         sessao.novoProponente(this.utilizador);
         evento.getListaSessoesTematicas().adicionarSessaoTematica(sessao);
