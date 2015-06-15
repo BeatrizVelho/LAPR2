@@ -158,7 +158,7 @@ public class SessaoTematicaEmDetecaoState implements SessaoTematicaState {
      */
     @Override
     public boolean validarEstado() {
-        return true;
+        return false;
     }
 
     /**
