@@ -90,4 +90,19 @@ public class ListaLicitacoes {
         return listaLicitacoes.equals(outraLista.listaLicitacoes);
     }
 
+    /**
+     * Verifica se existe alguma licitação associada ao utilizador
+     *
+     * @param u utilizador a verificar
+     * @return verdadeiro se encontrou a licitação e falso se não 
+     */
+    public boolean contains(Utilizador u) {
+        for (Licitacao licitacao : this.listaLicitacoes) {
+            Utilizador ut = licitacao.getRevisor().getUtilizador();
+            if (ut.equals(u)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
