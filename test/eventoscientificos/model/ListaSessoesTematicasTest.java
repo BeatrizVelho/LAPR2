@@ -20,7 +20,7 @@ public class ListaSessoesTematicasTest {
         this.evento = new Evento("titulo", "descricao", new Local("local"),
                             new Data(2016, 5, 8), new Data(2016, 6, 20),
                             new Data(2016, 7, 7), new Data(2016, 8, 1),
-                            new Data(2017, 6, 10));
+                            new Data(2017, 6, 10), new Data(2017,6,13));
         this.listaSessoesTematicas = new ListaSessoesTematicas(this.evento);
         this.sessaoTematica = new SessaoTematica(
                             "#123456", "Uma descrição", new Data(2016, 5, 9),
