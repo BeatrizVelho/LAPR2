@@ -36,20 +36,21 @@ public class RegistoEventos {
      * @param dataInicioSubmissao Data de inicio de submissao do evento.
      * @param dataLimiteSubmissao Data limite de submissao do evento.
      * @param dataInicioDistribuicao Data de inicio de distribuicao do evento.
-     * @param dataFimSubmissaoCameraReady Data fim de submissao camera ready do evento.
+     * @param dataFimSubmissaoCameraReady Data fim de submissao camera ready do
+     * evento.
      * @param dataInicio Data de inicio do evento.
      * @param dataFim Data de fim do evento.
      *
      * @return Evento.
      */
     public Evento novoEvento(String titulo, String descricao, Local local,
-            Data dataInicioSubmissao, Data dataLimiteSubmissao,
-            Data dataInicioDistribuicao, Data dataFimSubmissaoCameraReady,
-            Data dataInicio, Data dataFim) {
+                        Data dataInicioSubmissao, Data dataLimiteSubmissao,
+                        Data dataInicioDistribuicao, Data dataFimSubmissaoCameraReady,
+                        Data dataInicio, Data dataFim) {
 
         return new Evento(titulo, descricao, local, dataInicioSubmissao,
-                dataLimiteSubmissao, dataInicioDistribuicao, dataFimSubmissaoCameraReady,
-                dataInicio, dataFim);
+                            dataLimiteSubmissao, dataInicioDistribuicao, dataFimSubmissaoCameraReady,
+                            dataInicio, dataFim);
     }
 
     /**
@@ -85,7 +86,7 @@ public class RegistoEventos {
 
         for (Evento evento : this.listaEventos) {
             if (evento.isOrganizador(utilizador)
-                    && evento.isRegistadoOuSessoesTematicasDefinidas()) {
+                                && evento.isRegistadoOuSessoesTematicasDefinidas()) {
                 listaEventosOrganizador.add(evento);
             }
         }
@@ -107,11 +108,11 @@ public class RegistoEventos {
                 listaSubmissiveis.add(evento);
             }
             listaSubmissiveis.addAll(
-                    evento.getListaSubmissiveisAceitarArtigo());
+                                evento.getListaSubmissiveisAceitarArtigo());
         }
         return listaSubmissiveis;
     }
-    
+
 //    public List<Submissivel> getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador(Utilizador utilizador) {
 //        List<Submissivel> listaSubmissiveisUtilizador = new ArrayList<>();
 //        
@@ -124,28 +125,46 @@ public class RegistoEventos {
 //                    evento.getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador(utilizador));
 //        }
 //    }
-    /** Devolve uma lista de eventoes/sessões temáticas que se encontrem sem CP
+    /**
+     * Devolve uma lista de eventoes/sessões temáticas que se encontrem sem CP
      * definida e onde o utilizador é organizador/proponente.
-     * 
+     *
      * @param utilizador Utilizador a verificar se é organizador/proponente.
-     * @return Lista de evento/sessao temática onde o utilizador
-     * é organizador/proponente.
+     * @return Lista de evento/sessao temática onde o utilizador é
+     * organizador/proponente.
      */
     public List<CPDefinivel> getListaCPDefiniveisSemCPOrganizadorProponente(Utilizador utilizador) {
         List<CPDefinivel> listaSemCPDefinida = new ArrayList();
 
         for (Evento evento : this.listaEventos) {
             if (evento.isSessoesTematicasDefinidas()
-                    && evento.isOrganizador(utilizador)) {
+                                && evento.isOrganizador(utilizador)) {
                 listaSemCPDefinida.add(evento);
-                List<CPDefinivel> listaSessoesTematicas = evento.getListaCPDefiniveisSemCPOrganizadorProponente(utilizador);
-                listaSemCPDefinida.addAll(listaSessoesTematicas);
             }
-
+            List<CPDefinivel> listaSessoesTematicas
+                                = evento.getListaCPDefiniveisSemCPOrganizadorProponente(utilizador);
+            listaSemCPDefinida.addAll(listaSessoesTematicas);
         }
 
         return listaSemCPDefinida;
+    }
 
+    /**
+     * Devolve uma lista de eventos onde consta o utilizador no sistema como
+     * revisor
+     *
+     * @param u utilizador no sistema
+     * @return lista de eventos
+     */
+    public List<Licitavel> getListaLicitaveisComArtigosPorLicitarRevisor(Utilizador u) {
+        List<Licitavel> listaLicitaveis = new ArrayList<>();
+        for (Evento evento : listaEventos) {
+            boolean validoParaLicitar = evento.isStateValidoParaLicitar(u);
+            if (validoParaLicitar) {
+                listaLicitaveis.add(evento);
+            }
+        }
+        return listaLicitaveis;
     }
 
     /**
