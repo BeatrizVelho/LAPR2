@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListaEventos>
+	<NumeroEventos></NumeroEventos>
+	<Eventos>
+		<Evento>
+			<Titulo></Titulo>
+			<Descricao></Descricao>
+			<DataInicio><!-- exemplo: 2015/06/08 --></DataInicio>
+			<DataFim></DataFim>
+			<DataInicioSubmissao></DataInicioSubmissao>
+			<DataFimSubmissao></DataFimSubmissao>
+			<DataInicioDistribuicao></DataInicioDistribuicao>
+			<DataLimiteRevisao></DataLimiteRevisao>
+			<EstadoEvento></EstadoEvento>
+			<Local><!-- ID do local--></Local>
+			<ListaOrganizadores>
+				<NumeroOrganizadores></NumeroOrganizadores>
+				<Organizadores>
+					<Organizador><!-- Username do Organizador --></Organizador>
+				</Organizadores>
+			</ListaOrganizadores>
+			<CP>
+				<NumeroMembrosCP></NumeroMembrosCP>
+				<MembrosCP>
+					<MembroCP><!-- Username do membro da CP --></MembroCP>
+				</MembrosCP>
+			</CP>
+			<ListaSessoesTematicas>
+				<NumeroSessoesTematicas></NumeroSessoesTematicas>
+				<SessoesTematicas>
+					<SessaoTematica>
+						<CodigoCP></CodigoCP>
+						<DescricaoCP></DescricaoCP>
+						<ListaProponentes>
+							<NumeroProponentes></NumeroProponentes>
+							<Proponentes>
+								<Proponente><!-- Username do Proponente --></Proponente>
+							</Proponentes>
+						</ListaProponentes>
+						<CPSessao>
+							<NumeroMembrosCPST></NumeroMembrosCPST>
+							<MembrosCPSessao>
+								<MembroCPSessao><!-- Username do membro da CP --></MembroCPSessao>
+							</MembrosCPSessao>
+						</CPSessao>
+						<ListaSubmissoes>
+							<NumeroSubmissoes></NumeroSubmissoes>
+							<Submissoes>
+								<Submissao>
+									<EstadoSubmissao></EstadoSubmissao>
+									<Artigo tipo = "INCIAL">
+										<AutorCorrespondente><!-- Username do Proponente --></AutorCorrespondente>
+										<DataSubmissao></DataSubmissao>
+										<TituloArtigo></TituloArtigo>
+										<Resumo></Resumo>
+										<ListaAutores>
+											<NumeroAutores></NumeroAutores>
+											<Autores>
+												<Autor>
+													<NomeAutor></NomeAutor>
+													<EmailAutor></EmailAutor>
+													<Filiacao></Filiacao>
+													<UsernameAutor><!-- Username do Autor (vazio se não for utilizador) --></UsernameAutor>
+												</Autor>
+											</Autores>
+										</ListaAutores>
+										<PalavrasChave><!-- separadas por ; --></PalavrasChave>
+										<Ficheiro></Ficheiro>
+									</Artigo>
+									<Artigo tipo = "FINAL">
+										<AutorCorrespondente><!-- Username do Proponente --></AutorCorrespondente>
+										<DataSubmissao></DataSubmissao>
+										<TituloArtigo></TituloArtigo>
+										<Resumo></Resumo>
+										<ListaAutores>
+											<NumeroAutores></NumeroAutores>
+											<Autores>
+												<Autor>
+													<NomeAutor></NomeAutor>
+													<EmailAutor></EmailAutor>
+													<Filiacao></Filiacao>
+													<UsernameAutor><!-- Username do Autor (vazio se não for utilizador) --></UsernameAutor>
+												</Autor>
+											</Autores>
+										</ListaAutores>
+										<PalavrasChave><!-- separadas por ; --></PalavrasChave>
+										<Ficheiro></Ficheiro>
+									</Artigo>
+									<ListaRevisoes>
+										<NumeroRevisoes></NumeroRevisoes>
+										<Revisoes>
+											<Revisao>
+												<Revisor><!-- Username--></Revisor>
+												<EstadoRevisao></EstadoRevisao>
+												<Confianca></Confianca>
+												<Adequacao></Adequacao>
+												<Originalidade></Originalidade>
+												<Apresentacao></Apresentacao>
+												<Recomendacao></Recomendacao>
+												<Justificacao></Justificacao>
+											</Revisao>
+										</Revisoes>
+									</ListaRevisoes>
+									<Decisao></Decisao>
+								</Submissao>
+							</Submissoes>
+						</ListaSubmissoes>
+					</SessaoTematica>
+				</SessoesTematicas>
+			</ListaSessoesTematicas>
+			<ListaSubmissoesEvento>
+				<!-- igual ao formato das submissões de uma sessão temática -->
+			</ListaSubmissoesEvento>
+		</Evento>
+	</Eventos>
+</ListaEventos>
