@@ -61,14 +61,14 @@ public class ListaSessoesTematicas {
      * @return Sessão Temática.
      */
     public SessaoTematica novaSessaoTematica(
-            String codigoUnico,
-            String descricao,
-            Data dataInicioSubmissao,
-            Data dataFimSubmissao, Data dataInicioDistribuicao,
-            Data dataFimSubmissaoCameraReady, Data dataInicio,
-            Data dataFim) {
+                        String codigoUnico,
+                        String descricao,
+                        Data dataInicioSubmissao,
+                        Data dataFimSubmissao, Data dataInicioDistribuicao,
+                        Data dataFimSubmissaoCameraReady, Data dataInicio,
+                        Data dataFim) {
         return new SessaoTematica(
-                codigoUnico, descricao, dataInicioSubmissao, dataFimSubmissao, dataInicioDistribuicao, dataFimSubmissaoCameraReady, dataInicio, dataFim);
+                            codigoUnico, descricao, dataInicioSubmissao, dataFimSubmissao, dataInicioDistribuicao, dataFimSubmissaoCameraReady, dataInicio, dataFim);
     }
 
     /**
@@ -103,11 +103,11 @@ public class ListaSessoesTematicas {
         }
 
         ListaSessoesTematicas outraListaSessoesTematicas
-                = (ListaSessoesTematicas) outroObjeto;
+                            = (ListaSessoesTematicas) outroObjeto;
 
         return this.evento.equals(outraListaSessoesTematicas.evento)
-                && this.listaSessoesTematicas.equals(
-                        outraListaSessoesTematicas.listaSessoesTematicas);
+                            && this.listaSessoesTematicas.equals(
+                                                outraListaSessoesTematicas.listaSessoesTematicas);
     }
 
     /**
@@ -121,28 +121,28 @@ public class ListaSessoesTematicas {
      */
     public boolean validarSessaoTematica(SessaoTematica sessaoTematica) {
         if (this.evento.getDataInicioSubmissao().isMaior(
-                sessaoTematica.getDataInicioSubmissao())) {
+                            sessaoTematica.getDataInicioSubmissao())) {
             throw new IllegalArgumentException("A data de inicio de submissão "
-                    + "da sessão temática não pode ser menor que a do evento");
+                                + "da sessão temática não pode ser menor que a do evento");
         }
 
         if (this.evento.getDataFimSubmissao().isMaior(
-                sessaoTematica.getDataFimSubmissao())) {
+                            sessaoTematica.getDataFimSubmissao())) {
             throw new IllegalArgumentException("A data de fim de submissão da "
-                    + "sessão temática não pode ser menor que a do evento");
+                                + "sessão temática não pode ser menor que a do evento");
         }
 
         if (this.evento.getDataInicioDistribuicao().isMaior(
-                sessaoTematica.getDataInicioDistribuicao())) {
+                            sessaoTematica.getDataInicioDistribuicao())) {
             throw new IllegalArgumentException("A data de inicio de distribuição"
-                    + " da sessão temática não pode ser menor que a do evento");
+                                + " da sessão temática não pode ser menor que a do evento");
         }
 
         if (this.evento.getDataInicio().isMaior(sessaoTematica.getDataInicio())
-                || sessaoTematica.getDataFim().isMaior(
-                        this.evento.getDataFim())) {
+                            || sessaoTematica.getDataFim().isMaior(
+                                                this.evento.getDataFim())) {
             throw new IllegalArgumentException("A sessão temática deve ocorrer "
-                    + "dentro do periodo do evento.");
+                                + "dentro do periodo do evento.");
         }
 
         return !this.listaSessoesTematicas.contains(sessaoTematica);
@@ -193,10 +193,9 @@ public class ListaSessoesTematicas {
      */
     List<CPDefinivel> getListaCPDefiniveisSemCPOrganizadorProponente(Utilizador utilizador) {
         List<CPDefinivel> listaSemCPDefinida = new ArrayList();
-
         for (SessaoTematica sessaoTematica : this.listaSessoesTematicas) {
             if (sessaoTematica.isRegistada()
-                    && sessaoTematica.isProponente(utilizador)) {
+                                && sessaoTematica.isProponente(utilizador)) {
                 listaSemCPDefinida.add(sessaoTematica);
             }
         }
