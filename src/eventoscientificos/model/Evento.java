@@ -1,6 +1,8 @@
 package eventoscientificos.model;
 
 import eventoscientificos.model.state.evento.EventoCriadoState;
+import eventoscientificos.model.state.evento.EventoRegistadoState;
+import eventoscientificos.model.state.evento.EventoSessoesTematicasDefinidasState;
 import eventoscientificos.model.state.evento.EventoState;
 import java.util.ArrayList;
 import java.util.List;
@@ -371,32 +373,6 @@ public class Evento implements CPDefinivel, Licitavel {
     }
 
     /**
-     * Verifica se existem sessões temáticas definidas no evento.
-     *
-     * @return Verdadeiro caso existam Sessões Temáticas definidas na
-     * ListaSessõesTemáticas e falso caso esteja vazia.
-     */
-    public boolean temSessoesTematicasDefinidas() {
-        return this.listaSessoesTematicas.temSessoesTematicasDefinidas();
-    }
-
-    /**
-     * Verifica se determinado utilizador é organizador do evento.
-     *
-     * @param utilizador Utilizador que se pretende verificar.
-     * @return Verdadeiro caso seja e falso se não for.
-     */
-    public boolean isOrganizador(Utilizador utilizador) {
-        for (Organizador organizador : this.listaOrganizadores) {
-            if (utilizador.equals(organizador.getUtilizador())) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    /**
      * Compara dois objetos entre si. Comparando primariamente a posição de
      * memória, seguida do conteudo e das classes as quais cada um deles
      * pertence, e finalmente os seus atributos, titulo.
@@ -471,6 +447,43 @@ public class Evento implements CPDefinivel, Licitavel {
      */
     public boolean validarEvento() {
         return this.estado.setRegistado();
+    }
+
+    /**
+     * Verifica se determinado utilizador é organizador do evento.
+     *
+     * @param utilizador Utilizador que se pretende verificar.
+     * @return Verdadeiro caso seja e falso se não for.
+     */
+    public boolean isOrganizador(Utilizador utilizador) {
+        for (Organizador organizador : this.listaOrganizadores) {
+            if (utilizador.equals(organizador.getUtilizador())) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Verifica se o evento está num estado que permite criar sessões temáticas.
+     * 
+     * @return Verdadeiro se for possível criar sessões temáticas e falso caso
+     * não seja.
+     */
+    public boolean isRegistadoOuSessoesTematicasDefinidas() {
+        return this.getEstado() instanceof EventoRegistadoState 
+                || this.getEstado() instanceof EventoSessoesTematicasDefinidasState;
+    }
+
+    /**
+     * Verifica se existem sessões temáticas definidas no evento.
+     *
+     * @return Verdadeiro caso existam Sessões Temáticas definidas na
+     * ListaSessõesTemáticas e falso caso esteja vazia.
+     */
+    public boolean temSessoesTematicasDefinidas() {
+        return this.listaSessoesTematicas.temSessoesTematicasDefinidas();
     }
 
     /**

@@ -1,7 +1,5 @@
 package eventoscientificos.model;
 
-import eventoscientificos.model.state.sessaotematica.SessaoTematicaCPDefinidaState;
-import eventoscientificos.model.state.sessaotematica.SessaoTematicaRegistadaState;
 import java.util.ArrayList;
 import java.util.List;
 import utils.Data;
@@ -73,6 +71,8 @@ public class ListaSessoesTematicas {
      * Sessão Temática.
      * @param dataFimSubmissao Data de fim do periodo de submissão da Sessão
      * Temática.
+     * @param dataInicioDistribuicao Data de início de distribuição da Sessão
+     * Temática.
      * @param dataFimSubmissaoCameraReady Data de fim do periodo de submissão do
      * artigo final da Sessão Temática.
      * @param dataInicio Data de início da Sessão Temática.
@@ -84,12 +84,14 @@ public class ListaSessoesTematicas {
             String descricao,
             Data dataInicioSubmissao,
             Data dataFimSubmissao,
+            Data dataInicioDistribuicao,
             Data dataFimSubmissaoCameraReady,
             Data dataInicio,
             Data dataFim) {
         return new SessaoTematica(
                 codigoUnico, descricao, dataInicioSubmissao, dataFimSubmissao,
-                dataFimSubmissaoCameraReady, dataInicio, dataFim);
+                dataInicioDistribuicao, dataFimSubmissaoCameraReady, dataInicio,
+                dataFim);
     }
 
     /**
@@ -112,6 +114,12 @@ public class ListaSessoesTematicas {
                 sessaoTematica.getDataFimSubmissao())) {
             throw new IllegalArgumentException("A data de fim de submissão da "
                     + "sessão temática não pode ser menor que a do evento");
+        }
+
+        if (this.evento.getDataInicioDistribuicao().isMaior(
+                sessaoTematica.getDataInicioDistribuicao())) {
+            throw new IllegalArgumentException("A data de inicio de distribuição"
+                    + " da sessão temática não pode ser menor que a do evento");
         }
 
         if (this.evento.getDataInicio().isMaior(sessaoTematica.getDataInicio())
