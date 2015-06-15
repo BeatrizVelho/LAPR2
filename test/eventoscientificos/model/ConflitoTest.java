@@ -74,7 +74,7 @@ public class ConflitoTest {
     /**
      * Teste do método equals, da classe Conflito.
      */
-    @Test(expected = NullPointerException.class)
+    @Test
     public void testEquals() {
         System.out.println("equals");
         Object outroObjecto = new Conflito(revisor, submissao, new ArrayList<TipoConflito>());
@@ -87,12 +87,12 @@ public class ConflitoTest {
     /**
      * Teste do método equals, da classe Conflito.
      */
-    @Test(expected = NullPointerException.class)
+    @Test
     public void testEqualsNot() {
         System.out.println("equalsNot");
         Object outroObjecto = new Conflito(revisor, submissao, new ArrayList<TipoConflito>());
         Revisor revisor = new Revisor(new Utilizador(
-                            "Fernando", "1131658@isep.ipp.pt", "tiago", "1234"));
+                            "Fernando", " 8@isep.ipp.pt", "tiago", "1234"));
         Conflito instance = new Conflito(revisor, submissao, new ArrayList<>());
         boolean expResult = false;
         boolean result = instance.equals(outroObjecto);
