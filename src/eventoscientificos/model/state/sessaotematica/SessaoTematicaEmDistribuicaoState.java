@@ -86,7 +86,7 @@ public class SessaoTematicaEmDistribuicaoState implements SessaoTematicaState {
      */
     @Override
     public boolean setEmLicitacao() {
-        return true;
+        return false;
     }
 
     /**
