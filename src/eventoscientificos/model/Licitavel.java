@@ -22,7 +22,7 @@ public interface Licitavel {
      * @return verdadeiro se estiver em periodo de licitação e falso se não
      * estiver
      */
-    public boolean isStateValidoParaLicitar();
+    public boolean isStateValidoParaLicitar(Utilizador utilizador);
 
     /**
      * Devolve a lista de licitações do do artigo.
