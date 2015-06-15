@@ -1,4 +1,4 @@
-package eventoscientificos.state.submissao;
+package eventoscientificos.model.state.submissao;
 
 /**
  * @author G01

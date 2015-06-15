@@ -1,4 +1,4 @@
-package eventoscientificos.state.submissao;
+package eventoscientificos.model.state.submissao;
 
 /** 
  * Interface implementada pelas várias classes que representam o estado da 

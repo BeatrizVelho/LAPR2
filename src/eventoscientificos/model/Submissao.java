@@ -1,10 +1,10 @@
 package eventoscientificos.model;
 
-import eventoscientificos.state.submissao.SubmissaoAceiteState;
-import eventoscientificos.state.submissao.SubmissaoCriadaState;
-import eventoscientificos.state.submissao.SubmissaoEmCameraReadyState;
-import eventoscientificos.state.submissao.SubmissaoEmSubmissaoState;
-import eventoscientificos.state.submissao.SubmissaoState;
+import eventoscientificos.model.state.submissao.SubmissaoAceiteState;
+import eventoscientificos.model.state.submissao.SubmissaoCriadaState;
+import eventoscientificos.model.state.submissao.SubmissaoEmCameraReadyState;
+import eventoscientificos.model.state.submissao.SubmissaoEmSubmissaoState;
+import eventoscientificos.model.state.submissao.SubmissaoState;
 
 /**
  * @author G01
