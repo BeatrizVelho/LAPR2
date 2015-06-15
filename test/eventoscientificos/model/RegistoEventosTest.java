@@ -16,14 +16,30 @@ public class RegistoEventosTest {
 
     private Evento evento;
     private Utilizador utilizador;
+    private SessaoTematica st;
 
     public RegistoEventosTest() {
-        this.evento = new Evento("titulo", "descricao", new Local("local"),
-                            new Data(2016, 6, 8), new Data(2016, 6, 20),
-                            new Data(2016, 7, 7), new Data(2016, 8, 1),
-                            new Data(2017, 6, 10), new Data(2017, 6, 13));
+        String titulo = "sem titulo";
+        String descricao = "descricao";
+        Local local = new Local("local");
+        Data dataInicioSubmissao = new Data(2016, 6, 8);
+        Data dataFimSubmissao = new Data(2016, 6, 20);
+        Data dataInicioDistribuicao = new Data(2016, 7, 30);
+        Data dataFimSubmissaoCameraReady = new Data(2016, 8, 30);
+        Data dataInicio = new Data(2016, 10, 9);
+        Data dataFim = new Data(2017, 6, 10);
+        RegistoEventos instance = new RegistoEventos();
+        this.evento = new Evento(titulo, descricao, local, dataInicioSubmissao,
+                            dataFimSubmissao, dataInicioDistribuicao,
+                            dataFimSubmissaoCameraReady, dataInicio, dataFim);
+
         this.utilizador = new Utilizador(
                             "pedro", "1140781@isep.ipp.pt", "pedro", "12345");
+        this.st = new SessaoTematica(
+                            "#123456", "Uma descrição", new Data(2016, 5, 9),
+                            new Data(2016, 6, 21), new Data(2016, 7, 8),
+                            new Data(2016, 7, 20), new Data(2016, 9, 24),
+                            new Data(2017, 5, 28));
     }
 
     /**
@@ -128,24 +144,63 @@ public class RegistoEventosTest {
     @Test
     public void testGetListaCPDefiniveisSemCPOrganizadorProponente() {
         System.out.println("getListaCPDefiniveisSemOrganizadorProponente");
-        Evento evento = new Evento("titulo", "descricao", new Local("local"),
-                            new Data(2016, 6, 8), new Data(2016, 6, 20),
-                            new Data(2016, 7, 7), new Data(2016, 7, 14), new Data(2016, 8, 1),
-                            new Data(2017, 6, 10));
-        evento.setEstado(new EventoSessoesTematicasDefinidasState(evento));
+        this.evento.setEstado(new EventoSessoesTematicasDefinidasState(evento));
         evento.novoOrganizador(this.utilizador);
-        SessaoTematica sessao = new SessaoTematica(
-                            "#123456", "Uma descrição", new Data(2016, 5, 9),
-                            new Data(2016, 6, 21), new Data(2016, 7, 8),
-                            new Data(2016, 7, 20), new Data(2016, 9, 24),
-                            new Data(2017, 5, 28));
-        sessao.setEstado(new SessaoTematicaRegistadaState(sessao));
-        sessao.novoProponente(this.utilizador);
-        evento.getListaSessoesTematicas().adicionarSessaoTematica(sessao);
+        st.setEstado(new SessaoTematicaRegistadaState(st));
+        st.novoProponente(this.utilizador);
+        evento.getListaSessoesTematicas().adicionarSessaoTematica(st);
         RegistoEventos instance = new RegistoEventos();
         instance.adicionarEvento(evento);
         int expResult = 2;
         int result = (instance.getListaCPDefiniveisSemCPOrganizadorProponente(this.utilizador)).size();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método getListaCPDefiniveisSemCPOrganizadorProponente, da classe
+     * RegistoEventos.
+     */
+    @Test
+    public void testGetListaCPDefiniveisSemCPOrganizadorProponenteSemEvento() {
+        System.out.println("getListaCPDefiniveisSemOrganizadorProponenteSemEvento");
+        this.evento.setEstado(new EventoSessoesTematicasDefinidasState(evento));
+        evento.novoOrganizador(new Utilizador("fafa", "fafa@imal.com", "nana", "1234"));
+        st.setEstado(new SessaoTematicaRegistadaState(st));
+        st.novoProponente(this.utilizador);
+        evento.getListaSessoesTematicas().adicionarSessaoTematica(st);
+        RegistoEventos instance = new RegistoEventos();
+        instance.adicionarEvento(evento);
+        int expResult = 1;
+        int result = (instance.getListaCPDefiniveisSemCPOrganizadorProponente(this.utilizador)).size();
+        assertEquals(expResult, result);
+    }
+//    /**
+//     * Test of getListaSubmissiveisAceitarArtigo method, of class
+//     * RegistoEventos.
+//     */
+//    @Test
+//    public void testGetListaSubmissiveisAceitarArtigo() {
+//        System.out.println("getListaSubmissiveisAceitarArtigo");
+//        RegistoEventos instance = new RegistoEventos();
+//        List<Submissivel> expResult = null;
+//        List<Submissivel> result = instance.getListaSubmissiveisAceitarArtigo();
+//        assertEquals(expResult, result);
+//    }
+
+    /**
+     * Test of getListaLicitaveisComArtigosPorLicitarRevisor method, of class
+     * RegistoEventos.
+     */
+    @Test
+    public void testGetListaLicitaveisComArtigosPorLicitarRevisor() {
+        System.out.println("getListaLicitaveisComArtigosPorLicitarRevisor");
+        Utilizador u = this.utilizador;
+        this.evento.setCP(new CP());
+        this.evento.getCP().novoRevisor(utilizador);
+        RegistoEventos instance = new RegistoEventos();
+        instance.adicionarEvento(evento);
+        int expResult = 1;
+        int result = instance.getListaLicitaveisComArtigosPorLicitarRevisor(u).size();
         assertEquals(expResult, result);
     }
 
