@@ -38,6 +38,6 @@ public interface Licitavel {
      * @param submissao submissão a rever
      * @return lista de conflitos detetados entre o revisor e o artigo
      */
-    public List<Conflito> getConflitoRevisorArtigo(Revisor revisor, Submissao submissao);
+    public Conflito getConflitoRevisorArtigo(Revisor revisor, Submissao submissao);
 
 }
