@@ -30,6 +30,8 @@ public class ConflitoTest {
         this.revisor = new Revisor(new Utilizador(
                             "Tiago", "1131658@isep.ipp.pt", "tiago", "1234"));
         this.submissao = new Submissao();
+        this.submissao.setArtigoFinal(new Artigo("titulo", "saude", "D:\\ISEP\\1.º Ano\\2.º Semestre"));
+        this.submissao.setArtigoInicial(new Artigo("titulo1234", "saude", "D:\\ISEP\\1.º Ano\\2.º Semestre"));
 
     }
 
@@ -69,4 +71,32 @@ public class ConflitoTest {
         assertEquals(expResult, result);
     }
 
+    /**
+     * Teste do método equals, da classe Conflito.
+     */
+    @Test(expected = NullPointerException.class)
+    public void testEquals() {
+        System.out.println("equals");
+        Object outroObjecto = new Conflito(revisor, submissao, new ArrayList<TipoConflito>());
+        Conflito instance = new Conflito(revisor, submissao, new ArrayList<>());
+        boolean expResult = true;
+        boolean result = instance.equals(outroObjecto);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método equals, da classe Conflito.
+     */
+    @Test(expected = NullPointerException.class)
+    public void testEqualsNot() {
+        System.out.println("equalsNot");
+        Object outroObjecto = new Conflito(revisor, submissao, new ArrayList<TipoConflito>());
+        Revisor revisor = new Revisor(new Utilizador(
+                            "Fernando", "1131658@isep.ipp.pt", "tiago", "1234"));
+        Conflito instance = new Conflito(revisor, submissao, new ArrayList<>());
+        boolean expResult = false;
+        boolean result = instance.equals(outroObjecto);
+        assertEquals(expResult, result);
+
+    }
 }
