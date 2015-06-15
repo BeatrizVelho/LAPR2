@@ -164,6 +164,15 @@ public class SessaoTematica implements Submissivel, CPDefinivel, Licitavel {
     }
 
     /**
+     * Devolve a data de inicio de distribuição da sessão temática.
+     * 
+     * @return Data de início de distribuição da sessão temática.
+     */
+    public Data getDataInicioDistribuicao() {
+        return this.dataInicioDistribuicao;
+    }
+
+    /**
      * Devolve a data de fim de submissão CameraReady da sessão temática.
      *
      * @return Data de fim de submissão CameraReady da sessão temática.
@@ -285,6 +294,21 @@ public class SessaoTematica implements Submissivel, CPDefinivel, Licitavel {
 
         this.dataFimSubmissao = dataFinalSubmissao;
     }
+
+    /**
+     * Modifica a data de início de distribuição da sessão temática.
+     * 
+     * @param dataInicioDistribuicao Nova data de início de distribuição da
+     * sessão temática.
+     */
+    public void setDataInicioDistribuicao(Data dataInicioDistribuicao) {
+        if (dataInicioDistribuicao == null) {
+            throw new NullPointerException("A data de início de distribuição "
+                    + "não pode estar vazia.");
+        }
+        
+        this.dataInicioDistribuicao = dataInicioDistribuicao;
+    } 
 
     /**
      * Modifica a data de início de distribuição da sessão temática.
@@ -449,6 +473,12 @@ public class SessaoTematica implements Submissivel, CPDefinivel, Licitavel {
         if (getDataFimSubmissao().isMaior(getDataInicioDistribuicao())) {
             throw new IllegalArgumentException("A data de inicio de distribuição"
                     + " não pode ser menor que a data de fim de submissão.");
+        }
+        
+        if (getDataInicioDistribuicao().isMaior(getDataFimSubmissaoCameraReady())) {
+            throw new IllegalArgumentException("A data de fim de submissão "
+                    + "CameraReady não pode ser menor que a data de início de"
+                    + "distribuição.");
         }
         
         if (getDataInicioDistribuicao().isMaior(getDataFimSubmissaoCameraReady())) {
