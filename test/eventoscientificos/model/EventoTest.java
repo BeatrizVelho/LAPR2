@@ -1,11 +1,7 @@
 package eventoscientificos.model;
 
 import eventoscientificos.model.state.evento.EventoCriadoState;
-import eventoscientificos.model.state.evento.EventoRegistadoState;
-import eventoscientificos.model.state.evento.EventoSessoesTematicasDefinidasState;
 import eventoscientificos.model.state.evento.EventoState;
-import java.util.ArrayList;
-import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import utils.Data;
@@ -21,8 +17,8 @@ public class EventoTest {
     public EventoTest() {
         this.evento = new Evento("titulo", "descricao", new Local("local"),
                 new Data(2016, 6, 8), new Data(2016, 6, 20),
-                new Data(2016, 7, 7), new Data(2016, 8, 1),
-                new Data(2017, 6, 10));
+                new Data(2016, 7, 7), new Data(2016, 9, 10),
+                new Data(2016, 10, 1), new Data(2017, 6, 10));
         this.utilizador = new Utilizador(
                 "Pedro", "1140781@isep.ipp.pt", "pedro", "12345");
     }
@@ -313,11 +309,10 @@ public class EventoTest {
     @Test
     public void testEqualsNot() {
         System.out.println("equalsNot");
-        Object outroObjeto = new Evento("Sem titulo", "Sem descricao",
-                new Local("local"),
+        Object outroObjeto = new Evento("sem titulo", "descricao", new Local("local"),
                 new Data(2016, 6, 8), new Data(2016, 6, 20),
-                new Data(2016, 7, 7), new Data(2016, 8, 1),
-                new Data(2017, 6, 10));
+                new Data(2016, 7, 7), new Data(2016, 9, 10),
+                new Data(2016, 11, 1), new Data(2017, 6, 10));
         Evento instance = this.evento;
         boolean expResult = false;
         boolean result = instance.equals(outroObjeto);

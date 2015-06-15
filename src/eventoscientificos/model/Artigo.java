@@ -1,6 +1,5 @@
 package eventoscientificos.model;
 
-
 /**
  * Representa uma instância de Artigo
  *
@@ -136,6 +135,14 @@ public class Artigo {
         }
 
         this.ficheiro = ficheiro;
+    }
+    
+    public boolean validarArtigo() {
+        return true;
+    }
+    
+    public boolean isAutor(Utilizador utilizador) {
+        return this.listaAutores.isAutor(utilizador);
     }
 
     /**

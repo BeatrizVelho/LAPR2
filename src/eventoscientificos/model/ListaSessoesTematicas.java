@@ -34,6 +34,55 @@ public class ListaSessoesTematicas {
     }
 
     /**
+     * Devolve uma lista de sessões tméticas.
+     *
+     * @return Lista de Sessões Temáticas.
+     */
+    public List<SessaoTematica> getListaSessoesTematicas() {
+        return this.listaSessoesTematicas;
+    }
+
+    /**
+     * Cria uma instância de sessão temática com um código único, uma descrição,
+     * uma data de inicio de submissão e data de fim de submissão.
+     *
+     * @param codigoUnico Código único da Sessão Temática.
+     * @param descricao Descrição da Sessão Temátiica.
+     * @param dataInicioSubmissao Data de inicio do periodo de submissão da
+     * Sessão Temática.
+     * @param dataFimSubmissao Data de fim do periodo de submissão da Sessão
+     * Temática.
+     * @param dataInicioDistribuicao Data de início de distribuição da Sessão
+     * Temática.
+     * @param dataFimSubmissaoCameraReady Data de fim do periodo de submissão do
+     * artigo final da Sessão Temática.
+     * @param dataInicio Data de início da Sessão Temática.
+     * @param dataFim Data de fim da Sessão Temática.
+     * @return Sessão Temática.
+     */
+    public SessaoTematica novaSessaoTematica(
+            String codigoUnico,
+            String descricao,
+            Data dataInicioSubmissao,
+            Data dataFimSubmissao, Data dataInicioDistribuicao,
+            Data dataFimSubmissaoCameraReady, Data dataInicio,
+            Data dataFim) {
+        return new SessaoTematica(
+                codigoUnico, descricao, dataInicioSubmissao, dataFimSubmissao, dataInicioDistribuicao, dataFimSubmissaoCameraReady, dataInicio, dataFim);
+    }
+
+    /**
+     * Adiciona uma instância de uma Sessão Temática a uma lista.
+     *
+     * @param sessaoTematica Sessão Temática que vai ser adicionada à lista.
+     * @return Verdadeiro caso a Sessão Temática seja adicionada à lista e falso
+     * caso a adição falhe.
+     */
+    public boolean adicionarSessaoTematica(SessaoTematica sessaoTematica) {
+        return this.listaSessoesTematicas.add(sessaoTematica);
+    }
+
+    /**
      * Compara dois objetos entre si. Comparando primariamente a posição de
      * memória, seguida do conteudo e das classes as quais cada um deles
      * pertence, e finalmente os seus atributos, evento que a contém e as suas
@@ -59,39 +108,6 @@ public class ListaSessoesTematicas {
         return this.evento.equals(outraListaSessoesTematicas.evento)
                 && this.listaSessoesTematicas.equals(
                         outraListaSessoesTematicas.listaSessoesTematicas);
-    }
-
-    /**
-     * Cria uma instância de sessão temática com um código único, uma descrição,
-     * uma data de inicio de submissão e data de fim de submissão.
-     *
-     * @param codigoUnico Código único da Sessão Temática.
-     * @param descricao Descrição da Sessão Temátiica.
-     * @param dataInicioSubmissao Data de inicio do periodo de submissão da
-     * Sessão Temática.
-     * @param dataFimSubmissao Data de fim do periodo de submissão da Sessão
-     * Temática.
-     * @param dataInicioDistribuicao Data de início de distribuição da Sessão
-     * Temática.
-     * @param dataFimSubmissaoCameraReady Data de fim do periodo de submissão do
-     * artigo final da Sessão Temática.
-     * @param dataInicio Data de início da Sessão Temática.
-     * @param dataFim Data de fim da Sessão Temática.
-     * @return Sessão Temática.
-     */
-    public SessaoTematica novaSessaoTematica(
-            String codigoUnico,
-            String descricao,
-            Data dataInicioSubmissao,
-            Data dataFimSubmissao,
-            Data dataInicioDistribuicao,
-            Data dataFimSubmissaoCameraReady,
-            Data dataInicio,
-            Data dataFim) {
-        return new SessaoTematica(
-                codigoUnico, descricao, dataInicioSubmissao, dataFimSubmissao,
-                dataInicioDistribuicao, dataFimSubmissaoCameraReady, dataInicio,
-                dataFim);
     }
 
     /**
@@ -133,14 +149,21 @@ public class ListaSessoesTematicas {
     }
 
     /**
-     * Adiciona uma instância de uma Sessão Temática a uma lista.
+     * Devolve uma lista de submissiveis nos quais ainda é possivel submeter
+     * artigos
      *
-     * @param sessaoTematica Sessão Temática que vai ser adicionada à lista.
-     * @return Verdadeiro caso a Sessão Temática seja adicionada à lista e falso
-     * caso a adição falhe.
+     *
+     * @return Lista de Submisiveis que aceitam submisoes
      */
-    public boolean adicionarSessaoTematica(SessaoTematica sessaoTematica) {
-        return this.listaSessoesTematicas.add(sessaoTematica);
+    public List<Submissivel> getListaSubmissiveisAceitarArtigo() {
+        List<Submissivel> listaSubmissiveis = new ArrayList<>();
+
+        for (SessaoTematica sessaoTematica : this.listaSessoesTematicas) {
+            if (sessaoTematica.isStateValidoParaSubmeter()) {
+                listaSubmissiveis.add(sessaoTematica);
+            }
+        }
+        return listaSubmissiveis;
     }
 
     /**
@@ -152,27 +175,32 @@ public class ListaSessoesTematicas {
     public boolean temSessoesTematicasDefinidas() {
         return this.listaSessoesTematicas.size() > 0;
     }
+//
+//    public List<Submissivel> getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador(Utilizador utilizador) {
+//        List<Submissivel> listalistaSubmissiveisUtilizador = new ArrayList<>();
+//        
+//        for(SessaoTematica sessaoTematica : this.listaSessoesTematicas) {
+//            if(sessaoTematica.isStateValidoParaAlterar() && sessaoTematica.)
+//        }
+//    }
 
     /**
-     * Devolve uma lista de sessão temáticas que se encontrem sem CP
-     * definida e onde o utilizador é proponente.
-     * 
+     * Devolve uma lista de sessão temáticas que se encontrem sem CP definida e
+     * onde o utilizador é proponente.
+     *
      * @param utilizador Utilizador a verificar se é proponente.
-     * @return Lista de sessao temática onde o utilizador
-     * é proponente.
+     * @return Lista de sessao temática onde o utilizador é proponente.
      */
-    public List<CPDefinivel> getListaCPDefiniveisSemCPOrganizadorProponente
-        (Utilizador utilizador) {
+    List<CPDefinivel> getListaCPDefiniveisSemCPOrganizadorProponente(Utilizador utilizador) {
         List<CPDefinivel> listaSemCPDefinida = new ArrayList();
-        
-        for(SessaoTematica sessaoTematica : this.listaSessoesTematicas){
-            if(sessaoTematica.isRegistada()
-                    && sessaoTematica.isProponente(utilizador)){
+
+        for (SessaoTematica sessaoTematica : this.listaSessoesTematicas) {
+            if (sessaoTematica.isRegistada()
+                    && sessaoTematica.isProponente(utilizador)) {
                 listaSemCPDefinida.add(sessaoTematica);
             }
         }
-        
+
         return listaSemCPDefinida;
     }
-
 }

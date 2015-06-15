@@ -31,7 +31,7 @@ public class ListaSubmissoesTest {
     }
    
     /**
-     * Teste do método validarSubmissao, da classe ListaSubmissoes.
+     * Teste do método alterarEstadoSubmissao, da classe ListaSubmissoes.
      */
     @Test
     public void testValidarSubmissao() {

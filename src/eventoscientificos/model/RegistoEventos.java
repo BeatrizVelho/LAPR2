@@ -33,20 +33,23 @@ public class RegistoEventos {
      * @param titulo Titulo do evento.
      * @param descricao Descricao do evento.
      * @param local Local do evento.
-     * @param dataInicio Data de inicio do evento.
-     * @param dataFim Data de fim do evento.
      * @param dataInicioSubmissao Data de inicio de submissao do evento.
      * @param dataLimiteSubmissao Data limite de submissao do evento.
      * @param dataInicioDistribuicao Data de inicio de distribuicao do evento.
+     * @param dataFimSubmissaoCameraReady Data fim de submissao camera ready do evento.
+     * @param dataInicio Data de inicio do evento.
+     * @param dataFim Data de fim do evento.
      *
      * @return Evento.
      */
     public Evento novoEvento(String titulo, String descricao, Local local,
             Data dataInicioSubmissao, Data dataLimiteSubmissao,
-            Data dataInicioDistribuicao, Data dataInicio, Data dataFim) {
+            Data dataInicioDistribuicao, Data dataFimSubmissaoCameraReady,
+            Data dataInicio, Data dataFim) {
 
         return new Evento(titulo, descricao, local, dataInicioSubmissao,
-                dataLimiteSubmissao, dataInicioDistribuicao, dataInicio, dataFim);
+                dataLimiteSubmissao, dataInicioDistribuicao, dataFimSubmissaoCameraReady,
+                dataInicio, dataFim);
     }
 
     /**
@@ -91,7 +94,37 @@ public class RegistoEventos {
     }
 
     /**
-     * Devolve uma lista de eventoes/sessões temáticas que se encontrem sem CP
+     * Devolve uma lista de submissiveis nos quais ainda é possivel submeter
+     * artigos
+     *
+     * @return Lista de Submisiveis que aceitam submisoes
+     */
+    public List<Submissivel> getListaSubmissiveisAceitarArtigo() {
+        List<Submissivel> listaSubmissiveis = new ArrayList<>();
+
+        for (Evento evento : this.listaEventos) {
+            if (evento.isStateValidoParaSubmeter()) {
+                listaSubmissiveis.add(evento);
+            }
+            listaSubmissiveis.addAll(
+                    evento.getListaSubmissiveisAceitarArtigo());
+        }
+        return listaSubmissiveis;
+    }
+    
+//    public List<Submissivel> getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador(Utilizador utilizador) {
+//        List<Submissivel> listaSubmissiveisUtilizador = new ArrayList<>();
+//        
+//        for(Evento evento : this.listaEventos) {
+//            if(evento.isStateValidoParaAlterar() &&
+//                    evento.isUtilizadorUmAutor(utilizador)) {
+//                listaSubmissiveisUtilizador.add(evento);
+//            }
+//            listaSubmissiveisUtilizador.addAll(
+//                    evento.getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador(utilizador));
+//        }
+//    }
+    /** Devolve uma lista de eventoes/sessões temáticas que se encontrem sem CP
      * definida e onde o utilizador é organizador/proponente.
      * 
      * @param utilizador Utilizador a verificar se é organizador/proponente.

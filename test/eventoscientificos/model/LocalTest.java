@@ -1,13 +1,13 @@
 package eventoscientificos.model;
 
-import org.junit.Test;
+import org.omg.rg.junit.Test;
 import static org.junit.Assert.*;
 
 /**
  * @author G01
  */
 public class LocalTest {
-    
+
     public LocalTest() {
     }
 
@@ -34,8 +34,8 @@ public class LocalTest {
         String result = instance.toString();
         assertEquals(expResult, result);
     }
-    
-        /**
+
+    /**
      * Teste do metodo setLocal, da classe Evento.
      */
     @Test(expected = NullPointerException.class)
@@ -45,6 +45,5 @@ public class LocalTest {
         Local instance = new Local("isep");
         instance.setNomeLocal(local);
     }
-    
-    
+
 }

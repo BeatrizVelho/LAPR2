@@ -1,4 +1,4 @@
-package eventoscientificos.state.submissao;
+package eventoscientificos.model.state.submissao;
 
 import eventoscientificos.model.Submissao;
 
@@ -9,8 +9,12 @@ import eventoscientificos.model.Submissao;
  * @author G01
  */
 public class SubmissaoEmSubmissaoState implements SubmissaoState {
+    
+    private Submissao submissao;
 
     public SubmissaoEmSubmissaoState(Submissao submissao) {
+        this.submissao = submissao;
+        this.submissao.setEstado(new SubmissaoEmSubmissaoState(this.submissao));
     }
 
     /**
@@ -41,13 +45,17 @@ public class SubmissaoEmSubmissaoState implements SubmissaoState {
      */
     @Override
     public boolean setEmLicitacao() {
-        return true;
+        if(validarEstado()) {
+            this.submissao.setEstado(new SubmissaoEmLicitacaoState(this.submissao));
+            return true;
+        }
+        return false;
     }
 
     /**
      * Modifica o estado da submissão para o estado Submissão Em Revisão.
      *
-     * @return Falso, não deve ser possível mudar de Criada para EmRevisão.
+     * @return Falso, não deve ser possível mudar de EmSubmissao para EmRevisão.
      */
     @Override
     public boolean setEmRevisao() {
@@ -57,7 +65,7 @@ public class SubmissaoEmSubmissaoState implements SubmissaoState {
     /**
      * Modifica o estado da submissão para o estado Submissão Revista.
      *
-     * @return Falso, não deve ser possível mudar de Criada para Revista.
+     * @return Falso, não deve ser possível mudar de EmSubmissao para Revista.
      */
     @Override
     public boolean setRevista() {
@@ -67,7 +75,7 @@ public class SubmissaoEmSubmissaoState implements SubmissaoState {
     /**
      * Modifica o estado da submissão para o estado Submissão NaoRevista.
      *
-     * @return Falso, não deve ser possível mudar de Criada para NaoRevista.
+     * @return Falso, não deve ser possível mudar de EmSubmissao para NaoRevista.
      */
     @Override
     public boolean setNaoRevista() {
@@ -77,7 +85,7 @@ public class SubmissaoEmSubmissaoState implements SubmissaoState {
     /**
      * Modifica o estado da submissão para o estado Submissão Aceite.
      *
-     * @return Falso, não deve ser possível mudar de Criada para Aceite.
+     * @return Falso, não deve ser possível mudar de EmSubmissao para Aceite.
      */
     @Override
     public boolean setAceite() {
@@ -87,7 +95,7 @@ public class SubmissaoEmSubmissaoState implements SubmissaoState {
     /**
      * Modifica o estado da submissão para o estado Submissão Rejeitada.
      *
-     * @return Falso, não deve ser possível mudar de Criada para Rejeitada.
+     * @return Falso, não deve ser possível mudar de EmSubmissao para Rejeitada.
      */
     @Override
     public boolean setRejeitada() {
@@ -97,7 +105,7 @@ public class SubmissaoEmSubmissaoState implements SubmissaoState {
     /**
      * Modifica o estado da submissão para o estado Submissão EmCameraReady.
      *
-     * @return Falso, não deve ser possível mudar de Criada para EmCameraReady.
+     * @return Falso, não deve ser possível mudar de EmSubmissao para EmCameraReady.
      */
     @Override
     public boolean setEmCameraReady() {
@@ -107,7 +115,7 @@ public class SubmissaoEmSubmissaoState implements SubmissaoState {
     /**
      * Modifica o estado da submissão para o estado Submissão SemArtigoFinal.
      *
-     * @return Falso, não deve ser possível mudar de Criada para SemArtigoFinal.
+     * @return Falso, não deve ser possível mudar de EmSubmissao para SemArtigoFinal.
      */
     @Override
     public boolean setSemArtigoFinal() {
@@ -117,7 +125,7 @@ public class SubmissaoEmSubmissaoState implements SubmissaoState {
     /**
      * Modifica o estado da submissão para o estado Submissão Removida.
      *
-     * @return Falso, não deve ser possível mudar de Criada para Removida.
+     * @return Verdadeiro, deve ser possível mudar de EmSubmissao para Removida.
      */
     @Override
     public boolean setRemovida() {
