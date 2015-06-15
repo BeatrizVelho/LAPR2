@@ -70,7 +70,7 @@ public class Conflito {
      * Compara dois objetos entre si. Comparando primariamente a posição de
      * memória, seguida do conteudo e das classes as quais cada um deles
      * pertence, e finalmente os seus atributos, revisor, submissao e lista de
-     * submissões.
+     * tipos de conflitos.
      *
      * @param outroObjecto conflito a comparar
      * @return Verdadeiro caso os objetos comparados sejam iguais e falso caso
@@ -86,10 +86,10 @@ public class Conflito {
             return false;
         }
 
-        Conflito outroProcesso = (Conflito) outroObjecto;
+        Conflito outroConflito = (Conflito) outroObjecto;
 
-        return this.revisor.equals(outroProcesso.revisor)
-                            && this.submissao.equals(outroProcesso.submissao)
-                            && this.listaTipoConflito.equals(outroProcesso.listaTipoConflito);
+        return this.revisor.equals(outroConflito.revisor)
+                            && this.submissao.equals(outroConflito.submissao)
+                            && this.listaTipoConflito.equals(outroConflito.listaTipoConflito);
     }
 }
