@@ -89,4 +89,5 @@ public class ListaLicitacoes {
 
         return listaLicitacoes.equals(outraLista.listaLicitacoes);
     }
+
 }
