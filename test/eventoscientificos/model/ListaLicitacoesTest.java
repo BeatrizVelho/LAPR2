@@ -27,8 +27,6 @@ public class ListaLicitacoesTest {
                             "fatima", "ola@iml.com", "fafa", "1234")),
                             new Artigo(), 0, null);
         this.listaLicitacoes.add(instance);
-
-        listaLicitacoes.adicionarListaLicitacoesTemporaria(this.listaLicitacoes);
     }
 
     /**
@@ -121,6 +119,18 @@ public class ListaLicitacoesTest {
         assertEquals(expResult, result);
     }
 
-    
+    /**
+     * Test of contains method, of class ListaLicitacoes.
+     */
+    @Test
+    public void testContains() {
+        System.out.println("contains");
+        ListaLicitacoes instance = new ListaLicitacoes();
+        instance.adicionarListaLicitacoesTemporaria(listaLicitacoes);
+        Utilizador utilizador = new Utilizador("fatima", "ola@iml.com", "fafa", "1234");
+               boolean expResult = true;
+        boolean result = instance.contains(utilizador);
+        assertEquals(expResult, result);
+    }
 
 }
