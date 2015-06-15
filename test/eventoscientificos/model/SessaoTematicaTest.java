@@ -178,6 +178,19 @@ public class SessaoTematicaTest {
     }
 
     /**
+     * Teste dos métodos set e get ProcessoDetecao, da classe SessaoTematica.
+     */
+    @Test
+    public void testSetAndGetProcessoDetecao() {
+        System.out.println("setAndGetProcessoDetecao");
+        SessaoTematica instance = this.sessaoTematica;
+        instance.setProcessoDetecao(new ProcessoDetecao());
+        ProcessoDetecao expResult = new ProcessoDetecao();
+        ProcessoDetecao result = instance.getProcessoDetecao();
+        assertEquals(expResult, result);
+    }
+
+    /**
      * Teste do método setCodigoUnico, da classe SessaoTematica.
      */
     @Test(expected = IllegalArgumentException.class)
