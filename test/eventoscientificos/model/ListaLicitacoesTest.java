@@ -120,4 +120,7 @@ public class ListaLicitacoesTest {
         boolean result = instance.equals(outroObjecto);
         assertEquals(expResult, result);
     }
+
+    
+
 }
