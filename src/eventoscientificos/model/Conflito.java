@@ -22,7 +22,7 @@ public class Conflito {
     /**
      * Tipo do conflito.
      */
-    private List<TipoConflito> ListaTipoConflito;
+    private List<TipoConflito> listaTipoConflito;
 
     /**
      * Constrói uma instância de Conflito recebendo um revisor, uma submissão e
@@ -36,19 +36,23 @@ public class Conflito {
                         Revisor revisor, Submissao submissao, List<TipoConflito> listaConflitos) {
         this.revisor = revisor;
         this.submissao = submissao;
-        this.ListaTipoConflito = listaConflitos;
+        this.listaTipoConflito = listaConflitos;
     }
-/**
- * Devolve o revisor associado ao conflito
- * @return revisor
- */
+
+    /**
+     * Devolve o revisor associado ao conflito
+     *
+     * @return revisor
+     */
     public Revisor getRevisor() {
         return revisor;
     }
-/**
- * Devolve a submissão associada ao conflito
- * @return submissao
- */
+
+    /**
+     * Devolve a submissão associada ao conflito
+     *
+     * @return submissao
+     */
     public Submissao getSubmissao() {
         return submissao;
     }
@@ -59,6 +63,33 @@ public class Conflito {
      * @return lista de conflitos
      */
     public List<TipoConflito> getListaTipoConflito() {
-        return ListaTipoConflito;
+        return listaTipoConflito;
+    }
+
+    /**
+     * Compara dois objetos entre si. Comparando primariamente a posição de
+     * memória, seguida do conteudo e das classes as quais cada um deles
+     * pertence, e finalmente os seus atributos, revisor, submissao e lista de
+     * submissões.
+     *
+     * @param outroObjecto conflito a comparar
+     * @return Verdadeiro caso os objetos comparados sejam iguais e falso caso
+     * não o sejam.
+     */
+    @Override
+    public boolean equals(Object outroObjecto) {
+        if (this == outroObjecto) {
+            return true;
+        }
+
+        if (outroObjecto == null || this.getClass() != outroObjecto.getClass()) {
+            return false;
+        }
+
+        Conflito outroProcesso = (Conflito) outroObjecto;
+
+        return this.revisor.equals(outroProcesso.revisor)
+                            && this.submissao.equals(outroProcesso.submissao)
+                            && this.listaTipoConflito.equals(outroProcesso.listaTipoConflito);
     }
 }
