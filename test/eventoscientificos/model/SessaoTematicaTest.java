@@ -2,8 +2,12 @@ package eventoscientificos.model;
 
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaCPDefinidaState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaCriadaState;
+import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmDetecaoState;
+import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmLicitacaoState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaRegistadaState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaState;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import utils.Data;
@@ -15,19 +19,23 @@ public class SessaoTematicaTest {
 
     private SessaoTematica sessaoTematica;
     private Utilizador utilizador;
+    private Licitacao licitacao;
 
     public SessaoTematicaTest() {
         this.sessaoTematica = new SessaoTematica(
-                "#A9D24R",
-                "LAPR2",
-                new Data(2015, 5, 22),
-                new Data(2015, 5, 28),
-                new Data(2015, 6, 10),
-                new Data(2015, 6, 20),
-                new Data(2015, 6, 24),
-                new Data(2015, 6, 28));
+                            "#A9D24R",
+                            "LAPR2",
+                            new Data(2015, 5, 22),
+                            new Data(2015, 5, 28),
+                            new Data(2015, 6, 10),
+                            new Data(2015, 6, 20),
+                            new Data(2015, 6, 24),
+                            new Data(2015, 6, 28));
         this.utilizador = new Utilizador(
-                "Pedro", "1140781@isep.ipp.pt", "pedro", "1234");
+                            "Pedro", "1140781@isep.ipp.pt", "pedro", "1234");
+        this.licitacao = new Licitacao(new Revisor(new Utilizador(
+                            "fatima", "ola@iml.com", "fafa", "1234")),
+                            new Artigo(), 0, null);
     }
 
     /**
@@ -158,10 +166,10 @@ public class SessaoTematicaTest {
         System.out.println("setAndGetEstado");
         SessaoTematica instance = this.sessaoTematica;
         SessaoTematicaState estado
-                = new SessaoTematicaCriadaState(this.sessaoTematica);
+                            = new SessaoTematicaCriadaState(this.sessaoTematica);
         Class<? extends SessaoTematicaState> expResult = estado.getClass();
         Class<? extends SessaoTematicaState> result
-                = instance.getEstado().getClass();
+                            = instance.getEstado().getClass();
         assertEquals(expResult, result);
     }
 
@@ -233,7 +241,7 @@ public class SessaoTematicaTest {
         Data dataFimSubmissao = null;
         instance.setDataFimSubmissao(dataFimSubmissao);
     }
-    
+
     /**
      * Teste do método setDataInicioDistribuicao, da classe SessaoTematica.
      */
@@ -298,9 +306,9 @@ public class SessaoTematicaTest {
     public void testEqualsNot() {
         System.out.println("equalsNot");
         Object outroObjeto = new SessaoTematica("#1234", "Sem descrição",
-                new Data(2016, 1, 1), new Data(2016, 1, 7),
-                new Data(2016, 1, 9), new Data(2016, 1, 26),
-                new Data(2016, 2, 4), new Data(2016, 2, 6));
+                            new Data(2016, 1, 1), new Data(2016, 1, 7),
+                            new Data(2016, 1, 9), new Data(2016, 1, 26),
+                            new Data(2016, 2, 4), new Data(2016, 2, 6));
         SessaoTematica instance = this.sessaoTematica;
         boolean expResult = false;
         boolean result = instance.equals(outroObjeto);
@@ -362,7 +370,7 @@ public class SessaoTematicaTest {
         System.out.println("adicionarCP");
         SessaoTematica instance = this.sessaoTematica;
         sessaoTematica.setEstado(
-                new SessaoTematicaRegistadaState(sessaoTematica));
+                            new SessaoTematicaRegistadaState(sessaoTematica));
         CP cp = new CP();
         boolean expResult = true;
         boolean result = instance.adicionarCP(cp);
@@ -377,7 +385,7 @@ public class SessaoTematicaTest {
         System.out.println("setEmSubmissao");
         SessaoTematica instance = this.sessaoTematica;
         instance.setEstado(new SessaoTematicaCPDefinidaState(instance));
-        boolean expResult = true;
+        boolean expResult = false;
         boolean result = instance.setEmSubmissao();
         assertEquals(expResult, result);
     }
@@ -395,4 +403,98 @@ public class SessaoTematicaTest {
         assertEquals(expResult, result);
     }
 
+    /**
+     * Test of getListaLicitacoes method, of class SessãoTematica.
+     */
+    @Test
+    public void testGetListaLicitacoes() {
+        System.out.println("getListaLicitacoes");
+        SessaoTematica instance = this.sessaoTematica;
+        ListaLicitacoes expResult = new ListaLicitacoes();
+        ListaLicitacoes result = instance.getListaLicitacoes();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of getConflitoRevisorArtigo method, of class SessaoTematica.
+     */
+    @Test
+    public void testGetConflitoRevisorArtigo() {
+        System.out.println("getConflitoRevisorArtigo");
+        Revisor revisor = new Revisor(new Utilizador(
+                            "Tiago", "1131658@isep.ipp.pt", "tiago", "1234"));
+        Submissao submissao = new Submissao();
+        submissao.setArtigoFinal(new Artigo("titulo", "saude", "D:\\ISEP\\1.º Ano\\2.º Semestre"));
+        submissao.setArtigoInicial(new Artigo("titulo1234", "saude", "D:\\ISEP\\1.º Ano\\2.º Semestre"));
+
+        Conflito c = new Conflito(revisor, submissao, new ArrayList<>());
+        SessaoTematica instance = this.sessaoTematica;
+        instance.setProcessoDetecao(new ProcessoDetecao());
+        instance.getProcessoDetecao().getListaConflito().add(c);
+
+        Conflito expResult = c;
+        Conflito result = instance.getConflitoRevisorArtigo(revisor, submissao);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of isStateValidoParaLicitar method, of class SessaoTematica.
+     */
+    @Test
+    public void testIsStateValidoParaLicitarNot() {
+        System.out.println("isStateValidoParaLicitarNot");
+        this.sessaoTematica.setEstado(new SessaoTematicaCriadaState(sessaoTematica));
+        SessaoTematicaState instance = this.sessaoTematica.getEstado();
+        boolean expResult = false;
+        boolean result = instance.isStateValidoParaLicitar();
+        assertEquals(expResult, result);
+
+    }
+
+    /**
+     * Test of isStateValidoParaLicitar method, of class SessaoTematica.
+     */
+    @Test
+    public void testIsStateValidoParaLicitarValido() {
+        System.out.println("isStateValidoParaLicitarValido");
+        this.sessaoTematica.setEstado(new SessaoTematicaEmLicitacaoState(sessaoTematica));
+        this.sessaoTematica.setCP(new CP());
+        this.sessaoTematica.getCP().novoRevisor(this.utilizador);
+        boolean expResult = true;
+        boolean result = this.sessaoTematica.isStateValidoParaLicitar(this.utilizador);
+        assertEquals(expResult, result);
+
+    }
+
+    /**
+     * Test of isStateValidoParaLicitar method, of class Evento.
+     */
+    @Test
+    public void testIsStateValidoParaLicitarEstadoInvalido() {
+        System.out.println("isStateValidoParaLicitarValido");
+        this.sessaoTematica.setEstado(new SessaoTematicaEmDetecaoState(sessaoTematica));
+        this.sessaoTematica.setCP(new CP());
+        this.sessaoTematica.getCP().novoRevisor(this.utilizador);
+        boolean expResult = false;
+        boolean result = this.sessaoTematica.isStateValidoParaLicitar(this.utilizador);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of isStateValidoParaLicitar method, of class Evento.
+     */
+    @Test
+    public void testIsStateValidoParaLicitarComLicitacao() {
+        System.out.println("isStateValidoParaLicitarValido");
+        this.sessaoTematica.setEstado(new SessaoTematicaEmLicitacaoState(sessaoTematica));
+        this.sessaoTematica.setCP(new CP());
+        this.sessaoTematica.getCP().novoRevisor(this.utilizador);
+        List<Licitacao> listaTeste = new ArrayList<>();
+        listaTeste.add(licitacao);
+        this.sessaoTematica.getListaLicitacoes().adicionarListaLicitacoesTemporaria(listaTeste);
+        boolean expResult = true;
+        boolean result = this.sessaoTematica.isStateValidoParaLicitar(this.utilizador);
+        assertEquals(expResult, result);
+
+    }
 }
