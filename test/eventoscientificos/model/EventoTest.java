@@ -400,13 +400,26 @@ public class EventoTest {
         boolean result = instance.isOrganizador(this.utilizador);
         assertEquals(expResult, result);
     }
-    
+
+    /**
+     * Teste ao método isRegistadoOuSessoesTematicasDefinidas, da classe evento.
+     */
+    @Test
+    public void testIsRegistadoOuSessoesTematicasDefinidas() {
+        System.out.println("isRegistadoOuSessoesTematicasDefinidas");
+        Evento instance = this.evento;
+        instance.setEstado(new EventoRegistadoState(instance));
+        boolean expResult = true;
+        boolean result = instance.isRegistadoOuSessoesTematicasDefinidas();
+        assertEquals(expResult, result);
+    }
+
     /**
      * Teste ao método isSessoesTematicasDefinidas, da classe Evento.
      */
     @Test
-    public void testIsSessoesTematicasDefinidasSemSessoesDefinidas() {
-        System.out.println("isSessoesTematicasDefinidasSemSessoesDefinidas");
+    public void testTemSessoesTematicasDefinidasSemSessoesDefinidas() {
+        System.out.println("temSessoesTematicasDefinidasSemSessoesDefinidas");
         Evento instance = this.evento;
         instance.setEstado(new EventoRegistadoState(evento));
         boolean expResult = false;

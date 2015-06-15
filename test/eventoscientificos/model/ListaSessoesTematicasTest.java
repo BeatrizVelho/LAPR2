@@ -25,7 +25,8 @@ public class ListaSessoesTematicasTest {
         this.sessaoTematica = new SessaoTematica(
                             "#123456", "Uma descrição", new Data(2016, 5, 9),
                             new Data(2016, 6, 21), new Data(2016, 7, 8),
-                            new Data(2016, 9, 24), new Data(2017, 5, 28));
+                            new Data(2016, 7, 9), new Data(2016, 9, 24),
+                            new Data(2017, 5, 28));
     }
 
     /**
@@ -39,7 +40,8 @@ public class ListaSessoesTematicasTest {
         SessaoTematica result = instance.novaSessaoTematica(
                             "#123456", "Uma descrição", new Data(2015, 5, 22),
                             new Data(2015, 5, 28), new Data(2015, 6, 20),
-                            new Data(2015, 6, 24), new Data(2015, 6, 28));
+                            new Data(2015, 6, 24), new Data(2015, 6, 28),
+                            new Data(2015, 7, 1));
         assertEquals(expResult, result);
     }
 
