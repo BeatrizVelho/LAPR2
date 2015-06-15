@@ -65,4 +65,28 @@ public class ListaLicitacoes {
             return false;
         }
     }
+
+    /**
+     * Compara dois objetos entre si. Comparando primariamente a posição de
+     * memória, seguida do conteudo e das classes as quais cada um deles
+     * pertence, e finalmente o seu atributo, lista de licitações.
+     *
+     * @param outroObjecto Lista de Licitações a comparar
+     * @return Verdadeiro caso os objetos comparados sejam iguais e falso caso
+     * não o sejam.
+     */
+    @Override
+    public boolean equals(Object outroObjecto) {
+        if (this == outroObjecto) {
+            return true;
+        }
+
+        if (outroObjecto == null || this.getClass() != outroObjecto.getClass()) {
+            return false;
+        }
+
+        ListaLicitacoes outraLista = (ListaLicitacoes) outroObjecto;
+
+        return listaLicitacoes.equals(outraLista.listaLicitacoes);
+    }
 }
