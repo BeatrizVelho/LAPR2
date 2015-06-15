@@ -163,15 +163,7 @@ public class SessaoTematica implements Submissivel, CPDefinivel, Licitavel {
         return this.dataInicioDistribuicao;
     }
 
-    /**
-     * Devolve a data de inicio de distribuição da sessão temática.
-     * 
-     * @return Data de início de distribuição da sessão temática.
-     */
-    public Data getDataInicioDistribuicao() {
-        return this.dataInicioDistribuicao;
-    }
-
+  
     /**
      * Devolve a data de fim de submissão CameraReady da sessão temática.
      *
@@ -310,20 +302,7 @@ public class SessaoTematica implements Submissivel, CPDefinivel, Licitavel {
         this.dataInicioDistribuicao = dataInicioDistribuicao;
     } 
 
-    /**
-     * Modifica a data de início de distribuição da sessão temática.
-     * 
-     * @param dataInicioDistribuicao Nova data de início de distribuição da
-     * sessão temática.
-     */
-    public void setDataInicioDistribuicao(Data dataInicioDistribuicao) {
-        if (dataInicioDistribuicao == null) {
-            throw new NullPointerException("A data de início de distribuição "
-                    + "não pode estar vazia.");
-        }
-        
-        this.dataInicioDistribuicao = dataInicioDistribuicao;
-    } 
+   
 
     /**
      * Modifica a data de fim de submissão da sessão temática.
