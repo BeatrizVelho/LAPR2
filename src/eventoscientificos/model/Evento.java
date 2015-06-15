@@ -668,9 +668,9 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel {
     }
 
     /**
-     * Valida se o licitável se encontra em periodo de licitação
+     * Valida se o evento se encontra em periodo de licitação
      *
-     * @param u
+     * @param u utilizador no sistema
      * @return verdadeiro se estiver em periodo de licitação e falso se não
      * estiver
      */
