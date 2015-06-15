@@ -31,15 +31,6 @@ public interface Detetavel {
      *
      * @param listaTiposConflito Lista de tipos de conflito.
      */
-    public void iniciarProcessoDeteca(List<TipoConflito> listaTiposConflito);
-
-    /**
-     * Altera o estado do detetavel quando o mesmo atinge a data de fim de
-     * submissão.
-     *
-     * @return Verdadeiro se for possível alterar o estado e falso caso não
-     * seja.
-     */
-    public boolean setEmDetecao();
+    public void iniciarProcessoDetecao(List<TipoConflito> listaTiposConflito);
 
 }
