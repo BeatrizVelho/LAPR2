@@ -21,7 +21,14 @@ public class ListaLicitacoesTest {
     private List<Licitacao> listaLicitacoes;
 
     public ListaLicitacoesTest() {
+        ListaLicitacoes listaLicitacoes = new ListaLicitacoes();
         this.listaLicitacoes = new ArrayList<>();
+        Licitacao instance = new Licitacao(new Revisor(new Utilizador(
+                            "fatima", "ola@iml.com", "fafa", "1234")),
+                            new Artigo(), 0, null);
+        this.listaLicitacoes.add(instance);
+
+        listaLicitacoes.adicionarListaLicitacoesTemporaria(this.listaLicitacoes);
     }
 
     /**
@@ -85,4 +92,32 @@ public class ListaLicitacoesTest {
         assertEquals(expResult, result);
     }
 
+    /**
+     * Test of equals method, of class ListaLicitacoes.
+     */
+    @Test
+    public void testEquals() {
+        System.out.println("equals");
+        Object outroObjecto = new ListaLicitacoes();
+        ((ListaLicitacoes) outroObjecto).adicionarListaLicitacoesTemporaria(listaLicitacoes);
+        ListaLicitacoes instance = new ListaLicitacoes();
+        instance.adicionarListaLicitacoesTemporaria(listaLicitacoes);
+        boolean expResult = true;
+        boolean result = instance.equals(outroObjecto);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of equals method, of class ListaLicitacoes.
+     */
+    @Test
+    public void testEqualsNot() {
+        System.out.println("equalsNot");
+        Object outroObjecto = new ListaLicitacoes();
+        ListaLicitacoes instance = new ListaLicitacoes();
+        instance.adicionarListaLicitacoesTemporaria(listaLicitacoes);
+        boolean expResult = false;
+        boolean result = instance.equals(outroObjecto);
+        assertEquals(expResult, result);
+    }
 }
