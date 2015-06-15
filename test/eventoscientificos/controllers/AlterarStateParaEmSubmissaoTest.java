@@ -28,7 +28,11 @@ public class AlterarStateParaEmSubmissaoTest {
                 "#A9D24R",
                 "LAPR2",
                 new Data(2015, 5, 22),
-                new Data(2015, 5, 28));
+                new Data(2015, 5, 28),
+                new Data(2015, 6, 10),
+                new Data(2015, 6, 20),
+                new Data(2015, 6, 24),
+                new Data(2015, 6, 28));
         sessaoTematica.setEstado(
                 new SessaoTematicaCPDefinidaState(sessaoTematica));
 
@@ -41,8 +45,7 @@ public class AlterarStateParaEmSubmissaoTest {
     @Test
     public void testRun() {
         System.out.println("run");
-        TimerTask instance = new AlterarStateParaEmSubmissao(
-                (Submissivel) this.sessaoTematica);
+        TimerTask instance = new AlterarStateParaEmSubmissao(this.sessaoTematica);
         instance.run();
         Class<? extends SessaoTematicaState> expResult
                 = new SessaoTematicaEmSubmissaoState(sessaoTematica).getClass();
