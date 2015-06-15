@@ -1,20 +1,43 @@
 package eventoscientificios.view;
 
 import eventoscientificos.model.Empresa;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import utils.XMLParser;
 
 /**
  * @author G01
  */
 public class Janela extends javax.swing.JFrame {
 
+    /**
+     * Empresa que contém todos os dados usados pela aplicação.
+     */
     private Empresa empresa;
+
+    /**
+     * Parser de XML responsável pela persistência dos dados da aplicação.
+     */
+    private XMLParser xmlParser;
 
     /**
      * Creates new form Janela
      */
     public Janela() {
         this.empresa = new Empresa();
+        this.xmlParser = new XMLParser(this, empresa);
+        this.xmlParser.lerFicheiroUtilizador();
+        this.xmlParser.lerFicheiroEvento();
+
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                terminarPrograma();
+            }
+        });
+
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -68,7 +91,7 @@ public class Janela extends javax.swing.JFrame {
         jMenu4.setText("Edit");
         jMenuBar2.add(jMenu4);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Sistema de Gestão de Eventos Cientificos");
         setResizable(false);
 
@@ -92,6 +115,11 @@ public class Janela extends javax.swing.JFrame {
 
         uc1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
         uc1.setText("Registar Utilizador");
+        uc1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uc1ActionPerformed(evt);
+            }
+        });
         opcoes.add(uc1);
 
         login.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_MASK));
@@ -120,6 +148,11 @@ public class Janela extends javax.swing.JFrame {
 
         sair.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
         sair.setText("Sair");
+        sair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sairActionPerformed(evt);
+            }
+        });
         opcoes.add(sair);
 
         barraMenu.add(opcoes);
@@ -215,12 +248,13 @@ public class Janela extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(painelUCs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(640, Short.MAX_VALUE)
-                        .addComponent(boasVindas, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(painelUCs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 630, Short.MAX_VALUE)
+                        .addComponent(boasVindas, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -238,7 +272,7 @@ public class Janela extends javax.swing.JFrame {
 
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
         new LoginUI(this, true, this.empresa);
-        
+
         if (empresa.getUtilizadorAutenticado() != null) {
             boasVindas.setText("Olá, " + empresa.getUtilizadorAutenticado().getNome() + ".");
             boasVindas.revalidate();
@@ -276,6 +310,14 @@ public class Janela extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_uc20ActionPerformed
 
+    private void uc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc1ActionPerformed
+        new RegistarUtilizadorUI(this, true, this.empresa);
+    }//GEN-LAST:event_uc1ActionPerformed
+
+    private void sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairActionPerformed
+        terminarPrograma();
+    }//GEN-LAST:event_sairActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -309,6 +351,15 @@ public class Janela extends javax.swing.JFrame {
                 new Janela().setVisible(true);
             }
         });
+    }
+
+    /**
+     *
+     */
+    private void terminarPrograma() {
+        this.xmlParser.escreverFicheiroUtilizador();
+        this.xmlParser.escreverFicheiroEvento();
+        dispose();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
