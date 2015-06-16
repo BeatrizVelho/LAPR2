@@ -35,12 +35,10 @@ public class RegistoUtilizadoresTest {
         Utilizador expResult = new Utilizador(nome, email, username, password);
         Utilizador result = instance.novoUtilizador(nome, email, username, password);
         assertEquals(expResult, result);
-
     }
 
     /**
      * Teste ao metodo AdicionarUtilizador da classe RegistoUtilizadores.
-     *
      */
     @Test
     public void testAdicionaUtilizador() {
@@ -50,12 +48,10 @@ public class RegistoUtilizadoresTest {
         boolean expResult = true;
         boolean result = instance.adicionaUtilizador(u);
         assertEquals(expResult, result);
-
     }
     
     /**
      * Teste ao metodo getUtilizador da classe RegistoUtilizadores.
-     *
      */
     @Test
     public void testgetUtilizadorUsername() {
@@ -67,10 +63,41 @@ public class RegistoUtilizadoresTest {
         assertEquals(expResult, result);
 
     }
-    
+
+    /**
+     * Teste ao método validarUtilizadorClone, da classe RegistoUtilizadores.
+     */
+    @Test
+    public void testValidarUtilizadorClone() {
+        System.out.println("validarUtilizadorClone");
+        RegistoUtilizadores instance = new RegistoUtilizadores();
+        Utilizador utilizador = new Utilizador(
+                "pedro", "1140781@isep.ipp.pt", "pedro", "1234");
+        Utilizador utilizadorClone = utilizador.criarCloneUtilizador();
+        instance.adicionaUtilizador(utilizador);
+        boolean result = true;
+        boolean expResult = instance.validarUtilizadorClone(utilizador, utilizadorClone);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste ao método atualizarUtilizadorClone, da classe RegistoUtilizadores.
+     */
+    @Test
+    public void testAtualizarUtilizador() {
+        System.out.println("atualizarUtilizador");
+        RegistoUtilizadores instance = new RegistoUtilizadores();
+        Utilizador utilizador = new Utilizador(
+                "pedro", "1140781@isep.ipp.pt", "pedro", "1234");
+        Utilizador utilizadorClone = utilizador.criarCloneUtilizador();
+        instance.adicionaUtilizador(utilizador);
+        boolean result = true;
+        boolean expResult = instance.atualizarUtilizador(utilizador, utilizadorClone);
+        assertEquals(expResult, result);
+    }
+
     /**
      * Teste ao metodo getUtilizador da classe RegistoUtilizadores.
-     *
      */
     @Test
     public void testgetUtilizadorEmail() {
