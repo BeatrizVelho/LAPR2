@@ -655,7 +655,7 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
 //    }
 
     /**
-     * Devolve o conflito detetado entre o revisor e o artigo
+     * Devolve o conflito detetado entre o revisor e a submissao
      *
      * @param revisor revisor associado ao conflito
      * @param submissao submissão associada ao conflito
@@ -663,7 +663,7 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
      * encontrado
      */
     @Override
-    public Conflito getConflitoRevisorArtigo(Revisor revisor, Submissao submissao) {
+    public Conflito getConflitoRevisorSubmissao(Revisor revisor, Submissao submissao) {
         for (Conflito conflito : this.processoDetecao.getListaConflito()) {
             if (conflito.getRevisor().equals(revisor) && conflito.getSubmissao().equals(submissao)) {
                 return conflito;

@@ -22,6 +22,15 @@ public class ListaSubmissoes {
     }
 
     /**
+     * Devolve a lista de submissões.
+     *
+     * @return lista de submissões.
+     */
+    public List<Submissao> getListaSubmissoes() {
+        return listaSubmissoes;
+    }
+
+    /**
      * Cria e retorna uma instância de submissao.
      *
      * @return Submissao com os dados vazios
@@ -55,6 +64,12 @@ public class ListaSubmissoes {
         return this.listaSubmissoes.add(submissao);
     }
 
+    /**
+     * Devolve uam lista de submissões associadas ao utilizador
+     *
+     * @param utilizador utilizador a verificar submissões
+     * @return lista de submissões do utilizador
+     */
     public List<Submissao> getListaSubmissoesUtilizador(Utilizador utilizador) {
         List<Submissao> listaSubmissoesUtilizador = new ArrayList<>();
 
@@ -65,7 +80,6 @@ public class ListaSubmissoes {
         }
         return listaSubmissoesUtilizador;
     }
-
 
     /**
      * Compara dois objetos entre si. Comparando primariamente a posição de
@@ -87,10 +101,10 @@ public class ListaSubmissoes {
         }
 
         ListaSubmissoes outraListaSubmissoes
-                = (ListaSubmissoes) outroObjeto;
+                            = (ListaSubmissoes) outroObjeto;
 
         return this.listaSubmissoes.equals(
-                outraListaSubmissoes.listaSubmissoes);
+                            outraListaSubmissoes.listaSubmissoes);
     }
 
 }

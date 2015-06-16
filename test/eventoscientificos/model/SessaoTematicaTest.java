@@ -20,6 +20,7 @@ public class SessaoTematicaTest {
     private SessaoTematica sessaoTematica;
     private Utilizador utilizador;
     private Licitacao licitacao;
+    private Submissao submissao;
 
     public SessaoTematicaTest() {
         this.sessaoTematica = new SessaoTematica(
@@ -35,7 +36,12 @@ public class SessaoTematicaTest {
                             "Pedro", "1140781@isep.ipp.pt", "pedro", "1234");
         this.licitacao = new Licitacao(new Revisor(new Utilizador(
                             "fatima", "ola@iml.com", "fafa", "1234")),
-                            new Artigo(), 0, null);
+                            new Submissao(), 0, null);
+        Artigo artigoInicial = new Artigo();
+        Artigo artigoFinal = new Artigo();
+        this.submissao = new Submissao();
+        submissao.setArtigoInicial(artigoInicial);
+        submissao.setArtigoFinal(artigoFinal);
     }
 
     /**
@@ -416,11 +422,11 @@ public class SessaoTematicaTest {
     }
 
     /**
-     * Test of getConflitoRevisorArtigo method, of class SessaoTematica.
+     * Test of getConflitoRevisorSubmissao method, of class SessaoTematica.
      */
     @Test
-    public void testGetConflitoRevisorArtigo() {
-        System.out.println("getConflitoRevisorArtigo");
+    public void testGetConflitoRevisorSubmissao() {
+        System.out.println("getConflitoRevisorSubmissao");
         Revisor revisor = new Revisor(new Utilizador(
                             "Tiago", "1131658@isep.ipp.pt", "tiago", "1234"));
         Submissao submissao = new Submissao();
@@ -433,7 +439,7 @@ public class SessaoTematicaTest {
         instance.getProcessoDetecao().getListaConflito().add(c);
 
         Conflito expResult = c;
-        Conflito result = instance.getConflitoRevisorArtigo(revisor, submissao);
+        Conflito result = instance.getConflitoRevisorSubmissao(revisor, submissao);
         assertEquals(expResult, result);
     }
 

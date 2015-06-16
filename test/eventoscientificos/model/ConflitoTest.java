@@ -60,14 +60,19 @@ public class ConflitoTest {
     }
 
     /**
-     * Test of getListaTipoConflito method, of class Conflito.
+     * Teste aos métodos getListaTipoConflito e setListaTipoConflito, da classe
+     * Conflito.
      */
     @Test
-    public void testGetListaTipoConflito() {
-        System.out.println("getListaTipoConflito");
+    public void testSetAndGetListaTipoConflito() {
+        System.out.println("setAndGetListaTipoConflito");
         Conflito instance = new Conflito(revisor, submissao, new ArrayList<>());
-        List<TipoConflito> expResult = new ArrayList<>();
-        List<TipoConflito> result = instance.getListaTipoConflito();
+        TipoConflito tipoC = new TipoConflito("Parente");
+        List<TipoConflito> listaConflitos = new ArrayList<>();
+        listaConflitos.add(tipoC);
+        instance.setListaTipoConflito(listaConflitos);
+        int expResult = 1;
+        int result = instance.getListaTipoConflito().size();
         assertEquals(expResult, result);
     }
 
@@ -99,4 +104,5 @@ public class ConflitoTest {
         assertEquals(expResult, result);
 
     }
+
 }

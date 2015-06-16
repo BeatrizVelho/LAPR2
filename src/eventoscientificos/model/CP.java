@@ -113,4 +113,16 @@ public class CP {
         }
         return false;
     }
+
+    /**
+     * Devolve um revisor associado ao utilizador recebido por parâmetro
+     *
+     * @param u utilizador a procurar
+     * @return revisor associado ao utilizador
+     */
+    public Revisor getRevisor(Utilizador u) {
+        Revisor r = new Revisor(u);
+        int indice = this.listaRevisores.indexOf(r);
+        return this.listaRevisores.get(indice);
+    }
 }
