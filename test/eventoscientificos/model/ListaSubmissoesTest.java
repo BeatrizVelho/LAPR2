@@ -1,5 +1,6 @@
 package eventoscientificos.model;
 
+import eventoscientificos.model.state.submissao.SubmissaoEmSubmissaoState;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
@@ -154,4 +155,24 @@ public class ListaSubmissoesTest {
         boolean result = instance.validarCloneSubmissao(submissao1, submissaoClone);
         assertEquals(expResult, result);
     } 
+
+    /**
+     * Teste do método isUtilizadorUmAutorSubmissao, da classe ListaSubmissoes.
+     */
+    @Test
+    public void testIsUtilizadorUmAutorSubmissao() {
+        System.out.println("isUtilizadorUmAutorSubmissao");
+        Utilizador utilizador = new Utilizador(
+                "Susana", "email@gmail.com", "susus", "1234");
+        Autor autor = new Autor(utilizador, new InstituicaoAfiliacao("ISEP"));
+        Submissao submissao = new Submissao();        
+        submissao.setEstado(new SubmissaoEmSubmissaoState(submissao));
+        submissao.setArtigoInicial(new Artigo());
+        submissao.getArtigoInicial().getListaAutores().adicionarAutor(autor);
+        ListaSubmissoes instance = new ListaSubmissoes();
+        instance.adicionarSubmissao(submissao);
+        boolean expResult = true;
+        boolean result = instance.isUtilizadorUmAutorSubmissao(utilizador);
+        assertEquals(expResult, result);
+    }
 }
