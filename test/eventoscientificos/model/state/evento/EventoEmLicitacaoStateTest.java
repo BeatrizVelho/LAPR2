@@ -1,7 +1,5 @@
 package eventoscientificos.model.state.evento;
 
-import eventoscientificos.model.state.evento.EventoState;
-import eventoscientificos.model.state.evento.EventoEmLicitacaoState;
 import eventoscientificos.model.Evento;
 import eventoscientificos.model.Local;
 import org.junit.Test;

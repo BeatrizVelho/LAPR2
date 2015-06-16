@@ -1,9 +1,8 @@
 package eventoscientificos.model;
 
-import eventoscientificos.state.submissao.SubmissaoAceiteState;
-import eventoscientificos.state.submissao.SubmissaoCriadaState;
-import eventoscientificos.state.submissao.SubmissaoEmSubmissaoState;
-import eventoscientificos.state.submissao.SubmissaoState;
+import eventoscientificos.model.state.submissao.SubmissaoAceiteState;
+import eventoscientificos.model.state.submissao.SubmissaoState;
+
 import org.junit.Test;
 import static org.junit.Assert.*;
 

@@ -60,7 +60,7 @@ public class CP {
 
         if (!validarRevisor(revisor)) {
             throw new IllegalArgumentException("O revisor"
-                    + " já se encontra na lista.");
+                                + " já se encontra na lista.");
         }
 
         return adicionarRevisor(revisor);
@@ -98,4 +98,19 @@ public class CP {
         return !(this.listaRevisores.size() == 0);
     }
 
+    /**
+     * Verifica se existe alguma licitação associada ao utilizador
+     *
+     * @param u utilizador a verificar
+     * @return verdadeiro se encontrou a licitação e falso se não encontrar
+     */
+    public boolean contains(Utilizador u) {
+        for (Revisor r : listaRevisores) {
+            Utilizador ut = r.getUtilizador();
+            if (ut.equals(u)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

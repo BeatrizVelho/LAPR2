@@ -5,8 +5,7 @@
  */
 package eventoscientificos.model.state.evento;
 
-import eventoscientificos.model.state.evento.EventoState;
-import eventoscientificos.model.state.evento.EventoEmSubmissaoCameraReadyState;
+
 import eventoscientificos.model.Evento;
 import eventoscientificos.model.Local;
 import org.junit.Test;

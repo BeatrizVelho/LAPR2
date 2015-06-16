@@ -17,6 +17,14 @@ import java.util.List;
 public interface Licitavel {
 
     /**
+     * Valida se o licitável se encontra em periodo de licitação
+     *
+     * @return verdadeiro se estiver em periodo de licitação e falso se não
+     * estiver
+     */
+    public boolean isStateValidoParaLicitar(Utilizador utilizador);
+
+    /**
      * Devolve a lista de licitações do do artigo.
      *
      * @return Devolve a lista de submissões do submissivel.
@@ -30,5 +38,6 @@ public interface Licitavel {
      * @param submissao submissão a rever
      * @return lista de conflitos detetados entre o revisor e o artigo
      */
-    public List<Conflito> getConflitoRevisorArtigo(Revisor revisor, Submissao submissao);
+    public Conflito getConflitoRevisorArtigo(Revisor revisor, Submissao submissao);
+
 }

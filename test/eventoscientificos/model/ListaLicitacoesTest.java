@@ -21,7 +21,12 @@ public class ListaLicitacoesTest {
     private List<Licitacao> listaLicitacoes;
 
     public ListaLicitacoesTest() {
+        ListaLicitacoes listaLicitacoes = new ListaLicitacoes();
         this.listaLicitacoes = new ArrayList<>();
+        Licitacao instance = new Licitacao(new Revisor(new Utilizador(
+                            "fatima", "ola@iml.com", "fafa", "1234")),
+                            new Artigo(), 0, null);
+        this.listaLicitacoes.add(instance);
     }
 
     /**
@@ -82,6 +87,49 @@ public class ListaLicitacoesTest {
         ListaLicitacoes instance = new ListaLicitacoes();
         boolean expResult = false;
         boolean result = instance.adicionarListaLicitacoesTemporaria(listaTemporaria);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of equals method, of class ListaLicitacoes.
+     */
+    @Test
+    public void testEquals() {
+        System.out.println("equals");
+        Object outroObjecto = new ListaLicitacoes();
+        ((ListaLicitacoes) outroObjecto).adicionarListaLicitacoesTemporaria(listaLicitacoes);
+        ListaLicitacoes instance = new ListaLicitacoes();
+        instance.adicionarListaLicitacoesTemporaria(listaLicitacoes);
+        boolean expResult = true;
+        boolean result = instance.equals(outroObjecto);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of equals method, of class ListaLicitacoes.
+     */
+    @Test
+    public void testEqualsNot() {
+        System.out.println("equalsNot");
+        Object outroObjecto = new ListaLicitacoes();
+        ListaLicitacoes instance = new ListaLicitacoes();
+        instance.adicionarListaLicitacoesTemporaria(listaLicitacoes);
+        boolean expResult = false;
+        boolean result = instance.equals(outroObjecto);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of contains method, of class ListaLicitacoes.
+     */
+    @Test
+    public void testContains() {
+        System.out.println("contains");
+        ListaLicitacoes instance = new ListaLicitacoes();
+        instance.adicionarListaLicitacoesTemporaria(listaLicitacoes);
+        Utilizador utilizador = new Utilizador("fatima", "ola@iml.com", "fafa", "1234");
+               boolean expResult = true;
+        boolean result = instance.contains(utilizador);
         assertEquals(expResult, result);
     }
 

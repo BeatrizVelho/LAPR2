@@ -1,7 +1,7 @@
 package eventoscientificos.model;
 
-import org.omg.rg.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Test;
 
 /**
  * @author G01

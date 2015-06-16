@@ -1,7 +1,9 @@
 package eventoscientificos.model;
 
+import java.util.List;
+
 /**
- * Representa uma instância de conflito através 
+ * Representa uma instância de conflito através
  *
  * @author G01
  */
@@ -20,21 +22,74 @@ public class Conflito {
     /**
      * Tipo do conflito.
      */
-    private TipoConflito tipoConflito;
+    private List<TipoConflito> listaTipoConflito;
 
     /**
      * Constrói uma instância de Conflito recebendo um revisor, uma submissão e
      * um tipo de conflito.
-     * 
+     *
      * @param revisor Revisor do conflito.
      * @param submissao Submissão do conflito.
-     * @param tipoConflito Tipo do conflito.
+     * @param listaConflitos lista de Tipos do conflito.
      */
     public Conflito(
-            Revisor revisor, Submissao submissao, TipoConflito tipoConflito) {
+                        Revisor revisor, Submissao submissao, List<TipoConflito> listaConflitos) {
         this.revisor = revisor;
         this.submissao = submissao;
-        this.tipoConflito = tipoConflito;
-    }   
+        this.listaTipoConflito = listaConflitos;
+    }
 
+    /**
+     * Devolve o revisor associado ao conflito
+     *
+     * @return revisor
+     */
+    public Revisor getRevisor() {
+        return revisor;
+    }
+
+    /**
+     * Devolve a submissão associada ao conflito
+     *
+     * @return submissao
+     */
+    public Submissao getSubmissao() {
+        return submissao;
+    }
+
+    /**
+     * Devolve os tipos de conflitos associados entre o revisor e artigo
+     *
+     * @return lista de conflitos
+     */
+    public List<TipoConflito> getListaTipoConflito() {
+        return listaTipoConflito;
+    }
+
+    /**
+     * Compara dois objetos entre si. Comparando primariamente a posição de
+     * memória, seguida do conteudo e das classes as quais cada um deles
+     * pertence, e finalmente os seus atributos, revisor, submissao e lista de
+     * tipos de conflitos.
+     *
+     * @param outroObjecto conflito a comparar
+     * @return Verdadeiro caso os objetos comparados sejam iguais e falso caso
+     * não o sejam.
+     */
+    @Override
+    public boolean equals(Object outroObjecto) {
+        if (this == outroObjecto) {
+            return true;
+        }
+
+        if (outroObjecto == null || this.getClass() != outroObjecto.getClass()) {
+            return false;
+        }
+
+        Conflito outroConflito = (Conflito) outroObjecto;
+
+        return this.revisor.equals(outroConflito.revisor)
+                            && this.submissao.equals(outroConflito.submissao)
+                            && this.listaTipoConflito.equals(outroConflito.listaTipoConflito);
+    }
 }
