@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package eventoscientificos.model;
 
 import java.util.ArrayList;
@@ -40,46 +35,71 @@ public class RegistoUtilizadores {
      * @return Utilizador
      */
     public Utilizador novoUtilizador(String nome, String email, String username, String password) {
-        Utilizador u = new Utilizador(nome, email, username, password);
-        if (!u.validarUtilizador()) {
+        Utilizador utilizador = new Utilizador(nome, email, username, password);
+        if (!utilizador.validarUtilizador()) {
             throw new IllegalArgumentException(" Utilizador invalido");
         }
-        if (!validarUtilizador(u)) {
+        if (!validarUtilizador(utilizador)) {
             throw new IllegalArgumentException("Utilizador ja consta na lista"
-                                + " de utilizadores da empresa");
+                    + " de utilizadores da empresa");
         }
-        return u;
+        return utilizador;
     }
 
     /**
      * Adiciona o utilizador passado por parametro a lista de utilizadores caso
      * este nao exista na lista
      *
-     * @param u instancia de Utilizador a adicionar
+     * @param utilizador instancia de Utilizador a adicionar
      * @return true quando adicionado caso o utilizador nao exista na lista de
      * utilizadores e adicionado e false caso o utilizador
      */
-    public boolean adicionaUtilizador(Utilizador u) {
-        if (this.listaUtilizadores.add(u)) {
-            return true;
-        } else {
-            return false;
-        }
+    public boolean adicionaUtilizador(Utilizador utilizador) {
+        return this.listaUtilizadores.add(utilizador);
     }
 
     /**
      * Verifica se o utilizador passado por parametro ja consta na lista de
      * utilizadores
      *
-     * @param u instancia de Utilizador a verificar
+     * @param utilizador instancia de Utilizador a verificar
      * @return true caso nao exista na lista e false caso ja conste
      */
-    private boolean validarUtilizador(Utilizador u) {
-        if (!listaUtilizadores.contains(u)) {
-            return true;
-        } else {
-            return false;
+    private boolean validarUtilizador(Utilizador utilizador) {
+        return !listaUtilizadores.contains(utilizador);
+    }
+
+    /**
+     * Verifica se o utilizador passado por paraemtro já consta na lista de
+     * utilizadores, ignorando o utilizador que lhe deu origem.
+     *
+     * @return Verdadeiro se o utilizador passado por parametro não existir 
+     */
+    public boolean validarUtilizadorClone(
+            Utilizador utilizador, Utilizador utilizadorClone) {
+        for (Utilizador outroUtilizador : this.listaUtilizadores) {
+            if (utilizadorClone.equals(outroUtilizador)
+                    && !utilizador.equals(outroUtilizador)) {
+                return false;
+            }
         }
+
+        return true;
+    }
+
+    /**
+     * Atualiza um utilizador na lista de utilizadores, substituindo o atual
+     * pelo novo.
+     * 
+     * @param utilizador Utilizador antigo.
+     * @param utilizadorClone Utilizador novo.
+     * @return Verdadeiro se for possível realizar a atualização e falso caso 
+     * não seja.
+     */
+    public boolean atualizarUtilizador(
+            Utilizador utilizador, Utilizador utilizadorClone) {
+        return this.listaUtilizadores.remove(utilizador) 
+                && this.listaUtilizadores.add(utilizadorClone);
     }
 
     /**
@@ -104,11 +124,11 @@ public class RegistoUtilizadores {
 
         return this.listaUtilizadores.equals(outroRegisto.listaUtilizadores);
     }
-    
+
     /**
      * Procura um utilizador na lista de utilizadores através dos seus
      * identificadores (username ou email).
-     * 
+     *
      * @param id ID do utilizador, pode ser o seu utilizador ou email
      * @return Um objeto do tipo utilizador, caso o mesmo exista, senão retorna
      * null.

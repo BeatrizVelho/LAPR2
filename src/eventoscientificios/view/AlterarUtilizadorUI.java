@@ -1,6 +1,6 @@
 package eventoscientificios.view;
 
-import eventoscientificos.controllers.RegistarUtilizadorController;
+import eventoscientificos.controllers.AlterarUtilizadorController;
 import eventoscientificos.model.Empresa;
 import java.awt.Frame;
 import javax.swing.JOptionPane;
@@ -8,24 +8,25 @@ import javax.swing.JOptionPane;
 /**
  * @author G01
  */
-public class RegistarUtilizadorUI extends javax.swing.JDialog {
-    
+public class AlterarUtilizadorUI extends javax.swing.JDialog {
+
     private Frame framePai;
-    private RegistarUtilizadorController controller;
+    private AlterarUtilizadorController controller;
 
     /**
-     * Creates new form RegistarUtilizadorUI
+     * Creates new form NewJDialog
      * @param parent
      * @param modal
      * @param empresa
      */
-    public RegistarUtilizadorUI(java.awt.Frame parent, boolean modal, Empresa empresa) {
-        super(parent, "Registar utilizador", modal);
-        this.controller = new RegistarUtilizadorController(empresa);
+    public AlterarUtilizadorUI(java.awt.Frame parent, boolean modal, Empresa empresa) {
+        super(parent, "Alterar Utilizador", modal);
+        this.controller = new AlterarUtilizadorController(empresa);
+        this.controller.criarCloneUtilizador();
         this.framePai = parent;
         initComponents();
         setLocationRelativeTo(null);
-        getRootPane().setDefaultButton(this.btn_registar);
+        getRootPane().setDefaultButton(btn_alterarDados);
         setVisible(true);
     }
 
@@ -38,23 +39,30 @@ public class RegistarUtilizadorUI extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lbl_username = new javax.swing.JLabel();
-        lbl_password = new javax.swing.JLabel();
-        lbl_nome = new javax.swing.JLabel();
-        lbl_email = new javax.swing.JLabel();
         txt_username = new javax.swing.JTextField();
         txt_nome = new javax.swing.JTextField();
         txt_email = new javax.swing.JTextField();
-        btn_cancelar = new javax.swing.JButton();
-        btn_registar = new javax.swing.JButton();
         txt_password = new javax.swing.JPasswordField();
+        lbl_password = new javax.swing.JLabel();
+        lbl_username = new javax.swing.JLabel();
+        lbl_nome = new javax.swing.JLabel();
+        lbl_email = new javax.swing.JLabel();
+        btn_cancelar = new javax.swing.JButton();
+        btn_alterarDados = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(345, 345));
 
-        lbl_username.setText("Username:");
+        txt_username.setText(this.controller.getUtilizadorUsername());
+
+        txt_nome.setText(this.controller.getUtilizadorNome());
+
+        txt_email.setText(this.controller.getUtilizadorEmail());
+
+        txt_password.setText(this.controller.getUtilizadorPassword());
 
         lbl_password.setText("Password:");
+
+        lbl_username.setText("Username:");
 
         lbl_nome.setText("Nome:");
 
@@ -67,10 +75,10 @@ public class RegistarUtilizadorUI extends javax.swing.JDialog {
             }
         });
 
-        btn_registar.setText("Registar");
-        btn_registar.addActionListener(new java.awt.event.ActionListener() {
+        btn_alterarDados.setText("Alterar Dados");
+        btn_alterarDados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_registarActionPerformed(evt);
+                btn_alterarDadosActionPerformed(evt);
             }
         });
 
@@ -83,19 +91,21 @@ public class RegistarUtilizadorUI extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lbl_username)
-                            .addComponent(lbl_password)
-                            .addComponent(lbl_nome)
-                            .addComponent(lbl_email))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lbl_username)
+                                    .addComponent(lbl_password))
+                                .addComponent(lbl_email, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addComponent(lbl_nome))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_username)
-                            .addComponent(txt_nome)
                             .addComponent(txt_email)
+                            .addComponent(txt_nome)
+                            .addComponent(txt_username)
                             .addComponent(txt_password)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 171, Short.MAX_VALUE)
-                        .addComponent(btn_registar)
+                        .addGap(0, 145, Short.MAX_VALUE)
+                        .addComponent(btn_alterarDados)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_cancelar)))
                 .addContainerGap())
@@ -105,12 +115,12 @@ public class RegistarUtilizadorUI extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_username)
-                    .addComponent(txt_username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_username))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_password)
-                    .addComponent(txt_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_password))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -122,25 +132,31 @@ public class RegistarUtilizadorUI extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_cancelar)
-                    .addComponent(btn_registar))
+                    .addComponent(btn_alterarDados))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_registarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_registarActionPerformed
+    private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed
+        dispose();
+    }//GEN-LAST:event_btn_cancelarActionPerformed
+
+    private void btn_alterarDadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_alterarDadosActionPerformed
         try {
-            controller.novoUtilizador(
-                txt_nome.getText(), txt_email.getText(), txt_username.getText(),
-                new String(txt_password.getPassword()));
+            controller.alterarDadosUtilizador(
+                    txt_username.getText(),
+                    new String(txt_password.getPassword()),
+                    txt_nome.getText(),
+                    txt_email.getText());
             
             String opcoes[] = {"Sim", "Não"};
             int resposta = JOptionPane.showOptionDialog(
-                    null, "Confirma os dados?", "Registar Utilizador", 0, 
+                    null, "Confirma os dados?", "Alterar Utilizador", 0, 
                     JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]);
             if (resposta == 0) {
-                controller.adicionarUtilizador();
+                controller.atualizarUtilizador();
                 dispose();
             } else {
                 dispose();
@@ -149,18 +165,14 @@ public class RegistarUtilizadorUI extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(
                     framePai,
                     ex.getMessage(),
-                    "Registar Utilizador",
+                    "Alterar Utilizador",
                     JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_btn_registarActionPerformed
-
-    private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed
-        dispose();
-    }//GEN-LAST:event_btn_cancelarActionPerformed
+    }//GEN-LAST:event_btn_alterarDadosActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_alterarDados;
     private javax.swing.JButton btn_cancelar;
-    private javax.swing.JButton btn_registar;
     private javax.swing.JLabel lbl_email;
     private javax.swing.JLabel lbl_nome;
     private javax.swing.JLabel lbl_password;

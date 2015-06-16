@@ -3,8 +3,16 @@
 	<NumElementos></NumElementos>
 	<Locais>
 		<Local>
-			<LocalID></LocalID>
-			<Designacao></Designacao>
+			<LocalID>1</LocalID>
+			<Designacao>Porto</Designacao>
+		</Local>
+		<Local>
+			<LocalID>2</LocalID>
+			<Designacao>Lisboa</Designacao>
+		</Local>
+		<Local>
+			<LocalID>3</LocalID>
+			<Designacao>Coimbra</Designacao>
 		</Local>
 	</Locais>
 </ListaLocais>
