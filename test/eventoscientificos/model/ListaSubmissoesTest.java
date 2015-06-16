@@ -99,16 +99,59 @@ public class ListaSubmissoesTest {
         assertEquals(expResult, result);
     }
 
-//    /**
-//     * Test of getListaSubmissoesUtilizador method, of class ListaSubmissoes.
-//     */
-//    @Test
-//    public void testGetListaSubmissoesUtilizador() {
-//        System.out.println("getListaSubmissoesUtilizador");
-//        Utilizador utilizador = null;
-//        ListaSubmissoes instance = new ListaSubmissoes();
-//        List<Submissao> expResult = null;
-//        List<Submissao> result = instance.getListaSubmissoesUtilizador(utilizador);
-//        assertEquals(expResult, result);
-//    }
+    /**
+     * Teste do método getListaSubmissoesUtilizador, da classe ListaSubmissoes.
+     */
+    @Test
+    public void testGetListaSubmissoesUtilizador() {
+        System.out.println("getListaSubmissoesUtilizador");
+        Artigo artigo = new Artigo();
+        artigo.getListaAutores().novoAutor(new Utilizador(
+                "pedro", "1140781@isep.ipp.pt", "pedro", "12345"),
+                new InstituicaoAfiliacao("ISEP"));
+
+        Utilizador utilizador
+                = new Utilizador("pedro", "1140781@isep.ipp.pt", "pedro", "12345");
+        ListaSubmissoes instance = new ListaSubmissoes();
+        instance.adicionarSubmissao(this.submissao);
+        int expResult = 1;
+        int result = instance.getListaSubmissoesUtilizador(utilizador).size();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método validarCloneSubmissao, da classe ListaSubmissoes.
+     */
+    @Test
+    public void testValidarCloneSubmissaoTrue() {
+        System.out.println("validarCloneSubmissao");
+        Submissao submissao = this.submissao;
+        Submissao submissaoClone = submissao.criarCloneSubmissao();
+        ListaSubmissoes instance = new ListaSubmissoes();
+        instance.adicionarSubmissao(submissao);
+        boolean expResult = true;
+        boolean result = instance.validarCloneSubmissao(submissao, submissaoClone);
+        assertEquals(expResult, result);
+    }
+
+   /**
+     * Teste do método validarCloneSubmissao, da classe ListaSubmissoes.
+     */
+    @Test
+    public void testValidarCloneSubmissaoFalse() {
+        System.out.println("validarCloneSubmissao");
+        Submissao submissao = this.submissao;
+        Submissao submissaoClone = submissao.criarCloneSubmissao();
+        Submissao submissao1 = new Submissao();
+        Artigo artigo = new Artigo();
+        artigo.setTitulo("Ananás");
+        submissao1.setArtigoInicial(artigo);
+        submissao1.setArtigoFinal(artigo);
+        ListaSubmissoes instance = new ListaSubmissoes();
+        instance.adicionarSubmissao(submissao);
+        instance.adicionarSubmissao(submissao1);
+        boolean expResult = false;
+        boolean result = instance.validarCloneSubmissao(submissao1, submissaoClone);
+        assertEquals(expResult, result);
+    } 
 }
