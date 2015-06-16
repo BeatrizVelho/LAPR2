@@ -6,7 +6,6 @@
 package eventoscientificos.model.state.evento;
 
 import eventoscientificos.model.Evento;
-import utils.Data;
 
 /**
  * Representa uma instância de EventoCriadoState tendo acesso ao respetivo
@@ -177,18 +176,18 @@ public class EventoCriadoState implements EventoState {
      */
     @Override
     public boolean isStateValidoParaRemover() {
-                return (!(setCriado() || setRegistado() || setSessoesTematicasDefinidas() || setCPDefinida() || setCameraReady()));
+        return (!(setCriado() || setRegistado() || setSessoesTematicasDefinidas() || setCPDefinida() || setCameraReady()));
 
     }
 
-     /**
+    /**
      * Valida se o evento se encontra num estado válido para submeter artigos
      *
      * @return verdadeiro se estiver no estado correto e falso se não estiver
      */
     @Override
     public boolean isStateValidoParaSubmeter() {
-               return setEmSubmissao();
+        return setEmSubmissao();
 
     }
 
@@ -200,7 +199,7 @@ public class EventoCriadoState implements EventoState {
      */
     @Override
     public boolean isStateValidoParaAlterar() {
-              return setEmSubmissao();
+        return setEmSubmissao();
 
     }
 
