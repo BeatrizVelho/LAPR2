@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * Representa uma instância de Licitacao através do objeto revisor, objeto
- * artigo, grau de interesse e conflitos.
+ * submissão, grau de interesse e conflitos.
  *
  * @author G01
  */
@@ -21,56 +21,52 @@ public class Licitacao {
      */
     private Revisor revisor;
     /**
-     * Artigo a licitar.
+     * Submissão a licitar.
      */
-    private Artigo artigo;
+    private Submissao submissao;
     /**
      * Grau de interesse em rever.
      */
     private int grauInteresse;
     /**
-     * Lista de conflitos de interesse entre o revisor e o artigo a rever
+     * Conflito de interesse entre o revisor e o submissão a rever
      */
-    private List<Conflito> listaConflitos;
+    private Conflito conflito;
     /**
      * Grau de interesse por omissão.
      */
     private static final int GRAU_INTERESSE_POR_OMISSAO = 0;
-    /**
-     * Lista de conflitos por omissão.
-     */
-    private static final List<Conflito> LISTA_CONFLITOS_POR_OMISSAO
-                        = new ArrayList<Conflito>();
 
     /**
      * Constrói uma instancia de Licitacao com os valores passados por parametro
      *
-     * @param revisor revisor que licita o artigo
-     * @param artigo artigo a licitar
-     * @param grauInteresse grau de interesse em rever o artigo
-     * @param listaConflitos lista de conflitos entre o revisor com o artigo
+     * @param revisor revisor que licita o submissão
+     * @param submissao submissão a licitar
+     * @param grauInteresse grau de interesse em rever o submissão
+     * @param conflito conflito entre o revisor com o submissão
      */
-    public Licitacao(Revisor revisor, Artigo artigo, int grauInteresse, List<Conflito> listaConflitos) {
+    public Licitacao(Revisor revisor, Submissao submissao, int grauInteresse,
+                        Conflito conflito) {
         this.revisor = revisor;
-        this.artigo = artigo;
+        this.submissao = submissao;
         setGrauInteresse(grauInteresse);
-        setListaConflitos(listaConflitos);
+        setConflito(conflito);
     }
 
     /**
-     * Devolve a lista de conflitos reconhecidos pelo revisor em relação ao
-     * artigo
+     * Devolve a lista de conflitos do
      *
-     * @return lista de conflitos reconhecidos pelo revisor
+     * @return conflito entre revisor e a submissão
      */
-    public List<Conflito> getListaConflitos() {
-        return listaConflitos;
+    public Conflito getConflito() {
+        return conflito;
     }
 
     /**
-     * Devolve o grau de interesse apresentado pelo revisor na revisão do artigo
+     * Devolve o grau de interesse apresentado pelo revisor na revisão do
+     * submissao
      *
-     * @return grau de interesse na revisão do artigo
+     * @return grau de interesse na revisão do submissao
      */
     public int getGrauInteresse() {
         return grauInteresse;
@@ -79,23 +75,23 @@ public class Licitacao {
     /**
      * Devolve o revisor licitador
      *
-     * @return o objeto revisor que licita o artigo
+     * @return o objeto revisor que licita o submissao
      */
     public Revisor getRevisor() {
         return revisor;
     }
 
     /**
-     * Devolve o artigo alvo de licitação por parte do revisor
+     * Devolve o submissao alvo de licitação por parte do revisor
      *
-     * @return o artigo licitável
+     * @return o submissao licitável
      */
-    public Artigo getArtigo() {
-        return artigo;
+    public Submissao getSubmissao() {
+        return submissao;
     }
 
     /**
-     * Modifica o grau de interesse do revisor rever o artigo
+     * Modifica o grau de interesse do revisor rever o submissao
      *
      * @param grauInteresse grau de interesse indicado pelo revisor
      */
@@ -108,15 +104,13 @@ public class Licitacao {
     }
 
     /**
-     * Modifica os conflitos detetados entre o revisor e o artigo a rever
+     * Modifica os conflitos detetados entre o revisor e o submissao a rever
      *
-     * @param listaConflitos lista de conflitos alterados pelo revisor
+     * @param conflito conflito a alterar pelo revisor
      */
-    public void setListaConflitos(List<Conflito> listaConflitos) {
-        if (listaConflitos == null) {
-            this.listaConflitos = LISTA_CONFLITOS_POR_OMISSAO;
-        } else {
-            this.listaConflitos = listaConflitos;
+    public void setConflito(Conflito conflito) {
+        if (conflito != null) {
+            this.conflito = conflito;
         }
     }
 
@@ -127,14 +121,14 @@ public class Licitacao {
      * falso se não uma licitação válida
      */
     public boolean validarLicitacao() {
-        return (this.artigo != null && this.revisor != null);
+        return (this.submissao != null && this.revisor != null);
 
     }
 
     /**
      * Compara dois objetos entre si. Comparando primariamente a posição de
      * memória, seguida do conteudo e das classes as quais cada um deles
-     * pertence, e finalmente os seus atributos revisor, artigo, grau de
+     * pertence, e finalmente os seus atributos revisor, submissao, grau de
      * interesse e conflitos.
      *
      * @param outroObjeto Licitação a comparar
@@ -153,8 +147,8 @@ public class Licitacao {
         Licitacao outraLicitacao = (Licitacao) outroObjeto;
 
         return this.revisor.equals(outraLicitacao.revisor)
-                            && this.artigo.equals(outraLicitacao.artigo)
+                            && this.submissao.equals(outraLicitacao.submissao)
                             && this.grauInteresse == outraLicitacao.grauInteresse
-                            && this.listaConflitos == outraLicitacao.listaConflitos;
+                            && this.conflito == outraLicitacao.conflito;
     }
 }

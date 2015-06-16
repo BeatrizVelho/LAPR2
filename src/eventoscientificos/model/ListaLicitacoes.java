@@ -42,13 +42,13 @@ public class ListaLicitacoes {
      * Cria uma nova instância do tipo Licitação
      *
      * @param revisor revisor licitador
-     * @param artigo artigo a licitar
-     * @param grauInteresse grau de interesse na revisão do artigo em questão
-     * @param conflitos lista de conflitos entre o revisor e o artigo
+     * @param submissao submissao a licitar
+     * @param grauInteresse grau de interesse na revisão do submissao em questão
+     * @param conflitos lista de conflitos entre o revisor e o submissao
      * @return
      */
-    public Licitacao novaLicitacao(Revisor revisor, Artigo artigo, int grauInteresse, List<Conflito> conflitos) {
-        return new Licitacao(revisor, artigo, grauInteresse, conflitos);
+    public Licitacao novaLicitacao(Revisor revisor, Submissao submissao, int grauInteresse, Conflito conflito) {
+        return new Licitacao(revisor, submissao, grauInteresse, conflito);
     }
 
     /**
@@ -94,7 +94,7 @@ public class ListaLicitacoes {
      * Verifica se existe alguma licitação associada ao utilizador
      *
      * @param u utilizador a verificar
-     * @return verdadeiro se encontrou a licitação e falso se não 
+     * @return verdadeiro se encontrou a licitação e falso se não
      */
     public boolean contains(Utilizador u) {
         for (Licitacao licitacao : this.listaLicitacoes) {

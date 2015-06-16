@@ -38,7 +38,7 @@ public interface Licitavel {
      * @param submissao submissão a rever
      * @return lista de conflitos detetados entre o revisor e o artigo
      */
-    public Conflito getConflitoRevisorArtigo(Revisor revisor, Submissao submissao);
+    public Conflito getConflitoRevisorSubmissao(Revisor revisor, Submissao submissao);
 
     /**
      * Devolve uma instância de ListaSubmissões.
@@ -46,4 +46,10 @@ public interface Licitavel {
      * @return ListaSubmissoes
      */
     public ListaSubmissoes getListaSubmissoes();
+
+    /**
+     * Devolve a Comissão de Programa (CP).
+     */
+    public CP getCP();
+
 }
