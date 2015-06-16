@@ -40,4 +40,10 @@ public interface Licitavel {
      */
     public Conflito getConflitoRevisorArtigo(Revisor revisor, Submissao submissao);
 
+    /**
+     * Devolve uma instância de ListaSubmissões.
+     *
+     * @return ListaSubmissoes
+     */
+    public ListaSubmissoes getListaSubmissoes();
 }
