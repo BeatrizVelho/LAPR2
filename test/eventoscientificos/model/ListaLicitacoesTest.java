@@ -19,14 +19,29 @@ import static org.junit.Assert.*;
 public class ListaLicitacoesTest {
 
     private List<Licitacao> listaLicitacoes;
+    private Submissao submissao;
+    private Revisor revisor;
+    private Conflito conflito;
 
     public ListaLicitacoesTest() {
+
+        Artigo artigoInicial = new Artigo();
+        Artigo artigoFinal = new Artigo();
+        this.submissao = new Submissao();
+        submissao.setArtigoInicial(artigoInicial);
+        submissao.setArtigoFinal(artigoFinal);
+
         ListaLicitacoes listaLicitacoes = new ListaLicitacoes();
         this.listaLicitacoes = new ArrayList<>();
         Licitacao instance = new Licitacao(new Revisor(new Utilizador(
                             "fatima", "ola@iml.com", "fafa", "1234")),
-                            new Artigo(), 0, null);
+                            this.submissao, 0, null);
         this.listaLicitacoes.add(instance);
+        this.revisor = new Revisor(new Utilizador(
+                            "Tiago", "1131658@isep.ipp.pt", "tiago", "1234"));
+
+        this.conflito = new Conflito(revisor, submissao, new ArrayList<>());
+
     }
 
     /**
@@ -48,12 +63,10 @@ public class ListaLicitacoesTest {
     public void testNovaLicitacao() {
         System.out.println("novaLicitacao");
         Revisor revisor = new Revisor(new Utilizador("Soraia", "freitas@mail.com", "fafa", "1234"));
-        Artigo artigo = new Artigo();
         int grauInteresse = 0;
-        List<Conflito> conflitos = new ArrayList<>();
         ListaLicitacoes instance = new ListaLicitacoes();
-        Licitacao expResult = new Licitacao(revisor, artigo, grauInteresse, conflitos);
-        Licitacao result = instance.novaLicitacao(revisor, artigo, grauInteresse, conflitos);
+        Licitacao expResult = new Licitacao(revisor, this.submissao, grauInteresse, conflito);
+        Licitacao result = instance.novaLicitacao(revisor, this.submissao, grauInteresse, conflito);
         assertEquals(expResult, result);
     }
 
@@ -67,9 +80,8 @@ public class ListaLicitacoesTest {
         Revisor revisor = new Revisor(new Utilizador("Soraia", "freitas@mail.com", "fafa", "1234"));
         Artigo artigo = new Artigo();
         int grauInteresse = 0;
-        List<Conflito> conflitos = new ArrayList<>();
         List<Licitacao> listaTemporaria = new ArrayList<>();
-        listaTemporaria.add(new Licitacao(revisor, artigo, grauInteresse, conflitos));
+        listaTemporaria.add(new Licitacao(revisor, submissao, grauInteresse, conflito));
         ListaLicitacoes instance = new ListaLicitacoes();
         boolean expResult = true;
         boolean result = instance.adicionarListaLicitacoesTemporaria(listaTemporaria);
@@ -128,7 +140,7 @@ public class ListaLicitacoesTest {
         ListaLicitacoes instance = new ListaLicitacoes();
         instance.adicionarListaLicitacoesTemporaria(listaLicitacoes);
         Utilizador utilizador = new Utilizador("fatima", "ola@iml.com", "fafa", "1234");
-               boolean expResult = true;
+        boolean expResult = true;
         boolean result = instance.contains(utilizador);
         assertEquals(expResult, result);
     }

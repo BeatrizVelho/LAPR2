@@ -67,6 +67,15 @@ public class Conflito {
     }
 
     /**
+     * Modifica a lista de tipos de conflitos do conflito detetado
+     *
+     * @param listaTipoConflito nova lista de conflitos
+     */
+    public void setListaTipoConflito(List<TipoConflito> listaTipoConflito) {
+        this.listaTipoConflito = listaTipoConflito;
+    }
+
+    /**
      * Compara dois objetos entre si. Comparando primariamente a posição de
      * memória, seguida do conteudo e das classes as quais cada um deles
      * pertence, e finalmente os seus atributos, revisor, submissao e lista de

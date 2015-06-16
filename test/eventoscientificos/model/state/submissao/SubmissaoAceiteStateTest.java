@@ -121,7 +121,7 @@ public class SubmissaoAceiteStateTest {
     public void testSetSemArtigoFinal() {
         System.out.println("setSemArtigoFinal");
         SubmissaoState instance = this.submissao.getEstado();
-        boolean expResult = false;
+        boolean expResult = true;
         boolean result = instance.setSemArtigoFinal();
         assertEquals(expResult, result);
     }

@@ -20,6 +20,7 @@ public class EventoTest {
     private Evento evento;
     private Utilizador utilizador;
     private Licitacao licitacao;
+    private Submissao submissao;
 
     public EventoTest() {
         this.evento = new Evento("titulo", "descricao", new Local("local"),
@@ -28,9 +29,14 @@ public class EventoTest {
                             new Data(2016, 10, 1), new Data(2017, 6, 10));
         this.utilizador = new Utilizador(
                             "Pedro", "1140781@isep.ipp.pt", "pedro", "12345");
+        Artigo artigoInicial = new Artigo();
+        Artigo artigoFinal = new Artigo();
+        this.submissao = new Submissao();
+        submissao.setArtigoInicial(artigoInicial);
+        submissao.setArtigoFinal(artigoFinal);
         this.licitacao = new Licitacao(new Revisor(new Utilizador(
                             "fatima", "ola@iml.com", "fafa", "1234")),
-                            new Artigo(), 0, null);
+                            this.submissao, 0, null);
     }
 
     /**
@@ -499,11 +505,11 @@ public class EventoTest {
 //
 //    }
     /**
-     * Test of getConflitoRevisorArtigo method, of class Evento.
+     * Test of getConflitoRevisorSubmissao method, of class Evento.
      */
     @Test
-    public void testGetConflitoRevisorArtigo() {
-        System.out.println("getConflitoRevisorArtigo");
+    public void testGetConflitoRevisorSubmissao() {
+        System.out.println("getConflitoRevisorSubmissao");
         Revisor revisor = new Revisor(new Utilizador(
                             "Tiago", "1131658@isep.ipp.pt", "tiago", "1234"));
         Submissao submissao = new Submissao();
@@ -515,7 +521,7 @@ public class EventoTest {
         instance.getProcessoDetecao().getListaConflito().add(c);
 
         Conflito expResult = c;
-        Conflito result = instance.getConflitoRevisorArtigo(revisor, submissao);
+        Conflito result = instance.getConflitoRevisorSubmissao(revisor, submissao);
         assertEquals(expResult, result);
 
     }

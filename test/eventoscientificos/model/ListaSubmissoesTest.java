@@ -1,5 +1,7 @@
 package eventoscientificos.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -7,14 +9,14 @@ import static org.junit.Assert.*;
  * @author G01
  */
 public class ListaSubmissoesTest {
-    
+
     private Submissao submissao;
-    
+
     public ListaSubmissoesTest() {
         this.submissao = new Submissao();
         this.submissao.setArtigoInicial(new Artigo());
         this.submissao.setArtigoFinal(new Artigo());
-                }
+    }
 
     /**
      * Teste do método novaSubmissao, da classe ListaSubmissoes.
@@ -22,14 +24,14 @@ public class ListaSubmissoesTest {
     @Test
     public void testNovaSubmissao() {
         System.out.println("novaSubmissao");
-        ListaSubmissoes instance = new ListaSubmissoes();        
+        ListaSubmissoes instance = new ListaSubmissoes();
         Submissao expResult = this.submissao;
         Submissao result = instance.novaSubmissao();
         result.setArtigoInicial(new Artigo());
         result.setArtigoFinal(new Artigo());
         assertEquals(expResult, result);
     }
-   
+
     /**
      * Teste do método alterarEstadoSubmissao, da classe ListaSubmissoes.
      */
@@ -68,7 +70,7 @@ public class ListaSubmissoesTest {
         boolean result = instance.equals(outroObjeto);
         assertEquals(expResult, result);
     }
-    
+
     /**
      * Teste do método equals, da classe ListaSubmissoes.
      */
@@ -82,4 +84,31 @@ public class ListaSubmissoesTest {
         boolean result = instance.equals(outroObjeto);
         assertEquals(expResult, result);
     }
+
+    /**
+     * Test of getListaSubmissoes method, of class ListaSubmissoes.
+     */
+    @Test
+    public void testGetListaSubmissoes() {
+        System.out.println("getListaSubmissoes");
+        ListaSubmissoes instance = new ListaSubmissoes();
+        instance.adicionarSubmissao(submissao);
+        List<Submissao> expResult = new ArrayList<>();
+        expResult.add(submissao);
+        List<Submissao> result = instance.getListaSubmissoes();
+        assertEquals(expResult, result);
+    }
+
+//    /**
+//     * Test of getListaSubmissoesUtilizador method, of class ListaSubmissoes.
+//     */
+//    @Test
+//    public void testGetListaSubmissoesUtilizador() {
+//        System.out.println("getListaSubmissoesUtilizador");
+//        Utilizador utilizador = null;
+//        ListaSubmissoes instance = new ListaSubmissoes();
+//        List<Submissao> expResult = null;
+//        List<Submissao> result = instance.getListaSubmissoesUtilizador(utilizador);
+//        assertEquals(expResult, result);
+//    }
 }

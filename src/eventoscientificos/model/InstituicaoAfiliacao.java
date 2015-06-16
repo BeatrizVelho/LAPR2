@@ -45,6 +45,7 @@ public class InstituicaoAfiliacao {
     
     /**
      * Verifica se o nome da instituição de afiliação 
+     * @return Verdadeiro
      */
     public boolean validarInstituicaoAfiliacao() {
         return true;
