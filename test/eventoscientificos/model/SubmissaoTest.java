@@ -1,6 +1,7 @@
 package eventoscientificos.model;
 
 import eventoscientificos.model.state.submissao.SubmissaoAceiteState;
+import eventoscientificos.model.state.submissao.SubmissaoEmSubmissaoState;
 import eventoscientificos.model.state.submissao.SubmissaoState;
 
 import org.junit.Test;
@@ -165,20 +166,6 @@ public class SubmissaoTest {
         boolean result = instance.equals(outroObjecto);
         assertEquals(expResult, result);
     }
-    
-        
-//    /**
-//     * Test of equals method, of class Submissao.
-//     */
-//    @Test
-//    public void testEquals() {
-//        System.out.println("equals");
-//        Object outroObjecto = new Submissao();
-//        Submissao instance = new Submissao();
-//        boolean expResult = true;
-//        boolean result = instance.equals(outroObjecto);
-//        assertEquals(expResult, result);
-//    }
 
     /**
      * Teste do método equals, da classe Submissao.
@@ -204,6 +191,109 @@ public class SubmissaoTest {
         Submissao instance = new Submissao();
         Artigo expResult = this.artigoInicial;
         Artigo result = instance.novoArtigo();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método alterarEstadoSubmissao, da classe Submissao.
+     */
+    @Test
+    public void testAlterarEstadoSubmissao() {
+        System.out.println("alterarEstadoSubmissao");
+        Submissao instance = new Submissao();
+        boolean expResult = true;
+        boolean result = instance.alterarEstadoSubmissao();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método validarArtigo, da classe Submissao.
+     */
+    @Test
+    public void testValidarArtigoEmSubmissao() {
+        System.out.println("validarArtigo");
+        Submissao instance = new Submissao();
+        boolean expResult = true;
+        boolean result = this.artigoInicial.validarArtigo();
+        assertEquals(expResult, result);
+    }
+    
+    /**
+     * Teste do método validarArtigo, da classe Submissao.
+     */
+    @Test
+    public void testValidarArtigoAceite() {
+        System.out.println("validarArtigo");
+        Submissao instance = new Submissao();
+        instance.setEstado(new SubmissaoAceiteState(instance));
+        boolean expResult = true;
+        boolean result = this.artigoFinal.validarArtigo();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método adicionarArtigo, da classe Submissao.
+     */
+    @Test
+    public void testAdicionarArtigoEmSubmissao() {
+        System.out.println("adicionarArtigo");
+        Artigo artigo = this.artigoInicial;
+        Submissao instance = new Submissao();
+        boolean expResult = true;
+        boolean result = instance.adicionarArtigo(artigo);
+        assertEquals(expResult, result);
+    }
+    
+    /**
+     * Teste do método adicionarArtigo, da classe Submissao.
+     */
+    @Test
+    public void testAdicionarArtigoAceite() {
+        System.out.println("adicionarArtigo");
+        Artigo artigo = this.artigoInicial;
+        Submissao instance = new Submissao();
+        instance.setEstado(new SubmissaoAceiteState(instance));
+        boolean expResult = true;
+        boolean result = instance.adicionarArtigo(artigo);
+        assertEquals(expResult, result);
+    }
+    
+    
+    /**
+     * Teste do método criarCloneSubmissao, da classe Submissao.
+     */
+    @Test
+    public void testCriarCloneSubmissao() {
+        System.out.println("criarCloneSubmissao");
+        Submissao instance = new Submissao();
+        instance.setArtigoInicial(new Artigo("Teste","123","C:777"));
+        instance.setArtigoFinal(new Artigo());
+        Submissao novaInstance = instance.criarCloneSubmissao();
+        novaInstance.setArtigoInicial(this.artigoInicial);
+        novaInstance.setArtigoFinal(this.artigoFinal);
+        boolean expResult = true;
+        boolean result = instance.equals(novaInstance);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método isAutor, da classe Submissao.
+     */
+    @Test
+    public void testIsAutor() {
+        System.out.println("isAutor");
+        Utilizador utilizador = this.utilizador;
+        Submissao instance = new Submissao();
+        instance.setEstado(new SubmissaoEmSubmissaoState(instance));
+        instance.setArtigoInicial(this.artigoInicial);
+        instance.getArtigoInicial().getListaAutores().novoAutor(
+                this.utilizador, new InstituicaoAfiliacao("ISEP"));
+        
+        instance.getArtigoInicial().getListaAutores().adicionarAutor(
+                new Autor(this.utilizador, new InstituicaoAfiliacao("ISEP")));
+        
+        boolean expResult = true;
+        boolean result = instance.isAutor(utilizador);
         assertEquals(expResult, result);
     }
 
