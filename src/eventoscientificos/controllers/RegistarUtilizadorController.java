@@ -50,14 +50,10 @@ public class RegistarUtilizadorController {
      * @return nova instancia de utilizador.
      */
     public boolean novoUtilizador(String nome, String email, String username,
-                        String password) {
-        try {
-            this.utilizador = registoUtilizadores.novoUtilizador(nome, email, username, password);
-        } catch (IllegalArgumentException e) {
-            e.getMessage();
-            return false;
-        }
-        return true;
+            String password) {
+        this.utilizador = registoUtilizadores.novoUtilizador(nome, email, username, password);
+
+        return this.utilizador != null;
     }
 
     /**
@@ -70,5 +66,5 @@ public class RegistarUtilizadorController {
     public boolean adicionarUtilizador() {
         return registoUtilizadores.adicionaUtilizador(this.utilizador);
     }
- 
+
 }

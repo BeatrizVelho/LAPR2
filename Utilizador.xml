@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ListaUtilizadores>
-	<NumeroElementos></NumeroElementos>
+	<NumeroElementos>2</NumeroElementos>
 	<Utilizadores>
 		<Utilizador>
+			<Username>pedro</Username>
+			<Nome>Pedro Moreira</Nome>
+			<Email>1140781@isep.ipp.pt</Email>
+			<Password>1234</Password>
+		</Utilizador>
+		<Utilizador>
 			<Username></Username>
-			<Nome></Nome>
-			<Email></Email>
+			<Nome>Soraia Freitas</Nome>
+			<Email>1140875@isep.ipp.pt</Email>
+			<Password>1234</Password>
+		</Utilizador>
+		<Utilizador>
+			<Username>beatriz</Username>
+			<Nome>Beatriz Velho</Nome>
+			<Email>1140587@isep.ipp.pt</Email>
 			<Password></Password>
 		</Utilizador>
 	</Utilizadores>
