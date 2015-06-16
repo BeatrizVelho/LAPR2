@@ -3,12 +3,11 @@ package eventoscientificos.model.state.submissao;
 import eventoscientificos.model.Submissao;
 
 /**
- * Representa uma instância de SubmissaoEmLicitacaoState através de uma
- * submissão
- *
+ * Representa uma instância de SubmissaoRevistaState através de uma submissão.
+ * 
  * @author G01
  */
-public class SubmissaoEmLicitacaoState implements SubmissaoState {
+public class SubmissaoRevistaState implements SubmissaoState {
 
     /**
      * Submissao que adota o estado.
@@ -16,19 +15,18 @@ public class SubmissaoEmLicitacaoState implements SubmissaoState {
     private Submissao submissao;
 
     /**
-     * Constroi uma instância de SubmissaoEmLicitacaoState recebendo uma
-     * Submissao
+     * Constroi uma instância de SubmissaoRevistaState recebendo uma Submissao
      *
      * @param submissao Submissao que adota o estado.
      */
-    public SubmissaoEmLicitacaoState(Submissao submissao) {
+    public SubmissaoRevistaState(Submissao submissao) {
         this.submissao = submissao;
     }
 
     /**
      * Modifica o estado da submissão para o estado Submissão Criada
-     *
-     * @return Falso, não deve ser possível mudar de EmLicitacao para Criada.
+     * 
+     * @return Falso, não deve ser possível mudar de Revista para Criada.
      */
     @Override
     public boolean setCriada() {
@@ -37,8 +35,8 @@ public class SubmissaoEmLicitacaoState implements SubmissaoState {
 
     /**
      * Modifica o estado da submissão para o estado Submissão Em Submissão.
-     *
-     * @return Falso, não deve ser possível mudar de EmLicitacao para EmSubmissao.
+     * 
+     * @return Falso, não deve ser possível mudar de Revista para EmSubmissao.
      */
     @Override
     public boolean setEmSubmissao() {
@@ -46,64 +44,71 @@ public class SubmissaoEmLicitacaoState implements SubmissaoState {
     }
 
     /**
-     * Modifica o estado da submissão para o estado Submissão Em Licitacao.
-     *
-     * @return Verdadeiro, a submissão encontra-se neste estado.
+     * Modifica o estado da submissão para o estado Submissão EmLicitação.
+     * 
+     * @return Falso, não deve ser possível mudar de Revista para Em Licitação.
      */
     @Override
     public boolean setEmLicitacao() {
-        return true;
+        return false;
     }
 
     /**
      * Modifica o estado da submissão para o estado Submissão Em Revisão.
-     *
-     * @return Verdadeiro se for possivel alterar o estado para EmRevisao e
-     * falso caso não seja.
+     * 
+     * @return Falso, não deve ser possível mudar de Revista para EmRevisão.
      */
     @Override
     public boolean setEmRevisao() {
-        if (validarEstado()) {
-            this.submissao.setEstado(new SubmissaoEmRevisaoState(this.submissao));
-            return true;
-        }
         return false;
     }
 
     /**
-     * Modifica o estado da submissão para o estado Submissão Revista.
-     *
-     * @return Falso, não deve ser possível mudar de EmLicitacao para Revista.
+     * Modifica o estado da submissão para o estado Submissão Revista
+     * 
+     * @return Verdadeiro, a submissão encontra-se neste estado.
      */
     @Override
     public boolean setRevista() {
-        return false;
+        return true;
     }
 
     /**
      * Modifica o estado da submissão para o estado Submissão Aceite.
-     *
-     * @return Falso, não deve ser possível mudar de EmLicitacao para Aceite.
+     * 
+     * @return Verdadeiro se for possivel alterar o estado para Aceite e
+     * falso caso não seja.
      */
     @Override
     public boolean setAceite() {
+        if (validarEstado()) {
+            this.submissao.setEstado(new SubmissaoAceiteState(this.submissao));
+            return true;
+        }
+
         return false;
     }
 
     /**
      * Modifica o estado da submissão para o estado Submissão Rejeitada.
-     *
-     * @return Falso, não deve ser possível mudar de EmLicitacao para Rejeitada.
+     * 
+     * @return Verdadeiro se for possivel alterar o estado para Rejeitada e
+     * falso caso não seja.
      */
     @Override
     public boolean setRejeitada() {
+        if (validarEstado()) {
+            this.submissao.setEstado(new SubmissaoRejeitadaState(this.submissao));
+            return true;
+        }
+
         return false;
     }
 
     /**
      * Modifica o estado da submissão para o estado Submissão EmCameraReady.
-     *
-     * @return Falso, não deve ser possível mudar de EmLicitacao para EmCameraReady.
+     * 
+     * @return Falso, não deve ser possível mudar de revista para EmCameraReady.
      */
     @Override
     public boolean setEmCameraReady() {
@@ -112,8 +117,8 @@ public class SubmissaoEmLicitacaoState implements SubmissaoState {
 
     /**
      * Modifica o estado da submissão para o estado Submissão SemArtigoFinal.
-     *
-     * @return Falso, não deve ser possível mudar de EmLicitacao para SemArtigoFinal.
+     * 
+     * @return Falso, não deve ser possível mudar de Revista para SemArtigoFinal.
      */
     @Override
     public boolean setSemArtigoFinal() {
@@ -122,8 +127,8 @@ public class SubmissaoEmLicitacaoState implements SubmissaoState {
 
     /**
      * Modifica o estado da submissão para o estado Submissão Removida.
-     *
-     * @return Verdadeiro, deve ser possível mudar de EmLicitacao para Removida.
+     * 
+     * @return Verdadeiro, deve ser possível mudar de Revista para Removida.
      */
     @Override
     public boolean setRemovida() {

@@ -80,16 +80,6 @@ public class SubmissaoCriadaState implements SubmissaoState {
     }
 
     /**
-     * Modifica o estado da submissão para o estado Submissão NaoRevista.
-     * 
-     * @return Falso, não deve ser possível mudar de Criada para NaoRevista.
-     */
-    @Override
-    public boolean setNaoRevista() {
-        return false;
-    }
-
-    /**
      * Modifica o estado da submissão para o estado Submissão Aceite.
      * 
      * @return Falso, não deve ser possível mudar de Criada para Aceite.

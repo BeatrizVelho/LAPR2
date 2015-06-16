@@ -10,11 +10,18 @@ import eventoscientificos.model.Submissao;
  */
 public class SubmissaoEmSubmissaoState implements SubmissaoState {
     
+    /**
+     * Submissao que adota o estado.
+     */
     private Submissao submissao;
 
+    /**
+     * Constroi uma instância de SubmissaoEmSubmissaoState recebendo uma Submissao
+     *
+     * @param submissao Submissao que adota o estado.
+     */
     public SubmissaoEmSubmissaoState(Submissao submissao) {
         this.submissao = submissao;
-        this.submissao.setEstado(new SubmissaoEmSubmissaoState(this.submissao));
     }
 
     /**
@@ -71,17 +78,7 @@ public class SubmissaoEmSubmissaoState implements SubmissaoState {
     public boolean setRevista() {
         return false;
     }
-
-    /**
-     * Modifica o estado da submissão para o estado Submissão NaoRevista.
-     *
-     * @return Falso, não deve ser possível mudar de EmSubmissao para NaoRevista.
-     */
-    @Override
-    public boolean setNaoRevista() {
-        return false;
-    }
-
+    
     /**
      * Modifica o estado da submissão para o estado Submissão Aceite.
      *

@@ -17,9 +17,7 @@ public interface SubmissaoState {
     boolean setEmRevisao();
     
     boolean setRevista();
-    
-    boolean setNaoRevista();
-    
+        
     boolean setAceite();
     
     boolean setRejeitada();
