@@ -25,21 +25,22 @@ public class RegistoEventosTest {
         Data dataInicioSubmissao = new Data(2016, 6, 8);
         Data dataFimSubmissao = new Data(2016, 6, 20);
         Data dataInicioDistribuicao = new Data(2016, 7, 30);
+        Data dataFimRevisao = new Data(2016, 8, 15);
         Data dataFimSubmissaoCameraReady = new Data(2016, 8, 30);
         Data dataInicio = new Data(2016, 10, 9);
         Data dataFim = new Data(2017, 6, 10);
         RegistoEventos instance = new RegistoEventos();
         this.evento = new Evento(titulo, descricao, local, dataInicioSubmissao,
-                            dataFimSubmissao, dataInicioDistribuicao,
-                            dataFimSubmissaoCameraReady, dataInicio, dataFim);
+                dataFimSubmissao, dataInicioDistribuicao, dataFimRevisao,
+                dataFimSubmissaoCameraReady, dataInicio, dataFim);
 
         this.utilizador = new Utilizador(
-                            "pedro", "1140781@isep.ipp.pt", "pedro", "12345");
+                "pedro", "1140781@isep.ipp.pt", "pedro", "12345");
         this.st = new SessaoTematica(
-                            "#123456", "Uma descrição", new Data(2016, 5, 9),
-                            new Data(2016, 6, 21), new Data(2016, 7, 8),
-                            new Data(2016, 7, 20), new Data(2016, 9, 24),
-                            new Data(2017, 5, 28));
+                "#123456", "Uma descrição", new Data(2016, 5, 9),
+                new Data(2016, 6, 21), new Data(2016, 7, 8),
+                new Data(2016, 7, 20), new Data(2016, 9, 24),
+                new Data(2017, 5, 28));
     }
 
     /**
@@ -54,14 +55,16 @@ public class RegistoEventosTest {
         Data dataInicioSubmissao = new Data(2016, 6, 8);
         Data dataFimSubmissao = new Data(2016, 6, 20);
         Data dataInicioDistribuicao = new Data(2016, 7, 30);
+        Data dataFimRevisao = new Data(2016, 8, 15);
         Data dataFimSubmissaoCameraReady = new Data(2016, 8, 30);
         Data dataInicio = new Data(2016, 10, 9);
         Data dataFim = new Data(2017, 6, 10);
         RegistoEventos instance = new RegistoEventos();
         Evento expResult = this.evento;
         Evento result = instance.novoEvento(
-                            titulo, descricao, local, dataInicioSubmissao, dataFimSubmissao,
-                            dataInicioDistribuicao, dataFimSubmissaoCameraReady, dataInicio, dataFim);
+                titulo, descricao, local, dataInicioSubmissao, dataFimSubmissao,
+                dataInicioDistribuicao, dataFimRevisao, dataFimSubmissaoCameraReady,
+                dataInicio, dataFim);
         assertEquals(expResult, result);
     }
 
@@ -133,7 +136,7 @@ public class RegistoEventosTest {
         List<Evento> expResult = new ArrayList();
         expResult.add(this.evento);
         List<Evento> result
-                            = instance.getListaEventosOrganizador(this.utilizador);
+                = instance.getListaEventosOrganizador(this.utilizador);
         assertEquals(expResult, result);
     }
 
