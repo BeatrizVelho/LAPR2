@@ -8,6 +8,7 @@ import eventoscientificos.model.Submissao;
  * @author G01
  */
 public class SubmissaoAceiteState implements SubmissaoState {
+    
      /**
      * Submissao que adota o estado.
      */
@@ -73,16 +74,6 @@ public class SubmissaoAceiteState implements SubmissaoState {
     }
 
     /**
-     * Modifica o estado da submissão para o estado Submissão NaoRevista.
-     * 
-     * @return Falso, não deve ser possível mudar de Aceite para NaoRevista.
-     */
-    @Override
-    public boolean setNaoRevista() {
-        return false;
-    }
-
-    /**
      * Modifica o estado da submissão para o estado Submissão Aceite.
      * 
      * @return Verdadeiro, a submissão encontra-se neste estado.
@@ -121,17 +112,24 @@ public class SubmissaoAceiteState implements SubmissaoState {
     /**
      * Modifica o estado da submissão para o estado Submissão SemArtigoFinal.
      * 
-     * @return Falso, não deve ser possível mudar de EmCameraReady para SemArtigoFinal.
+     * @return Verdadeiro se for possivel alterar o estado para SemArtigoFinal e
+     * falso caso não seja.
      */
     @Override
     public boolean setSemArtigoFinal() {
+        if(!validarEstado()) {
+            this.submissao.setEstado(
+                    new SubmissaoSemArtigoFinalState(this.submissao));
+            return true;
+        }
+        
         return false;
     }
 
     /**
      * Modifica o estado da submissão para o estado Submissão Removida.
      * 
-     * @return verdadeiro, deve ser possível mudar de EmCameraReady para Removida.
+     * @return verdadeiro, deve ser possível mudar de Aceite para Removida.
      */ 
     @Override
     public boolean setRemovida() {
@@ -143,7 +141,7 @@ public class SubmissaoAceiteState implements SubmissaoState {
      * estado pretendida
      *
      * @return Verdadeiro se for possivel alterar o estado para EmCameraReady e
-     * falso caso não seja. 
+     * falso se não for, neste caso muda para SemArtigoFinal.
      */
     @Override
     public boolean validarEstado() {
