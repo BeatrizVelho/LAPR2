@@ -44,13 +44,14 @@ public class RegistoEventos {
      * @return Evento.
      */
     public Evento novoEvento(String titulo, String descricao, Local local,
-                        Data dataInicioSubmissao, Data dataLimiteSubmissao,
-                        Data dataInicioDistribuicao, Data dataFimSubmissaoCameraReady,
-                        Data dataInicio, Data dataFim) {
+            Data dataInicioSubmissao, Data dataLimiteSubmissao,
+            Data dataInicioDistribuicao, Data dataFimRevisao,
+            Data dataFimSubmissaoCameraReady, Data dataInicio,
+            Data dataFim) {
 
         return new Evento(titulo, descricao, local, dataInicioSubmissao,
-                            dataLimiteSubmissao, dataInicioDistribuicao, dataFimSubmissaoCameraReady,
-                            dataInicio, dataFim);
+                dataLimiteSubmissao, dataInicioDistribuicao, dataFimRevisao,
+                dataFimSubmissaoCameraReady, dataInicio, dataFim);
     }
 
     /**
@@ -86,7 +87,7 @@ public class RegistoEventos {
 
         for (Evento evento : this.listaEventos) {
             if (evento.isOrganizador(utilizador)
-                                && evento.isRegistadoOuSessoesTematicasDefinidas()) {
+                    && evento.isRegistadoOuSessoesTematicasDefinidas()) {
                 listaEventosOrganizador.add(evento);
             }
         }
@@ -108,7 +109,7 @@ public class RegistoEventos {
                 listaSubmissiveis.add(evento);
             }
             listaSubmissiveis.addAll(
-                                evento.getListaSubmissiveisAceitarArtigo());
+                    evento.getListaSubmissiveisAceitarArtigo());
         }
         return listaSubmissiveis;
     }
@@ -138,11 +139,11 @@ public class RegistoEventos {
 
         for (Evento evento : this.listaEventos) {
             if (evento.isSessoesTematicasDefinidas()
-                                && evento.isOrganizador(utilizador)) {
+                    && evento.isOrganizador(utilizador)) {
                 listaSemCPDefinida.add(evento);
             }
             List<CPDefinivel> listaSessoesTematicas
-                                = evento.getListaCPDefiniveisSemCPOrganizadorProponente(utilizador);
+                    = evento.getListaCPDefiniveisSemCPOrganizadorProponente(utilizador);
             listaSemCPDefinida.addAll(listaSessoesTematicas);
         }
 
