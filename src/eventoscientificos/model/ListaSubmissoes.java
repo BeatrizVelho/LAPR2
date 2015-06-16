@@ -27,7 +27,7 @@ public class ListaSubmissoes {
      * @return lista de submissões.
      */
     public List<Submissao> getListaSubmissoes() {
-        return listaSubmissoes;
+        return this.listaSubmissoes;
     }
 
     /**
@@ -52,6 +52,27 @@ public class ListaSubmissoes {
             return !this.listaSubmissoes.contains(submissao);
         }
         return false;
+    }
+
+    /**
+     * Verifica se a submissão passada por parametro já consta na lista de
+     * submissoes, ignorando a submisaao que lhe deu origem.
+     *
+     * @param submissao Submissao clonada.
+     * @param submissaoClone Submissao clone.
+     * 
+     * @return Verdadeiro se a submissao clone não existir.
+     */
+    public boolean validarCloneSubmissao(
+            Submissao submissao, Submissao submissaoClone) {
+        for (Submissao outraSubmissao : this.listaSubmissoes) {
+            if (submissaoClone.equals(outraSubmissao)
+                    && !submissao.equals(outraSubmissao)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**
@@ -101,10 +122,10 @@ public class ListaSubmissoes {
         }
 
         ListaSubmissoes outraListaSubmissoes
-                            = (ListaSubmissoes) outroObjeto;
+                = (ListaSubmissoes) outroObjeto;
 
         return this.listaSubmissoes.equals(
-                            outraListaSubmissoes.listaSubmissoes);
+                outraListaSubmissoes.listaSubmissoes);
     }
 
 }
