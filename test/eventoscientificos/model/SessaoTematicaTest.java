@@ -4,8 +4,10 @@ import eventoscientificos.model.state.sessaotematica.SessaoTematicaCPDefinidaSta
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaCriadaState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmDetecaoState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmLicitacaoState;
+import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmSubmissaoState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaRegistadaState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaState;
+import eventoscientificos.model.state.submissao.SubmissaoEmSubmissaoState;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
@@ -21,24 +23,26 @@ public class SessaoTematicaTest {
     private Utilizador utilizador;
     private Licitacao licitacao;
     private Submissao submissao;
+    private Artigo artigoInicial;
+    private Artigo artigoFinal;
 
     public SessaoTematicaTest() {
         this.sessaoTematica = new SessaoTematica(
-                            "#A9D24R",
-                            "LAPR2",
-                            new Data(2015, 5, 22),
-                            new Data(2015, 5, 28),
-                            new Data(2015, 6, 10),
-                            new Data(2015, 6, 20),
-                            new Data(2015, 6, 24),
-                            new Data(2015, 6, 28));
+                "#A9D24R",
+                "LAPR2",
+                new Data(2015, 5, 22),
+                new Data(2015, 5, 28),
+                new Data(2015, 6, 10),
+                new Data(2015, 6, 20),
+                new Data(2015, 6, 24),
+                new Data(2015, 6, 28));
         this.utilizador = new Utilizador(
-                            "Pedro", "1140781@isep.ipp.pt", "pedro", "1234");
+                "Pedro", "1140781@isep.ipp.pt", "pedro", "1234");
         this.licitacao = new Licitacao(new Revisor(new Utilizador(
-                            "fatima", "ola@iml.com", "fafa", "1234")),
-                            new Submissao(), 0, null);
-        Artigo artigoInicial = new Artigo();
-        Artigo artigoFinal = new Artigo();
+                "fatima", "ola@iml.com", "fafa", "1234")),
+                new Submissao(), 0, null);
+        this.artigoInicial = new Artigo();
+        this.artigoFinal = new Artigo();
         this.submissao = new Submissao();
         submissao.setArtigoInicial(artigoInicial);
         submissao.setArtigoFinal(artigoFinal);
@@ -172,10 +176,10 @@ public class SessaoTematicaTest {
         System.out.println("setAndGetEstado");
         SessaoTematica instance = this.sessaoTematica;
         SessaoTematicaState estado
-                            = new SessaoTematicaCriadaState(this.sessaoTematica);
+                = new SessaoTematicaCriadaState(this.sessaoTematica);
         Class<? extends SessaoTematicaState> expResult = estado.getClass();
         Class<? extends SessaoTematicaState> result
-                            = instance.getEstado().getClass();
+                = instance.getEstado().getClass();
         assertEquals(expResult, result);
     }
 
@@ -312,9 +316,9 @@ public class SessaoTematicaTest {
     public void testEqualsNot() {
         System.out.println("equalsNot");
         Object outroObjeto = new SessaoTematica("#1234", "Sem descrição",
-                            new Data(2016, 1, 1), new Data(2016, 1, 7),
-                            new Data(2016, 1, 9), new Data(2016, 1, 26),
-                            new Data(2016, 2, 4), new Data(2016, 2, 6));
+                new Data(2016, 1, 1), new Data(2016, 1, 7),
+                new Data(2016, 1, 9), new Data(2016, 1, 26),
+                new Data(2016, 2, 4), new Data(2016, 2, 6));
         SessaoTematica instance = this.sessaoTematica;
         boolean expResult = false;
         boolean result = instance.equals(outroObjeto);
@@ -376,7 +380,7 @@ public class SessaoTematicaTest {
         System.out.println("adicionarCP");
         SessaoTematica instance = this.sessaoTematica;
         sessaoTematica.setEstado(
-                            new SessaoTematicaRegistadaState(sessaoTematica));
+                new SessaoTematicaRegistadaState(sessaoTematica));
         CP cp = new CP();
         boolean expResult = true;
         boolean result = instance.adicionarCP(cp);
@@ -428,7 +432,7 @@ public class SessaoTematicaTest {
     public void testGetConflitoRevisorSubmissao() {
         System.out.println("getConflitoRevisorSubmissao");
         Revisor revisor = new Revisor(new Utilizador(
-                            "Tiago", "1131658@isep.ipp.pt", "tiago", "1234"));
+                "Tiago", "1131658@isep.ipp.pt", "tiago", "1234"));
         Submissao submissao = new Submissao();
         submissao.setArtigoFinal(new Artigo("titulo", "saude", "D:\\ISEP\\1.º Ano\\2.º Semestre"));
         submissao.setArtigoInicial(new Artigo("titulo1234", "saude", "D:\\ISEP\\1.º Ano\\2.º Semestre"));
@@ -502,5 +506,91 @@ public class SessaoTematicaTest {
         boolean result = this.sessaoTematica.isStateValidoParaLicitar(this.utilizador);
         assertEquals(expResult, result);
 
+    }
+//
+//    /**
+//     * Test of isRegistada method, of class SessaoTematica.
+//     */
+//    @Test
+//    public void testIsRegistada() {
+//        System.out.println("isRegistada");
+//        SessaoTematica instance = null;
+//        boolean expResult = false;
+//        boolean result = instance.isRegistada();
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+//
+//    /**
+//     * Test of iniciarProcessoDetecao method, of class SessaoTematica.
+//     */
+//    @Test
+//    public void testIniciarProcessoDetecao() {
+//        System.out.println("iniciarProcessoDetecao");
+//        List<TipoConflito> listaTiposConflito = null;
+//        SessaoTematica instance = null;
+//        instance.iniciarProcessoDetecao(listaTiposConflito);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+
+    /**
+     * Teste do método isStateValidoParaSubmeter, da classe SessaoTematica.
+     */
+    @Test
+    public void testIsStateValidoParaSubmeter() {
+        System.out.println("isStateValidoParaSubmeter");
+        SessaoTematica instance = this.sessaoTematica;
+        instance.setEstado(new SessaoTematicaEmSubmissaoState(sessaoTematica));
+        boolean expResult = true;
+        boolean result = instance.isStateValidoParaSubmeter();
+        assertEquals(expResult, result);
+    }
+
+//    /**
+//     * Test of isStateValidoParaLicitar method, of class SessaoTematica.
+//     */
+//    @Test
+//    public void testIsStateValidoParaLicitar() {
+//        System.out.println("isStateValidoParaLicitar");
+//        Utilizador u = null;
+//        SessaoTematica instance = null;
+//        boolean expResult = false;
+//        boolean result = instance.isStateValidoParaLicitar(u);
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+    /**
+     * Teste do método isStateValidoParaAlterar, da classe SessaoTematica.
+     */
+    @Test
+    public void testIsStateValidoParaAlterar() {
+        System.out.println("isStateValidoParaAlterar");
+        SessaoTematica instance = this.sessaoTematica;
+        instance.setEstado(new SessaoTematicaEmSubmissaoState(sessaoTematica));
+        boolean expResult = true;
+        boolean result = instance.isStateValidoParaAlterar();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método isUtilizadorUmAutorSubmissao, da classe SessaoTematica.
+     */
+    @Test
+    public void testIsUtilizadorUmAutorSubmissao() {
+        System.out.println("isUtilizadorUmAutorSubmissao");
+        Utilizador utilizador = this.utilizador;
+        Autor autor = new Autor(utilizador, new InstituicaoAfiliacao("ISEP"));
+        Submissao submissao = new Submissao();
+        submissao.setEstado(new SubmissaoEmSubmissaoState(submissao));
+        submissao.setArtigoInicial(this.artigoInicial);
+        submissao.getArtigoInicial().getListaAutores().adicionarAutor(autor);
+        ListaSubmissoes instance = new ListaSubmissoes();
+        instance.adicionarSubmissao(submissao);
+        boolean expResult = true;
+        boolean result = instance.isUtilizadorUmAutorSubmissao(utilizador);
+        assertEquals(expResult, result);
     }
 }
