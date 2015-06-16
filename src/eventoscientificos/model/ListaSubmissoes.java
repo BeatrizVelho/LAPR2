@@ -86,6 +86,24 @@ public class ListaSubmissoes {
     }
 
     /**
+     * Verifica se o utilizador passado por parâmetro é autor de alguma 
+     * submissão.
+     * 
+     * @param utilizador Utilizador a verificar se é autor.
+     * @return Verdadeiro se encontrar uma submissão em que o utilizador é autor 
+     * e falso se não encontrar.
+     */
+    public boolean isUtilizadorUmAutorSubmissao(Utilizador utilizador) {
+        for(Submissao submissao : this.listaSubmissoes) {
+            if(submissao.isAutor(utilizador)) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
+    /**
      * Devolve uam lista de submissões associadas ao utilizador
      *
      * @param utilizador utilizador a verificar submissões
