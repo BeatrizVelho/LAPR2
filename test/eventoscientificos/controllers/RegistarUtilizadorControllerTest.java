@@ -43,13 +43,13 @@ public class RegistarUtilizadorControllerTest {
     public void testNovoUtilizador() {
         Empresa emp = new Empresa();
         System.out.println("novoUtilizador");
-        String nome = "";
-        String email = "";
-        String username = "";
-        String password = "";
+        String nome = "fatima";
+        String email = "ola@iml.com";
+        String username = "fafa";
+        String password = "1234";
         RegistarUtilizadorController instance
                             = new RegistarUtilizadorController(emp);
-        boolean expResult = false;
+        boolean expResult = true;
         boolean result = instance.novoUtilizador(nome, email, username, password);
         assertEquals(expResult, result);
     }
