@@ -107,4 +107,18 @@ public class CPTest {
         boolean result = instance.contains(utilizador);
         assertEquals(expResult, result);
     }
+
+    /**
+     * Test of getRevisor method, of class CP.
+     */
+    @Test
+    public void testGetRevisor() {
+        System.out.println("getRevisor");
+        Utilizador u = new Utilizador("Joao", "jotajota@gmail.com", "username", "password");
+        CP instance = new CP();
+        boolean criado = instance.novoRevisor(u);
+        Revisor expResult = new Revisor(u);
+        Revisor result = instance.getRevisor(u);
+        assertEquals(expResult, result);
+    }
 }
