@@ -25,6 +25,7 @@ public class RegistarUtilizadorUI extends javax.swing.JDialog {
         this.framePai = parent;
         initComponents();
         setLocationRelativeTo(null);
+        getRootPane().setDefaultButton(this.btn_registar);
         setVisible(true);
     }
 
