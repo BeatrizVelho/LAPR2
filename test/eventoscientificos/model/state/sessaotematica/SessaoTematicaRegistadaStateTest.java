@@ -24,10 +24,11 @@ public class SessaoTematicaRegistadaStateTest {
                 new Data(2015, 6, 20),
                 new Data(2015, 6, 24),
                 new Data(2015, 6, 28),
-                new Data(2016, 7, 1));
+                new Data(2016, 7, 1),
+                new Data(2015, 7, 7));
         sessaoTematica.setEstado(
-                            new SessaoTematicaRegistadaState(sessaoTematica));
-      
+                new SessaoTematicaRegistadaState(sessaoTematica));
+
         this.sessaoTematica = sessaoTematica;
     }
 
@@ -68,8 +69,7 @@ public class SessaoTematicaRegistadaStateTest {
     }
 
     /**
-     * Teste do método setEmSubmissao, da classe
-     * SessaoTematicaRegistadaState.
+     * Teste do método setEmSubmissao, da classe SessaoTematicaRegistadaState.
      */
     @Test
     public void testSetEmSubmissao() {
@@ -93,8 +93,7 @@ public class SessaoTematicaRegistadaStateTest {
     }
 
     /**
-     * Teste do méotodo setEmLicitacao, da classe
-     * SessaoTematicaRegistadaState.
+     * Teste do méotodo setEmLicitacao, da classe SessaoTematicaRegistadaState.
      */
     @Test
     public void testSetEmLicitacao() {
@@ -131,8 +130,7 @@ public class SessaoTematicaRegistadaStateTest {
     }
 
     /**
-     * Teste do método setFaseDecisao, da classe
-     * SessaoTematicaRegistadaState.
+     * Teste do método setFaseDecisao, da classe SessaoTematicaRegistadaState.
      */
     @Test
     public void testSetFaseDecisao() {
@@ -157,8 +155,7 @@ public class SessaoTematicaRegistadaStateTest {
     }
 
     /**
-     * Teste do método setCameraReady, da classe
-     * SessaoTematicaRegistadaState.
+     * Teste do método setCameraReady, da classe SessaoTematicaRegistadaState.
      */
     @Test
     public void testSetCameraReady() {
@@ -170,8 +167,7 @@ public class SessaoTematicaRegistadaStateTest {
     }
 
     /**
-     * Teste do método validarEstado, da classe
-     * SessaoTematicaRegistadaState.
+     * Teste do método validarEstado, da classe SessaoTematicaRegistadaState.
      */
     @Test
     public void testValidarEstado() {

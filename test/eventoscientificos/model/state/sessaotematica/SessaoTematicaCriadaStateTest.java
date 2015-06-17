@@ -1,7 +1,7 @@
 package eventoscientificos.model.state.sessaotematica;
 
-import eventoscientificos.model.state.sessaotematica.SessaoTematicaState;
 import eventoscientificos.model.SessaoTematica;
+import eventoscientificos.model.Utilizador;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import utils.Data;
@@ -14,7 +14,7 @@ public class SessaoTematicaCriadaStateTest {
     private SessaoTematica sessaoTematica;
 
     public SessaoTematicaCriadaStateTest() {
-        this.sessaoTematica = new SessaoTematica(
+        SessaoTematica sessaoTematica = new SessaoTematica(
                 "#A9D24R",
                 "LAPR2",
                 new Data(2015, 5, 22),
@@ -22,7 +22,11 @@ public class SessaoTematicaCriadaStateTest {
                 new Data(2015, 6, 20),
                 new Data(2015, 6, 24),
                 new Data(2015, 6, 28),
-                new Data(2016, 7, 1));
+                new Data(2016, 7, 1),
+                new Data(2016, 7, 7));
+        sessaoTematica.novoProponente(new Utilizador(
+                "pedro", "1140781@isep.ipp.pt", "pedro", "1234"));
+        this.sessaoTematica = sessaoTematica;
     }
 
     /**
@@ -170,8 +174,7 @@ public class SessaoTematicaCriadaStateTest {
         assertEquals(expResult, result);
     }
 
-   
-  /**
+    /**
      * Teste ao método isStateValidoParaRemover, da classe
      * SessaoTematicaCriadaState.
      */

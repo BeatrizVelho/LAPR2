@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package eventoscientificos.model.state.sessaotematica;
 
 import eventoscientificos.model.CP;
@@ -28,7 +23,8 @@ public class SessaoTematicaCPDefinidaStateTest {
                 new Data(2015, 6, 10),
                 new Data(2015, 6, 20),
                 new Data(2015, 6, 24),
-                new Data(2015, 6, 28));
+                new Data(2015, 6, 28),
+                new Data(2015, 7, 7));
         sessaoTematica.setEstado(
                             new SessaoTematicaRegistadaState(sessaoTematica));
         sessaoTematica.adicionarCP(new CP());
