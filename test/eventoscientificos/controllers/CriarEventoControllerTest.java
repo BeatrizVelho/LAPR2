@@ -31,6 +31,9 @@ public class CriarEventoControllerTest {
         this.empresa = new Empresa();
         this.registoEventos = this.empresa.getRegistoEventos();
         this.registoUtilizadores = this.empresa.getRegistoUtilizadores();
+        Utilizador utilizador = this.registoUtilizadores.novoUtilizador(
+                "beatriz", "1140587@isep.ipp.pt", "beatriz", "1234");
+        this.registoUtilizadores.adicionaUtilizador(utilizador);
     }
 
     /**
@@ -63,12 +66,21 @@ public class CriarEventoControllerTest {
     @Test
     public void testNovoOrganizador() {
         System.out.println("novoOrganizador");
-        Utilizador utilizador = this.registoUtilizadores.novoUtilizador("beatriz", "1140587@isep.ipp.pt", "beatriz", "1234");
-        this.registoUtilizadores.adicionaUtilizador(utilizador);
-        String id = "1140587@isep.ipp.pt";
+        String titulo = "sem titulo";
+        String descricao = "sem descricao";
+        Local local = new Local("local");
+        Data dataInicioSubmissao = new Data(2016, 6, 8);
+        Data dataFimSubmissao = new Data(2016, 6, 20);
+        Data dataInicioDistribuicao = new Data(2016, 7, 30);
+        Data dataFimRevisao = new Data(2016, 8, 15);
+        Data dataFimSubmissaoCameraReady = new Data(2016, 8, 30);
+        Data dataInicio = new Data(2016, 10, 9);
+        Data dataFim = new Data(2017, 6, 10);
         CriarEventoController instance = new CriarEventoController(this.empresa);
+        instance.novoEvento(titulo, descricao, local, dataInicioSubmissao, dataFimSubmissao, dataInicioDistribuicao, dataFimRevisao, dataFimSubmissaoCameraReady, dataInicio, dataFim);
+        String id = "1140587@isep.ipp.pt";
         boolean expResult = true;
-        boolean result = this.evento.novoOrganizador(this.registoUtilizadores.getUtilizador(id));
+        boolean result = instance.novoOrganizador(id);
         assertEquals(expResult, result);
     }
 
@@ -78,10 +90,21 @@ public class CriarEventoControllerTest {
     @Test
     public void testValidarEvento() {
         System.out.println("validarEvento");
+        String titulo = "sem titulo";
+        String descricao = "sem descricao";
+        Local local = new Local("local");
+        Data dataInicioSubmissao = new Data(2016, 6, 8);
+        Data dataFimSubmissao = new Data(2016, 6, 20);
+        Data dataInicioDistribuicao = new Data(2016, 7, 30);
+        Data dataFimRevisao = new Data(2016, 8, 15);
+        Data dataFimSubmissaoCameraReady = new Data(2016, 8, 30);
+        Data dataInicio = new Data(2016, 10, 9);
+        Data dataFim = new Data(2017, 6, 10);
         CriarEventoController instance = new CriarEventoController(this.empresa);
-        Evento evento = this.evento;
+        instance.novoEvento(titulo, descricao, local, dataInicioSubmissao, dataFimSubmissao, dataInicioDistribuicao, dataFimRevisao, dataFimSubmissaoCameraReady, dataInicio, dataFim);
+        instance.novoOrganizador("1140587@isep.ipp.pt");
         boolean expResult = true;
-        boolean result = this.evento.validarEvento();
+        boolean result = instance.validarEvento();
         assertEquals(expResult, result);
     }
 
@@ -144,28 +167,8 @@ public class CriarEventoControllerTest {
         Data dataFim = new Data(2017, 6, 10);
         instance.novoEvento(titulo, descricao, local, dataInicioSubmissao, dataFimSubmissao, dataInicioDistribuicao, dataFimRevisao, dataFimSubmissaoCameraReady, dataInicio, dataFim);
         boolean expResult = true;
-        boolean result = instance.adicionarEvento(evento);
+        boolean result = instance.adicionarEvento();
         assertEquals(expResult, result);
     }
 
-    /**
-     * Teste do método criarTimers, da classe CriarEventoController.
-     */
-    @Test
-    public void testCriarTimers() {
-        System.out.println("criarTimers");
-        String titulo = "sem titulo";
-        String descricao = "sem descricao";
-        Local local = new Local("local");
-        Data dataInicioSubmissao = new Data(2016, 6, 8);
-        Data dataFimSubmissao = new Data(2016, 6, 20);
-        Data dataInicioDistribuicao = new Data(2016, 7, 30);
-        Data dataFimRevisao = new Data(2016, 8, 15);
-        Data dataFimSubmissaoCameraReady = new Data(2016, 8, 30);
-        Data dataInicio = new Data(2016, 10, 9);
-        Data dataFim = new Data(2017, 6, 10);
-        CriarEventoController instance = new CriarEventoController(this.empresa);
-        instance.novoEvento(titulo, descricao, local, dataInicioSubmissao, dataFimSubmissao, dataInicioDistribuicao, dataFimRevisao, dataFimSubmissaoCameraReady, dataInicio, dataFim);
-        instance.criarTimers();
-    }
 }
