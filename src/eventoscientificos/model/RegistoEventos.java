@@ -199,9 +199,9 @@ public class RegistoEventos {
             if (validoParaDistribuir) {
                 listaDistribuiveis.add(evento);
             }
-            List<SessaoTematica> listaST = evento.getListaSessoesTematicas().getListaSessoesTematicas();
+            List<SessaoTematica> listaST = (evento.getListaSessoesTematicas()).getListaSessoesTematicas();
             for (SessaoTematica st : listaST) {
-                validoParaDistribuir = st.isStateValidoParaLicitar(u);
+                validoParaDistribuir = st.isStateValidoParaDistribuir(u);
                 if (validoParaDistribuir) {
                     listaDistribuiveis.add(st);
                 }
