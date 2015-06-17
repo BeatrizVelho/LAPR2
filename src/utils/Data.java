@@ -239,6 +239,27 @@ public class Data {
     }
 
     /**
+     * Converte uma data no formato aaaa-mm-dd ou aaaa/mm/dd, num objeto do tipo
+     * Data.
+     * 
+     * @param dataEmTexto Data em formato de texto.
+     * @return Data convertida em objeto.
+     */
+    public static Data converterString(String dataEmTexto) {
+        String[] data = dataEmTexto.split("[-/]");
+        
+        if (data.length != 3) {
+            throw new IllegalArgumentException("A data não possui os 3 atributos");
+        }
+
+        int ano = Integer.parseInt(data[0]);
+        int mes = Integer.parseInt(data[1]);
+        int dia = Integer.parseInt(data[2]);
+        
+        return new Data(ano, mes, dia);
+    }
+
+    /**
      * Devolve a data atual do sistema.
      *
      * @return Data atual do sistema.

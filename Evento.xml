@@ -3,26 +3,28 @@
 	<NumeroEventos></NumeroEventos>
 	<Eventos>
 		<Evento>
-			<Titulo></Titulo>
-			<Descricao></Descricao>
-			<DataInicio><!-- exemplo: 2015/06/08 --></DataInicio>
-			<DataFim></DataFim>
-			<DataInicioSubmissao></DataInicioSubmissao>
-			<DataFimSubmissao></DataFimSubmissao>
-			<DataInicioDistribuicao></DataInicioDistribuicao>
-			<DataLimiteRevisao></DataLimiteRevisao>
-			<EstadoEvento></EstadoEvento>
-			<Local><!-- ID do local--></Local>
+			<Titulo>Linux, o pinguim da atualidade.</Titulo>
+			<Descricao>Conferência sobre o SO mais usado nos dias de hoje.</Descricao>
+			<DataInicio>2016/07/06</DataInicio>
+			<DataFim>2016/07/07</DataFim>
+			<DataInicioSubmissao>2016/07/01</DataInicioSubmissao>
+			<DataFimSubmissao>2016/07/02</DataFimSubmissao>
+			<DataInicioDistribuicao>2016/07/03</DataInicioDistribuicao>
+			<DataLimiteRevisao>2016/07/04</DataLimiteRevisao>
+                        <DataLimiteSubmissaoEmCameraReady>2016/07/05</DataLimiteSubmissaoEmCameraReady>
+			<EstadoEvento>???</EstadoEvento>
+			<Local>1</Local>
 			<ListaOrganizadores>
-				<NumeroOrganizadores></NumeroOrganizadores>
-				<Organizadores>
-					<Organizador><!-- Username do Organizador --></Organizador>
-				</Organizadores>
+				<NumeroOrganizadores>2</NumeroOrganizadores>
+                                <Organizadores>
+					<Organizador>pedro</Organizador>
+                                        <Organizador>beatriz</Organizador>
+                                </Organizadores>
 			</ListaOrganizadores>
 			<CP>
-				<NumeroMembrosCP></NumeroMembrosCP>
+				<NumeroMembrosCP>2</NumeroMembrosCP>
 				<MembrosCP>
-					<MembroCP><!-- Username do membro da CP --></MembroCP>
+					<MembroCP>soraia</MembroCP>
 				</MembrosCP>
 			</CP>
 			<ListaSessoesTematicas>
