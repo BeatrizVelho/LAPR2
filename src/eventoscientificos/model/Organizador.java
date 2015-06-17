@@ -30,6 +30,12 @@ public class Organizador {
         return this.utilizador;
     }
 
+    /**
+     * Devolve a descrição textual do organizador no formato: nome (email)
+     *
+     * @return Características do organizador.
+     */
+    @Override
     public String toString() {
         return String.format("%s (%s)",
                 this.getUtilizador().getNome(),
