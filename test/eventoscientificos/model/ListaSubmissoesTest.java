@@ -1,6 +1,8 @@
 package eventoscientificos.model;
 
+import eventoscientificos.model.state.submissao.SubmissaoCriadaState;
 import eventoscientificos.model.state.submissao.SubmissaoEmSubmissaoState;
+import eventoscientificos.model.state.submissao.SubmissaoRemovidaState;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
@@ -173,6 +175,35 @@ public class ListaSubmissoesTest {
         instance.adicionarSubmissao(submissao);
         boolean expResult = true;
         boolean result = instance.isUtilizadorUmAutorSubmissao(utilizador);
+        assertEquals(expResult, result);
+    }
+    
+    /**
+     * Teste do método temSubmissoesRetiradas, da classe ListaSubmissoes.
+     */
+    @Test
+    public void testTemSubmissoesRetiradasNot() {
+        System.out.println("temSubmissoesRetiradasNot");
+        ListaSubmissoes instance = new ListaSubmissoes();
+        this.submissao.setEstado(new SubmissaoCriadaState(submissao));
+        instance.adicionarSubmissao(submissao);
+        
+        boolean expResult = false;
+        boolean result = instance.temSubmissoesRetiradas();
+        assertEquals(expResult, result);
+    }
+    
+    /**
+     * Teste do método temSubmissoesRetiradas, da classe ListaSubmissoes.
+     */
+    @Test
+    public void testTemSubmissoesRetiradas() {
+        System.out.println("temSubmissoesRetiradas");
+        ListaSubmissoes instance = new ListaSubmissoes();
+        this.submissao.setEstado(new SubmissaoRemovidaState(submissao));
+        instance.adicionarSubmissao(submissao);
+        boolean expResult = true;
+        boolean result = instance.temSubmissoesRetiradas();
         assertEquals(expResult, result);
     }
 }

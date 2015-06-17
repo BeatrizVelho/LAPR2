@@ -794,4 +794,22 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
         return false;
     }
 
+    /**
+     * Verifica se evento se encontra reune as condições necessárias para ser
+     * possível distribuir
+     *
+     * @return verdadeiro cumprir as condições necessárias distribuir e falso se
+     * não estiver
+     */
+    @Override
+    public boolean isStateValidoParaDistribuir(Utilizador u) {
+        if (this.estado.isStateValidoParaDistribuir()) {
+            Organizador o = new Organizador(u);
+            if (listaOrganizadores.contains(o)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

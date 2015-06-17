@@ -154,5 +154,20 @@ public class ListaSubmissoes {
         return this.listaSubmissoes.equals(
                 outraListaSubmissoes.listaSubmissoes);
     }
+    
+    /**
+     * Verifica se na lista de submissoes existe submissao no estado removido.
+     * 
+     * @return Verdadeiro caso esteja no estado removido e 
+     * falso caso não esteja.
+     */
+    public boolean temSubmissoesRetiradas() {
+        for (Submissao submissao : this.listaSubmissoes) {
+            if(submissao.isStateRemovida()) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 }

@@ -1,6 +1,7 @@
 package eventoscientificos.model;
 
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmSubmissaoState;
+import eventoscientificos.model.state.submissao.SubmissaoRemovidaState;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
@@ -16,7 +17,8 @@ public class ListaSessoesTematicasTest {
     private Evento evento;
     private ListaSessoesTematicas listaSessoesTematicas;
     private SessaoTematica sessaoTematica;
-
+    private Submissao submissao;
+    
     public ListaSessoesTematicasTest() {
         this.evento = new Evento("titulo", "descricao", new Local("local"),
                 new Data(2016, 6, 8), new Data(2016, 6, 20),
@@ -25,10 +27,13 @@ public class ListaSessoesTematicasTest {
                 new Data(2017, 6, 10));
         this.listaSessoesTematicas = new ListaSessoesTematicas(this.evento);
         this.sessaoTematica = new SessaoTematica(
-                            "#123456", "Uma descrição", new Data(2016, 6, 9),
-                            new Data(2016, 6, 21), new Data(2016, 7, 8),
-                            new Data(2016, 7, 9), new Data(2017, 3, 24),
-                            new Data(2017, 5, 28));
+                "#123456", "Uma descrição", new Data(2016, 6, 9),
+                new Data(2016, 6, 21), new Data(2016, 7, 8),
+                new Data(2016, 7, 9), new Data(2017, 9, 24),
+                new Data(2017, 11, 28));
+        this.submissao = new Submissao();
+        submissao.setArtigoInicial(new Artigo());
+        submissao.setArtigoFinal(new Artigo());
     }
 
     /**
@@ -241,6 +246,27 @@ public class ListaSessoesTematicasTest {
         instance.adicionarSessaoTematica(sessaoTematica1);
         int expResult = 1;
         int result = instance.getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador(utilizador).size();
+        assertEquals(expResult, result);
+    }
+    
+    /**
+     * Teste do método
+     * getListaSubmissiveisComSubmissoesRetiradasOrganizadorProponente, da class
+     * ListaSessoesTematicas.
+     */
+    @Test
+    public void testGetListaSubmissiveisComSubmissoesRetiradasOrganizadorProponente() {
+        System.out.println("getListaSubmissiveisComSubmissoesRetiradasOrganizadorProponente");
+        Utilizador utilizador = new Utilizador(
+                "Pedro", "1140781@isep.ipp.pt", "pedro", "1234");
+        Proponente proponente = new Proponente(utilizador);
+        sessaoTematica.novoProponente(utilizador);
+        this.submissao.setEstado(new SubmissaoRemovidaState(submissao));
+        this.sessaoTematica.getListaSubmissoes().adicionarSubmissao(submissao);
+        listaSessoesTematicas = new ListaSessoesTematicas(evento);
+        listaSessoesTematicas.adicionarSessaoTematica(sessaoTematica);
+        int expResult = 1;
+        int result = listaSessoesTematicas.getListaSubmissiveisComSubmissoesRetiradasOrganizadorProponente(utilizador).size();
         assertEquals(expResult, result);
     }
 }

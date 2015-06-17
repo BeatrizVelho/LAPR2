@@ -1,6 +1,8 @@
 package eventoscientificos.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -38,6 +40,11 @@ public class Empresa {
     private Timer temporizador;
 
     /**
+     * Lista de mecanismo de distribuição.
+     */
+    private List<MecanismoDistribuicao> listaDistribuicao;
+
+    /**
      * Constrói uma instância de Empresa nao recebendo quaisquer valores por
      * parametro.
      */
@@ -45,12 +52,13 @@ public class Empresa {
         this.registoUtilizadores = new RegistoUtilizadores();
         this.registoEventos = new RegistoEventos();
         this.registoTiposConflito = new RegistoTiposConflito();
+        this.listaDistribuicao = new ArrayList<MecanismoDistribuicao>();
         this.temporizador = new Timer();
     }
 
     /**
      * Devolve o Utilizador Autenticado.
-     * 
+     *
      * @return Utilizador Autenticado.
      */
     public Utilizador getUtilizadorAutenticado() {
@@ -85,8 +93,18 @@ public class Empresa {
     }
 
     /**
+     * Devolve a lista de mecanismos de distribuições que a empresa
+     * disponibiliza para distribuir.
+     *
+     * @return Lista de mecanismos de distribuicao.
+     */
+    public List<MecanismoDistribuicao> getListaDistribuicao() {
+        return listaDistribuicao;
+    }
+
+    /**
      * Modifica o Utilizador Autenticado.
-     * 
+     *
      * @param utilizadorAutenticado Novo Utilizador Autenticado.
      */
     public void setUtilizadorAutenticado(Utilizador utilizadorAutenticado) {
