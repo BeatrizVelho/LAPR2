@@ -2,6 +2,7 @@ package eventoscientificos.model;
 
 import eventoscientificos.model.state.submissao.SubmissaoAceiteState;
 import eventoscientificos.model.state.submissao.SubmissaoEmSubmissaoState;
+import eventoscientificos.model.state.submissao.SubmissaoRejeitadaState;
 import eventoscientificos.model.state.submissao.SubmissaoState;
 
 import org.junit.Test;
@@ -294,6 +295,31 @@ public class SubmissaoTest {
         
         boolean expResult = true;
         boolean result = instance.isAutor(utilizador);
+        assertEquals(expResult, result);
+    }
+    
+    /**
+     * Teste do método isStateRemovida, da classe Submissao.
+     */
+    @Test
+    public void testIsStateRemovida() {
+        System.out.println("isStateRemovida");
+        Submissao instance = new Submissao();
+        instance.setEstado(new SubmissaoRejeitadaState(instance));
+        boolean expResult = false;
+        boolean result = instance.isStateRemovida();
+        assertEquals(expResult, result);
+    }
+    
+    /**
+     * Teste do método isStateRemovida, da classe Submissao.
+     */
+    @Test
+    public void testIsStateRemovidaNot() {
+        System.out.println("isStateRemovidaNot");
+        Submissao instance = new Submissao();
+        boolean expResult = false;
+        boolean result = instance.isStateRemovida();
         assertEquals(expResult, result);
     }
 
