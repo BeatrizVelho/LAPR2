@@ -214,4 +214,21 @@ public class ListaSessoesTematicas {
 
         return listaSemCPDefinida;
     }
+    
+    /**
+     * Devolve uma lista de submissiveis com as sessoes tematicas
+     * que tenham submissoes retiradas onde o utilizador é proponente.
+     * 
+     * @param utilizador Utilizador a verificar se é proponente.
+     * @return Lista de submissiveis onde o utilizador é proponente.
+     */
+    public List<Submissivel> getListaSubmissiveisComSubmissoesRetiradasOrganizadorProponente(Utilizador utilizador) {
+        List<Submissivel> listaSubmissiveis = new ArrayList<>();
+        for(SessaoTematica  sessaoTematica : this.listaSessoesTematicas) {
+            if(sessaoTematica.temSubmissoesRetiradas(utilizador)) {
+                listaSubmissiveis.add(sessaoTematica);
+            }
+        }
+        return listaSubmissiveis;
+    }
 }
