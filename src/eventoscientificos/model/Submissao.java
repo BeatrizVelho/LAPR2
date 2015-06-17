@@ -197,7 +197,7 @@ public class Submissao {
      * 
      * @return Verdadeiro se o artigo for válido e falso se não for.
      */
-    public boolean validarArtigo() {
+    public boolean validarSubmissao() {
         if(this.estado instanceof SubmissaoEmSubmissaoState) {
             this.artigoInicial.validarArtigo();
         }
