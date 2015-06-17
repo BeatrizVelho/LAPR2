@@ -1,16 +1,18 @@
 package utils;
 
+import eventoscientificos.model.CP;
 import eventoscientificos.model.Empresa;
 import eventoscientificos.model.Evento;
 import eventoscientificos.model.Local;
 import eventoscientificos.model.RegistoEventos;
 import eventoscientificos.model.RegistoUtilizadores;
+import eventoscientificos.model.Utilizador;
 import java.awt.Frame;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.IdentityHashMap;
-import java.util.Map;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -80,6 +82,10 @@ public class XMLParser {
     /**
      * Tags passíveis de serem encontradas no ficheiro .xml dos eventos.
      */
+    
+    /**
+     * Evento
+     */
     private String listaEventosTag = "ListaEventos";
     private String numeroEventosTag = "NumeroEventos";
     private String eventosTag = "EventosTag";
@@ -97,11 +103,37 @@ public class XMLParser {
     private String listaOrganizadoresTag = "ListaOrganizadores";
     private String numeroOrganizadoresTag = "NumeroOrganizadores";
     private String organizadoresTag = "Organizadores";
-    private String organizador = "Organizador";
+    private String organizadorTag = "Organizador";
     private String cpTag = "CP";
     private String numeroMembrosCPTag = "NumeroMembrosCP";
     private String membrosCPTag = "MembrosCP";
     private String membroCPTag = "MembroCP";
+
+    /**
+     * Sessão Temática
+     */
+    private String listaSessoesTematicasTag = "ListaSessoesTematicas";
+    private String numeroSessoesTematicasTag = "NumeroSessoesTematicas";
+    private String sessoesTematicasTag = "SessoesTematicas";
+    private String sessaoTematicaTag = "SessaoTematica";
+    private String codigoCPTag = "CodigoCP";
+    private String descricaoCPTag = "DescricaoCP";
+    private String listaProponentesTag = "ListaProponentes";
+    private String numeroProponentesTag = "NumeroProponentes";
+    private String proponentesTag = "Proponentes";
+    private String proponenteTag = "Proponente";
+    private String CPSessaoTag = "CPSessao";
+    private String numeroMembrosCPSTTag = "NumeroMembrosCPST";
+    private String membrosCPSessaoTag = "MembrosCPSessao";
+    private String membroCPSessaoTag = "MembroCPSessao";
+
+    /**
+     * Lista de Submissões Evento/Sessão Temática
+     */
+    private String listaSubmissoesTag = "ListaSubmissoes";
+    private String numeroSubmissoesTag = "NumeroSubmissoes";
+    private String submissoesTag = "Submissoes";
+    private String submissaoTag = "Submissao";
 
     /**
      * Representa uma instância de um parser de XML, recebendo uma empresa.
@@ -196,6 +228,7 @@ public class XMLParser {
      */
     public void lerFicheiroEvento() {
         RegistoEventos registoEventos = this.empresa.getRegistoEventos();
+        RegistoUtilizadores registoUtilizadores = this.empresa.getRegistoUtilizadores();
 
         try {
             Document docEvento = lerFicheiro(caminhoFicheiroEvento);
@@ -226,6 +259,30 @@ public class XMLParser {
                             dataFimRevisao, dataFimSubmissaoCameraReady,
                             dataInicio, dataFim);
 
+                    for (String username : lerIntervenientes(docEvento, numeroOrganizadoresTag, organizadorTag)) {
+                        Utilizador utilizador = registoUtilizadores.getUtilizador(username);
+                        if (utilizador == null) {
+                            throw new IllegalArgumentException();
+                        }
+
+                        evento.novoOrganizador(utilizador);
+                    }
+
+                    if (evento.validarEvento()) {
+                        CP cp = evento.novaCP();
+
+                        for (String username : lerIntervenientes(docEvento, numeroMembrosCPTag, membroCPTag)) {
+                            Utilizador utilizador = registoUtilizadores.getUtilizador(username);
+                            if (utilizador == null) {
+                                throw new IllegalArgumentException();
+                            }
+
+                            cp.novoRevisor(utilizador);
+                        }
+
+                        evento.adicionarCP(cp);
+                    }
+
                     registoEventos.adicionarEvento(evento);
                 }
             }
@@ -252,6 +309,37 @@ public class XMLParser {
      */
     public void escreverFicheiroEvento() {
         // Precisa de implementação
+    }
+
+    /**
+     *
+     *
+     * @param doc
+     * @param totalIntervenientes
+     * @param interveniente
+     * @return
+     */
+    private List<String> lerIntervenientes(Document doc, String totalIntervenientes, String interveniente) {
+        List<String> listaUsernames = new ArrayList();
+
+        int numeroOrganizadores = -1;
+        numeroOrganizadores = Integer.parseInt(doc.getElementsByTagName(totalIntervenientes).item(0).getTextContent());
+        NodeList nList = doc.getElementsByTagName(interveniente);
+
+        if (numeroOrganizadores != -1 && numeroOrganizadores != nList.getLength()) {
+            throw new IllegalArgumentException();
+        }
+
+        for (int temp = 0; temp < nList.getLength(); temp++) {
+            Node nNode = nList.item(temp);
+
+            if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                Element eElement = (Element) nNode;
+                listaUsernames.add(eElement.getTextContent());
+            }
+        }
+
+        return listaUsernames;
     }
 
     /**
