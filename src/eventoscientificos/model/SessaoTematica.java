@@ -702,4 +702,18 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
         }
         return false;
     }
+    
+    /**
+     * Verifica se existem submissões retiradas e onde o utilizador é proponente.
+     * 
+     * @param utilizador Utilizador a verificar é proponente.
+     * @return Verdadeiro caso existam submissoes retiradas e
+     * falso se não existir.
+     */
+    public boolean temSubmissoesRetiradas(Utilizador utilizador) {
+        if (isProponente(utilizador) && this.listaSubmissoes.temSubmissoesRetiradas()) {
+            return true;
+        }
+        return false;
+    }
 }
