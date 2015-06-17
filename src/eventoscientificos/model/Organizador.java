@@ -5,15 +5,15 @@ package eventoscientificos.model;
  * @author G01
  */
 public class Organizador {
-    
+
     /**
      * Utilizador que assume o papel de organizador.
      */
     private Utilizador utilizador;
 
     /**
-     * Constrói uma instância de um organizador recebendo o utilizador que assume
-     * o papel.
+     * Constrói uma instância de um organizador recebendo o utilizador que
+     * assume o papel.
      *
      * @param utilizador Utilizador que assume o papel de organizador.
      */
@@ -28,6 +28,12 @@ public class Organizador {
      */
     public Utilizador getUtilizador() {
         return this.utilizador;
+    }
+
+    public String toString() {
+        return String.format("%s (%s)",
+                this.getUtilizador().getNome(),
+                this.getUtilizador().getEmail());
     }
 
     /*
@@ -53,7 +59,7 @@ public class Organizador {
 
         return this.getUtilizador().equals(outroOrganizador.getUtilizador());
     }
-    
+
     /**
      * Valida um organizador de forma a garantir que o mesmo possui os dados
      * corretos.
