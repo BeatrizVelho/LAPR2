@@ -811,5 +811,19 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
         }
         return false;
     }
+    
+        /**
+     * Verifica se existem submissões retiradas e onde o utilizador é organizador.
+     * 
+     * @param utilizador Utilizador a verificar é organizador.
+     * @return Verdadeiro caso existam submissoes retiradas e
+     * falso se não existir.
+     */
+    public boolean temSubmissoesRetiradas(Utilizador utilizador) {
+        if (isOrganizador(utilizador) && this.listaSubmissoes.temSubmissoesRetiradas()) {
+            return true;
+        }
+        return false;
+    }
 
 }

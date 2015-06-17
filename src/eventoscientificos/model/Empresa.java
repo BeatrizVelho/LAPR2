@@ -42,7 +42,7 @@ public class Empresa {
     /**
      * Lista de mecanismo de distribuição.
      */
-    private List<MecanismoDistribuicao> listaDistribuicao;
+    private List<MecanismoDistribuicao> listaMecanismoDistribuicao;
 
     /**
      * Constrói uma instância de Empresa nao recebendo quaisquer valores por
@@ -52,7 +52,7 @@ public class Empresa {
         this.registoUtilizadores = new RegistoUtilizadores();
         this.registoEventos = new RegistoEventos();
         this.registoTiposConflito = new RegistoTiposConflito();
-        this.listaDistribuicao = new ArrayList<MecanismoDistribuicao>();
+        this.listaMecanismoDistribuicao = new ArrayList<MecanismoDistribuicao>();
         this.temporizador = new Timer();
     }
 
@@ -98,8 +98,8 @@ public class Empresa {
      *
      * @return Lista de mecanismos de distribuicao.
      */
-    public List<MecanismoDistribuicao> getListaDistribuicao() {
-        return listaDistribuicao;
+    public List<MecanismoDistribuicao> getListaMecanismoDistribuicao() {
+        return listaMecanismoDistribuicao;
     }
 
     /**
