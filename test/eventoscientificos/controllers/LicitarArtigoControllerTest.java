@@ -112,7 +112,7 @@ public class LicitarArtigoControllerTest {
     public void testInserirDadosLicitacao() {
         System.out.println("inserirDadosLicitacao");
         int grauInteresse = 0;
-        Conflito conflito = new Conflito(revisor, submissao, new ArrayList<>());
+        Conflito conflito = new Conflito(revisor, submissao, new ArrayList());
         LicitarArtigoController instance = new LicitarArtigoController(this.empresa);
         instance.getListaLicitaveisComArtigosPorLicitarRevisor();
         instance.selecionarLicitavel(0);
