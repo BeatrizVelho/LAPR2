@@ -1,5 +1,7 @@
 package eventoscientificos.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -13,7 +15,7 @@ public class EmpresaTest {
      */
     public EmpresaTest() {
     }
-    
+
     /**
      * Testa o método set e get UtilizadorAutenticado, da classe Empresa.
      */
@@ -22,7 +24,7 @@ public class EmpresaTest {
         System.out.println("setAndGetUtilizadorAutenticado");
         Empresa instance = new Empresa();
         Utilizador utilizador = new Utilizador(
-                "Pedro Moreira", "1140781@isep.ipp.pt", "pedro", "1234");
+                            "Pedro Moreira", "1140781@isep.ipp.pt", "pedro", "1234");
         instance.setUtilizadorAutenticado(utilizador);
         Utilizador expResult = utilizador;
         Utilizador result = instance.getUtilizadorAutenticado();
@@ -65,4 +67,16 @@ public class EmpresaTest {
         assertEquals(expResult, result);
     }
 
+    /**
+     * Testa o metodo testgetListaDistribuicao da classe Empresa.
+     */
+    @Test
+    public void testgetListaDistribuicao() {
+        System.out.println("getListaDistribuicao");
+        Empresa instance = new Empresa();
+        List<MecanismoDistribuicao> expResult
+                            = new ArrayList<MecanismoDistribuicao>();
+        List<MecanismoDistribuicao> result = instance.getListaDistribuicao();
+        assertEquals(expResult, result);
+    }
 }
