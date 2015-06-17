@@ -825,5 +825,16 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
         }
         return false;
     }
+    
+    /**
+     * Devolve uma lista de sessões temáticas onde se encontrem submissoes
+     * retiradas e o utilizador é proponente.
+     * 
+     * @param utilizador Utilizador a verificar se é proponente.
+     * @return Lista de sessao temática onde o utilizador é proponente.
+     */
+    public List<Submissivel> getListaSubmissiveisComSubmissoesRetiradasOrganizadorProponente(Utilizador utilizador) {
+        return listaSessoesTematicas.getListaSubmissiveisComSubmissoesRetiradasOrganizadorProponente(utilizador);
+    }
 
 }
