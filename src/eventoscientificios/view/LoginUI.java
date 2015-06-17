@@ -25,9 +25,11 @@ public class LoginUI extends javax.swing.JDialog {
         this.controller = new LoginController(empresa);
         this.framePai = parent;
         initComponents();
-        setLocationRelativeTo(null);
+        setResizable(false);
         getRootPane().setDefaultButton(jButton2);
+        setLocationRelativeTo(null);
         setVisible(true);
+        pack();
     }
 
     /**
