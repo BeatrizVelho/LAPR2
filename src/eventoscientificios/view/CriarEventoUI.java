@@ -37,6 +37,7 @@ public class CriarEventoUI extends javax.swing.JDialog {
         super(parent, "Criar Evento", modal);
         this.controller = new CriarEventoController(empresa);
         this.framePai = parent;
+        setResizable(false);
         initComponents();
         setLocationRelativeTo(null);
         getRootPane().setDefaultButton(btn_criarEvento);
