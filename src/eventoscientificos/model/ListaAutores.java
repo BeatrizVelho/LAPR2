@@ -95,8 +95,13 @@ public class ListaAutores {
      * @param autor Autor a remover da lista de autores.
      * @return Verdadeiro se for removido e falso se não for
      */
-    public boolean removerAutor(Autor autor) {
-        return this.listaAutores.remove(autor);
+    public boolean removerAutor(String email) {
+        for(Autor autor : this.listaAutores) {
+            if(autor.getEmail().equals(email)) {
+                return this.listaAutores.remove(autor);
+            }
+        }
+        return false;
     }
     
     public boolean isAutor(Utilizador utilizador){
