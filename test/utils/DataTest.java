@@ -2,7 +2,6 @@ package utils;
 
 import java.math.BigDecimal;
 import java.sql.Date;
-import java.time.Instant;
 import java.util.Calendar;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -198,7 +197,19 @@ public class DataTest {
     }
 
     /**
-     * Teste do método dataAtual, da classe data.
+     * Teste do método converterString, da classe Data.
+     */
+    @Test
+    public void testConverterString() {
+        System.out.println("converterString");
+        String instance = "2015-05/22";
+        Data expResult = new Data(2015, 5, 22);
+        Data result = Data.converterString(instance);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método dataAtual, da classe Data.
      */
     @Test
     public void testDataAtual() {

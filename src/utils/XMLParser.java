@@ -1,11 +1,16 @@
 package utils;
 
 import eventoscientificos.model.Empresa;
+import eventoscientificos.model.Evento;
+import eventoscientificos.model.Local;
+import eventoscientificos.model.RegistoEventos;
 import eventoscientificos.model.RegistoUtilizadores;
 import java.awt.Frame;
 import java.io.File;
 import java.io.IOException;
-import java.util.Formatter;
+import java.util.HashMap;
+import java.util.IdentityHashMap;
+import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -28,11 +33,16 @@ public class XMLParser {
      * Frame principal.
      */
     private Frame framePai;
-    
+
     /**
      * Empresa onde é guardada a informação.
      */
     private Empresa empresa;
+
+    /**
+     * Locais de todos os eventos, com o respetivo ID de cada um.
+     */
+    private HashMap<String, String> locais;
 
     /**
      * Caminho para o ficheiro .xml dos utilizadores.
@@ -46,7 +56,7 @@ public class XMLParser {
     private String caminhoFicheiroLocal = "Local.xml";
 
     /**
-     * Tag passíveis de ser encontradas no ficheiro .xml dos utilizadores.
+     * Tags passíveis de serem encontradas no ficheiro .xml dos utilizadores.
      */
     private String listaUtilizadoresTag = "ListaUtilizadores";
     private String numeroElementosTag = "NumeroElementos";
@@ -56,6 +66,42 @@ public class XMLParser {
     private String nomeTag = "Nome";
     private String emailTag = "Email";
     private String passwordTag = "Password";
+
+    /**
+     * Tags passíveis de serem encontradas no ficheiro .xml dos locais.
+     */
+    private String listaLocaisTag = "ListaLocais";
+    private String numElementosTag = "NumElementos";
+    private String locaisTag = "Locais";
+    private String localTag = "Local";
+    private String localIDTag = "LocalID";
+    private String designacaoTag = "Designacao";
+
+    /**
+     * Tags passíveis de serem encontradas no ficheiro .xml dos eventos.
+     */
+    private String listaEventosTag = "ListaEventos";
+    private String numeroEventosTag = "NumeroEventos";
+    private String eventosTag = "EventosTag";
+    private String eventoTag = "Evento";
+    private String tituloTag = "Titulo";
+    private String descricaoTag = "Descricao";
+    private String dataInicioTag = "DataInicio";
+    private String dataFimTag = "DataFim";
+    private String dataInicioSubmissaoTag = "DataInicioSubmissao";
+    private String dataFimSubmissaoTag = "DataFimSubmissao";
+    private String dataInicioDistribuicaoTag = "DataInicioDistribuicao";
+    private String dataLimiteRevisaoTag = "DataLimiteRevisao";
+    private String dataLimiteSubmissaoEmCameraReadyTag = "DataLimiteSubmissaoEmCameraReady";
+    private String estadoEventoTag = "EstadoEvento";
+    private String listaOrganizadoresTag = "ListaOrganizadores";
+    private String numeroOrganizadoresTag = "NumeroOrganizadores";
+    private String organizadoresTag = "Organizadores";
+    private String organizador = "Organizador";
+    private String cpTag = "CP";
+    private String numeroMembrosCPTag = "NumeroMembrosCP";
+    private String membrosCPTag = "MembrosCP";
+    private String membroCPTag = "MembroCP";
 
     /**
      * Representa uma instância de um parser de XML, recebendo uma empresa.
@@ -74,13 +120,7 @@ public class XMLParser {
                 = this.empresa.getRegistoUtilizadores();
 
         try {
-            File ficheiroUtilizador = new File(this.caminhoFicheiroUtilizador);
-            DocumentBuilderFactory docBuilderF = DocumentBuilderFactory.newInstance();
-            DocumentBuilder docBuilder = docBuilderF.newDocumentBuilder();
-            Document doc = docBuilder.parse(ficheiroUtilizador);
-
-            doc.getDocumentElement().normalize();
-
+            Document doc = lerFicheiro(caminhoFicheiroUtilizador);
             int numeroUtilizadores = -1;
             numeroUtilizadores = Integer.parseInt(doc.getElementsByTagName(numeroElementosTag).item(0).getTextContent());
             NodeList nodeList = doc.getElementsByTagName(utilizadorTag);
@@ -105,7 +145,7 @@ public class XMLParser {
                                     nome, email, username, password));
                 }
             }
-        } catch (ParserConfigurationException | SAXException | IOException | IllegalArgumentException ex) {
+        } catch (ParserConfigurationException | IOException | SAXException | IllegalArgumentException ex) {
             JOptionPane.showMessageDialog(framePai, "Ocorreu um erro durante a leitura dos ficheiros XML.", "Leitura XML", JOptionPane.ERROR_MESSAGE);
             this.empresa = new Empresa();
         }
@@ -113,10 +153,87 @@ public class XMLParser {
     }
 
     /**
+     * Lê o ficheiro .xml que contém os dados sobre os locais da aplicação.
+     */
+    public void lerFicheiroLocal() {
+        this.locais = new HashMap();
+
+        try {
+            Document doc = lerFicheiro(caminhoFicheiroLocal);
+
+            int numeroLocais = -1;
+            numeroLocais = Integer.parseInt(doc.getElementsByTagName(numElementosTag).item(0).getTextContent());
+            NodeList nodeList = doc.getElementsByTagName(localTag);
+
+            if (numeroLocais != -1 && numeroLocais != nodeList.getLength()) {
+                throw new IllegalArgumentException();
+            }
+
+            for (int i = 0; i < nodeList.getLength(); i++) {
+                Node node = nodeList.item(i);
+
+                if (node.getNodeType() == Node.ELEMENT_NODE) {
+                    Element element = (Element) node;
+
+                    String id = element.getElementsByTagName(localIDTag).item(0).getTextContent();
+                    String designacao = element.getElementsByTagName(designacaoTag).item(0).getTextContent();
+
+                    this.locais.put(id, designacao);
+                }
+            }
+
+            if (this.locais.isEmpty()) {
+                throw new IllegalArgumentException();
+            }
+        } catch (ParserConfigurationException | IOException | SAXException | IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(framePai, "Ocorreu um erro durante a leitura dos ficheiros XML.", "Leitura XML", JOptionPane.ERROR_MESSAGE);
+            this.empresa = new Empresa();
+        }
+    }
+
+    /**
      * Lê o ficheiro XML que contém os dados dos eventos da aplicação.
      */
     public void lerFicheiroEvento() {
-        // Precisa de implementação
+        RegistoEventos registoEventos = this.empresa.getRegistoEventos();
+
+        try {
+            Document docEvento = lerFicheiro(caminhoFicheiroEvento);
+
+            NodeList nList = docEvento.getElementsByTagName(eventoTag);
+
+            for (int temp = 0; temp < nList.getLength(); temp++) {
+                Node nNode = nList.item(temp);
+
+                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                    Element eElement = (Element) nNode;
+
+                    String titulo = eElement.getElementsByTagName(tituloTag).item(0).getTextContent();
+                    String descricao = eElement.getElementsByTagName(descricaoTag).item(0).getTextContent();
+                    String nomeLocal = this.locais.get(eElement.getElementsByTagName(localTag).item(0).getTextContent());
+                    Local local = new Local(nomeLocal);
+                    Data dataInicio = Data.converterString(eElement.getElementsByTagName(dataInicioTag).item(0).getTextContent());
+                    Data dataFim = Data.converterString(eElement.getElementsByTagName(dataFimTag).item(0).getTextContent());
+                    Data dataInicioSubmissao = Data.converterString(eElement.getElementsByTagName(dataInicioSubmissaoTag).item(0).getTextContent());
+                    Data dataFimSubmissao = Data.converterString(eElement.getElementsByTagName(dataFimSubmissaoTag).item(0).getTextContent());
+                    Data dataInicioDistribuicao = Data.converterString(eElement.getElementsByTagName(dataInicioDistribuicaoTag).item(0).getTextContent());
+                    Data dataFimRevisao = Data.converterString(eElement.getElementsByTagName(dataLimiteRevisaoTag).item(0).getTextContent());
+                    Data dataFimSubmissaoCameraReady = Data.converterString(eElement.getElementsByTagName(dataLimiteSubmissaoEmCameraReadyTag).item(0).getTextContent());
+
+                    Evento evento = registoEventos.novoEvento(
+                            titulo, descricao, local, dataInicioSubmissao,
+                            dataFimSubmissao, dataInicioDistribuicao,
+                            dataFimRevisao, dataFimSubmissaoCameraReady,
+                            dataInicio, dataFim);
+
+                    registoEventos.adicionarEvento(evento);
+                }
+            }
+
+        } catch (ParserConfigurationException | IOException | SAXException | IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(framePai, "Ocorreu um erro durante a leitura dos ficheiros XML.", "Leitura XML", JOptionPane.ERROR_MESSAGE);
+            this.empresa = new Empresa();
+        }
     }
 
     /**
@@ -126,11 +243,32 @@ public class XMLParser {
         // Precisa de implementação
     }
 
+    public void escreverFicheiroLocal() {
+        // Precisa de implementação
+    }
+
     /**
      *
      */
     public void escreverFicheiroEvento() {
         // Precisa de implementação
+    }
+
+    /**
+     * Lê e processa um ficheiro XML
+     *
+     * @param caminho Caminho do ficheiro a ler.
+     * @return Construção de uma árvore em XML.
+     */
+    private Document lerFicheiro(String caminho) throws ParserConfigurationException, IOException, SAXException {
+        File ficheiro = new File(caminho);
+        DocumentBuilderFactory docBuilderF = DocumentBuilderFactory.newInstance();
+        DocumentBuilder docBuilder;
+        docBuilder = docBuilderF.newDocumentBuilder();
+        Document doc = docBuilder.parse(ficheiro);
+        doc.normalize();
+
+        return doc;
     }
 
 }
