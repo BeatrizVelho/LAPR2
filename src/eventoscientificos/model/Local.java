@@ -34,7 +34,7 @@ public class Local {
      * @param nomeLocal Novo nome do local de realização do evento.
      */
     public void setNomeLocal(String nomeLocal) {
-        if (nomeLocal.trim().isEmpty()) {
+        if (nomeLocal == null || nomeLocal.trim().isEmpty()) {
             throw new IllegalArgumentException("Nome do local não pode estar vazio!");
         }
         this.nomeLocal = nomeLocal;
