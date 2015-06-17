@@ -541,6 +541,16 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
     }
 
     /**
+     * Verifica se o Evento tem pelo um Organizador.
+     * 
+     * @return Verdadeiro se tem pelo menos um organizador e falso se a lista 
+     * está vazia.
+     */
+    public boolean temOrganizadores() {
+        return this.listaOrganizadores.size() > 0;
+    } 
+    
+    /**
      * Verifica se determinado utilizador é organizador do evento.
      *
      * @param utilizador Utilizador que se pretende verificar.
