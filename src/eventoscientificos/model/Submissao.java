@@ -4,6 +4,7 @@ import eventoscientificos.model.state.submissao.SubmissaoAceiteState;
 import eventoscientificos.model.state.submissao.SubmissaoCriadaState;
 import eventoscientificos.model.state.submissao.SubmissaoEmCameraReadyState;
 import eventoscientificos.model.state.submissao.SubmissaoEmSubmissaoState;
+import eventoscientificos.model.state.submissao.SubmissaoRemovidaState;
 import eventoscientificos.model.state.submissao.SubmissaoState;
 
 /**
@@ -275,5 +276,15 @@ public class Submissao {
 
         return this.getArtigoInicial().equals(outraSubmissao.getArtigoInicial())
                 || this.getArtigoFinal().equals(outraSubmissao.getArtigoFinal());
+    }
+    
+    /**
+     * Verifica se a submissao se encontra no estado removida.
+     * 
+     * @return Verdadeiro caso se encontre no estado removido e
+     * falso caso não esteja.
+     */
+    public boolean isStateRemovida(){
+        return this.estado instanceof SubmissaoRemovidaState;
     }
 }
