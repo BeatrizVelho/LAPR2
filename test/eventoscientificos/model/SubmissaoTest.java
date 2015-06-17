@@ -207,7 +207,7 @@ public class SubmissaoTest {
     }
 
     /**
-     * Teste do método validarArtigo, da classe Submissao.
+     * Teste do método validarSubmissao, da classe Submissao.
      */
     @Test
     public void testValidarArtigoEmSubmissao() {
@@ -219,7 +219,7 @@ public class SubmissaoTest {
     }
     
     /**
-     * Teste do método validarArtigo, da classe Submissao.
+     * Teste do método validarSubmissao, da classe Submissao.
      */
     @Test
     public void testValidarArtigoAceite() {
