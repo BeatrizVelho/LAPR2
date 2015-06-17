@@ -10,6 +10,7 @@ import eventoscientificos.model.state.evento.EventoSessoesTematicasDefinidasStat
 import eventoscientificos.model.state.evento.EventoState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmSubmissaoState;
 import eventoscientificos.model.state.submissao.SubmissaoEmSubmissaoState;
+import eventoscientificos.model.state.submissao.SubmissaoRemovidaState;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
@@ -795,6 +796,23 @@ public class EventoTest {
         this.evento.novoOrganizador(utilizador);
         boolean expResult = false;
         boolean result = this.evento.isStateValidoParaDistribuir(utilizador);
+        assertEquals(expResult, result);
+    }
+    
+    /**
+     * Teste do método temSubmissoesRetiradas, da classe Evento.
+     */
+    @Test
+    public void testTemSubmissoesRetiradas() {
+        System.out.println("temSubmissoesRetiradas");
+        Utilizador utilizador = new Utilizador(
+                "Pedro", "1140781@isep.ipp.pt", "pedro", "1234");
+        Proponente proponente = new Proponente(utilizador);
+        evento.novoOrganizador(utilizador);
+        this.submissao.setEstado(new SubmissaoRemovidaState(submissao));
+        this.evento.getListaSubmissoes().adicionarSubmissao(submissao);
+        boolean expResult = true;
+        boolean result = this.evento.temSubmissoesRetiradas(utilizador);
         assertEquals(expResult, result);
     }
 }
