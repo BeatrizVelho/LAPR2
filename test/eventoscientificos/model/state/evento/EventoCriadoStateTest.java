@@ -7,6 +7,8 @@ package eventoscientificos.model.state.evento;
 
 import eventoscientificos.model.Evento;
 import eventoscientificos.model.Local;
+import eventoscientificos.model.Organizador;
+import eventoscientificos.model.Utilizador;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import utils.Data;
@@ -33,7 +35,10 @@ public class EventoCriadoStateTest {
                 new Data(2016, 7, 7), new Data(2016, 8, 15),
                 new Data(2016, 9, 10), new Data(2016, 10, 1),
                 new Data(2017, 6, 10));
+        e.novoOrganizador(new Utilizador(
+                "beatriz", "  1140587@isep.ipp.pt", "bea", "1234"));
         e.setEstado(new EventoCriadoState(e));
+        
     }
 
     /**
@@ -55,6 +60,7 @@ public class EventoCriadoStateTest {
     public void testSetRegistado() {
         System.out.println("setRegistado");
         EventoState instance = e.getEstado();
+        Evento e = this.e;
         boolean expResult = true;
         boolean result = instance.setRegistado();
         assertEquals(expResult, result);

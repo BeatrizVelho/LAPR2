@@ -27,7 +27,7 @@ public class ListaSubmissoes {
      * @return lista de submissões.
      */
     public List<Submissao> getListaSubmissoes() {
-        return listaSubmissoes;
+        return this.listaSubmissoes;
     }
 
     /**
@@ -55,6 +55,27 @@ public class ListaSubmissoes {
     }
 
     /**
+     * Verifica se a submissão passada por parametro já consta na lista de
+     * submissoes, ignorando a submisaao que lhe deu origem.
+     *
+     * @param submissao Submissao clonada.
+     * @param submissaoClone Submissao clone.
+     * 
+     * @return Verdadeiro se a submissao clone não existir.
+     */
+    public boolean validarCloneSubmissao(
+            Submissao submissao, Submissao submissaoClone) {
+        for (Submissao outraSubmissao : this.listaSubmissoes) {
+            if (submissaoClone.equals(outraSubmissao)
+                    && !submissao.equals(outraSubmissao)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
      * Adiciona à lista de submissoes a submissao passada por parametro.
      *
      * @param submissao Submissao de artigo
@@ -64,6 +85,24 @@ public class ListaSubmissoes {
         return this.listaSubmissoes.add(submissao);
     }
 
+    /**
+     * Verifica se o utilizador passado por parâmetro é autor de alguma 
+     * submissão.
+     * 
+     * @param utilizador Utilizador a verificar se é autor.
+     * @return Verdadeiro se encontrar uma submissão em que o utilizador é autor 
+     * e falso se não encontrar.
+     */
+    public boolean isUtilizadorUmAutorSubmissao(Utilizador utilizador) {
+        for(Submissao submissao : this.listaSubmissoes) {
+            if(submissao.isAutor(utilizador)) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
     /**
      * Devolve uam lista de submissões associadas ao utilizador
      *
@@ -101,10 +140,10 @@ public class ListaSubmissoes {
         }
 
         ListaSubmissoes outraListaSubmissoes
-                            = (ListaSubmissoes) outroObjeto;
+                = (ListaSubmissoes) outroObjeto;
 
         return this.listaSubmissoes.equals(
-                            outraListaSubmissoes.listaSubmissoes);
+                outraListaSubmissoes.listaSubmissoes);
     }
 
 }

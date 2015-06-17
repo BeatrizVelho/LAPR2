@@ -179,6 +179,11 @@ public class Submissao {
         return this.artigoInicial = new Artigo();
     }
 
+    /**
+     * Altera o estado da submissão para EmSubmissão.
+     * 
+     * @return Verdadeiro  
+     */
     public boolean alterarEstadoSubmissao() {
         if (this.estado instanceof SubmissaoCriadaState) {
             this.estado.setEmSubmissao();
@@ -187,10 +192,29 @@ public class Submissao {
         return true;
     }
 
+    /**
+     * Valida o artigo conforme o estado da Submissao.
+     * 
+     * @return Verdadeiro se o artigo for válido e falso se não for.
+     */
     public boolean validarArtigo() {
-        return this.artigoInicial.validarArtigo();
+        if(this.estado instanceof SubmissaoEmSubmissaoState) {
+            this.artigoInicial.validarArtigo();
+        }
+        
+        if(this.estado instanceof SubmissaoAceiteState) {
+            this.artigoFinal.validarArtigo();
+        }
+        
+        return true;
     }
 
+    /**
+     * Adiciona um artigo conforme o estado da submissao.
+     * 
+     * @param artigo Artigo a ser adicionado.
+     * @return Verdadeiro se o atigo for adicionado.
+     */
     public boolean adicionarArtigo(Artigo artigo) {
         if (this.estado instanceof SubmissaoEmSubmissaoState) {
             setArtigoInicial(artigo);

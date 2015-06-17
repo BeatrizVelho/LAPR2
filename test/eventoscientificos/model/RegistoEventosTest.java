@@ -1,5 +1,6 @@
 package eventoscientificos.model;
 
+import eventoscientificos.model.state.evento.EventoEmSubmissaoState;
 import eventoscientificos.model.state.evento.EventoRegistadoState;
 import eventoscientificos.model.state.evento.EventoSessoesTematicasDefinidasState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaRegistadaState;
@@ -31,16 +32,16 @@ public class RegistoEventosTest {
         Data dataFim = new Data(2017, 6, 10);
         RegistoEventos instance = new RegistoEventos();
         this.evento = new Evento(titulo, descricao, local, dataInicioSubmissao,
-                            dataFimSubmissao, dataInicioDistribuicao, dataFimRevisao,
-                            dataFimSubmissaoCameraReady, dataInicio, dataFim);
+                dataFimSubmissao, dataInicioDistribuicao, dataFimRevisao,
+                dataFimSubmissaoCameraReady, dataInicio, dataFim);
 
         this.utilizador = new Utilizador(
-                            "pedro", "1140781@isep.ipp.pt", "pedro", "12345");
+                "pedro", "1140781@isep.ipp.pt", "pedro", "12345");
         this.st = new SessaoTematica(
-                            "#123456", "Uma descrição", new Data(2016, 5, 9),
-                            new Data(2016, 6, 21), new Data(2016, 7, 8),
-                            new Data(2016, 7, 20), new Data(2016, 9, 24),
-                            new Data(2017, 5, 28));
+                "#123456", "Uma descrição", new Data(2016, 5, 9),
+                new Data(2016, 6, 21), new Data(2016, 7, 8),
+                new Data(2016, 7, 20), new Data(2016, 9, 24),
+                new Data(2017, 5, 28));
     }
 
     /**
@@ -62,9 +63,9 @@ public class RegistoEventosTest {
         RegistoEventos instance = new RegistoEventos();
         Evento expResult = this.evento;
         Evento result = instance.novoEvento(
-                            titulo, descricao, local, dataInicioSubmissao, dataFimSubmissao,
-                            dataInicioDistribuicao, dataFimRevisao, dataFimSubmissaoCameraReady,
-                            dataInicio, dataFim);
+                titulo, descricao, local, dataInicioSubmissao, dataFimSubmissao,
+                dataInicioDistribuicao, dataFimRevisao, dataFimSubmissaoCameraReady,
+                dataInicio, dataFim);
         assertEquals(expResult, result);
     }
 
@@ -136,7 +137,7 @@ public class RegistoEventosTest {
         List<Evento> expResult = new ArrayList();
         expResult.add(this.evento);
         List<Evento> result
-                            = instance.getListaEventosOrganizador(this.utilizador);
+                = instance.getListaEventosOrganizador(this.utilizador);
         assertEquals(expResult, result);
     }
 
@@ -206,5 +207,40 @@ public class RegistoEventosTest {
         boolean result = instance.getListaLicitaveisComArtigosPorLicitarRevisor(u) != null;
         assertEquals(expResult, result);
     }
+
+    /**
+     * Teste do método getListaSubmissiveisAceitarArtigo, da classe RegistoEventos.
+     */
+    @Test
+    public void testGetListaSubmissiveisAceitarArtigo() {
+        System.out.println("getListaSubmissiveisAceitarArtigo");
+        RegistoEventos instance = new RegistoEventos();
+        Evento evento = this.evento;
+        evento.setEstado(new EventoEmSubmissaoState(evento));
+        instance.adicionarEvento(evento);
+        instance.adicionarEvento(new Evento("sem titulo", "descricao",
+                new Local("local"), new Data(2016, 6, 8), new Data(2016, 6, 20),
+                new Data(2016, 7, 30), new Data(2016, 8, 15), new Data(2016, 8, 30),
+                new Data(2016, 10, 9), new Data(2017, 6, 10)));
+        int expResult = 1;
+        int result = instance.getListaSubmissiveisAceitarArtigo().size();
+        assertEquals(expResult, result);
+    }
+
+//    /**
+//     * Teste do método getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador,
+//     * da classe RegistoEventos.
+//     */
+//    @Test
+//    public void testGetListaSubmissiveisAceitarArtigoComSubmissaoUtilizador() {
+//        System.out.println("getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador");
+//        Utilizador utilizador = null;
+//        RegistoEventos instance = new RegistoEventos();
+//        List<Submissivel> expResult = null;
+//        List<Submissivel> result = instance.getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador(utilizador);
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
 
 }

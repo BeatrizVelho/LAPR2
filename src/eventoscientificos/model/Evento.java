@@ -541,6 +541,16 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
     }
 
     /**
+     * Verifica se o Evento tem pelo um Organizador.
+     * 
+     * @return Verdadeiro se tem pelo menos um organizador e falso se a lista 
+     * está vazia.
+     */
+    public boolean temOrganizadores() {
+        return this.listaOrganizadores.size() > 0;
+    } 
+    
+    /**
      * Verifica se determinado utilizador é organizador do evento.
      *
      * @param utilizador Utilizador que se pretende verificar.
@@ -649,10 +659,29 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
     public List<Submissivel> getListaSubmissiveisAceitarArtigo() {
         return this.listaSessoesTematicas.getListaSubmissiveisAceitarArtigo();
     }
-//
-//    public List<Submissivel> getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador(Utilizador utilizador) {
-//        return this.listaSessoesTematicas.getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador(utilizador);
-//    }
+
+    /**
+     * Verifica se o utilizador passado por parâmetro é autor de alguma 
+     * submissão da lista de Submissões do evento.
+     * 
+     * @param utilizador Utilizador a verificar.
+     * @return Verdadeiro se é autor e falso se não é.
+     */
+    public boolean isUtilizadorUmAutorSubmissao(Utilizador utilizador) {
+        return this.listaSubmissoes.isUtilizadorUmAutorSubmissao(utilizador);
+    }
+
+    /**
+     * Devolve uma lista de submissiveis nas quais o utilizador é autor de alguma
+     * submissao submissao.
+     * 
+     * @param utilizador
+     * @return Lista de Submissiveis.
+     */
+    public List<Submissivel> getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador(
+            Utilizador utilizador) {
+        return this.listaSessoesTematicas.getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador(utilizador);
+    }
 
     /**
      * Devolve o conflito detetado entre o revisor e a submissao

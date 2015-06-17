@@ -14,7 +14,7 @@ import utils.Data;
  * @author G01
  */
 public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
-                    Licitavel, Distribuivel {
+        Licitavel, Distribuivel {
 
     /**
      * Código único da sessão temática.
@@ -101,14 +101,14 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
      * @param dataFim Data de fim da sessão temática.
      */
     public SessaoTematica(
-                        String codigoUnico,
-                        String descricao,
-                        Data dataInicioSubmissao,
-                        Data dataFimSubmissao,
-                        Data dataInicioDistribuicao,
-                        Data dataFimSubmissaoCameraReady,
-                        Data dataInicio,
-                        Data dataFim) {
+            String codigoUnico,
+            String descricao,
+            Data dataInicioSubmissao,
+            Data dataFimSubmissao,
+            Data dataInicioDistribuicao,
+            Data dataFimSubmissaoCameraReady,
+            Data dataInicio,
+            Data dataFim) {
         setCodigoUnico(codigoUnico);
         setDescricao(descricao);
         setDataInicioSubmissao(dataInicioSubmissao);
@@ -255,7 +255,7 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
     public void setCodigoUnico(String codigoUnico) {
         if (codigoUnico.trim().isEmpty()) {
             throw new IllegalArgumentException("O código único da sessão "
-                                + "temática não pode estar vazio.");
+                    + "temática não pode estar vazio.");
         }
 
         this.codigoUnico = codigoUnico;
@@ -269,7 +269,7 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
     public void setDescricao(String descricao) {
         if (descricao.trim().isEmpty()) {
             throw new IllegalArgumentException("A descrição da sessão temática"
-                                + "não pode estar vazia.");
+                    + "não pode estar vazia.");
         }
 
         this.descricao = descricao;
@@ -284,7 +284,7 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
     public void setDataInicioSubmissao(Data dataInicioSubmissao) {
         if (dataInicioSubmissao == null) {
             throw new NullPointerException("A data de inicio de submissão não "
-                                + "pode estar vazia.");
+                    + "pode estar vazia.");
         }
 
         this.dataInicioSubmissao = dataInicioSubmissao;
@@ -299,7 +299,7 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
     public void setDataFimSubmissao(Data dataFinalSubmissao) {
         if (dataFinalSubmissao == null) {
             throw new NullPointerException("A data de fim de submissão não pode"
-                                + "estar vazia.");
+                    + "estar vazia.");
         }
 
         this.dataFimSubmissao = dataFinalSubmissao;
@@ -314,7 +314,7 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
     public void setDataInicioDistribuicao(Data dataInicioDistribuicao) {
         if (dataInicioDistribuicao == null) {
             throw new NullPointerException("A data de início de distribuição "
-                                + "não pode estar vazia.");
+                    + "não pode estar vazia.");
         }
 
         this.dataInicioDistribuicao = dataInicioDistribuicao;
@@ -327,10 +327,10 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
      * CameraReady da sessão temática.
      */
     public void setDataFimSubmissaoCameraReady(
-                        Data dataFimSubmissaoCameraReady) {
+            Data dataFimSubmissaoCameraReady) {
         if (dataFimSubmissaoCameraReady == null) {
             throw new NullPointerException("A data de fim de submissão "
-                                + "CameraReady não pode estar vazia.");
+                    + "CameraReady não pode estar vazia.");
         }
 
         this.dataFimSubmissaoCameraReady = dataFimSubmissaoCameraReady;
@@ -344,7 +344,7 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
     public void setDataInicio(Data dataInicio) {
         if (dataInicio == null) {
             throw new NullPointerException("A data de início não pode estar"
-                                + "vazia.");
+                    + "vazia.");
         }
 
         this.dataInicio = dataInicio;
@@ -358,7 +358,7 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
     public void setDataFim(Data dataFim) {
         if (dataFim == null) {
             throw new NullPointerException("A data de fim não pode estar"
-                                + "vazia.");
+                    + "vazia.");
         }
 
         this.dataFim = dataFim;
@@ -415,7 +415,7 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
         SessaoTematica outraSessaoTematica = (SessaoTematica) outroObjeto;
 
         return this.getCodigoUnico().equals(
-                            outraSessaoTematica.getCodigoUnico());
+                outraSessaoTematica.getCodigoUnico());
     }
 
     /**
@@ -431,12 +431,12 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
 
         if (!proponente.validarProponente()) {
             throw new IllegalArgumentException("Não introduziu um proponente"
-                                + "válido.");
+                    + "válido.");
         }
 
         if (!validarProponente(proponente)) {
             throw new IllegalArgumentException("O proponente introduzido já"
-                                + "se encontra na lista.");
+                    + "se encontra na lista.");
         }
 
         return adicionarProponente(proponente);
@@ -474,34 +474,34 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
     public boolean validarSessaoTematica() {
         if (getDataInicioSubmissao().isMaior(getDataFimSubmissao())) {
             throw new IllegalArgumentException("A data de fim de submissão não "
-                                + "pode ser menor que a data de inicio de submissão.");
+                    + "pode ser menor que a data de inicio de submissão.");
         }
 
         if (getDataFimSubmissao().isMaior(getDataInicioDistribuicao())) {
             throw new IllegalArgumentException("A data de inicio de distribuição"
-                                + " não pode ser menor que a data de fim de submissão.");
+                    + " não pode ser menor que a data de fim de submissão.");
         }
 
         if (getDataInicioDistribuicao().isMaior(getDataFimSubmissaoCameraReady())) {
             throw new IllegalArgumentException("A data de fim de submissão "
-                                + "CameraReady não pode ser menor que a data de início de"
-                                + "distribuição.");
+                    + "CameraReady não pode ser menor que a data de início de"
+                    + "distribuição.");
         }
 
         if (getDataInicioDistribuicao().isMaior(getDataFimSubmissaoCameraReady())) {
             throw new IllegalArgumentException("A data de fim de submissão "
-                                + "CameraReady não pode ser menor que a data de início de"
-                                + "distribuição.");
+                    + "CameraReady não pode ser menor que a data de início de"
+                    + "distribuição.");
         }
 
         if (getDataFimSubmissaoCameraReady().isMaior(getDataInicio())) {
             throw new IllegalArgumentException("A data de início não pode ser"
-                                + "menor que a data de submissão CameraReady.");
+                    + "menor que a data de submissão CameraReady.");
         }
 
         if (getDataInicio().isMaior(getDataFim())) {
             throw new IllegalArgumentException("A data de fim não pode ser menor"
-                                + " que a data de inicio.");
+                    + " que a data de inicio.");
         }
 
         return this.estado.setRegistada();
@@ -617,6 +617,25 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
         }
         return false;
     }
+
+    /**
+     * Verifica se a Sessão Tematica está no estado EmSubmissao.
+     *
+     * @return Verdadeiro se está no estado EmSubmissao e falso se não está.
+     */
+    @Override
+    public boolean isStateValidoParaAlterar() {
+        return getEstado() instanceof SessaoTematicaEmSubmissaoState;
+    }
+    
+    /**
+     * Verifica se o utilizador passado por parâmetro é autor de alguma 
+     * submissão da lista de Submissões da Sessão Temática.
+     * 
+     * @param utilizador Utilizador a verificar.
+     * @return Verdadeiro se é autor e falso se não é.
+     */
+    public boolean isUtilizadorUmAutorSubmissao(Utilizador utilizador) {
+        return this.listaSubmissoes.isUtilizadorUmAutorSubmissao(utilizador);
+    }
 }
-
-

@@ -175,14 +175,26 @@ public class ListaSessoesTematicas {
     public boolean temSessoesTematicasDefinidas() {
         return this.listaSessoesTematicas.size() > 0;
     }
-//
-//    public List<Submissivel> getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador(Utilizador utilizador) {
-//        List<Submissivel> listalistaSubmissiveisUtilizador = new ArrayList<>();
-//        
-//        for(SessaoTematica sessaoTematica : this.listaSessoesTematicas) {
-//            if(sessaoTematica.isStateValidoParaAlterar() && sessaoTematica.)
-//        }
-//    }
+
+    /**
+     * Devolve uma lista de Submissiveis que tem submissoes em que o utilizador 
+     * passado por parametro é autor e que estão a permitir a alteração de 
+     * submissões.
+     * 
+     * @param utilizador 
+     * @return Lista de Submissiveis.
+     */
+    public List<Submissivel> getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador(
+            Utilizador utilizador) {
+        List<Submissivel> listaSubmissiveisUtilizador = new ArrayList<>();
+        
+        for(SessaoTematica sessaoTematica : this.listaSessoesTematicas) {
+            if(sessaoTematica.isStateValidoParaAlterar() && sessaoTematica.isUtilizadorUmAutorSubmissao(utilizador)) {
+                listaSubmissiveisUtilizador.add(sessaoTematica);
+            }
+        }
+        return listaSubmissiveisUtilizador;
+    }
 
     /**
      * Devolve uma lista de sessão temáticas que se encontrem sem CP definida e

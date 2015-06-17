@@ -33,4 +33,12 @@ public interface Submissivel {
      */
     boolean isStateValidoParaSubmeter();
     
+    /**
+     * Verifica se um evento ou sessão temática estão a aceitar alterações nas 
+     * submissões de artigos.
+     * 
+     * @return Verdadeiro se é possivel alterar e falso se não é possível
+     */
+    boolean isStateValidoParaAlterar();
+    
 }

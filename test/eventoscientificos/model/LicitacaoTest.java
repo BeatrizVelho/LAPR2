@@ -52,7 +52,7 @@ public class LicitacaoTest {
         this.submissao = new Submissao();
         this.submissao.setArtigoFinal(new Artigo("titulo", "saude", "D:\\ISEP\\1.º Ano\\2.º Semestre"));
         this.submissao.setArtigoInicial(new Artigo("titulo1234", "saude", "D:\\ISEP\\1.º Ano\\2.º Semestre"));
-        conflito = new Conflito(revisor, submissao, new ArrayList<>());
+        conflito = new Conflito(revisor, submissao, new ArrayList());
         this.grauInteresse = 2;
 
     }

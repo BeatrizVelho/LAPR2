@@ -114,18 +114,28 @@ public class RegistoEventos {
         return listaSubmissiveis;
     }
 
-//    public List<Submissivel> getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador(Utilizador utilizador) {
-//        List<Submissivel> listaSubmissiveisUtilizador = new ArrayList<>();
-//        
-//        for(Evento evento : this.listaEventos) {
-//            if(evento.isStateValidoParaAlterar() &&
-//                    evento.isUtilizadorUmAutor(utilizador)) {
-//                listaSubmissiveisUtilizador.add(evento);
-//            }
-//            listaSubmissiveisUtilizador.addAll(
-//                    evento.getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador(utilizador));
-//        }
-//    }
+    /**
+     * Devolve uma lista de submissiveis nas quais o utilizador é autor de alguma
+     * submissao.
+     * 
+     * @param utilizador
+     * @return Lista de Submissiveis.
+     */
+    public List<Submissivel> getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador(Utilizador utilizador) {
+        List<Submissivel> listaSubmissiveisUtilizador = new ArrayList<>();
+        
+        for(Evento evento : this.listaEventos) {
+            if(evento.isStateValidoParaAlterar() &&
+                    evento.isUtilizadorUmAutorSubmissao(utilizador)) {
+                listaSubmissiveisUtilizador.add(evento);
+            }
+            listaSubmissiveisUtilizador.addAll(
+                    evento.getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador(utilizador));
+        }
+        
+        return listaSubmissiveisUtilizador;
+    }
+    
     /**
      * Devolve uma lista de eventoes/sessões temáticas que se encontrem sem CP
      * definida e onde o utilizador é organizador/proponente.

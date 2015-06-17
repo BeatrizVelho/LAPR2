@@ -5,7 +5,6 @@
  */
 package eventoscientificos.model;
 
-import com.sun.javafx.scene.control.skin.VirtualFlow;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
@@ -40,7 +39,7 @@ public class ListaLicitacoesTest {
         this.revisor = new Revisor(new Utilizador(
                             "Tiago", "1131658@isep.ipp.pt", "tiago", "1234"));
 
-        this.conflito = new Conflito(revisor, submissao, new ArrayList<>());
+        this.conflito = new Conflito(revisor, submissao, new ArrayList());
 
     }
 
