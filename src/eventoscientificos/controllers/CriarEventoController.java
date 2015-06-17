@@ -3,6 +3,7 @@ package eventoscientificos.controllers;
 import eventoscientificos.model.Empresa;
 import eventoscientificos.model.Evento;
 import eventoscientificos.model.Local;
+import eventoscientificos.model.Organizador;
 import eventoscientificos.model.RegistoEventos;
 import eventoscientificos.model.RegistoUtilizadores;
 import eventoscientificos.model.Utilizador;
@@ -21,6 +22,11 @@ public class CriarEventoController {
      * Intancia de Empresa.
      */
     private Empresa empresa;
+
+    /**
+     * Modelo da lista de organizadores.
+     */
+    private ModeloListaPapel modeloListaPapel;
 
     /**
      * Instancia de RegistoEventos.
@@ -45,9 +51,14 @@ public class CriarEventoController {
      */
     public CriarEventoController(Empresa empresa) {
         this.empresa = empresa;
+        this.modeloListaPapel = new ModeloListaPapel<Organizador>();
         this.registoEventos = null;
         this.evento = null;
         this.registoUtilizadores = null;
+    }
+
+    public ModeloListaPapel getModeloListaPapel() {
+        return this.modeloListaPapel;
     }
 
     /**
@@ -93,6 +104,11 @@ public class CriarEventoController {
      */
     public boolean novoOrganizador(String id) {
         Utilizador utilizador = this.registoUtilizadores.getUtilizador(id);
+
+        if (utilizador != null 
+                && !this.modeloListaPapel.contains(new Organizador(utilizador))) {
+            this.modeloListaPapel.addElement(new Organizador(utilizador));
+        }
 
         return this.evento.novoOrganizador(utilizador);
     }
