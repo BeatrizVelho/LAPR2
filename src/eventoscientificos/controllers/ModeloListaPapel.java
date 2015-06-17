@@ -65,4 +65,14 @@ public class ModeloListaPapel<E> extends AbstractListModel<E> {
         return papelAdicionado;
     }
 
+    /**
+     * Verifica se um elemento já existe na lista.
+     * 
+     * @param elemento Elemento a verificar.
+     * @return Verdadeiro se o elemento já existir e falso caso não exista.
+     */
+    public boolean contains(E elemento) {
+        return this.listaPapel.contains(elemento);
+    }
+
 }
