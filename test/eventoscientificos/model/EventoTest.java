@@ -548,7 +548,7 @@ public class EventoTest {
         submissao.setArtigoFinal(new Artigo("titulo", "saude", "D:\\ISEP\\1.º Ano\\2.º Semestre"));
         submissao.setArtigoInicial(new Artigo("titulo1234", "saude", "D:\\ISEP\\1.º Ano\\2.º Semestre"));
 
-        Conflito c = new Conflito(revisor, submissao, new ArrayList<>());
+        Conflito c = new Conflito(revisor, submissao, new ArrayList());
         Evento instance = this.evento;
         instance.getProcessoDetecao().getListaConflito().add(c);
 
