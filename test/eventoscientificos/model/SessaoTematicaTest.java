@@ -3,6 +3,7 @@ package eventoscientificos.model;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaCPDefinidaState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaCriadaState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmDetecaoState;
+import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmDistribuicaoState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmLicitacaoState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmSubmissaoState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaRegistadaState;
@@ -28,19 +29,19 @@ public class SessaoTematicaTest {
 
     public SessaoTematicaTest() {
         this.sessaoTematica = new SessaoTematica(
-                "#A9D24R",
-                "LAPR2",
-                new Data(2015, 5, 22),
-                new Data(2015, 5, 28),
-                new Data(2015, 6, 10),
-                new Data(2015, 6, 20),
-                new Data(2015, 6, 24),
-                new Data(2015, 6, 28));
+                            "#A9D24R",
+                            "LAPR2",
+                            new Data(2015, 5, 22),
+                            new Data(2015, 5, 28),
+                            new Data(2015, 6, 10),
+                            new Data(2015, 6, 20),
+                            new Data(2015, 6, 24),
+                            new Data(2015, 6, 28));
         this.utilizador = new Utilizador(
-                "Pedro", "1140781@isep.ipp.pt", "pedro", "1234");
+                            "Pedro", "1140781@isep.ipp.pt", "pedro", "1234");
         this.licitacao = new Licitacao(new Revisor(new Utilizador(
-                "fatima", "ola@iml.com", "fafa", "1234")),
-                new Submissao(), 0, null);
+                            "fatima", "ola@iml.com", "fafa", "1234")),
+                            new Submissao(), 0, null);
         this.artigoInicial = new Artigo();
         this.artigoFinal = new Artigo();
         this.submissao = new Submissao();
@@ -176,10 +177,10 @@ public class SessaoTematicaTest {
         System.out.println("setAndGetEstado");
         SessaoTematica instance = this.sessaoTematica;
         SessaoTematicaState estado
-                = new SessaoTematicaCriadaState(this.sessaoTematica);
+                            = new SessaoTematicaCriadaState(this.sessaoTematica);
         Class<? extends SessaoTematicaState> expResult = estado.getClass();
         Class<? extends SessaoTematicaState> result
-                = instance.getEstado().getClass();
+                            = instance.getEstado().getClass();
         assertEquals(expResult, result);
     }
 
@@ -316,9 +317,9 @@ public class SessaoTematicaTest {
     public void testEqualsNot() {
         System.out.println("equalsNot");
         Object outroObjeto = new SessaoTematica("#1234", "Sem descrição",
-                new Data(2016, 1, 1), new Data(2016, 1, 7),
-                new Data(2016, 1, 9), new Data(2016, 1, 26),
-                new Data(2016, 2, 4), new Data(2016, 2, 6));
+                            new Data(2016, 1, 1), new Data(2016, 1, 7),
+                            new Data(2016, 1, 9), new Data(2016, 1, 26),
+                            new Data(2016, 2, 4), new Data(2016, 2, 6));
         SessaoTematica instance = this.sessaoTematica;
         boolean expResult = false;
         boolean result = instance.equals(outroObjeto);
@@ -380,7 +381,7 @@ public class SessaoTematicaTest {
         System.out.println("adicionarCP");
         SessaoTematica instance = this.sessaoTematica;
         sessaoTematica.setEstado(
-                new SessaoTematicaRegistadaState(sessaoTematica));
+                            new SessaoTematicaRegistadaState(sessaoTematica));
         CP cp = new CP();
         boolean expResult = true;
         boolean result = instance.adicionarCP(cp);
@@ -432,7 +433,7 @@ public class SessaoTematicaTest {
     public void testGetConflitoRevisorSubmissao() {
         System.out.println("getConflitoRevisorSubmissao");
         Revisor revisor = new Revisor(new Utilizador(
-                "Tiago", "1131658@isep.ipp.pt", "tiago", "1234"));
+                            "Tiago", "1131658@isep.ipp.pt", "tiago", "1234"));
         Submissao submissao = new Submissao();
         submissao.setArtigoFinal(new Artigo("titulo", "saude", "D:\\ISEP\\1.º Ano\\2.º Semestre"));
         submissao.setArtigoInicial(new Artigo("titulo1234", "saude", "D:\\ISEP\\1.º Ano\\2.º Semestre"));
@@ -548,20 +549,6 @@ public class SessaoTematicaTest {
         assertEquals(expResult, result);
     }
 
-//    /**
-//     * Test of isStateValidoParaLicitar method, of class SessaoTematica.
-//     */
-//    @Test
-//    public void testIsStateValidoParaLicitar() {
-//        System.out.println("isStateValidoParaLicitar");
-//        Utilizador u = null;
-//        SessaoTematica instance = null;
-//        boolean expResult = false;
-//        boolean result = instance.isStateValidoParaLicitar(u);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
     /**
      * Teste do método isStateValidoParaAlterar, da classe SessaoTematica.
      */
@@ -591,6 +578,46 @@ public class SessaoTematicaTest {
         instance.adicionarSubmissao(submissao);
         boolean expResult = true;
         boolean result = instance.isUtilizadorUmAutorSubmissao(utilizador);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método NovoProcessoDistribuicao, da classe SessaoTematica.
+     */
+    @Test(expected = NullPointerException.class)
+    public void testNovoProcessoDistribuicao() {
+        System.out.println("novoProcessoDistribuicao");
+        SessaoTematica instance = this.sessaoTematica;
+        this.sessaoTematica.setEstado(new SessaoTematicaEmDistribuicaoState(sessaoTematica));
+        ProcessoDistribuicao expResult = new ProcessoDistribuicao();
+        ProcessoDistribuicao result = instance.novoProcessoDistribuicao();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método AdicionarProcessoDistribuicao, da classe SessaoTematica.
+     */
+    @Test
+    public void testAdicionarProcessoDistribuicao() {
+        System.out.println("adicionarProcessoDistribuicao");
+        this.sessaoTematica.setEstado(new SessaoTematicaEmDistribuicaoState(sessaoTematica));
+        ProcessoDistribuicao pd = new ProcessoDistribuicao();
+        boolean expResult = true;
+        SessaoTematica instance = this.sessaoTematica;
+        boolean result = instance.adicionarProcessoDistribuicao(pd);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método getProcessoDistribuicao, da classe SessaoTematica.
+     */
+    @Test(expected = NullPointerException.class)
+    public void testGetProcessoDistribuicao() {
+        System.out.println("getProcessoDistribuicao");
+        this.sessaoTematica.adicionarProcessoDistribuicao(new ProcessoDistribuicao());
+        ProcessoDistribuicao expResult = new ProcessoDistribuicao();
+        SessaoTematica instance = this.sessaoTematica;
+        ProcessoDistribuicao result = instance.getProcessoDistribuicao();
         assertEquals(expResult, result);
     }
 }

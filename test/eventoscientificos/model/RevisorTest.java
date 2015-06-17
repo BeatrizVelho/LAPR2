@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author Tiago Ferreira
+ * @author G01
  */
 public class RevisorTest {
 
