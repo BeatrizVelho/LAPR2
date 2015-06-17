@@ -684,4 +684,22 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
         }
         return false;
     }
+
+    /**
+     * Verifica se evento se encontra reune as condições necessárias para ser
+     * possível distribuir
+     *
+     * @return verdadeiro cumprir as condições necessárias distribuir e falso se
+     * não estiver
+     */
+    @Override
+    public boolean isStateValidoParaDistribuir(Utilizador u) {
+        if (this.estado.isStateValidoParaDistribuir()) {
+            Proponente p = new Proponente(u);
+            if (listaProponentes.contains(p)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
