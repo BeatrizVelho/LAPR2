@@ -48,7 +48,7 @@ public class ListaSubmissoes {
      * se tiver.
      */
     public boolean validarSubmissao(Submissao submissao) {
-        if (submissao.validarArtigo()) {
+        if (submissao.validarSubmissao()) {
             return !this.listaSubmissoes.contains(submissao);
         }
         return false;
@@ -85,6 +85,15 @@ public class ListaSubmissoes {
         return this.listaSubmissoes.add(submissao);
     }
 
+    /**
+     * Altera o artigo inicial da submissao.
+     * 
+     * @param submissao Submissao a alterar o artigo.
+     * @param artigo Novo artigo inicial.
+     */
+    public void alterarSubmissao(Submissao submissao, Artigo artigo) {
+        submissao.setArtigoInicial(artigo);
+    }
     /**
      * Verifica se o utilizador passado por parâmetro é autor de alguma 
      * submissão.

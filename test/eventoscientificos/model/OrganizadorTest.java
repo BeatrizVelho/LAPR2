@@ -26,6 +26,17 @@ public class OrganizadorTest {
     }
 
     /**
+     * Teste do método toString, da classe Organizador.
+     */
+    public void testToString() {
+        Organizador instance = new Organizador(new Utilizador(
+                "Beatriz", "1140587@isep.ipp.pt", "bea", "1234"));
+        String expResult = "Beatriz (1140587@isep.ipp.pt)";
+        String result = instance.toString();
+        assertEquals(expResult, result);
+    }
+
+    /**
      * Teste do método validarOrganizador, da classe Organizador.
      */
     @Test
@@ -75,7 +86,7 @@ public class OrganizadorTest {
                 "Beatriz", "1140587@isep.ipp.pt", "bea", "1234"));
         Organizador instance = new Organizador(new Utilizador(
                 "Beatriz", "1140587@isep.ipp.pt", "beatriz", "1234"));
-        boolean expResult = true;
+        boolean expResult = false;
         boolean result = instance.equals(outroObjeto);
         assertEquals(expResult, result);
     }
