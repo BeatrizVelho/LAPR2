@@ -41,7 +41,7 @@ public class ConflitoTest {
     @Test
     public void testGetRevisor() {
         System.out.println("getRevisor");
-        Conflito instance = new Conflito(revisor, submissao, new ArrayList<>());
+        Conflito instance = new Conflito(revisor, submissao, new ArrayList<TipoConflito>());
         Revisor expResult = this.revisor;
         Revisor result = instance.getRevisor();
         assertEquals(expResult, result);
@@ -66,7 +66,7 @@ public class ConflitoTest {
     @Test
     public void testSetAndGetListaTipoConflito() {
         System.out.println("setAndGetListaTipoConflito");
-        Conflito instance = new Conflito(revisor, submissao, new ArrayList<>());
+        Conflito instance = new Conflito(revisor, submissao, new ArrayList<TipoConflito>());
         TipoConflito tipoC = new TipoConflito("Parente");
         List<TipoConflito> listaConflitos = new ArrayList<>();
         listaConflitos.add(tipoC);
@@ -83,7 +83,7 @@ public class ConflitoTest {
     public void testEquals() {
         System.out.println("equals");
         Object outroObjecto = new Conflito(revisor, submissao, new ArrayList<TipoConflito>());
-        Conflito instance = new Conflito(revisor, submissao, new ArrayList<>());
+        Conflito instance = new Conflito(revisor, submissao, new ArrayList<TipoConflito>());
         boolean expResult = true;
         boolean result = instance.equals(outroObjecto);
         assertEquals(expResult, result);
@@ -98,7 +98,7 @@ public class ConflitoTest {
         Object outroObjecto = new Conflito(revisor, submissao, new ArrayList<TipoConflito>());
         Revisor revisor = new Revisor(new Utilizador(
                             "Fernando", " 8@isep.ipp.pt", "tiago", "1234"));
-        Conflito instance = new Conflito(revisor, submissao, new ArrayList<>());
+        Conflito instance = new Conflito(revisor, submissao, new ArrayList<TipoConflito>());
         boolean expResult = false;
         boolean result = instance.equals(outroObjecto);
         assertEquals(expResult, result);
