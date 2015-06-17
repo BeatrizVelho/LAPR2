@@ -45,9 +45,23 @@ public class ModeloListaPapelTest {
     public void testAddElement() {
         System.out.println("addElement");
         String elemento = "123";
-        ModeloListaPapel instance = new ModeloListaPapel();
+        ModeloListaPapel instance = new ModeloListaPapel<String>();
         boolean expResult = true;
         boolean result = instance.addElement(elemento);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método contains, da classe ModeloListaPapel.
+     */
+    @Test
+    public void testContains() {
+        System.out.println("contains");
+        String elemento = "123";
+        ModeloListaPapel instance = new ModeloListaPapel<String>();
+        instance.addElement(elemento);
+        boolean expResult = true;
+        boolean result = instance.contains(elemento);
         assertEquals(expResult, result);
     }
 
