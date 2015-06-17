@@ -23,10 +23,12 @@ public class RegistarUtilizadorUI extends javax.swing.JDialog {
         super(parent, "Registar utilizador", modal);
         this.controller = new RegistarUtilizadorController(empresa);
         this.framePai = parent;
+        setResizable(false);
         initComponents();
         setLocationRelativeTo(null);
         getRootPane().setDefaultButton(this.btn_registar);
         setVisible(true);
+        pack();
     }
 
     /**
@@ -94,7 +96,7 @@ public class RegistarUtilizadorUI extends javax.swing.JDialog {
                             .addComponent(txt_email)
                             .addComponent(txt_password)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 171, Short.MAX_VALUE)
+                        .addGap(0, 96, Short.MAX_VALUE)
                         .addComponent(btn_registar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_cancelar)))
