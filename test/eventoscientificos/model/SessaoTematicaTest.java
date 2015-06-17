@@ -2,6 +2,7 @@ package eventoscientificos.model;
 
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaCPDefinidaState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaCriadaState;
+import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmCameraReadyState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmDetecaoState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmDistribuicaoState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmLicitacaoState;
@@ -9,6 +10,7 @@ import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmSubmissaoSt
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaRegistadaState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaState;
 import eventoscientificos.model.state.submissao.SubmissaoEmSubmissaoState;
+import java.nio.channels.SeekableByteChannel;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
@@ -618,6 +620,32 @@ public class SessaoTematicaTest {
         ProcessoDistribuicao expResult = new ProcessoDistribuicao();
         SessaoTematica instance = this.sessaoTematica;
         ProcessoDistribuicao result = instance.getProcessoDistribuicao();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método isStateValidoParaDistribuir, da classe SessaoTematica.
+     */
+    @Test
+    public void testIsStateValidoParaDistribuir() {
+        System.out.println("isStateValidoParaDistribuir");
+        this.sessaoTematica.setEstado(new SessaoTematicaEmDistribuicaoState(sessaoTematica));
+        boolean adicionado = this.sessaoTematica.novoProponente(utilizador);
+        boolean expResult = true;
+        boolean result = this.sessaoTematica.isStateValidoParaDistribuir(utilizador);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método isStateValidoParaDistribuir, da classe SessaoTematica.
+     */
+    @Test
+    public void testIsStateValidoParaDistribuirNot() {
+        System.out.println("isStateValidoParaDistribuir");
+        this.sessaoTematica.setEstado(new SessaoTematicaEmLicitacaoState(sessaoTematica));
+        this.sessaoTematica.novoProponente(utilizador);
+        boolean expResult = false;
+        boolean result = this.sessaoTematica.isStateValidoParaDistribuir(utilizador);
         assertEquals(expResult, result);
     }
 }
