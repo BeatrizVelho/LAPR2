@@ -402,6 +402,7 @@ public class EventoTest {
     public void testValidarEvento() {
         System.out.println("validarEvento");
         Evento instance = this.evento;
+        instance.novoOrganizador(this.utilizador);
         boolean expResult = true;
         boolean result = instance.validarEvento();
         assertEquals(expResult, result);
@@ -716,4 +717,19 @@ public class EventoTest {
 //        int result = instance.getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador(utilizador).size();
 //        assertEquals(expResult, result);
 //    }
+
+    /**
+     * Teste do método temOrganizadores, da classe Evento.
+     */
+    @Test
+    public void testTemOrganizadores() {
+        System.out.println("temOrganizadores");
+        Evento instance = this.evento;
+        this.evento.novoOrganizador(new Utilizador(
+                "nome", "email@isep.ipp.pt", "username", "password"));
+        boolean expResult = true;
+        boolean result = instance.temOrganizadores();
+        assertEquals(expResult, result);
+    }
+
 }
