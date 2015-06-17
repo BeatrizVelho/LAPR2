@@ -108,7 +108,7 @@ public class CriarEventoController {
             throw new IllegalArgumentException("O evento possui dados inválidos");
         }
 
-        if (this.registoEventos.validarEvento(evento)) {
+        if (!this.registoEventos.validarEvento(evento)) {
             throw new IllegalArgumentException("O evento já existe.");
         }
 
@@ -118,18 +118,19 @@ public class CriarEventoController {
     /**
      * Adiciona um evento ao Registo de Eventos.
      *
-     * @param evento Evento a adicionar.
      * @return Verdadeiro se o evento for adicionado e falso se não for.
      */
-    public boolean adicionarEvento(Evento evento) {
-        return this.registoEventos.adicionarEvento(evento);
+    public boolean adicionarEvento() {
+        criarTimers();
+        
+        return this.registoEventos.adicionarEvento(this.evento);
     }
 
     /**
      * Responsável por criar as TimerTasks que alteram o estada do evento, 
      * quando o mesmo atinge uma data.
      */
-    public void criarTimers() {
+    private void criarTimers() {
         TimerTask alterarParaEmSubmissao
                 = new AlterarStateParaEmSubmissao(this.evento);
 
