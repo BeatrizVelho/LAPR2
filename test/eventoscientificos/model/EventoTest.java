@@ -815,4 +815,20 @@ public class EventoTest {
         boolean result = this.evento.temSubmissoesRetiradas(utilizador);
         assertEquals(expResult, result);
     }
+
+    /**
+     * Teste do método 
+     * getListaSubmissiveisComSubmissoesRetiradasOrganizadorProponente,
+     * da classe Evento.
+     */
+    @Test
+    public void testGetListaSubmissiveisComSubmissoesRetiradasOrganizadorProponente() {
+        System.out.println("getListaSubmissiveisComSubmissoesRetiradasOrganizadorProponente");
+        Utilizador utilizador = new Utilizador(this.utilizador);
+        Evento instance = this.evento;
+        Proponente proponente = new Proponente(utilizador);
+        List<Submissivel> expResult = new ArrayList<>();
+        List<Submissivel> result = instance.getListaSubmissiveisComSubmissoesRetiradasOrganizadorProponente(utilizador);
+        assertEquals(expResult, result);
+    }
 }
