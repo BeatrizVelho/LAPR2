@@ -27,6 +27,7 @@ public class Janela extends javax.swing.JFrame {
         this.empresa = new Empresa();
         this.xmlParser = new XMLParser(this, empresa);
         this.xmlParser.lerFicheiroUtilizador();
+        this.xmlParser.lerFicheiroLocal();
         this.xmlParser.lerFicheiroEvento();
 
         addWindowListener(new WindowAdapter() {
@@ -93,23 +94,15 @@ public class Janela extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Sistema de Gestão de Eventos Cientificos");
+        setPreferredSize(new java.awt.Dimension(900, 650));
         setResizable(false);
 
         boasVindas.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         boasVindas.setText("Olá, visitante.");
 
         painelUCs.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        javax.swing.GroupLayout painelUCsLayout = new javax.swing.GroupLayout(painelUCs);
-        painelUCs.setLayout(painelUCsLayout);
-        painelUCsLayout.setHorizontalGroup(
-            painelUCsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        painelUCsLayout.setVerticalGroup(
-            painelUCsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 528, Short.MAX_VALUE)
-        );
+        painelUCs.setMinimumSize(new java.awt.Dimension(780, 532));
+        painelUCs.setLayout(new java.awt.GridLayout());
 
         opcoes.setText("Opções");
 
@@ -134,6 +127,11 @@ public class Janela extends javax.swing.JFrame {
         uc9.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
         uc9.setText("Alterar Utilizador");
         uc9.setVisible(false);
+        uc9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uc9ActionPerformed(evt);
+            }
+        });
         opcoes.add(uc9);
 
         logout.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_MASK));
@@ -181,6 +179,11 @@ public class Janela extends javax.swing.JFrame {
         gerirEventos.setVisible(false);
 
         uc2.setText("Criar evento");
+        uc2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uc2ActionPerformed(evt);
+            }
+        });
         gerirEventos.add(uc2);
 
         uc6.setText("Criar Sessão Temática");
@@ -268,6 +271,7 @@ public class Janela extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
@@ -317,6 +321,16 @@ public class Janela extends javax.swing.JFrame {
     private void sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairActionPerformed
         terminarPrograma();
     }//GEN-LAST:event_sairActionPerformed
+
+    private void uc9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc9ActionPerformed
+        new AlterarUtilizadorUI(this, true, this.empresa);
+        boasVindas.setText("Olá, " + empresa.getUtilizadorAutenticado().getNome() + ".");
+        boasVindas.revalidate();
+    }//GEN-LAST:event_uc9ActionPerformed
+
+    private void uc2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc2ActionPerformed
+        new CriarEventoUI(this, true, this.empresa);
+    }//GEN-LAST:event_uc2ActionPerformed
 
     /**
      * @param args the command line arguments
