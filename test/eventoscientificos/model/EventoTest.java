@@ -2,6 +2,7 @@ package eventoscientificos.model;
 
 import eventoscientificos.model.state.evento.EventoCriadoState;
 import eventoscientificos.model.state.evento.EventoEmDetecaoConflitos;
+import eventoscientificos.model.state.evento.EventoEmDistribuicaoState;
 import eventoscientificos.model.state.evento.EventoEmLicitacaoState;
 import eventoscientificos.model.state.evento.EventoEmSubmissaoState;
 import eventoscientificos.model.state.evento.EventoRegistadoState;
@@ -29,20 +30,20 @@ public class EventoTest {
 
     public EventoTest() {
         this.evento = new Evento("titulo", "descricao", new Local("local"),
-                new Data(2016, 6, 8), new Data(2016, 6, 20),
-                new Data(2016, 7, 7), new Data(2016, 8, 15),
-                new Data(2016, 9, 10), new Data(2016, 10, 1),
-                new Data(2017, 6, 10));
+                            new Data(2016, 6, 8), new Data(2016, 6, 20),
+                            new Data(2016, 7, 7), new Data(2016, 8, 15),
+                            new Data(2016, 9, 10), new Data(2016, 10, 1),
+                            new Data(2017, 6, 10));
         this.utilizador = new Utilizador(
-                "Pedro", "1140781@isep.ipp.pt", "pedro", "12345");
+                            "Pedro", "1140781@isep.ipp.pt", "pedro", "12345");
         this.artigoInicial = new Artigo();
         this.artigoFinal = new Artigo();
         this.submissao = new Submissao();
         submissao.setArtigoInicial(artigoInicial);
         submissao.setArtigoFinal(artigoFinal);
         this.licitacao = new Licitacao(new Revisor(new Utilizador(
-                "fatima", "ola@iml.com", "fafa", "1234")),
-                this.submissao, 0, null);
+                            "fatima", "ola@iml.com", "fafa", "1234")),
+                            this.submissao, 0, null);
     }
 
     /**
@@ -213,7 +214,7 @@ public class EventoTest {
         System.out.println("getListaSessoesTematicas");
         Evento instance = this.evento;
         ListaSessoesTematicas expResult
-                = new ListaSessoesTematicas(this.evento);
+                            = new ListaSessoesTematicas(this.evento);
         ListaSessoesTematicas result = instance.getListaSessoesTematicas();
         assertEquals(expResult, result);
     }
@@ -359,10 +360,10 @@ public class EventoTest {
     public void testEqualsNot() {
         System.out.println("equalsNot");
         Object outroObjeto = new Evento("sem titulo", "descricao", new Local("local"),
-                new Data(2016, 6, 8), new Data(2016, 6, 20),
-                new Data(2016, 7, 7), new Data(2016, 8, 15),
-                new Data(2016, 9, 10), new Data(2016, 11, 1),
-                new Data(2017, 6, 10));
+                            new Data(2016, 6, 8), new Data(2016, 6, 20),
+                            new Data(2016, 7, 7), new Data(2016, 8, 15),
+                            new Data(2016, 9, 10), new Data(2016, 11, 1),
+                            new Data(2017, 6, 10));
         Evento instance = this.evento;
         boolean expResult = false;
         boolean result = instance.equals(outroObjeto);
@@ -378,7 +379,7 @@ public class EventoTest {
         Evento instance = this.evento;
         boolean expResult = true;
         boolean result = instance.novoOrganizador(new Utilizador("Bea",
-                "1140587@isep.ipp.pt", "beatriz", "111"));
+                            "1140587@isep.ipp.pt", "beatriz", "111"));
         assertEquals(expResult, result);
     }
 
@@ -390,9 +391,9 @@ public class EventoTest {
         System.out.println("novoOrganizadorExists");
         Evento instance = this.evento;
         instance.novoOrganizador(new Utilizador(
-                "Beatriz", "1140587@isep.ipp.pt", "bea", "1234"));
+                            "Beatriz", "1140587@isep.ipp.pt", "bea", "1234"));
         instance.novoOrganizador(new Utilizador(
-                "Beatriz", "1140587@isep.ipp.pt", "bea", "1234"));
+                            "Beatriz", "1140587@isep.ipp.pt", "bea", "1234"));
     }
 
     /**
@@ -495,9 +496,9 @@ public class EventoTest {
         System.out.println("getListaCPDefiniveisSemCPOrganizadorProponente");
         Utilizador utilizador = new Utilizador(this.utilizador);
         Evento instance = new Evento("titulo", "descricao", new Local("local"),
-                new Data(2016, 6, 8), new Data(2016, 6, 20),
-                new Data(2016, 7, 7), new Data(2016, 7, 14), new Data(2016, 8, 1),
-                new Data(2017, 6, 10), new Data(2018, 6, 10));
+                            new Data(2016, 6, 8), new Data(2016, 6, 20),
+                            new Data(2016, 7, 7), new Data(2016, 7, 14), new Data(2016, 8, 1),
+                            new Data(2017, 6, 10), new Data(2018, 6, 10));
         Proponente prop = new Proponente(utilizador);
         List<CPDefinivel> expResult = new ArrayList<>();
         List<CPDefinivel> result = instance.getListaCPDefiniveisSemCPOrganizadorProponente(utilizador);
@@ -524,13 +525,13 @@ public class EventoTest {
         System.out.println("getListaSubmissiveisAceitarArtigo");
         ListaSessoesTematicas listaSessoesTematicas = new ListaSessoesTematicas(this.evento);
         SessaoTematica instance = new SessaoTematica("#A9D24R",
-                "LAPR2",
-                new Data(2015, 5, 22),
-                new Data(2015, 5, 28),
-                new Data(2015, 6, 10),
-                new Data(2015, 6, 20),
-                new Data(2015, 6, 24),
-                new Data(2015, 6, 28));
+                            "LAPR2",
+                            new Data(2015, 5, 22),
+                            new Data(2015, 5, 28),
+                            new Data(2015, 6, 10),
+                            new Data(2015, 6, 20),
+                            new Data(2015, 6, 24),
+                            new Data(2015, 6, 28));
         listaSessoesTematicas.adicionarSessaoTematica(instance);
         instance.setEstado(new SessaoTematicaEmSubmissaoState(instance));
         int expResult = 1;
@@ -545,7 +546,7 @@ public class EventoTest {
     public void testGetConflitoRevisorSubmissao() {
         System.out.println("getConflitoRevisorSubmissao");
         Revisor revisor = new Revisor(new Utilizador(
-                "Tiago", "1131658@isep.ipp.pt", "tiago", "1234"));
+                            "Tiago", "1131658@isep.ipp.pt", "tiago", "1234"));
         Submissao submissao = new Submissao();
         submissao.setArtigoFinal(new Artigo("titulo", "saude", "D:\\ISEP\\1.º Ano\\2.º Semestre"));
         submissao.setArtigoInicial(new Artigo("titulo1234", "saude", "D:\\ISEP\\1.º Ano\\2.º Semestre"));
@@ -587,12 +588,13 @@ public class EventoTest {
      * Test of isStateValidoParaLicitar method, of class Evento.
      */
     @Test
-    public void testIsStateValidoParaLicitarNot() {
-        System.out.println("isStateValidoParaLicitarNot");
-        this.evento.setEstado(new EventoCriadoState(evento));
-        EventoState instance = this.evento.getEstado();
-        boolean expResult = false;
-        boolean result = instance.isStateValidoParaLicitar();
+    public void testIsStateValidoParaLicitarValido() {
+        System.out.println("isStateValidoParaLicitarValido");
+        this.evento.setEstado(new EventoEmLicitacaoState(evento));
+        this.evento.setCP(new CP());
+        this.evento.getCP().novoRevisor(this.utilizador);
+        boolean expResult = true;
+        boolean result = this.evento.isStateValidoParaLicitar(this.utilizador);
         assertEquals(expResult, result);
 
     }
@@ -601,13 +603,12 @@ public class EventoTest {
      * Test of isStateValidoParaLicitar method, of class Evento.
      */
     @Test
-    public void testIsStateValidoParaLicitarValido() {
-        System.out.println("isStateValidoParaLicitarValido");
-        this.evento.setEstado(new EventoEmLicitacaoState(evento));
-        this.evento.setCP(new CP());
-        this.evento.getCP().novoRevisor(this.utilizador);
-        boolean expResult = true;
-        boolean result = this.evento.isStateValidoParaLicitar(this.utilizador);
+    public void testIsStateValidoParaLicitarNot() {
+        System.out.println("isStateValidoParaLicitarNot");
+        this.evento.setEstado(new EventoCriadoState(evento));
+        EventoState instance = this.evento.getEstado();
+        boolean expResult = false;
+        boolean result = instance.isStateValidoParaLicitar();
         assertEquals(expResult, result);
 
     }
@@ -717,7 +718,6 @@ public class EventoTest {
 //        int result = instance.getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador(utilizador).size();
 //        assertEquals(expResult, result);
 //    }
-
     /**
      * Teste do método temOrganizadores, da classe Evento.
      */
@@ -726,9 +726,36 @@ public class EventoTest {
         System.out.println("temOrganizadores");
         Evento instance = this.evento;
         this.evento.novoOrganizador(new Utilizador(
-                "nome", "email@isep.ipp.pt", "username", "password"));
+                            "nome", "email@isep.ipp.pt", "username", "password"));
         boolean expResult = true;
         boolean result = instance.temOrganizadores();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método novoProcessoDistribuicao, da classe SessaoTematica.
+     */
+    @Test(expected = NullPointerException.class)
+    public void testNovoProcessoDistribuicao() {
+        System.out.println("novoProcessoDistribuicao");
+        Evento instance = this.evento;
+        this.evento.setEstado(new EventoEmDistribuicaoState(evento));
+        ProcessoDistribuicao expResult = new ProcessoDistribuicao();
+        ProcessoDistribuicao result = instance.novoProcessoDistribuicao();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método adicionarProcessoDistribuicao, da classe SessaoTematica.
+     */
+    @Test
+    public void testAdicionarProcessoDistribuicao() {
+        System.out.println("adicionarProcessoDistribuicao");
+        this.evento.setEstado(new EventoEmDistribuicaoState(evento));
+        ProcessoDistribuicao pd = new ProcessoDistribuicao();
+        boolean expResult = true;
+        Evento instance = this.evento;
+        boolean result = instance.adicionarProcessoDistribuicao(pd);
         assertEquals(expResult, result);
     }
 

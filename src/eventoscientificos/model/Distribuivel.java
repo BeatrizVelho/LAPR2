@@ -1,8 +1,35 @@
 package eventoscientificos.model;
 
 /**
+ * Todas as classes que implementam esta interface, herdam a responsabilidade de
+ * distribuir as submissões pelos revisores da CP, ficando obrigadas a
+ * implementar um processo referente ao mesmo.
  *
+ * @author G01
  */
 public interface Distribuivel {
-    
+
+    /**
+     * Constrói instância de ProcessoDistribuicao.
+     *
+     * @return ProcessoDistribuicao.
+     */
+    public ProcessoDistribuicao novoProcessoDistribuicao();
+
+    /**
+     * Adiciona um Processo Distribuição ao Distribuível.
+     *
+     * @param processoDistribuicao ProcessoDistribuicao a adicionar ao
+     * distribuivel.
+     * @return verdadeiro se adicionar ao distribuivel e falso se não for
+     * possivel adicioná-lo.
+     */
+    public boolean adicionarProcessoDistribuicao(ProcessoDistribuicao processoDistribuicao);
+
+    /**
+     * Devolve o processo de distribuição.
+     *
+     * @return processo de distribuicao.
+     */
+    public ProcessoDistribuicao getProcessoDistribuicao();
 }

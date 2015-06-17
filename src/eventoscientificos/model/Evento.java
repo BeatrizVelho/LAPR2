@@ -88,6 +88,12 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
      * Processo de deteção de conflitos do evento.
      */
     private ProcessoDetecao processoDetecao;
+
+    /**
+     * Processo de Distribuição.
+     */
+    private ProcessoDistribuicao processoDistribuicao;
+
     /**
      * CP do evento.
      */
@@ -116,10 +122,10 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
      * @param dataFim Data de fim do evento.
      */
     public Evento(String titulo, String descricao, Local local,
-            Data dataInicioSubmissao, Data dataFimSubmissao,
-            Data dataInicioDistribuicao, Data dataFimRevisao,
-            Data dataFimSubmissaoCameraReady, Data dataInicio,
-            Data dataFim) {
+                        Data dataInicioSubmissao, Data dataFimSubmissao,
+                        Data dataInicioDistribuicao, Data dataFimRevisao,
+                        Data dataFimSubmissaoCameraReady, Data dataInicio,
+                        Data dataFim) {
         setTitulo(titulo);
         setDescricao(descricao);
         setLocal(local);
@@ -318,11 +324,11 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
     public void setDataInicioSubmissao(Data dataInicioSubmissao) {
         if (dataInicioSubmissao == null) {
             throw new NullPointerException("A data de inicio de submissão não pode"
-                    + "estar vazia.");
+                                + "estar vazia.");
         }
         if (!dataInicioSubmissao.isMaior(Data.dataAtual())) {
             throw new IllegalArgumentException("Data de inicio de submissao "
-                    + "não pode ser menor que a data atual");
+                                + "não pode ser menor que a data atual");
         }
         this.dataInicioSubmissao = dataInicioSubmissao;
     }
@@ -335,12 +341,12 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
     public void setDataFimSubmissao(Data dataFimSubmissao) {
         if (dataFimSubmissao == null) {
             throw new NullPointerException("A data de fim de submissão não pode"
-                    + "estar vazia.");
+                                + "estar vazia.");
         }
 
         if (!dataFimSubmissao.isMaior(this.dataInicioSubmissao)) {
             throw new IllegalArgumentException("Data de fim de submissao "
-                    + "não pode ser menor que a data de inicio de submissao");
+                                + "não pode ser menor que a data de inicio de submissao");
         }
         this.dataFimSubmissao = dataFimSubmissao;
     }
@@ -354,11 +360,11 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
     public void setDataInicioDistribuicao(Data dataInicioDistribuicao) {
         if (dataInicioDistribuicao == null) {
             throw new NullPointerException("A data de inicio de distribuicao não"
-                    + " pode estar vazia.");
+                                + " pode estar vazia.");
         }
         if (!dataInicioDistribuicao.isMaior(this.dataFimSubmissao)) {
             throw new IllegalArgumentException("Data de inicio de distribuicao "
-                    + "nao pode ser menor que a data de fim de submissao");
+                                + "nao pode ser menor que a data de fim de submissao");
         }
         this.dataInicioDistribuicao = dataInicioDistribuicao;
     }
@@ -371,12 +377,12 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
     public void setDataFimRevisao(Data dataFimRevisao) {
         if (dataFimRevisao == null) {
             throw new NullPointerException("A data de fim de revisao não"
-                    + " pode estar vazia.");
+                                + " pode estar vazia.");
         }
         if (!dataFimRevisao.isMaior(this.dataInicioDistribuicao)) {
             throw new IllegalArgumentException("Data de fim de revisao "
-                    + "nao pode ser menor que a data de inicio"
-                    + " de distribuição");
+                                + "nao pode ser menor que a data de inicio"
+                                + " de distribuição");
         }
         this.dataFimRevisao = dataFimRevisao;
     }
@@ -390,13 +396,13 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
     public void setDataFimSubmissaoCameraReady(Data dataFimSubmissaoCameraReady) {
         if (dataFimSubmissaoCameraReady == null) {
             throw new NullPointerException("A data de fim de submissão camera "
-                    + "ready não pode estar vazia.");
+                                + "ready não pode estar vazia.");
         }
 
         if (!dataFimSubmissaoCameraReady.isMaior(this.dataInicioDistribuicao)) {
             throw new IllegalArgumentException("Data de fim de submissao "
-                    + "camera ready não pode ser menor que a data "
-                    + "de inicio de distribuição.");
+                                + "camera ready não pode ser menor que a data "
+                                + "de inicio de distribuição.");
         }
         this.dataFimSubmissaoCameraReady = dataFimSubmissaoCameraReady;
     }
@@ -409,11 +415,11 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
     public void setDataInicio(Data dataInicio) {
         if (dataInicio == null) {
             throw new NullPointerException("A data de inicio do evento não pode"
-                    + "estar vazia.");
+                                + "estar vazia.");
         }
         if (!dataInicio.isMaior(this.dataInicioDistribuicao)) {
             throw new IllegalArgumentException("Data de inicio do evento "
-                    + "nao pode ser menor que a data de inicio de distribuicao");
+                                + "nao pode ser menor que a data de inicio de distribuicao");
         }
         this.dataInicio = dataInicio;
     }
@@ -426,11 +432,11 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
     public void setDataFim(Data dataFim) {
         if (dataFim == null) {
             throw new NullPointerException("A data de fim do evento não pode"
-                    + "estar vazia.");
+                                + "estar vazia.");
         }
         if (!dataFim.isMaior(dataInicio)) {
             throw new IllegalArgumentException("Data de fim do evento "
-                    + "nao pode ser menor que a data de inicio");
+                                + "nao pode ser menor que a data de inicio");
         }
         this.dataFim = dataFim;
     }
@@ -484,7 +490,7 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
         Evento outroEvento = (Evento) outroObjeto;
 
         return this.getTitulo().equals(outroEvento.getTitulo())
-                && this.getDataInicio().equals(outroEvento.getDataInicio());
+                            && this.getDataInicio().equals(outroEvento.getDataInicio());
     }
 
     /**
@@ -498,11 +504,11 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
         Organizador o = new Organizador(utilizador);
         if (!o.validarOrganizador()) {
             throw new IllegalArgumentException("O organizador não pode estar "
-                    + "invalido");
+                                + "invalido");
         }
         if (!validarOrganizador(o)) {
             throw new IllegalArgumentException("O organizador introduzido ja "
-                    + "se encontra na lista");
+                                + "se encontra na lista");
         }
 
         return adicionarOganizador(o);
@@ -542,14 +548,14 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
 
     /**
      * Verifica se o Evento tem pelo um Organizador.
-     * 
-     * @return Verdadeiro se tem pelo menos um organizador e falso se a lista 
+     *
+     * @return Verdadeiro se tem pelo menos um organizador e falso se a lista
      * está vazia.
      */
     public boolean temOrganizadores() {
         return this.listaOrganizadores.size() > 0;
-    } 
-    
+    }
+
     /**
      * Verifica se determinado utilizador é organizador do evento.
      *
@@ -574,7 +580,7 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
      */
     public boolean isRegistadoOuSessoesTematicasDefinidas() {
         return this.getEstado() instanceof EventoRegistadoState
-                || this.getEstado() instanceof EventoSessoesTematicasDefinidasState;
+                            || this.getEstado() instanceof EventoSessoesTematicasDefinidasState;
     }
 
     /**
@@ -661,9 +667,9 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
     }
 
     /**
-     * Verifica se o utilizador passado por parâmetro é autor de alguma 
+     * Verifica se o utilizador passado por parâmetro é autor de alguma
      * submissão da lista de Submissões do evento.
-     * 
+     *
      * @param utilizador Utilizador a verificar.
      * @return Verdadeiro se é autor e falso se não é.
      */
@@ -672,14 +678,14 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
     }
 
     /**
-     * Devolve uma lista de submissiveis nas quais o utilizador é autor de alguma
-     * submissao submissao.
-     * 
+     * Devolve uma lista de submissiveis nas quais o utilizador é autor de
+     * alguma submissao submissao.
+     *
      * @param utilizador
      * @return Lista de Submissiveis.
      */
     public List<Submissivel> getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador(
-            Utilizador utilizador) {
+                        Utilizador utilizador) {
         return this.listaSessoesTematicas.getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador(utilizador);
     }
 
@@ -709,6 +715,16 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
     @Override
     public ProcessoDetecao getProcessoDetecao() {
         return this.processoDetecao;
+    }
+
+    /**
+     * Devolve o processo de distribuição.
+     *
+     * @return processo de distribuição
+     */
+    @Override
+    public ProcessoDistribuicao getProcessoDistribuicao() {
+        return this.processoDistribuicao;
     }
 
     /**
@@ -746,4 +762,36 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
         }
         return false;
     }
+
+    /**
+     * Constrói instância de ProcessoDistribuicao.
+     *
+     * @return ProcessoDistribuicao.
+     */
+    @Override
+    public ProcessoDistribuicao novoProcessoDistribuicao() {
+        return new ProcessoDistribuicao();
+    }
+
+    /**
+     * Adiciona um Processo Distribuição ao Distribuível.
+     *
+     * @param processoDistribuicao ProcessoDistribuicao a adicionar ao
+     * distribuivel.
+     * @return verdadeiro se adicionar ao distribuivel e falso se não for
+     * possivel adicioná-lo.
+     */
+    @Override
+    public boolean adicionarProcessoDistribuicao(ProcessoDistribuicao processoDistribuicao) {
+        this.processoDistribuicao = processoDistribuicao;
+        if (estado.setEmRevisao()) {
+            List<Submissao> listaSubmissoes = this.listaSubmissoes.getListaSubmissoes();
+            for (Submissao s : listaSubmissoes) {
+                s.getEstado().setEmRevisao();
+            }
+            return true;
+        }
+        return false;
+    }
+
 }
