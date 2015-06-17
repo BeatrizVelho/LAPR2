@@ -28,6 +28,17 @@ public class ProponenteTest {
     }
 
     /**
+     * Teste do método toString, da classe Organizador.
+     */
+    public void testToString() {
+        Proponente instance = new Proponente(new Utilizador(
+                "Beatriz", "1140587@isep.ipp.pt", "bea", "1234"));
+        String expResult = "Beatriz (1140587@isep.ipp.pt)";
+        String result = instance.toString();
+        assertEquals(expResult, result);
+    }
+
+    /**
      * Teste do método validarProponente, da classe Proponente.
      */
     @Test
