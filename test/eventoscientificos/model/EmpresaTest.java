@@ -68,15 +68,15 @@ public class EmpresaTest {
     }
 
     /**
-     * Testa o metodo testgetListaDistribuicao da classe Empresa.
+     * Testa o metodo testgetListaMecanismoDistribuicao da classe Empresa.
      */
     @Test
-    public void testgetListaDistribuicao() {
-        System.out.println("getListaDistribuicao");
+    public void testgetListaMecanismoDistribuicao() {
+        System.out.println("getListaMecanismoDistribuicao");
         Empresa instance = new Empresa();
         List<MecanismoDistribuicao> expResult
                             = new ArrayList<MecanismoDistribuicao>();
-        List<MecanismoDistribuicao> result = instance.getListaDistribuicao();
+        List<MecanismoDistribuicao> result = instance.getListaMecanismoDistribuicao();
         assertEquals(expResult, result);
     }
 }
