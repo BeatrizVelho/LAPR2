@@ -24,10 +24,12 @@ public class AlterarUtilizadorUI extends javax.swing.JDialog {
         this.controller = new AlterarUtilizadorController(empresa);
         this.controller.criarCloneUtilizador();
         this.framePai = parent;
+        setResizable(false);
         initComponents();
         setLocationRelativeTo(null);
         getRootPane().setDefaultButton(btn_alterarDados);
         setVisible(true);
+        pack();
     }
 
     /**
