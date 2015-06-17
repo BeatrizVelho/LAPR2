@@ -32,4 +32,13 @@ public interface Distribuivel {
      * @return processo de distribuicao.
      */
     public ProcessoDistribuicao getProcessoDistribuicao();
+
+    /**
+     * Verifica se o distribuivel contém as condições necessárias para
+     * distribuir as suas submissões pelos revisores
+     *
+     * @return verdadeiro cumprir as condições necessárias distribuir e falso se
+     * não estiver
+     */
+    public boolean isStateValidoParaDistribuir(Utilizador u);
 }

@@ -733,7 +733,7 @@ public class EventoTest {
     }
 
     /**
-     * Teste do método novoProcessoDistribuicao, da classe SessaoTematica.
+     * Teste do método novoProcessoDistribuicao, da classe Evento.
      */
     @Test(expected = NullPointerException.class)
     public void testNovoProcessoDistribuicao() {
@@ -746,7 +746,7 @@ public class EventoTest {
     }
 
     /**
-     * Teste do método adicionarProcessoDistribuicao, da classe SessaoTematica.
+     * Teste do método adicionarProcessoDistribuicao, da classe Evento.
      */
     @Test
     public void testAdicionarProcessoDistribuicao() {
@@ -759,4 +759,42 @@ public class EventoTest {
         assertEquals(expResult, result);
     }
 
+    /**
+     * Teste do método getProcessoDistribuicao, da classe Evento.
+     */
+    @Test(expected = NullPointerException.class)
+    public void testGetProcessoDistribuicao() {
+        System.out.println("getProcessoDistribuicao");
+        this.evento.adicionarProcessoDistribuicao(new ProcessoDistribuicao());
+        ProcessoDistribuicao expResult = new ProcessoDistribuicao();
+        Evento instance = this.evento;
+        ProcessoDistribuicao result = instance.getProcessoDistribuicao();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método isStateValidoParaDistribuir, da classe Evento.
+     */
+    @Test
+    public void testIsStateValidoParaDistribuir() {
+        System.out.println("isStateValidoParaDistribuir");
+        this.evento.setEstado(new EventoEmDistribuicaoState(evento));
+        boolean adicionado = this.evento.novoOrganizador(utilizador);
+        boolean expResult = true;
+        boolean result = this.evento.isStateValidoParaDistribuir(utilizador);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método isStateValidoParaDistribuir, da classe Evento.
+     */
+    @Test
+    public void testIsStateValidoParaDistribuirNot() {
+        System.out.println("isStateValidoParaDistribuir");
+        this.evento.setEstado(new EventoEmLicitacaoState(evento));
+        this.evento.novoOrganizador(utilizador);
+        boolean expResult = false;
+        boolean result = this.evento.isStateValidoParaDistribuir(utilizador);
+        assertEquals(expResult, result);
+    }
 }
