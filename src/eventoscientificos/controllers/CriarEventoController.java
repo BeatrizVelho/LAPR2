@@ -105,7 +105,7 @@ public class CriarEventoController {
      */
     public boolean validarEvento() {
         if (!evento.validarEvento()) {
-            throw new IllegalArgumentException("O evento possui dados inválidos");
+            throw new IllegalArgumentException("Deve introduzir pelo menos um organizador.");
         }
 
         if (!this.registoEventos.validarEvento(evento)) {
