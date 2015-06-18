@@ -5,6 +5,7 @@ import eventoscientificos.model.Evento;
 import eventoscientificos.model.Local;
 import eventoscientificos.model.Utilizador;
 import eventoscientificos.model.state.evento.EventoSessoesTematicasDefinidasState;
+import javax.swing.DefaultListModel;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import utils.Data;
@@ -44,10 +45,9 @@ public class DefinirSessaoTematicaControllerTest {
         System.out.println("getModeloListaPapel");
         DefinirSessaoTematicaController instance
                 = new DefinirSessaoTematicaController(this.empresa);
-        Class<? extends ModeloListaPapel> expResult
-                = new ModeloListaPapel().getClass();
-        Class<? extends ModeloListaPapel> result
-                = instance.getModeloListaPapel().getClass();
+        String expResult = new DefaultListModel().getClass().getSimpleName();
+        String result 
+                = instance.getModeloListaPapel().getClass().getSimpleName();
         assertEquals(expResult, result);
     }
 

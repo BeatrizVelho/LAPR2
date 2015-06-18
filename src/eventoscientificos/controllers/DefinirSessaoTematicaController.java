@@ -11,6 +11,7 @@ import eventoscientificos.model.Utilizador;
 import java.util.Date;
 import java.util.List;
 import java.util.TimerTask;
+import javax.swing.DefaultListModel;
 import utils.Data;
 
 /**
@@ -31,7 +32,7 @@ public class DefinirSessaoTematicaController {
     /**
      * Modelo da lista de proponentes.
      */
-    private ModeloListaPapel modeloListaPapel;
+    private DefaultListModel modeloLista;
 
     /**
      * Lista de eventos onde é possivel definir sessões temáticas.
@@ -66,7 +67,7 @@ public class DefinirSessaoTematicaController {
      */
     public DefinirSessaoTematicaController(Empresa empresa) {
         this.empresa = empresa;
-        this.modeloListaPapel = new ModeloListaPapel<Proponente>();
+        this.modeloLista = new DefaultListModel<Proponente>();
         this.listaEventos = null;
         this.evento = null;
         this.listaSessoesTematicas = null;
@@ -79,8 +80,8 @@ public class DefinirSessaoTematicaController {
      * 
      * @return Modelo da lista de proponentes.
      */
-    public ModeloListaPapel getModeloListaPapel() {
-        return this.modeloListaPapel;
+    public DefaultListModel getModeloListaPapel() {
+        return this.modeloLista;
     }
 
     /**
@@ -167,8 +168,8 @@ public class DefinirSessaoTematicaController {
         Utilizador utilizador = this.registoUtilizadores.getUtilizador(id);
 
         if (utilizador != null 
-                && !this.modeloListaPapel.contains(new Proponente(utilizador))) {
-            this.modeloListaPapel.addElement(new Proponente(utilizador));
+                && !this.modeloLista.contains(new Proponente(utilizador))) {
+            this.modeloLista.addElement(new Proponente(utilizador));
         }
 
         return this.sessaoTematica.novoProponente(utilizador);
