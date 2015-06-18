@@ -102,7 +102,7 @@ public class Janela extends javax.swing.JFrame {
 
         painelUCs.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         painelUCs.setMinimumSize(new java.awt.Dimension(780, 532));
-        painelUCs.setLayout(new java.awt.GridLayout());
+        painelUCs.setLayout(new java.awt.GridLayout(1, 0));
 
         opcoes.setText("Opções");
 
@@ -187,9 +187,19 @@ public class Janela extends javax.swing.JFrame {
         gerirEventos.add(uc2);
 
         uc6.setText("Criar Sessão Temática");
+        uc6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uc6ActionPerformed(evt);
+            }
+        });
         gerirEventos.add(uc6);
 
         uc3.setText("Criar Comissão de Programa");
+        uc3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uc3ActionPerformed(evt);
+            }
+        });
         gerirEventos.add(uc3);
 
         uc8.setText("Distribuir artigos científicos para revisão");
@@ -332,6 +342,14 @@ public class Janela extends javax.swing.JFrame {
         new CriarEventoUI(this, true, this.empresa);
     }//GEN-LAST:event_uc2ActionPerformed
 
+    private void uc6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc6ActionPerformed
+        new DefinirSessaoTematicaUI(this, true, this.empresa);
+    }//GEN-LAST:event_uc6ActionPerformed
+
+    private void uc3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc3ActionPerformed
+        new CriarCPUI(this, true, this.empresa);
+    }//GEN-LAST:event_uc3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -361,6 +379,7 @@ public class Janela extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new Janela().setVisible(true);
             }
@@ -372,6 +391,7 @@ public class Janela extends javax.swing.JFrame {
      */
     private void terminarPrograma() {
         this.xmlParser.escreverFicheiroUtilizador();
+        this.xmlParser.escreverFicheiroLocal();
         this.xmlParser.escreverFicheiroEvento();
         dispose();
     }
