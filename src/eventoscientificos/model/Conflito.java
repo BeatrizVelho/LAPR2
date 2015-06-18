@@ -32,8 +32,8 @@ public class Conflito {
      * @param submissao Submissão do conflito.
      * @param listaConflitos lista de Tipos do conflito.
      */
-    public Conflito(
-                        Revisor revisor, Submissao submissao, List<TipoConflito> listaConflitos) {
+    public Conflito(Revisor revisor, Submissao submissao,
+            List<TipoConflito> listaConflitos) {
         this.revisor = revisor;
         this.submissao = submissao;
         this.listaTipoConflito = listaConflitos;
@@ -99,6 +99,7 @@ public class Conflito {
 
         return this.revisor.equals(outroConflito.revisor)
                             && this.submissao.equals(outroConflito.submissao)
-                            && this.listaTipoConflito.equals(outroConflito.listaTipoConflito);
+                            && this.listaTipoConflito.equals(
+                                    outroConflito.listaTipoConflito);
     }
 }
