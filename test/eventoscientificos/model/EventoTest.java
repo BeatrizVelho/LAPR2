@@ -532,7 +532,8 @@ public class EventoTest {
                             new Data(2015, 6, 10),
                             new Data(2015, 6, 20),
                             new Data(2015, 6, 24),
-                            new Data(2015, 6, 28));
+                            new Data(2015, 6, 28), 
+                            new Data(2017, 6, 8));
         listaSessoesTematicas.adicionarSessaoTematica(instance);
         instance.setEstado(new SessaoTematicaEmSubmissaoState(instance));
         int expResult = 1;
