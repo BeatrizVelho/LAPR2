@@ -44,14 +44,14 @@ public class RegistoEventos {
      * @return Evento.
      */
     public Evento novoEvento(String titulo, String descricao, Local local,
-            Data dataInicioSubmissao, Data dataLimiteSubmissao,
-            Data dataInicioDistribuicao, Data dataFimRevisao,
-            Data dataFimSubmissaoCameraReady, Data dataInicio,
-            Data dataFim) {
+                        Data dataInicioSubmissao, Data dataLimiteSubmissao,
+                        Data dataInicioDistribuicao, Data dataFimRevisao,
+                        Data dataFimSubmissaoCameraReady, Data dataInicio,
+                        Data dataFim) {
 
         return new Evento(titulo, descricao, local, dataInicioSubmissao,
-                dataLimiteSubmissao, dataInicioDistribuicao, dataFimRevisao,
-                dataFimSubmissaoCameraReady, dataInicio, dataFim);
+                            dataLimiteSubmissao, dataInicioDistribuicao, dataFimRevisao,
+                            dataFimSubmissaoCameraReady, dataInicio, dataFim);
     }
 
     /**
@@ -87,7 +87,7 @@ public class RegistoEventos {
 
         for (Evento evento : this.listaEventos) {
             if (evento.isOrganizador(utilizador)
-                    && evento.isRegistadoOuSessoesTematicasDefinidas()) {
+                                && evento.isRegistadoOuSessoesTematicasDefinidas()) {
                 listaEventosOrganizador.add(evento);
             }
         }
@@ -109,7 +109,7 @@ public class RegistoEventos {
                 listaSubmissiveis.add(evento);
             }
             listaSubmissiveis.addAll(
-                    evento.getListaSubmissiveisAceitarArtigo());
+                                evento.getListaSubmissiveisAceitarArtigo());
         }
         return listaSubmissiveis;
     }
@@ -126,11 +126,11 @@ public class RegistoEventos {
 
         for (Evento evento : this.listaEventos) {
             if (evento.isStateValidoParaAlterar()
-                    && evento.isUtilizadorUmAutorSubmissao(utilizador)) {
+                                && evento.isUtilizadorUmAutorSubmissao(utilizador)) {
                 listaSubmissiveisUtilizador.add(evento);
             }
             listaSubmissiveisUtilizador.addAll(
-                    evento.getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador(utilizador));
+                                evento.getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador(utilizador));
         }
 
         return listaSubmissiveisUtilizador;
@@ -149,11 +149,11 @@ public class RegistoEventos {
 
         for (Evento evento : this.listaEventos) {
             if (evento.isSessoesTematicasDefinidas()
-                    && evento.isOrganizador(utilizador)) {
+                                && evento.isOrganizador(utilizador)) {
                 listaSemCPDefinida.add(evento);
             }
             List<CPDefinivel> listaSessoesTematicas
-                    = evento.getListaCPDefiniveisSemCPOrganizadorProponente(utilizador);
+                                = evento.getListaCPDefiniveisSemCPOrganizadorProponente(utilizador);
             listaSemCPDefinida.addAll(listaSessoesTematicas);
         }
 
@@ -208,6 +208,29 @@ public class RegistoEventos {
             }
         }
         return listaDistribuiveis;
+    }
+
+    /**
+     * Devolve uma lista de revisiveis onde o revisor tem submissoes a rever
+     * @param u
+     * @return 
+     */
+    public List<Revisivel> getListaRevisiveisComArtigosPReverRevisor(Utilizador u) {
+        List<Revisivel> listaRevisiveis = new ArrayList<>();
+        for (Evento evento : listaEventos) {
+            boolean validoRever = evento.getEstado().setEmRevisao();
+            if (evento.isStateValidoParaRever(u)) {
+                listaRevisiveis.add(evento);
+            }
+            List<SessaoTematica> listaST = (evento.getListaSessoesTematicas()).getListaSessoesTematicas();
+            for (SessaoTematica st : listaST) {
+                validoRever = st.isStateValidoParaRever(u);
+                if (validoRever) {
+                    listaRevisiveis.add(st);
+                }
+            }
+        }
+        return listaRevisiveis;
     }
 
     /**
