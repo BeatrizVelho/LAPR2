@@ -45,6 +45,23 @@ public class ListaRevisoes {
     }
 
     /**
+     * Devolve uma lista de revisões cujo o utilizador em sistema é revisor
+     *
+     * @param u utilizador em sistema
+     * @return lista de revisões do revisor
+     */
+    public List<Revisao> getRevisoesRevisor(Utilizador u) {
+        Revisor revisor = new Revisor(u);
+        List<Revisao> listaRevisoesDoRevisor = new ArrayList<>();
+        for (Revisao r : this.listaRevisoes) {
+            if (r.getRevisor().equals(revisor)) {
+                listaRevisoesDoRevisor.add(r);
+            }
+        }
+        return listaRevisoesDoRevisor;
+    }
+
+    /**
      * Compara dois objetos entre si. Comparando primariamente a posição de
      * memória, seguida do conteudo e das classes as quais cada um deles
      * pertence, e finalmente os seus atributos, lista de revisões.

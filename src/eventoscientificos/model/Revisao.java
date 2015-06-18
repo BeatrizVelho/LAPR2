@@ -81,6 +81,15 @@ public class Revisao {
         this.submissao = submissao;
         this.revisor = revisor;
     }
+
+    /**
+     * Devolve o revisor associado à revisão.
+     *
+     * @return
+     */
+    public Revisor getRevisor() {
+        return this.revisor;
+    }
 //
 //    /**
 //     * Cria uma instância de revisão com os valores recebidos por parâmetro.

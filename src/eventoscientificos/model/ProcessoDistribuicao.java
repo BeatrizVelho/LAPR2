@@ -24,14 +24,27 @@ public class ProcessoDistribuicao {
     private MecanismoDistribuicao mecanismoDistribuicao;
 
     /**
+     * Devolve a ListaRevisões.
+     *
+     * @return Lista Rvisões
+     */
+    public ListaRevisoes getListaRevisoes() {
+        return this.listaRevisoes;
+    }
+
+    /**
      * Adiciona uma Mecanismo de Distribuição ao processo de distribuição.
      *
      * @param mecanismoDistribuicao mecanismo de distribuicao a adicionar
      * @return verdadeiro
      */
     public boolean adicionarMecanismoDistribuicao(MecanismoDistribuicao mecanismoDistribuicao) {
-        this.mecanismoDistribuicao = mecanismoDistribuicao;
-        return true;
+        if (mecanismoDistribuicao != null) {
+            this.mecanismoDistribuicao = mecanismoDistribuicao;
+            return true;
+        } else {
+            throw new IllegalArgumentException();
+        }
     }
 
     /**
