@@ -185,7 +185,7 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
 
     /**
      * Devolve a data de fim de revisão da sessão temática.
-     * 
+     *
      * @return Data de fim de revisão da sessão temática.
      */
     public Data getDataFimRevisao() {
@@ -354,7 +354,7 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
     public void setDataFimRevisao(Data dataFimRevisao) {
         if (dataFimRevisao == null) {
             throw new NullPointerException("A data de fim de revisão não pode "
-                    + "estar vazia.");
+                                + "estar vazia.");
         }
 
         this.dataFimRevisao = dataFimRevisao;
@@ -434,16 +434,16 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
     }
 
     /**
-     * Devolve a descrição textual da sessão temática no formato: 
-     *     código único - descrição
+     * Devolve a descrição textual da sessão temática no formato: código único -
+     * descrição
      *
      * @return Características da sessão temática.
      */
     @Override
     public String toString() {
         return String.format("    %s - %s",
-                this.getCodigoUnico(),
-                this.getDescricao());
+                            this.getCodigoUnico(),
+                            this.getDescricao());
     }
 
     /**
@@ -718,13 +718,32 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
         }
         return false;
     }
-    
+
     /**
-     * Verifica se existem submissões retiradas e onde o utilizador é proponente.
-     * 
+     * Verifica se o revisivel contém as condições necessárias para as
+     * submissões serem revistas pelos revisores
+     *
+     * @return verdadeiro cumprir as condições necessárias para rever e falso se
+     * não estiver
+     */
+    @Override
+    public boolean isStateValidoParaRever(Utilizador u) {
+        if (estado.setEmRevisao() && this.cp.contains(u)) {
+            ListaRevisoes lr = this.processoDistribuicao.getListaRevisoes();
+            if (lr.getRevisoesRevisor(u).size() > 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Verifica se existem submissões retiradas e onde o utilizador é
+     * proponente.
+     *
      * @param utilizador Utilizador a verificar é proponente.
-     * @return Verdadeiro caso existam submissoes retiradas e
-     * falso se não existir.
+     * @return Verdadeiro caso existam submissoes retiradas e falso se não
+     * existir.
      */
     public boolean temSubmissoesRetiradas(Utilizador utilizador) {
         if (isProponente(utilizador) && this.listaSubmissoes.temSubmissoesRetiradas()) {
@@ -735,7 +754,7 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
 
     /**
      * Devolve uma lista de submissões retiradas.
-     * 
+     *
      * @return Lista de submissões retiradas.
      */
     @Override
