@@ -866,4 +866,14 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
         return true;
     }
 
+    /**
+     * Devolve uma lista de submissões retiradas.
+     * 
+     * @return Lista de submissões retiradas.
+     */
+    @Override
+    public List<Submissao> getListaSubmissoesRetiradas() {
+        return this.listaSubmissoes.getListaSubmissoesRetiradas();
+    }
+
 }

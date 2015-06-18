@@ -1,9 +1,14 @@
 package eventoscientificos.model.mecanismo.detecao;
 
 import eventoscientificos.model.Conflito;
+import eventoscientificos.model.ListaConflitos;
+import eventoscientificos.model.Revisor;
+import eventoscientificos.model.Submissao;
+import eventoscientificos.model.TipoConflito;
 
 /**
- * Constrói uma instância de MecanismoDetecao1.
+ * Constrói uma instância de MecanismoDetecao1 que verifica se o revisor é autor
+ * de uma submissão.
  *
  * @author G01
  */
@@ -18,12 +23,27 @@ public class MecanismoDetecao1 implements MecanismoDetecao {
     /**
      * Deteta um conflito entre um revisor e uma submissão da forma indicada.
      *
-     * @return Conflito detetado.
+     * @return Verdadeiro se encontrar um conflito e falso caso não encontre.
      */
     @Override
-    public Conflito detetarConflito() {
-        throw new UnsupportedOperationException(
-                "Needs logic...");
+    public boolean detetarConflito(ListaConflitos listaConflitos, Revisor revisor,
+            Submissao submissao, TipoConflito tipoConflito) {
+        if (submissao.isAutor(revisor.getUtilizador())) {
+            Conflito conflito = listaConflitos.validarExistenciaConflito(
+                    revisor, submissao);
+
+            if (conflito != null) {
+                conflito.adicionarTipoConflito(tipoConflito);
+            } else {
+                listaConflitos.adicionarConflito(
+                        listaConflitos.novoConflito(
+                                revisor, submissao, tipoConflito));
+            }
+
+            return true;
+        }
+
+        return false;
     }
 
 }
