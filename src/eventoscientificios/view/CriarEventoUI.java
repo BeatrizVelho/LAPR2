@@ -5,17 +5,13 @@
  */
 package eventoscientificios.view;
 
-import eventoscientificos.controllers.ModeloListaPapel;
 import eventoscientificos.controllers.CriarEventoController;
 import eventoscientificos.model.Empresa;
 import eventoscientificos.model.Local;
 import eventoscientificos.model.Organizador;
-import java.awt.Component;
 import java.awt.Frame;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
-import org.jdesktop.swingx.JXDatePicker;
-import org.jdesktop.swingx.plaf.basic.BasicDatePickerUI;
 import utils.Data;
 
 /**
@@ -77,7 +73,7 @@ public class CriarEventoUI extends javax.swing.JDialog {
         lbl_dataFimSubmissaoCameraReady = new javax.swing.JLabel();
         pnl_listaOrganizadores = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList_listaOrganizadores = new javax.swing.JList(new ModeloListaPapel<Organizador>());
+        jList_listaOrganizadores = new javax.swing.JList();
         btn_adicionarOrganizador = new javax.swing.JButton();
         txt_IDorganizador = new javax.swing.JTextField();
         lbl_IDorganizador = new javax.swing.JLabel();
