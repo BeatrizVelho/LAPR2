@@ -5,6 +5,7 @@ import eventoscientificos.model.state.sessaotematica.SessaoTematicaCriadaState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmDetecaoState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmDistribuicaoState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmLicitacaoState;
+import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmSubmissaoCameraReadyState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmSubmissaoState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaRegistadaState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaState;
@@ -715,6 +716,24 @@ public class SessaoTematicaTest {
         this.sessaoTematica.getListaSubmissoes().adicionarSubmissao(submissao);
         boolean expResult = true;
         boolean result = this.sessaoTematica.temSubmissoesRetiradas(utilizador);
+        assertEquals(expResult, result);
+    }
+    
+    /**
+     * Teste do método getListaSubmissoesRetiradas, na classe Evento.
+     */
+    @Test
+    public void testGetListaSubmissoesRetiradas() {
+        System.out.println("getListaSubmissoesRetiradas");
+        Submissao submissao = this.submissao;
+        submissao.setEstado(new SubmissaoRemovidaState(submissao));
+        SessaoTematica instance = this.sessaoTematica;
+        instance.setEstado(new SessaoTematicaEmSubmissaoCameraReadyState(sessaoTematica));
+        instance.novoProponente(utilizador);
+        instance.getListaSubmissoes().adicionarSubmissao(submissao);
+        instance.getListaSubmissoesRetiradas().add(submissao);
+        int expResult = 1;
+        int result = (instance.getListaSubmissoesRetiradas()).size();
         assertEquals(expResult, result);
     }
 }
