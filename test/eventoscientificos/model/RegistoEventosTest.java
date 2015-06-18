@@ -1,9 +1,16 @@
 package eventoscientificos.model;
 
+import eventoscientificos.model.state.evento.EventoEmCameraReadyState;
+import eventoscientificos.model.state.evento.EventoEmSubmissaoCameraReadyState;
 import eventoscientificos.model.state.evento.EventoEmSubmissaoState;
+import eventoscientificos.model.state.evento.EventoFaseDecisaoState;
 import eventoscientificos.model.state.evento.EventoRegistadoState;
 import eventoscientificos.model.state.evento.EventoSessoesTematicasDefinidasState;
+import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmCameraReadyState;
+import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmSubmissaoCameraReadyState;
+import eventoscientificos.model.state.sessaotematica.SessaoTematicaFaseDecisaoState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaRegistadaState;
+import eventoscientificos.model.state.submissao.SubmissaoRemovidaState;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
@@ -257,6 +264,37 @@ public class RegistoEventosTest {
         instance.adicionarEvento(evento);
         boolean expResult = true;
         boolean result = instance.getListaDistribuiveisOrganizadorProponente(u) != null;
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método
+     * getListaSubmissiveisComSubmissoesRetiradasOrganizadorProponente,
+     * da classe RegistoEventos.
+     */
+    @Test
+    public void testGetListaSubmissiveisComSubmissoesRetiradasOrganizadorProponente() {
+        System.out.println(
+                "getListaSubmissiveisComSubmissoesRetiradasOrganizadorProponente");
+        Submissao submissao = new Submissao();
+        submissao.setEstado(new SubmissaoRemovidaState(submissao));
+        
+        SessaoTematica st = this.st;
+        st.setEstado(new SessaoTematicaEmSubmissaoCameraReadyState(st));
+        st.novoProponente(this.utilizador);
+        st.getListaSubmissoes().adicionarSubmissao(submissao);
+        
+        Evento evento = this.evento;
+        evento.setEstado(new EventoEmSubmissaoCameraReadyState(evento));
+        evento.novoOrganizador(this.utilizador);
+        evento.getListaSubmissoes().adicionarSubmissao(submissao);
+        evento.getListaSessoesTematicas().adicionarSessaoTematica(st);
+        
+        RegistoEventos instance = new RegistoEventos();
+        instance.adicionarEvento(evento);
+        
+        int expResult = 2;
+        int result = (instance.getListaSubmissiveisComSubmissoesRetiradasOrganizadorProponente(this.utilizador)).size();
         assertEquals(expResult, result);
     }
 

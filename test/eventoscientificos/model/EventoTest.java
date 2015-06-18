@@ -532,7 +532,8 @@ public class EventoTest {
                             new Data(2015, 6, 10),
                             new Data(2015, 6, 20),
                             new Data(2015, 6, 24),
-                            new Data(2015, 6, 28));
+                            new Data(2015, 6, 28), 
+                            new Data(2017, 6, 8));
         listaSessoesTematicas.adicionarSessaoTematica(instance);
         instance.setEstado(new SessaoTematicaEmSubmissaoState(instance));
         int expResult = 1;
@@ -813,6 +814,22 @@ public class EventoTest {
         this.evento.getListaSubmissoes().adicionarSubmissao(submissao);
         boolean expResult = true;
         boolean result = this.evento.temSubmissoesRetiradas(utilizador);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método 
+     * getListaSubmissiveisComSubmissoesRetiradasOrganizadorProponente,
+     * da classe Evento.
+     */
+    @Test
+    public void testGetListaSubmissiveisComSubmissoesRetiradasOrganizadorProponente() {
+        System.out.println("getListaSubmissiveisComSubmissoesRetiradasOrganizadorProponente");
+        Utilizador utilizador = new Utilizador(this.utilizador);
+        Evento instance = this.evento;
+        Proponente proponente = new Proponente(utilizador);
+        List<Submissivel> expResult = new ArrayList<>();
+        List<Submissivel> result = instance.getListaSubmissiveisComSubmissoesRetiradasOrganizadorProponente(utilizador);
         assertEquals(expResult, result);
     }
 }
