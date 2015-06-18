@@ -57,6 +57,11 @@ public class CriarEventoController {
         this.registoUtilizadores = null;
     }
 
+    /**
+     * Devolve o modelo da lista de organizadores.
+     * 
+     * @return Modelo da lista de organizadores.
+     */
     public ModeloListaPapel getModeloListaPapel() {
         return this.modeloListaPapel;
     }
