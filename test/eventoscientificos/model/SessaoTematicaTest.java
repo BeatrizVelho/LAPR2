@@ -692,6 +692,7 @@ public class SessaoTematicaTest {
         assertEquals(expResult, result);
     }
 
+    
     /**
      * Teste do método isStateValidoParaDistribuir, da classe SessaoTematica.
      */
