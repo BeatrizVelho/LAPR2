@@ -1,14 +1,11 @@
 package eventoscientificos.model;
 
-import eventoscientificos.model.state.evento.EventoEmCameraReadyState;
+import eventoscientificos.model.state.evento.EventoEmRevisaoState;
 import eventoscientificos.model.state.evento.EventoEmSubmissaoCameraReadyState;
 import eventoscientificos.model.state.evento.EventoEmSubmissaoState;
-import eventoscientificos.model.state.evento.EventoFaseDecisaoState;
 import eventoscientificos.model.state.evento.EventoRegistadoState;
 import eventoscientificos.model.state.evento.EventoSessoesTematicasDefinidasState;
-import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmCameraReadyState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmSubmissaoCameraReadyState;
-import eventoscientificos.model.state.sessaotematica.SessaoTematicaFaseDecisaoState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaRegistadaState;
 import eventoscientificos.model.state.submissao.SubmissaoRemovidaState;
 import java.util.ArrayList;
@@ -25,6 +22,7 @@ public class RegistoEventosTest {
     private Evento evento;
     private Utilizador utilizador;
     private SessaoTematica st;
+    private Revisao revisao;
 
     public RegistoEventosTest() {
         String titulo = "sem titulo";
@@ -49,6 +47,14 @@ public class RegistoEventosTest {
                             new Data(2016, 6, 21), new Data(2016, 7, 8),
                             new Data(2016, 7, 20), new Data(2016, 9, 24),
                             new Data(2017, 5, 28), new Data(2017, 6, 8));
+
+        Artigo artigoInicial = new Artigo();
+        Artigo artigoFinal = new Artigo();
+        Submissao submissao = new Submissao();
+        submissao.setArtigoInicial(artigoInicial);
+        submissao.setArtigoFinal(artigoFinal);
+
+        this.revisao = new Revisao(submissao, new Revisor(utilizador));
     }
 
     /**
@@ -269,32 +275,56 @@ public class RegistoEventosTest {
 
     /**
      * Teste do método
-     * getListaSubmissiveisComSubmissoesRetiradasOrganizadorProponente,
-     * da classe RegistoEventos.
+     * getListaSubmissiveisComSubmissoesRetiradasOrganizadorProponente, da
+     * classe RegistoEventos.
      */
     @Test
     public void testGetListaSubmissiveisComSubmissoesRetiradasOrganizadorProponente() {
         System.out.println(
-                "getListaSubmissiveisComSubmissoesRetiradasOrganizadorProponente");
+                            "getListaSubmissiveisComSubmissoesRetiradasOrganizadorProponente");
         Submissao submissao = new Submissao();
         submissao.setEstado(new SubmissaoRemovidaState(submissao));
-        
+
         SessaoTematica st = this.st;
         st.setEstado(new SessaoTematicaEmSubmissaoCameraReadyState(st));
         st.novoProponente(this.utilizador);
         st.getListaSubmissoes().adicionarSubmissao(submissao);
-        
+
         Evento evento = this.evento;
         evento.setEstado(new EventoEmSubmissaoCameraReadyState(evento));
         evento.novoOrganizador(this.utilizador);
         evento.getListaSubmissoes().adicionarSubmissao(submissao);
         evento.getListaSessoesTematicas().adicionarSessaoTematica(st);
-        
+
         RegistoEventos instance = new RegistoEventos();
         instance.adicionarEvento(evento);
-        
+
         int expResult = 2;
         int result = (instance.getListaSubmissiveisComSubmissoesRetiradasOrganizadorProponente(this.utilizador)).size();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of getListaRevisiveisComArtigosPReverRevisor method, of class
+     * RegistoEventos.
+     */
+    @Test
+    public void testGetListaRevisiveisComArtigosPReverRevisor() {
+        System.out.println("getListaRevisiveisComArtigosPReverRevisor");
+        this.evento.setEstado(new EventoEmRevisaoState(evento));
+        this.evento.adicionarCP(new CP());
+        this.evento.getCP().novoRevisor(utilizador);
+        ProcessoDistribuicao pd = this.evento.novoProcessoDistribuicao();
+        this.evento.adicionarProcessoDistribuicao(pd);
+
+        ListaRevisoes lr = pd.getListaRevisoes();
+        lr.adicionarRevisao(this.revisao);
+
+        RegistoEventos instance = new RegistoEventos();
+        instance.adicionarEvento(evento);
+
+        int expResult = 1;
+        int result = instance.getListaRevisiveisComArtigosPReverRevisor(utilizador).size();
         assertEquals(expResult, result);
     }
 

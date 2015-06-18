@@ -851,7 +851,7 @@ public class EventoTest {
     }
 
     /**
-     * Teste do método isStateValidoParaRever, da classe SessaoTematica.
+     * Teste do método isStateValidoParaRever, da classe Evento.
      */
     @Test
     public void testIsStateValidoParaRever() {
