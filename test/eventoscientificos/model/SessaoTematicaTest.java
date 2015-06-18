@@ -5,6 +5,7 @@ import eventoscientificos.model.state.sessaotematica.SessaoTematicaCriadaState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmDetecaoState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmDistribuicaoState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmLicitacaoState;
+import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmRevisaoState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmSubmissaoCameraReadyState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmSubmissaoState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaRegistadaState;
@@ -28,6 +29,7 @@ public class SessaoTematicaTest {
     private Submissao submissao;
     private Artigo artigoInicial;
     private Artigo artigoFinal;
+    private Revisao revisao;
 
     public SessaoTematicaTest() {
         this.sessaoTematica = new SessaoTematica(
@@ -43,7 +45,7 @@ public class SessaoTematicaTest {
         this.utilizador = new Utilizador(
                             "Pedro", "1140781@isep.ipp.pt", "pedro", "1234");
         this.sessaoTematica.novoProponente(new Utilizador(
-                "Beatriz", "1140587@isep.ipp.pt", "beatriz", "1234"));
+                            "Beatriz", "1140587@isep.ipp.pt", "beatriz", "1234"));
         this.licitacao = new Licitacao(new Revisor(new Utilizador(
                             "fatima", "ola@iml.com", "fafa", "1234")),
                             new Submissao(), 0, null);
@@ -52,6 +54,7 @@ public class SessaoTematicaTest {
         this.submissao = new Submissao();
         submissao.setArtigoInicial(artigoInicial);
         submissao.setArtigoFinal(artigoFinal);
+        this.revisao = new Revisao(submissao, new Revisor(utilizador));
     }
 
     /**
@@ -122,7 +125,7 @@ public class SessaoTematicaTest {
         assertEquals(expResult, result);
     }
 
-        /**
+    /**
      * Teste dos metodos set e get da data de fim de revisão, da classe
      * SessaoTematica.
      */
@@ -701,7 +704,7 @@ public class SessaoTematicaTest {
         boolean result = this.sessaoTematica.isStateValidoParaDistribuir(utilizador);
         assertEquals(expResult, result);
     }
-    
+
     /**
      * Teste do método temSubmissoesRetiradas method, da classe SessaoTematica.
      */
@@ -709,7 +712,7 @@ public class SessaoTematicaTest {
     public void testTemSubmissoesRetiradas() {
         System.out.println("temSubmissoesRetiradas");
         Utilizador utilizador = new Utilizador(
-                "Pedro", "1140781@isep.ipp.pt", "pedro", "1234");
+                            "Pedro", "1140781@isep.ipp.pt", "pedro", "1234");
         Proponente proponente = new Proponente(utilizador);
         sessaoTematica.novoProponente(utilizador);
         this.submissao.setEstado(new SubmissaoRemovidaState(submissao));
@@ -718,7 +721,7 @@ public class SessaoTematicaTest {
         boolean result = this.sessaoTematica.temSubmissoesRetiradas(utilizador);
         assertEquals(expResult, result);
     }
-    
+
     /**
      * Teste do método getListaSubmissoesRetiradas, na classe Evento.
      */
@@ -734,6 +737,24 @@ public class SessaoTematicaTest {
         instance.getListaSubmissoesRetiradas().add(submissao);
         int expResult = 1;
         int result = (instance.getListaSubmissoesRetiradas()).size();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método isStateValidoParaRever, da classe SessaoTematica.
+     */
+    @Test
+    public void testIsStateValidoParaRever() {
+        System.out.println("isStateValidoParaRever");
+        this.sessaoTematica.setEstado(new SessaoTematicaEmRevisaoState(sessaoTematica));
+        this.sessaoTematica.adicionarCP(new CP());
+        this.sessaoTematica.getCP().novoRevisor(utilizador);
+        ProcessoDistribuicao pd = this.sessaoTematica.novoProcessoDistribuicao();
+        this.sessaoTematica.adicionarProcessoDistribuicao(pd);
+        ListaRevisoes lr = pd.getListaRevisoes();
+        lr.adicionarRevisao(this.revisao);
+        boolean expResult = true;
+        boolean result = this.sessaoTematica.isStateValidoParaRever(utilizador);
         assertEquals(expResult, result);
     }
 }
