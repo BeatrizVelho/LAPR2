@@ -81,7 +81,7 @@ public class Conflito {
      * pertence, e finalmente os seus atributos, revisor, submissao e lista de
      * tipos de conflitos.
      *
-     * @param outroObjecto conflito a comparar
+     * @param outroObjecto Conflito a comparar
      * @return Verdadeiro caso os objetos comparados sejam iguais e falso caso
      * não o sejam.
      */
@@ -98,8 +98,19 @@ public class Conflito {
         Conflito outroConflito = (Conflito) outroObjecto;
 
         return this.revisor.equals(outroConflito.revisor)
-                            && this.submissao.equals(outroConflito.submissao)
-                            && this.listaTipoConflito.equals(
-                                    outroConflito.listaTipoConflito);
+                            && this.submissao.equals(outroConflito.submissao);
     }
+
+    /**
+     * Adiciona um tipo de conflito ao conflito.
+     * 
+     * @param tipoConflito Tipo de conflito que vai ser adicionado.
+     * 
+     * @return Verdadeiro se o tipo de conflito for adicionado com sucesso e 
+     * falso caso não seja.
+     */
+    public boolean adicionarTipoConflito(TipoConflito tipoConflito) {
+        return this.listaTipoConflito.add(tipoConflito);
+    }
+
 }
