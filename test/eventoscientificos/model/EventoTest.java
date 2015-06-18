@@ -832,4 +832,17 @@ public class EventoTest {
         List<Submissivel> result = instance.getListaSubmissiveisComSubmissoesRetiradasOrganizadorProponente(utilizador);
         assertEquals(expResult, result);
     }
+    
+    /**
+     * Teste do método toString, da classe Evento.
+     */
+    @Test
+    public void testToString() {
+        System.out.println("toString");
+        Evento instance = this.evento;
+        this.evento.setTitulo("Titulo");
+        this.evento.setDescricao("Descrição");
+        String expResult = "Titulo - Descrição";
+        String result = instance.toString();
+}
 }
