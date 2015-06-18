@@ -100,4 +100,19 @@ public class ConflitoTest {
 
     }
 
+    /**
+     * Teste do método adicionarTipoConflito, da classe Conflito.
+     */
+    @Test
+    public void testAdicionarTipoConflito() {
+        System.out.println("adicionarTipoConflito");
+        TipoConflito tipoConflito
+                = new TipoConflito("Comeu arroz ontem à noite.");
+        Conflito instance = new Conflito(
+                revisor, submissao, new ArrayList<TipoConflito>());
+        boolean expResult = true;
+        boolean result = instance.adicionarTipoConflito(tipoConflito);
+        assertEquals(expResult, result);
+    }
+
 }
