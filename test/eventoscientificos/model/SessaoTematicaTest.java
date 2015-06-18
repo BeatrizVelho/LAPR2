@@ -2,7 +2,6 @@ package eventoscientificos.model;
 
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaCPDefinidaState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaCriadaState;
-import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmCameraReadyState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmDetecaoState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmDistribuicaoState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmLicitacaoState;
@@ -11,7 +10,6 @@ import eventoscientificos.model.state.sessaotematica.SessaoTematicaRegistadaStat
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaState;
 import eventoscientificos.model.state.submissao.SubmissaoEmSubmissaoState;
 import eventoscientificos.model.state.submissao.SubmissaoRemovidaState;
-import java.nio.channels.SeekableByteChannel;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
@@ -39,9 +37,12 @@ public class SessaoTematicaTest {
                             new Data(2015, 6, 10),
                             new Data(2015, 6, 20),
                             new Data(2015, 6, 24),
-                            new Data(2015, 6, 28));
+                            new Data(2015, 6, 28),
+                            new Data(2015, 6, 30));
         this.utilizador = new Utilizador(
                             "Pedro", "1140781@isep.ipp.pt", "pedro", "1234");
+        this.sessaoTematica.novoProponente(new Utilizador(
+                "Beatriz", "1140587@isep.ipp.pt", "beatriz", "1234"));
         this.licitacao = new Licitacao(new Revisor(new Utilizador(
                             "fatima", "ola@iml.com", "fafa", "1234")),
                             new Submissao(), 0, null);
@@ -93,6 +94,20 @@ public class SessaoTematicaTest {
     }
 
     /**
+     * Teste dos metodos set e get da data de fim de submissão, da classe
+     * SessaoTematica.
+     */
+    @Test
+    public void testSetAndGetDataFimSubmissao() {
+        System.out.println("setAndGetDataFimSubmissao");
+        SessaoTematica instance = this.sessaoTematica;
+        Data expResult = new Data(2016, 5, 29);
+        instance.setDataFimSubmissao(expResult);
+        Data result = instance.getDataFimSubmissao();
+        assertEquals(expResult, result);
+    }
+
+    /**
      * Teste dos metodos set e get da data de início de distribuição, da classe
      * SessaoTematica.
      */
@@ -106,17 +121,17 @@ public class SessaoTematicaTest {
         assertEquals(expResult, result);
     }
 
-    /**
-     * Teste dos metodos set e get da data de fim de submissão, da classe
+        /**
+     * Teste dos metodos set e get da data de fim de revisão, da classe
      * SessaoTematica.
      */
     @Test
-    public void testSetAndGetDataFimSubmissao() {
-        System.out.println("setAndGetDataFimSubmissao");
+    public void testSetAndGetDataFimRevisao() {
+        System.out.println("setAndGetDataFimRevisao");
         SessaoTematica instance = this.sessaoTematica;
         Data expResult = new Data(2016, 5, 29);
-        instance.setDataFimSubmissao(expResult);
-        Data result = instance.getDataFimSubmissao();
+        instance.setDataFimRevisao(expResult);
+        Data result = instance.getDataFimRevisao();
         assertEquals(expResult, result);
     }
 
@@ -246,6 +261,17 @@ public class SessaoTematicaTest {
     }
 
     /**
+     * Teste do método setDataFimRevisao, da classe SessaoTematica.
+     */
+    @Test(expected = NullPointerException.class)
+    public void testSetDataFimRevisaoNull() {
+        System.out.println("setDataFimRevisao");
+        SessaoTematica instance = this.sessaoTematica;
+        Data dataFimRevisao = null;
+        instance.setDataFimRevisao(dataFimRevisao);
+    }
+
+    /**
      * Teste do método setDataFimSubmissao, da classe SessaoTematica.
      */
     @Test(expected = NullPointerException.class)
@@ -301,6 +327,18 @@ public class SessaoTematicaTest {
     }
 
     /**
+     * Teste do método toString, da classe SessaoTematica.
+     */
+    @Test
+    public void testToString() {
+        System.out.println("toString");
+        SessaoTematica instance = this.sessaoTematica;
+        String expResult = "    #A9D24R - LAPR2";
+        String result = instance.toString();
+        assertEquals(expResult, result);
+    }
+
+    /**
      * Teste do método equals, da classe SessaoTematica.
      */
     @Test
@@ -322,7 +360,8 @@ public class SessaoTematicaTest {
         Object outroObjeto = new SessaoTematica("#1234", "Sem descrição",
                             new Data(2016, 1, 1), new Data(2016, 1, 7),
                             new Data(2016, 1, 9), new Data(2016, 1, 26),
-                            new Data(2016, 2, 4), new Data(2016, 2, 6));
+                            new Data(2016, 2, 4), new Data(2016, 2, 6),
+                            new Data(2016, 2, 8));
         SessaoTematica instance = this.sessaoTematica;
         boolean expResult = false;
         boolean result = instance.equals(outroObjeto);
@@ -361,6 +400,18 @@ public class SessaoTematicaTest {
         SessaoTematica instance = this.sessaoTematica;
         boolean expResult = true;
         boolean result = instance.validarSessaoTematica();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método temProponentes, da classe SessaoTematica.
+     */
+    @Test
+    public void testTemProponentes() {
+        System.out.println("temProponentes");
+        SessaoTematica instance = this.sessaoTematica;
+        boolean expResult = true;
+        boolean result = instance.temProponentes();
         assertEquals(expResult, result);
     }
 

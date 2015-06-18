@@ -21,7 +21,8 @@ public class SessaoTematicaEmLicitacaoStateTest {
                 new Data(2015, 6, 10),
                 new Data(2015, 6, 20),
                 new Data(2015, 6, 24),
-                new Data(2015, 6, 28));
+                new Data(2015, 6, 28),
+                new Data(2015, 6, 30));
         sessaoTematica.setEstado(
                 new SessaoTematicaEmLicitacaoState(sessaoTematica));
 

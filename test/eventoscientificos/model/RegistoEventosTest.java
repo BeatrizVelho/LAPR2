@@ -48,7 +48,7 @@ public class RegistoEventosTest {
                             "#123456", "Uma descrição", new Data(2016, 5, 9),
                             new Data(2016, 6, 21), new Data(2016, 7, 8),
                             new Data(2016, 7, 20), new Data(2016, 9, 24),
-                            new Data(2017, 5, 28));
+                            new Data(2017, 5, 28), new Data(2017, 6, 8));
     }
 
     /**

@@ -144,11 +144,17 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Criar Sess&#xe3;o Tem&#xe1;tica"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="uc6ActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="uc3">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Criar Comiss&#xe3;o de Programa"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="uc3ActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="uc8">
               <Properties>

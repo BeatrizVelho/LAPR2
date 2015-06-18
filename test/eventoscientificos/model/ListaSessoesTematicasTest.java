@@ -26,11 +26,11 @@ public class ListaSessoesTematicasTest {
                 new Data(2016, 9, 10), new Data(2016, 10, 1),
                 new Data(2017, 6, 10));
         this.listaSessoesTematicas = new ListaSessoesTematicas(this.evento);
-        this.sessaoTematica = new SessaoTematica(
-                "#123456", "Uma descrição", new Data(2016, 6, 9),
-                new Data(2016, 6, 21), new Data(2016, 7, 8),
-                new Data(2016, 7, 9), new Data(2017, 9, 24),
-                new Data(2017, 11, 28));
+        this.sessaoTematica = new SessaoTematica("#123456", "Uma descrição",
+                new Data(2016, 6, 9), new Data(2016, 6, 21),
+                new Data(2016, 7, 8), new Data(2016, 8, 16),
+                new Data(2016, 9, 11), new Data(2016, 10, 2),
+                new Data(2017, 5, 20));
         this.submissao = new Submissao();
         submissao.setArtigoInicial(new Artigo());
         submissao.setArtigoFinal(new Artigo());
@@ -48,7 +48,7 @@ public class ListaSessoesTematicasTest {
                             "#123456", "Uma descrição", new Data(2015, 5, 22),
                             new Data(2015, 5, 28), new Data(2015, 6, 20),
                             new Data(2015, 6, 24), new Data(2015, 6, 28),
-                            new Data(2015, 7, 1));
+                            new Data(2015, 7, 1), new Data(2015, 7, 7));
         assertEquals(expResult, result);
     }
 
@@ -173,7 +173,7 @@ public class ListaSessoesTematicasTest {
                             "#1234567", "Uma descrição", new Data(2016, 6, 9),
                             new Data(2016, 6, 21), new Data(2016, 7, 8),
                             new Data(2016, 7, 9), new Data(2017, 3, 25),
-                            new Data(2017, 5, 29)));
+                            new Data(2017, 5, 29), new Data(2017, 6, 1)));
         int expResult = 2;
         int result = listaSessoesTematicas.getListaSessoesTematicas().size();
         assertEquals(expResult, result);
@@ -191,7 +191,7 @@ public class ListaSessoesTematicasTest {
                             "#1234567", "Uma descrição", new Data(2016, 6, 9),
                             new Data(2016, 6, 21), new Data(2016, 7, 8),
                             new Data(2016, 7, 9), new Data(2017, 3, 25),
-                            new Data(2017, 5, 29));
+                            new Data(2017, 5, 29), new Data(2017, 6, 1));
         sessaoTematica.setEstado(new SessaoTematicaEmSubmissaoState(sessaoTematica));
         instance.adicionarSessaoTematica(sessaoTematica);
         instance.adicionarSessaoTematica(sessaoTematica1);
@@ -212,7 +212,7 @@ public class ListaSessoesTematicasTest {
                             "#1234567", "Uma descrição", new Data(2016, 6, 9),
                             new Data(2016, 6, 21), new Data(2016, 7, 8),
                             new Data(2016, 7, 9), new Data(2017, 3, 25),
-                            new Data(2017, 5, 29));
+                            new Data(2017, 5, 29), new Data(2017, 6, 1));
         instance.adicionarSessaoTematica(sessaoTematica);
         instance.adicionarSessaoTematica(sessaoTematica1);
         boolean expResult = true;
@@ -236,7 +236,7 @@ public class ListaSessoesTematicasTest {
                             "#1234567", "Uma descrição", new Data(2016, 6, 9),
                             new Data(2016, 6, 21), new Data(2016, 7, 8),
                             new Data(2016, 7, 9), new Data(2017, 3, 25),
-                            new Data(2017, 5, 29));
+                            new Data(2017, 5, 29), new Data(2017, 6, 1));
         ListaSessoesTematicas instance = this.listaSessoesTematicas;
         Submissao submissao = new Submissao();
         submissao.setArtigoInicial(new Artigo("tituo", "resumo", "ficheiro"));

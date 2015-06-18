@@ -45,7 +45,7 @@ public class SessaoTematicaCriadaState implements SessaoTematicaState {
     public boolean setRegistada() {
         if (validarEstado()) {
             this.sessaoTematica.setEstado(
-                                new SessaoTematicaRegistadaState(this.sessaoTematica));
+                    new SessaoTematicaRegistadaState(this.sessaoTematica));
             return true;
         }
 
@@ -150,6 +150,48 @@ public class SessaoTematicaCriadaState implements SessaoTematicaState {
      */
     @Override
     public boolean validarEstado() {
+        if (this.sessaoTematica.getDataInicioSubmissao().isMaior(
+                this.sessaoTematica.getDataFimSubmissao())) {
+            throw new IllegalArgumentException("A data de fim de submissão não "
+                    + "pode ser menor que a data de inicio de submissão.");
+        }
+
+        if (this.sessaoTematica.getDataFimSubmissao().isMaior(
+                this.sessaoTematica.getDataInicioDistribuicao())) {
+            throw new IllegalArgumentException("A data de inicio de distribuição"
+                    + " não pode ser menor que a data de fim de submissão.");
+        }
+
+        if (this.sessaoTematica.getDataInicioDistribuicao().isMaior(
+                this.sessaoTematica.getDataFimRevisao())) {
+            throw new IllegalArgumentException("A data de fim de revisão "
+                    + "não pode ser menor que a data de início de distribuição.");
+        }
+
+        if (this.sessaoTematica.getDataFimRevisao().isMaior(
+                this.sessaoTematica.getDataFimSubmissaoCameraReady())) {
+            throw new IllegalArgumentException("A data de fim de submissão "
+                    + "CameraReady não pode ser menor que a data de fim de "
+                    + "revisão.");
+        }
+
+        if (this.sessaoTematica.getDataFimSubmissaoCameraReady().isMaior(
+                this.sessaoTematica.getDataInicio())) {
+            throw new IllegalArgumentException("A data de início não pode ser"
+                    + "menor que a data de submissão CameraReady.");
+        }
+
+        if (this.sessaoTematica.getDataInicio().isMaior(
+                this.sessaoTematica.getDataFim())) {
+            throw new IllegalArgumentException("A data de fim não pode ser menor"
+                    + " que a data de inicio.");
+        }
+
+        if (!this.sessaoTematica.temProponentes()) {
+            throw new IllegalArgumentException("Deve introduzir pelo menos um"
+                    + "proponente.");
+        }
+
         return true;
     }
 

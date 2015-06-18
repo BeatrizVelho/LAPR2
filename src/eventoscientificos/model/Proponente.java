@@ -32,6 +32,17 @@ public class Proponente {
         return this.utilizador;
     }
 
+    /**
+     * Devolve a descrição textual do proponente no formato: nome (email)
+     *
+     * @return Características do proponente.
+     */
+    public String toString() {
+        return String.format("%s (%s)", 
+                this.getUtilizador().getNome(),
+                this.getUtilizador().getEmail());
+    }
+
     /*
      * Compara dois objetos entre si. Comparando primariamente a posição de 
      * memória, seguida do conteudo e das classes as quais cada um deles 
