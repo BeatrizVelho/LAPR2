@@ -262,6 +262,18 @@ public class RevisaoTest {
         boolean expResult = false;
         boolean result = revisao.validarRevisao();
         assertEquals(expResult, result);
+    }
 
+    /**
+     * Test of getRevisor method, of class Revisao.
+     */
+    @Test
+    public void testGetRevisor() {
+        System.out.println("getRevisor");
+        Revisor revisor = this.revisor;
+        Revisao instance = new Revisao(submissao, revisor);
+        boolean expResult = true;
+        Revisor result = instance.getRevisor();
+        assertEquals(revisor, result);
     }
 }

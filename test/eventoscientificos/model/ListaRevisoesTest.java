@@ -20,12 +20,17 @@ public class ListaRevisoesTest {
     private Revisor revisor;
     private Submissao submissao;
     private Revisao revisao;
+    private Utilizador u;
     private List<Revisao> listaRevisoes;
 
     public ListaRevisoesTest() {
         Artigo artigoInicial = new Artigo();
         Artigo artigoFinal = new Artigo();
         this.submissao = new Submissao();
+        this.u = new Utilizador("nome",
+                            "1140587@isep.ipp.pt",
+                            "username",
+                            "password");
         this.submissao.setArtigoInicial(artigoInicial);
         this.submissao.setArtigoFinal(artigoFinal);
         this.revisor = new Revisor(new Utilizador("nome",
@@ -93,6 +98,20 @@ public class ListaRevisoesTest {
         ListaRevisoes instance = new ListaRevisoes();
         boolean expResult = false;
         boolean result = instance.equals(outroObjecto);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of getRevisoesRevisor method, of class ListaRevisoes.
+     */
+    @Test
+    public void testGetRevisoesRevisor() {
+        System.out.println("getRevisoesRevisor");
+        Utilizador u = this.u;
+        ListaRevisoes instance = new ListaRevisoes();
+        instance.adicionarRevisao(revisao);
+        int expResult = 1;
+        int result = instance.getRevisoesRevisor(u).size();
         assertEquals(expResult, result);
     }
 }
