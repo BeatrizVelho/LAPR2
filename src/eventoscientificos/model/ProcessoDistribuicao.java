@@ -24,9 +24,16 @@ public class ProcessoDistribuicao {
     private MecanismoDistribuicao mecanismoDistribuicao;
 
     /**
+     * Constrói uma instância de Processo de Distribuição.
+     */
+    public ProcessoDistribuicao() {
+        this.listaRevisoes = new ListaRevisoes();
+    }
+
+    /**
      * Devolve a ListaRevisões.
      *
-     * @return Lista Rvisões
+     * @return Lista Revisões
      */
     public ListaRevisoes getListaRevisoes() {
         return this.listaRevisoes;

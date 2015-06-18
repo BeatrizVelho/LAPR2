@@ -4,6 +4,7 @@ import eventoscientificos.model.state.evento.EventoCriadoState;
 import eventoscientificos.model.state.evento.EventoEmDetecaoConflitos;
 import eventoscientificos.model.state.evento.EventoEmDistribuicaoState;
 import eventoscientificos.model.state.evento.EventoEmLicitacaoState;
+import eventoscientificos.model.state.evento.EventoEmRevisaoState;
 import eventoscientificos.model.state.evento.EventoEmSubmissaoState;
 import eventoscientificos.model.state.evento.EventoRegistadoState;
 import eventoscientificos.model.state.evento.EventoSessoesTematicasDefinidasState;
@@ -28,6 +29,7 @@ public class EventoTest {
     private Submissao submissao;
     private Artigo artigoInicial;
     private Artigo artigoFinal;
+    private Revisao revisao;
 
     public EventoTest() {
         this.evento = new Evento("titulo", "descricao", new Local("local"),
@@ -45,6 +47,7 @@ public class EventoTest {
         this.licitacao = new Licitacao(new Revisor(new Utilizador(
                             "fatima", "ola@iml.com", "fafa", "1234")),
                             this.submissao, 0, null);
+        this.revisao = new Revisao(submissao, new Revisor(utilizador));
     }
 
     /**
@@ -532,7 +535,7 @@ public class EventoTest {
                             new Data(2015, 6, 10),
                             new Data(2015, 6, 20),
                             new Data(2015, 6, 24),
-                            new Data(2015, 6, 28), 
+                            new Data(2015, 6, 28),
                             new Data(2017, 6, 8));
         listaSessoesTematicas.adicionarSessaoTematica(instance);
         instance.setEstado(new SessaoTematicaEmSubmissaoState(instance));
@@ -755,7 +758,7 @@ public class EventoTest {
         System.out.println("adicionarProcessoDistribuicao");
         this.evento.setEstado(new EventoEmDistribuicaoState(evento));
         ProcessoDistribuicao pd = new ProcessoDistribuicao();
-        boolean expResult = true;
+        boolean expResult = false;
         Evento instance = this.evento;
         boolean result = instance.adicionarProcessoDistribuicao(pd);
         assertEquals(expResult, result);
@@ -799,7 +802,7 @@ public class EventoTest {
         boolean result = this.evento.isStateValidoParaDistribuir(utilizador);
         assertEquals(expResult, result);
     }
-    
+
     /**
      * Teste do método temSubmissoesRetiradas, da classe Evento.
      */
@@ -807,7 +810,7 @@ public class EventoTest {
     public void testTemSubmissoesRetiradas() {
         System.out.println("temSubmissoesRetiradas");
         Utilizador utilizador = new Utilizador(
-                "Pedro", "1140781@isep.ipp.pt", "pedro", "1234");
+                            "Pedro", "1140781@isep.ipp.pt", "pedro", "1234");
         Proponente proponente = new Proponente(utilizador);
         evento.novoOrganizador(utilizador);
         this.submissao.setEstado(new SubmissaoRemovidaState(submissao));
@@ -818,9 +821,9 @@ public class EventoTest {
     }
 
     /**
-     * Teste do método 
-     * getListaSubmissiveisComSubmissoesRetiradasOrganizadorProponente,
-     * da classe Evento.
+     * Teste do método
+     * getListaSubmissiveisComSubmissoesRetiradasOrganizadorProponente, da
+     * classe Evento.
      */
     @Test
     public void testGetListaSubmissiveisComSubmissoesRetiradasOrganizadorProponente() {
@@ -832,7 +835,7 @@ public class EventoTest {
         List<Submissivel> result = instance.getListaSubmissiveisComSubmissoesRetiradasOrganizadorProponente(utilizador);
         assertEquals(expResult, result);
     }
-    
+
     /**
      * Teste do método toString, da classe Evento.
      */
@@ -844,5 +847,23 @@ public class EventoTest {
         this.evento.setDescricao("Descrição");
         String expResult = "Titulo - Descrição";
         String result = instance.toString();
-}
+    }
+
+    /**
+     * Teste do método isStateValidoParaRever, da classe SessaoTematica.
+     */
+    @Test
+    public void testIsStateValidoParaRever() {
+        System.out.println("isStateValidoParaRever");
+        this.evento.setEstado(new EventoEmRevisaoState(evento));
+        this.evento.adicionarCP(new CP());
+        this.evento.getCP().novoRevisor(utilizador);
+        ProcessoDistribuicao pd = this.evento.novoProcessoDistribuicao();
+        this.evento.adicionarProcessoDistribuicao(pd);
+        ListaRevisoes lr = pd.getListaRevisoes();
+        lr.adicionarRevisao(this.revisao);
+        boolean expResult = true;
+        boolean result = this.evento.isStateValidoParaRever(utilizador);
+        assertEquals(expResult, result);
+    }
 }

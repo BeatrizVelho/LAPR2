@@ -14,7 +14,7 @@ import utils.Data;
  * @author G01
  */
 public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
-                    Licitavel, Distribuivel {
+                    Licitavel, Distribuivel, Revisivel {
 
     /**
      * Código único da sessão temática.
@@ -731,5 +731,15 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
             return true;
         }
         return false;
+    }
+
+    /**
+     * Devolve uma lista de submissões retiradas.
+     * 
+     * @return Lista de submissões retiradas.
+     */
+    @Override
+    public List<Submissao> getListaSubmissoesRetiradas() {
+        return this.listaSubmissoes.getListaSubmissoesRetiradas();
     }
 }

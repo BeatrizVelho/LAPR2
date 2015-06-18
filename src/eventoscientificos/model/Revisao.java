@@ -63,7 +63,7 @@ public class Revisao {
     /**
      * Recomendação global por omissão.
      */
-    private static final int RECOMENDACAO_GLOBAL_POR_OMISSAO = -1;
+    private static final int RECOMENDACAO_GLOBAL_POR_OMISSAO = -3;
 
     /**
      * Breve texto justificativo por omissão.
@@ -72,7 +72,7 @@ public class Revisao {
 
     /**
      * Constrói uma instância de revisão através dos valores recebidos por
-     * parâmetro
+     * parâmetro e com os restantes por omissão.
      *
      * @param submissao submissão associado à revisão
      * @param revisor revisor associado à revisão
@@ -80,6 +80,12 @@ public class Revisao {
     public Revisao(Submissao submissao, Revisor revisor) {
         this.submissao = submissao;
         this.revisor = revisor;
+        this.confiancaRevisor = CONFIANCA_REVISOR_POR_OMISSAO;
+        this.adequacaoArtigo = ADEQUACAO_ARTIGO_POR_OMISSAO;
+        this.originalidadeArtigo = ORIGINALIDADE_ARTIGO_POR_OMISSAO;
+        this.qualidadeArtigo = QUALIDADE_ARTIGO_POR_OMISSAO;
+        this.recomendacaoGlobal = RECOMENDACAO_GLOBAL_POR_OMISSAO;
+        this.textoJustificativo = BREVE_TEXTO_JUSTIFICATIVO_POR_OMISSAO;
     }
 
     /**
@@ -90,31 +96,6 @@ public class Revisao {
     public Revisor getRevisor() {
         return this.revisor;
     }
-//
-//    /**
-//     * Cria uma instância de revisão com os valores recebidos por parâmetro.
-//     *
-//     * @param submissao submissao associada
-//     * @param revisor revisor destacado
-//     * @param confiancaRevisor confiança do revisor
-//     * @param adequacaoArtigo adequação do artigo ao evento/sessão temática
-//     * @param originalidadeArtigo originalidade do artigo
-//     * @param qualidadeArtigo qualidade do artigo
-//     * @param recomendacaoGlobal recomendação global
-//     */
-//    public Revisao(Submissao submissao, Revisor revisor, int confiancaRevisor,
-//                        int adequacaoArtigo, int originalidadeArtigo,
-//                        int qualidadeArtigo, int recomendacaoGlobal,
-//                        String textoJustificativo) {
-//        this.submissao = submissao;
-//        this.revisor = revisor;
-//        this.confiancaRevisor = CONFIANCA_REVISOR_POR_OMISSAO;
-//        this.adequacaoArtigo = ADEQUACAO_ARTIGO_POR_OMISSAO;
-//        this.originalidadeArtigo = ORIGINALIDADE_ARTIGO_POR_OMISSAO;
-//        this.qualidadeArtigo = QUALIDADE_ARTIGO_POR_OMISSAO;
-//        this.recomendacaoGlobal = RECOMENDACAO_GLOBAL_POR_OMISSAO;
-//        this.textoJustificativo = BREVE_TEXTO_JUSTIFICATIVO_POR_OMISSAO;
-//    }
 
     /**
      * Modifica o valor de Adequação do Artigo.
@@ -255,7 +236,7 @@ public class Revisao {
                             && this.originalidadeArtigo != ORIGINALIDADE_ARTIGO_POR_OMISSAO
                             && this.qualidadeArtigo != QUALIDADE_ARTIGO_POR_OMISSAO
                             && this.recomendacaoGlobal != RECOMENDACAO_GLOBAL_POR_OMISSAO
-                            && !this.textoJustificativo.equalsIgnoreCase(textoJustificativo));
+                            && !this.textoJustificativo.equalsIgnoreCase(BREVE_TEXTO_JUSTIFICATIVO_POR_OMISSAO));
     }
 
     /**

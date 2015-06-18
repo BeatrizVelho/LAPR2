@@ -169,5 +169,21 @@ public class ListaSubmissoes {
         }
         return false;
     }
+    
+    /**
+     * Devolve uma lista de submissões que se encontram no estado removido.
+     * 
+     * @return Lista de submissões retiradas.
+     */
+    public List<Submissao> getListaSubmissoesRetiradas(){
+        List<Submissao> listaSubmissoesRetiradas = new ArrayList<>();
+        
+        for(Submissao submissao : this.listaSubmissoes){
+            if(submissao.isStateRemovida()){
+                listaSubmissoesRetiradas.add(submissao);
+            }
+        }
+        return listaSubmissoesRetiradas;
+    }
 
 }
