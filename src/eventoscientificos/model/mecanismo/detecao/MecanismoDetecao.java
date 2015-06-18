@@ -1,6 +1,9 @@
 package eventoscientificos.model.mecanismo.detecao;
 
-import eventoscientificos.model.Conflito;
+import eventoscientificos.model.ListaConflitos;
+import eventoscientificos.model.Revisor;
+import eventoscientificos.model.Submissao;
+import eventoscientificos.model.TipoConflito;
 
 /**
  * Todas as classes que implementam esta interface, herdam a responsabilidade de
@@ -14,8 +17,15 @@ public interface MecanismoDetecao {
      * Método responsável por detetar um conflito entre um revisor e uma 
      * submissão, aplicando-lhe uma descrição.
      * 
-     * @return Conflito detetado.
+     * @param listaConflitos Lista de conflitos encontrados.
+     * @param revisor Revisor da CP do detetável.
+     * @param submissao Submissão do detetável.
+     * @param tipoConflito Tipo de conflito que vai ser procurado.
+     * 
+     * @return Verdadeiro se encontrar um tipo de conflito e falso caso não
+     * encontre.
      */
-    Conflito detetarConflito();
+    boolean detetarConflito(ListaConflitos listaConflitos, Revisor revisor,
+            Submissao submissao, TipoConflito tipoConflito);
 
 }
