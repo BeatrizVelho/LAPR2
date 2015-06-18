@@ -14,7 +14,7 @@ import utils.Data;
  * @author G01
  */
 public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
-                    Licitavel, Distribuivel {
+                    Licitavel, Distribuivel, Revisivel {
 
     /**
      * Código único da sessão temática.

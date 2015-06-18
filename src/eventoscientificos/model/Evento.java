@@ -12,7 +12,7 @@ import utils.Data;
 /**
  * @author G01
  */
-public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, Distribuivel, Decidivel {
+public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, Distribuivel, Decidivel, Revisivel {
 
     /**
      * Título do Evento.
