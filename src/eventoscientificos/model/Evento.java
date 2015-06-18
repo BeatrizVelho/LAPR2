@@ -836,5 +836,15 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
     public List<Submissivel> getListaSubmissiveisComSubmissoesRetiradasOrganizadorProponente(Utilizador utilizador) {
         return listaSessoesTematicas.getListaSubmissiveisComSubmissoesRetiradasOrganizadorProponente(utilizador);
     }
+    
+    /**
+     * Devolve a descrição textual do Evento no formato: titulo - descrição
+     *
+     * @return Características do Evento.
+     */
+    @Override
+    public String toString() {
+        return String.format("%s - %s", this.getTitulo(), this.getDescricao());
+    }
 
 }
