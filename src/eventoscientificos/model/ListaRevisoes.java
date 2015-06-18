@@ -54,7 +54,7 @@ public class ListaRevisoes {
         Revisor revisor = new Revisor(u);
         List<Revisao> listaRevisoesDoRevisor = new ArrayList<>();
         for (Revisao r : this.listaRevisoes) {
-            if (r.getRevisor().equals(revisor)) {
+            if ((r.getRevisor().equals(revisor)) && (r.validarRevisao() == false)) {
                 listaRevisoesDoRevisor.add(r);
             }
         }
