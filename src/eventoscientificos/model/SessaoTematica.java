@@ -732,4 +732,14 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
         }
         return false;
     }
+
+    /**
+     * Devolve uma lista de submissões retiradas.
+     * 
+     * @return Lista de submissões retiradas.
+     */
+    @Override
+    public List<Submissao> getListaSubmissoesRetiradas() {
+        return this.listaSubmissoes.getListaSubmissoesRetiradas();
+    }
 }
