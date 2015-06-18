@@ -1,5 +1,7 @@
 package eventoscientificos.model;
 
+import eventoscientificos.model.state.evento.EventoEmSubmissaoCameraReadyState;
+import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmSubmissaoCameraReadyState;
 import eventoscientificos.model.state.submissao.SubmissaoCriadaState;
 import eventoscientificos.model.state.submissao.SubmissaoEmSubmissaoState;
 import eventoscientificos.model.state.submissao.SubmissaoRemovidaState;
@@ -7,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import utils.Data;
 
 /**
  * @author G01
@@ -204,6 +207,22 @@ public class ListaSubmissoesTest {
         instance.adicionarSubmissao(submissao);
         boolean expResult = true;
         boolean result = instance.temSubmissoesRetiradas();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método getListaSubmissoesRetiradas, da classe ListaSubmissoes.
+     */
+    @Test
+    public void testGetListaSubmissoesRetiradas() {
+        System.out.println("getListaSubmissoesRetiradas");
+        Submissao submissao = new Submissao();
+        submissao.setEstado(new SubmissaoRemovidaState(submissao));
+        ListaSubmissoes instance = new ListaSubmissoes();
+        instance.adicionarSubmissao(submissao);
+        instance.getListaSubmissoesRetiradas();
+        int expResult = 1;
+        int result = (instance.getListaSubmissoesRetiradas()).size();
         assertEquals(expResult, result);
     }
 }
