@@ -203,7 +203,8 @@ public class DefinirSessaoTematicaController {
         criarTimers();
 
         return this.listaSessoesTematicas.adicionarSessaoTematica(
-                this.sessaoTematica);
+                this.sessaoTematica)
+                && this.evento.temSessoesTematicasDefinidas();
     }
 
     /**

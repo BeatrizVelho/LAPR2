@@ -6,11 +6,9 @@
 package eventoscientificos.controllers;
 
 import eventoscientificos.model.Artigo;
-import eventoscientificos.model.CP;
 import eventoscientificos.model.Distribuivel;
 import eventoscientificos.model.Empresa;
 import eventoscientificos.model.Evento;
-import eventoscientificos.model.Licitacao;
 import eventoscientificos.model.ListaRevisoes;
 import eventoscientificos.model.Local;
 import eventoscientificos.model.MecanismoDistribuicao;
@@ -20,7 +18,6 @@ import eventoscientificos.model.SessaoTematica;
 import eventoscientificos.model.Submissao;
 import eventoscientificos.model.Utilizador;
 import eventoscientificos.model.state.evento.EventoEmDistribuicaoState;
-import eventoscientificos.model.state.evento.EventoEmLicitacaoState;
 import eventoscientificos.model.state.evento.EventoEmSubmissaoCameraReadyState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmDistribuicaoState;
 import java.util.List;
@@ -67,7 +64,7 @@ public class DistribuirRevisoesArtigoControllerTest {
                             "#123456", "Uma descrição", new Data(2016, 6, 9),
                             new Data(2016, 6, 21), new Data(2016, 7, 8),
                             new Data(2016, 7, 9), new Data(2017, 9, 24),
-                            new Data(2017, 11, 28));
+                            new Data(2017, 11, 28), new Data(2017, 12, 1));
         this.sessaoTematica.setEstado(new SessaoTematicaEmDistribuicaoState(sessaoTematica));
         this.sessaoTematica.novoProponente(utilizador);
         this.evento.getListaSessoesTematicas().adicionarSessaoTematica(sessaoTematica);
