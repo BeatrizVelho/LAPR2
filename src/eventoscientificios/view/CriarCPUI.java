@@ -27,7 +27,7 @@ public class CriarCPUI extends javax.swing.JDialog {
      * @param empresa
      */
     public CriarCPUI(java.awt.Frame parent, boolean modal, Empresa empresa) {
-        super(parent, modal);
+        super(parent, "Criar CP", modal);
         this.controller = new CriarCPController(empresa);
         this.controller.getListaCPDefiniveisSemCPOrganizadorProponente();
         this.framePai = parent;
