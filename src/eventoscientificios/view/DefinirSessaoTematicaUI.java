@@ -7,7 +7,6 @@ package eventoscientificios.view;
 
 import eventoscientificos.controllers.DefinirSessaoTematicaController;
 import eventoscientificos.model.Empresa;
-import eventoscientificos.model.Local;
 import java.awt.Frame;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
@@ -38,8 +37,18 @@ public class DefinirSessaoTematicaUI extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         getRootPane().setDefaultButton(btn_selecionarEvento);
-        setVisible(true);
-        pack();
+        if (controller.getListaEventos().isEmpty()) {
+            JOptionPane.showMessageDialog(
+                    framePai,
+                    "Não existem eventos ou sessões temáticas onde lhe é "
+                    + "possível definir CP.",
+                    "Criar CP",
+                    JOptionPane.ERROR_MESSAGE);
+            dispose();
+        } else {
+            setVisible(true);
+            pack();
+        }
         if (this.cmb_selecionarEvento.getItemCount() == 0) {
             JOptionPane.showMessageDialog(
                     framePai,
@@ -441,13 +450,13 @@ public class DefinirSessaoTematicaUI extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(
                     framePai,
                     "Não introduziu um ID válido.",
-                    "Criar Evento",
+                    "Criar Sessão Temática",
                     JOptionPane.ERROR_MESSAGE);
         } catch (IllegalArgumentException ex) {
             JOptionPane.showMessageDialog(
                     framePai,
                     ex.getMessage(),
-                    "Criar Evento",
+                    "Criar Sessão Temática",
                     JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btn_adicionarProponenteActionPerformed
