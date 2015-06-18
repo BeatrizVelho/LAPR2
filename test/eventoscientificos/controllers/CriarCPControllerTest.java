@@ -4,10 +4,10 @@ import eventoscientificos.model.CP;
 import eventoscientificos.model.Empresa;
 import eventoscientificos.model.Evento;
 import eventoscientificos.model.Local;
-import eventoscientificos.model.Revisor;
 import eventoscientificos.model.SessaoTematica;
 import eventoscientificos.model.Utilizador;
 import eventoscientificos.model.state.evento.EventoSessoesTematicasDefinidasState;
+import javax.swing.DefaultListModel;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import utils.Data;
@@ -18,43 +18,40 @@ import utils.Data;
  */
 public class CriarCPControllerTest {
 
-    private Empresa emp;
+    private Empresa empresa;
     private Evento evento;
     private SessaoTematica st;
-    private Utilizador u;
+    private Utilizador utilizador;
 
     public CriarCPControllerTest() {
-        this.emp = new Empresa();
-        CP cp = new CP();
-        Revisor revisor = new Revisor(new Utilizador(
-                "fatima", "ola@iml.com", "fafa", "1234"));
-
-        this.u = new Utilizador(
+        Utilizador utilizador = new Utilizador(
                 "fatima", "ola@iml.com", "fafa", "1234");
-        cp.novoRevisor(u);
-
-        this.evento = new Evento("titulo", "descricao", new Local("local"),
+        CP cp = new CP();
+        cp.novoRevisor(utilizador);
+        Evento evento = new Evento("titulo", "descricao", new Local("local"),
                 new Data(2016, 6, 8), new Data(2016, 6, 20),
                 new Data(2016, 7, 7), new Data(2016, 9, 10),
                 new Data(2016, 9, 11), new Data(2016, 10, 1),
                 new Data(2017, 6, 10));
-        this.evento.novoOrganizador(u);
-        this.evento.setEstado(new EventoSessoesTematicasDefinidasState(evento));
-        this.evento.adicionarCP(cp);
-
-        Evento evento2 = new Evento("Francisca", "descricao", new Local("local"),
+        evento.novoOrganizador(utilizador);
+        evento.setEstado(new EventoSessoesTematicasDefinidasState(evento));
+        Evento outroEvento = new Evento("Francisca", "descricao", new Local("local"),
                 new Data(2016, 6, 8), new Data(2016, 6, 20),
                 new Data(2016, 7, 7), new Data(2016, 9, 10),
                 new Data(2016, 9, 11), new Data(2016, 10, 1),
                 new Data(2017, 6, 10));
-        evento2.novoOrganizador(u);
-        evento2.setEstado(new EventoSessoesTematicasDefinidasState(evento2));
-
-        this.emp.setUtilizadorAutenticado(u);
-        this.emp.getRegistoUtilizadores().adicionaUtilizador(u);
-        this.emp.getRegistoEventos().adicionarEvento(evento);
-        this.emp.getRegistoEventos().adicionarEvento(evento2);
-
+        outroEvento.novoOrganizador(utilizador);
+        outroEvento.setEstado(new EventoSessoesTematicasDefinidasState(outroEvento));
+        
+        Empresa empresa = new Empresa();
+        empresa.setUtilizadorAutenticado(utilizador);
+        empresa.getRegistoUtilizadores().adicionaUtilizador(utilizador);
+        empresa.getRegistoEventos().adicionarEvento(evento);
+        empresa.getRegistoEventos().adicionarEvento(outroEvento);
+        
+        this.utilizador = utilizador;
+        this.evento = evento;
+        this.empresa = empresa;
     }
 
     /**
@@ -64,8 +61,8 @@ public class CriarCPControllerTest {
     @Test
     public void testGetListaCPDefiniveisSemCPOrganizadorProponente() {
         System.out.println("getListaCPDefiniveisSemCPOrganizadorProponente");
-        CriarCPController instance = new CriarCPController(emp);
-        emp.setUtilizadorAutenticado(u);
+        CriarCPController instance = new CriarCPController(empresa);
+        empresa.setUtilizadorAutenticado(utilizador);
         boolean expResult = true;
         boolean result = instance.getListaCPDefiniveisSemCPOrganizadorProponente();
         assertEquals(expResult, result);
@@ -78,7 +75,7 @@ public class CriarCPControllerTest {
     public void testSelecionarCPDefinivel() {
         System.out.println("selecionarCPDefinivel");
         int indice = 0;
-        CriarCPController instance = new CriarCPController(emp);
+        CriarCPController instance = new CriarCPController(empresa);
         instance.getListaCPDefiniveisSemCPOrganizadorProponente();
         boolean expResult = true;
         boolean result = instance.selecionarCPDefinivel(indice);
@@ -93,7 +90,7 @@ public class CriarCPControllerTest {
         System.out.println("novoRevisor");
         Empresa emp = new Empresa();
         String id = "fafa";
-        CriarCPController instance = new CriarCPController(this.emp);
+        CriarCPController instance = new CriarCPController(this.empresa);
         instance.getListaCPDefiniveisSemCPOrganizadorProponente();
         instance.selecionarCPDefinivel(0);
         boolean expResult = true;
@@ -107,7 +104,7 @@ public class CriarCPControllerTest {
     @Test
     public void testValidarCP() {
         System.out.println("validarCP");
-        CriarCPController instance =  new CriarCPController(this.emp);
+        CriarCPController instance =  new CriarCPController(this.empresa);
         instance.getListaCPDefiniveisSemCPOrganizadorProponente();
         instance.selecionarCPDefinivel(0);
         instance.novoRevisor("fafa");
@@ -122,13 +119,38 @@ public class CriarCPControllerTest {
     @Test
     public void testAdicionarCP() {
         System.out.println("adicionarCP");
-        CriarCPController instance = new CriarCPController(this.emp);
+        CriarCPController instance = new CriarCPController(this.empresa);
         instance.getListaCPDefiniveisSemCPOrganizadorProponente();
         instance.selecionarCPDefinivel(0);
-        instance.novoRevisor("fafa");
+        instance.novoRevisor("ola@iml.com");
         instance.validarCP();
         boolean expResult = true;
         boolean result = instance.adicionarCP();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of getModeloLista method, of class CriarCPController.
+     */
+    @Test
+    public void testGetModeloLista() {
+        System.out.println("getModeloLista");
+        CriarCPController instance = new CriarCPController(this.empresa);
+        String expResult = new DefaultListModel().getClass().getSimpleName();
+        String result = instance.getModeloLista().getClass().getSimpleName();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of getListaCPDefinivel method, of class CriarCPController.
+     */
+    @Test
+    public void testGetListaCPDefinivel() {
+        System.out.println("getListaCPDefinivel");
+        CriarCPController instance = new CriarCPController(this.empresa);
+        instance.getListaCPDefiniveisSemCPOrganizadorProponente();
+        int expResult = 2;
+        int result = instance.getListaCPDefinivel().size();
         assertEquals(expResult, result);
     }
 

@@ -5,8 +5,10 @@ import eventoscientificos.model.CPDefinivel;
 import eventoscientificos.model.Empresa;
 import eventoscientificos.model.RegistoEventos;
 import eventoscientificos.model.RegistoUtilizadores;
+import eventoscientificos.model.Revisor;
 import eventoscientificos.model.Utilizador;
 import java.util.List;
+import javax.swing.DefaultListModel;
 
 /**
  * Representa uma instância de CriarCPController através de CPDefinivel.
@@ -21,6 +23,11 @@ public class CriarCPController {
     private Empresa empresa;
 
     /**
+     * Modelo da lista de revisores.
+     */
+    private DefaultListModel modeloLista;
+
+    /**
      * Instancia de listaCPDefinivel
      */
     private List<CPDefinivel> listaCPDefinivel;
@@ -28,7 +35,7 @@ public class CriarCPController {
     /**
      * Instancia de CPDefinivel.
      */
-    private CPDefinivel cpDefinivel;
+    private CPDefinivel CPDefinivel;
 
     /**
      * Instancia de RegistoUtilizadores.
@@ -38,7 +45,7 @@ public class CriarCPController {
     /**
      * Instancia de CP.
      */
-    private CP cp;
+    private CP CP;
 
     /**
      * Constrói uma instância de CriarCPController recebendo uma empresa por
@@ -48,41 +55,67 @@ public class CriarCPController {
      */
     public CriarCPController(Empresa empresa) {
         this.empresa = empresa;
+        this.modeloLista = new DefaultListModel<Revisor>();
+        this.listaCPDefinivel = null;
+        this.CPDefinivel = null;
+        this.registoUtilizadores = null;
+        this.CP = null;
     }
 
     /**
-     * Devolve uma lista de eventos/sessão temáticas que se encontrem sem CP
-     * definida e onde o utilizador é proponente.
+     * Devolve o modelo da lista de revisores.
+     *
+     * @return
+     */
+    public DefaultListModel getModeloLista() {
+        return this.modeloLista;
+    }
+
+    /**
+     * Devolve uma lista de eventos e sessões temáticas onde é possível definir
+     * uma CP.
+     *
+     * @return Lista de eventos e sessões temáticas onde é possível definir CP.
+     */
+    public List<CPDefinivel> getListaCPDefinivel() {
+        return this.listaCPDefinivel;
+    }
+
+    /**
+     * Manda criar uma lista de eventos/sessão temáticas que se encontrem sem CP
+     * definida e onde o utilizador é organizador/proponente.
      *
      * @return
      */
     public boolean getListaCPDefiniveisSemCPOrganizadorProponente() {
+        RegistoEventos registoEventos = this.empresa.getRegistoEventos();
 
-        RegistoEventos registoEventos = empresa.getRegistoEventos();
+        Utilizador utilizador = this.empresa.getUtilizadorAutenticado();
 
-        Utilizador utilizador = empresa.getUtilizadorAutenticado();
+        this.listaCPDefinivel
+                = registoEventos.getListaCPDefiniveisSemCPOrganizadorProponente(
+                        utilizador);
 
-        this.listaCPDefinivel = registoEventos.
-                getListaCPDefiniveisSemCPOrganizadorProponente(utilizador);
-
-        return true;
+        return this.listaCPDefinivel != null;
     }
 
     /**
-     * Seleciona uma CP pelo seu indice.
+     * Seleciona um evento/sessão temática da lista de CPDefiniveis pelo indice.
      *
-     * @param indice A procurar.
+     * @param indice Indice do evento/sessão temática selecionado.
+     *
      * @return
      */
     public boolean selecionarCPDefinivel(int indice) {
 
-        this.cpDefinivel = this.listaCPDefinivel.get(indice);
+        this.CPDefinivel = this.listaCPDefinivel.get(indice);
 
-        this.cp = cpDefinivel.novaCP();
+        this.CP = CPDefinivel.novaCP();
 
         this.registoUtilizadores = empresa.getRegistoUtilizadores();
-       
-        return true;
+
+        return this.CPDefinivel != null && this.CP != null
+                && this.registoUtilizadores != null;
     }
 
     /**
@@ -94,26 +127,36 @@ public class CriarCPController {
     public boolean novoRevisor(String id) {
         Utilizador utilizador = this.registoUtilizadores.getUtilizador(id);
 
-        return this.cp.novoRevisor(utilizador);
+        if (utilizador != null 
+                && !this.modeloLista.contains(new Revisor(utilizador))) {
+            this.modeloLista.addElement(new Revisor(utilizador));
+        }
 
+        return this.CP.novoRevisor(utilizador);
     }
 
     /**
-     * Valida se a cp já existe.
+     * Valida se a CP tem pelo menos um revisor.
      *
-     * @return Verdadeiro caso a cp seja válida e falso caso não seja.
+     * @return Verdadeiro se existir pelo menos um revisor e falso caso não
+     * exista nenhum.
      */
     public boolean validarCP() {
-        return this.cp.validarCP();
+        if (!this.CP.validarCP()) {
+            throw new IllegalArgumentException("Deve introduzir pelo menos um "
+                    + "revisor.");
+        }
+
+        return true;
     }
 
     /**
-     * Adiciona uma nova CP.
+     * Adiciona a CP ao evento ou sessão temática escolhido previamente.
      *
      * @return Verdadeiro caso a CP seja adicionada e falso caso não seja.
      */
     public boolean adicionarCP() {
-        return this.cpDefinivel.adicionarCP(cp);
+        return this.CPDefinivel.adicionarCP(this.CP);
 
     }
 
