@@ -9,6 +9,7 @@ import eventoscientificos.model.RegistoUtilizadores;
 import eventoscientificos.model.Utilizador;
 import java.util.Date;
 import java.util.TimerTask;
+import javax.swing.DefaultListModel;
 import utils.Data;
 
 /**
@@ -26,7 +27,7 @@ public class CriarEventoController {
     /**
      * Modelo da lista de organizadores.
      */
-    private ModeloListaPapel modeloListaPapel;
+    private DefaultListModel modeloLista;
 
     /**
      * Instancia de RegistoEventos.
@@ -51,7 +52,7 @@ public class CriarEventoController {
      */
     public CriarEventoController(Empresa empresa) {
         this.empresa = empresa;
-        this.modeloListaPapel = new ModeloListaPapel<Organizador>();
+        this.modeloLista = new DefaultListModel<Organizador>();
         this.registoEventos = null;
         this.evento = null;
         this.registoUtilizadores = null;
@@ -62,8 +63,8 @@ public class CriarEventoController {
      * 
      * @return Modelo da lista de organizadores.
      */
-    public ModeloListaPapel getModeloListaPapel() {
-        return this.modeloListaPapel;
+    public DefaultListModel getModeloListaPapel() {
+        return this.modeloLista;
     }
 
     /**
@@ -111,8 +112,8 @@ public class CriarEventoController {
         Utilizador utilizador = this.registoUtilizadores.getUtilizador(id);
 
         if (utilizador != null 
-                && !this.modeloListaPapel.contains(new Organizador(utilizador))) {
-            this.modeloListaPapel.addElement(new Organizador(utilizador));
+                && !this.modeloLista.contains(new Organizador(utilizador))) {
+            this.modeloLista.addElement(new Organizador(utilizador));
         }
 
         return this.evento.novoOrganizador(utilizador);
