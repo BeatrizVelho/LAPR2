@@ -1,5 +1,7 @@
 package eventoscientificos.model;
 
+import java.util.List;
+
 /**
  * Todas as classes que implementam esta interface, herdam a responsabilidade de
  * permitir submissões de artigos cientificos, ficando obrigadas a implementar
@@ -41,4 +43,10 @@ public interface Submissivel {
      */
     boolean isStateValidoParaAlterar();
     
+    /**
+     * Devolve uma lista de submissões retiradas.
+     * 
+     * @return Lista de submissões retiradas.
+     */
+    List<Submissao> getListaSubmissoesRetiradas();
 }
