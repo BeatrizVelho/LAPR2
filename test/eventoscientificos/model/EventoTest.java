@@ -5,6 +5,7 @@ import eventoscientificos.model.state.evento.EventoEmDetecaoConflitos;
 import eventoscientificos.model.state.evento.EventoEmDistribuicaoState;
 import eventoscientificos.model.state.evento.EventoEmLicitacaoState;
 import eventoscientificos.model.state.evento.EventoEmRevisaoState;
+import eventoscientificos.model.state.evento.EventoEmSubmissaoCameraReadyState;
 import eventoscientificos.model.state.evento.EventoEmSubmissaoState;
 import eventoscientificos.model.state.evento.EventoRegistadoState;
 import eventoscientificos.model.state.evento.EventoSessoesTematicasDefinidasState;
@@ -864,6 +865,24 @@ public class EventoTest {
         lr.adicionarRevisao(this.revisao);
         boolean expResult = true;
         boolean result = this.evento.isStateValidoParaRever(utilizador);
+        assertEquals(expResult, result);
+    }
+    
+    /**
+     * Teste do método getListaSubmissoesRetiradas, na classe Evento.
+     */
+    @Test
+    public void testGetListaSubmissoesRetiradas() {
+        System.out.println("getListaSubmissoesRetiradas");
+        Submissao submissao = this.submissao;
+        submissao.setEstado(new SubmissaoRemovidaState(submissao));
+        Evento instance = this.evento;
+        instance.setEstado(new EventoEmSubmissaoCameraReadyState(instance));
+        instance.novoOrganizador(this.utilizador);
+        instance.getListaSubmissoes().adicionarSubmissao(submissao);
+        instance.getListaSubmissiveisComSubmissoesRetiradasOrganizadorProponente(utilizador);
+        int expResult = 1;
+        int result = (instance.getListaSubmissoesRetiradas()).size();
         assertEquals(expResult, result);
     }
 }
