@@ -811,13 +811,14 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
         }
         return false;
     }
-    
-        /**
-     * Verifica se existem submissões retiradas e onde o utilizador é organizador.
-     * 
+
+    /**
+     * Verifica se existem submissões retiradas e onde o utilizador é
+     * organizador.
+     *
      * @param utilizador Utilizador a verificar é organizador.
-     * @return Verdadeiro caso existam submissoes retiradas e
-     * falso se não existir.
+     * @return Verdadeiro caso existam submissoes retiradas e falso se não
+     * existir.
      */
     public boolean temSubmissoesRetiradas(Utilizador utilizador) {
         if (isOrganizador(utilizador) && this.listaSubmissoes.temSubmissoesRetiradas()) {
@@ -825,18 +826,18 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
         }
         return false;
     }
-    
+
     /**
      * Devolve uma lista de sessões temáticas onde se encontrem submissoes
      * retiradas e o utilizador é proponente.
-     * 
+     *
      * @param utilizador Utilizador a verificar se é proponente.
      * @return Lista de sessao temática onde o utilizador é proponente.
      */
     public List<Submissivel> getListaSubmissiveisComSubmissoesRetiradasOrganizadorProponente(Utilizador utilizador) {
         return listaSessoesTematicas.getListaSubmissiveisComSubmissoesRetiradasOrganizadorProponente(utilizador);
     }
-    
+
     /**
      * Devolve a descrição textual do Evento no formato: titulo - descrição
      *
@@ -845,6 +846,24 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
     @Override
     public String toString() {
         return String.format("%s - %s", this.getTitulo(), this.getDescricao());
+    }
+
+    /**
+     * Verifica se o revisivel contém as condições necessárias para as
+     * submissões serem revistas pelos revisores
+     *
+     * @return verdadeiro cumprir as condições necessárias para rever e falso se
+     * não estiver
+     */
+    @Override
+    public boolean isStateValidoParaRever(Utilizador u) {
+        if (estado.setEmRevisao() && this.cp.contains(u)) {
+            ListaRevisoes lr = this.processoDistribuicao.getListaRevisoes();
+            if (lr.getRevisoesRevisor(u).size() > 0) {
+                return true;
+            }
+        }
+        return true;
     }
 
 }
