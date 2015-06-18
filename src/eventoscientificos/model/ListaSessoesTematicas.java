@@ -52,6 +52,8 @@ public class ListaSessoesTematicas {
      * Sessão Temática.
      * @param dataFimSubmissao Data de fim do periodo de submissão da Sessão
      * Temática.
+     * @param dataFimRevisao Data de fim de revisão de submissoes da Sessão
+     * Temática
      * @param dataInicioDistribuicao Data de início de distribuição da Sessão
      * Temática.
      * @param dataFimSubmissaoCameraReady Data de fim do periodo de submissão do
@@ -61,14 +63,15 @@ public class ListaSessoesTematicas {
      * @return Sessão Temática.
      */
     public SessaoTematica novaSessaoTematica(
-                        String codigoUnico,
-                        String descricao,
-                        Data dataInicioSubmissao,
-                        Data dataFimSubmissao, Data dataInicioDistribuicao,
-                        Data dataFimSubmissaoCameraReady, Data dataInicio,
-                        Data dataFim) {
+            String codigoUnico, String descricao,
+            Data dataInicioSubmissao, Data dataFimSubmissao,
+            Data dataFimRevisao, Data dataInicioDistribuicao,
+            Data dataFimSubmissaoCameraReady, Data dataInicio,
+            Data dataFim) {
         return new SessaoTematica(
-                            codigoUnico, descricao, dataInicioSubmissao, dataFimSubmissao, dataInicioDistribuicao, dataFimSubmissaoCameraReady, dataInicio, dataFim);
+                codigoUnico, descricao, dataInicioSubmissao, dataFimSubmissao,
+                dataFimRevisao, dataInicioDistribuicao,
+                dataFimSubmissaoCameraReady, dataInicio, dataFim);
     }
 
     /**
@@ -103,11 +106,11 @@ public class ListaSessoesTematicas {
         }
 
         ListaSessoesTematicas outraListaSessoesTematicas
-                            = (ListaSessoesTematicas) outroObjeto;
+                = (ListaSessoesTematicas) outroObjeto;
 
         return this.evento.equals(outraListaSessoesTematicas.evento)
-                            && this.listaSessoesTematicas.equals(
-                                                outraListaSessoesTematicas.listaSessoesTematicas);
+                && this.listaSessoesTematicas.equals(
+                        outraListaSessoesTematicas.listaSessoesTematicas);
     }
 
     /**
@@ -121,28 +124,41 @@ public class ListaSessoesTematicas {
      */
     public boolean validarSessaoTematica(SessaoTematica sessaoTematica) {
         if (this.evento.getDataInicioSubmissao().isMaior(
-                            sessaoTematica.getDataInicioSubmissao())) {
+                sessaoTematica.getDataInicioSubmissao())) {
             throw new IllegalArgumentException("A data de inicio de submissão "
-                                + "da sessão temática não pode ser menor que a do evento");
+                    + "da sessão temática não pode ser menor que a do evento");
         }
 
         if (this.evento.getDataFimSubmissao().isMaior(
-                            sessaoTematica.getDataFimSubmissao())) {
+                sessaoTematica.getDataFimSubmissao())) {
             throw new IllegalArgumentException("A data de fim de submissão da "
-                                + "sessão temática não pode ser menor que a do evento");
+                    + "sessão temática não pode ser menor que a do evento");
         }
 
         if (this.evento.getDataInicioDistribuicao().isMaior(
-                            sessaoTematica.getDataInicioDistribuicao())) {
+                sessaoTematica.getDataInicioDistribuicao())) {
             throw new IllegalArgumentException("A data de inicio de distribuição"
-                                + " da sessão temática não pode ser menor que a do evento");
+                    + " da sessão temática não pode ser menor que a do evento");
+        }
+
+        if (this.evento.getDataFimRevisao().isMaior(
+                sessaoTematica.getDataFimRevisao())) {
+            throw new IllegalArgumentException("A data de fim de revisão da "
+                    + "sessão temática não pode ser menor que a do evento");
+        }
+
+        if (this.evento.getDataFimSubmissaoCameraReady().isMaior(
+                sessaoTematica.getDataFimSubmissaoCameraReady())) {
+            throw new IllegalArgumentException("A data de fim de submissão "
+                    + "Camera Ready da sessão temática não pode ser menor que a "
+                    + "do evento");
         }
 
         if (this.evento.getDataInicio().isMaior(sessaoTematica.getDataInicio())
-                            || sessaoTematica.getDataFim().isMaior(
-                                                this.evento.getDataFim())) {
+                || sessaoTematica.getDataFim().isMaior(
+                        this.evento.getDataFim())) {
             throw new IllegalArgumentException("A sessão temática deve ocorrer "
-                                + "dentro do periodo do evento.");
+                    + "dentro do periodo do evento.");
         }
 
         return !this.listaSessoesTematicas.contains(sessaoTematica);
@@ -177,19 +193,19 @@ public class ListaSessoesTematicas {
     }
 
     /**
-     * Devolve uma lista de Submissiveis que tem submissoes em que o utilizador 
-     * passado por parametro é autor e que estão a permitir a alteração de 
+     * Devolve uma lista de Submissiveis que tem submissoes em que o utilizador
+     * passado por parametro é autor e que estão a permitir a alteração de
      * submissões.
-     * 
-     * @param utilizador 
+     *
+     * @param utilizador
      * @return Lista de Submissiveis.
      */
     public List<Submissivel> getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador(
             Utilizador utilizador) {
         List<Submissivel> listaSubmissiveisUtilizador = new ArrayList<>();
-        
-        for(SessaoTematica sessaoTematica : this.listaSessoesTematicas) {
-            if(sessaoTematica.isStateValidoParaAlterar() && sessaoTematica.isUtilizadorUmAutorSubmissao(utilizador)) {
+
+        for (SessaoTematica sessaoTematica : this.listaSessoesTematicas) {
+            if (sessaoTematica.isStateValidoParaAlterar() && sessaoTematica.isUtilizadorUmAutorSubmissao(utilizador)) {
                 listaSubmissiveisUtilizador.add(sessaoTematica);
             }
         }
@@ -207,25 +223,25 @@ public class ListaSessoesTematicas {
         List<CPDefinivel> listaSemCPDefinida = new ArrayList();
         for (SessaoTematica sessaoTematica : this.listaSessoesTematicas) {
             if (sessaoTematica.isRegistada()
-                                && sessaoTematica.isProponente(utilizador)) {
+                    && sessaoTematica.isProponente(utilizador)) {
                 listaSemCPDefinida.add(sessaoTematica);
             }
         }
 
         return listaSemCPDefinida;
     }
-    
+
     /**
-     * Devolve uma lista de submissiveis com as sessoes tematicas
-     * que tenham submissoes retiradas onde o utilizador é proponente.
-     * 
+     * Devolve uma lista de submissiveis com as sessoes tematicas que tenham
+     * submissoes retiradas onde o utilizador é proponente.
+     *
      * @param utilizador Utilizador a verificar se é proponente.
      * @return Lista de submissiveis onde o utilizador é proponente.
      */
     public List<Submissivel> getListaSubmissiveisComSubmissoesRetiradasOrganizadorProponente(Utilizador utilizador) {
         List<Submissivel> listaSubmissiveis = new ArrayList<>();
-        for(SessaoTematica  sessaoTematica : this.listaSessoesTematicas) {
-            if(sessaoTematica.temSubmissoesRetiradas(utilizador)) {
+        for (SessaoTematica sessaoTematica : this.listaSessoesTematicas) {
+            if (sessaoTematica.temSubmissoesRetiradas(utilizador)) {
                 listaSubmissiveis.add(sessaoTematica);
             }
         }
