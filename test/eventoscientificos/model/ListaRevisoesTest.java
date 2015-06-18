@@ -20,6 +20,7 @@ public class ListaRevisoesTest {
     private Revisor revisor;
     private Submissao submissao;
     private Revisao revisao;
+    private Revisao r;
     private Utilizador u;
     private List<Revisao> listaRevisoes;
 
@@ -38,8 +39,16 @@ public class ListaRevisoesTest {
                             "username",
                             "password"));
         this.revisao = new Revisao(submissao, revisor);
+        this.r = new Revisao(submissao, revisor);
+        r.setAdequacaoArtigo(0);
+        r.setConfiancaRevisor(0);
+        r.setOriginalidadeArtigo(0);
+        r.setQualidadeArtigo(0);
+        r.setRecomendacaoGlobal(-1);
+        r.setTextoJustificativo("ola");
         this.listaRevisoes = new ArrayList<>();
         listaRevisoes.add(revisao);
+        listaRevisoes.add(r);
     }
 
     /**
@@ -110,6 +119,7 @@ public class ListaRevisoesTest {
         Utilizador u = this.u;
         ListaRevisoes instance = new ListaRevisoes();
         instance.adicionarRevisao(revisao);
+        instance.adicionarRevisao(r);
         int expResult = 1;
         int result = instance.getRevisoesRevisor(u).size();
         assertEquals(expResult, result);
