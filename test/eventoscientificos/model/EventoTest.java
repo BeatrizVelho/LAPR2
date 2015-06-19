@@ -559,7 +559,8 @@ public class EventoTest {
 
         Conflito c = new Conflito(revisor, submissao, new ArrayList());
         Evento instance = this.evento;
-        instance.getProcessoDetecao().getListaConflito().add(c);
+        instance.setProcessoDetecao(new ProcessoDetecao(instance, new ArrayList()));
+        instance.getProcessoDetecao().getListaConflito().adicionarConflito(c);
 
         Conflito expResult = c;
         Conflito result = instance.getConflitoRevisorSubmissao(revisor, submissao);
@@ -574,8 +575,10 @@ public class EventoTest {
     public void testSetAndGetProcessoDetecao() {
         System.out.println("setAndGetProcessoDetecao");
         Evento instance = this.evento;
-        instance.setProcessoDetecao(new ProcessoDetecao());
-        ProcessoDetecao expResult = new ProcessoDetecao();
+        instance.setProcessoDetecao(
+                new ProcessoDetecao(instance, new ArrayList()));
+        ProcessoDetecao expResult
+                = new ProcessoDetecao(instance, new ArrayList());
         ProcessoDetecao result = instance.getProcessoDetecao();
         assertEquals(expResult, result);
     }

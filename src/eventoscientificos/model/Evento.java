@@ -140,8 +140,8 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
         this.listaOrganizadores = new ArrayList();
         this.listaSubmissoes = new ListaSubmissoes();
         this.listaSessoesTematicas = new ListaSessoesTematicas(this);
+        this.processoDetecao = null;
         this.listaLicitacoes = new ListaLicitacoes();
-        this.processoDetecao = new ProcessoDetecao();
         this.cp = null;
         setEstado(new EventoCriadoState(this));
     }
@@ -700,12 +700,8 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
      */
     @Override
     public Conflito getConflitoRevisorSubmissao(Revisor revisor, Submissao submissao) {
-        for (Conflito conflito : this.processoDetecao.getListaConflito()) {
-            if (conflito.getRevisor().equals(revisor) && conflito.getSubmissao().equals(submissao)) {
-                return conflito;
-            }
-        }
-        return null;
+        return this.processoDetecao.getListaConflito().validarExistenciaConflito(
+                revisor, submissao);
     }
 
     /**
