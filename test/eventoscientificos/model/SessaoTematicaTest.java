@@ -758,19 +758,4 @@ public class SessaoTematicaTest {
         assertEquals(expResult, result);
     }
 
-    /**
-     * Test of todasAsSubmissoesRevistas method, of class SessaoTematica.
-     */
-    @Test(expected = NullPointerException.class)
-    public void testTodasAsSubmissoesRevistas() {
-        System.out.println("todasAsSubmissoesRevistas");
-        SessaoTematica instance = this.sessaoTematica;
-        ListaRevisoes lr = instance.getProcessoDistribuicao().getListaRevisoes();
-        lr.adicionarRevisao(revisao);
-        boolean expResult = false;
-        boolean result = instance.todasAsSubmissoesRevistas();
-        assertEquals(expResult, result);
-
-    }
-
 }
