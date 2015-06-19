@@ -182,8 +182,8 @@ public class Submissao {
 
     /**
      * Altera o estado da submissão para EmSubmissão.
-     * 
-     * @return Verdadeiro  
+     *
+     * @return Verdadeiro
      */
     public boolean alterarEstadoSubmissao() {
         if (this.estado instanceof SubmissaoCriadaState) {
@@ -195,24 +195,24 @@ public class Submissao {
 
     /**
      * Valida o artigo conforme o estado da Submissao.
-     * 
+     *
      * @return Verdadeiro se o artigo for válido e falso se não for.
      */
     public boolean validarSubmissao() {
-        if(this.estado instanceof SubmissaoEmSubmissaoState) {
+        if (this.estado instanceof SubmissaoEmSubmissaoState) {
             this.artigoInicial.validarArtigo();
         }
-        
-        if(this.estado instanceof SubmissaoAceiteState) {
+
+        if (this.estado instanceof SubmissaoAceiteState) {
             this.artigoFinal.validarArtigo();
         }
-        
+
         return true;
     }
 
     /**
      * Adiciona um artigo conforme o estado da submissao.
-     * 
+     *
      * @param artigo Artigo a ser adicionado.
      * @return Verdadeiro se o atigo for adicionado.
      */
@@ -241,15 +241,15 @@ public class Submissao {
 
     public boolean isAutor(Utilizador utilizador) {
         if (this.estado instanceof SubmissaoEmSubmissaoState
-                && this.getArtigoInicial().isAutor(utilizador)) {
+                            && this.getArtigoInicial().isAutor(utilizador)) {
             return true;
         }
 
         if (this.estado instanceof SubmissaoEmCameraReadyState
-                && this.artigoFinal.isAutor(utilizador)) {
+                            && this.artigoFinal.isAutor(utilizador)) {
             return true;
         }
-        
+
         return false;
     }
 
@@ -275,16 +275,26 @@ public class Submissao {
         Submissao outraSubmissao = (Submissao) outroObjecto;
 
         return this.getArtigoInicial().equals(outraSubmissao.getArtigoInicial())
-                || this.getArtigoFinal().equals(outraSubmissao.getArtigoFinal());
+                            || this.getArtigoFinal().equals(outraSubmissao.getArtigoFinal());
     }
-    
+
     /**
      * Verifica se a submissao se encontra no estado removida.
-     * 
-     * @return Verdadeiro caso se encontre no estado removido e
-     * falso caso não esteja.
+     *
+     * @return Verdadeiro caso se encontre no estado removido e falso caso não
+     * esteja.
      */
-    public boolean isStateRemovida(){
+    public boolean isStateRemovida() {
         return this.estado instanceof SubmissaoRemovidaState;
+    }
+
+    /**
+     * Modifica o estado da submissao para o estado revista se cumprir os
+     * requisitos necessários
+     *
+     * @return verdadeiro se mudar de estado e falso se não o conseguir fazer
+     */
+    public boolean setParaRevista() {
+        return this.estado.setRevista();
     }
 }

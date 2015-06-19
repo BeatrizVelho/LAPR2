@@ -1,5 +1,7 @@
 package eventoscientificos.model;
 
+import eventoscientificos.model.state.submissao.SubmissaoRevistaState;
+
 /**
  * Representa uma instância de um Revisao através de submissão e revisor.
  *
@@ -222,7 +224,7 @@ public class Revisao {
         revisao.setQualidadeArtigo(this.qualidadeArtigo);
         revisao.setRecomendacaoGlobal(this.recomendacaoGlobal);
         revisao.setTextoJustificativo(textoJustificativo);
-        return true;
+        return this.submissao.setParaRevista();
     }
 
     /**
