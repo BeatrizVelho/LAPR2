@@ -1,7 +1,6 @@
 package eventoscientificos.model;
 
 import eventoscientificos.model.state.submissao.SubmissaoAceiteState;
-import eventoscientificos.model.state.submissao.SubmissaoEmRevisaoState;
 import eventoscientificos.model.state.submissao.SubmissaoEmSubmissaoState;
 import eventoscientificos.model.state.submissao.SubmissaoRejeitadaState;
 import eventoscientificos.model.state.submissao.SubmissaoState;
@@ -58,10 +57,10 @@ public class SubmissaoTest {
     public void testSetAndGetAutorCorrespondente() {
         System.out.println("setAndGetAutorCorrespondente");
         Submissao instance = new Submissao();
-        AutorCorrepondente expResult = new AutorCorrepondente(this.utilizador,
+        AutorCorrespondente expResult = new AutorCorrespondente(this.utilizador,
                             new InstituicaoAfiliacao("ISEP"));
         instance.setAutorCorrespondente(expResult);
-        AutorCorrepondente result = instance.getAutorCorrespondente();
+        AutorCorrespondente result = instance.getAutorCorrespondente();
         assertEquals(expResult, result);
     }
 
@@ -289,10 +288,6 @@ public class SubmissaoTest {
         instance.setArtigoInicial(this.artigoInicial);
         instance.getArtigoInicial().getListaAutores().novoAutor(
                             this.utilizador, new InstituicaoAfiliacao("ISEP"));
-
-        instance.getArtigoInicial().getListaAutores().adicionarAutor(
-                            new Autor(this.utilizador, new InstituicaoAfiliacao("ISEP")));
-
         boolean expResult = true;
         boolean result = instance.isAutor(utilizador);
         assertEquals(expResult, result);
