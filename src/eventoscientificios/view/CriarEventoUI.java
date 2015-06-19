@@ -25,6 +25,7 @@ public class CriarEventoUI extends javax.swing.JDialog {
 
     /**
      * Creates new form CriarEventoUI
+     *
      * @param parent
      * @param modal
      * @param empresa
@@ -324,16 +325,16 @@ public class CriarEventoUI extends javax.swing.JDialog {
     private void btn_criarEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_criarEventoActionPerformed
         try {
             this.controller.validarEvento();
-            
+
             String opcoes[] = {"Sim", "Não"};
             int resposta = JOptionPane.showOptionDialog(
-                    null, "Pretende criar o evento?", "Criar Evento", 0, 
+                    null, "Pretende criar o evento?", "Criar Evento", 0,
                     JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]);
             if (resposta == 0) {
                 this.controller.adicionarEvento();
             }
             dispose();
-        } catch(IllegalArgumentException ex) {
+        } catch (IllegalArgumentException ex) {
             JOptionPane.showMessageDialog(
                     framePai,
                     ex.getMessage(),
@@ -345,15 +346,15 @@ public class CriarEventoUI extends javax.swing.JDialog {
     private void btn_adicionarOrganizadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_adicionarOrganizadorActionPerformed
         try {
             this.controller.novoOrganizador(txt_IDorganizador.getText());
-            
+
             txt_IDorganizador.setText("");
-        } catch(NullPointerException ex) {
+        } catch (NullPointerException ex) {
             JOptionPane.showMessageDialog(
                     framePai,
                     "Não introduziu um ID válido.",
                     "Criar Evento",
                     JOptionPane.ERROR_MESSAGE);
-        } catch(IllegalArgumentException ex) {
+        } catch (IllegalArgumentException ex) {
             JOptionPane.showMessageDialog(
                     framePai,
                     ex.getMessage(),
@@ -377,13 +378,14 @@ public class CriarEventoUI extends javax.swing.JDialog {
                     Data.converterString(formatador.format(datePicker_dataFimSubmissaoCameraReady.getDate())),
                     Data.converterString(formatador.format(datePicker_dataInicio.getDate())),
                     Data.converterString(formatador.format(datePicker_dataFim.getDate())));
-            
+
             this.pnl_informacoes.setVisible(false);
             this.pnl_datas.setVisible(false);
             this.btn_seguinte.setVisible(false);
             this.pnl_listaOrganizadores.setVisible(true);
             this.btn_criarEvento.setVisible(true);
             pack();
+            setLocationRelativeTo(null);
         } catch (IllegalArgumentException ex) {
             JOptionPane.showMessageDialog(
                     framePai,
