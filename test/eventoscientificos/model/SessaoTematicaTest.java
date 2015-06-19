@@ -473,6 +473,24 @@ public class SessaoTematicaTest {
     }
 
     /**
+     * Test of iniciarProcessoDetecao method, of class SessaoTematica.
+     */
+    @Test
+    public void testIniciarProcessoDetecao() {
+        System.out.println("iniciarProcessoDetecao");
+        List<TipoConflito> listaTiposConflito = new ArrayList();
+        SessaoTematica instance = this.sessaoTematica;
+        instance.adicionarCP(new CP());
+        instance.setEstado(new SessaoTematicaEmSubmissaoState(instance));
+        instance.iniciarProcessoDetecao(listaTiposConflito);
+        Class <? extends SessaoTematicaState> expResult
+                = new SessaoTematicaEmLicitacaoState(instance).getClass();
+        Class <? extends SessaoTematicaState> result
+                = instance.getEstado().getClass();
+        assertEquals(expResult, result);
+    }
+
+    /**
      * Test of getListaLicitacoes method, of class SessãoTematica.
      */
     @Test
@@ -581,18 +599,6 @@ public class SessaoTematicaTest {
 //        fail("The test case is a prototype.");
 //    }
 //
-//    /**
-//     * Test of iniciarProcessoDetecao method, of class SessaoTematica.
-//     */
-//    @Test
-//    public void testIniciarProcessoDetecao() {
-//        System.out.println("iniciarProcessoDetecao");
-//        List<TipoConflito> listaTiposConflito = null;
-//        SessaoTematica instance = null;
-//        instance.iniciarProcessoDetecao(listaTiposConflito);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
 
     /**
      * Teste do método isStateValidoParaSubmeter, da classe SessaoTematica.

@@ -153,7 +153,7 @@ public class SessaoTematicaEmDetecaoState implements SessaoTematicaState {
      */
     @Override
     public boolean validarEstado() {
-        return false;
+        return this.sessaoTematica.getProcessoDetecao() != null;
     }
 
     /**
