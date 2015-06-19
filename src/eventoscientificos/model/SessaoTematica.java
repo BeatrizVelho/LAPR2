@@ -761,4 +761,19 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
     public List<Submissao> getListaSubmissoesRetiradas() {
         return this.listaSubmissoes.getListaSubmissoesRetiradas();
     }
+
+    /**
+     * Devolve a informação se todas as submissões fora revistas.
+     *
+     * @return verdadeiro se todas já estiverem revistas e falso se não.
+     */
+    @Override
+    public boolean todasAsSubmissoesRevistas() {
+        ListaRevisoes lr = this.processoDistribuicao.getListaRevisoes();
+        if (lr.getQuantidadeSubmissoesPorRever() == 0) {
+            return estado.setFaseDecisao();
+        } else {
+            return false;
+        }
+    }
 }
