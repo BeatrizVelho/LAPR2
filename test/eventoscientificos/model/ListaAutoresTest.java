@@ -11,10 +11,11 @@ import static org.junit.Assert.*;
 public class ListaAutoresTest {
 
     private Autor autor;
-
+    private Utilizador utilizador;
     public ListaAutoresTest() {
         this.autor = new Autor("Beatriz", "1140587@isep.ipp.pt",
                 new InstituicaoAfiliacao("ISEP"));
+        this.utilizador = new Utilizador("nome", "11111@isep.ipp.pt", "username", "1234");
     }
 
     /**
@@ -23,10 +24,12 @@ public class ListaAutoresTest {
     @Test
     public void testNovoAutor() {
         System.out.println("novoAutor");
+        Utilizador utilizador = this.utilizador;
         String nome = "Beatriz";
-        String email = "1111111@isep.ipp.pt";
+        String email = "12345@isep.ipp.pt";
         InstituicaoAfiliacao instituicaoAfiliacao = new InstituicaoAfiliacao("isep");
         ListaAutores instance = new ListaAutores();
+        instance.novoAutor(utilizador, instituicaoAfiliacao);
         boolean expResult = true;
         boolean result = instance.novoAutor(nome, email, instituicaoAfiliacao);
         assertEquals(expResult, result);
@@ -38,9 +41,17 @@ public class ListaAutoresTest {
     @Test
     public void testGetListaAutoresRegistados() {
         System.out.println("getListaAutoresRegistados");
+        String nome = "Beatriz";
+        String email = "12345@isep.ipp.pt";
+        InstituicaoAfiliacao instituicaoAfiliacao = new InstituicaoAfiliacao("isep");
         ListaAutores instance = new ListaAutores();
-        List<Autor> expResult = new ArrayList<>();
-        List<Autor> result = instance.getListaAutoresRegistados();
+        instance.novoAutor(nome, email, instituicaoAfiliacao);
+        Utilizador utilizador = this.utilizador;
+        Utilizador utilizador1 = new Utilizador("nome1", "111112@isep.ipp.pt", "username1", "12341");
+        instance.novoAutor(utilizador, instituicaoAfiliacao);
+        instance.novoAutor(utilizador1, instituicaoAfiliacao);
+        int expResult = 2;
+        int result = instance.getListaAutoresRegistados().size();
         assertEquals(expResult, result);
     }
 
@@ -50,9 +61,12 @@ public class ListaAutoresTest {
     @Test
     public void testEqualsNot() {
         System.out.println("equalsNot");
+        Utilizador utilizador = this.utilizador;
+        Utilizador utilizador1 = new Utilizador("nome1", "00000@isep.ipp.pt", "username1", "12341");
         Object outroObjeto = new ListaAutores();
+        ((ListaAutores) outroObjeto).novoAutor(utilizador, new InstituicaoAfiliacao("isep"));
         ListaAutores instance = new ListaAutores();
-        instance.adicionarAutor(this.autor);
+        instance.novoAutor(utilizador1, new InstituicaoAfiliacao("isep"));
         boolean expResult = false;
         boolean result = instance.equals(outroObjeto);
         assertEquals(expResult, result);
@@ -65,49 +79,12 @@ public class ListaAutoresTest {
     public void testEquals() {
         System.out.println("equals");
         Object outroObjeto = new ListaAutores();
+        Utilizador utilizador = this.utilizador;
+        ((ListaAutores) outroObjeto).novoAutor(utilizador, new InstituicaoAfiliacao("isep"));
         ListaAutores instance = new ListaAutores();
+        instance.novoAutor(utilizador, new InstituicaoAfiliacao("isep"));
         boolean expResult = true;
         boolean result = instance.equals(outroObjeto);
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Teste do método validarAutor, da classe ListaAutores.
-     */
-    @Test
-    public void testValidarAutor() {
-        System.out.println("validarAutor");
-        Autor autor = this.autor;
-        ListaAutores instance = new ListaAutores();
-        boolean expResult = true;
-        boolean result = instance.validarAutor(autor);
-        assertEquals(expResult, result);
-    }
-    
-    /**
-     * Teste do método validarAutor, da classe ListaAutores.
-     */
-    @Test
-    public void testValidarAutorNot() {
-        System.out.println("validarAutorNot");
-        Autor autor = this.autor;
-        ListaAutores instance = new ListaAutores();
-        instance.adicionarAutor(this.autor);
-        boolean expResult = false;
-        boolean result = instance.validarAutor(autor);
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Teste do método adicionarAutor, da classe ListaAutores.
-     */
-    @Test
-    public void testAdicionarAutor() {
-        System.out.println("adicionarAutor");
-        Autor autor = this.autor;
-        ListaAutores instance = new ListaAutores();
-        boolean expResult = true;
-        boolean result = instance.adicionarAutor(autor);
         assertEquals(expResult, result);
     }
 
