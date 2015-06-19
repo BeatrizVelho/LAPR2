@@ -615,7 +615,7 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
      * 
      * @param listaTiposConflito Tipos de conflito pelos quais o processo de 
      * deteção vai procurar.
-     * @return 
+     * @return ProcessoDetecao.
      */
     private ProcessoDetecao novoProcessoDetecao(
             List<TipoConflito> listaTiposConflito) {
