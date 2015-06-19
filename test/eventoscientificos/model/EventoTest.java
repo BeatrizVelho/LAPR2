@@ -454,6 +454,32 @@ public class EventoTest {
     }
 
     /**
+     * Teste ao método iniciarProcessoDetecao, da classe Evento.
+     */
+    @Test
+    public void testIniciarProcessoDetecao() {
+        System.out.println("iniciarProcessoDetecao");
+        Evento evento = new Evento("titulo", "descricao", new Local("local"),
+                            new Data(2015, 5, 22),
+                            new Data(2015, 5, 28),
+                            new Data(2015, 6, 10),
+                            new Data(2015, 6, 18),
+                            new Data(2015, 6, 24),
+                            new Data(2015, 6, 28),
+                            new Data(2015, 6, 30));
+        List<TipoConflito> listaTiposConflito = new ArrayList();
+        Evento instance = this.evento;
+        instance.adicionarCP(new CP());
+        instance.setEstado(new EventoEmSubmissaoState(instance));
+        instance.iniciarProcessoDetecao(listaTiposConflito);
+        Class <? extends EventoState> expResult
+                = new EventoEmLicitacaoState(instance).getClass();
+        Class <? extends EventoState> result
+                = instance.getEstado().getClass();
+        assertEquals(expResult, result);
+    }
+
+    /**
      * Teste ao método isRegistadoOuSessoesTematicasDefinidas, da classe evento.
      */
     @Test
@@ -583,16 +609,6 @@ public class EventoTest {
         assertEquals(expResult, result);
     }
 
-//    /**
-//     * Test of iniciarProcessoDetecao method, of class Evento.
-//     */
-//    @Test
-//    public void testIniciarProcessoDetecao() {
-//        System.out.println("iniciarProcessoDetecao");
-//        List<TipoConflito> listaTiposConflito = null;
-//        Evento instance = null;
-//        instance.iniciarProcessoDetecao(listaTiposConflito);
-//    }
     /**
      * Test of isStateValidoParaLicitar method, of class Evento.
      */
@@ -691,7 +707,8 @@ public class EventoTest {
         Submissao submissao = new Submissao();
         submissao.setEstado(new SubmissaoEmSubmissaoState(submissao));
         submissao.setArtigoInicial(this.artigoInicial);
-        submissao.getArtigoInicial().getListaAutores().novoAutor(utilizador, new InstituicaoAfiliacao("ISEP"));
+        submissao.getArtigoInicial().getListaAutores().novoAutor(
+                utilizador, new InstituicaoAfiliacao("ISEP"));
         ListaSubmissoes instance = new ListaSubmissoes();
         instance.adicionarSubmissao(submissao);
         boolean expResult = true;

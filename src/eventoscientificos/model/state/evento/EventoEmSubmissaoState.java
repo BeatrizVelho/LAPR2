@@ -167,7 +167,7 @@ public class EventoEmSubmissaoState implements EventoState {
      */
     @Override
     public boolean validarEstado() {
-        return Data.dataAtual().isMaior(e.getDataFimSubmissao());
+        return e.getDataFimSubmissao().isMaior(Data.dataAtual());
     }
  /**
      * Valida se o evento se encontra num estado válido para ser removido
