@@ -867,7 +867,7 @@ public class EventoTest {
         boolean result = this.evento.isStateValidoParaRever(utilizador);
         assertEquals(expResult, result);
     }
-    
+
     /**
      * Teste do método getListaSubmissoesRetiradas, na classe Evento.
      */
@@ -885,19 +885,19 @@ public class EventoTest {
         int result = (instance.getListaSubmissoesRetiradas()).size();
         assertEquals(expResult, result);
     }
-    
-    
+
     /**
      * Test of todasAsSubmissoesRevistas method, of class SessaoTematica.
      */
     @Test(expected = NullPointerException.class)
     public void testTodasAsSubmissoesRevistas() {
         System.out.println("todasAsSubmissoesRevistas");
-        SessaoTematica instance = this.sessaoTematica;
+        Evento instance = this.evento;
         ListaRevisoes lr = instance.getProcessoDistribuicao().getListaRevisoes();
         lr.adicionarRevisao(revisao);
         boolean expResult = false;
         boolean result = instance.todasAsSubmissoesRevistas();
         assertEquals(expResult, result);
 
+    }
 }
