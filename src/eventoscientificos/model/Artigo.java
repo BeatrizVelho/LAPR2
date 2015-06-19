@@ -1,5 +1,7 @@
 package eventoscientificos.model;
 
+
+
 /**
  * Representa uma instância de Artigo
  *
