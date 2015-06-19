@@ -1,6 +1,7 @@
 package eventoscientificos.model;
 
 import eventoscientificos.model.state.submissao.SubmissaoAceiteState;
+import eventoscientificos.model.state.submissao.SubmissaoEmRevisaoState;
 import eventoscientificos.model.state.submissao.SubmissaoEmSubmissaoState;
 import eventoscientificos.model.state.submissao.SubmissaoRejeitadaState;
 import eventoscientificos.model.state.submissao.SubmissaoState;
@@ -58,7 +59,7 @@ public class SubmissaoTest {
         System.out.println("setAndGetAutorCorrespondente");
         Submissao instance = new Submissao();
         AutorCorrepondente expResult = new AutorCorrepondente(this.utilizador,
-                new InstituicaoAfiliacao("ISEP"));
+                            new InstituicaoAfiliacao("ISEP"));
         instance.setAutorCorrespondente(expResult);
         AutorCorrepondente result = instance.getAutorCorrespondente();
         assertEquals(expResult, result);
@@ -72,7 +73,7 @@ public class SubmissaoTest {
         System.out.println("setAndGetAutorSubmissorInicial");
         Submissao instance = new Submissao();
         Autor expResult = new Autor(this.utilizador,
-                new InstituicaoAfiliacao("ISEP"));
+                            new InstituicaoAfiliacao("ISEP"));
         instance.setAutorSubmissorInicial(expResult);
         Autor result = instance.getAutorSubmissorInicial();
         assertEquals(expResult, result);
@@ -86,7 +87,7 @@ public class SubmissaoTest {
         System.out.println("setAndgetAutorSubmissorFinal");
         Submissao instance = new Submissao();
         Autor expResult = new Autor(this.utilizador,
-                new InstituicaoAfiliacao("ISEP"));
+                            new InstituicaoAfiliacao("ISEP"));
         instance.setAutorSubmissorFinal(expResult);
         Autor result = instance.getAutorSubmissorFinal();
         assertEquals(expResult, result);
@@ -183,7 +184,7 @@ public class SubmissaoTest {
         assertEquals(expResult, result);
     }
 
-     /**
+    /**
      * Teste do método novoArtigo method, da classe Submissao.
      */
     @Test
@@ -218,7 +219,7 @@ public class SubmissaoTest {
         boolean result = this.artigoInicial.validarArtigo();
         assertEquals(expResult, result);
     }
-    
+
     /**
      * Teste do método validarSubmissao, da classe Submissao.
      */
@@ -244,7 +245,7 @@ public class SubmissaoTest {
         boolean result = instance.adicionarArtigo(artigo);
         assertEquals(expResult, result);
     }
-    
+
     /**
      * Teste do método adicionarArtigo, da classe Submissao.
      */
@@ -258,8 +259,7 @@ public class SubmissaoTest {
         boolean result = instance.adicionarArtigo(artigo);
         assertEquals(expResult, result);
     }
-    
-    
+
     /**
      * Teste do método criarCloneSubmissao, da classe Submissao.
      */
@@ -267,7 +267,7 @@ public class SubmissaoTest {
     public void testCriarCloneSubmissao() {
         System.out.println("criarCloneSubmissao");
         Submissao instance = new Submissao();
-        instance.setArtigoInicial(new Artigo("Teste","123","C:777"));
+        instance.setArtigoInicial(new Artigo("Teste", "123", "C:777"));
         instance.setArtigoFinal(new Artigo());
         Submissao novaInstance = instance.criarCloneSubmissao();
         novaInstance.setArtigoInicial(this.artigoInicial);
@@ -288,16 +288,16 @@ public class SubmissaoTest {
         instance.setEstado(new SubmissaoEmSubmissaoState(instance));
         instance.setArtigoInicial(this.artigoInicial);
         instance.getArtigoInicial().getListaAutores().novoAutor(
-                this.utilizador, new InstituicaoAfiliacao("ISEP"));
-        
+                            this.utilizador, new InstituicaoAfiliacao("ISEP"));
+
         instance.getArtigoInicial().getListaAutores().adicionarAutor(
-                new Autor(this.utilizador, new InstituicaoAfiliacao("ISEP")));
-        
+                            new Autor(this.utilizador, new InstituicaoAfiliacao("ISEP")));
+
         boolean expResult = true;
         boolean result = instance.isAutor(utilizador);
         assertEquals(expResult, result);
     }
-    
+
     /**
      * Teste do método isStateRemovida, da classe Submissao.
      */
@@ -310,7 +310,7 @@ public class SubmissaoTest {
         boolean result = instance.isStateRemovida();
         assertEquals(expResult, result);
     }
-    
+
     /**
      * Teste do método isStateRemovida, da classe Submissao.
      */
@@ -323,4 +323,16 @@ public class SubmissaoTest {
         assertEquals(expResult, result);
     }
 
+    /**
+     * Teste do método setParaRevista, da classe Submissao.
+     */
+    @Test
+    public void testSetParaRevista() {
+        System.out.println("setParaRevista");
+        Submissao instance = new Submissao();
+        instance.setEstado(new SubmissaoEmRevisaoState(instance));
+        boolean expResult = true;
+        boolean result = instance.setParaRevista();
+        assertEquals(expResult, result);
+    }
 }
