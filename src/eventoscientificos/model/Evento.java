@@ -887,6 +887,13 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
         return this.listaSubmissoes.isUtilizadorUmAutorSubmissaoInicial(utilizador);
     }
     
+    /**
+     * Devolve uma lista de Submissiveis que estão que aceitar a submissão de 
+     * artigos finais e que têm submissões do utilizador.
+     * 
+     * @param utilizador Utilizador.
+     * @return Lista de Submissiveis.
+     */
     public List<Submissivel> getListaSubmissiveisAceitarArtigoFinal(Utilizador utilizador) {
         return this.listaSessoesTematicas.getListaSubmissiveisAceitarArtigoFinal(utilizador);
     }
