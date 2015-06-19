@@ -697,12 +697,12 @@ public class EventoTest {
     }
 
 //    /**
-//     * Teste do método getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador,
+//     * Teste do método getListaSubmissiveisAceitarAlteracaoArtigoComSubmissaoUtilizador,
 //     * da classe Evento.
 //     */
 //    @Test
 //    public void testGetListaSubmissiveisAceitarArtigoComSubmissaoUtilizador() {
-//        System.out.println("getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador");
+//        System.out.println("getListaSubmissiveisAceitarAlteracaoArtigoComSubmissaoUtilizador");
 //        SessaoTematica sessaoTematica = this.sessaoTematica;
 //        sessaoTematica.setEstado(new SessaoTematicaEmSubmissaoState(sessaoTematica));
 //        Utilizador utilizador = new Utilizador(
@@ -721,7 +721,7 @@ public class EventoTest {
 //        instance.adicionarSessaoTematica(sessaoTematica);
 //        instance.adicionarSessaoTematica(sessaoTematica1);
 //        int expResult = 1;
-//        int result = instance.getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador(utilizador).size();
+//        int result = instance.getListaSubmissiveisAceitarAlteracaoArtigoComSubmissaoUtilizador(utilizador).size();
 //        assertEquals(expResult, result);
 //    }
     /**
