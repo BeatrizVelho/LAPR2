@@ -1,9 +1,11 @@
 package eventoscientificos.model;
 
 import eventoscientificos.model.state.submissao.SubmissaoAceiteState;
+import eventoscientificos.model.state.submissao.SubmissaoEmLicitacaoState;
 import eventoscientificos.model.state.submissao.SubmissaoEmSubmissaoState;
 import eventoscientificos.model.state.submissao.SubmissaoRejeitadaState;
 import eventoscientificos.model.state.submissao.SubmissaoState;
+import java.util.List;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -289,7 +291,7 @@ public class SubmissaoTest {
         instance.getArtigoInicial().getListaAutores().novoAutor(
                             this.utilizador, new InstituicaoAfiliacao("ISEP"));
         boolean expResult = true;
-        boolean result = instance.isAutor(utilizador);
+        boolean result = instance.isAutorEmPeriodoSubmissao(utilizador);
         assertEquals(expResult, result);
     }
 
@@ -318,5 +320,36 @@ public class SubmissaoTest {
         assertEquals(expResult, result);
     }
 
-   
+    /**
+     * Test of isAutorArtigo method, of class Submissao.
+     */
+    @Test
+    public void testIsAutorArtigo() {
+        System.out.println("isAutorArtigo");
+    //    Utilizador u = this.utilizador;
+        Utilizador utilizador = new Utilizador("susana", "peixoto@gmail.com ", "susy", "1234");
+        Submissao instance = new Submissao();
+        instance.setEstado(new SubmissaoEmSubmissaoState(instance));
+        instance.setArtigoInicial(artigoInicial);
+        instance.setArtigoFinal(artigoFinal);
+        ListaAutores listaAutores = this.artigoInicial.getListaAutores();
+        listaAutores.novoAutor(utilizador, new InstituicaoAfiliacao("MatosinhosSport"));
+        boolean expResult = true;
+        boolean result = instance.isAutorArtigo(utilizador);
+        assertEquals(expResult, result);
+
+    }
+
+    /**
+     * Test of setEstadoRemovida method, of class Submissao.
+     */
+    @Test
+    public void testSetEstadoRemovida() {
+        System.out.println("setEstadoRemovida");
+        Submissao instance = new Submissao();
+        instance.setEstado(new SubmissaoEmLicitacaoState(instance));
+        boolean expResult = true;
+        boolean result = instance.setEstadoRemovida();
+        assertEquals(expResult, result);
+    }
 }

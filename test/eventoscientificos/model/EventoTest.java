@@ -576,9 +576,9 @@ public class EventoTest {
         System.out.println("setAndGetProcessoDetecao");
         Evento instance = this.evento;
         instance.setProcessoDetecao(
-                new ProcessoDetecao(instance, new ArrayList()));
+                            new ProcessoDetecao(instance, new ArrayList()));
         ProcessoDetecao expResult
-                = new ProcessoDetecao(instance, new ArrayList());
+                            = new ProcessoDetecao(instance, new ArrayList());
         ProcessoDetecao result = instance.getProcessoDetecao();
         assertEquals(expResult, result);
     }
@@ -889,4 +889,18 @@ public class EventoTest {
         assertEquals(expResult, result);
     }
 
+    /**
+     * Test of isStateValidoParaRemover method, of class Evento.
+     */
+    @Test
+    public void testIsStateValidoParaRemover() {
+        System.out.println("isStateValidoParaRemover");
+        Utilizador u = new Utilizador("fatima", "mail@isep.ipp.pt", "fafa","1235");
+        Evento instance = this.evento;
+        instance.setEstado(new EventoEmSubmissaoState(evento));
+        instance.getListaSubmissoes().adicionarSubmissao(submissao);
+        boolean expResult = false;
+        boolean result = instance.isStateValidoParaRemover(u);
+        assertEquals(expResult, result);
+    }
 }
