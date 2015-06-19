@@ -95,7 +95,7 @@ public class CP {
      * vazia.
      */
     public boolean validarCP() {
-        return !(this.listaRevisores.size() == 0);
+        return !this.listaRevisores.isEmpty();
     }
 
     /**
@@ -125,4 +125,25 @@ public class CP {
         int indice = this.listaRevisores.indexOf(r);
         return this.listaRevisores.get(indice);
     }
+
+    /**
+     * Devolve o número de revisores existentes na CP.
+     * 
+     * @return Número de revisores existentes na CP.
+     */
+    public int getNumeroRevisores() {
+        return this.listaRevisores.size();
+    }
+
+    /**
+     * Devolve um revisor pela sua posição na lista de revisores da CP.
+     * 
+     * @param indice Posição do revisor.
+     * 
+     * @return Revisor na posição dada.
+     */
+    public Revisor getRevisorPeloIndice(int indice) {
+        return this.listaRevisores.get(indice);
+    }
+
 }
