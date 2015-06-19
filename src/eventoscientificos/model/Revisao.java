@@ -224,7 +224,7 @@ public class Revisao {
         revisao.setQualidadeArtigo(this.qualidadeArtigo);
         revisao.setRecomendacaoGlobal(this.recomendacaoGlobal);
         revisao.setTextoJustificativo(textoJustificativo);
-        return this.submissao.setParaRevista();
+        return true;
     }
 
     /**

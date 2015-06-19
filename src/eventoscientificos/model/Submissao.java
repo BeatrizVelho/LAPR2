@@ -288,13 +288,5 @@ public class Submissao {
         return this.estado instanceof SubmissaoRemovidaState;
     }
 
-    /**
-     * Modifica o estado da submissao para o estado revista se cumprir os
-     * requisitos necessários
-     *
-     * @return verdadeiro se mudar de estado e falso se não o conseguir fazer
-     */
-    public boolean setParaRevista() {
-        return this.estado.setRevista();
-    }
+   
 }
