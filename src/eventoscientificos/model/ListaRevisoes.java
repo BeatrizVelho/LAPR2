@@ -16,12 +16,12 @@ public class ListaRevisoes {
     private List<Revisao> listaRevisoes;
 
     /**
-     * Quantidade de revisões revistas
+     * Quantidade de submissões revistas.
      */
-    private static int quantidadeRevisoesRevistas = 0;
+    private static int quantidadeSubmissoesRevistas = 0;
 
     /**
-     * Constrói instância de ListaRevisoes
+     * Constrói instância de ListaRevisoes.
      */
     public ListaRevisoes() {
         this.listaRevisoes = new ArrayList<>();
@@ -91,12 +91,12 @@ public class ListaRevisoes {
     }
 
     /**
-     * Devolve a quantidade de revisões revistas.
+     * Devolve a quantidade de submissões revistas.
      *
-     * @return quantidade de revisões revistas.
+     * @return quantidade de submissões revistas.
      */
-    public int getQuantidadeRevisoesPorRever() {
-        return listaRevisoes.size() - quantidadeRevisoesRevistas;
+    public int getQuantidadeSubmissoesPorRever() {
+        return listaRevisoes.size() - quantidadeSubmissoesRevistas;
     }
 
     /**
@@ -109,7 +109,7 @@ public class ListaRevisoes {
      */
     public boolean adicionarResultadoRevisao(Revisao revisao, Revisao rClone) {
         if (revisao.adicionarResultadoRevisao(rClone)) {
-            quantidadeRevisoesRevistas++;
+            quantidadeSubmissoesRevistas++;
             return true;
         } else {
             return false;
