@@ -191,19 +191,7 @@ public class RegistoEventosTest {
         int result = (instance.getListaCPDefiniveisSemCPOrganizadorProponente(this.utilizador)).size();
         assertEquals(expResult, result);
     }
-//    /**
-//     * Test of getListaSubmissiveisAceitarArtigo method, of class
-//     * RegistoEventos.
-//     */
-//    @Test
-//    public void testGetListaSubmissiveisAceitarArtigo() {
-//        System.out.println("getListaSubmissiveisAceitarArtigo");
-//        RegistoEventos instance = new RegistoEventos();
-//        List<Submissivel> expResult = null;
-//        List<Submissivel> result = instance.getListaSubmissiveisAceitarArtigo();
-//        assertEquals(expResult, result);
-//    }
-
+    
     /**
      * Test of getListaLicitaveisComArtigosPorLicitarRevisor method, of class
      * RegistoEventos.
@@ -240,22 +228,7 @@ public class RegistoEventosTest {
         int result = instance.getListaSubmissiveisAceitarArtigo().size();
         assertEquals(expResult, result);
     }
-
-//    /**
-//     * Teste do método getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador,
-//     * da classe RegistoEventos.
-//     */
-//    @Test
-//    public void testGetListaSubmissiveisAceitarArtigoComSubmissaoUtilizador() {
-//        System.out.println("getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador");
-//        Utilizador utilizador = null;
-//        RegistoEventos instance = new RegistoEventos();
-//        List<Submissivel> expResult = null;
-//        List<Submissivel> result = instance.getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador(utilizador);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+    
     /**
      * Test of getListaDistribuiveisOrganizadorProponente method, of class
      * RegistoEventos.
