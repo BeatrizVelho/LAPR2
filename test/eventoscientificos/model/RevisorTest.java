@@ -27,6 +27,19 @@ public class RevisorTest {
     }
 
     /**
+     * Teste do método toString, da classe Revisor.
+     */
+    public void testToString() {
+        System.out.println("toString");
+        Revisor instance = new Revisor(new Utilizador(
+                "Beatriz", "1140587@isep.ipp.pt", "bea", "1234"));
+        String expResult = "Beatriz (1140587@isep.ipp.pt)";
+        String result = instance.toString();
+        assertEquals(expResult, result);
+    }
+
+
+    /**
      * Teste do método validarProponente, da classe Revisor.
      */
     @Test

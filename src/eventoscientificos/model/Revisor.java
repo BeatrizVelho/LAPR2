@@ -46,6 +46,17 @@ public class Revisor {
     }
 
     /**
+     * Devolve a descrição textual do revisor no formato: nome (email)
+     *
+     * @return Características do revisor.
+     */
+    public String toString() {
+        return String.format("%s (%s)",
+                this.getUtilizador().getNome(),
+                this.getUtilizador().getEmail());
+    }
+
+    /**
      * Compara dois objetos entre si. Comparando primariamente a posição de
      * memória, seguida do conteudo e das classes as quais cada um deles
      * pertence, e finalmente o utilizador que assume o papel de revisor em cada
