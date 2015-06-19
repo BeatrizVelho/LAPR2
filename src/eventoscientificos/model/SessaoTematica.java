@@ -1,6 +1,7 @@
 package eventoscientificos.model;
 
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaCriadaState;
+import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmSubmissaoCameraReadyState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmSubmissaoState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaState;
 import java.util.ArrayList;
@@ -790,5 +791,28 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
     public List<Submissao> getListaSubmissoesRetiradas() {
         return this.listaSubmissoes.getListaSubmissoesRetiradas();
     }
+    
+        /**
+     * Verifica se a Sessão Temática está no estado EmSubmissaoCmeraReady.
+     *
+     * @return Verdadeiro se está no estado EmSubmissaoCameraReady e falso se
+     * não está.
+     */
+    @Override
+    public boolean isStateValidoParaSubmeterArtigoFinal() {
+        return this.estado instanceof SessaoTematicaEmSubmissaoCameraReadyState;
+    }
+
+    /**
+     * Verifica se o utilizador passado por parâmetro é autor de alguma
+     * submissão da lista de Submissões da sessão temática
+     *
+     * @param utilizador Utilizador a verificar.
+     * @return Verdadeiro se é autor e falso se não é.
+     */
+    public boolean isUtilizadorUmAutorSubmissaoInicial(Utilizador utilizador) {
+        return this.listaSubmissoes.isUtilizadorUmAutorSubmissaoInicial(utilizador);
+    }
+
 
 }

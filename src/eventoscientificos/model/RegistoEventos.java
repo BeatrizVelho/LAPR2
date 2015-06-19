@@ -130,7 +130,7 @@ public class RegistoEventos {
                 listaSubmissiveisUtilizador.add(evento);
             }
             listaSubmissiveisUtilizador.addAll(
-                                evento.getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador(utilizador));
+                                evento.getListaSubmissiveisAceitarAlteracaoArtigoComSubmissaoUtilizador(utilizador));
         }
 
         return listaSubmissiveisUtilizador;
@@ -277,4 +277,52 @@ public class RegistoEventos {
         }
         return listaSubmissoesRetiradas;
     }
+    
+    /**
+     * Devolve uma lista de submissiveis nas quais o utilizador é autor de
+     * alguma submissao.
+     * 
+     * @param utilizador
+     * @return 
+     */
+    public List<Submissivel> getListaSubmissiveisAceitarArtigoFinal(
+            Utilizador utilizador) {
+        
+        List<Submissivel> listaSubmissiveis  = new ArrayList<>();
+        
+        for(Evento evento : this.listaEventos) {
+            if(evento.isStateValidoParaSubmeterArtigoFinal() &&
+                    evento.isUtilizadorUmAutorSubmissaoInicial(utilizador)) {
+                listaSubmissiveis.add(evento);
+            }
+            listaSubmissiveis.addAll(
+                    evento.getListaSubmissiveisAceitarArtigoFinal(utilizador));
+        }
+        return listaSubmissiveis;
+    }
+
+    /**
+     * Devolve uma lista de submissiveis nas quais o utilizador é autor de
+     * alguma submissao.
+     *
+     * @param utilizador
+     * @return Lista de Submissiveis.
+     */
+    public List<Submissivel> getListaSubmissiveisAceitarAlteracaoArtigoComSubmissaoUtilizador(
+            Utilizador utilizador) {
+        List<Submissivel> listaSubmissiveisUtilizador = new ArrayList<>();
+
+        for (Evento evento : this.listaEventos) {
+            if (evento.isStateValidoParaAlterar()
+                    && evento.isUtilizadorUmAutorSubmissao(utilizador)) {
+                listaSubmissiveisUtilizador.add(evento);
+            }
+            listaSubmissiveisUtilizador.addAll(
+                    evento.getListaSubmissiveisAceitarAlteracaoArtigoComSubmissaoUtilizador(
+                            utilizador));
+        }
+
+        return listaSubmissiveisUtilizador;
+    }
+
 }

@@ -49,4 +49,13 @@ public interface Submissivel {
      * @return Lista de submissões retiradas.
      */
     List<Submissao> getListaSubmissoesRetiradas();
+    
+    /**
+     * Verifica se um evento ou sessão temática estão a aceitar submissões
+     * de artigos finais.
+     * 
+     * @return Verdadeiro se é possivel submeter e falso se não é possível
+     */
+    boolean isStateValidoParaSubmeterArtigoFinal();
+
 }

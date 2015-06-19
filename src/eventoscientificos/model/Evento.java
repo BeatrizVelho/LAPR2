@@ -1,6 +1,7 @@
 package eventoscientificos.model;
 
 import eventoscientificos.model.state.evento.EventoCriadoState;
+import eventoscientificos.model.state.evento.EventoEmSubmissaoCameraReadyState;
 import eventoscientificos.model.state.evento.EventoEmSubmissaoState;
 import eventoscientificos.model.state.evento.EventoRegistadoState;
 import eventoscientificos.model.state.evento.EventoSessoesTematicasDefinidasState;
@@ -684,7 +685,7 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
      * @param utilizador
      * @return Lista de Submissiveis.
      */
-    public List<Submissivel> getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador(
+    public List<Submissivel> getListaSubmissiveisAceitarAlteracaoArtigoComSubmissaoUtilizador(
                         Utilizador utilizador) {
         return this.listaSessoesTematicas.getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador(utilizador);
     }
@@ -875,5 +876,38 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
     public List<Submissao> getListaSubmissoesRetiradas() {
         return this.listaSubmissoes.getListaSubmissoesRetiradas();
     }
+
+    /**
+     * Verifica se o utilizador passado por parâmetro é autor de alguma
+     * submissão da lista de Submissões do evento.
+     *
+     * @param utilizador Utilizador a verificar.
+     * @return Verdadeiro se é autor e falso se não é.
+     */
+    public boolean isUtilizadorUmAutorSubmissaoInicial(Utilizador utilizador) {
+        return this.listaSubmissoes.isUtilizadorUmAutorSubmissaoInicial(utilizador);
+    }
+    
+    /**
+     * Devolve uma lista de Submissiveis que estão que aceitar a submissão de 
+     * artigos finais e que têm submissões do utilizador.
+     * 
+     * @param utilizador Utilizador.
+     * @return Lista de Submissiveis.
+     */
+    public List<Submissivel> getListaSubmissiveisAceitarArtigoFinal(Utilizador utilizador) {
+        return this.listaSessoesTematicas.getListaSubmissiveisAceitarArtigoFinal(utilizador);
+    }
+
+    /**
+     * Verifica se o evento está no estado EmSubmissaoCameraReady.
+     * 
+     * @return Verdadeiro se é possível submeter o artigo final e falso se não é. 
+     */
+    @Override
+    public boolean isStateValidoParaSubmeterArtigoFinal() {
+        return getEstado() instanceof EventoEmSubmissaoCameraReadyState;
+    }
+
 
 }
