@@ -259,7 +259,7 @@ public class RevisaoTest {
         revisao.setOriginalidadeArtigo(0);
         revisao.setRecomendacaoGlobal(0);
         revisao.setTextoJustificativo("sesese");
-        boolean expResult = false;
+        boolean expResult = true;
         boolean result = revisao.validarRevisao();
         assertEquals(expResult, result);
     }
