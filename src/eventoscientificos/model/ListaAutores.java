@@ -95,7 +95,7 @@ public class ListaAutores {
      * 
      * @return Verdadeiro se for adicionado e falso se não for.
      */
-    public boolean adicionarAutor(Autor autor) {
+    private boolean adicionarAutor(Autor autor) {
         return this.listaAutores.add(autor);
     }
     
