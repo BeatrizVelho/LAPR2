@@ -212,8 +212,9 @@ public class RegistoEventos {
 
     /**
      * Devolve uma lista de revisiveis onde o revisor tem submissoes a rever
+     *
      * @param u
-     * @return 
+     * @return
      */
     public List<Revisivel> getListaRevisiveisComArtigosPReverRevisor(Utilizador u) {
         List<Revisivel> listaRevisiveis = new ArrayList<>();
@@ -277,26 +278,26 @@ public class RegistoEventos {
         }
         return listaSubmissoesRetiradas;
     }
-    
+
     /**
      * Devolve uma lista de submissiveis nas quais o utilizador é autor de
      * alguma submissao.
-     * 
+     *
      * @param utilizador
-     * @return 
+     * @return
      */
     public List<Submissivel> getListaSubmissiveisAceitarArtigoFinal(
-            Utilizador utilizador) {
-        
-        List<Submissivel> listaSubmissiveis  = new ArrayList<>();
-        
-        for(Evento evento : this.listaEventos) {
-            if(evento.isStateValidoParaSubmeterArtigoFinal() &&
-                    evento.isUtilizadorUmAutorSubmissaoInicial(utilizador)) {
+                        Utilizador utilizador) {
+
+        List<Submissivel> listaSubmissiveis = new ArrayList<>();
+
+        for (Evento evento : this.listaEventos) {
+            if (evento.isStateValidoParaSubmeterArtigoFinal()
+                                && evento.isUtilizadorUmAutorSubmissaoInicial(utilizador)) {
                 listaSubmissiveis.add(evento);
             }
             listaSubmissiveis.addAll(
-                    evento.getListaSubmissiveisAceitarArtigoFinal(utilizador));
+                                evento.getListaSubmissiveisAceitarArtigoFinal(utilizador));
         }
         return listaSubmissiveis;
     }
@@ -309,19 +310,42 @@ public class RegistoEventos {
      * @return Lista de Submissiveis.
      */
     public List<Submissivel> getListaSubmissiveisAceitarAlteracaoArtigoComSubmissaoUtilizador(
-            Utilizador utilizador) {
+                        Utilizador utilizador) {
         List<Submissivel> listaSubmissiveisUtilizador = new ArrayList<>();
 
         for (Evento evento : this.listaEventos) {
             if (evento.isStateValidoParaAlterar()
-                    && evento.isUtilizadorUmAutorSubmissao(utilizador)) {
+                                && evento.isUtilizadorUmAutorSubmissao(utilizador)) {
                 listaSubmissiveisUtilizador.add(evento);
             }
             listaSubmissiveisUtilizador.addAll(
-                    evento.getListaSubmissiveisAceitarAlteracaoArtigoComSubmissaoUtilizador(
-                            utilizador));
+                                evento.getListaSubmissiveisAceitarAlteracaoArtigoComSubmissaoUtilizador(
+                                                    utilizador));
         }
 
+        return listaSubmissiveisUtilizador;
+    }
+
+    /**
+     * Devolve a lista de submissiveis onde o utilizador em sistema tem artigos
+     * e é possivel remover
+     *
+     * @param u utilizador autenticado no sistema
+     * @return lista de submissiveis
+     */
+    public List<Submissivel> getListaSubmissiveisComArtigosUtilizadorParaRemover(Utilizador u) {
+        List<Submissivel> listaSubmissiveisUtilizador = new ArrayList<>();
+        for (Evento evento : this.listaEventos) {
+            if (evento.isStateValidoParaRemover(u)) {
+                listaSubmissiveisUtilizador.add(evento);
+            }
+            for (SessaoTematica st : evento.getListaSessoesTematicas().getListaSessoesTematicas()) {
+                if (st.isStateValidoParaRemover(u)) {
+                    listaSubmissiveisUtilizador.add(st);
+                }
+            }
+
+        }
         return listaSubmissiveisUtilizador;
     }
 

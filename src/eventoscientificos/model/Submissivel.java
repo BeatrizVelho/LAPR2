@@ -63,6 +63,6 @@ public interface Submissivel {
      * remover.
      * @return verdadeiro se poder remover e falso se não for possível remover.
      */
-    boolean isStateValidoParaRemover();
+    boolean isStateValidoParaRemover(Utilizador u);
 
 }

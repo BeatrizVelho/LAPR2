@@ -701,7 +701,7 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
     @Override
     public Conflito getConflitoRevisorSubmissao(Revisor revisor, Submissao submissao) {
         return this.processoDetecao.getListaConflito().validarExistenciaConflito(
-                revisor, submissao);
+                            revisor, submissao);
     }
 
     /**
@@ -883,11 +883,11 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
     public boolean isUtilizadorUmAutorSubmissaoInicial(Utilizador utilizador) {
         return this.listaSubmissoes.isUtilizadorUmAutorSubmissaoInicial(utilizador);
     }
-    
+
     /**
-     * Devolve uma lista de Submissiveis que estão que aceitar a submissão de 
+     * Devolve uma lista de Submissiveis que estão que aceitar a submissão de
      * artigos finais e que têm submissões do utilizador.
-     * 
+     *
      * @param utilizador Utilizador.
      * @return Lista de Submissiveis.
      */
@@ -897,13 +897,28 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
 
     /**
      * Verifica se o evento está no estado EmSubmissaoCameraReady.
-     * 
-     * @return Verdadeiro se é possível submeter o artigo final e falso se não é. 
+     *
+     * @return Verdadeiro se é possível submeter o artigo final e falso se não
+     * é.
      */
     @Override
     public boolean isStateValidoParaSubmeterArtigoFinal() {
         return getEstado() instanceof EventoEmSubmissaoCameraReadyState;
     }
 
+    /**
+     * Verifica se determinado Evento cumpre os critérios necessários para
+     * remover.
+     *
+     * @return verdadeiro se o evento reunir as condições necessárias de remoção
+     * e falso se não for possível remover.
+     */
+    @Override
+    public boolean isStateValidoParaRemover(Utilizador u) {
+        if (estado.isStateValidoParaRemover()) {
+            return this.listaSubmissoes.containsAutorNaListaAutoresArtigoInicial(u);
+        }
+        return false;
+    }
 
 }
