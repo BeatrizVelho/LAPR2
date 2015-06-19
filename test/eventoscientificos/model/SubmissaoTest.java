@@ -287,7 +287,7 @@ public class SubmissaoTest {
         Utilizador utilizador = this.utilizador;
         Submissao instance = new Submissao();
         instance.setEstado(new SubmissaoEmSubmissaoState(instance));
-        instance.setArtigoInicial(this.artigoInicial);
+        instance.setArtigoInicial(new Artigo());
         instance.getArtigoInicial().getListaAutores().novoAutor(
                             this.utilizador, new InstituicaoAfiliacao("ISEP"));
         boolean expResult = true;

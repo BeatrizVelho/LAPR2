@@ -256,21 +256,19 @@ public class ListaSubmissoesTest {
         Utilizador u = new Utilizador(
                             "Nana", "molly@isep.ipp.pt", "User2", "1234");
         Submissao s = new Submissao();
-        s.setEstado(new SubmissaoEmSubmissaoState(submissao));
-        Artigo artigo = new Artigo();
-        artigo.getListaAutores();
+        s.setEstado(new SubmissaoEmSubmissaoState(s));
         s.setArtigoInicial(new Artigo());
         s.getArtigoInicial().getListaAutores().novoAutor(u, new InstituicaoAfiliacao("Porto"));
 
-//        Utilizador ut = new Utilizador(
-//                            "fafa", "money@isep.ipp.pt", "Username", "1234");
-//        Submissao sub = new Submissao();
-//        sub.setEstado(new SubmissaoEmSubmissaoState(submissao));
-//        sub.setArtigoInicial(new Artigo());
-//        sub.getArtigoInicial().getListaAutores().novoAutor(ut, new InstituicaoAfiliacao("Maia"));
-//
-//        instance.adicionarSubmissao(sub);
+        Utilizador ut = new Utilizador(
+                            "fafa", "money@isep.ipp.pt", "Username", "1234");
+        Submissao sub = new Submissao();
+        sub.setEstado(new SubmissaoEmSubmissaoState(sub));
+        sub.setArtigoInicial(new Artigo());
+        sub.getArtigoInicial().getListaAutores().novoAutor(ut, new InstituicaoAfiliacao("Maia"));
+
         ListaSubmissoes instance = new ListaSubmissoes();
+        instance.adicionarSubmissao(sub);
         instance.adicionarSubmissao(s);
 
         int expResult = 1;
