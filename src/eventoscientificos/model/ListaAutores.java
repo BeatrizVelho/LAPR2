@@ -37,10 +37,17 @@ public class ListaAutores {
             InstituicaoAfiliacao instituicaoAfiliacao) {
         
         Autor autor = new Autor(nome, email, instituicaoAfiliacao);
-        if(autor.validarAutor()) {
-            return validarAutor(autor);
-        } else
-            return false;
+
+        if(!autor.validarAutor()) {
+            throw new IllegalArgumentException(
+                    "Não introduziu um autor válido.");
+        }
+        if(!validarAutor(autor)) {
+            throw new IllegalArgumentException("O autor introduzido já se"
+                    + "econtra na lista de autores.");
+        }
+        
+        return adicionarAutor(autor);
     }
     
     /**
@@ -57,10 +64,16 @@ public class ListaAutores {
             Utilizador utilizador, InstituicaoAfiliacao instituicaoAfiliacao) {
         Autor autor = new Autor(utilizador, instituicaoAfiliacao);
         
-        if(autor.validarAutor()) {
-            return validarAutor(autor);
-        } else
-            return false;
+        if(!autor.validarAutor()) {
+            throw new IllegalArgumentException(
+                    "Não introduziu um autor válido.");
+        }
+        if(!validarAutor(autor)) {
+            throw new IllegalArgumentException("O autor introduzido já se"
+                    + "econtra na lista de autores.");
+        }
+        
+        return adicionarAutor(autor);
     }
     
     /**
@@ -68,14 +81,11 @@ public class ListaAutores {
      * na lista.
      * 
      * @param autor Autor que vai ser procurado na lista.
-     * @return Verdadeiro se o Autor já existir na lista e falso caso
-     * não exista.
+     * @return Verdadeiro se o Autor não existir na lista e falso caso
+     *exista.
      */
-    public boolean validarAutor(Autor autor) {
-        if(!this.listaAutores.contains(autor)) {
-            return adicionarAutor(autor);
-        } else
-            return false;
+    private boolean validarAutor(Autor autor) {
+        return !this.listaAutores.contains(autor);
     }
     
     /**
