@@ -691,7 +691,7 @@ public class EventoTest {
         Submissao submissao = new Submissao();
         submissao.setEstado(new SubmissaoEmSubmissaoState(submissao));
         submissao.setArtigoInicial(this.artigoInicial);
-        submissao.getArtigoInicial().getListaAutores().adicionarAutor(autor);
+        submissao.getArtigoInicial().getListaAutores().novoAutor(utilizador, new InstituicaoAfiliacao("ISEP"));
         ListaSubmissoes instance = new ListaSubmissoes();
         instance.adicionarSubmissao(submissao);
         boolean expResult = true;
