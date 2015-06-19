@@ -221,8 +221,8 @@ public class ListaSessoesTematicasTest {
     }
 
     /**
-     * Teste do método getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador,
-     * da classe ListaSessoesTematicas.
+     * Teste do método getListaSubmissiveisAceitarAlteracaoArtigoComSubmissaoUtilizador,
+ da classe ListaSessoesTematicas.
      */
     @Test
     public void testGetListaSubmissiveisAceitarArtigoComSubmissaoUtilizador() {
@@ -231,7 +231,6 @@ public class ListaSessoesTematicasTest {
         sessaoTematica.setEstado(new SessaoTematicaEmSubmissaoState(sessaoTematica));
         Utilizador utilizador = new Utilizador(
                 "pedro", "1140781@isep.ipp.pt", "pedro", "12345");
-        Autor autor = new Autor(utilizador, new InstituicaoAfiliacao("ISEP"));
         SessaoTematica sessaoTematica1 = new SessaoTematica(
                             "#1234567", "Uma descrição", new Data(2016, 6, 9),
                             new Data(2016, 6, 21), new Data(2016, 7, 8),
@@ -240,7 +239,7 @@ public class ListaSessoesTematicasTest {
         ListaSessoesTematicas instance = this.listaSessoesTematicas;
         Submissao submissao = new Submissao();
         submissao.setArtigoInicial(new Artigo("tituo", "resumo", "ficheiro"));
-        submissao .getArtigoInicial().getListaAutores().adicionarAutor(autor);
+        submissao .getArtigoInicial().getListaAutores().novoAutor(utilizador, new InstituicaoAfiliacao("ISEP"));
         sessaoTematica.getListaSubmissoes().adicionarSubmissao(submissao);
         instance.adicionarSessaoTematica(sessaoTematica);
         instance.adicionarSessaoTematica(sessaoTematica1);
