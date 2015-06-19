@@ -225,8 +225,8 @@ public class SessaoTematicaTest {
     public void testSetAndGetProcessoDetecao() {
         System.out.println("setAndGetProcessoDetecao");
         SessaoTematica instance = this.sessaoTematica;
-        instance.setProcessoDetecao(new ProcessoDetecao());
-        ProcessoDetecao expResult = new ProcessoDetecao();
+        instance.setProcessoDetecao(new ProcessoDetecao(instance, new ArrayList()));
+        ProcessoDetecao expResult = new ProcessoDetecao(instance, new ArrayList());
         ProcessoDetecao result = instance.getProcessoDetecao();
         assertEquals(expResult, result);
     }
@@ -498,8 +498,8 @@ public class SessaoTematicaTest {
 
         Conflito c = new Conflito(revisor, submissao, new ArrayList());
         SessaoTematica instance = this.sessaoTematica;
-        instance.setProcessoDetecao(new ProcessoDetecao());
-        instance.getProcessoDetecao().getListaConflito().add(c);
+        instance.setProcessoDetecao(new ProcessoDetecao(instance, new ArrayList()));
+        instance.getProcessoDetecao().getListaConflito().adicionarConflito(c);
 
         Conflito expResult = c;
         Conflito result = instance.getConflitoRevisorSubmissao(revisor, submissao);
