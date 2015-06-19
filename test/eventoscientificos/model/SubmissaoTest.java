@@ -323,16 +323,5 @@ public class SubmissaoTest {
         assertEquals(expResult, result);
     }
 
-    /**
-     * Teste do método setParaRevista, da classe Submissao.
-     */
-    @Test
-    public void testSetParaRevista() {
-        System.out.println("setParaRevista");
-        Submissao instance = new Submissao();
-        instance.setEstado(new SubmissaoEmRevisaoState(instance));
-        boolean expResult = true;
-        boolean result = instance.setParaRevista();
-        assertEquals(expResult, result);
-    }
+   
 }

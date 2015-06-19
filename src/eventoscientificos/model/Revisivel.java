@@ -24,11 +24,4 @@ public interface Revisivel {
      */
     public boolean isStateValidoParaRever(Utilizador u);
 
-    /**
-     * Devolve a informação se todas as submissões fora revistas.
-     *
-     * @return verdadeiro se todas submissões já estiverem revistas e falso se
-     * não.
-     */
-    public boolean todasAsSubmissoesRevistas();
 }

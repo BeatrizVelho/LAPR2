@@ -125,29 +125,4 @@ public class ListaRevisoesTest {
         assertEquals(expResult, result);
     }
 
-    /**
-     * Test of getQuantidadeSubmissoesPorRever method, of class ListaRevisoes.
-     */
-    @Test
-    public void testGetQuantidadeSubmissoesPorRever() {
-        System.out.println("getQuantidadeSubmissoesPorRever");
-        ListaRevisoes instance = new ListaRevisoes();
-        int expResult = 0;
-        int result = instance.getQuantidadeSubmissoesPorRever();
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of adicionarResultadoRevisao method, of class ListaRevisoes.
-     */
-    @Test(expected = IllegalArgumentException.class)
-    public void testAdicionarResultadoRevisao() {
-        System.out.println("adicionarResultadoRevisao");
-        Revisao revisao = new Revisao(submissao, revisor);
-        Revisao rClone = new Revisao(submissao, revisor);
-        ListaRevisoes instance = new ListaRevisoes();
-        boolean expResult = false;
-        boolean result = instance.adicionarResultadoRevisao(revisao, rClone);
-        assertEquals(expResult, result);
-    }
 }
