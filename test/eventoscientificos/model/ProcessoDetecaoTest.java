@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import utils.Data;
 
 /**
  * Teste à classe Processo Deteção
@@ -18,8 +19,19 @@ import static org.junit.Assert.*;
 public class ProcessoDetecaoTest {
 
     private Conflito conflito;
+    private SessaoTematica sessaoTematica;
 
     public ProcessoDetecaoTest() {
+        this.sessaoTematica = new SessaoTematica(
+                            "#A9D24R",
+                            "LAPR2",
+                            new Data(2015, 5, 22),
+                            new Data(2015, 5, 28),
+                            new Data(2015, 6, 10),
+                            new Data(2015, 6, 20),
+                            new Data(2015, 6, 24),
+                            new Data(2015, 6, 28),
+                            new Data(2015, 6, 30));
         Revisor r = new Revisor(new Utilizador(
                             "fatima", "ola@iml.com", "fafa", "1234"));
         Submissao s = new Submissao();
@@ -31,58 +43,65 @@ public class ProcessoDetecaoTest {
     }
 
     /**
-     * Test of getListaConflito method, of class ProcessoDetecao.
+     * Teste do método getListaConflito, da classe ProcessoDetecao.
      */
     @Test
     public void testGetListaConflito() {
         System.out.println("getListaConflito");
-        ProcessoDetecao instance = new ProcessoDetecao();
-        List<Conflito> listaConflitos = instance.getListaConflito();
-        listaConflitos.add(conflito);
-        int expResult = 1;
-        int result = instance.getListaConflito().size();
+        ProcessoDetecao instance = new ProcessoDetecao(
+                this.sessaoTematica, new ArrayList());
+        ListaConflitos listaConflitos = instance.getListaConflito();
+        listaConflitos.adicionarConflito(this.conflito);
+        Conflito expResult = this.conflito;
+        Conflito result = instance.getListaConflito().validarExistenciaConflito(
+                this.conflito.getRevisor(), this.conflito.getSubmissao());
         assertEquals(expResult, result);
     }
 
     /**
-     * Test of equals method, of class ProcessoDetecao.
+     * Teste do método equals, da classe ProcessoDetecao.
      */
     @Test
     public void testEquals() {
         System.out.println("equals");
 
-        Object outroObjecto = new ProcessoDetecao();
-        List<Conflito> listaConflitos1 = ((ProcessoDetecao) outroObjecto).getListaConflito();
-        listaConflitos1.add(conflito);
-        ProcessoDetecao instance = new ProcessoDetecao();
-        List<Conflito> listaConflitos = instance.getListaConflito();
-        listaConflitos.add(conflito);
+        Object outroObjecto = new ProcessoDetecao(
+                this.sessaoTematica, new ArrayList());
+        ListaConflitos listaConflitos 
+                = ((ProcessoDetecao) outroObjecto).getListaConflito();
+        listaConflitos.adicionarConflito(
+                this.conflito);
+        ProcessoDetecao instance = new ProcessoDetecao(
+                this.sessaoTematica, new ArrayList());
+        ListaConflitos OutraListaConflitos = instance.getListaConflito();
+        OutraListaConflitos.adicionarConflito(this.conflito);
         boolean expResult = true;
         boolean result = instance.equals(outroObjecto);
         assertEquals(expResult, result);
     }
 
     /**
-     * Test of equals method, of class ProcessoDetecao.
+     * Teste do método equals, da classe ProcessoDetecao.
      */
     @Test
     public void testEqualsNot() {
         System.out.println("equalsNot");
-
-        Object outroObjecto = new ProcessoDetecao();
+        Object outroObjecto = new ProcessoDetecao(
+                this.sessaoTematica, new ArrayList());
         Revisor revisor = new Revisor(new Utilizador(
                             "Fernando", "ola@iml.com", "fafa", "1234"));
-        Submissao s = new Submissao();
-        Conflito conflito1 = new Conflito(revisor, s, new ArrayList<TipoConflito>());
-        List<Conflito> listaConflitos1 = ((ProcessoDetecao) outroObjecto).getListaConflito();
-        listaConflitos1.add(conflito1);
-        ProcessoDetecao instance = new ProcessoDetecao();
-        List<Conflito> listaConflitos = instance.getListaConflito();
-        listaConflitos.add(conflito);
+        Submissao submissao = new Submissao();
+        Conflito conflito = new Conflito(
+                revisor, submissao, new ArrayList<TipoConflito>());
+        ListaConflitos listaConflitos = (
+                (ProcessoDetecao) outroObjecto).getListaConflito();
+        ProcessoDetecao instance = new ProcessoDetecao(
+                this.sessaoTematica, new ArrayList());
+        ListaConflitos outraListaConflitos = instance.getListaConflito();
+        outraListaConflitos.adicionarConflito(conflito);
         boolean expResult = false;
         boolean result = instance.equals(outroObjecto);
         assertEquals(expResult, result);
-
     }
 
 }

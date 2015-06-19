@@ -615,12 +615,8 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
      */
     @Override
     public Conflito getConflitoRevisorSubmissao(Revisor revisor, Submissao submissao) {
-        for (Conflito conflito : this.processoDetecao.getListaConflito()) {
-            if (conflito.getRevisor().equals(revisor) && conflito.getSubmissao().equals(submissao)) {
-                return conflito;
-            }
-        }
-        return null;
+        return this.processoDetecao.getListaConflito()
+                .validarExistenciaConflito(revisor, submissao);
     }
 
     /**
