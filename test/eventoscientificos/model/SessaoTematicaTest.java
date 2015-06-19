@@ -473,7 +473,7 @@ public class SessaoTematicaTest {
     }
 
     /**
-     * Test of iniciarProcessoDetecao method, of class SessaoTematica.
+     * Teste ao método iniciarProcessoDetecao, da classe SessaoTematica.
      */
     @Test
     public void testIniciarProcessoDetecao() {
