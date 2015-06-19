@@ -25,6 +25,30 @@ public class ListaConflitos {
     }
 
     /**
+     * Compara dois objetos entre si. Comparando primariamente a posição de
+     * memória, seguida do conteudo e das classes as quais cada um deles
+     * pertence, e finalmente os seus atributos, os conflitos na lista.
+     *
+     * @param outroObjeto Lista de Conflitos que vai ser usada na comparação.
+     * @return Verdadeiro caso os objetos comparados sejam iguais e falso caso
+     * não o sejam.
+     */
+    @Override
+    public boolean equals(Object outroObjeto) {
+        if (this == outroObjeto) {
+            return true;
+        }
+
+        if (outroObjeto == null || this.getClass() != outroObjeto.getClass()) {
+            return false;
+        }
+
+        ListaConflitos outraListaConflitos = (ListaConflitos) outroObjeto;
+
+        return this.listaConflitos.equals(outraListaConflitos.listaConflitos);
+    }
+
+    /**
      * Verifica se já existe um conflito na lista entre um dado revisor e uma
      * submissão.
      *

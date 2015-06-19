@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import utils.Data;
 
 /**
  * @author G01
@@ -75,6 +76,33 @@ public class ListaConflitosTest {
         ListaConflitos instance = new ListaConflitos();
         boolean expResult = true;
         boolean result = instance.adicionarConflito(conflito);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método equals, da classe ListaConflitos.
+     */
+    @Test
+    public void testEquals() {
+        System.out.println("equals");
+        Object outroObjeto = new ListaConflitos();
+        ListaConflitos instance = new ListaConflitos();
+        boolean expResult = true;
+        boolean result = instance.equals(outroObjeto);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método equals, da classe ListaConflitos.
+     */
+    @Test
+    public void testEqualsNot() {
+        System.out.println("equalsNot");
+        Object outroObjeto = new ListaConflitos();
+        ListaConflitos instance = new ListaConflitos();
+        instance.adicionarConflito(this.conflito);
+        boolean expResult = false;
+        boolean result = instance.equals(outroObjeto);
         assertEquals(expResult, result);
     }
     
