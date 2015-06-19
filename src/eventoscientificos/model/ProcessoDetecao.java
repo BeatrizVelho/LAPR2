@@ -1,6 +1,5 @@
 package eventoscientificos.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -9,15 +8,30 @@ import java.util.List;
 public class ProcessoDetecao {
 
     /**
+     * Detetável.
+     */
+    private Detetavel detetavel;
+
+    /**
+     * Lista de Tipos de Conflito.
+     */
+    private List<TipoConflito> listaTiposConflito;
+
+    /**
      * Lista de conflitos detetados
      */
-    private List<Conflito> listaConflito;
+    private ListaConflitos listaConflitos;
 
     /**
      * Constrói uma instância de Processo de Deteção
+     * @param detetavel
+     * @param listaTiposConflito
      */
-    public ProcessoDetecao() {
-        this.listaConflito = new ArrayList<>();
+    public ProcessoDetecao(
+            Detetavel detetavel, List<TipoConflito> listaTiposConflito) {
+        this.detetavel = detetavel;
+        this.listaTiposConflito = listaTiposConflito;
+        this.listaConflitos = new ListaConflitos();
     }
 
     /**
@@ -25,8 +39,8 @@ public class ProcessoDetecao {
      *
      * @return lista de conflitos detetados
      */
-    public List<Conflito> getListaConflito() {
-        return listaConflito;
+    public ListaConflitos getListaConflito() {
+        return this.listaConflitos;
     }
 
     /**
@@ -50,6 +64,8 @@ public class ProcessoDetecao {
 
         ProcessoDetecao outroProcesso = (ProcessoDetecao) outroObjecto;
 
-        return listaConflito.equals(outroProcesso.listaConflito);
+        return this.detetavel.equals(outroProcesso.detetavel)
+                && this.listaConflitos.equals(outroProcesso.listaConflitos);
     }
+
 }
