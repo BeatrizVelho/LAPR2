@@ -185,5 +185,14 @@ public class ListaSubmissoes {
         }
         return listaSubmissoesRetiradas;
     }
+   
+    public boolean isUtilizadorUmAutorSubmissaoInicial(Utilizador utilizador) {
+        for(Submissao submissao : this.listaSubmissoes) {
+            if(submissao.isAutorArtigoInicial(utilizador)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 }
