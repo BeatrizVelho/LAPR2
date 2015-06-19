@@ -241,12 +241,12 @@ public class Submissao {
 
     public boolean isAutor(Utilizador utilizador) {
         if (this.estado instanceof SubmissaoEmSubmissaoState
-                            && this.getArtigoInicial().isAutor(utilizador)) {
+                && this.getArtigoInicial().isAutor(utilizador)) {
             return true;
         }
 
         if (this.estado instanceof SubmissaoEmCameraReadyState
-                            && this.artigoFinal.isAutor(utilizador)) {
+                && this.artigoFinal.isAutor(utilizador)) {
             return true;
         }
 
@@ -275,7 +275,7 @@ public class Submissao {
         Submissao outraSubmissao = (Submissao) outroObjecto;
 
         return this.getArtigoInicial().equals(outraSubmissao.getArtigoInicial())
-                            || this.getArtigoFinal().equals(outraSubmissao.getArtigoFinal());
+                || this.getArtigoFinal().equals(outraSubmissao.getArtigoFinal());
     }
 
     /**
@@ -288,5 +288,12 @@ public class Submissao {
         return this.estado instanceof SubmissaoRemovidaState;
     }
 
-   
+    public boolean isAutorArtigoInicial(Utilizador utilizador) {
+        if (this.estado instanceof SubmissaoAceiteState
+                && getArtigoInicial().isAutor(utilizador)) {
+            return true;
+        }
+        return false;
+    }
+
 }
