@@ -3,6 +3,7 @@ package eventoscientificos.model;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaCriadaState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmSubmissaoCameraReadyState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmSubmissaoState;
+import eventoscientificos.model.state.sessaotematica.SessaoTematicaFaseDecisaoState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaState;
 import java.util.ArrayList;
 import java.util.List;
@@ -814,5 +815,13 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
         return this.listaSubmissoes.isUtilizadorUmAutorSubmissaoInicial(utilizador);
     }
 
+    /**
+     * Verifica se a Sessão Temática está no estado FaseDeDecisao
+     * 
+     * @return Verdadeiro se está no estado FaseDecisao e falso se não está.
+     */
+    public boolean isEstadoValidoParaDecidir(){
+        return this.estado instanceof SessaoTematicaFaseDecisaoState;
+    }
 
 }
