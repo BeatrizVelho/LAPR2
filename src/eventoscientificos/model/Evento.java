@@ -876,4 +876,20 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
         return this.listaSubmissoes.getListaSubmissoesRetiradas();
     }
 
+    /**
+     * Verifica se o utilizador passado por parâmetro é autor de alguma
+     * submissão da lista de Submissões do evento.
+     *
+     * @param utilizador Utilizador a verificar.
+     * @return Verdadeiro se é autor e falso se não é.
+     */
+    public boolean isUtilizadorUmAutorSubmissaoInicial(Utilizador utilizador) {
+        return this.listaSubmissoes.isUtilizadorUmAutorSubmissaoInicial(utilizador);
+    }
+    
+    public List<Submissivel> getListaSubmissiveisAceitarArtigoFinal(Utilizador utilizador) {
+        return this.listaSessoesTematicas.getListaSubmissiveisAceitarArtigoFinal(utilizador);
+    }
+
+
 }
