@@ -169,11 +169,10 @@ public class ListaSubmissoesTest {
         System.out.println("isUtilizadorUmAutorSubmissao");
         Utilizador utilizador = new Utilizador(
                 "Susana", "email@gmail.com", "susus", "1234");
-        Autor autor = new Autor(utilizador, new InstituicaoAfiliacao("ISEP"));
         Submissao submissao = new Submissao();        
         submissao.setEstado(new SubmissaoEmSubmissaoState(submissao));
         submissao.setArtigoInicial(new Artigo());
-        submissao.getArtigoInicial().getListaAutores().adicionarAutor(autor);
+        submissao.getArtigoInicial().getListaAutores().novoAutor(utilizador, new InstituicaoAfiliacao("ISEP"));
         ListaSubmissoes instance = new ListaSubmissoes();
         instance.adicionarSubmissao(submissao);
         boolean expResult = true;
