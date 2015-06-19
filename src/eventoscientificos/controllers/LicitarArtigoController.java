@@ -15,10 +15,13 @@ import eventoscientificos.model.RegistoTiposConflito;
 import eventoscientificos.model.Revisor;
 import eventoscientificos.model.Submissao;
 import java.util.List;
-
 /**
+ * Representa uma instância de LicitarArtigoController através de Empresa, 
+ * Revisor, RegistoTiposConflito, List<Licitavel> listaLicitaveis, 
+ * List<Licitacao> listaLicitacaoTemporaria, List<Submissao> listaSubmissoes,
+ * Licitacao.
  *
- * @author Soraia
+ * @author G01
  */
 public class LicitarArtigoController {
 

@@ -108,7 +108,7 @@ public class Revisao {
         if (adequacaoArtigo < 6 && adequacaoArtigo >= 0) {
             this.adequacaoArtigo = adequacaoArtigo;
         } else {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("O valor da adequação deve estar compreendido entre os valores 0 e 5");
         }
     }
 
@@ -121,7 +121,7 @@ public class Revisao {
         if (confiancaRevisor < 6 && confiancaRevisor >= 0) {
             this.confiancaRevisor = confiancaRevisor;
         } else {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("O valor da confiança deve estar compreendido entre os valores 0 e 5");
         }
     }
 
@@ -134,7 +134,7 @@ public class Revisao {
         if (originalidadeArtigo < 6 && originalidadeArtigo >= 0) {
             this.originalidadeArtigo = originalidadeArtigo;
         } else {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("O valor da originalidade deve estar compreendido entre os valores 0 e 5");
         }
     }
 
@@ -147,7 +147,7 @@ public class Revisao {
         if (qualidadeArtigo < 6 && qualidadeArtigo >= 0) {
             this.qualidadeArtigo = qualidadeArtigo;
         } else {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("O valor da qualidade deve estar compreendido entre os valores 0 e 5");
         }
     }
 
@@ -160,7 +160,7 @@ public class Revisao {
         if (recomendacaoGlobal <= 2 && recomendacaoGlobal >= -2) {
             this.recomendacaoGlobal = recomendacaoGlobal;
         } else {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("O valor da recomendação global deve estar entre [-2,2]");
         }
     }
 
@@ -173,7 +173,7 @@ public class Revisao {
         if (textoJustificativo.length() > 0) {
             this.textoJustificativo = textoJustificativo;
         } else {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("O texto justificativo não pode estar vazio.");
         }
     }
 
@@ -217,13 +217,13 @@ public class Revisao {
      * @return verdadeiro se modificar todos os valores correctamente e falso se
      * não o conseguir.
      */
-    public boolean adicionarResultadoRevisao(Revisao revisao) {
-        revisao.setAdequacaoArtigo(this.adequacaoArtigo);
-        revisao.setConfiancaRevisor(this.confiancaRevisor);
-        revisao.setOriginalidadeArtigo(this.originalidadeArtigo);
-        revisao.setQualidadeArtigo(this.qualidadeArtigo);
-        revisao.setRecomendacaoGlobal(this.recomendacaoGlobal);
-        revisao.setTextoJustificativo(textoJustificativo);
+    public boolean adicionarResultadoRevisao(Revisao revisaoClone) {
+        setAdequacaoArtigo(revisaoClone.adequacaoArtigo);
+        setConfiancaRevisor(revisaoClone.confiancaRevisor);
+        setOriginalidadeArtigo(revisaoClone.originalidadeArtigo);
+        setQualidadeArtigo(revisaoClone.qualidadeArtigo);
+        setRecomendacaoGlobal(revisaoClone.recomendacaoGlobal);
+        setTextoJustificativo(revisaoClone.textoJustificativo);
         return true;
     }
 
