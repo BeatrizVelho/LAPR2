@@ -126,14 +126,14 @@ public class ListaRevisoesTest {
     }
 
     /**
-     * Test of getQuantidadeRevisoesPorRever method, of class ListaRevisoes.
+     * Test of getQuantidadeSubmissoesPorRever method, of class ListaRevisoes.
      */
     @Test
-    public void testGetQuantidadeRevisoesPorRever() {
-        System.out.println("getQuantidadeRevisoesPorRever");
+    public void testGetQuantidadeSubmissoesPorRever() {
+        System.out.println("getQuantidadeSubmissoesPorRever");
         ListaRevisoes instance = new ListaRevisoes();
         int expResult = 0;
-        int result = instance.getQuantidadeRevisoesPorRever();
+        int result = instance.getQuantidadeSubmissoesPorRever();
         assertEquals(expResult, result);
     }
 
