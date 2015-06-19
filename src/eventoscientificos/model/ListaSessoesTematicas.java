@@ -247,4 +247,37 @@ public class ListaSessoesTematicas {
         }
         return listaSubmissiveis;
     }
+    
+        /**
+     * Devolve uma lista de Submissiveis que tem submissoes em que o utilizador
+     * passado por parametro é autor e que estão a permitir a alteração de
+     * submissões.
+     *
+     * @param utilizador
+     * @return Lista de Submissiveis.
+     */
+    public List<Submissivel> getListaSubmissiveisAceitarAlteracaoArtigoComSubmissaoUtilizador(
+            Utilizador utilizador) {
+        List<Submissivel> listaSubmissiveisUtilizador = new ArrayList<>();
+
+        for (SessaoTematica sessaoTematica : this.listaSessoesTematicas) {
+            if (sessaoTematica.isStateValidoParaAlterar() && sessaoTematica.isUtilizadorUmAutorSubmissao(utilizador)) {
+                listaSubmissiveisUtilizador.add(sessaoTematica);
+            }
+        }
+        return listaSubmissiveisUtilizador;
+    }
+    
+    public List<Submissivel> getListaSubmissiveisAceitarArtigoFinal(Utilizador utilizador) {
+        List<Submissivel> listaSusmissiveisUtilizador = new ArrayList<>();
+        
+        for(SessaoTematica sessaoTematica : this.listaSessoesTematicas) {
+            if(sessaoTematica.isStateValidoParaSubmeterArtigoFinal() &&
+                    sessaoTematica.isUtilizadorUmAutorSubmissaoInicial(utilizador)) {
+                listaSusmissiveisUtilizador.add(sessaoTematica);
+            }
+        }
+        return listaSusmissiveisUtilizador;
+    }
+
 }
