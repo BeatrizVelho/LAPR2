@@ -6,7 +6,6 @@
 package eventoscientificos.model;
 
 import java.util.ArrayList;
-import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import utils.Data;
@@ -22,24 +21,25 @@ public class ProcessoDetecaoTest {
     private SessaoTematica sessaoTematica;
 
     public ProcessoDetecaoTest() {
-        this.sessaoTematica = new SessaoTematica(
-                            "#A9D24R",
-                            "LAPR2",
-                            new Data(2015, 5, 22),
-                            new Data(2015, 5, 28),
-                            new Data(2015, 6, 10),
-                            new Data(2015, 6, 20),
-                            new Data(2015, 6, 24),
-                            new Data(2015, 6, 28),
-                            new Data(2015, 6, 30));
+        SessaoTematica sessaoTematica = new SessaoTematica(
+                "#A9D24R",
+                "LAPR2",
+                new Data(2015, 5, 22),
+                new Data(2015, 5, 28),
+                new Data(2015, 6, 10),
+                new Data(2015, 6, 20),
+                new Data(2015, 6, 24),
+                new Data(2015, 6, 28),
+                new Data(2015, 6, 30));
+        sessaoTematica.adicionarCP(new CP());
         Revisor r = new Revisor(new Utilizador(
-                            "fatima", "ola@iml.com", "fafa", "1234"));
+                "fatima", "ola@iml.com", "fafa", "1234"));
         Submissao s = new Submissao();
         s = new Submissao();
         s.setArtigoFinal(new Artigo("titulo", "saude", "D:\\ISEP\\1.º Ano\\2.º Semestre"));
         s.setArtigoInicial(new Artigo("titulo1234", "saude", "D:\\ISEP\\1.º Ano\\2.º Semestre"));
         this.conflito = new Conflito(r, s, new ArrayList<TipoConflito>());
-
+        this.sessaoTematica = sessaoTematica;
     }
 
     /**
@@ -67,7 +67,7 @@ public class ProcessoDetecaoTest {
 
         Object outroObjecto = new ProcessoDetecao(
                 this.sessaoTematica, new ArrayList());
-        ListaConflitos listaConflitos 
+        ListaConflitos listaConflitos
                 = ((ProcessoDetecao) outroObjecto).getListaConflito();
         listaConflitos.adicionarConflito(
                 this.conflito);
@@ -89,12 +89,11 @@ public class ProcessoDetecaoTest {
         Object outroObjecto = new ProcessoDetecao(
                 this.sessaoTematica, new ArrayList());
         Revisor revisor = new Revisor(new Utilizador(
-                            "Fernando", "ola@iml.com", "fafa", "1234"));
+                "Fernando", "ola@iml.com", "fafa", "1234"));
         Submissao submissao = new Submissao();
         Conflito conflito = new Conflito(
                 revisor, submissao, new ArrayList<TipoConflito>());
-        ListaConflitos listaConflitos = (
-                (ProcessoDetecao) outroObjecto).getListaConflito();
+        ListaConflitos listaConflitos = ((ProcessoDetecao) outroObjecto).getListaConflito();
         ProcessoDetecao instance = new ProcessoDetecao(
                 this.sessaoTematica, new ArrayList());
         ListaConflitos outraListaConflitos = instance.getListaConflito();
@@ -102,6 +101,18 @@ public class ProcessoDetecaoTest {
         boolean expResult = false;
         boolean result = instance.equals(outroObjecto);
         assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método detetarConflito, da classe ProcessoDetecao.
+     */
+    @Test
+    public void testDetetarConflitos() {
+        System.out.println("detetarConflitos");
+        ProcessoDetecao instance = new ProcessoDetecao(
+                this.sessaoTematica, new ArrayList());
+        boolean expResult = true;
+        boolean result = instance.detetarConflitos();
     }
 
 }

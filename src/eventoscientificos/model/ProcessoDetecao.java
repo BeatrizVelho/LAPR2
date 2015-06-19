@@ -1,5 +1,6 @@
 package eventoscientificos.model;
 
+import eventoscientificos.model.mecanismo.detecao.MecanismoDetecao;
 import java.util.List;
 
 /**
@@ -24,6 +25,7 @@ public class ProcessoDetecao {
 
     /**
      * Constrói uma instância de Processo de Deteção
+     *
      * @param detetavel
      * @param listaTiposConflito
      */
@@ -66,6 +68,29 @@ public class ProcessoDetecao {
 
         return this.detetavel.equals(outroProcesso.detetavel)
                 && this.listaConflitos.equals(outroProcesso.listaConflitos);
+    }
+
+    public boolean detetarConflitos() {
+        CP cp = ((CPDefinivel) this.detetavel).getCP();
+        ListaSubmissoes listaSubmissoes
+                = ((Submissivel) this.detetavel).getListaSubmissoes();
+
+        for (int i = 0; i < cp.getNumeroRevisores(); i++) {
+            Revisor revisor = cp.getRevisorPeloIndice(i);
+
+            for (Submissao submissao : listaSubmissoes.getListaSubmissoes()) {
+                for (TipoConflito tipoConflito : this.listaTiposConflito) {
+                    MecanismoDetecao mecanismo
+                            = tipoConflito.getMecanismoDetecao();
+
+                    mecanismo.detetarConflito(
+                            this.listaConflitos, revisor,
+                            submissao, tipoConflito);
+                }
+            }
+        }
+
+        return true;
     }
 
 }
