@@ -763,4 +763,16 @@ public class SessaoTematicaTest {
         assertEquals(expResult, result);
     }
 
+    /**
+     * Teste do método isEstadoValidoParaDecidir, da classe SessaoTematica.
+     */
+    @Test
+    public void testIsEstadoValidoParaDecidir() {
+        System.out.println("isEstadoValidoParaDecidir");
+        SessaoTematica instance = this.sessaoTematica;
+        instance.setEstado(new SessaoTematicaEmRevisaoState(sessaoTematica));
+        boolean expResult = false;
+        boolean result = instance.isEstadoValidoParaDecidir();
+        assertEquals(expResult, result);
+    }
 }
