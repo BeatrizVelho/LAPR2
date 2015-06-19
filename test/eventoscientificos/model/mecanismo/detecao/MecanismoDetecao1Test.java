@@ -34,8 +34,7 @@ public class MecanismoDetecao1Test {
         Revisor revisor = new Revisor(utilizador);
         Artigo artigo = new Artigo();
         ListaAutores listaAutores = artigo.getListaAutores();
-        listaAutores.adicionarAutor(
-                new Autor(utilizador,  new InstituicaoAfiliacao("ISEP")));
+        listaAutores.novoAutor(utilizador, new InstituicaoAfiliacao("ISEP"));
         Submissao submissao = new Submissao();
         submissao.setEstado(new SubmissaoEmSubmissaoState(submissao));
         submissao.setArtigoInicial(artigo);
