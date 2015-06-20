@@ -297,6 +297,16 @@ public class Submissao {
     }
 
     /**
+     * Valida se a submissão em questão está no estado aceite.
+     *
+     * @return Verdadeiro caso se encontre no estado aceite e falso caso não
+     * esteja.
+     */
+    public boolean isStateAceite() {
+        return estado.setAceite();
+    }
+
+    /**
      * Valida se a submissão se encontra no estado em Camera Ready
      *
      * @return verdadeiro se estiver e falso se não estiver no referido estado
@@ -315,11 +325,14 @@ public class Submissao {
     public boolean isAutorArtigo(Utilizador utilizador) {
         return this.artigoInicial.isAutor(utilizador);
     }
-/**
- * Modifica o estado da submissão para o estado de removida se cumprir
- * todos os requisitos necessários para a mudança
- * @return verdadeiro se mudar de estado para removida e falso se não mudar.F 
- */
+
+    /**
+     * Modifica o estado da submissão para o estado de removida se cumprir todos
+     * os requisitos necessários para a mudança
+     *
+     * @return verdadeiro se mudar de estado para removida e falso se não
+     * mudar.F
+     */
     public boolean setEstadoRemovida() {
         return this.estado.setRemovida();
     }

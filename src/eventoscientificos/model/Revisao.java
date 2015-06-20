@@ -82,8 +82,8 @@ public class Revisao {
     public Revisao(Submissao submissao, Revisor revisor) {
         this.submissao = submissao;
         this.revisor = revisor;
-        this.confiancaRevisor = CONFIANCA_REVISOR_POR_OMISSAO;
         this.adequacaoArtigo = ADEQUACAO_ARTIGO_POR_OMISSAO;
+        this.confiancaRevisor = CONFIANCA_REVISOR_POR_OMISSAO;
         this.originalidadeArtigo = ORIGINALIDADE_ARTIGO_POR_OMISSAO;
         this.qualidadeArtigo = QUALIDADE_ARTIGO_POR_OMISSAO;
         this.recomendacaoGlobal = RECOMENDACAO_GLOBAL_POR_OMISSAO;
@@ -97,6 +97,61 @@ public class Revisao {
      */
     public Revisor getRevisor() {
         return this.revisor;
+    }
+
+    /**
+     * Devolve a submissão associada à revisão.
+     *
+     * @return submissão
+     */
+    public Submissao getSubmissao() {
+        return submissao;
+    }
+
+    /**
+     * Devolve o valor atribuido pelo revisor à adequação do artigo
+     *
+     * @return valor da adequação
+     */
+    public int getAdequacaoArtigo() {
+        return adequacaoArtigo;
+    }
+
+    /**
+     * Devolve o valor atribuido à confiança que o revisor tem em rever o artigo
+     *
+     * @return valor da confiança
+     */
+    public int getConfiancaRevisor() {
+        return confiancaRevisor;
+    }
+
+    /**
+     * Devolve o valor atribuido pelo revisor à originalidade do artigo
+     *
+     * @return valor da originalidade
+     */
+    public int getOriginalidadeArtigo() {
+        return originalidadeArtigo;
+    }
+
+    /**
+     * Devolve o valor atribuido pelo revisor à qualidade do artigo
+     *
+     * @return valor da qualidade do artigo
+     */
+    public int getQualidadeArtigo() {
+        return qualidadeArtigo;
+    }
+
+    /**
+     * Devolve o valor atribuido pelo revisor referente à recomendação global do
+     * artigo
+     *
+     * @return valor da recomendação global.
+     */
+    public int getRecomendacaoGlobal() {
+        return recomendacaoGlobal;
     }
 
     /**

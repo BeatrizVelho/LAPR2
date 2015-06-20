@@ -349,4 +349,19 @@ public class RegistoEventos {
         return listaSubmissiveisUtilizador;
     }
 
+    /**
+     * Devolve uma lista com todos os eventos nos quais o utilizador autenticdo
+     * é uma organizador e estão em submissãoCameraReady
+     *
+     * @return lista de eventos
+     */
+    public List<Evento> getListaEventosOrganizadorEmSubmissaoCameraReady(Utilizador u) {
+        List<Evento> listaEventos = new ArrayList<>();
+        for (Evento e : this.listaEventos) {
+            if (e.isOrganizador(u) && e.isStateValidoParaSubmeterArtigoFinal()) {
+                listaEventos.add(e);
+            }
+        }
+        return listaEventos;
+    }
 }
