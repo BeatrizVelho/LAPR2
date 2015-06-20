@@ -180,7 +180,7 @@ public class Submissao {
         if (getEstado() instanceof SubmissaoCriadaState) {
             return this.artigoInicial = new Artigo();
         }
-        
+
         return this.artigoFinal = new Artigo();
     }
 
@@ -207,7 +207,7 @@ public class Submissao {
             this.artigoInicial.validarArtigo();
         }
 
-        if (this.estado instanceof SubmissaoAceiteState) {
+        if (this.estado instanceof SubmissaoEmCameraReadyState) {
             this.artigoFinal.validarArtigo();
         }
 
