@@ -1,7 +1,5 @@
 package eventoscientificos.model;
 
-import eventoscientificos.model.state.evento.EventoEmSubmissaoCameraReadyState;
-import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmSubmissaoCameraReadyState;
 import eventoscientificos.model.state.submissao.SubmissaoCriadaState;
 import eventoscientificos.model.state.submissao.SubmissaoEmSubmissaoState;
 import eventoscientificos.model.state.submissao.SubmissaoRemovidaState;
@@ -9,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import utils.Data;
 
 /**
  * @author G01
@@ -273,6 +270,33 @@ public class ListaSubmissoesTest {
 
         int expResult = 1;
         int result = instance.getListaSubmissoesUtilizador(u).size();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método getNumeroSubmissoes, da classe ListaSubmissoes.
+     */
+    @Test
+    public void testGetNumeroSubmissoes() {
+        System.out.println("getNumeroSubmissoes");
+        ListaSubmissoes instance = new ListaSubmissoes();
+        instance.adicionarSubmissao(this.submissao);
+        int expResult = 1;
+        int result = instance.getNumeroSubmissoes();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método getOrganizadorPeloID, da classe ListaSubmissoes.
+     */
+    @Test
+    public void testGetSubmissaoPeloID() {
+        System.out.println("getSubmissaoPeloID");
+        int indice = 0;
+        ListaSubmissoes instance = new ListaSubmissoes();
+        instance.adicionarSubmissao(this.submissao);
+        Submissao expResult = this.submissao;
+        Submissao result = instance.getSubmissaoPeloID(indice);
         assertEquals(expResult, result);
     }
 

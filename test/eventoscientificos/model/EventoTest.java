@@ -920,4 +920,32 @@ public class EventoTest {
         boolean result = instance.isStateValidoParaRemover(u);
         assertEquals(expResult, result);
     }
+
+    /**
+     * Teste do método getNumeroOrgnizadores, da classe Eventos.
+     */
+    @Test
+    public void testGetNumeroOrganizadores() {
+        System.out.println("getNumeroOrganizadores");
+        Evento instance = this.evento;
+        instance.novoOrganizador(utilizador);
+        int expResult = 1;
+        int result = instance.getNumeroOrganizadores();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método getOrganizadorPeloID, da classe Evento.
+     */
+    @Test
+    public void testGetOrganizadorPeloID() {
+        System.out.println("getOrganizadorPeloID");
+        int indice = 0;
+        Evento instance = this.evento;
+        instance.novoOrganizador(utilizador);
+        Organizador expResult = new Organizador(this.utilizador);
+        Organizador result = instance.getOrganizadorPeloID(indice);
+        assertEquals(expResult, result);
+    }
+
 }

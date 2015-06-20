@@ -1,7 +1,9 @@
 package eventoscientificos.model;
 
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmSubmissaoState;
+import eventoscientificos.model.state.sessaotematica.SessaoTematicaFaseDecisaoState;
 import eventoscientificos.model.state.submissao.SubmissaoRemovidaState;
+import eventoscientificos.model.state.submissao.SubmissaoRevistaState;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
@@ -266,6 +268,54 @@ public class ListaSessoesTematicasTest {
         listaSessoesTematicas.adicionarSessaoTematica(sessaoTematica);
         int expResult = 1;
         int result = listaSessoesTematicas.getListaSubmissiveisComSubmissoesRetiradasOrganizadorProponente(utilizador).size();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método getNumeroSessoesTematicas, da classe ListaSessoesTematicas.
+     */
+    @Test
+    public void testGetNumeroSessoesTematicas() {
+        System.out.println("getNumeroSessoesTematicas");
+        ListaSessoesTematicas instance = this.listaSessoesTematicas;
+        instance.adicionarSessaoTematica(this.sessaoTematica);
+        int expResult = 1;
+        int result = instance.getNumeroSessoesTematicas();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método getSessoesTematicasPeloID, da classe ListaSessoesTematicas.
+     */
+    @Test
+    public void testGetSessoesTematicasPeloID() {
+        System.out.println("getSessoesTematicasPeloID");
+        int indice = 0;
+        ListaSessoesTematicas instance = this.listaSessoesTematicas;
+        instance.adicionarSessaoTematica(this.sessaoTematica);
+        SessaoTematica expResult = this.sessaoTematica;
+        SessaoTematica result = instance.getSessoesTematicasPeloID(indice);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método getListaDecidivelOrganizadorProponente,
+     * da classe ListaSessoesTematicas.
+     */
+    @Test
+    public void testGetListaDecidivelOrganizadorProponente() {
+        System.out.println("getListaDecidivelOrganizadorProponente");
+        Utilizador utilizador = new Utilizador(
+                "Pedro", "1140781@isep.ipp.pt", "pedro", "1234");
+        Proponente proponente = new Proponente(utilizador);
+        sessaoTematica.novoProponente(utilizador);
+        sessaoTematica.setEstado(new SessaoTematicaFaseDecisaoState(sessaoTematica));
+        this.submissao.setEstado(new SubmissaoRevistaState(submissao));
+        this.sessaoTematica.getListaSubmissoes().adicionarSubmissao(submissao);
+        listaSessoesTematicas = new ListaSessoesTematicas(evento);
+        listaSessoesTematicas.adicionarSessaoTematica(sessaoTematica);
+        int expResult = 1;
+        int result = listaSessoesTematicas.getListaDecidivelOrganizadorProponente(utilizador).size();
         assertEquals(expResult, result);
     }
 }

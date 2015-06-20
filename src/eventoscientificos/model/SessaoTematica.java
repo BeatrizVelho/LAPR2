@@ -16,7 +16,7 @@ import utils.Data;
  * @author G01
  */
 public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
-                    Licitavel, Distribuivel, Revisivel {
+                    Licitavel, Distribuivel, Revisivel, Decidivel {
 
     /**
      * Código único da sessão temática.
@@ -538,6 +538,27 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
      */
     public boolean temProponentes() {
         return this.listaProponentes.size() > 0;
+    }
+
+    
+    /**
+     * Devolve o número total de proponentes na lista.
+     * 
+     * @return Número total de proponentes na lista.
+     */
+    public int getNumeroProponentes() {
+        return this.listaProponentes.size();
+    }
+
+    /**
+     * Devolve um proponente através da sua posição na lista.
+     * 
+     * @param indice Posição na lista.
+     * 
+     * @return Proponente através da sua posição na lista.
+     */
+    public Proponente getProponentePeloID(int indice) {
+        return this.listaProponentes.get(indice);
     }
 
     /**

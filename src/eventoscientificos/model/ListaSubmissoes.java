@@ -97,6 +97,26 @@ public class ListaSubmissoes {
     }
 
     /**
+     * Devolve o número total de submissões na lista.
+     * 
+     * @return Número total de submissões na lista.
+     */
+    public int getNumeroSubmissoes() {
+        return this.listaSubmissoes.size();
+    }
+
+    /**
+     * Devolve uma submissão através da sua posição na lista.
+     * 
+     * @param indice Posição na lista.
+     * 
+     * @return Submissão através da sua posição na lista.
+     */
+    public Submissao getSubmissaoPeloID(int indice) {
+        return this.listaSubmissoes.get(indice);
+    }
+
+    /**
      * Verifica se o utilizador passado por parâmetro é autor de alguma
      * submissão.
      *
