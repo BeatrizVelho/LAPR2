@@ -7,6 +7,7 @@ import eventoscientificos.model.state.evento.EventoEmLicitacaoState;
 import eventoscientificos.model.state.evento.EventoEmRevisaoState;
 import eventoscientificos.model.state.evento.EventoEmSubmissaoCameraReadyState;
 import eventoscientificos.model.state.evento.EventoEmSubmissaoState;
+import eventoscientificos.model.state.evento.EventoFaseDecisaoState;
 import eventoscientificos.model.state.evento.EventoRegistadoState;
 import eventoscientificos.model.state.evento.EventoSessoesTematicasDefinidasState;
 import eventoscientificos.model.state.evento.EventoState;
@@ -945,6 +946,21 @@ public class EventoTest {
         instance.novoOrganizador(utilizador);
         Organizador expResult = new Organizador(this.utilizador);
         Organizador result = instance.getOrganizadorPeloID(indice);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método isEstadoValidoParaDecidir, da classe Evento.
+     */
+    @Test
+    public void testIsEstadoValidoParaDecidir() {
+        System.out.println("isEstadoValidoParaDecidir");
+        Utilizador u = new Utilizador("fatima", "mail@isep.ipp.pt", "fafa","1235");
+        Evento instance = this.evento;
+        instance.setEstado(new EventoEmRevisaoState(evento));
+        instance.getListaSubmissoes().adicionarSubmissao(submissao);
+        boolean expResult = false;
+        boolean result = instance.isEstadoValidoParaDecidir();
         assertEquals(expResult, result);
     }
 
