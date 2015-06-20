@@ -662,7 +662,8 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
      */
     @Override
     public boolean isStateValidoParaSubmeter() {
-        return getEstado() instanceof EventoEmSubmissaoState;
+        return getEstado() instanceof EventoEmSubmissaoState ||
+                getEstado() instanceof EventoEmSubmissaoCameraReadyState;
     }
 
     /**
@@ -670,6 +671,7 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
      *
      * @return Verdadeiro se está no estado EmSubmissao e falso se não está.
      */
+    @Override
     public boolean isStateValidoParaAlterar() {
         return getEstado() instanceof EventoEmSubmissaoState;
     }
