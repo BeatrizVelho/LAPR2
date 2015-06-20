@@ -300,5 +300,23 @@ public class ListaSessoesTematicas {
         }
         return listaSusmissiveisUtilizador;
     }
+    
+    /**
+     * Devolve uma lista de Decidivel de sessão temática em que o utilizador
+     * é proponente e que é possivel decidir.
+     * 
+     * @param utilizador Utilizador a verificar se é proponente.
+     * @return Lista Decidivel
+     */
+    public List<Decidivel> getListaDecidivelOrganizadorProponente(Utilizador utilizador){
+        List<Decidivel> listaDecidivel = new ArrayList<>();
+        
+        for(SessaoTematica sessaoTematica : this.listaSessoesTematicas){
+            if(sessaoTematica.isProponente(utilizador) && sessaoTematica.isEstadoValidoParaDecidir()){
+                listaDecidivel.add(sessaoTematica);
+            }
+        }
+        return listaDecidivel;
+    }
 
 }
