@@ -28,7 +28,7 @@ public class MecanismoDetecao1 implements MecanismoDetecao {
     @Override
     public boolean detetarConflito(ListaConflitos listaConflitos, Revisor revisor,
             Submissao submissao, TipoConflito tipoConflito) {
-        if (submissao.isAutor(revisor.getUtilizador())) {
+        if (submissao.isAutorArtigo(revisor.getUtilizador())) {
             Conflito conflito = listaConflitos.validarExistenciaConflito(
                     revisor, submissao);
 

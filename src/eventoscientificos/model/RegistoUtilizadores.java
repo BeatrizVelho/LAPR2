@@ -25,6 +25,29 @@ public class RegistoUtilizadores {
     }
 
     /**
+     * Compara dois objetos entre si. Comparando primariamente a posição de
+     * memória, seguida do conteudo e das classes as quais cada um deles
+     * pertence, e finalmente os seus atributos lista de utilizadores.
+     *
+     * @param outroObjeto Utilizador que vai ser usado na comparação.
+     * @return Verdadeiro caso os objetos comparados sejam iguais e falso caso
+     * não o sejam.
+     */
+    public boolean equals(Object outroObjeto) {
+        if (this == outroObjeto) {
+            return true;
+        }
+
+        if (outroObjeto == null || this.getClass() != outroObjeto.getClass()) {
+            return false;
+        }
+
+        RegistoUtilizadores outroRegisto = (RegistoUtilizadores) outroObjeto;
+
+        return this.listaUtilizadores.equals(outroRegisto.listaUtilizadores);
+    }
+
+    /**
      * Cria uma instancia de utilizador recebendo como parametros o nome, o
      * email, o username e password de utilizador
      *
@@ -103,26 +126,23 @@ public class RegistoUtilizadores {
     }
 
     /**
-     * Compara dois objetos entre si. Comparando primariamente a posição de
-     * memória, seguida do conteudo e das classes as quais cada um deles
-     * pertence, e finalmente os seus atributos lista de utilizadores.
-     *
-     * @param outroObjeto Utilizador que vai ser usado na comparação.
-     * @return Verdadeiro caso os objetos comparados sejam iguais e falso caso
-     * não o sejam.
+     * Devolve o número total de utilizadores na lista.
+     * 
+     * @return Número total de utilizadores na lista.
      */
-    public boolean equals(Object outroObjeto) {
-        if (this == outroObjeto) {
-            return true;
-        }
+    public int getNumeroUtilizadores() {
+        return this.listaUtilizadores.size();
+    }
 
-        if (outroObjeto == null || this.getClass() != outroObjeto.getClass()) {
-            return false;
-        }
-
-        RegistoUtilizadores outroRegisto = (RegistoUtilizadores) outroObjeto;
-
-        return this.listaUtilizadores.equals(outroRegisto.listaUtilizadores);
+    /**
+     * Devolve um utilizador através da sua posição na lista.
+     * 
+     * @param indice Posição na lista.
+     * 
+     * @return Utilizador através da sua posição na lista.
+     */
+    public Utilizador getUtilizadorPeloID(int indice) {
+        return this.listaUtilizadores.get(indice);
     }
 
     /**

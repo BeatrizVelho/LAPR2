@@ -76,7 +76,7 @@ public class ProcessoDetecao {
                 = ((Submissivel) this.detetavel).getListaSubmissoes();
 
         for (int i = 0; i < cp.getNumeroRevisores(); i++) {
-            Revisor revisor = cp.getRevisorPeloIndice(i);
+            Revisor revisor = cp.getRevisorPeloID(i);
 
             for (Submissao submissao : listaSubmissoes.getListaSubmissoes()) {
                 for (TipoConflito tipoConflito : this.listaTiposConflito) {

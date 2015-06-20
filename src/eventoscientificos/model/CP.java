@@ -142,7 +142,7 @@ public class CP {
      * 
      * @return Revisor na posição dada.
      */
-    public Revisor getRevisorPeloIndice(int indice) {
+    public Revisor getRevisorPeloID(int indice) {
         return this.listaRevisores.get(indice);
     }
 

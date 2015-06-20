@@ -110,4 +110,62 @@ public class RegistoUtilizadoresTest {
 
     }
 
+    /**
+     * Teste do método equals, da classe RegistoUtilizadores.
+     */
+    @Test
+    public void testEquals() {
+        System.out.println("equals");
+        Object outroObjeto = new RegistoUtilizadores();
+        RegistoUtilizadores instance = new RegistoUtilizadores();
+        boolean expResult = true;
+        boolean result = instance.equals(outroObjeto);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método equals, da classe RegistoUtilizadores.
+     */
+    @Test
+    public void testEqualsNot() {
+        System.out.println("equalsNot");
+        Object outroObjeto = new RegistoUtilizadores();
+        RegistoUtilizadores instance = new RegistoUtilizadores();
+        instance.adicionaUtilizador(
+                new Utilizador("Susana", "email@gmail.com", "susus", "1234"));
+        boolean expResult = false;
+        boolean result = instance.equals(outroObjeto);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método getNumeroUtilizadores, da classe RegistoUtilizadores.
+     */
+    @Test
+    public void testGetNumeroUtilizadores() {
+        System.out.println("getNumeroUtilizadores");
+        RegistoUtilizadores instance = new RegistoUtilizadores();
+        instance.adicionaUtilizador(
+                new Utilizador("Susana", "email@gmail.com", "susus", "1234"));
+        int expResult = 1;
+        int result = instance.getNumeroUtilizadores();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método getUtilizadorPeloID, da classe RegistoUtilizadores.
+     */
+    @Test
+    public void testGetUtilizadorPeloID() {
+        System.out.println("getUtilizadorPeloID");
+        int indice = 0;
+        RegistoUtilizadores instance = new RegistoUtilizadores();
+        instance.adicionaUtilizador(
+                new Utilizador("Susana", "email@gmail.com", "susus", "1234"));
+        Utilizador expResult
+                = new Utilizador("Susana", "email@gmail.com", "susus", "1234");
+        Utilizador result = instance.getUtilizadorPeloID(indice);
+        assertEquals(expResult, result);
+    }
+
 }

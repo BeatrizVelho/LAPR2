@@ -167,9 +167,7 @@ public class EventoEmDetecaoConflitos implements EventoState {
      */
     @Override
     public boolean validarEstado() {
-        //necessita de ser novamente implementada qd houver processo 
-        //de detecção de conflitos
-        return false;
+        return this.e.getProcessoDetecao() != null;
     }
  /**
      * Valida se o evento se encontra num estado válido para ser removido
