@@ -985,4 +985,14 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
         return this.estado instanceof EventoFaseDecisaoState;
     }
 
+    /**
+     * Devolve uma lista de Decidiveis onde é possivel realizar decisões
+     * das submissões que têm submissões do utilizador.
+     * 
+     * @param utilizador Utilizador.
+     * @return Lista de Decidiveis.
+     */
+    public List<Decidivel> getListaDecidivelOrganizadorProponente(Utilizador utilizador){
+        return listaSessoesTematicas.getListaDecidivelOrganizadorProponente(utilizador);
+    }
 }
