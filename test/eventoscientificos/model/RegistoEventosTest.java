@@ -325,4 +325,31 @@ public class RegistoEventosTest {
         assertEquals(expResult, result);
     }
 
+    /**
+     * Teste do método getNumeroEventos, da classe RegistoEventos.
+     */
+    @Test
+    public void testGetNumeroEventos() {
+        System.out.println("getNumeroEventos");
+        RegistoEventos instance = new RegistoEventos();
+        instance.adicionarEvento(this.evento);
+        int expResult = 1;
+        int result = instance.getNumeroEventos();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método getEventoPeloID, da classe RegistoEventos.
+     */
+    @Test
+    public void testGetEventoPeloID() {
+        System.out.println("getEventoPeloID");
+        int indice = 0;
+        RegistoEventos instance = new RegistoEventos();
+        instance.adicionarEvento(this.evento);
+        Evento expResult
+                = this.evento;
+        Evento result = instance.getEventoPeloID(indice);
+        assertEquals(expResult, result);
+    }
 }
