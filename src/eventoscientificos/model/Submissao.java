@@ -220,7 +220,7 @@ public class Submissao {
         if (this.estado instanceof SubmissaoEmSubmissaoState) {
             setArtigoInicial(artigo);
         }
-        if (this.estado instanceof SubmissaoAceiteState) {
+        if (this.estado instanceof SubmissaoEmCameraReadyState) {
             setArtigoFinal(artigo);
 
             return this.estado.setEmCameraReady();
