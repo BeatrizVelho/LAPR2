@@ -384,4 +384,28 @@ public class RegistoEventos {
         }
         return listaEventos;
     }
+    
+    /**
+     * Devolve uma lista de eventoes/sessões temáticas com todas as submissões
+     * revistas e ainda não foi realizado o processo de decisão e onde
+     * o utilizador é organizador/proponente.
+     * 
+     * @param utilizador Utilizador a verificar se é organizador/proponente.
+     * @return Lista de evento/sessao temática onde o utilizador é
+     * organizador/proponente.
+     */
+    public List<Decidivel> getListaDecidivelOrganizadorProponente(Utilizador utilizador) {
+        List<Decidivel> listaDecidiveis = new ArrayList<>();
+
+        for (Evento evento : this.listaEventos) {
+            if (evento.isOrganizador(utilizador) && 
+                    evento.isEstadoValidoParaDecidir()) {
+                listaDecidiveis.add(evento);
+            }
+            List<Decidivel> listaDecidiveisSessaoTematica =
+                    evento.getListaDecidivelOrganizadorProponente(utilizador);
+            listaDecidiveis.addAll(listaDecidiveisSessaoTematica);
+        }
+        return listaDecidiveis;
+    }
 }
