@@ -4,13 +4,16 @@ import eventoscientificos.model.state.evento.EventoEmLicitacaoState;
 import eventoscientificos.model.state.evento.EventoEmRevisaoState;
 import eventoscientificos.model.state.evento.EventoEmSubmissaoCameraReadyState;
 import eventoscientificos.model.state.evento.EventoEmSubmissaoState;
+import eventoscientificos.model.state.evento.EventoFaseDecisaoState;
 import eventoscientificos.model.state.evento.EventoRegistadoState;
 import eventoscientificos.model.state.evento.EventoSessoesTematicasDefinidasState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmSubmissaoCameraReadyState;
+import eventoscientificos.model.state.sessaotematica.SessaoTematicaFaseDecisaoState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaRegistadaState;
 import eventoscientificos.model.state.submissao.SubmissaoEmCameraReadyState;
 import eventoscientificos.model.state.submissao.SubmissaoEmSubmissaoState;
 import eventoscientificos.model.state.submissao.SubmissaoRemovidaState;
+import eventoscientificos.model.state.submissao.SubmissaoRevistaState;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
@@ -374,6 +377,35 @@ public class RegistoEventosTest {
         Evento expResult
                 = this.evento;
         Evento result = instance.getEventoPeloID(indice);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método getListaDecidivelOrganizadorProponente,
+     * da classe RegistoEventos.
+     */
+    @Test
+    public void testGetListaDecidivelOrganizadorProponente() {
+        System.out.println("getListaDecidivelOrganizadorProponente");
+        Submissao submissao = new Submissao();
+        submissao.setEstado(new SubmissaoRevistaState(submissao));
+
+        SessaoTematica sessaoTematica = this.st;
+        sessaoTematica.setEstado(new SessaoTematicaFaseDecisaoState(sessaoTematica));
+        sessaoTematica.novoProponente(this.utilizador);
+        sessaoTematica.getListaSubmissoes().adicionarSubmissao(submissao);
+
+        Evento evento = this.evento;
+        evento.setEstado(new EventoFaseDecisaoState(evento));
+        evento.novoOrganizador(this.utilizador);
+        evento.getListaSubmissoes().adicionarSubmissao(submissao);
+        evento.getListaSessoesTematicas().adicionarSessaoTematica(sessaoTematica);
+
+        RegistoEventos instance = new RegistoEventos();
+        instance.adicionarEvento(evento);
+
+        int expResult = 2;
+        int result = (instance.getListaDecidivelOrganizadorProponente(this.utilizador)).size();
         assertEquals(expResult, result);
     }
 
