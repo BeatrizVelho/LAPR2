@@ -5,6 +5,7 @@
  */
 package eventoscientificos.model;
 
+import eventoscientificos.model.state.submissao.SubmissaoAceiteState;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
@@ -40,11 +41,11 @@ public class ListaRevisoesTest {
                             "password"));
         this.revisao = new Revisao(submissao, revisor);
         this.r = new Revisao(submissao, revisor);
-        r.setAdequacaoArtigo(0);
-        r.setConfiancaRevisor(0);
-        r.setOriginalidadeArtigo(0);
-        r.setQualidadeArtigo(0);
-        r.setRecomendacaoGlobal(-1);
+        r.setAdequacaoArtigo(5);
+        r.setConfiancaRevisor(4);
+        r.setOriginalidadeArtigo(3);
+        r.setQualidadeArtigo(4);
+        r.setRecomendacaoGlobal(2);
         r.setTextoJustificativo("ola");
         this.listaRevisoes = new ArrayList<>();
         listaRevisoes.add(revisao);
@@ -123,6 +124,30 @@ public class ListaRevisoesTest {
         int expResult = 1;
         int result = instance.getRevisoesRevisor(u).size();
         assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of getValoresTotaisParaEstatisticaEvento method, of class
+     * ListaRevisoes.
+     */
+    @Test
+    public void testGetValoresTotaisParaEstatisticaEvento() {
+        System.out.println("getValoresTotaisParaEstatisticaEvento");
+        int nSubmissoes = 2;
+
+        this.r.getSubmissao().setEstado(new SubmissaoAceiteState(submissao));
+        this.revisao.getSubmissao().setEstado(new SubmissaoAceiteState(submissao));
+
+        ListaRevisoes instance = new ListaRevisoes();
+        instance.adicionarRevisao(revisao);
+        instance.adicionarRevisao(r);
+//        float[] expResult = new float[5];
+        float[] result = instance.getValoresTotaisParaEstatisticaEvento(nSubmissoes);
+        // float[] valores = instance.getValoresTotaisParaEstatisticaEvento(nSubmissoes);
+        float[] expResult = {2, 5f, 2, 1, 5f, 2, 1};
+        //  boolean result = (valores[0] == 2,5f) && (valores[1] == 2f) && (valores[2] == 1,5f) && (valores[3] == 2f) && (valores[4] == 1f);
+        assertEquals(expResult, result);
+
     }
 
 }

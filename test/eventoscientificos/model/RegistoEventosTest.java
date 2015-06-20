@@ -8,6 +8,7 @@ import eventoscientificos.model.state.evento.EventoRegistadoState;
 import eventoscientificos.model.state.evento.EventoSessoesTematicasDefinidasState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmSubmissaoCameraReadyState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaRegistadaState;
+import eventoscientificos.model.state.submissao.SubmissaoEmCameraReadyState;
 import eventoscientificos.model.state.submissao.SubmissaoEmSubmissaoState;
 import eventoscientificos.model.state.submissao.SubmissaoRemovidaState;
 import java.util.ArrayList;
@@ -323,6 +324,30 @@ public class RegistoEventosTest {
         int expResult = 1;
         int result = instance.getListaSubmissiveisComArtigosUtilizadorParaRemover(u).size();
         assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of getListaEventosOrganizadorEmSubmissaoCameraReady method, of class
+     * RegistoEventos.
+     */
+    @Test
+    public void testGetListaEventosOrganizadorEmSubmissaoCameraReady() {
+        System.out.println("getListaEventosOrganizadorEmSubmissaoCameraReady");
+        Utilizador u = this.utilizador;
+        Artigo a = new Artigo();
+        a.getListaAutores().novoAutor(utilizador, new InstituicaoAfiliacao("Matosinhos"));
+        Submissao s = new Submissao();
+        s.adicionarArtigo(a);
+        s.setEstado(new SubmissaoEmCameraReadyState(s));
+        this.evento.getListaSubmissoes().adicionarSubmissao(s);
+        this.evento.novoOrganizador(utilizador);
+        this.evento.setEstado(new EventoEmSubmissaoCameraReadyState(evento));
+        RegistoEventos instance = new RegistoEventos();
+        instance.adicionarEvento(evento);
+        int expResult = 1;
+        int result = instance.getListaEventosOrganizadorEmSubmissaoCameraReady(u).size();
+        assertEquals(expResult, result);
+
     }
 
 }
