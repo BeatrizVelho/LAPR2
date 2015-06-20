@@ -43,6 +43,34 @@ public class ListaSessoesTematicas {
     }
 
     /**
+     * Compara dois objetos entre si. Comparando primariamente a posição de
+     * memória, seguida do conteudo e das classes as quais cada um deles
+     * pertence, e finalmente os seus atributos, evento que a contém e as suas
+     * sessões temáticas.
+     *
+     * @param outroObjeto ListaSessoesTematicas que vai ser usada na comparação.
+     * @return Verdadeiro caso os objetos comparados sejam iguais e falso caso
+     * não o sejam.
+     */
+    @Override
+    public boolean equals(Object outroObjeto) {
+        if (this == outroObjeto) {
+            return true;
+        }
+
+        if (outroObjeto == null || this.getClass() != outroObjeto.getClass()) {
+            return false;
+        }
+
+        ListaSessoesTematicas outraListaSessoesTematicas
+                = (ListaSessoesTematicas) outroObjeto;
+
+        return this.evento.equals(outraListaSessoesTematicas.evento)
+                && this.listaSessoesTematicas.equals(
+                        outraListaSessoesTematicas.listaSessoesTematicas);
+    }
+
+    /**
      * Cria uma instância de sessão temática com um código único, uma descrição,
      * uma data de inicio de submissão e data de fim de submissão.
      *
@@ -84,33 +112,26 @@ public class ListaSessoesTematicas {
     public boolean adicionarSessaoTematica(SessaoTematica sessaoTematica) {
         return this.listaSessoesTematicas.add(sessaoTematica);
     }
+    
+    
+    /**
+     * Devolve o número total de sessões temáticas na lista.
+     * 
+     * @return Número total de sessões temaáticas na lista.
+     */
+    public int getNumeroSessoesTematicas() {
+        return this.listaSessoesTematicas.size();
+    }
 
     /**
-     * Compara dois objetos entre si. Comparando primariamente a posição de
-     * memória, seguida do conteudo e das classes as quais cada um deles
-     * pertence, e finalmente os seus atributos, evento que a contém e as suas
-     * sessões temáticas.
-     *
-     * @param outroObjeto ListaSessoesTematicas que vai ser usada na comparação.
-     * @return Verdadeiro caso os objetos comparados sejam iguais e falso caso
-     * não o sejam.
+     * Devolve uma sessão temática através da sua posição na lista.
+     * 
+     * @param indice Posição na lista.
+     * 
+     * @return Sessão temática através da sua posição na lista.
      */
-    @Override
-    public boolean equals(Object outroObjeto) {
-        if (this == outroObjeto) {
-            return true;
-        }
-
-        if (outroObjeto == null || this.getClass() != outroObjeto.getClass()) {
-            return false;
-        }
-
-        ListaSessoesTematicas outraListaSessoesTematicas
-                = (ListaSessoesTematicas) outroObjeto;
-
-        return this.evento.equals(outraListaSessoesTematicas.evento)
-                && this.listaSessoesTematicas.equals(
-                        outraListaSessoesTematicas.listaSessoesTematicas);
+    public SessaoTematica getSessoesTematicasPeloID(int indice) {
+        return this.listaSessoesTematicas.get(indice);
     }
 
     /**

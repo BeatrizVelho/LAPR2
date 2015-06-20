@@ -268,4 +268,31 @@ public class ListaSessoesTematicasTest {
         int result = listaSessoesTematicas.getListaSubmissiveisComSubmissoesRetiradasOrganizadorProponente(utilizador).size();
         assertEquals(expResult, result);
     }
+
+    /**
+     * Teste do método getNumeroSessoesTematicas, da classe ListaSessoesTematicas.
+     */
+    @Test
+    public void testGetNumeroSessoesTematicas() {
+        System.out.println("getNumeroSessoesTematicas");
+        ListaSessoesTematicas instance = this.listaSessoesTematicas;
+        instance.adicionarSessaoTematica(this.sessaoTematica);
+        int expResult = 1;
+        int result = instance.getNumeroSessoesTematicas();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método getSessoesTematicasPeloID, da classe ListaSessoesTematicas.
+     */
+    @Test
+    public void testGetSessoesTematicasPeloID() {
+        System.out.println("getSessoesTematicasPeloID");
+        int indice = 0;
+        ListaSessoesTematicas instance = this.listaSessoesTematicas;
+        instance.adicionarSessaoTematica(this.sessaoTematica);
+        SessaoTematica expResult = this.sessaoTematica;
+        SessaoTematica result = instance.getSessoesTematicasPeloID(indice);
+        assertEquals(expResult, result);
+    }
 }
