@@ -556,7 +556,7 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
 
     /**
      * Devolve o número total de organizadores na lista.
-     * 
+     *
      * @return Número total de organizadores na lista.
      */
     public int getNumeroOrganizadores() {
@@ -565,9 +565,9 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
 
     /**
      * Devolve um Organizador através da sua posição na lista.
-     * 
+     *
      * @param indice Posição na lista.
-     * 
+     *
      * @return Organizador através da sua posição na lista.
      */
     public Organizador getOrganizadorPeloID(int indice) {
@@ -662,8 +662,7 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
      */
     @Override
     public boolean isStateValidoParaSubmeter() {
-        return getEstado() instanceof EventoEmSubmissaoState ||
-                getEstado() instanceof EventoEmSubmissaoCameraReadyState;
+        return getEstado() instanceof EventoEmSubmissaoState;
     }
 
     /**
@@ -673,7 +672,8 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
      */
     @Override
     public boolean isStateValidoParaAlterar() {
-        return getEstado() instanceof EventoEmSubmissaoState;
+        return getEstado() instanceof EventoEmSubmissaoState
+                || getEstado() instanceof EventoEmSubmissaoCameraReadyState;
     }
 
     /**
@@ -720,7 +720,7 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
     @Override
     public Conflito getConflitoRevisorSubmissao(Revisor revisor, Submissao submissao) {
         return this.processoDetecao.getListaConflito().validarExistenciaConflito(
-                            revisor, submissao);
+                revisor, submissao);
     }
 
     /**
@@ -755,8 +755,8 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
     }
 
     /**
-     * Inicia o processo de deteção do evento, recebendo uma lista de
-     * tipos de conflito a detetar.
+     * Inicia o processo de deteção do evento, recebendo uma lista de tipos de
+     * conflito a detetar.
      *
      * @param listaTiposConflito Lista de tipos de conflito a detetar.
      */
@@ -975,7 +975,7 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
         }
         return false;
     }
-    
+
     /**
      * Verifica se o evento está no estado FaseDeDecisao.
      *
