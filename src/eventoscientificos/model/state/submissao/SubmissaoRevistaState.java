@@ -132,6 +132,7 @@ public class SubmissaoRevistaState implements SubmissaoState {
      */
     @Override
     public boolean setRemovida() {
+          submissao.setEstado(new SubmissaoRemovidaState(submissao));
         return true;
     }
 
