@@ -138,7 +138,7 @@ public class CPTest {
     }
 
     /**
-     * Teste ao método getRevisorPeloIndice, da classe CP.
+     * Teste ao método getRevisorPeloID, da classe CP.
      */
     public void testGetRevisorPeloIndice() {
         System.out.println("getRevisorPeloIndice");
@@ -148,7 +148,7 @@ public class CPTest {
         instance.novoRevisor(utilizador);
         int indice = 0;
         Revisor expResult = new Revisor(utilizador);
-        Revisor result = instance.getRevisorPeloIndice(indice);
+        Revisor result = instance.getRevisorPeloID(indice);
         assertEquals(expResult, result);
     }
 
