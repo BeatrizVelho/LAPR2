@@ -89,10 +89,11 @@ public class ListaSubmissoes {
      * Altera o artigo inicial da submissao.
      *
      * @param submissao Submissao a alterar o artigo.
-     * @param artigo Novo artigo inicial.
+     * @param artigo Novo artigo.
+     * @return Verdadeiro se a submissao foi alterada e falso se nao for.
      */
-    public void alterarSubmissao(Submissao submissao, Artigo artigo) {
-        submissao.setArtigoInicial(artigo);
+    public boolean alterarSubmissao(Submissao submissao, Artigo artigo) {
+        return submissao.adicionarArtigo(artigo);
     }
 
     /**
