@@ -708,7 +708,8 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
      */
     @Override
     public boolean isStateValidoParaAlterar() {
-        return getEstado() instanceof SessaoTematicaEmSubmissaoState;
+        return getEstado() instanceof SessaoTematicaEmSubmissaoState ||
+                getEstado() instanceof SessaoTematicaEmSubmissaoCameraReadyState;
     }
 
     /**
