@@ -3,6 +3,7 @@ package eventoscientificos.model;
 import eventoscientificos.model.state.evento.EventoCriadoState;
 import eventoscientificos.model.state.evento.EventoEmSubmissaoCameraReadyState;
 import eventoscientificos.model.state.evento.EventoEmSubmissaoState;
+import eventoscientificos.model.state.evento.EventoFaseDecisaoState;
 import eventoscientificos.model.state.evento.EventoRegistadoState;
 import eventoscientificos.model.state.evento.EventoSessoesTematicasDefinidasState;
 import eventoscientificos.model.state.evento.EventoState;
@@ -971,6 +972,15 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
             return this.listaSubmissoes.containsAutorNaListaAutoresArtigoInicial(u);
         }
         return false;
+    }
+    
+    /**
+     * Verifica se o evento está no estado FaseDeDecisao.
+     *
+     * @return Verdadeiro se está no estado FaseDecisao e falso se não está.
+     */
+    public boolean isEstadoValidoParaDecidir() {
+        return this.estado instanceof EventoFaseDecisaoState;
     }
 
 }
