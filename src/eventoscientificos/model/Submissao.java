@@ -250,7 +250,7 @@ public class Submissao {
         }
 
         if (this.estado instanceof SubmissaoEmCameraReadyState
-                && this.artigoFinal.isAutor(utilizador)) {
+                && this.getArtigoFinal().isAutor(utilizador)) {
             return true;
         }
 
