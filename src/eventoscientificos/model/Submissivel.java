@@ -57,5 +57,12 @@ public interface Submissivel {
      * @return Verdadeiro se é possivel submeter e falso se não é possível
      */
     boolean isStateValidoParaSubmeterArtigoFinal();
+    
+    /**
+     * Verifica se determinado Submissivel cumpre os critérios necessários para
+     * remover.
+     * @return verdadeiro se poder remover e falso se não for possível remover.
+     */
+    boolean isStateValidoParaRemover(Utilizador u);
 
 }

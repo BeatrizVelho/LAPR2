@@ -3,13 +3,13 @@ package eventoscientificos.model.state.submissao;
 import eventoscientificos.model.Submissao;
 
 /**
- *  Representa uma instância de SubmissaoAceiteState através de uma submissão.
- * 
+ * Representa uma instância de SubmissaoAceiteState através de uma submissão.
+ *
  * @author G01
  */
 public class SubmissaoAceiteState implements SubmissaoState {
-    
-     /**
+
+    /**
      * Submissao que adota o estado.
      */
     private Submissao submissao;
@@ -25,7 +25,7 @@ public class SubmissaoAceiteState implements SubmissaoState {
 
     /**
      * Modifica o estado da submissão para o estado Submissão Criada
-     * 
+     *
      * @return Falso, não deve ser possível mudar de Aceite para Criada.
      */
     @Override
@@ -35,7 +35,7 @@ public class SubmissaoAceiteState implements SubmissaoState {
 
     /**
      * Modifica o estado da submissão para o estado Submissão Em Submissão.
-     * 
+     *
      * @return Falso, não deve ser possível mudar de Aceite para EmSubmissao.
      */
     @Override
@@ -45,7 +45,7 @@ public class SubmissaoAceiteState implements SubmissaoState {
 
     /**
      * Modifica o estado da submissão para o estado Submissão Em Licitacao.
-     * 
+     *
      * @return Falso, não deve ser possível mudar de Aceite para EmLicitacao.
      */
     @Override
@@ -55,7 +55,7 @@ public class SubmissaoAceiteState implements SubmissaoState {
 
     /**
      * Modifica o estado da submissão para o estado Submissão Em Revisão.
-     * 
+     *
      * @return Falso, não deve ser possível mudar de Aceite para EmRevisão.
      */
     @Override
@@ -65,7 +65,7 @@ public class SubmissaoAceiteState implements SubmissaoState {
 
     /**
      * Modifica o estado da submissão para o estado Submissão Revista.
-     * 
+     *
      * @return Falso, não deve ser possível mudar de Aceite para Revista.
      */
     @Override
@@ -75,7 +75,7 @@ public class SubmissaoAceiteState implements SubmissaoState {
 
     /**
      * Modifica o estado da submissão para o estado Submissão Aceite.
-     * 
+     *
      * @return Verdadeiro, a submissão encontra-se neste estado.
      */
     @Override
@@ -85,7 +85,7 @@ public class SubmissaoAceiteState implements SubmissaoState {
 
     /**
      * Modifica o estado da submissão para o estado Submissão Rejeitada.
-     * 
+     *
      * @return Falso, não deve ser possível mudar de Aceite para Rejeitada.
      */
     @Override
@@ -95,15 +95,15 @@ public class SubmissaoAceiteState implements SubmissaoState {
 
     /**
      * Modifica o estado da submissão para o estado Submissão EmCameraReady.
-     * 
+     *
      * @return Verdadeiro se for possivel alterar o estado para EmCameraReady e
-     * falso caso não seja.     
+     * falso caso não seja.
      */
     @Override
     public boolean setEmCameraReady() {
-        if(validarEstado()) {
+        if (validarEstado()) {
             this.submissao.setEstado(
-                    new SubmissaoEmCameraReadyState(this.submissao));
+                                new SubmissaoEmCameraReadyState(this.submissao));
             return true;
         }
         return false;
@@ -111,15 +111,15 @@ public class SubmissaoAceiteState implements SubmissaoState {
 
     /**
      * Modifica o estado da submissão para o estado Submissão SemArtigoFinal.
-     * 
+     *
      * @return Verdadeiro se for possivel alterar o estado para SemArtigoFinal e
      * falso caso não seja.
      */
     @Override
     public boolean setSemArtigoFinal() {
-        if(!validarEstado()) {
+        if (!validarEstado()) {
             this.submissao.setEstado(
-                    new SubmissaoSemArtigoFinalState(this.submissao));
+                                new SubmissaoSemArtigoFinalState(this.submissao));
             return true;
         }
         
@@ -128,11 +128,12 @@ public class SubmissaoAceiteState implements SubmissaoState {
 
     /**
      * Modifica o estado da submissão para o estado Submissão Removida.
-     * 
+     *
      * @return verdadeiro, deve ser possível mudar de Aceite para Removida.
-     */ 
+     */    
     @Override
     public boolean setRemovida() {
+        submissao.setEstado(new SubmissaoRemovidaState(submissao));
         return true;
     }
 

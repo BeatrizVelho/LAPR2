@@ -1,5 +1,6 @@
 package eventoscientificos.model;
 
+import eventoscientificos.model.state.evento.EventoEmLicitacaoState;
 import eventoscientificos.model.state.evento.EventoEmRevisaoState;
 import eventoscientificos.model.state.evento.EventoEmSubmissaoCameraReadyState;
 import eventoscientificos.model.state.evento.EventoEmSubmissaoState;
@@ -7,6 +8,7 @@ import eventoscientificos.model.state.evento.EventoRegistadoState;
 import eventoscientificos.model.state.evento.EventoSessoesTematicasDefinidasState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmSubmissaoCameraReadyState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaRegistadaState;
+import eventoscientificos.model.state.submissao.SubmissaoEmSubmissaoState;
 import eventoscientificos.model.state.submissao.SubmissaoRemovidaState;
 import java.util.ArrayList;
 import java.util.List;
@@ -191,7 +193,7 @@ public class RegistoEventosTest {
         int result = (instance.getListaCPDefiniveisSemCPOrganizadorProponente(this.utilizador)).size();
         assertEquals(expResult, result);
     }
-    
+
     /**
      * Test of getListaLicitaveisComArtigosPorLicitarRevisor method, of class
      * RegistoEventos.
@@ -228,7 +230,7 @@ public class RegistoEventosTest {
         int result = instance.getListaSubmissiveisAceitarArtigo().size();
         assertEquals(expResult, result);
     }
-    
+
     /**
      * Test of getListaDistribuiveisOrganizadorProponente method, of class
      * RegistoEventos.
@@ -298,6 +300,28 @@ public class RegistoEventosTest {
 
         int expResult = 1;
         int result = instance.getListaRevisiveisComArtigosPReverRevisor(utilizador).size();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of getListaSubmissiveisComArtigosUtilizadorParaRemover method, of
+     * class RegistoEventos.
+     */
+    @Test
+    public void testGetListaSubmissiveisComArtigosUtilizadorParaRemover() {
+        System.out.println("getListaSubmissiveisComArtigosUtilizadorParaRemover");
+        Utilizador u = this.utilizador;
+        this.evento.setEstado(new EventoEmSubmissaoState(evento));
+        Artigo a = new Artigo();
+        a.getListaAutores().novoAutor(utilizador, new InstituicaoAfiliacao("Matosinhos"));
+        Submissao s = new Submissao();
+        s.setEstado(new SubmissaoEmSubmissaoState(s));
+        s.adicionarArtigo(a);
+        this.evento.getListaSubmissoes().adicionarSubmissao(s);
+        RegistoEventos instance = new RegistoEventos();
+        instance.adicionarEvento(evento);
+        int expResult = 1;
+        int result = instance.getListaSubmissiveisComArtigosUtilizadorParaRemover(u).size();
         assertEquals(expResult, result);
     }
 

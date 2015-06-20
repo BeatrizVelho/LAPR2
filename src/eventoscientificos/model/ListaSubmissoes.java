@@ -60,14 +60,14 @@ public class ListaSubmissoes {
      *
      * @param submissao Submissao clonada.
      * @param submissaoClone Submissao clone.
-     * 
+     *
      * @return Verdadeiro se a submissao clone não existir.
      */
     public boolean validarCloneSubmissao(
-            Submissao submissao, Submissao submissaoClone) {
+                        Submissao submissao, Submissao submissaoClone) {
         for (Submissao outraSubmissao : this.listaSubmissoes) {
             if (submissaoClone.equals(outraSubmissao)
-                    && !submissao.equals(outraSubmissao)) {
+                                && !submissao.equals(outraSubmissao)) {
                 return false;
             }
         }
@@ -87,46 +87,63 @@ public class ListaSubmissoes {
 
     /**
      * Altera o artigo inicial da submissao.
-     * 
+     *
      * @param submissao Submissao a alterar o artigo.
      * @param artigo Novo artigo inicial.
      */
     public void alterarSubmissao(Submissao submissao, Artigo artigo) {
         submissao.setArtigoInicial(artigo);
     }
+
     /**
-     * Verifica se o utilizador passado por parâmetro é autor de alguma 
+     * Verifica se o utilizador passado por parâmetro é autor de alguma
      * submissão.
-     * 
+     *
      * @param utilizador Utilizador a verificar se é autor.
-     * @return Verdadeiro se encontrar uma submissão em que o utilizador é autor 
+     * @return Verdadeiro se encontrar uma submissão em que o utilizador é autor
      * e falso se não encontrar.
      */
     public boolean isUtilizadorUmAutorSubmissao(Utilizador utilizador) {
-        for(Submissao submissao : this.listaSubmissoes) {
-            if(submissao.isAutor(utilizador)) {
+        for (Submissao submissao : this.listaSubmissoes) {
+            if (submissao.isAutorEmPeriodoSubmissao(utilizador)) {
                 return true;
             }
         }
-        
+
         return false;
     }
-    
+
     /**
      * Devolve uam lista de submissões associadas ao utilizador
      *
      * @param utilizador utilizador a verificar submissões
      * @return lista de submissões do utilizador
      */
-    public List<Submissao> getListaSubmissoesUtilizador(Utilizador utilizador) {
+    public List<Submissao> getListaSubmissoesUtilizadorEmPeriodoSubmissao(Utilizador utilizador) {
         List<Submissao> listaSubmissoesUtilizador = new ArrayList<>();
 
         for (Submissao submissao : this.listaSubmissoes) {
-            if (submissao.isAutor(utilizador)) {
+            if (submissao.isAutorEmPeriodoSubmissao(utilizador)) {
                 listaSubmissoesUtilizador.add(submissao);
             }
         }
         return listaSubmissoesUtilizador;
+    }
+
+    /**
+     * Verifica se determinado Utilizador (recebido por parâmetro) é autor do
+     * artigo submetido
+     *
+     * @param u utilizador no sistema
+     * @return verdadeiro se for autor do artigo e falso se não for
+     */
+    public boolean containsAutorNaListaAutoresArtigoInicial(Utilizador u) {
+        for (Submissao s : listaSubmissoes) {
+            if (s.getArtigoInicial().isAutor(u) && !s.isStateEmCameraReady()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -149,50 +166,66 @@ public class ListaSubmissoes {
         }
 
         ListaSubmissoes outraListaSubmissoes
-                = (ListaSubmissoes) outroObjeto;
+                            = (ListaSubmissoes) outroObjeto;
 
         return this.listaSubmissoes.equals(
-                outraListaSubmissoes.listaSubmissoes);
+                            outraListaSubmissoes.listaSubmissoes);
     }
-    
+
     /**
      * Verifica se na lista de submissoes existe submissao no estado removido.
-     * 
-     * @return Verdadeiro caso esteja no estado removido e 
-     * falso caso não esteja.
+     *
+     * @return Verdadeiro caso esteja no estado removido e falso caso não
+     * esteja.
      */
     public boolean temSubmissoesRetiradas() {
         for (Submissao submissao : this.listaSubmissoes) {
-            if(submissao.isStateRemovida()) {
+            if (submissao.isStateRemovida()) {
                 return true;
             }
         }
         return false;
     }
-    
+
     /**
      * Devolve uma lista de submissões que se encontram no estado removido.
-     * 
+     *
      * @return Lista de submissões retiradas.
      */
-    public List<Submissao> getListaSubmissoesRetiradas(){
+    public List<Submissao> getListaSubmissoesRetiradas() {
         List<Submissao> listaSubmissoesRetiradas = new ArrayList<>();
-        
-        for(Submissao submissao : this.listaSubmissoes){
-            if(submissao.isStateRemovida()){
+
+        for (Submissao submissao : this.listaSubmissoes) {
+            if (submissao.isStateRemovida()) {
                 listaSubmissoesRetiradas.add(submissao);
             }
         }
         return listaSubmissoesRetiradas;
     }
-   
+
     public boolean isUtilizadorUmAutorSubmissaoInicial(Utilizador utilizador) {
-        for(Submissao submissao : this.listaSubmissoes) {
-            if(submissao.isAutorArtigoInicial(utilizador)) {
+        for (Submissao submissao : this.listaSubmissoes) {
+            if (submissao.isAutorArtigoInicial(utilizador)) {
                 return true;
             }
         }
         return false;
     }
 
+    /**
+     * Devolve uma lista de submissões em que o utilizador autenticado no
+     * sistema é um dos autores
+     *
+     * @param u utilizador autenticado no sistema
+     * @return lista de submissões do utilizador
+     */
+    public List<Submissao> getListaSubmissoesUtilizador(Utilizador u) {
+        List<Submissao> listaSubmissoesAutor = new ArrayList<>();
+        for (Submissao s : listaSubmissoes) {
+            if (s.isAutorArtigo(u)) {
+                listaSubmissoesAutor.add(s);
+            }
+        }
+        return listaSubmissoesAutor;
+    }
 }

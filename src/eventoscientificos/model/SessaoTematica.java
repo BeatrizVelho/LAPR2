@@ -3,6 +3,7 @@ package eventoscientificos.model;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaCriadaState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmSubmissaoCameraReadyState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmSubmissaoState;
+import eventoscientificos.model.state.sessaotematica.SessaoTematicaFaseDecisaoState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaState;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +16,7 @@ import utils.Data;
  * @author G01
  */
 public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
-        Licitavel, Distribuivel, Revisivel {
+                    Licitavel, Distribuivel, Revisivel {
 
     /**
      * Código único da sessão temática.
@@ -112,15 +113,15 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
      * @param dataFim Data de fim da sessão temática.
      */
     public SessaoTematica(
-            String codigoUnico,
-            String descricao,
-            Data dataInicioSubmissao,
-            Data dataFimSubmissao,
-            Data dataInicioDistribuicao,
-            Data dataFimRevisao,
-            Data dataFimSubmissaoCameraReady,
-            Data dataInicio,
-            Data dataFim) {
+                        String codigoUnico,
+                        String descricao,
+                        Data dataInicioSubmissao,
+                        Data dataFimSubmissao,
+                        Data dataInicioDistribuicao,
+                        Data dataFimRevisao,
+                        Data dataFimSubmissaoCameraReady,
+                        Data dataInicio,
+                        Data dataFim) {
         setCodigoUnico(codigoUnico);
         setDescricao(descricao);
         setDataInicioSubmissao(dataInicioSubmissao);
@@ -287,7 +288,7 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
     public void setCodigoUnico(String codigoUnico) {
         if (codigoUnico.trim().isEmpty()) {
             throw new IllegalArgumentException("O código único da sessão "
-                    + "temática não pode estar vazio.");
+                                + "temática não pode estar vazio.");
         }
 
         this.codigoUnico = codigoUnico;
@@ -301,7 +302,7 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
     public void setDescricao(String descricao) {
         if (descricao.trim().isEmpty()) {
             throw new IllegalArgumentException("A descrição da sessão temática"
-                    + "não pode estar vazia.");
+                                + "não pode estar vazia.");
         }
 
         this.descricao = descricao;
@@ -316,7 +317,7 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
     public void setDataInicioSubmissao(Data dataInicioSubmissao) {
         if (dataInicioSubmissao == null) {
             throw new NullPointerException("A data de inicio de submissão não "
-                    + "pode estar vazia.");
+                                + "pode estar vazia.");
         }
 
         this.dataInicioSubmissao = dataInicioSubmissao;
@@ -331,7 +332,7 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
     public void setDataFimSubmissao(Data dataFinalSubmissao) {
         if (dataFinalSubmissao == null) {
             throw new NullPointerException("A data de fim de submissão não pode"
-                    + "estar vazia.");
+                                + "estar vazia.");
         }
 
         this.dataFimSubmissao = dataFinalSubmissao;
@@ -346,7 +347,7 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
     public void setDataInicioDistribuicao(Data dataInicioDistribuicao) {
         if (dataInicioDistribuicao == null) {
             throw new NullPointerException("A data de início de distribuição "
-                    + "não pode estar vazia.");
+                                + "não pode estar vazia.");
         }
 
         this.dataInicioDistribuicao = dataInicioDistribuicao;
@@ -355,7 +356,7 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
     public void setDataFimRevisao(Data dataFimRevisao) {
         if (dataFimRevisao == null) {
             throw new NullPointerException("A data de fim de revisão não pode "
-                    + "estar vazia.");
+                                + "estar vazia.");
         }
 
         this.dataFimRevisao = dataFimRevisao;
@@ -368,10 +369,10 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
      * CameraReady da sessão temática.
      */
     public void setDataFimSubmissaoCameraReady(
-            Data dataFimSubmissaoCameraReady) {
+                        Data dataFimSubmissaoCameraReady) {
         if (dataFimSubmissaoCameraReady == null) {
             throw new NullPointerException("A data de fim de submissão "
-                    + "CameraReady não pode estar vazia.");
+                                + "CameraReady não pode estar vazia.");
         }
 
         this.dataFimSubmissaoCameraReady = dataFimSubmissaoCameraReady;
@@ -385,7 +386,7 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
     public void setDataInicio(Data dataInicio) {
         if (dataInicio == null) {
             throw new NullPointerException("A data de início não pode estar"
-                    + "vazia.");
+                                + "vazia.");
         }
 
         this.dataInicio = dataInicio;
@@ -399,7 +400,7 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
     public void setDataFim(Data dataFim) {
         if (dataFim == null) {
             throw new NullPointerException("A data de fim não pode estar"
-                    + "vazia.");
+                                + "vazia.");
         }
 
         this.dataFim = dataFim;
@@ -443,8 +444,8 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
     @Override
     public String toString() {
         return String.format("    %s - %s",
-                this.getCodigoUnico(),
-                this.getDescricao());
+                            this.getCodigoUnico(),
+                            this.getDescricao());
     }
 
     /**
@@ -469,7 +470,7 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
         SessaoTematica outraSessaoTematica = (SessaoTematica) outroObjeto;
 
         return this.getCodigoUnico().equals(
-                outraSessaoTematica.getCodigoUnico());
+                            outraSessaoTematica.getCodigoUnico());
     }
 
     /**
@@ -485,12 +486,12 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
 
         if (!proponente.validarProponente()) {
             throw new IllegalArgumentException("Não introduziu um proponente"
-                    + "válido.");
+                                + "válido.");
         }
 
         if (!validarProponente(proponente)) {
             throw new IllegalArgumentException("O proponente introduzido já"
-                    + "se encontra na lista.");
+                                + "se encontra na lista.");
         }
 
         return adicionarProponente(proponente);
@@ -603,31 +604,31 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
     @Override
     public void iniciarProcessoDetecao(List<TipoConflito> listaTiposConflito) {
         ProcessoDetecao processoDetecao = novoProcessoDetecao(listaTiposConflito);
-        
+
         processoDetecao.detetarConflitos();
-        
+
         adicionarProcessoDetecao(processoDetecao);
     }
 
     /**
      * Cria e devolve uma instância de ProcessoDetecao alterando o estado da
      * sessão temática para EmDetecao.
-     * 
-     * @param listaTiposConflito Tipos de conflito pelos quais o processo de 
+     *
+     * @param listaTiposConflito Tipos de conflito pelos quais o processo de
      * deteção vai procurar.
      * @return ProcessoDetecao.
      */
     private ProcessoDetecao novoProcessoDetecao(
-            List<TipoConflito> listaTiposConflito) {
+                        List<TipoConflito> listaTiposConflito) {
         this.estado.setEmDetecao();
 
         return new ProcessoDetecao(this, listaTiposConflito);
     }
 
     /**
-     * Guarda o processo de deteção na sessão temática e altera o seu estado 
+     * Guarda o processo de deteção na sessão temática e altera o seu estado
      * para emLicitacao.
-     * 
+     *
      * @param processoDetecao Processo de Deteção a guardar.
      * @return Verdadeiro se o processo e a alteração de estado forem executados
      * com sucesso e falso caso não sejam.
@@ -649,7 +650,7 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
     @Override
     public Conflito getConflitoRevisorSubmissao(Revisor revisor, Submissao submissao) {
         return this.processoDetecao.getListaConflito()
-                .validarExistenciaConflito(revisor, submissao);
+                            .validarExistenciaConflito(revisor, submissao);
     }
 
     /**
@@ -791,8 +792,8 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
     public List<Submissao> getListaSubmissoesRetiradas() {
         return this.listaSubmissoes.getListaSubmissoesRetiradas();
     }
-    
-        /**
+
+    /**
      * Verifica se a Sessão Temática está no estado EmSubmissaoCmeraReady.
      *
      * @return Verdadeiro se está no estado EmSubmissaoCameraReady e falso se
@@ -814,5 +815,28 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
         return this.listaSubmissoes.isUtilizadorUmAutorSubmissaoInicial(utilizador);
     }
 
+    /**
+     * Verifica se a Sessão Temática está no estado FaseDeDecisao
+     *
+     * @return Verdadeiro se está no estado FaseDecisao e falso se não está.
+     */
+    public boolean isEstadoValidoParaDecidir() {
+        return this.estado instanceof SessaoTematicaFaseDecisaoState;
+    }
+
+    /**
+     * Verifica se determinado Submissivel cumpre os critérios necessários para
+     * remover.
+     *
+     * @return verdadeiro se a sessão temática reunir as condições necessárias de remoção
+     * e falso se não for possível remover.
+     */
+    @Override
+    public boolean isStateValidoParaRemover(Utilizador u) {
+        if (estado.isStateValidoParaRemover()) {
+            return this.listaSubmissoes.containsAutorNaListaAutoresArtigoInicial(u);
+        }
+        return false;
+    }
 
 }

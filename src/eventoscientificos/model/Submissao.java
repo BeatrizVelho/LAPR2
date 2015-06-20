@@ -239,14 +239,14 @@ public class Submissao {
         return new Submissao(this);
     }
 
-    public boolean isAutor(Utilizador utilizador) {
+    public boolean isAutorEmPeriodoSubmissao(Utilizador utilizador) {
         if (this.estado instanceof SubmissaoEmSubmissaoState
-                && this.getArtigoInicial().isAutor(utilizador)) {
+                            && this.getArtigoInicial().isAutor(utilizador)) {
             return true;
         }
 
         if (this.estado instanceof SubmissaoEmCameraReadyState
-                && this.artigoFinal.isAutor(utilizador)) {
+                            && this.artigoFinal.isAutor(utilizador)) {
             return true;
         }
 
@@ -275,7 +275,7 @@ public class Submissao {
         Submissao outraSubmissao = (Submissao) outroObjecto;
 
         return this.getArtigoInicial().equals(outraSubmissao.getArtigoInicial())
-                || this.getArtigoFinal().equals(outraSubmissao.getArtigoFinal());
+                            || this.getArtigoFinal().equals(outraSubmissao.getArtigoFinal());
     }
 
     /**
@@ -290,10 +290,37 @@ public class Submissao {
 
     public boolean isAutorArtigoInicial(Utilizador utilizador) {
         if (this.estado instanceof SubmissaoAceiteState
-                && getArtigoInicial().isAutor(utilizador)) {
+                            && getArtigoInicial().isAutor(utilizador)) {
             return true;
         }
         return false;
     }
 
+    /**
+     * Valida se a submissão se encontra no estado em Camera Ready
+     *
+     * @return verdadeiro se estiver e falso se não estiver no referido estado
+     */
+    public boolean isStateEmCameraReady() {
+        return this.estado.setEmCameraReady();
+    }
+
+    /**
+     * Verifica se determinado utilizador é autor no artigo.
+     *
+     * @param utilizador utilizador autenticado no sistema
+     * @return verdadeiro se pertencer à lista de autores do artigo e falso se
+     * não pertencer
+     */
+    public boolean isAutorArtigo(Utilizador utilizador) {
+        return this.artigoInicial.isAutor(utilizador);
+    }
+/**
+ * Modifica o estado da submissão para o estado de removida se cumprir
+ * todos os requisitos necessários para a mudança
+ * @return verdadeiro se mudar de estado para removida e falso se não mudar.F 
+ */
+    public boolean setEstadoRemovida() {
+        return this.estado.setRemovida();
+    }
 }

@@ -63,14 +63,15 @@ public class ListaAutores {
     public  boolean novoAutor(
             Utilizador utilizador, InstituicaoAfiliacao instituicaoAfiliacao) {
         Autor autor = new Autor(utilizador, instituicaoAfiliacao);
-        
+        System.out.println("Imprimir lista");
+        System.out.println(listaAutores);
         if(!autor.validarAutor()) {
             throw new IllegalArgumentException(
                     "Não introduziu um autor válido.");
         }
         if(!validarAutor(autor)) {
-            throw new IllegalArgumentException("O autor introduzido já se"
-                    + "econtra na lista de autores.");
+            throw new IllegalArgumentException("O autor introduzido já se "
+                    + "encontra na lista de autores.");
         }
         
         return adicionarAutor(autor);

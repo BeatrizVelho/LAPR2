@@ -22,6 +22,7 @@ public class ListaSubmissoesTest {
         this.submissao = new Submissao();
         this.submissao.setArtigoInicial(new Artigo());
         this.submissao.setArtigoFinal(new Artigo());
+
     }
 
     /**
@@ -106,22 +107,23 @@ public class ListaSubmissoesTest {
     }
 
     /**
-     * Teste do método getListaSubmissoesUtilizador, da classe ListaSubmissoes.
+     * Teste do método getListaSubmissoesUtilizadorEmPeriodoSubmissao, da classe
+     * ListaSubmissoes.
      */
     @Test
-    public void testGetListaSubmissoesUtilizador() {
-        System.out.println("getListaSubmissoesUtilizador");
+    public void testGetListaSubmissoesUtilizadorEmPeriodoSubmissao() {
+        System.out.println("getListaSubmissoesUtilizadorEmPeriodoSubmissao");
         Artigo artigo = new Artigo();
         artigo.getListaAutores().novoAutor(new Utilizador(
-                "pedro", "1140781@isep.ipp.pt", "pedro", "12345"),
-                new InstituicaoAfiliacao("ISEP"));
+                            "pedro", "1140781@isep.ipp.pt", "pedro", "12345"),
+                            new InstituicaoAfiliacao("ISEP"));
 
         Utilizador utilizador
-                = new Utilizador("pedro", "1140781@isep.ipp.pt", "pedro", "12345");
+                            = new Utilizador("pedro", "1140781@isep.ipp.pt", "pedro", "12345");
         ListaSubmissoes instance = new ListaSubmissoes();
         instance.adicionarSubmissao(this.submissao);
         int expResult = 1;
-        int result = instance.getListaSubmissoesUtilizador(utilizador).size();
+        int result = instance.getListaSubmissoesUtilizadorEmPeriodoSubmissao(utilizador).size();
         assertEquals(expResult, result);
     }
 
@@ -140,7 +142,7 @@ public class ListaSubmissoesTest {
         assertEquals(expResult, result);
     }
 
-   /**
+    /**
      * Teste do método validarCloneSubmissao, da classe ListaSubmissoes.
      */
     @Test
@@ -159,7 +161,7 @@ public class ListaSubmissoesTest {
         boolean expResult = false;
         boolean result = instance.validarCloneSubmissao(submissao1, submissaoClone);
         assertEquals(expResult, result);
-    } 
+    }
 
     /**
      * Teste do método isUtilizadorUmAutorSubmissao, da classe ListaSubmissoes.
@@ -168,8 +170,8 @@ public class ListaSubmissoesTest {
     public void testIsUtilizadorUmAutorSubmissao() {
         System.out.println("isUtilizadorUmAutorSubmissao");
         Utilizador utilizador = new Utilizador(
-                "Susana", "email@gmail.com", "susus", "1234");
-        Submissao submissao = new Submissao();        
+                            "Susana", "email@gmail.com", "susus", "1234");
+        Submissao submissao = new Submissao();
         submissao.setEstado(new SubmissaoEmSubmissaoState(submissao));
         submissao.setArtigoInicial(new Artigo());
         submissao.getArtigoInicial().getListaAutores().novoAutor(utilizador, new InstituicaoAfiliacao("ISEP"));
@@ -179,7 +181,7 @@ public class ListaSubmissoesTest {
         boolean result = instance.isUtilizadorUmAutorSubmissao(utilizador);
         assertEquals(expResult, result);
     }
-    
+
     /**
      * Teste do método temSubmissoesRetiradas, da classe ListaSubmissoes.
      */
@@ -189,12 +191,12 @@ public class ListaSubmissoesTest {
         ListaSubmissoes instance = new ListaSubmissoes();
         this.submissao.setEstado(new SubmissaoCriadaState(submissao));
         instance.adicionarSubmissao(submissao);
-        
+
         boolean expResult = false;
         boolean result = instance.temSubmissoesRetiradas();
         assertEquals(expResult, result);
     }
-    
+
     /**
      * Teste do método temSubmissoesRetiradas, da classe ListaSubmissoes.
      */
@@ -224,4 +226,54 @@ public class ListaSubmissoesTest {
         int result = (instance.getListaSubmissoesRetiradas()).size();
         assertEquals(expResult, result);
     }
+
+    /**
+     * Test of containsAutorNaListaAutoresArtigoInicial method, of class
+     * ListaSubmissoes.
+     */
+    @Test
+    public void testContainsAutorNaListaAutoresArtigoInicial() {
+        System.out.println("containsAutorNaListaAutoresArtigoInicial");
+        Artigo artigoInicial = new Artigo();
+        Utilizador u = new Utilizador(
+                            "Nome", "mail@isep.ipp.pt", "Username", "1234");
+        artigoInicial.getListaAutores().novoAutor(u, new InstituicaoAfiliacao("MatosinhosSport"));
+        this.submissao.adicionarArtigo(artigoInicial);
+        ListaSubmissoes instance = new ListaSubmissoes();
+        instance.adicionarSubmissao(submissao);
+        boolean expResult = true;
+        boolean result = instance.containsAutorNaListaAutoresArtigoInicial(u);
+        assertEquals(expResult, result);
+
+    }
+
+    /**
+     * Test of getListaSubmissoesUtilizador method, of class ListaSubmissoes.
+     */
+    @Test
+    public void testGetListaSubmissoesUtilizador() {
+        System.out.println("getListaSubmissoesUtilizador");
+        Utilizador u = new Utilizador(
+                            "Nana", "molly@isep.ipp.pt", "User2", "1234");
+        Submissao s = new Submissao();
+        s.setEstado(new SubmissaoEmSubmissaoState(s));
+        s.setArtigoInicial(new Artigo());
+        s.getArtigoInicial().getListaAutores().novoAutor(u, new InstituicaoAfiliacao("Porto"));
+
+        Utilizador ut = new Utilizador(
+                            "fafa", "money@isep.ipp.pt", "Username", "1234");
+        Submissao sub = new Submissao();
+        sub.setEstado(new SubmissaoEmSubmissaoState(sub));
+        sub.setArtigoInicial(new Artigo());
+        sub.getArtigoInicial().getListaAutores().novoAutor(ut, new InstituicaoAfiliacao("Maia"));
+
+        ListaSubmissoes instance = new ListaSubmissoes();
+        instance.adicionarSubmissao(sub);
+        instance.adicionarSubmissao(s);
+
+        int expResult = 1;
+        int result = instance.getListaSubmissoesUtilizador(u).size();
+        assertEquals(expResult, result);
+    }
+
 }

@@ -763,4 +763,31 @@ public class SessaoTematicaTest {
         assertEquals(expResult, result);
     }
 
+    /**
+     * Teste do método isEstadoValidoParaDecidir, da classe SessaoTematica.
+     */
+    @Test
+    public void testIsEstadoValidoParaDecidir() {
+        System.out.println("isEstadoValidoParaDecidir");
+        SessaoTematica instance = this.sessaoTematica;
+        instance.setEstado(new SessaoTematicaEmRevisaoState(sessaoTematica));
+        boolean expResult = false;
+        boolean result = instance.isEstadoValidoParaDecidir();
+        assertEquals(expResult, result);
+    }
+    
+    /**
+     * Test of isStateValidoParaRemover method, of class SessaoTematica.
+     */
+    @Test
+    public void testIsStateValidoParaRemover() {
+        System.out.println("isStateValidoParaRemover");
+        Utilizador u = new Utilizador("fatima", "mail@isep.ipp.pt", "fafa","1235");
+        SessaoTematica instance = this.sessaoTematica;
+        instance.setEstado(new SessaoTematicaEmSubmissaoState(sessaoTematica));
+        instance.getListaSubmissoes().adicionarSubmissao(submissao);
+        boolean expResult = false;
+        boolean result = instance.isStateValidoParaRemover(u);
+        assertEquals(expResult, result);
+    }
 }

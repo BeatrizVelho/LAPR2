@@ -1,5 +1,7 @@
 package eventoscientificos.model;
 
+
+
 /**
  * Representa uma instância de Artigo
  *
@@ -42,11 +44,7 @@ public class Artigo {
      */
     private static final String FICHEIRO_POR__OMISSAO = "Sem Ficheiro!";
 
-    /**
-     * Lista de autores do artigo por omissão.
-     */
-    private static final ListaAutores LISTA_AUTORES_POR_OMISSAO
-            = new ListaAutores();
+
 
     /**
      * Constroi uma instancia de artigo com o titulo, o resumo e o ficheiro.
@@ -65,7 +63,7 @@ public class Artigo {
         this.titulo = TITULO_POR_OMISSAO;
         this.resumo = RESUMO_POR_OMISSAO;
         this.ficheiro = FICHEIRO_POR__OMISSAO;
-        this.listaAutores =  LISTA_AUTORES_POR_OMISSAO;      
+        this.listaAutores = new ListaAutores();      
     }
 
     /**

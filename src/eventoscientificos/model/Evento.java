@@ -697,7 +697,7 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
     @Override
     public Conflito getConflitoRevisorSubmissao(Revisor revisor, Submissao submissao) {
         return this.processoDetecao.getListaConflito().validarExistenciaConflito(
-                revisor, submissao);
+                            revisor, submissao);
     }
 
     /**
@@ -936,6 +936,21 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
     @Override
     public boolean isStateValidoParaSubmeterArtigoFinal() {
         return getEstado() instanceof EventoEmSubmissaoCameraReadyState;
+    }
+
+    /**
+     * Verifica se determinado Evento cumpre os critérios necessários para
+     * remover.
+     *
+     * @return verdadeiro se o evento reunir as condições necessárias de remoção
+     * e falso se não for possível remover.
+     */
+    @Override
+    public boolean isStateValidoParaRemover(Utilizador u) {
+        if (estado.isStateValidoParaRemover()) {
+            return this.listaSubmissoes.containsAutorNaListaAutoresArtigoInicial(u);
+        }
+        return false;
     }
 
 }
