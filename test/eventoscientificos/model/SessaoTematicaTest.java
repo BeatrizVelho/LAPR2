@@ -790,4 +790,31 @@ public class SessaoTematicaTest {
         boolean result = instance.isStateValidoParaRemover(u);
         assertEquals(expResult, result);
     }
+
+    /**
+     * Teste do método getNumeroProponentes, da classe SessoesTematica.
+     */
+    @Test
+    public void testGetNumeroProponentes() {
+        System.out.println("getNumeroProponentes");
+        SessaoTematica instance = this.sessaoTematica;
+        instance.novoProponente(this.utilizador);
+        int expResult = 1;
+        int result = instance.getNumeroProponentes();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método getProponentePeloID, da classe SessaoTematica.
+     */
+    @Test
+    public void testGetProponentePeloID() {
+        System.out.println("getProponentePeloID");
+        int indice = 0;
+        SessaoTematica instance = this.sessaoTematica;
+        instance.novoProponente(this.utilizador);
+        Proponente expResult = new Proponente(this.utilizador);
+        Proponente result = instance.getProponentePeloID(indice);
+        assertEquals(expResult, result);
+    }
 }
