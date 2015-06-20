@@ -242,7 +242,7 @@ public class ListaSubmissoes {
      */
     public List<Submissao> getListaSubmissoesUtilizador(Utilizador u) {
         List<Submissao> listaSubmissoesAutor = new ArrayList<>();
-        for (Submissao s : listaSubmissoes) {
+        for (Submissao s : this.listaSubmissoes) {
             if (s.isAutorArtigo(u)) {
                 listaSubmissoesAutor.add(s);
             }
