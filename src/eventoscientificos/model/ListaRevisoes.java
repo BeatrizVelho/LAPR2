@@ -85,4 +85,45 @@ public class ListaRevisoes {
         return this.listaRevisoes.equals(outraLista.listaRevisoes);
     }
 
+    /**
+     * Devolve a taxa de aceitação e as médias de cada parâmetro de avaliação
+     * (adequação, confiança, originalidade, qualidade e recomendação)
+     *
+     * @param nSubmissoes numero total de submissões
+     * @return taxa de aceitação e as médias de cada parâmetro de avaliação.
+     */
+    public float[] getValoresTotaisParaEstatisticaEvento(int nSubmissoes) {
+        int nSubmissoesAceites = 0, totalAdequacao = 0, totalConfianca = 0,
+                            totalQualidade = 0, totalRecomendacao = 0;
+
+        float[] vecTaxaEMediaParametrosAvaliacao = new float[5];
+
+        for (Revisao r : this.listaRevisoes) {
+            Submissao s = r.getSubmissao();
+            if (s.isStateAceite()) {
+                nSubmissoesAceites++;
+            }
+            totalAdequacao += r.getAdequacaoArtigo();
+            totalConfianca += r.getConfiancaRevisor();
+            totalQualidade += r.getQualidadeArtigo();
+            totalRecomendacao += r.getRecomendacaoGlobal();
+        }
+        vecTaxaEMediaParametrosAvaliacao[0] = nSubmissoesAceites / nSubmissoes;
+        vecTaxaEMediaParametrosAvaliacao[1] = totalAdequacao / nSubmissoesAceites;
+        vecTaxaEMediaParametrosAvaliacao[2] = totalConfianca / nSubmissoesAceites;
+        vecTaxaEMediaParametrosAvaliacao[3] = totalQualidade / nSubmissoesAceites;
+        vecTaxaEMediaParametrosAvaliacao[4] = totalRecomendacao / nSubmissoesAceites;
+
+        return vecTaxaEMediaParametrosAvaliacao;
+    }
+    
+//    /**
+//     * Calcula a média.
+//     * @param a valor do numerador
+//     * @param b valor do denominador
+//     * @return 
+//     */
+//    private float calcularMedia(int a, int b){
+//        return a/b;
+//    }
 }

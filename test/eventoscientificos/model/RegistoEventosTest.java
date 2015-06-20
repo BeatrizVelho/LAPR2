@@ -8,6 +8,7 @@ import eventoscientificos.model.state.evento.EventoRegistadoState;
 import eventoscientificos.model.state.evento.EventoSessoesTematicasDefinidasState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmSubmissaoCameraReadyState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaRegistadaState;
+import eventoscientificos.model.state.submissao.SubmissaoEmCameraReadyState;
 import eventoscientificos.model.state.submissao.SubmissaoEmSubmissaoState;
 import eventoscientificos.model.state.submissao.SubmissaoRemovidaState;
 import java.util.ArrayList;
@@ -326,30 +327,27 @@ public class RegistoEventosTest {
     }
 
     /**
-     * Teste do método getNumeroEventos, da classe RegistoEventos.
+     * Test of getListaEventosOrganizadorEmSubmissaoCameraReady method, of class
+     * RegistoEventos.
      */
     @Test
-    public void testGetNumeroEventos() {
-        System.out.println("getNumeroEventos");
+    public void testGetListaEventosOrganizadorEmSubmissaoCameraReady() {
+        System.out.println("getListaEventosOrganizadorEmSubmissaoCameraReady");
+        Utilizador u = this.utilizador;
+        Artigo a = new Artigo();
+        a.getListaAutores().novoAutor(utilizador, new InstituicaoAfiliacao("Matosinhos"));
+        Submissao s = new Submissao();
+        s.adicionarArtigo(a);
+        s.setEstado(new SubmissaoEmCameraReadyState(s));
+        this.evento.getListaSubmissoes().adicionarSubmissao(s);
+        this.evento.novoOrganizador(utilizador);
+        this.evento.setEstado(new EventoEmSubmissaoCameraReadyState(evento));
         RegistoEventos instance = new RegistoEventos();
-        instance.adicionarEvento(this.evento);
+        instance.adicionarEvento(evento);
         int expResult = 1;
-        int result = instance.getNumeroEventos();
+        int result = instance.getListaEventosOrganizadorEmSubmissaoCameraReady(u).size();
         assertEquals(expResult, result);
+
     }
 
-    /**
-     * Teste do método getEventoPeloID, da classe RegistoEventos.
-     */
-    @Test
-    public void testGetEventoPeloID() {
-        System.out.println("getEventoPeloID");
-        int indice = 0;
-        RegistoEventos instance = new RegistoEventos();
-        instance.adicionarEvento(this.evento);
-        Evento expResult
-                = this.evento;
-        Evento result = instance.getEventoPeloID(indice);
-        assertEquals(expResult, result);
-    }
 }

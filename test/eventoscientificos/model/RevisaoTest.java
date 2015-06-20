@@ -64,16 +64,18 @@ public class RevisaoTest {
     }
 
     /**
-     * Test of setAdequacaoArtigo method, of class Revisao.
+     * Test of setAdequacaoArtigo and getAdequacaoArtigomethod, of class
+     * Revisao.
      */
     @Test
-    public void testSetAdequacaoArtigo() {
-        System.out.println("setAdequacaoArtigo");
+    public void testSetAndGetAdequacaoArtigo() {
+        System.out.println("setAndGetAdequacaoArtigo");
         int adequacaoArtigo = 5;
-
         Revisao instance = new Revisao(submissao, revisor);
         instance.setAdequacaoArtigo(adequacaoArtigo);
-
+        int expResult = 5;
+        int result = instance.getAdequacaoArtigo();
+        assertEquals(expResult, result);
     }
 
     /**
@@ -88,14 +90,19 @@ public class RevisaoTest {
     }
 
     /**
-     * Test of setConfiancaRevisor method, of class Revisao.
+     * Test of setConfiancaRevisor and getConfiancaRevisormethod, of class
+     * Revisao.
      */
     @Test
-    public void testSetConfiancaRevisor() {
-        System.out.println("setConfiancaRevisor");
+    public void testSetAndGetConfiancaRevisor() {
+        System.out.println("setAndGetConfiancaRevisor");
         int confiancaRevisor = 0;
         Revisao instance = new Revisao(submissao, revisor);
         instance.setConfiancaRevisor(confiancaRevisor);
+        int expResult = 0;
+        int result = instance.getConfiancaRevisor();
+        assertEquals(expResult, result);
+
     }
 
     /**
@@ -110,14 +117,19 @@ public class RevisaoTest {
     }
 
     /**
-     * Test of setOriginalidadeArtigo method, of class Revisao.
+     * Test of setOriginalidadeArtigo and getOriginalidadeArtigo method, of
+     * class Revisao.
      */
     @Test
-    public void testSetOriginalidadeArtigo() {
-        System.out.println("setOriginalidadeArtigo");
+    public void testSetAndGetOriginalidadeArtigo() {
+        System.out.println("setAndGetOriginalidadeArtigo");
         int originalidadeArtigo = 5;
         Revisao instance = new Revisao(submissao, revisor);
         instance.setOriginalidadeArtigo(originalidadeArtigo);
+        int expResult = 5;
+        int result = instance.getOriginalidadeArtigo();
+        assertEquals(expResult, result);
+
     }
 
     /**
@@ -132,14 +144,19 @@ public class RevisaoTest {
     }
 
     /**
-     * Test of setQualidadeArtigo method, of class Revisao.
+     * Test of setQualidadeArtigo and getQualidadeArtigomethod, of class
+     * Revisao.
      */
     @Test
-    public void testSetQualidadeArtigo() {
-        System.out.println("setQualidadeArtigo");
+    public void testSetAndGetQualidadeArtigo() {
+        System.out.println("setAndGetQualidadeArtigo");
         int qualidadeArtigo = 0;
         Revisao instance = new Revisao(submissao, revisor);
         instance.setQualidadeArtigo(qualidadeArtigo);
+        int expResult = 0;
+        int result = instance.getQualidadeArtigo();
+        assertEquals(expResult, result);
+
     }
 
     /**
@@ -154,14 +171,19 @@ public class RevisaoTest {
     }
 
     /**
-     * Test of setRecomendacaoGlobal method, of class Revisao.
+     * Test of setRecomendacaoGlobal and getRecomendacaoGlobal method, of class
+     * Revisao.
      */
     @Test
-    public void testSetRecomendacaoGlobal() {
-        System.out.println("setRecomendacaoGlobal");
+    public void testSetAndGetRecomendacaoGlobal() {
+        System.out.println("setAndGetRecomendacaoGlobal");
         int recomendacaoGlobal = -2;
         Revisao instance = new Revisao(submissao, revisor);
         instance.setRecomendacaoGlobal(recomendacaoGlobal);
+        int expResult = -2;
+        int result = instance.getRecomendacaoGlobal();
+        assertEquals(expResult, result);
+
     }
 
     /**
@@ -242,7 +264,7 @@ public class RevisaoTest {
         revisao.setTextoJustificativo("sesese");
         Revisao instance = new Revisao(submissao, revisor);
         boolean expResult = true;
-        boolean result = revisao.adicionarResultadoRevisao(instance);
+        boolean result = instance.adicionarResultadoRevisao(revisao);
         assertEquals(expResult, result);
     }
 
@@ -275,5 +297,18 @@ public class RevisaoTest {
         boolean expResult = true;
         Revisor result = instance.getRevisor();
         assertEquals(revisor, result);
+    }
+
+    /**
+     * Test of getSubmissao method, of class Revisao.
+     */
+    @Test
+    public void testGetSubmissao() {
+        System.out.println("getSubmissao");
+        Revisao instance = new Revisao(submissao, revisor);
+        Submissao expResult = this.submissao;
+        Submissao result = instance.getSubmissao();
+        assertEquals(expResult, result);
+
     }
 }

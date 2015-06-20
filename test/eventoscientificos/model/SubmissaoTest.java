@@ -307,6 +307,18 @@ public class SubmissaoTest {
         boolean result = instance.isStateRemovida();
         assertEquals(expResult, result);
     }
+/**
+     * Teste do método isStateAceite, da classe Submissao.
+     */
+    @Test
+    public void testIsStateAceite() {
+        System.out.println("isStateAceite");
+        Submissao instance = new Submissao();
+        instance.setEstado(new SubmissaoAceiteState(instance));
+        boolean expResult = true;
+        boolean result = instance.isStateAceite();
+        assertEquals(expResult, result);
+    }
 
     /**
      * Teste do método isStateRemovida, da classe Submissao.
