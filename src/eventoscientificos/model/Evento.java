@@ -554,6 +554,26 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
     }
 
     /**
+     * Devolve o número total de organizadores na lista.
+     * 
+     * @return Número total de organizadores na lista.
+     */
+    public int getNumeroOrganizadores() {
+        return this.listaOrganizadores.size();
+    }
+
+    /**
+     * Devolve um Organizador através da sua posição na lista.
+     * 
+     * @param indice Posição na lista.
+     * 
+     * @return Organizador através da sua posição na lista.
+     */
+    public Organizador getOrganizadorPeloID(int indice) {
+        return this.listaOrganizadores.get(indice);
+    }
+
+    /**
      * Verifica se determinado utilizador é organizador do evento.
      *
      * @param utilizador Utilizador que se pretende verificar.
