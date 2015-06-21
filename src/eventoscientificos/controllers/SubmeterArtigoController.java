@@ -13,6 +13,7 @@ import eventoscientificos.model.Submissao;
 import eventoscientificos.model.Submissivel;
 import eventoscientificos.model.Utilizador;
 import java.util.List;
+import javax.swing.DefaultListModel;
 
 /**
  * Representa uma instância de SubmeterArtigoController através de uma empresa.
@@ -27,24 +28,19 @@ public class SubmeterArtigoController {
     private Empresa empresa;
 
     /**
+     * Modelo da lista de autores.
+     */
+    private DefaultListModel<Autor> modeloLista;
+
+    /**
+     * Lista de Submissiveis.
+     */
+    private List<Submissivel> listaSubmissiveis;
+
+    /**
      * Instância de Submissivel.
      */
     private Submissivel submissivel;
-
-    /**
-     * Instncia de Artigo.
-     */
-    private Artigo artigo;
-
-    /**
-     * Intância de Lista de Autores.
-     */
-    private ListaAutores listaAutores;
-
-    /**
-     * Instância de Submissao.
-     */
-    private Submissao submissao;
 
     /**
      * Instância de Lista de Submissões.
@@ -52,15 +48,25 @@ public class SubmeterArtigoController {
     private ListaSubmissoes listaSubmissoes;
 
     /**
+     * Instância de Submissao.
+     */
+    private Submissao submissao;
+
+    /**
+     * Instncia de Artigo.
+     */
+    private Artigo artigo;
+
+    /**
      * Intância de Registo de Utiliazadores.
      */
     private RegistoUtilizadores registoUtilizadores;
-    
+
     /**
-     * Lista de Submissiveis.
+     * Intância de Lista de Autores.
      */
-    private List<Submissivel> listaSubmissiveis;
-    
+    private ListaAutores listaAutores;
+
     /**
      * Lista de autores registados.
      */
@@ -68,30 +74,61 @@ public class SubmeterArtigoController {
 
     /**
      * Constrói uma instância de SubmeterArtigoController.
-     * 
+     *
      * @param empresa Empresa.
      */
     public SubmeterArtigoController(Empresa empresa) {
         this.empresa = empresa;
-        this.artigo = null;
+        this.modeloLista = new DefaultListModel();
+        this.listaSubmissiveis = null;
         this.submissivel = null;
-        this.listaAutores = null;
-        this.submissao = null;
         this.listaSubmissoes = null;
+        this.submissao = null;
+        this.artigo = null;
         this.registoUtilizadores = null;
+        this.listaAutores = null;
+        this.listaAutoresRegistados = null;
     }
 
     /**
-     * Devolve uma lista de Submissiveis que estão a aceitar submissoes de artigos
-     * 
+     * Devolve a lista de submissiveis.
+     *
+     * @return Lista submissiveis.
+     */
+    public List<Submissivel> getListaSubmissiveis() {
+        return this.listaSubmissiveis;
+    }
+
+    /**
+     * Devolve a modelo da lista de autores.
+     *
+     * @return Modelo da lista de autores.
+     */
+    public DefaultListModel getModeloLista() {
+        return this.modeloLista;
+    }
+
+    /**
+     * Devolve a lista de autores registados.
+     *
+     * @return Lista de autores registados.
+     */
+    public List<Autor> getListaAutores() {
+        return this.listaAutoresRegistados;
+    }
+
+    /**
+     * Devolve uma lista de Submissiveis que estão a aceitar submissoes de
+     * artigos.
+     *
      * @return Lista de Submissiveis.
      */
-    public boolean getListaSubmissiveis() {
+    public boolean getListaSubmissiveisAceitarArtigo() {
         RegistoEventos registoEventos = this.empresa.getRegistoEventos();
         this.listaSubmissiveis
                 = registoEventos.getListaSubmissiveisAceitarArtigo();
 
-        return registoEventos != null && this.listaSubmissiveis != null;
+        return this.listaSubmissiveis != null;
     }
 
     /**
@@ -103,10 +140,10 @@ public class SubmeterArtigoController {
         this.submissao = listaSubmissoes.novaSubmissao();
         this.artigo = submissao.novoArtigo();
         this.listaAutores = artigo.getListaAutores();
-        
-        return this.submissivel != null && this.listaSubmissoes != null &&
-                this.submissao != null && this.artigo != null &&
-                this.listaAutores != null;
+
+        return this.submissivel != null && this.listaSubmissoes != null
+                && this.submissao != null && this.artigo != null
+                && this.listaAutores != null;
     }
 
     /**
@@ -119,7 +156,10 @@ public class SubmeterArtigoController {
         this.artigo.setTitulo(titulo);
         this.artigo.setResumo(resumo);
         this.registoUtilizadores = this.empresa.getRegistoUtilizadores();
-        
+
+        Utilizador submissor = this.empresa.getUtilizadorAutenticado();
+        this.novoAutor(submissor.getNome(), submissor.getEmail(), new InstituicaoAfiliacao("ISEP"));
+
         return this.registoUtilizadores != null;
     }
 
@@ -137,15 +177,23 @@ public class SubmeterArtigoController {
         Utilizador utilizador = this.registoUtilizadores.getUtilizador(email);
 
         if (utilizador == null) {
+            if (!this.modeloLista.contains(new Autor(nome, email, instituicaoAfiliacao))) {
+                this.modeloLista.addElement(new Autor(nome, email, instituicaoAfiliacao));
+            }
+
             return this.listaAutores.novoAutor(nome, email, instituicaoAfiliacao);
         } else {
+            if (!this.modeloLista.contains(new Autor(utilizador, instituicaoAfiliacao))) {
+                this.modeloLista.addElement(new Autor(utilizador, instituicaoAfiliacao));
+            }
+
             return this.listaAutores.novoAutor(utilizador, instituicaoAfiliacao);
         }
     }
 
     /**
      * Devolveuma lista de autores registados.
-     * 
+     *
      * @return Lista de autores registados.
      */
     public boolean getListaAutoresRegistados() {
@@ -161,13 +209,13 @@ public class SubmeterArtigoController {
         AutorCorrespondente autorCorrespondente = new AutorCorrespondente(
                 autor.getUtilizador(), autor.getInstituicaoAfiliacao());
         this.submissao.setAutorCorrespondente(autorCorrespondente);
-        
-        return autorCorrespondente != null;
+
+        return this.submissao.getAutorCorrespondente() != null;
     }
 
     /**
      * Modifica o ficheiro da submissão.
-     * 
+     *
      * @param ficheiro Ficheiro da submissão.
      * @return Verdadeiro se o ficheiro for válido e falso se não for.
      */
@@ -178,11 +226,11 @@ public class SubmeterArtigoController {
 
     /**
      * Adiciona uma submissão ao Submissível selecionado.
-     * 
+     *
      * @return Verdaeiro se a submissao for adicionada e falso se não for.
      */
     public boolean adicionarSubmissao() {
         return this.listaSubmissoes.adicionarSubmissao(this.submissao);
     }
-}
 
+}
