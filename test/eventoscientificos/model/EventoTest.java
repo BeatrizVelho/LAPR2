@@ -999,4 +999,17 @@ public class EventoTest {
         assertEquals(expResult, result);
     }
 
+    /**
+     * Teste do método novoProcessoDecisao, da classe Evento.
+     */
+    @Test (expected = NullPointerException.class)
+    public void testNovoProcessoDecisao() {
+        System.out.println("novoProcessoDecisao");
+        Evento instance = this.evento;
+        instance.setEstado(new EventoFaseDecisaoState(evento));
+        ProcessoDecisao expResult = new ProcessoDecisao();
+        ProcessoDecisao result = instance.novoProcessoDecisao();
+        assertEquals(expResult, result);
+    }
+
 }
