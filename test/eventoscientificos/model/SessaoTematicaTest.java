@@ -8,6 +8,7 @@ import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmLicitacaoSt
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmRevisaoState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmSubmissaoCameraReadyState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmSubmissaoState;
+import eventoscientificos.model.state.sessaotematica.SessaoTematicaFaseDecisaoState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaRegistadaState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaState;
 import eventoscientificos.model.state.submissao.SubmissaoEmSubmissaoState;
@@ -815,6 +816,19 @@ public class SessaoTematicaTest {
         instance.novoProponente(this.utilizador);
         Proponente expResult = new Proponente(this.utilizador);
         Proponente result = instance.getProponentePeloID(indice);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método novoProcessoDecisao, da classe SessaoTematica.
+     */
+    @Test (expected = NullPointerException.class)
+    public void testNovoProcessoDecisao() {
+        System.out.println("novoProcessoDecisao");
+        SessaoTematica instance = this.sessaoTematica;
+        this.sessaoTematica.setEstado(new SessaoTematicaFaseDecisaoState(sessaoTematica));
+        ProcessoDecisao expResult = new ProcessoDecisao();
+        ProcessoDecisao result = instance.novoProcessoDecisao();
         assertEquals(expResult, result);
     }
 }
