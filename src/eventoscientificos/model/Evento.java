@@ -95,6 +95,11 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
      * Processo de Distribuição.
      */
     private ProcessoDistribuicao processoDistribuicao;
+    
+    /**
+     * Processo de Decisão.
+     */
+    private ProcessoDecisao processoDecisao;
 
     /**
      * CP do evento.
@@ -994,5 +999,15 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
      */
     public List<Decidivel> getListaDecidivelOrganizadorProponente(Utilizador utilizador){
         return listaSessoesTematicas.getListaDecidivelOrganizadorProponente(utilizador);
+    }
+
+    /**
+     * Constrói instância de ProcessoDecisao
+     * 
+     * @return ProcessoDecisao
+     */
+    @Override
+    public ProcessoDecisao novoProcessoDecisao() {
+        return new ProcessoDecisao();
     }
 }
