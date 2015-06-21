@@ -156,7 +156,7 @@ public class SessaoTematicaCPDefinidaState implements SessaoTematicaState {
     @Override
     public boolean validarEstado() {
         return Data.dataAtual().isMaior(
-                            this.sessaoTematica.getDataInicioSubmissao()) && this.sessaoTematica.getDataFimSubmissao().isMaior(Data.dataAtual());
+                            this.sessaoTematica.getDataInicioSubmissao());
     }
 
     /**
