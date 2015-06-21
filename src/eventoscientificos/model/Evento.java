@@ -608,7 +608,7 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
      * ListaSessõesTemáticas e falso caso esteja vazia.
      */
     public boolean temSessoesTematicasDefinidas() {
-        return this.listaSessoesTematicas.temSessoesTematicasDefinidas();
+        return this.estado.setSessoesTematicasDefinidas();
     }
 
     /**

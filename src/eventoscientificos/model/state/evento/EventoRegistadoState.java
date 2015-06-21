@@ -175,7 +175,7 @@ public class EventoRegistadoState implements EventoState {
      */
     @Override
     public boolean validarEstado() {
-        return this.e.temSessoesTematicasDefinidas();
+        return this.e.getListaSessoesTematicas().temSessoesTematicasDefinidas();
     }
  /**
      * Valida se o evento se encontra num estado válido para ser removido
