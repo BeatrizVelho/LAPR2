@@ -3,6 +3,17 @@ package eventoscientificios.view;
 import eventoscientificos.model.Empresa;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.filechooser.FileFilter;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+import org.xml.sax.SAXException;
 import utils.XMLParser;
 
 /**
@@ -24,21 +35,29 @@ public class Janela extends javax.swing.JFrame {
      * Creates new form Janela
      */
     public Janela() {
-        this.empresa = new Empresa();
-        this.xmlParser = new XMLParser(this, empresa);
-        this.xmlParser.lerFicheiroUtilizador();
-        this.xmlParser.lerFicheiroLocal();
-        this.xmlParser.lerFicheiroEvento();
+        try {
+            this.empresa = new Empresa();
+            this.xmlParser = new XMLParser(this, empresa);
+            this.xmlParser.lerFicheiroUtilizador();
+            this.xmlParser.lerFicheiroLocal();
+            this.xmlParser.lerFicheiroEvento();
 
-        addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                terminarPrograma();
-            }
-        });
+            addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosing(WindowEvent e) {
+                    terminarPrograma();
+                }
+            });
 
-        initComponents();
-        setLocationRelativeTo(null);
+            initComponents();
+            setLocationRelativeTo(null);
+        } catch (ParserConfigurationException ex) {
+            Logger.getLogger(Janela.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Janela.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SAXException ex) {
+            Logger.getLogger(Janela.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -216,6 +235,11 @@ public class Janela extends javax.swing.JFrame {
         gerirSubmissoes.setVisible(false);
 
         uc4.setText("Submeter artigo científico");
+        uc4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uc4ActionPerformed(evt);
+            }
+        });
         gerirSubmissoes.add(uc4);
 
         uc18.setText("Carregar artigo científico por ficheiro");
@@ -350,6 +374,10 @@ public class Janela extends javax.swing.JFrame {
         new CriarCPUI(this, true, this.empresa);
     }//GEN-LAST:event_uc3ActionPerformed
 
+    private void uc4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc4ActionPerformed
+        new SubmeterArtigoUI(this, true, this.empresa);
+    }//GEN-LAST:event_uc4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -387,12 +415,136 @@ public class Janela extends javax.swing.JFrame {
     }
 
     /**
+     * Este método traduz para português todo o texto visual da janela gerada
+     * pela classe JFileChooser.
+     */
+    public static void personalizarFileChooserEmPortugues() {
+
+        // Títulos das Caixas de Diálogo
+        UIManager.put("FileChooser.openDialogTitleText", "Importar Ficheiro");
+        UIManager.put("FileChooser.saveDialogTitleText", "Exportar Ficheiro");
+
+        // Botão "Importar"
+        UIManager.put("FileChooser.openButtonText", "Importar");
+        UIManager.put("FileChooser.openButtonMnemonic", "I");
+        UIManager.put("FileChooser.openButtonToolTipText", "Importar Ficheiro");
+
+        // Botão "Exportar"
+        UIManager.put("FileChooser.saveButtonText", "Exportar");
+        UIManager.put("FileChooser.saveButtonMnemonic", "E");
+        UIManager.put("FileChooser.saveButtonToolTipText", "Exportar Ficheiro");
+
+        // Botão "Cancelar"
+        UIManager.put("FileChooser.cancelButtonText", "Cancelar");
+        UIManager.put("FileChooser.cancelButtonMnemonic", "C");
+        UIManager.put("FileChooser.cancelButtonToolTipText", "Cancelar");
+
+        // Botão "Ajuda"
+        UIManager.put("FileChooser.helpButtonText", "Ajuda");
+        UIManager.put("FileChooser.helpButtonMnemonic", "A");
+        UIManager.put("FileChooser.helpButtonToolTipText", "Ajuda");
+
+        // Legenda "Procurar em:"
+        UIManager.put("FileChooser.lookInLabelMnemonic", "E");
+        UIManager.put("FileChooser.lookInLabelText", "Procurar em:");
+
+        // Legenda "Guardar em:"
+        UIManager.put("FileChooser.saveInLabelText", "Guardar em:");
+        UIManager.put("FileChooser.saveInLabelMnemonic", "G");
+
+        // Legenda "Tipo de ficheiros:"
+        UIManager.put("FileChooser.filesOfTypeLabelText", "Ficheiros do tipo:");
+        UIManager.put("FileChooser.filesOfTypeLabelMnemonic", "F");
+
+        // Legenda "Nome do ficheiro:"
+        UIManager.put("FileChooser.fileNameLabelMnemonic", "N");
+        UIManager.put("FileChooser.fileNameLabelText", "Nome do ficheiro:");
+
+        // Filtro "Todos os Ficheiros"
+        UIManager.put("FileChooser.acceptAllFileFilterText", "Todos os Ficheiros");
+
+        // Botão "Um nível acima"
+        UIManager.put("FileChooser.upFolderToolTipText", "Um nível acima");
+        UIManager.put("FileChooser.upFolderAccessibleName", "Um nível acima");
+
+        // Botão "Ambiente de Trabalho"
+        UIManager.put("FileChooser.homeFolderToolTipText", "Ambiente");
+        UIManager.put("FileChooser.homeFolderToolTipText", "Ambiente de Trabalho");
+        UIManager.put("FileChooser.homeFolderAccessibleName", "Ambiente de Trabalho");
+
+        // Botão "Nova Pasta"
+        UIManager.put("FileChooser.newFolderToolTipText", "Criar nova pasta");
+        UIManager.put("FileChooser.newFolderAccessibleName", "Criar nova pasta");
+
+        // Botão "Vista Lista"
+        UIManager.put("FileChooser.listViewButtonToolTipText", "Lista");
+        UIManager.put("FileChooser.listViewButtonAccessibleName", "Lista");
+
+        // Botão "Vista Detalhada"
+        UIManager.put("FileChooser.detailsViewButtonToolTipText", "Detalhes");
+        UIManager.put("FileChooser.detailsViewButtonAccessibleName", "Detalhes");
+
+        // Cabeçalhos da "Vista Lista Detalhada"
+        UIManager.put("FileChooser.fileNameHeaderText", "Nome");
+        UIManager.put("FileChooser.fileSizeHeaderText", "Tamanho");
+        UIManager.put("FileChooser.fileTypeHeaderText", "Tipo");
+        UIManager.put("FileChooser.fileDateHeaderText", "Data");
+        UIManager.put("FileChooser.fileAttrHeaderText", "Atributos");
+    }
+
+    /**
+     * Filtra os ficheiros possiveis de escolher no JFileChooser, aceitando
+     * assim apenas PDFs.
+     *
+     * @param fileChooser JFileChooser no qual se pretende realizar a filtragem.
+     */
+    public static void definirFiltroExtensaoBin(JFileChooser fileChooser) {
+        fileChooser.setFileFilter(new FileFilter() {
+
+            @Override
+            public boolean accept(File f) {
+                if (f.isDirectory()) {
+                    return true;
+                }
+                String extensao = extensao(f);
+                if (extensao != null) {
+                    return extensao.equals("pdf");
+                }
+                return false;
+            }
+
+            @Override
+            public String getDescription() {
+                return "*.pdf";
+            }
+
+            private String extensao(File f) {
+                String ext = null;
+                String s = f.getName();
+                int i = s.lastIndexOf(".");
+                if (i != -1) {
+                    ext = s.substring(i + 1).toLowerCase();
+                }
+                return ext;
+            }
+        });
+    }
+
+    /**
      *
      */
     private void terminarPrograma() {
-        this.xmlParser.escreverFicheiroUtilizador();
-        this.xmlParser.escreverFicheiroLocal();
-        this.xmlParser.escreverFicheiroEvento();
+        try {
+            this.xmlParser.escreverFicheiroUtilizador();
+            this.xmlParser.escreverFicheiroLocal();
+            this.xmlParser.escreverFicheiroEvento();
+        } catch (ParserConfigurationException | TransformerException ex) {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Ocorreu um erro ao guardar os dados.",
+                    "Guardar Dados",
+                    JOptionPane.ERROR_MESSAGE);
+        }
         dispose();
     }
 
