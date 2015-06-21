@@ -1,7 +1,9 @@
 package eventoscientificos.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.TimerTask;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -77,6 +79,18 @@ public class EmpresaTest {
         List<MecanismoDistribuicao> expResult
                             = new ArrayList<MecanismoDistribuicao>();
         List<MecanismoDistribuicao> result = instance.getListaMecanismoDistribuicao();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método getListaMecanismoDecisao, da classe Empresa.
+     */
+    @Test
+    public void testGetListaMecanismoDecisao() {
+        System.out.println("getListaMecanismoDecisao");
+        Empresa instance = new Empresa();
+        List<MecanismoDecisao> expResult = new ArrayList<MecanismoDecisao>();
+        List<MecanismoDecisao> result = instance.getListaMecanismoDecisao();
         assertEquals(expResult, result);
     }
 }
