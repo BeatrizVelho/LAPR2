@@ -6,4 +6,11 @@ package eventoscientificos.model;
  */
 public interface Decidivel {
     
+    /**
+     * Constrói instância de ProcessoDecisao.
+     * 
+     * @return ProcessoDecisao
+     */
+    public ProcessoDecisao novoProcessoDecisao();
+    
 }
