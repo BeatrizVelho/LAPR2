@@ -40,22 +40,14 @@ public class DefinirSessaoTematicaUI extends javax.swing.JDialog {
         if (controller.getListaEventos().isEmpty()) {
             JOptionPane.showMessageDialog(
                     framePai,
-                    "Não existem eventos ou sessões temáticas onde lhe é "
-                    + "possível definir CP.",
-                    "Criar CP",
+                    "Não existem eventos onde seja possível definir sessões "
+                    + "temáticas.",
+                    "Definir Sessão Temática",
                     JOptionPane.ERROR_MESSAGE);
             dispose();
         } else {
             setVisible(true);
             pack();
-        }
-        if (this.cmb_selecionarEvento.getItemCount() == 0) {
-            JOptionPane.showMessageDialog(
-                    framePai,
-                    "Não existem eventos onde seja possível definir sessões temáticas.",
-                    "Criar Evento",
-                    JOptionPane.ERROR_MESSAGE);
-            dispose();
         }
     }
 
@@ -417,7 +409,7 @@ public class DefinirSessaoTematicaUI extends javax.swing.JDialog {
 
             String opcoes[] = {"Sim", "Não"};
             int resposta = JOptionPane.showOptionDialog(
-                    null, "Pretende criar a sessão temática?", "Criar Sessão Temática", 0, 
+                    null, "Pretende criar a sessão temática?", "Criar Sessão Temática", 0,
                     JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]);
             if (resposta == 0) {
                 this.controller.adicionarSessaoTematica();

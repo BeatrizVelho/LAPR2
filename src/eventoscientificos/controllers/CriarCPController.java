@@ -65,7 +65,7 @@ public class CriarCPController {
     /**
      * Devolve o modelo da lista de revisores.
      *
-     * @return
+     * @return Modelo da lista de revisores.
      */
     public DefaultListModel getModeloLista() {
         return this.modeloLista;
