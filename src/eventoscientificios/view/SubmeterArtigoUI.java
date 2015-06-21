@@ -434,8 +434,6 @@ public class SubmeterArtigoUI extends javax.swing.JDialog {
 
     private void btn_submeterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_submeterActionPerformed
         try {
-            this.controller.adicionarFicheiroPDF(null);
-
             String opcoes[] = {"Sim", "Não"};
             int resposta = JOptionPane.showOptionDialog(
                     null, "Pretende submeter o artigo?", "Submeter artigo", 0,
