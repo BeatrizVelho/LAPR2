@@ -90,6 +90,11 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
      * Processo de Distribuição.
      */
     private ProcessoDistribuicao processoDistribuicao;
+    
+    /**
+     * Processo de Decisão.
+     */
+    private ProcessoDecisao processoDecisao;
 
     /**
      * Estado da sessão temática.
@@ -278,6 +283,15 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
     @Override
     public ProcessoDistribuicao getProcessoDistribuicao() {
         return this.processoDistribuicao;
+    }
+    
+    /**
+     * Devolve o processo de decisão.
+     *
+     * @return processo de decisão
+     */
+    public ProcessoDecisao getProcessoDDecisao() {
+        return this.processoDecisao;
     }
 
     /**
@@ -859,6 +873,16 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
             return this.listaSubmissoes.containsAutorNaListaAutoresArtigoInicial(u);
         }
         return false;
+    }
+    
+    /**
+     * Constrói instância de ProcessoDecisao
+     * 
+     * @return ProcessoDecisao
+     */
+    @Override
+    public ProcessoDecisao novoProcessoDecisao() {
+        return new ProcessoDecisao();
     }
 
 }
