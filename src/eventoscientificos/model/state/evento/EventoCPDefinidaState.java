@@ -162,8 +162,7 @@ public class EventoCPDefinidaState implements EventoState {
      */
     @Override
     public boolean validarEstado() {
-        return (Data.dataAtual().isMaior(e.getDataFimSubmissao()))
-                            && (e.getDataInicioSubmissao().isMaior(Data.dataAtual()));
+        return Data.dataAtual().isMaior(e.getDataInicioSubmissao());
     }
 
     /**
