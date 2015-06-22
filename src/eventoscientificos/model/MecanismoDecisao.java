@@ -9,4 +9,9 @@ package eventoscientificos.model;
  */
 public interface MecanismoDecisao {
     
+    /**
+     * Classifica submissões.
+     */
+    public ListaDecisoes classificarSubmissoes (ListaRevisoes listaRevisoes);
+    
 }

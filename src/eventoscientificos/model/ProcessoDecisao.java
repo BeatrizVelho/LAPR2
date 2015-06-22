@@ -34,15 +34,6 @@ public class ProcessoDecisao {
     }
 
     /**
-     * Devolve a ListaRevisões.
-     *
-     * @return Lista Revisões
-     */
-    public ListaRevisoes getListaRevisoes() {
-        return this.listaRevisoes;
-    }
-
-    /**
      * Adiciona um Mecanismo de Decisão ao processo de decisão.
      *
      * @param mecanismoDecisao Mecanismo de decisão a adicionar.
@@ -56,7 +47,7 @@ public class ProcessoDecisao {
             throw new IllegalArgumentException();
         }
     }
-
+    
     /**
      * Compara dois objetos entre si. Comparando primariamente a posição de
      * memória, seguida do conteudo e das classes as quais cada um deles
