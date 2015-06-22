@@ -5,6 +5,8 @@
  */
 package eventoscientificos.model;
 
+import eventoscientificos.model.mecanismo.distribuicao.MecanismoDistribuicao;
+
 /**
  * Representa uma instância de ProcessoDistribuicao através de
  * RegistoUtilizadores e RegistoEventos.
