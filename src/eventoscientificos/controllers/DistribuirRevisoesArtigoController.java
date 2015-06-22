@@ -8,7 +8,7 @@ package eventoscientificos.controllers;
 import eventoscientificos.model.Distribuivel;
 import eventoscientificos.model.Empresa;
 import eventoscientificos.model.ListaRevisoes;
-import eventoscientificos.model.MecanismoDistribuicao;
+import eventoscientificos.model.mecanismo.distribuicao.MecanismoDistribuicao;
 import eventoscientificos.model.ProcessoDistribuicao;
 import eventoscientificos.model.RegistoEventos;
 import java.util.List;
