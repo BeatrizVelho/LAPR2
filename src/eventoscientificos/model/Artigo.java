@@ -1,5 +1,6 @@
 package eventoscientificos.model;
 
+import java.util.List;
 import utils.Data;
 
 /**
@@ -28,6 +29,11 @@ public class Artigo {
      * Lista de autores.
      */
     private ListaAutores listaAutores;
+    
+    /**
+     * Lista de palavras chave.
+     */
+    private List<String> palavrasChave;
 
     /**
      * Autor Correspondente do artigoInicial.
@@ -148,6 +154,15 @@ public class Artigo {
     }
 
     /**
+     * Devolve a lista de palavras de chave.do artigo.
+     * 
+     * @return Lista de palavras chave do artigo.
+     */
+    public List<String> getPalavrasChave() {
+        return palavrasChave;
+    }
+    
+    /**
      * Modifica o titulo do artigo.
      *
      * @param titulo Novo titulo do artigo
@@ -214,6 +229,15 @@ public class Artigo {
      */
     public void setAutorSubmissorFinal(Autor autorSubmissorFinal) {
         this.autorSubmissorFinal = autorSubmissorFinal;
+    }
+
+    /**
+     * Modifica a lista de palavras chave do artigo.
+     * 
+     * @param palavrasChave Nova lista de palavras chave.
+     */
+    public void setPalavrasChave(List<String> palavrasChave) {
+        this.palavrasChave = palavrasChave;
     }
 
     public boolean validarArtigo() {
