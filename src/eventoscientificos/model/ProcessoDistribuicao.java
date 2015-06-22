@@ -65,11 +65,12 @@ public class ProcessoDistribuicao {
      */
     public ListaRevisoes distribuirRevisoes(Distribuivel distribuivel) {
         this.listaRevisoes = new ListaRevisoes();
-        if (this.mecanismoDistribuicao.
-                            distribuirRevisoes(distribuivel, listaRevisoes)) {
-            return listaRevisoes;
+        this.mecanismoDistribuicao.
+                            distribuirRevisoes(distribuivel, listaRevisoes);
+        if (listaRevisoes == null) {
+            throw new NullPointerException("Não foi possível distribuir");
         } else {
-            return null;
+            return listaRevisoes;
         }
     }
 
@@ -84,7 +85,8 @@ public class ProcessoDistribuicao {
      * não o sejam.
      */
     @Override
-    public boolean equals(Object outroObjecto) {
+    public boolean equals(Object outroObjecto
+    ) {
         if (this == outroObjecto) {
             return true;
         }
@@ -95,7 +97,7 @@ public class ProcessoDistribuicao {
 
         ProcessoDistribuicao outroProcesso = (ProcessoDistribuicao) outroObjecto;
 
-        return this.listaRevisoes.equals(outroProcesso.listaRevisoes)
-                            && this.mecanismoDistribuicao.equals(outroProcesso.mecanismoDistribuicao);
+        return this.listaRevisoes.equals(outroProcesso.listaRevisoes);
+               //                    && this.mecanismoDistribuicao.equals(outroProcesso.mecanismoDistribuicao);
     }
 }

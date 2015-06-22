@@ -41,4 +41,18 @@ public interface Distribuivel {
      * falso se não estiver
      */
     public boolean isStateValidoParaDistribuir(Utilizador u);
+
+    /**
+     * Devolve a lista de submissões do distribuível.
+     *
+     * @return lista de submissões do distribuível.
+     */
+    public ListaSubmissoes getListaSubmissoes();
+
+    /**
+     * Devolve a comissão de programa do distribuivel.
+     *
+     * @return comissão de programa.
+     */
+    public CP getCP();
 }

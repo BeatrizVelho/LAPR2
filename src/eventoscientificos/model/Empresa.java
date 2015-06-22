@@ -48,7 +48,7 @@ public class Empresa {
      * Lista de mecanismo de decisão.
      */
     private List<MecanismoDecisao> listaMecanismoDecisao;
-    
+
     /**
      * Constrói uma instância de Empresa nao recebendo quaisquer valores por
      * parametro.
@@ -58,6 +58,7 @@ public class Empresa {
         this.registoEventos = new RegistoEventos();
         this.registoTiposConflito = new RegistoTiposConflito();
         this.listaMecanismoDistribuicao = new ArrayList<MecanismoDistribuicao>();
+        this.listaMecanismoDistribuicao.add(new MecanismoDistribuicaoTodasSubmissoesPorRevisor());
         this.listaMecanismoDecisao = new ArrayList<MecanismoDecisao>();
         this.temporizador = new Timer();
     }
@@ -127,7 +128,7 @@ public class Empresa {
     public void schedule(TimerTask task, Date date) {
         this.temporizador.schedule(task, date);
     }
-    
+
     /**
      * Devolve a lista de mecanismos de distribuições que a empresa
      * disponibiliza para distribuir.
