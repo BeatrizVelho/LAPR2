@@ -1034,11 +1034,23 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
 
     }
 
+    /**
+     * Preenche as listas recebidas por parâmetro, colocando as submissoes
+     * aceites no lista listaSubmissoesAceites e as submissoes rejeitadas na
+     * lista listaSubmissoesRejeitadas.
+     *
+     * @param listaSubmissoesAceites Lista para submissões aceites.
+     * @param listaSubmissoesRejeitadas Lista para submissões retiradas.
+     */
     public void getSubmissoesAceitesRejeitadas(
             List<Submissao> listaSubmissoesAceites,
             List<Submissao> listaSubmissoesRejeitadas) {
 
         this.listaSubmissoes.getSubmissoesAceitesRejeitadas(
+                listaSubmissoesAceites,
+                listaSubmissoesRejeitadas);
+
+        this.listaSessoesTematicas.getSubmissoesAceitesRejeitadas(
                 listaSubmissoesAceites,
                 listaSubmissoesRejeitadas);
     }
