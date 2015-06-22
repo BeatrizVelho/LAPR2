@@ -23,21 +23,6 @@ public class Submissao {
     private Artigo artigoFinal;
 
     /**
-     * Autor Correspondente do artigoInicial.
-     */
-    private AutorCorrespondente autorCorrespondente;
-
-    /**
-     * Autor que realiza a submissão inicial.
-     */
-    private Autor autorSubmissorInicial;
-
-    /**
-     * Autor que realiza a submissão final.
-     */
-    private Autor autorSubmissorFinal;
-
-    /**
      * Estado da submissao.
      */
     private SubmissaoState estado;
@@ -57,9 +42,6 @@ public class Submissao {
     public Submissao(Submissao submissao) {
         setArtigoInicial(submissao.getArtigoInicial());
         setArtigoFinal(submissao.getArtigoFinal());
-        setAutorCorrespondente(submissao.getAutorCorrespondente());
-        setAutorSubmissorInicial(submissao.getAutorSubmissorInicial());
-        setAutorSubmissorFinal(submissao.getAutorSubmissorFinal());
         setEstado(submissao.getEstado());
     }
 
@@ -79,33 +61,6 @@ public class Submissao {
      */
     public Artigo getArtigoFinal() {
         return this.artigoFinal;
-    }
-
-    /**
-     * Devolve o autor correspondente da submissao
-     *
-     * @return Autor correspondente da submissao
-     */
-    public AutorCorrespondente getAutorCorrespondente() {
-        return this.autorCorrespondente;
-    }
-
-    /**
-     * Devolve o autor submissor que realiza a submissão inicial.
-     *
-     * @return Autor que realiza a submissão inicial.
-     */
-    public Autor getAutorSubmissorInicial() {
-        return this.autorSubmissorInicial;
-    }
-
-    /**
-     * Devolve o autor submissor que realiza a submissão final.
-     *
-     * @return Autor que realiza a submissão final.
-     */
-    public Autor getAutorSubmissorFinal() {
-        return this.autorSubmissorFinal;
     }
 
     /**
@@ -133,33 +88,6 @@ public class Submissao {
      */
     public void setArtigoFinal(Artigo artigoFinal) {
         this.artigoFinal = artigoFinal;
-    }
-
-    /**
-     * Modifica o autor correspondente da submissão.
-     *
-     * @param autorCorrespondente Novo autor correspondente do artigoInicial.
-     */
-    public void setAutorCorrespondente(AutorCorrespondente autorCorrespondente) {
-        this.autorCorrespondente = autorCorrespondente;
-    }
-
-    /**
-     * Modifica o autor submissor da submissão inicial.
-     *
-     * @param autorSubmissorInicial Novo autor submissor inicial.
-     */
-    public void setAutorSubmissorInicial(Autor autorSubmissorInicial) {
-        this.autorSubmissorInicial = autorSubmissorInicial;
-    }
-
-    /**
-     * Modifica o autor submissor da submissão final.
-     *
-     * @param autorSubmissorFinal Novo autor submissor final.
-     */
-    public void setAutorSubmissorFinal(Autor autorSubmissorFinal) {
-        this.autorSubmissorFinal = autorSubmissorFinal;
     }
 
     /**
