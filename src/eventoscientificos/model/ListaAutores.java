@@ -115,6 +115,13 @@ public class ListaAutores {
         return false;
     }
     
+    /**
+     * Verifica se o utilizador passado por parâmetro está inserido na lista
+     * de autores.
+     * 
+     * @param utilizador Utilizador a verificar.
+     * @return Verdadeiro se já existe na lista de autores e falso se não está.
+     */
     public boolean isAutor(Utilizador utilizador){
         for(Autor autor : this.listaAutores) {
             if(utilizador.equals(autor.getUtilizador())){

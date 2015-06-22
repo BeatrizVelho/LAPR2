@@ -208,9 +208,9 @@ public class SubmeterArtigoController {
         Autor autor = this.listaAutoresRegistados.get(indice);
         AutorCorrespondente autorCorrespondente = new AutorCorrespondente(
                 autor.getUtilizador(), autor.getInstituicaoAfiliacao());
-        this.submissao.setAutorCorrespondente(autorCorrespondente);
+        this.artigo.setAutorCorrespondente(autorCorrespondente);
 
-        return this.submissao.getAutorCorrespondente() != null;
+        return this.artigo.getAutorCorrespondente() != null;
     }
 
     /**
