@@ -748,7 +748,7 @@ public class EventoTest {
 //                            new Data(2016, 6, 21), new Data(2016, 7, 8),
 //                            new Data(2016, 7, 9), new Data(2017, 3, 25),
 //                            new Data(2017, 5, 29));
-//        ListaSessoesTematicas instance = new Lis;
+//        ListaSessoesTematicas instance = new ListaSessoesTematicas(evento);
 //        Submissao submissao = new Submissao();
 //        submissao.setArtigoInicial(new Artigo("tituo", "resumo", "ficheiro"));
 //        submissao .getArtigoInicial().getListaAutores().adicionarAutor(autor);
