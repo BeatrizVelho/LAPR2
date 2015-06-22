@@ -1,6 +1,6 @@
 package eventoscientificos.model;
 
-
+import utils.Data;
 
 /**
  * Representa uma instância de Artigo
@@ -28,6 +28,31 @@ public class Artigo {
      * Lista de autores.
      */
     private ListaAutores listaAutores;
+
+    /**
+     * Autor Correspondente do artigoInicial.
+     */
+    private AutorCorrespondente autorCorrespondente;
+
+    /**
+     * Autor que realiza a submissão inicial.
+     */
+    private Autor autorSubmissorInicial;
+
+    /**
+     * Autor que realiza a submissão final.
+     */
+    private Autor autorSubmissorFinal;
+
+    /**
+     * Data de submissão do artigo inicial.
+     */
+    private Data dataSubmissaoInicial;
+    
+    /**
+     * Data de submissão do artigo final.
+     */
+    private Data dataSubmissaoFinal;
     
     /**
      * Titulo do artigo por omissão.
@@ -44,10 +69,9 @@ public class Artigo {
      */
     private static final String FICHEIRO_POR__OMISSAO = "Sem Ficheiro!";
 
-
-
     /**
      * Constroi uma instancia de artigo com o titulo, o resumo e o ficheiro.
+     *
      * @param titulo Titulo do artigo.
      * @param resumo Resumo do artigo.
      * @param ficheiro Caminho para o artigo.
@@ -57,13 +81,16 @@ public class Artigo {
         setResumo(resumo);
         setFicheiro(ficheiro);
         this.listaAutores = new ListaAutores();
+        setAutorCorrespondente(getAutorCorrespondente());
+        setAutorSubmissorInicial(getAutorSubmissorInicial());
+        setAutorSubmissorFinal(getAutorSubmissorFinal());
     }
-    
+
     public Artigo() {
         this.titulo = TITULO_POR_OMISSAO;
         this.resumo = RESUMO_POR_OMISSAO;
         this.ficheiro = FICHEIRO_POR__OMISSAO;
-        this.listaAutores = new ListaAutores();      
+        this.listaAutores = new ListaAutores();
     }
 
     /**
@@ -91,6 +118,33 @@ public class Artigo {
      */
     public ListaAutores getListaAutores() {
         return this.listaAutores;
+    }
+
+    /**
+     * Devolve o autor correspondente da submissao
+     *
+     * @return Autor correspondente da submissao
+     */
+    public AutorCorrespondente getAutorCorrespondente() {
+        return this.autorCorrespondente;
+    }
+
+    /**
+     * Devolve o autor submissor que realiza a submissão inicial.
+     *
+     * @return Autor que realiza a submissão inicial.
+     */
+    public Autor getAutorSubmissorInicial() {
+        return this.autorSubmissorInicial;
+    }
+
+    /**
+     * Devolve o autor submissor que realiza a submissão final.
+     *
+     * @return Autor que realiza a submissão final.
+     */
+    public Autor getAutorSubmissorFinal() {
+        return this.autorSubmissorFinal;
     }
 
     /**
@@ -135,10 +189,37 @@ public class Artigo {
         this.ficheiro = ficheiro;
     }
     
+     /**
+     * Modifica o autor correspondente da submissão.
+     *
+     * @param autorCorrespondente Novo autor correspondente do artigoInicial.
+     */
+    public void setAutorCorrespondente(AutorCorrespondente autorCorrespondente) {
+        this.autorCorrespondente = autorCorrespondente;
+    }
+
+    /**
+     * Modifica o autor submissor da submissão inicial.
+     *
+     * @param autorSubmissorInicial Novo autor submissor inicial.
+     */
+    public void setAutorSubmissorInicial(Autor autorSubmissorInicial) {
+        this.autorSubmissorInicial = autorSubmissorInicial;
+    }
+
+    /**
+     * Modifica o autor submissor da submissão final.
+     *
+     * @param autorSubmissorFinal Novo autor submissor final.
+     */
+    public void setAutorSubmissorFinal(Autor autorSubmissorFinal) {
+        this.autorSubmissorFinal = autorSubmissorFinal;
+    }
+
     public boolean validarArtigo() {
         return true;
     }
-    
+
     public boolean isAutor(Utilizador utilizador) {
         return this.listaAutores.isAutor(utilizador);
     }
@@ -167,5 +248,5 @@ public class Artigo {
 
         return this.getTitulo().equals(outroArtigo.getTitulo());
     }
-    
+
 }
