@@ -1,5 +1,6 @@
 package eventoscientificos.model;
 
+import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmSubmissaoCameraReadyState;
 import java.util.ArrayList;
 import java.util.List;
 import utils.Data;
@@ -112,11 +113,10 @@ public class ListaSessoesTematicas {
     public boolean adicionarSessaoTematica(SessaoTematica sessaoTematica) {
         return this.listaSessoesTematicas.add(sessaoTematica);
     }
-    
-    
+
     /**
      * Devolve o número total de sessões temáticas na lista.
-     * 
+     *
      * @return Número total de sessões temaáticas na lista.
      */
     public int getNumeroSessoesTematicas() {
@@ -125,9 +125,9 @@ public class ListaSessoesTematicas {
 
     /**
      * Devolve uma sessão temática através da sua posição na lista.
-     * 
+     *
      * @param indice Posição na lista.
-     * 
+     *
      * @return Sessão temática através da sua posição na lista.
      */
     public SessaoTematica getSessoesTematicasPeloID(int indice) {
@@ -268,8 +268,8 @@ public class ListaSessoesTematicas {
         }
         return listaSubmissiveis;
     }
-    
-        /**
+
+    /**
      * Devolve uma lista de Submissiveis que tem submissoes em que o utilizador
      * passado por parametro é autor e que estão a permitir a alteração de
      * submissões.
@@ -288,35 +288,58 @@ public class ListaSessoesTematicas {
         }
         return listaSubmissiveisUtilizador;
     }
-    
+
     public List<Submissivel> getListaSubmissiveisAceitarArtigoFinal(Utilizador utilizador) {
         List<Submissivel> listaSusmissiveisUtilizador = new ArrayList<>();
-        
-        for(SessaoTematica sessaoTematica : this.listaSessoesTematicas) {
-            if(sessaoTematica.isStateValidoParaSubmeterArtigoFinal() &&
-                    sessaoTematica.isUtilizadorUmAutorSubmissaoInicial(utilizador)) {
+
+        for (SessaoTematica sessaoTematica : this.listaSessoesTematicas) {
+            if (sessaoTematica.isStateValidoParaSubmeterArtigoFinal()
+                    && sessaoTematica.isUtilizadorUmAutorSubmissaoInicial(utilizador)) {
                 listaSusmissiveisUtilizador.add(sessaoTematica);
             }
         }
         return listaSusmissiveisUtilizador;
     }
-    
+
     /**
-     * Devolve uma lista de Decidivel de sessão temática em que o utilizador
-     * é proponente e que é possivel decidir.
-     * 
+     * Devolve uma lista de Decidivel de sessão temática em que o utilizador é
+     * proponente e que é possivel decidir.
+     *
      * @param utilizador Utilizador a verificar se é proponente.
      * @return Lista Decidivel
      */
-    public List<Decidivel> getListaDecidivelOrganizadorProponente(Utilizador utilizador){
+    public List<Decidivel> getListaDecidivelOrganizadorProponente(Utilizador utilizador) {
         List<Decidivel> listaDecidivel = new ArrayList<>();
-        
-        for(SessaoTematica sessaoTematica : this.listaSessoesTematicas){
-            if(sessaoTematica.isProponente(utilizador) && sessaoTematica.isEstadoValidoParaDecidir()){
+
+        for (SessaoTematica sessaoTematica : this.listaSessoesTematicas) {
+            if (sessaoTematica.isProponente(utilizador) && sessaoTematica.isEstadoValidoParaDecidir()) {
                 listaDecidivel.add(sessaoTematica);
             }
         }
         return listaDecidivel;
+    }
+
+    /**
+     * Preenche as listas recebidas por parâmetro, colocando as submissoes
+     * aceites no lista listaSubmissoesAceites e as submissoes rejeitadas na
+     * lista listaSubmissoesRejeitadas.
+     *
+     * @param listaSubmissoesAceites Lista para submissões aceites.
+     * @param listaSubmissoesRejeitadas Lista para submissões retiradas.
+     */
+    public void getSubmissoesAceitesRejeitadas(
+            List<Submissao> listaSubmissoesAceites,
+            List<Submissao> listaSubmissoesRejeitadas) {
+        
+        for (SessaoTematica sessaoTematica : this.listaSessoesTematicas) {
+            if (sessaoTematica.getEstado() instanceof SessaoTematicaEmSubmissaoCameraReadyState
+                    || sessaoTematica.getEstado() instanceof SessaoTematicaEmSubmissaoCameraReadyState) {
+                
+                sessaoTematica.getSubmissoesAceitesRejeitadas(
+                        listaSubmissoesAceites,
+                        listaSubmissoesRejeitadas);
+            }
+        }
     }
 
 }
