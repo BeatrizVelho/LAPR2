@@ -116,14 +116,4 @@ public class ListaRevisoes {
 
         return vecTaxaEMediaParametrosAvaliacao;
     }
-    
-//    /**
-//     * Calcula a média.
-//     * @param a valor do numerador
-//     * @param b valor do denominador
-//     * @return 
-//     */
-//    private float calcularMedia(int a, int b){
-//        return a/b;
-//    }
 }
