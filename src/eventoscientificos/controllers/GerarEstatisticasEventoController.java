@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * Representa uma instância de GerarEstatisticasEventoController através de
- * Empresa,
+ * Empresa, listaEventos e estatisticas do evento
  *
  *
  * @author G01
