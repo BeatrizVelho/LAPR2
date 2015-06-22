@@ -6,7 +6,6 @@
 package eventoscientificos.model;
 
 import eventoscientificos.model.mecanismo.distribuicao.MecanismoDistribuicao;
-import java.util.HashMap;
 
 /**
  * Representa uma instância de ProcessoDistribuicao através de
@@ -100,14 +99,7 @@ public class ProcessoDistribuicao {
 
         ProcessoDistribuicao outroProcesso = (ProcessoDistribuicao) outroObjecto;
 
-        return this.listaRevisoes.equals(outroProcesso.listaRevisoes)
-                            && this.mecanismoDistribuicao.equals(outroProcesso.mecanismoDistribuicao);
-    }
-
-    public void hashMapSubmissoes(HashMap hashMapSubmissoesAceites,
-                        HashMap hashMapSubmissoesRejeitadas) {
-
-        this.listaRevisoes.hashMapSubmissoes(hashMapSubmissoesAceites,
-                            hashMapSubmissoesRejeitadas);
+        return this.listaRevisoes.equals(outroProcesso.listaRevisoes);
+               //                    && this.mecanismoDistribuicao.equals(outroProcesso.mecanismoDistribuicao);
     }
 }
