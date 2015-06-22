@@ -5,6 +5,8 @@
  */
 package eventoscientificos.model;
 
+import eventoscientificos.model.mecanismo.distribuicao.MecanismoDistribuicao;
+import eventoscientificos.model.mecanismo.distribuicao.MecanismoDistribuicaoTodasSubmissoesPorRevisor;
 import eventoscientificos.model.state.submissao.SubmissaoEmLicitacaoState;
 import org.junit.Test;
 import static org.junit.Assert.*;

@@ -11,7 +11,7 @@ import eventoscientificos.model.Empresa;
 import eventoscientificos.model.Evento;
 import eventoscientificos.model.ListaRevisoes;
 import eventoscientificos.model.Local;
-import eventoscientificos.model.MecanismoDistribuicao;
+import eventoscientificos.model.mecanismo.distribuicao.MecanismoDistribuicao;
 import eventoscientificos.model.ProcessoDistribuicao;
 import eventoscientificos.model.Revisor;
 import eventoscientificos.model.SessaoTematica;

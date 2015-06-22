@@ -1,5 +1,6 @@
 package eventoscientificos.model;
 
+import eventoscientificos.model.mecanismo.distribuicao.MecanismoDistribuicaoTodasSubmissoesPorRevisor;
 import eventoscientificos.model.state.submissao.SubmissaoAceiteState;
 import eventoscientificos.model.state.submissao.SubmissaoEmLicitacaoState;
 import org.junit.Test;
