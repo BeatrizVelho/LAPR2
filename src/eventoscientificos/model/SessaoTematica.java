@@ -6,6 +6,7 @@ import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmSubmissaoSt
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaFaseDecisaoState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaState;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import utils.Data;
 
@@ -884,20 +885,12 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
         return new ProcessoDecisao();
     }
 
-    /**
-     * Preenche as listas recebidas por parâmetro, colocando as submissoes
-     * aceites no lista listaSubmissoesAceites e as submissoes rejeitadas na
-     * lista listaSubmissoesRejeitadas.
-     *
-     * @param listaSubmissoesAceites Lista para submissões aceites.
-     * @param listaSubmissoesRejeitadas Lista para submissões retiradas.
-     */
-    public void getSubmissoesAceitesRejeitadas(List<Submissao> listaSubmissoesAceites,
-            List<Submissao> listaSubmissoesRejeitadas) {
-
-        this.listaSubmissoes.getSubmissoesAceitesRejeitadas(
-                listaSubmissoesAceites,
-                listaSubmissoesRejeitadas);
+ 
+ public void hashMapSubmissoesSessaoTematica(
+            HashMap<String, Integer> hashMapSubmissoesAceites,
+            HashMap<String, Integer> hashMapSubmissoesRejeitadas) {
+        
+        this.processoDistribuicao.hashMapSubmissoes(hashMapSubmissoesAceites,
+                hashMapSubmissoesRejeitadas);
     }
-
 }

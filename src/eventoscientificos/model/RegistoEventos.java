@@ -3,6 +3,7 @@ package eventoscientificos.model;
 import eventoscientificos.model.state.evento.EventoEmCameraReadyState;
 import eventoscientificos.model.state.evento.EventoEmSubmissaoCameraReadyState;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import utils.Data;
 
@@ -45,14 +46,14 @@ public class RegistoEventos {
      * @return Evento.
      */
     public Evento novoEvento(String titulo, String descricao, Local local,
-            Data dataInicioSubmissao, Data dataLimiteSubmissao,
-            Data dataInicioDistribuicao, Data dataFimRevisao,
-            Data dataFimSubmissaoCameraReady, Data dataInicio,
-            Data dataFim) {
+                        Data dataInicioSubmissao, Data dataLimiteSubmissao,
+                        Data dataInicioDistribuicao, Data dataFimRevisao,
+                        Data dataFimSubmissaoCameraReady, Data dataInicio,
+                        Data dataFim) {
 
         return new Evento(titulo, descricao, local, dataInicioSubmissao,
-                dataLimiteSubmissao, dataInicioDistribuicao, dataFimRevisao,
-                dataFimSubmissaoCameraReady, dataInicio, dataFim);
+                            dataLimiteSubmissao, dataInicioDistribuicao, dataFimRevisao,
+                            dataFimSubmissaoCameraReady, dataInicio, dataFim);
     }
 
     /**
@@ -108,7 +109,7 @@ public class RegistoEventos {
 
         for (Evento evento : this.listaEventos) {
             if (evento.isOrganizador(utilizador)
-                    && evento.isRegistadoOuSessoesTematicasDefinidas()) {
+                                && evento.isRegistadoOuSessoesTematicasDefinidas()) {
                 listaEventosOrganizador.add(evento);
             }
         }
@@ -130,7 +131,7 @@ public class RegistoEventos {
                 listaSubmissiveis.add(evento);
             }
             listaSubmissiveis.addAll(
-                    evento.getListaSubmissiveisAceitarArtigo());
+                                evento.getListaSubmissiveisAceitarArtigo());
         }
         return listaSubmissiveis;
     }
@@ -147,11 +148,11 @@ public class RegistoEventos {
 
         for (Evento evento : this.listaEventos) {
             if (evento.isStateValidoParaAlterar()
-                    && evento.isUtilizadorUmAutorSubmissao(utilizador)) {
+                                && evento.isUtilizadorUmAutorSubmissao(utilizador)) {
                 listaSubmissiveisUtilizador.add(evento);
             }
             listaSubmissiveisUtilizador.addAll(
-                    evento.getListaSubmissiveisAceitarAlteracaoArtigoComSubmissaoUtilizador(utilizador));
+                                evento.getListaSubmissiveisAceitarAlteracaoArtigoComSubmissaoUtilizador(utilizador));
         }
 
         return listaSubmissiveisUtilizador;
@@ -170,11 +171,11 @@ public class RegistoEventos {
 
         for (Evento evento : this.listaEventos) {
             if (evento.isSessoesTematicasDefinidas()
-                    && evento.isOrganizador(utilizador)) {
+                                && evento.isOrganizador(utilizador)) {
                 listaSemCPDefinida.add(evento);
             }
             List<CPDefinivel> listaSessoesTematicas
-                    = evento.getListaCPDefiniveisSemCPOrganizadorProponente(utilizador);
+                                = evento.getListaCPDefiniveisSemCPOrganizadorProponente(utilizador);
             listaSemCPDefinida.addAll(listaSessoesTematicas);
         }
 
@@ -308,17 +309,17 @@ public class RegistoEventos {
      * @return
      */
     public List<Submissivel> getListaSubmissiveisAceitarArtigoFinal(
-            Utilizador utilizador) {
+                        Utilizador utilizador) {
 
         List<Submissivel> listaSubmissiveis = new ArrayList<>();
 
         for (Evento evento : this.listaEventos) {
             if (evento.isStateValidoParaSubmeterArtigoFinal()
-                    && evento.isUtilizadorUmAutorSubmissaoInicial(utilizador)) {
+                                && evento.isUtilizadorUmAutorSubmissaoInicial(utilizador)) {
                 listaSubmissiveis.add(evento);
             }
             listaSubmissiveis.addAll(
-                    evento.getListaSubmissiveisAceitarArtigoFinal(utilizador));
+                                evento.getListaSubmissiveisAceitarArtigoFinal(utilizador));
         }
         return listaSubmissiveis;
     }
@@ -331,17 +332,17 @@ public class RegistoEventos {
      * @return Lista de Submissiveis.
      */
     public List<Submissivel> getListaSubmissiveisAceitarAlteracaoArtigoComSubmissaoUtilizador(
-            Utilizador utilizador) {
+                        Utilizador utilizador) {
         List<Submissivel> listaSubmissiveisUtilizador = new ArrayList<>();
 
         for (Evento evento : this.listaEventos) {
             if (evento.isStateValidoParaAlterar()
-                    && evento.isUtilizadorUmAutorSubmissao(utilizador)) {
+                                && evento.isUtilizadorUmAutorSubmissao(utilizador)) {
                 listaSubmissiveisUtilizador.add(evento);
             }
             listaSubmissiveisUtilizador.addAll(
-                    evento.getListaSubmissiveisAceitarAlteracaoArtigoComSubmissaoUtilizador(
-                            utilizador));
+                                evento.getListaSubmissiveisAceitarAlteracaoArtigoComSubmissaoUtilizador(
+                                                    utilizador));
         }
 
         return listaSubmissiveisUtilizador;
@@ -400,34 +401,30 @@ public class RegistoEventos {
 
         for (Evento evento : this.listaEventos) {
             if (evento.isOrganizador(utilizador)
-                    && evento.isEstadoValidoParaDecidir()) {
+                                && evento.isEstadoValidoParaDecidir()) {
                 listaDecidiveis.add(evento);
             }
             List<Decidivel> listaDecidiveisSessaoTematica
-                    = evento.getListaDecidivelOrganizadorProponente(utilizador);
+                                = evento.getListaDecidivelOrganizadorProponente(utilizador);
             listaDecidiveis.addAll(listaDecidiveisSessaoTematica);
         }
         return listaDecidiveis;
     }
 
-    /**
-     * Preenche as listas recebidas por parâmetro, colocando as submissoes
-     * aceites no lista listaSubmissoesAceites e as submissoes rejeitadas na
-     * lista listaSubmissoesRejeitadas.
-     *
-     * @param listaSubmissoesAceites Lista para submissões aceites.
-     * @param listaSubmissoesRejeitadas Lista para submissões retiradas.
-     */
-    public void getSubmissoesAceitesRejeitadas(
-            List<Submissao> listaSubmissoesAceites,
-            List<Submissao> listaSubmissoesRejeitadas) {
-
+    public void hashMapSubmissoes(HashMap hashMapSubmissoesAceites,
+                        HashMap hashMapSubmissoesRejeitadas) {
         for (Evento evento : this.listaEventos) {
             if (evento.getEstado() instanceof EventoEmSubmissaoCameraReadyState
-                    || evento.getEstado() instanceof EventoEmCameraReadyState) {
-                evento.getSubmissoesAceitesRejeitadas(listaSubmissoesAceites,
-                        listaSubmissoesRejeitadas);
+                                || evento.getEstado() instanceof EventoEmCameraReadyState) {
+
+                evento.hashMapSubmissoes(hashMapSubmissoesAceites,
+                                    hashMapSubmissoesRejeitadas);
+
             }
+
+            evento.hashMapSubmissoesSessaoTematica(hashMapSubmissoesAceites,
+                                hashMapSubmissoesRejeitadas);
+
         }
     }
 }

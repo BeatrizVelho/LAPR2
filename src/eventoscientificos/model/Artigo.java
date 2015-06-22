@@ -1,6 +1,6 @@
 package eventoscientificos.model;
 
-
+import java.util.List;
 
 /**
  * Representa uma instância de Artigo
@@ -28,7 +28,12 @@ public class Artigo {
      * Lista de autores.
      */
     private ListaAutores listaAutores;
-    
+
+    /**
+     * Palavras chave do artigo.
+     */
+    private List<String> palavrasChave;
+
     /**
      * Titulo do artigo por omissão.
      */
@@ -44,10 +49,9 @@ public class Artigo {
      */
     private static final String FICHEIRO_POR__OMISSAO = "Sem Ficheiro!";
 
-
-
     /**
      * Constroi uma instancia de artigo com o titulo, o resumo e o ficheiro.
+     *
      * @param titulo Titulo do artigo.
      * @param resumo Resumo do artigo.
      * @param ficheiro Caminho para o artigo.
@@ -58,12 +62,12 @@ public class Artigo {
         setFicheiro(ficheiro);
         this.listaAutores = new ListaAutores();
     }
-    
+
     public Artigo() {
         this.titulo = TITULO_POR_OMISSAO;
         this.resumo = RESUMO_POR_OMISSAO;
         this.ficheiro = FICHEIRO_POR__OMISSAO;
-        this.listaAutores = new ListaAutores();      
+        this.listaAutores = new ListaAutores();
     }
 
     /**
@@ -94,6 +98,15 @@ public class Artigo {
     }
 
     /**
+     * Devolve a lista de palavras chave do artigo.
+     *
+     * @return lista de palavras chave.
+     */
+    public List<String> getPalavrasChave() {
+        return palavrasChave;
+    }
+
+    /**
      * Modifica o titulo do artigo.
      *
      * @param titulo Novo titulo do artigo
@@ -101,7 +114,7 @@ public class Artigo {
     public void setTitulo(String titulo) {
         if (titulo.trim().isEmpty()) {
             throw new IllegalArgumentException("O titulo do artigo não"
-                    + " pode estar vazio.");
+                                + " pode estar vazio.");
         }
 
         this.titulo = titulo;
@@ -115,7 +128,7 @@ public class Artigo {
     public void setResumo(String resumo) {
         if (resumo.trim().isEmpty()) {
             throw new IllegalArgumentException("O resumo do artigo"
-                    + " não pode estar vazio.");
+                                + " não pode estar vazio.");
         }
 
         this.resumo = resumo;
@@ -129,16 +142,25 @@ public class Artigo {
     public void setFicheiro(String ficheiro) {
         if (ficheiro.trim().isEmpty()) {
             throw new IllegalArgumentException(
-                    "Não submeteu um ficheiro válido.");
+                                "Não submeteu um ficheiro válido.");
         }
 
         this.ficheiro = ficheiro;
     }
-    
+
+    /**
+     * Modifica a lista de palavras chave.
+     *
+     * @param palavrasChave nova lista de palavras chave.
+     */
+    public void setPalavrasChave(List<String> palavrasChave) {
+        this.palavrasChave = palavrasChave;
+    }
+
     public boolean validarArtigo() {
         return true;
     }
-    
+
     public boolean isAutor(Utilizador utilizador) {
         return this.listaAutores.isAutor(utilizador);
     }
@@ -167,5 +189,5 @@ public class Artigo {
 
         return this.getTitulo().equals(outroArtigo.getTitulo());
     }
-    
+
 }
