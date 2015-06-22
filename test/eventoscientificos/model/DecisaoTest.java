@@ -1,6 +1,5 @@
 package eventoscientificos.model;
 
-import eventoscientificos.model.state.submissao.SubmissaoEmCameraReadyState;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
