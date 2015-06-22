@@ -29,6 +29,16 @@ public class Utilizador {
     private String password;
 
     /**
+     * Numero de caracteres da password.
+     */
+    private int numeroCarateres;
+
+    /**
+     * Contém indicação do Codificador;Tabela.
+     */
+    private String codificadorTabela;
+
+    /**
      * Nome do Utilizador por omissão.
      */
     private static final String NOME_POR_OMISSAO = "Sem nome";
@@ -58,7 +68,7 @@ public class Utilizador {
      * @param password Password do utilizador.
      */
     public Utilizador(
-            String nome, String email, String username, String password) {
+                        String nome, String email, String username, String password) {
         setNome(nome);
         setEmail(email);
         setUsername(username);
@@ -70,10 +80,10 @@ public class Utilizador {
      */
     public Utilizador() {
         this(
-                Utilizador.NOME_POR_OMISSAO,
-                Utilizador.EMAIL_POR_OMISSAO,
-                Utilizador.USERNAME_POR_OMISSAO,
-                Utilizador.PASSWORD_POR_OMISSAO);
+                            Utilizador.NOME_POR_OMISSAO,
+                            Utilizador.EMAIL_POR_OMISSAO,
+                            Utilizador.USERNAME_POR_OMISSAO,
+                            Utilizador.PASSWORD_POR_OMISSAO);
     }
 
     /**
@@ -83,10 +93,10 @@ public class Utilizador {
      */
     public Utilizador(Utilizador utilizador) {
         this(
-                utilizador.getNome(),
-                utilizador.getEmail(),
-                utilizador.getUsername(),
-                utilizador.getPassword());
+                            utilizador.getNome(),
+                            utilizador.getEmail(),
+                            utilizador.getUsername(),
+                            utilizador.getPassword());
     }
 
     /**
@@ -126,6 +136,33 @@ public class Utilizador {
     }
 
     /**
+     * Devolve o número de carateres da password.
+     *
+     * @return numero de carateres da password
+     */
+    public int getNumeroCarateres() {
+        return numeroCarateres;
+    }
+
+    /**
+     * Devolve o codificador e tabela usados para codificar a password.
+     *
+     * @return codificador e tabela
+     */
+    public String getCodificadorTabela() {
+        return codificadorTabela;
+    }
+
+    public Utilizador(String nome, String email, String username, String password, int numeroCarateres, String codificadorTabela) {
+        this.nome = nome;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+        this.numeroCarateres = numeroCarateres;
+        this.codificadorTabela = codificadorTabela;
+    }
+
+    /**
      * Modifica o nome de utilizador.
      *
      * @param nome Novo nome do utilizador.
@@ -133,21 +170,21 @@ public class Utilizador {
     public void setNome(String nome) {
         if (nome.trim().isEmpty()) {
             throw new IllegalArgumentException("Nome do utilizador nao pode"
-                    + " estar vazio");
+                                + " estar vazio");
         }
         if (nome.contains("[0-9]+")) {
 
             throw new IllegalArgumentException("Nome do utilizador nao pode "
-                    + "conter numeros");
+                                + "conter numeros");
         }
         if (nome.length() < 2) {
             throw new IllegalArgumentException("Nome do utilizador tem de"
-                    + " ter pelo menos 2 letras");
+                                + " ter pelo menos 2 letras");
 
         }
         if (nome.contains("[()<>,;:.\\[\\]{}]\\\\\\\\")) {
             throw new IllegalArgumentException("Nome do utilizador nao pode "
-                    + "conter caracteres");
+                                + "conter caracteres");
         }
         this.nome = nome;
     }
@@ -160,16 +197,16 @@ public class Utilizador {
     public void setEmail(String email) {
         if (email.trim().isEmpty()) {
             throw new IllegalArgumentException("Email do utilizador não "
-                    + "pode estar vazio.");
+                                + "pode estar vazio.");
         }
         if (email.contains("[()<>,;:.\\[\\]{}]\\\\\\\\")) {
             throw new IllegalArgumentException("Email do "
-                    + "utilizador não pode conter "
-                    + "caracteres.");
+                                + "utilizador não pode conter "
+                                + "caracteres.");
         }
         if (!(email.matches(".+@.+\\..{2,}"))) {
             throw new IllegalArgumentException("Email do utilizador"
-                    + " tem de obedecer a estrutura");
+                                + " tem de obedecer a estrutura");
         }
 
         this.email = email;
@@ -183,12 +220,12 @@ public class Utilizador {
     public void setUsername(String username) {
         if (username.trim().isEmpty()) {
             throw new IllegalArgumentException("Username do utilizador não "
-                    + "pode estar vazio.");
+                                + "pode estar vazio.");
         }
         if (username.contains("[()<>,;:.\\[\\]{}]\\\\\\\\")) {
             throw new IllegalArgumentException("Username do "
-                    + "utilizador não pode conter "
-                    + "caracteres.");
+                                + "utilizador não pode conter "
+                                + "caracteres.");
         }
 
         this.username = username;
@@ -202,14 +239,36 @@ public class Utilizador {
     public void setPassword(String password) {
         if (password.trim().isEmpty()) {
             throw new IllegalArgumentException("Password do utilizador não "
-                    + "pode estar vazia.");
+                                + "pode estar vazia.");
         }
         if (password.contains("[()<>,;:.\\[\\]{}]\\\\\\\\")) {
             throw new IllegalArgumentException("Password do "
-                    + "utilizador não pode conter "
-                    + "caracteres.");
+                                + "utilizador não pode conter "
+                                + "caracteres.");
+        }
+        if (password.length() > 16) {
+            throw new IllegalArgumentException("A password pode ter no máximo "
+                                + "16 caracteres");
         }
         this.password = password;
+    }
+
+    /**
+     * Modifica o número de carateres da password.
+     *
+     * @param numeroCarateres numero de carateres da password
+     */
+    public void setNumeroCarateres(int numeroCarateres) {
+        this.numeroCarateres = numeroCarateres;
+    }
+
+    /**
+     * Modifica o codificador e a tabela usada na codificação da password.
+     *
+     * @param codificadorTabela novo codificadorTabela
+     */
+    public void setCodificadorTabela(String codificadorTabela) {
+        this.codificadorTabela = codificadorTabela;
     }
 
     /**
@@ -220,9 +279,9 @@ public class Utilizador {
      */
     public boolean validarUtilizador() {
         return !(this.nome.equals(NOME_POR_OMISSAO)
-                || this.email.equals(EMAIL_POR_OMISSAO)
-                || this.username.equals(USERNAME_POR_OMISSAO)
-                || this.password.equals(PASSWORD_POR_OMISSAO));
+                            || this.email.equals(EMAIL_POR_OMISSAO)
+                            || this.username.equals(USERNAME_POR_OMISSAO)
+                            || this.password.equals(PASSWORD_POR_OMISSAO));
     }
 
     /**
@@ -258,10 +317,10 @@ public class Utilizador {
     @Override
     public String toString() {
         return String.format(""
-                + "O utlizador esta registado com os seguintes "
-                + "dados: nome %s, username %s, o email %s "
-                + "e as password %s", this.nome,
-                this.username, this.email, this.password);
+                            + "O utlizador esta registado com os seguintes "
+                            + "dados: nome %s, username %s, o email %s "
+                            + "e as password %s", this.nome,
+                            this.username, this.email, this.password);
     }
 
     /**
