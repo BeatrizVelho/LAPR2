@@ -1,6 +1,7 @@
 package eventoscientificos.model;
 
-import eventoscientificos.model.state.evento.EventoRegistadoState;
+import eventoscientificos.model.state.evento.EventoEmCameraReadyState;
+import eventoscientificos.model.state.evento.EventoEmSubmissaoCameraReadyState;
 import java.util.ArrayList;
 import java.util.List;
 import utils.Data;
@@ -77,7 +78,7 @@ public class RegistoEventos {
 
     /**
      * Devolve o número total de eventos na lista.
-     * 
+     *
      * @return Número total de eventos na lista.
      */
     public int getNumeroEventos() {
@@ -86,9 +87,9 @@ public class RegistoEventos {
 
     /**
      * Devolve um evento através da sua posição na lista.
-     * 
+     *
      * @param indice Posição na lista.
-     * 
+     *
      * @return Evento através da sua posição na lista.
      */
     public Evento getEventoPeloID(int indice) {
@@ -384,12 +385,12 @@ public class RegistoEventos {
         }
         return listaEventos;
     }
-    
+
     /**
      * Devolve uma lista de eventoes/sessões temáticas com todas as submissões
-     * revistas e ainda não foi realizado o processo de decisão e onde
-     * o utilizador é organizador/proponente.
-     * 
+     * revistas e ainda não foi realizado o processo de decisão e onde o
+     * utilizador é organizador/proponente.
+     *
      * @param utilizador Utilizador a verificar se é organizador/proponente.
      * @return Lista de evento/sessao temática onde o utilizador é
      * organizador/proponente.
@@ -398,14 +399,35 @@ public class RegistoEventos {
         List<Decidivel> listaDecidiveis = new ArrayList<>();
 
         for (Evento evento : this.listaEventos) {
-            if (evento.isOrganizador(utilizador) && 
-                    evento.isEstadoValidoParaDecidir()) {
+            if (evento.isOrganizador(utilizador)
+                    && evento.isEstadoValidoParaDecidir()) {
                 listaDecidiveis.add(evento);
             }
-            List<Decidivel> listaDecidiveisSessaoTematica =
-                    evento.getListaDecidivelOrganizadorProponente(utilizador);
+            List<Decidivel> listaDecidiveisSessaoTematica
+                    = evento.getListaDecidivelOrganizadorProponente(utilizador);
             listaDecidiveis.addAll(listaDecidiveisSessaoTematica);
         }
         return listaDecidiveis;
+    }
+
+    /**
+     * Preenche as listas recebidas por parâmetro, colocando as submissoes
+     * aceites no lista listaSubmissoesAceites e as submissoes rejeitadas na
+     * lista listaSubmissoesRejeitadas.
+     *
+     * @param listaSubmissoesAceites Lista para submissões aceites.
+     * @param listaSubmissoesRejeitadas Lista para submissões retiradas.
+     */
+    public void getSubmissoesAceitesRejeitadas(
+            List<Submissao> listaSubmissoesAceites,
+            List<Submissao> listaSubmissoesRejeitadas) {
+
+        for (Evento evento : this.listaEventos) {
+            if (evento.getEstado() instanceof EventoEmSubmissaoCameraReadyState
+                    || evento.getEstado() instanceof EventoEmCameraReadyState) {
+                evento.getSubmissoesAceitesRejeitadas(listaSubmissoesAceites,
+                        listaSubmissoesRejeitadas);
+            }
+        }
     }
 }

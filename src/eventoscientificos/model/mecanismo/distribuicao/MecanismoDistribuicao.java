@@ -3,7 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package eventoscientificos.model;
+package eventoscientificos.model.mecanismo.distribuicao;
+
+import eventoscientificos.model.Distribuivel;
+import eventoscientificos.model.ListaRevisoes;
 
 /**
  * Todas as classes que implementam esta interface, herdam a responsabilidade de

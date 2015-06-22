@@ -13,6 +13,7 @@ import eventoscientificos.model.state.evento.EventoSessoesTematicasDefinidasStat
 import eventoscientificos.model.state.evento.EventoState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmSubmissaoState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaFaseDecisaoState;
+import eventoscientificos.model.state.submissao.SubmissaoAceiteState;
 import eventoscientificos.model.state.submissao.SubmissaoEmSubmissaoState;
 import eventoscientificos.model.state.submissao.SubmissaoRemovidaState;
 import eventoscientificos.model.state.submissao.SubmissaoRevistaState;
@@ -34,6 +35,8 @@ public class EventoTest {
     private Artigo artigoInicial;
     private Artigo artigoFinal;
     private Revisao revisao;
+    private Revisao revisao2;
+    private Revisao r;
 
     public EventoTest() {
         this.evento = new Evento("titulo", "descricao", new Local("local"),
@@ -52,6 +55,15 @@ public class EventoTest {
                             "fatima", "ola@iml.com", "fafa", "1234")),
                             this.submissao, 0, null);
         this.revisao = new Revisao(submissao, new Revisor(utilizador));
+
+        this.r = new Revisao(submissao, new Revisor(utilizador));
+
+        r.setAdequacaoArtigo(5);
+        r.setConfiancaRevisor(4);
+        r.setOriginalidadeArtigo(3);
+        r.setQualidadeArtigo(4);
+        r.setRecomendacaoGlobal(2);
+        r.setTextoJustificativo("ola");
     }
 
     /**
@@ -475,10 +487,10 @@ public class EventoTest {
         instance.adicionarCP(new CP());
         instance.setEstado(new EventoEmSubmissaoState(instance));
         instance.iniciarProcessoDetecao(listaTiposConflito);
-        Class <? extends EventoState> expResult
-                = new EventoEmLicitacaoState(instance).getClass();
-        Class <? extends EventoState> result
-                = instance.getEstado().getClass();
+        Class<? extends EventoState> expResult
+                            = new EventoEmLicitacaoState(instance).getClass();
+        Class<? extends EventoState> result
+                            = instance.getEstado().getClass();
         assertEquals(expResult, result);
     }
 
@@ -711,7 +723,7 @@ public class EventoTest {
         submissao.setEstado(new SubmissaoEmSubmissaoState(submissao));
         submissao.setArtigoInicial(this.artigoInicial);
         submissao.getArtigoInicial().getListaAutores().novoAutor(
-                utilizador, new InstituicaoAfiliacao("ISEP"));
+                            utilizador, new InstituicaoAfiliacao("ISEP"));
         ListaSubmissoes instance = new ListaSubmissoes();
         instance.adicionarSubmissao(submissao);
         boolean expResult = true;
@@ -736,7 +748,7 @@ public class EventoTest {
 //                            new Data(2016, 6, 21), new Data(2016, 7, 8),
 //                            new Data(2016, 7, 9), new Data(2017, 3, 25),
 //                            new Data(2017, 5, 29));
-//        ListaSessoesTematicas instance = new Lis;
+//        ListaSessoesTematicas instance = new ListaSessoesTematicas(evento);
 //        Submissao submissao = new Submissao();
 //        submissao.setArtigoInicial(new Artigo("tituo", "resumo", "ficheiro"));
 //        submissao .getArtigoInicial().getListaAutores().adicionarAutor(autor);
@@ -915,7 +927,7 @@ public class EventoTest {
     @Test
     public void testIsStateValidoParaRemover() {
         System.out.println("isStateValidoParaRemover");
-        Utilizador u = new Utilizador("fatima", "mail@isep.ipp.pt", "fafa","1235");
+        Utilizador u = new Utilizador("fatima", "mail@isep.ipp.pt", "fafa", "1235");
         Evento instance = this.evento;
         instance.setEstado(new EventoEmSubmissaoState(evento));
         instance.getListaSubmissoes().adicionarSubmissao(submissao);
@@ -957,7 +969,7 @@ public class EventoTest {
     @Test
     public void testIsEstadoValidoParaDecidir() {
         System.out.println("isEstadoValidoParaDecidir");
-        Utilizador u = new Utilizador("fatima", "mail@isep.ipp.pt", "fafa","1235");
+        Utilizador u = new Utilizador("fatima", "mail@isep.ipp.pt", "fafa", "1235");
         Evento instance = this.evento;
         instance.setEstado(new EventoEmRevisaoState(evento));
         instance.getListaSubmissoes().adicionarSubmissao(submissao);
@@ -974,7 +986,7 @@ public class EventoTest {
         System.out.println("getListaDecidivelOrganizadorProponente");
         Submissao submissao = this.submissao;
         submissao.setEstado(new SubmissaoRevistaState(submissao));
-        
+
         SessaoTematica sessaoTematica = new SessaoTematica("#A9D24R",
                             "LAPR2",
                             new Data(2015, 5, 22),
@@ -987,7 +999,7 @@ public class EventoTest {
         sessaoTematica.setEstado(new SessaoTematicaFaseDecisaoState(sessaoTematica));
         sessaoTematica.novoProponente(utilizador);
         sessaoTematica.getListaSubmissoes().adicionarSubmissao(submissao);
-        
+
         Evento instance = this.evento;
         instance.setEstado(new EventoFaseDecisaoState(instance));
         instance.novoOrganizador(this.utilizador);
@@ -1002,7 +1014,7 @@ public class EventoTest {
     /**
      * Teste do método novoProcessoDecisao, da classe Evento.
      */
-    @Test (expected = NullPointerException.class)
+    @Test(expected = NullPointerException.class)
     public void testNovoProcessoDecisao() {
         System.out.println("novoProcessoDecisao");
         Evento instance = this.evento;
@@ -1011,5 +1023,59 @@ public class EventoTest {
         ProcessoDecisao result = instance.novoProcessoDecisao();
         assertEquals(expResult, result);
     }
+
+    /**
+     * Test of getValoresTotaisEstatisticaEvento method, of class Evento.
+     */
+    @Test
+    public void testGetValoresTotaisEstatisticaEvento() {
+        System.out.println("getValoresTotaisEstatisticaEvento");
+
+        int nSubmissoes = 2;
+        this.submissao.setEstado(new SubmissaoAceiteState(submissao));
+        this.evento.setEstado(new EventoEmSubmissaoCameraReadyState(evento));
+        this.revisao2 = new Revisao(submissao, new Revisor(utilizador));
+        revisao2.setAdequacaoArtigo(5);
+        revisao2.setConfiancaRevisor(4);
+        revisao2.setOriginalidadeArtigo(3);
+        revisao2.setQualidadeArtigo(4);
+        revisao2.setRecomendacaoGlobal(2);
+        revisao2.setTextoJustificativo("Fafa");
+
+        Submissao sb = new Submissao();
+        sb.setEstado(new SubmissaoAceiteState(submissao));
+        sb.setArtigoFinal(artigoFinal);
+        sb.setArtigoInicial(artigoInicial);
+
+        this.evento.getListaSubmissoes().adicionarSubmissao(submissao);
+        this.evento.getListaSubmissoes().adicionarSubmissao(sb);
+        this.r.getSubmissao().setEstado(new SubmissaoAceiteState(submissao));
+        this.revisao2.getSubmissao().setEstado(new SubmissaoAceiteState(submissao));
+        ProcessoDistribuicao pd = new ProcessoDistribuicao();
+        this.evento.adicionarProcessoDistribuicao(pd);
+        ListaRevisoes lr = this.evento.getProcessoDistribuicao().getListaRevisoes();
+        lr.adicionarRevisao(revisao2);
+        lr.adicionarRevisao(r);
+
+        Evento instance = this.evento;
+        float[] expResult = {1,5f,4f,3f,4f,2f};
+        float[] result = instance.getValoresTotaisEstatisticaEvento();
+        assertArrayEquals(expResult, result, 0.00f);
+
+    }
+
+
+    /**
+     * Test of isStateValidoParaGerarEstatisticasEvento method, of class Evento.
+     */
+    @Test
+    public void testIsStateValidoParaGerarEstatisticasEvento() {
+        System.out.println("isStateValidoParaGerarEstatisticasEvento");
+        Evento instance = this.evento;
+        this.evento.setEstado(new EventoEmSubmissaoCameraReadyState(evento));
+        boolean expResult = true;
+        boolean result = instance.isStateValidoParaGerarEstatisticasEvento();
+        assertEquals(expResult, result);
+           }
 
 }

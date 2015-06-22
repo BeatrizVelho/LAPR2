@@ -1,5 +1,7 @@
 package eventoscientificos.model;
 
+import eventoscientificos.model.state.submissao.SubmissaoAceiteState;
+import eventoscientificos.model.state.submissao.SubmissaoRejeitadaState;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -248,5 +250,27 @@ public class ListaSubmissoes {
             }
         }
         return listaSubmissoesAutor;
+    }
+
+    /**
+     * Preenche as listas recebidas por parâmetro, colocando as submissoes 
+     * aceites no lista listaSubmissoesAceites e as submissoes rejeitadas na 
+     * lista listaSubmissoesRejeitadas.
+     * 
+     * @param listaSubmissoesAceites Lista para submissões aceites.
+     * @param listaSubmissoesRejeitadas Lista para submissões retiradas.
+     */
+    public void getSubmissoesAceitesRejeitadas(
+            List<Submissao> listaSubmissoesAceites, 
+            List<Submissao> listaSubmissoesRejeitadas) {
+        for(Submissao submissao : this.listaSubmissoes) {
+            if(submissao.getEstado() instanceof SubmissaoAceiteState) {
+                listaSubmissoesAceites.add(submissao);
+            }
+            
+            if(submissao.getEstado() instanceof SubmissaoRejeitadaState) {
+                listaSubmissoesRejeitadas.add(submissao);
+            }
+        }
     }
 }

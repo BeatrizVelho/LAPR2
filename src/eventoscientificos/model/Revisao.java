@@ -46,6 +46,11 @@ public class Revisao {
      * Texto justificativo da avaliação efetuada.
      */
     private String textoJustificativo;
+
+    /**
+     * Estado revisto da revisão.
+     */
+    private boolean revisto;
     /**
      * Confiança do revisor em relação ao topico do artigo por omissão.
      */
@@ -82,6 +87,7 @@ public class Revisao {
     public Revisao(Submissao submissao, Revisor revisor) {
         this.submissao = submissao;
         this.revisor = revisor;
+        this.revisto = false;
         this.adequacaoArtigo = ADEQUACAO_ARTIGO_POR_OMISSAO;
         this.confiancaRevisor = CONFIANCA_REVISOR_POR_OMISSAO;
         this.originalidadeArtigo = ORIGINALIDADE_ARTIGO_POR_OMISSAO;
@@ -266,7 +272,7 @@ public class Revisao {
 
     /**
      * Adiciona à revisão os valores de revisão atribuidos pelo revisor ao
-     * artigo
+     * artigo e altera o estado da revisão para revista. 
      *
      * @param revisao revisão à qual vai se adicionar os novos valores
      * @return verdadeiro se modificar todos os valores correctamente e falso se
@@ -279,6 +285,7 @@ public class Revisao {
         setQualidadeArtigo(revisaoClone.qualidadeArtigo);
         setRecomendacaoGlobal(revisaoClone.recomendacaoGlobal);
         setTextoJustificativo(revisaoClone.textoJustificativo);
+        this.revisto = true;
         return true;
     }
 

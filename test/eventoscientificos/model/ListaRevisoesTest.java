@@ -8,6 +8,7 @@ package eventoscientificos.model;
 import eventoscientificos.model.state.submissao.SubmissaoAceiteState;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.Assert;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -135,18 +136,22 @@ public class ListaRevisoesTest {
         System.out.println("getValoresTotaisParaEstatisticaEvento");
         int nSubmissoes = 2;
 
+        revisao.setAdequacaoArtigo(5);
+        revisao.setConfiancaRevisor(4);
+        revisao.setOriginalidadeArtigo(3);
+        revisao.setQualidadeArtigo(4);
+        revisao.setRecomendacaoGlobal(2);
+        revisao.setTextoJustificativo("Fafa");
+
         this.r.getSubmissao().setEstado(new SubmissaoAceiteState(submissao));
         this.revisao.getSubmissao().setEstado(new SubmissaoAceiteState(submissao));
 
         ListaRevisoes instance = new ListaRevisoes();
         instance.adicionarRevisao(revisao);
         instance.adicionarRevisao(r);
-//        float[] expResult = new float[5];
         float[] result = instance.getValoresTotaisParaEstatisticaEvento(nSubmissoes);
-        // float[] valores = instance.getValoresTotaisParaEstatisticaEvento(nSubmissoes);
-        float[] expResult = {2, 5f, 2, 1, 5f, 2, 1};
-        //  boolean result = (valores[0] == 2,5f) && (valores[1] == 2f) && (valores[2] == 1,5f) && (valores[3] == 2f) && (valores[4] == 1f);
-        assertEquals(expResult, result);
+        float[] expResult = {1f, 5f, 4f, 3f, 4f, 2f};
+        Assert.assertArrayEquals(result, expResult, 0.00f);
 
     }
 

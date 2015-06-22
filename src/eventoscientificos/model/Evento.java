@@ -95,7 +95,7 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
      * Processo de Distribuição.
      */
     private ProcessoDistribuicao processoDistribuicao;
-    
+
     /**
      * Processo de Decisão.
      */
@@ -967,6 +967,15 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
     }
 
     /**
+     * Verifica se é possível gerar estatisticas do evento
+     *
+     * @return verdadeiro se for possivel e falso se não
+     */
+    public boolean isStateValidoParaGerarEstatisticasEvento() {
+        return estado.setEmSubmissaoCameraReady() || estado.setCameraReady();
+    }
+
+    /**
      * Verifica se determinado Evento cumpre os critérios necessários para
      * remover.
      *
@@ -991,23 +1000,58 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
     }
 
     /**
-     * Devolve uma lista de Decidiveis onde é possivel realizar decisões
-     * das submissões que têm submissões do utilizador.
-     * 
+     * Devolve uma lista de Decidiveis onde é possivel realizar decisões das
+     * submissões que têm submissões do utilizador.
+     *
      * @param utilizador Utilizador.
      * @return Lista de Decidiveis.
      */
-    public List<Decidivel> getListaDecidivelOrganizadorProponente(Utilizador utilizador){
+    public List<Decidivel> getListaDecidivelOrganizadorProponente(Utilizador utilizador) {
         return listaSessoesTematicas.getListaDecidivelOrganizadorProponente(utilizador);
     }
 
     /**
      * Constrói instância de ProcessoDecisao
-     * 
+     *
      * @return ProcessoDecisao
      */
     @Override
     public ProcessoDecisao novoProcessoDecisao() {
         return new ProcessoDecisao();
+    }
+
+    /**
+     * Devolve os valores totais da estatistica obtida no evento, no que refere
+     * à taxa de aceitação, e as médias da adequação, confiança, originalidade,
+     * qualidade e recomendação.
+     *
+     * @return uma array com toda a informação
+     */
+    public float[] getValoresTotaisEstatisticaEvento() {
+        int numeroSubmissoes = this.listaSubmissoes.getNumeroSubmissoes();
+        ListaRevisoes lr = this.processoDistribuicao.getListaRevisoes();
+        return lr.getValoresTotaisParaEstatisticaEvento(numeroSubmissoes);
+
+    }
+
+    /**
+     * Preenche as listas recebidas por parâmetro, colocando as submissoes
+     * aceites no lista listaSubmissoesAceites e as submissoes rejeitadas na
+     * lista listaSubmissoesRejeitadas.
+     *
+     * @param listaSubmissoesAceites Lista para submissões aceites.
+     * @param listaSubmissoesRejeitadas Lista para submissões retiradas.
+     */
+    public void getSubmissoesAceitesRejeitadas(
+            List<Submissao> listaSubmissoesAceites,
+            List<Submissao> listaSubmissoesRejeitadas) {
+
+        this.listaSubmissoes.getSubmissoesAceitesRejeitadas(
+                listaSubmissoesAceites,
+                listaSubmissoesRejeitadas);
+
+        this.listaSessoesTematicas.getSubmissoesAceitesRejeitadas(
+                listaSubmissoesAceites,
+                listaSubmissoesRejeitadas);
     }
 }
