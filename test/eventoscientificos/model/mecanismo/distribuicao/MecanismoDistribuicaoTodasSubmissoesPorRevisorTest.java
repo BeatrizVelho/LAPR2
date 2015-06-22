@@ -1,5 +1,16 @@
-package eventoscientificos.model;
+package eventoscientificos.model.mecanismo.distribuicao;
 
+import eventoscientificos.model.Artigo;
+import eventoscientificos.model.CP;
+import eventoscientificos.model.Distribuivel;
+import eventoscientificos.model.Evento;
+import eventoscientificos.model.ListaRevisoes;
+import eventoscientificos.model.Local;
+import eventoscientificos.model.ProcessoDistribuicao;
+import eventoscientificos.model.RegistoEventos;
+import eventoscientificos.model.Revisor;
+import eventoscientificos.model.Submissao;
+import eventoscientificos.model.Utilizador;
 import eventoscientificos.model.mecanismo.distribuicao.MecanismoDistribuicaoTodasSubmissoesPorRevisor;
 import eventoscientificos.model.state.submissao.SubmissaoAceiteState;
 import eventoscientificos.model.state.submissao.SubmissaoEmLicitacaoState;
