@@ -967,6 +967,15 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
     }
 
     /**
+     * Verifica se é possível gerar estatisticas do evento
+     *
+     * @return verdadeiro se for possivel e falso se não
+     */
+    public boolean isStateValidoParaGerarEstatisticasEvento() {
+        return estado.setEmSubmissaoCameraReady() && estado.setCameraReady();
+    }
+
+    /**
      * Verifica se determinado Evento cumpre os critérios necessários para
      * remover.
      *
