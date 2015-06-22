@@ -25,18 +25,6 @@ public class ProcessoDecisaoTest {
     }
 
     /**
-     * Teste do método getListaRevisoes, da classe ProcessoDecisao.
-     */
-    @Test
-    public void testGetListaRevisoes() {
-        System.out.println("getListaRevisoes");
-        ProcessoDecisao instance = new ProcessoDecisao();
-        ListaRevisoes expResult = null;
-        ListaRevisoes result = instance.getListaRevisoes();
-        assertEquals(expResult, result);
-    }
-
-    /**
      * Teste do método adicionarMecanismoDecisao, da classe ProcessoDecisao.
      */
     @Test (expected = IllegalArgumentException.class)
