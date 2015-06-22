@@ -8,7 +8,11 @@ import static org.junit.Assert.*;
  */
 public class UtilizadorTest {
 
+    private Utilizador utilizador;
+
     public UtilizadorTest() {
+        this.utilizador = new Utilizador(
+                            "luis", "1140356@isep.ipp.pt", "politico", "12345");
     }
 
     /**
@@ -149,7 +153,7 @@ public class UtilizadorTest {
      * verificar se o utilizador esta completamente preenchido
      */
     @Test
-    public void testValidaUtilizador() {
+    public void testValidarUtilizador() {
         System.out.println("validaUtilizador");
         Utilizador instance = new Utilizador(
                             "susana", "freitas@gmail.com", "susu", "12345");
@@ -160,7 +164,7 @@ public class UtilizadorTest {
     }
 
     /**
-     *
+     * teste ao metodo criarCloneUtilizador da classe Utilizador.
      */
     @Test
     public void testCriarCloneUtilizador() {
@@ -172,6 +176,37 @@ public class UtilizadorTest {
         novaInstance.setUsername("carlosvieira");
         boolean expResult = false;
         boolean result = instance.equals(novaInstance);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of setNumeroCarateres and getNumeroCarateres method, of class
+     * Utilizador.
+     */
+    @Test
+    public void testSetAndGetNumeroCarateres() {
+        System.out.println("setAndGetNumeroCarateres");
+        int numeroCarateres = 10;
+        Utilizador instance = this.utilizador;
+        instance.setNumeroCarateres(numeroCarateres);
+        int expResult = 10;
+        int result = instance.getNumeroCarateres();
+        assertEquals(expResult, result);
+
+    }
+
+    /**
+     * Test of setCodificadorTabela and getNumeroCarateresmethod, of class
+     * Utilizador.
+     */
+    @Test
+    public void testSetAndGetCodificadorTabela() {
+        System.out.println("setAndGetCodificadorTabela");
+        String codificadorTabela = "ola";
+        Utilizador instance = this.utilizador;
+        instance.setCodificadorTabela(codificadorTabela);
+        String expResult = "ola";
+        String result = instance.getCodificadorTabela();
         assertEquals(expResult, result);
     }
 
