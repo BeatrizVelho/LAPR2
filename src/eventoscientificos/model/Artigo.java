@@ -29,7 +29,7 @@ public class Artigo {
      * Lista de autores.
      */
     private ListaAutores listaAutores;
-    
+
     /**
      * Lista de palavras chave.
      */
@@ -54,12 +54,12 @@ public class Artigo {
      * Data de submissão do artigo inicial.
      */
     private Data dataSubmissaoInicial;
-    
+
     /**
      * Data de submissão do artigo final.
      */
     private Data dataSubmissaoFinal;
-    
+
     /**
      * Titulo do artigo por omissão.
      */
@@ -118,6 +118,15 @@ public class Artigo {
     }
 
     /**
+     * Devolve o caminho do ficheiro do artigo
+     *
+     * @return Caminho do ficheiro do artigo.
+     */
+    public String getFicheiro() {
+        return ficheiro;
+    }
+
+    /**
      * Devolve a lista com os autores do artigo.
      *
      * @return Lista dos autores do artigo
@@ -155,13 +164,31 @@ public class Artigo {
 
     /**
      * Devolve a lista de palavras de chave.do artigo.
-     * 
+     *
      * @return Lista de palavras chave do artigo.
      */
     public List<String> getPalavrasChave() {
         return palavrasChave;
     }
-    
+
+    /**
+     * Devolve a data de submissão do artigo inicial.
+     *
+     * @return Data de submissaão do artigo inicial.
+     */
+    public Data getDataSubmissaoInicial() {
+        return dataSubmissaoInicial;
+    }
+
+    /**
+     * Devolve a data de submissão do artigo final.
+     *
+     * @return Data de submissaão do artigo final.
+     */
+    public Data getDataSubmissaoFinal() {
+        return dataSubmissaoFinal;
+    }
+
     /**
      * Modifica o titulo do artigo.
      *
@@ -203,8 +230,8 @@ public class Artigo {
 
         this.ficheiro = ficheiro;
     }
-    
-     /**
+
+    /**
      * Modifica o autor correspondente da submissão.
      *
      * @param autorCorrespondente Novo autor correspondente do artigoInicial.
@@ -233,17 +260,46 @@ public class Artigo {
 
     /**
      * Modifica a lista de palavras chave do artigo.
-     * 
+     *
      * @param palavrasChave Nova lista de palavras chave.
      */
     public void setPalavrasChave(List<String> palavrasChave) {
         this.palavrasChave = palavrasChave;
     }
 
+    /**
+     * Modifica a data de submissão do artigo inicial.
+     *
+     * @param dataSubmissaoInicial Nova data de submissão do artigo inicial.
+     */
+    public void setDataSubmissaoInicial(Data dataSubmissaoInicial) {
+        this.dataSubmissaoInicial = dataSubmissaoInicial;
+    }
+
+    /**
+     * Modifica a data de submissão do artigo Final.
+     *
+     * @param dataSubmissaoFinal Nova data de submissão do artigo final.
+     */
+    public void setDataSubmissaoFinal(Data dataSubmissaoFinal) {
+        this.dataSubmissaoFinal = dataSubmissaoFinal;
+    }
+
+    /**
+     * Verifica se o artigo é válido.
+     * 
+     * @return Verdadeiro se o artigo é válido e falso se não é.
+     */
     public boolean validarArtigo() {
         return true;
     }
 
+    /**
+     * Verifica se o utilizador passado por parâmetro está inserido na lista.
+     * 
+     * @param utilizador Utilizador a verificar.
+     * @return Verdadeiro se já existe na lista de autores e falso se não está.
+     */
     public boolean isAutor(Utilizador utilizador) {
         return this.listaAutores.isAutor(utilizador);
     }
