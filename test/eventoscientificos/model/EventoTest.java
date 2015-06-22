@@ -1012,4 +1012,19 @@ public class EventoTest {
         assertEquals(expResult, result);
     }
 
+
+
+    /**
+     * Test of getValoresTotaisEstatisticaEvento method, of class Evento.
+     */
+    @Test
+    public void testGetValoresTotaisEstatisticaEvento() {
+        System.out.println("getValoresTotaisEstatisticaEvento");
+        Evento instance = null;
+        float[] expResult = null;
+        float[] result = instance.getValoresTotaisEstatisticaEvento();
+      //  assertArrayEquals(expResult, result);
+    
+    }
+
 }
