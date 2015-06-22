@@ -22,8 +22,8 @@ import static org.junit.Assert.*;
 import utils.Data;
 
 /**
- *
- * @author Soraia
+ *Teste à classe GerarEstatisticasEventoController
+ * @author G01
  */
 public class GerarEstatisticasEventoControllerTest {
 
