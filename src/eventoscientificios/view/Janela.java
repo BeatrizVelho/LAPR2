@@ -246,6 +246,11 @@ public class Janela extends javax.swing.JFrame {
         gerirSubmissoes.add(uc18);
 
         uc10.setText("Alterar submissão de artigo científico");
+        uc10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uc10ActionPerformed(evt);
+            }
+        });
         gerirSubmissoes.add(uc10);
 
         uc16.setText("Retirar submissão de artigo científico");
@@ -377,6 +382,10 @@ public class Janela extends javax.swing.JFrame {
     private void uc4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc4ActionPerformed
         new SubmeterArtigoUI(this, true, this.empresa);
     }//GEN-LAST:event_uc4ActionPerformed
+
+    private void uc10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc10ActionPerformed
+        new AlterarSubmissaoUI(this, true, this.empresa);
+    }//GEN-LAST:event_uc10ActionPerformed
 
     /**
      * @param args the command line arguments

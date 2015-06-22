@@ -195,6 +195,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Alterar submiss&#xe3;o de artigo cient&#xed;fico"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="uc10ActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="uc16">
               <Properties>
