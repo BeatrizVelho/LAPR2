@@ -54,7 +54,7 @@ public class ArtigoTest {
         ListaAutores result = instance.getListaAutores();
         assertEquals(expResult, result);
     }
-    
+
     /**
      * Teste do método setFicheiro, da classe Artigo.
      */
@@ -64,6 +64,36 @@ public class ArtigoTest {
         String ficheiro = "getNome, getEmail, getInstituicaoAfiliacao1234";
         Artigo instance = this.artigo;
         instance.setFicheiro(ficheiro);
+    }
+
+    /**
+     * Teste do método set e get AutorCorrespondente, da classe Submissao.
+     */
+    @Test
+    public void testSetAndGetAutorCorrespondente() {
+        System.out.println("setAndGetAutorCorrespondente");
+        Artigo instance = new Artigo();
+        AutorCorrespondente expResult = new AutorCorrespondente(
+                new Utilizador("nome", "1140587@isep.ipp.pt", "username", "password"),
+                new InstituicaoAfiliacao("ISEP"));
+        instance.setAutorCorrespondente(expResult);
+        AutorCorrespondente result = instance.getAutorCorrespondente();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método set e get AutorSubmissorInicial, da classe Submissao.
+     */
+    @Test
+    public void testGetAutorSubmissor() {
+        System.out.println("setAndGetAutorSubmissor");
+        Artigo instance = new Artigo();
+        Autor expResult = new Autor(
+                new Utilizador("nome", "1140587@isep.ipp.pt", "username", "password"),
+                new InstituicaoAfiliacao("ISEP"));
+        instance.setAutorSubmissor(expResult);
+        Autor result = instance.getAutorSubmissor();
+        assertEquals(expResult, result);
     }
 
     /**
@@ -78,7 +108,7 @@ public class ArtigoTest {
         boolean result = instance.equals(outroObjeto);
         assertEquals(expResult, result);
     }
-    
+
     /**
      * Teste do método equals, da classe Evento.
      */
