@@ -95,4 +95,19 @@ public class EmpresaTest {
         List<MecanismoDecisao> result = instance.getListaMecanismoDecisao();
         assertEquals(expResult, result);
     }
+    
+    /**
+     * Test of isAdministrador method, of class Empresa.
+     */
+    @Test
+    public void testIsAdministrador() {
+        System.out.println("isAdministrador");
+        Utilizador utilizador =  new Utilizador(
+                "Hulk", "hulk@marvel.com", "hulk@marvel.com", "green.man");
+        Administrador administrador = new Administrador(utilizador);
+        Empresa instance = new Empresa();
+        boolean expResult = true;
+        boolean result = instance.isAdministrador(administrador);
+        assertEquals(expResult, result);
+    }
 }
