@@ -18,6 +18,7 @@ import eventoscientificos.model.state.submissao.SubmissaoEmSubmissaoState;
 import eventoscientificos.model.state.submissao.SubmissaoRemovidaState;
 import eventoscientificos.model.state.submissao.SubmissaoRevistaState;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -1077,5 +1078,19 @@ public class EventoTest {
         boolean result = instance.isStateValidoParaGerarEstatisticasEvento();
         assertEquals(expResult, result);
            }
+
+    /**
+     * Teste do método adicionarProcessoDecisao, da classe Evento.
+     */
+    @Test
+    public void testAdicionarProcessoDecisao() {
+        System.out.println("adicionarProcessoDecisao");
+        this.evento.setEstado(new EventoFaseDecisaoState(evento));
+        ProcessoDecisao processoDecisao = new ProcessoDecisao();
+        boolean expResult = true;
+        Evento instance = this.evento;
+        boolean result = instance.adicionarProcessoDecisao(processoDecisao);
+        assertEquals(expResult, result);
+    }
 
 }
