@@ -55,7 +55,7 @@ public class Empresa {
      * Constrói uma instância de Empresa nao recebendo quaisquer valores por
      * parametro.
      */
-    public Empresa() {
+    public Empresa(){
         this.registoUtilizadores = new RegistoUtilizadores();
         this.registoEventos = new RegistoEventos();
         this.registoTiposConflito = new RegistoTiposConflito();
