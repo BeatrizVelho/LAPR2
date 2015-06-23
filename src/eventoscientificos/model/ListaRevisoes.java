@@ -1,6 +1,9 @@
 package eventoscientificos.model;
 
+import eventoscientificos.model.state.submissao.SubmissaoAceiteState;
+import eventoscientificos.model.state.submissao.SubmissaoRejeitadaState;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -136,5 +139,44 @@ public class ListaRevisoes {
         vecTaxaEMediaParametrosAvaliacao[5] = totalRecomendacao / nSubmissoesAceites;
 
         return vecTaxaEMediaParametrosAvaliacao;
+    }
+    
+    /**
+     * Preenche os mapas com as palavras chaves e respetivas recomendações
+     * globais.
+     * 
+     * @param hashMapSubmissoesAceites Mapa de submissões aceites.
+     * @param hashMapSubmissoesRejeitadas Mapa de submissões rejeitadas.
+     */
+    public void hashMapSubmissoes(HashMap<String, Integer> hashMapSubmissoesAceites,
+            HashMap<String, Integer> hashMapSubmissoesRejeitadas) {
+
+        for (Revisao revisao : this.listaRevisoes) {
+            if (revisao.getSubmissao().getEstado() instanceof SubmissaoAceiteState) {
+                List<String> palavrasChaves = revisao.getSubmissao().getArtigoInicial().getPalavrasChave();
+
+                for (String string : palavrasChaves) {
+                    Integer valor = hashMapSubmissoesAceites.get(string);
+                    if (valor == null) {
+                        hashMapSubmissoesAceites.put(string, revisao.getRecomendacaoGlobal());
+                    } else {
+                        valor = new Integer(valor.intValue() + revisao.getRecomendacaoGlobal());
+                        hashMapSubmissoesAceites.put(string, valor);
+                    }
+                }
+            }
+            if (revisao.getSubmissao().getEstado() instanceof SubmissaoRejeitadaState) {
+                List<String> palavrasChaves = revisao.getSubmissao().getArtigoInicial().getPalavrasChave();
+                for (String string : palavrasChaves) {
+                    Integer valor = hashMapSubmissoesRejeitadas.get(string);
+                    if (valor == null) {
+                        hashMapSubmissoesRejeitadas.put(string, revisao.getRecomendacaoGlobal());
+                    } else {
+                        valor = new Integer(valor.intValue() + revisao.getRecomendacaoGlobal());
+                        hashMapSubmissoesRejeitadas.put(string, valor);
+                    }
+                }
+            }
+        }
     }
 }
