@@ -13,13 +13,31 @@ public class ListaRevisoes {
     /**
      * Lista de revisões.
      */
-    private List<Revisao> listaRevisoes;
+    public List<Revisao> listaRevisoes;
 
     /**
      * Constrói instância de ListaRevisoes.
      */
     public ListaRevisoes() {
         this.listaRevisoes = new ArrayList<>();
+    }
+    
+    /**
+     * Devolve a lista de revisões.
+     * 
+     * @return Lista de revisões.
+     */
+    public List<Revisao> getListaRevisoes() {
+        return listaRevisoes;
+    }
+
+    /**
+     * Modifica a lista de revisões.
+     * 
+     * @param listaRevisoes lista de revisões.
+     */
+    public void setListaRevisoes(List<Revisao> listaRevisoes) {
+        this.listaRevisoes = listaRevisoes;
     }
 
     /**
@@ -41,7 +59,7 @@ public class ListaRevisoes {
      * possível adicioná-la
      */
     public boolean adicionarRevisao(Revisao revisao) {
-        return this.listaRevisoes.add(revisao);
+        return this.getListaRevisoes().add(revisao);
     }
 
     /**
@@ -53,7 +71,7 @@ public class ListaRevisoes {
     public List<Revisao> getRevisoesRevisor(Utilizador u) {
         Revisor revisor = new Revisor(u);
         List<Revisao> listaRevisoesDoRevisor = new ArrayList<>();
-        for (Revisao r : this.listaRevisoes) {
+        for (Revisao r : this.getListaRevisoes()) {
             if ((r.getRevisor().equals(revisor)) && (r.validarRevisao() == false)) {
                 listaRevisoesDoRevisor.add(r);
             }
@@ -82,7 +100,7 @@ public class ListaRevisoes {
 
         ListaRevisoes outraLista = (ListaRevisoes) outroObjecto;
 
-        return this.listaRevisoes.equals(outraLista.listaRevisoes);
+        return this.getListaRevisoes().equals(outraLista.getListaRevisoes());
     }
 
     /**
@@ -98,7 +116,7 @@ public class ListaRevisoes {
 
         float[] vecTaxaEMediaParametrosAvaliacao = new float[6];
 
-        for (Revisao r : this.listaRevisoes) {
+        for (Revisao r : this.getListaRevisoes()) {
             Submissao s = r.getSubmissao();
             if (s.isStateAceite()) {
                 nSubmissoesAceites++;
@@ -119,5 +137,4 @@ public class ListaRevisoes {
 
         return vecTaxaEMediaParametrosAvaliacao;
     }
-   
 }

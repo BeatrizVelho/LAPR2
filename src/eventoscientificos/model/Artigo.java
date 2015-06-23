@@ -1,6 +1,7 @@
 package eventoscientificos.model;
 
-
+import java.util.List;
+import utils.Data;
 
 /**
  * Representa uma instância de Artigo
@@ -28,7 +29,37 @@ public class Artigo {
      * Lista de autores.
      */
     private ListaAutores listaAutores;
-    
+
+    /**
+     * Lista de palavras chave.
+     */
+    private List<String> palavrasChave;
+
+    /**
+     * Autor Correspondente do artigoInicial.
+     */
+    private AutorCorrespondente autorCorrespondente;
+
+    /**
+     * Autor que realiza a submissão inicial.
+     */
+    private Autor autorSubmissorInicial;
+
+    /**
+     * Autor que realiza a submissão final.
+     */
+    private Autor autorSubmissorFinal;
+
+    /**
+     * Data de submissão do artigo inicial.
+     */
+    private Data dataSubmissaoInicial;
+
+    /**
+     * Data de submissão do artigo final.
+     */
+    private Data dataSubmissaoFinal;
+
     /**
      * Titulo do artigo por omissão.
      */
@@ -44,10 +75,9 @@ public class Artigo {
      */
     private static final String FICHEIRO_POR__OMISSAO = "Sem Ficheiro!";
 
-
-
     /**
      * Constroi uma instancia de artigo com o titulo, o resumo e o ficheiro.
+     *
      * @param titulo Titulo do artigo.
      * @param resumo Resumo do artigo.
      * @param ficheiro Caminho para o artigo.
@@ -57,13 +87,16 @@ public class Artigo {
         setResumo(resumo);
         setFicheiro(ficheiro);
         this.listaAutores = new ListaAutores();
+        setAutorCorrespondente(getAutorCorrespondente());
+        setAutorSubmissorInicial(getAutorSubmissorInicial());
+        setAutorSubmissorFinal(getAutorSubmissorFinal());
     }
-    
+
     public Artigo() {
         this.titulo = TITULO_POR_OMISSAO;
         this.resumo = RESUMO_POR_OMISSAO;
         this.ficheiro = FICHEIRO_POR__OMISSAO;
-        this.listaAutores = new ListaAutores();      
+        this.listaAutores = new ListaAutores();
     }
 
     /**
@@ -85,12 +118,75 @@ public class Artigo {
     }
 
     /**
+     * Devolve o caminho do ficheiro do artigo
+     *
+     * @return Caminho do ficheiro do artigo.
+     */
+    public String getFicheiro() {
+        return ficheiro;
+    }
+
+    /**
      * Devolve a lista com os autores do artigo.
      *
      * @return Lista dos autores do artigo
      */
     public ListaAutores getListaAutores() {
         return this.listaAutores;
+    }
+
+    /**
+     * Devolve o autor correspondente da submissao
+     *
+     * @return Autor correspondente da submissao
+     */
+    public AutorCorrespondente getAutorCorrespondente() {
+        return this.autorCorrespondente;
+    }
+
+    /**
+     * Devolve o autor submissor que realiza a submissão inicial.
+     *
+     * @return Autor que realiza a submissão inicial.
+     */
+    public Autor getAutorSubmissorInicial() {
+        return this.autorSubmissorInicial;
+    }
+
+    /**
+     * Devolve o autor submissor que realiza a submissão final.
+     *
+     * @return Autor que realiza a submissão final.
+     */
+    public Autor getAutorSubmissorFinal() {
+        return this.autorSubmissorFinal;
+    }
+
+    /**
+     * Devolve a lista de palavras de chave.do artigo.
+     *
+     * @return Lista de palavras chave do artigo.
+     */
+    public List<String> getPalavrasChave() {
+        return palavrasChave;
+    }
+
+    /**
+     * Devolve a data de submissão do artigo inicial.
+     *
+     * @return Data de submissaão do artigo inicial.
+     */
+    public Data getDataSubmissaoInicial() {
+        return dataSubmissaoInicial;
+    }
+
+    /**
+     * Devolve a data de submissão do artigo final.
+     *
+     * @return Data de submissaão do artigo final.
+     */
+    public Data getDataSubmissaoFinal() {
+        return dataSubmissaoFinal;
     }
 
     /**
@@ -134,11 +230,76 @@ public class Artigo {
 
         this.ficheiro = ficheiro;
     }
-    
+
+    /**
+     * Modifica o autor correspondente da submissão.
+     *
+     * @param autorCorrespondente Novo autor correspondente do artigoInicial.
+     */
+    public void setAutorCorrespondente(AutorCorrespondente autorCorrespondente) {
+        this.autorCorrespondente = autorCorrespondente;
+    }
+
+    /**
+     * Modifica o autor submissor da submissão inicial.
+     *
+     * @param autorSubmissorInicial Novo autor submissor inicial.
+     */
+    public void setAutorSubmissorInicial(Autor autorSubmissorInicial) {
+        this.autorSubmissorInicial = autorSubmissorInicial;
+    }
+
+    /**
+     * Modifica o autor submissor da submissão final.
+     *
+     * @param autorSubmissorFinal Novo autor submissor final.
+     */
+    public void setAutorSubmissorFinal(Autor autorSubmissorFinal) {
+        this.autorSubmissorFinal = autorSubmissorFinal;
+    }
+
+    /**
+     * Modifica a lista de palavras chave do artigo.
+     *
+     * @param palavrasChave Nova lista de palavras chave.
+     */
+    public void setPalavrasChave(List<String> palavrasChave) {
+        this.palavrasChave = palavrasChave;
+    }
+
+    /**
+     * Modifica a data de submissão do artigo inicial.
+     *
+     * @param dataSubmissaoInicial Nova data de submissão do artigo inicial.
+     */
+    public void setDataSubmissaoInicial(Data dataSubmissaoInicial) {
+        this.dataSubmissaoInicial = dataSubmissaoInicial;
+    }
+
+    /**
+     * Modifica a data de submissão do artigo Final.
+     *
+     * @param dataSubmissaoFinal Nova data de submissão do artigo final.
+     */
+    public void setDataSubmissaoFinal(Data dataSubmissaoFinal) {
+        this.dataSubmissaoFinal = dataSubmissaoFinal;
+    }
+
+    /**
+     * Verifica se o artigo é válido.
+     * 
+     * @return Verdadeiro se o artigo é válido e falso se não é.
+     */
     public boolean validarArtigo() {
         return true;
     }
-    
+
+    /**
+     * Verifica se o utilizador passado por parâmetro está inserido na lista.
+     * 
+     * @param utilizador Utilizador a verificar.
+     * @return Verdadeiro se já existe na lista de autores e falso se não está.
+     */
     public boolean isAutor(Utilizador utilizador) {
         return this.listaAutores.isAutor(utilizador);
     }
@@ -167,5 +328,5 @@ public class Artigo {
 
         return this.getTitulo().equals(outroArtigo.getTitulo());
     }
-    
+
 }

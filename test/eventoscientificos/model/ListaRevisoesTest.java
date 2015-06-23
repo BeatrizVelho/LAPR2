@@ -155,4 +155,16 @@ public class ListaRevisoesTest {
 
     }
 
+    /**
+     * Teste do método setAndgetListaRevisoes, da classe ListaRevisoes.
+     */
+    @Test
+    public void testSetAndGetListaRevisoes() {
+        System.out.println("setAndgetListaRevisoes");
+        ListaRevisoes instance = new ListaRevisoes();
+        List<Revisao> expResult = new ArrayList<>();
+        instance.setListaRevisoes(expResult);
+        List<Revisao> result = instance.getListaRevisoes();
+        assertEquals(expResult, result);
+    }
 }
