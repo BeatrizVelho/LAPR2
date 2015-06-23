@@ -84,7 +84,9 @@ public class Janela extends javax.swing.JFrame {
         sair = new javax.swing.JMenuItem();
         administracao = new javax.swing.JMenu();
         uc12 = new javax.swing.JMenuItem();
-        uc19 = new javax.swing.JMenuItem();
+        uc18 = new javax.swing.JMenuItem();
+        uc19a = new javax.swing.JMenuItem();
+        uc19b = new javax.swing.JMenuItem();
         uc20 = new javax.swing.JMenuItem();
         gerirEventos = new javax.swing.JMenu();
         uc2 = new javax.swing.JMenuItem();
@@ -94,7 +96,6 @@ public class Janela extends javax.swing.JFrame {
         uc13 = new javax.swing.JMenuItem();
         gerirSubmissoes = new javax.swing.JMenu();
         uc4 = new javax.swing.JMenuItem();
-        uc18 = new javax.swing.JMenuItem();
         uc10 = new javax.swing.JMenuItem();
         uc16 = new javax.swing.JMenuItem();
         uc17 = new javax.swing.JMenuItem();
@@ -181,8 +182,14 @@ public class Janela extends javax.swing.JFrame {
         uc12.setEnabled(false);
         administracao.add(uc12);
 
-        uc19.setText("Gerar estatísticas");
-        administracao.add(uc19);
+        uc18.setText("Carregar artigo científico por ficheiro");
+        administracao.add(uc18);
+
+        uc19a.setText("Gerar estatísticas de evento");
+        administracao.add(uc19a);
+
+        uc19b.setText("Gerar estatísticas de tópicos");
+        administracao.add(uc19b);
 
         uc20.setText("Análise estatística das revisões");
         uc20.addActionListener(new java.awt.event.ActionListener() {
@@ -242,9 +249,6 @@ public class Janela extends javax.swing.JFrame {
         });
         gerirSubmissoes.add(uc4);
 
-        uc18.setText("Carregar artigo científico por ficheiro");
-        gerirSubmissoes.add(uc18);
-
         uc10.setText("Alterar submissão de artigo científico");
         uc10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -262,6 +266,11 @@ public class Janela extends javax.swing.JFrame {
         gerirSubmissoes.add(uc16);
 
         uc17.setText("Listar submissões retiradas");
+        uc17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uc17ActionPerformed(evt);
+            }
+        });
         gerirSubmissoes.add(uc17);
 
         uc11.setText("Licitar artigos científicos para revisão");
@@ -351,7 +360,7 @@ public class Janela extends javax.swing.JFrame {
     }//GEN-LAST:event_uc5ActionPerformed
 
     private void uc16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc16ActionPerformed
-        // TODO add your handling code here:
+        new RetirarSubmissaoUI(this, true, this.empresa);
     }//GEN-LAST:event_uc16ActionPerformed
 
     private void uc20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc20ActionPerformed
@@ -395,6 +404,10 @@ public class Janela extends javax.swing.JFrame {
     private void uc22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc22ActionPerformed
         new AlterarSubmissaoFinalUI(this, true, this.empresa);
     }//GEN-LAST:event_uc22ActionPerformed
+
+    private void uc17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc17ActionPerformed
+        new ListarSubmissoesRetiradasUI(this, true, this.empresa);
+    }//GEN-LAST:event_uc17ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -590,7 +603,8 @@ public class Janela extends javax.swing.JFrame {
     private javax.swing.JMenuItem uc16;
     private javax.swing.JMenuItem uc17;
     private javax.swing.JMenuItem uc18;
-    private javax.swing.JMenuItem uc19;
+    private javax.swing.JMenuItem uc19a;
+    private javax.swing.JMenuItem uc19b;
     private javax.swing.JMenuItem uc2;
     private javax.swing.JMenuItem uc20;
     private javax.swing.JMenuItem uc22;
