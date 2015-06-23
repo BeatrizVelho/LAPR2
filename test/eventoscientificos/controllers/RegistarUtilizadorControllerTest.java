@@ -26,7 +26,7 @@ public class RegistarUtilizadorControllerTest {
      * RegistarUtilizadorController.
      */
     @Test
-    public void testGetRegistoUtilizadores() {
+    public void testGetRegistoUtilizadores(){
         System.out.println("getRegistoUtilizadores");
         Empresa emp = new Empresa();
         RegistarUtilizadorController instance = new RegistarUtilizadorController(emp);
@@ -59,7 +59,7 @@ public class RegistarUtilizadorControllerTest {
      * RegistarUtilizadorController.
      */
     @Test
-    public void testAdicionarUtilizadorComUtilizadorCorreto() {
+    public void testAdicionarUtilizadorComUtilizadorCorreto(){
         Empresa emp = new Empresa();
         System.out.println("adicionarUtilizador");
         String nome = "Susana";
@@ -129,9 +129,9 @@ public class RegistarUtilizadorControllerTest {
      * Teste do metodo testAdicionarUtilizadorComUtilizadorPasswordVazio, da
      * classe RegistarUtilizadorController.
      */
-    @Test(expected = IllegalArgumentException.class)
+    @Test
 
-    public void testAdicionarUtilizadorComUtilizadorPasswordVazio() {
+    public void testAdicionarUtilizadorComUtilizadorPasswordVazio(){
         Empresa emp = new Empresa();
         System.out.println("adicionarUtilizador");
         String nome = "Susana";
