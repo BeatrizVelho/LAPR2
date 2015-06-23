@@ -418,20 +418,16 @@ public class RegistoEventos {
      * @param hashMapSubmissoesAceites Mapa de submissões aceites.
      * @param hashMapSubmissoesRejeitadas Mapa de submissões rejeitadas.
      */
-    public void hashMapSubmissoes(HashMap hashMapSubmissoesAceites,
-            HashMap hashMapSubmissoesRejeitadas) {
+    public void hashMapSubmissoes(
+            HashMap<String, Integer> hashMapSubmissoesAceites,
+            HashMap<String, Integer> hashMapSubmissoesRejeitadas) {
         for (Evento evento : this.listaEventos) {
             if (evento.getEstado() instanceof EventoEmSubmissaoCameraReadyState
                     || evento.getEstado() instanceof EventoEmCameraReadyState) {
 
                 evento.hashMapSubmissoes(hashMapSubmissoesAceites,
                         hashMapSubmissoesRejeitadas);
-
             }
-
-            evento.hashMapSubmissoesSessaoTematica(hashMapSubmissoesAceites,
-                    hashMapSubmissoesRejeitadas);
-
         }
     }
 
