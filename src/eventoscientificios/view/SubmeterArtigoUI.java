@@ -209,9 +209,6 @@ public class SubmeterArtigoUI extends javax.swing.JDialog {
         pnl_autorCorrespondente.setBorder(javax.swing.BorderFactory.createTitledBorder("Selecione o Autor Correspondente"));
         pnl_autorCorrespondente.setPreferredSize(new java.awt.Dimension(780, 68));
 
-        cmb_AutorCorrespondente.setMinimumSize(new java.awt.Dimension(28, 20));
-        cmb_AutorCorrespondente.setPreferredSize(new java.awt.Dimension(28, 20));
-
         btn_selecionarAutorCorrespondente.setText("Selecionar Autor Correspondente");
         btn_selecionarAutorCorrespondente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -234,11 +231,11 @@ public class SubmeterArtigoUI extends javax.swing.JDialog {
             pnl_autorCorrespondenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_autorCorrespondenteLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnl_autorCorrespondenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnl_autorCorrespondenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnl_autorCorrespondenteLayout.createSequentialGroup()
                         .addGap(3, 3, 3)
-                        .addComponent(cmb_AutorCorrespondente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(btn_selecionarAutorCorrespondente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(cmb_AutorCorrespondente))
+                    .addComponent(btn_selecionarAutorCorrespondente))
                 .addContainerGap())
         );
 

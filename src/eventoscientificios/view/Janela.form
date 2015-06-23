@@ -238,6 +238,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Submeter vers&#xe3;o final do artigo cient&#xed;fico"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="uc15ActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="uc22">
               <Properties>
