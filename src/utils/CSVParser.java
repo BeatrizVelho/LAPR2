@@ -1,9 +1,18 @@
 package utils;
 
 import com.opencsv.CSVReader;
+import com.opencsv.CSVWriter;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Representa uma instância de CSVParser.
@@ -19,6 +28,11 @@ public class CSVParser {
      * Caminho para o ficheiro .csv que contém as tabelas de frequência.
      */
     private static final String ficheiro = "excel.csv";
+    
+    /**
+     * Nome para o ficheiro de estátisticas de tópicos.
+     */
+    private static final String ficheiroEstatisticas = "EstatísticaDeTópicos.csv";
 
     /**
      * Separador pelo qual é feito o split dos dados.
@@ -56,7 +70,8 @@ public class CSVParser {
                 for (int tabela = 0; tabela < totalTabelas; tabela++) {
                     int coluna = tabela + 2;
 
-                    double probabilidade = Double.parseDouble(proximaLinha[coluna].replace(",", ".")) * 10000;
+                    double probabilidade = Double.parseDouble(
+                            proximaLinha[coluna].replace(",", ".")) * 10000;
 
                     matrizTabelasFrequencia[tabela][simbolo] = (int) probabilidade;
                 }
@@ -66,4 +81,44 @@ public class CSVParser {
         return matrizTabelasFrequencia;
     }
 
+    /**
+     * Cria um ficheiro CSV com os dados estatisticos dos tópicos dos artigos
+     * de todos os eventos e sessões temáticas presentes na aplicação.
+     * 
+     * @param palavrasChaveAceites HashMap com todas as palavras-chave dos 
+     * artigos aceites e respetiva recomendação global.
+     * @param palavrasChaveRejeitados HashMap com todas as palavras-chave dos
+     * artigos rejeitados e respetiva recomendação global.
+     */
+    public void gerarFicheiroCSVEstatisticas(
+            HashMap<String, Integer> palavrasChaveAceites,
+            HashMap<String, Integer> palavrasChaveRejeitados) {
+        try {
+            CSVWriter csv = new CSVWriter(new FileWriter(
+                    new File(ficheiroEstatisticas)), separador);
+            
+            List<String[]> listaResultados = new ArrayList();
+            
+            String[] resultado = new String[2];
+            
+            for (String key : palavrasChaveAceites.keySet()) {
+                resultado[0] = key;
+                resultado[1] = palavrasChaveAceites.get(key).toString();
+                
+                listaResultados.add(resultado);
+            }
+            
+            for (String key : palavrasChaveRejeitados.keySet()) {
+                resultado[0] = key;
+                resultado[1] = palavrasChaveRejeitados.get(key).toString();
+                
+                listaResultados.add(resultado);
+            }
+            
+            csv.writeAll(listaResultados);
+            csv.close();
+        } catch (IOException ex) {
+        }
+    }
+    
 }
