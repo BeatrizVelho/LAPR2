@@ -1,5 +1,8 @@
 package eventoscientificos.model;
 
+import eventoscientificos.model.mecanismo.decisao.MecanismoDecisao;
+import eventoscientificos.model.mecanismo.decisao.MecanismoDecisao1;
+
 /**
  * Representa uma instância de ProcessoDecisao através de RegistoEventos.
  *
@@ -10,7 +13,7 @@ public class ProcessoDecisao {
     /**
      * Instância de ListaRevisoes.
      */
-    private ListaRevisoes listaRevisoes;
+    private ListaDecisoes listaDecisoes;
 
     /**
      * Instância de MecanismoDecisao.
@@ -21,16 +24,8 @@ public class ProcessoDecisao {
      * Constroi uma instancia de ProcessoDecisao, sem parâmetros.
      */
     public ProcessoDecisao() {
-    }
-
-    /**
-     * Constrói uma instância de Processo de Decisão.
-     * @param listaRevisoes Lista de Revisoes.
-     * @param mecanismoDecisao Mecanismo de Decisao.
-     */
-    public ProcessoDecisao(ListaRevisoes listaRevisoes, MecanismoDecisao mecanismoDecisao) {
-        this.listaRevisoes = new ListaRevisoes();
-        this.mecanismoDecisao = mecanismoDecisao;
+        this.listaDecisoes = new ListaDecisoes();
+        this.mecanismoDecisao = new MecanismoDecisao1();
     }
 
     /**
@@ -47,7 +42,31 @@ public class ProcessoDecisao {
             throw new IllegalArgumentException();
         }
     }
-    
+
+    /**
+     * Retorna uma lista de decisões com as classificações das submissões.
+     * 
+     * @param listaRevisoes Lista de revisões.
+     * @return Lista de decisões.
+     */
+    public ListaDecisoes classificarSubmissoes(ListaRevisoes listaRevisoes) {
+
+        ListaDecisoes listaDecisoes = this.mecanismoDecisao.classificarSubmissoes(listaRevisoes);
+        adicionarListaDecisoes(listaDecisoes);
+
+        return listaDecisoes;
+    }
+
+    /**
+     * Verifica se é possivel adicionar uma lista de decisões.
+     * 
+     * @param listaDecisoes Lista de decisões.
+     * @return Verdadeiro caso consiga adicionar e falso se não conseguir.
+     */
+    private boolean adicionarListaDecisoes(ListaDecisoes listaDecisoes) {
+        return (this.listaDecisoes = listaDecisoes) != null;
+    }
+
     /**
      * Compara dois objetos entre si. Comparando primariamente a posição de
      * memória, seguida do conteudo e das classes as quais cada um deles
@@ -70,7 +89,7 @@ public class ProcessoDecisao {
 
         ProcessoDecisao outroProcesso = (ProcessoDecisao) outroObjecto;
 
-        return this.listaRevisoes.equals(outroProcesso.listaRevisoes)
-                && this.mecanismoDecisao.equals(outroProcesso.mecanismoDecisao);
+        return this.listaDecisoes.equals(outroProcesso.listaDecisoes)
+                && this.mecanismoDecisao == (outroProcesso.mecanismoDecisao);
     }
 }

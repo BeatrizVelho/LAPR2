@@ -14,6 +14,7 @@ import eventoscientificos.model.state.sessaotematica.SessaoTematicaState;
 import eventoscientificos.model.state.submissao.SubmissaoEmSubmissaoState;
 import eventoscientificos.model.state.submissao.SubmissaoRemovidaState;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -829,6 +830,20 @@ public class SessaoTematicaTest {
         this.sessaoTematica.setEstado(new SessaoTematicaFaseDecisaoState(sessaoTematica));
         ProcessoDecisao expResult = new ProcessoDecisao();
         ProcessoDecisao result = instance.novoProcessoDecisao();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método adicionarProcessoDecisao, da classe SessaoTematica.
+     */
+    @Test
+    public void testAdicionarProcessoDecisao() {
+        System.out.println("adicionarProcessoDecisao");
+        this.sessaoTematica.setEstado(new SessaoTematicaFaseDecisaoState(sessaoTematica));
+        ProcessoDecisao processoDecisao = new ProcessoDecisao();
+        boolean expResult = true;
+        SessaoTematica instance = this.sessaoTematica;
+        boolean result = instance.adicionarProcessoDecisao(processoDecisao);
         assertEquals(expResult, result);
     }
 }

@@ -14,4 +14,12 @@ public interface Decidivel {
      */
     public ProcessoDecisao novoProcessoDecisao();
     
+    /**
+     * Adiciona um Processo Distribuição ao Decidivel.
+     * 
+     * @param processoDecisao Processo decisão a adicionar.
+     * @return Verdadeiro caso adicione e falso se não adicionar.
+     */
+    public boolean adicionarProcessoDecisao(ProcessoDecisao processoDecisao);
+    
 }
