@@ -90,6 +90,6 @@ public class ProcessoDecisao {
         ProcessoDecisao outroProcesso = (ProcessoDecisao) outroObjecto;
 
         return this.listaDecisoes.equals(outroProcesso.listaDecisoes)
-                && this.mecanismoDecisao == (outroProcesso.mecanismoDecisao);
+                && this.mecanismoDecisao.equals(outroProcesso.mecanismoDecisao);
     }
 }
