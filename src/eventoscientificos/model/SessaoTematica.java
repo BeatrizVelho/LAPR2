@@ -1,6 +1,7 @@
 package eventoscientificos.model;
 
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaCriadaState;
+import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmRevisaoState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmSubmissaoCameraReadyState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmSubmissaoState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaFaseDecisaoState;
@@ -898,6 +899,23 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
 
         this.processoDistribuicao.hashMapSubmissoes(hashMapSubmissoesAceites,
                 hashMapSubmissoesRejeitadas);
+    }
+
+    /**
+     * Adiciona um Processo de Decisão ao Decidivel.
+     * 
+     * @param processoDecisao ProcessoDecisão a adicionar ao decidivel.
+     * @return verdadeiro se adicionar ao decidivel e falso se não for
+     * possivel adicioná-lo.
+     */
+    @Override
+    public boolean adicionarProcessoDecisao(ProcessoDecisao processoDecisao) {
+        this.processoDecisao = processoDecisao;
+        setEstado(new SessaoTematicaEmSubmissaoCameraReadyState(this));
+        if(getEstado() instanceof SessaoTematicaEmSubmissaoCameraReadyState) {
+            return true;
+        }
+        return false;
     }
 
 }
