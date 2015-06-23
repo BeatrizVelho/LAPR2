@@ -100,6 +100,26 @@ public class Utilizador {
     }
 
     /**
+     * Constrói uma instância de utilizador recebendo um nome, um email, um
+     * username, uma password, um númeroCarateres e um codificadorTabela.
+     *
+     * @param nome nome do utilizador
+     * @param email email do utilizador
+     * @param username username do utilizador
+     * @param password password do utilizador
+     * @param numeroCarateres numero carateres
+     * @param codificadorTabela codificador tabela
+     */
+    public Utilizador(String nome, String email, String username, String password, int numeroCarateres, String codificadorTabela) {
+        this.nome = nome;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+        this.numeroCarateres = numeroCarateres;
+        this.codificadorTabela = codificadorTabela;
+    }
+
+    /**
      * Devolve o nome do utilizador.
      *
      * @return Nome do utilizador.
@@ -151,15 +171,6 @@ public class Utilizador {
      */
     public String getCodificadorTabela() {
         return codificadorTabela;
-    }
-
-    public Utilizador(String nome, String email, String username, String password, int numeroCarateres, String codificadorTabela) {
-        this.nome = nome;
-        this.email = email;
-        this.username = username;
-        this.password = password;
-        this.numeroCarateres = numeroCarateres;
-        this.codificadorTabela = codificadorTabela;
     }
 
     /**
@@ -237,19 +248,6 @@ public class Utilizador {
      * @param password Nova password do utilizador.
      */
     public void setPassword(String password) {
-        if (password.trim().isEmpty()) {
-            throw new IllegalArgumentException("Password do utilizador não "
-                                + "pode estar vazia.");
-        }
-        if (password.contains("[()<>,;:.\\[\\]{}]\\\\\\\\")) {
-            throw new IllegalArgumentException("Password do "
-                                + "utilizador não pode conter "
-                                + "caracteres.");
-        }
-        if (password.length() > 16) {
-            throw new IllegalArgumentException("A password pode ter no máximo "
-                                + "16 caracteres");
-        }
         this.password = password;
     }
 

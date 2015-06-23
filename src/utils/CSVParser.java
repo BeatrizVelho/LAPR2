@@ -18,7 +18,7 @@ public class CSVParser {
     /**
      * Caminho para o ficheiro .csv que contém as tabelas de frequência.
      */
-    private static final String ficheiro = "excel.csv";
+    private static final String ficheiro = "tabelas.csv";
 
     /**
      * Separador pelo qual é feito o split dos dados.

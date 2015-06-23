@@ -5,6 +5,7 @@
  */
 package eventoscientificos.model;
 
+import java.io.IOException;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -25,7 +26,7 @@ public class RegistoUtilizadoresTest {
      * Teste ao metodo novoUtilizador da classe RegistoUtilizadores.
      */
     @Test
-    public void testNovoUtilizador() {
+    public void testNovoUtilizador() throws IOException {
         System.out.println("novoUtilizador");
         String nome = "Rita";
         String email = "rita_susana@email.com";
@@ -41,7 +42,7 @@ public class RegistoUtilizadoresTest {
      * Teste ao metodo AdicionarUtilizador da classe RegistoUtilizadores.
      */
     @Test
-    public void testAdicionaUtilizador() {
+    public void testAdicionaUtilizador() throws IOException {
         System.out.println("adicionaUtilizador");
         Utilizador u = new Utilizador("Sususana", "email@gmail.com", "susus", "1234");
         RegistoUtilizadores instance = new RegistoUtilizadores();
@@ -49,12 +50,12 @@ public class RegistoUtilizadoresTest {
         boolean result = instance.adicionaUtilizador(u);
         assertEquals(expResult, result);
     }
-    
+
     /**
      * Teste ao metodo getUtilizador da classe RegistoUtilizadores.
      */
     @Test
-    public void testgetUtilizadorUsername() {
+    public void testgetUtilizadorUsername() throws IOException {
         System.out.println("getUtilizadorUsername");
         RegistoUtilizadores instance = new RegistoUtilizadores();
         Utilizador expResult = new Utilizador("Sususana", "email@gmail.com", "susus", "1234");
@@ -68,11 +69,11 @@ public class RegistoUtilizadoresTest {
      * Teste ao método validarUtilizadorClone, da classe RegistoUtilizadores.
      */
     @Test
-    public void testValidarUtilizadorClone() {
+    public void testValidarUtilizadorClone() throws IOException {
         System.out.println("validarUtilizadorClone");
         RegistoUtilizadores instance = new RegistoUtilizadores();
         Utilizador utilizador = new Utilizador(
-                "pedro", "1140781@isep.ipp.pt", "pedro", "1234");
+                            "pedro", "1140781@isep.ipp.pt", "pedro", "1234");
         Utilizador utilizadorClone = utilizador.criarCloneUtilizador();
         instance.adicionaUtilizador(utilizador);
         boolean result = true;
@@ -84,11 +85,11 @@ public class RegistoUtilizadoresTest {
      * Teste ao método atualizarUtilizadorClone, da classe RegistoUtilizadores.
      */
     @Test
-    public void testAtualizarUtilizador() {
+    public void testAtualizarUtilizador() throws IOException {
         System.out.println("atualizarUtilizador");
         RegistoUtilizadores instance = new RegistoUtilizadores();
         Utilizador utilizador = new Utilizador(
-                "pedro", "1140781@isep.ipp.pt", "pedro", "1234");
+                            "pedro", "1140781@isep.ipp.pt", "pedro", "1234");
         Utilizador utilizadorClone = utilizador.criarCloneUtilizador();
         instance.adicionaUtilizador(utilizador);
         boolean result = true;
@@ -100,7 +101,7 @@ public class RegistoUtilizadoresTest {
      * Teste ao metodo getUtilizador da classe RegistoUtilizadores.
      */
     @Test
-    public void testgetUtilizadorEmail() {
+    public void testgetUtilizadorEmail() throws IOException {
         System.out.println("getUtilizadorEmail");
         RegistoUtilizadores instance = new RegistoUtilizadores();
         Utilizador expResult = new Utilizador("Sususana", "email@gmail.com", "susus", "1234");
@@ -114,7 +115,7 @@ public class RegistoUtilizadoresTest {
      * Teste do método equals, da classe RegistoUtilizadores.
      */
     @Test
-    public void testEquals() {
+    public void testEquals() throws IOException {
         System.out.println("equals");
         Object outroObjeto = new RegistoUtilizadores();
         RegistoUtilizadores instance = new RegistoUtilizadores();
@@ -127,12 +128,12 @@ public class RegistoUtilizadoresTest {
      * Teste do método equals, da classe RegistoUtilizadores.
      */
     @Test
-    public void testEqualsNot() {
+    public void testEqualsNot() throws IOException {
         System.out.println("equalsNot");
         Object outroObjeto = new RegistoUtilizadores();
         RegistoUtilizadores instance = new RegistoUtilizadores();
         instance.adicionaUtilizador(
-                new Utilizador("Susana", "email@gmail.com", "susus", "1234"));
+                            new Utilizador("Susana", "email@gmail.com", "susus", "1234"));
         boolean expResult = false;
         boolean result = instance.equals(outroObjeto);
         assertEquals(expResult, result);
@@ -142,11 +143,11 @@ public class RegistoUtilizadoresTest {
      * Teste do método getNumeroUtilizadores, da classe RegistoUtilizadores.
      */
     @Test
-    public void testGetNumeroUtilizadores() {
+    public void testGetNumeroUtilizadores() throws IOException {
         System.out.println("getNumeroUtilizadores");
         RegistoUtilizadores instance = new RegistoUtilizadores();
         instance.adicionaUtilizador(
-                new Utilizador("Susana", "email@gmail.com", "susus", "1234"));
+                            new Utilizador("Susana", "email@gmail.com", "susus", "1234"));
         int expResult = 1;
         int result = instance.getNumeroUtilizadores();
         assertEquals(expResult, result);
@@ -156,16 +157,50 @@ public class RegistoUtilizadoresTest {
      * Teste do método getUtilizadorPeloID, da classe RegistoUtilizadores.
      */
     @Test
-    public void testGetUtilizadorPeloID() {
+    public void testGetUtilizadorPeloID() throws IOException {
         System.out.println("getUtilizadorPeloID");
         int indice = 0;
         RegistoUtilizadores instance = new RegistoUtilizadores();
         instance.adicionaUtilizador(
-                new Utilizador("Susana", "email@gmail.com", "susus", "1234"));
+                            new Utilizador("Susana", "email@gmail.com", "susus", "1234"));
         Utilizador expResult
-                = new Utilizador("Susana", "email@gmail.com", "susus", "1234");
+                            = new Utilizador("Susana", "email@gmail.com", "susus", "1234");
         Utilizador result = instance.getUtilizadorPeloID(indice);
         assertEquals(expResult, result);
     }
 
-}
+    /**
+     * Test of novoUtilizador method, of class RegistoUtilizadores.
+     */
+    @Test
+    public void testNovoUtilizador_4args() throws IOException {
+        System.out.println("novoUtilizador");
+        String nome = "Rita";
+        String email = "rita_susana@email.com";
+        String username = "rita";
+        String password = "1234";
+        RegistoUtilizadores instance = new RegistoUtilizadores();
+        Utilizador expResult = new Utilizador(nome, email, username, password);
+        Utilizador result = instance.novoUtilizador(nome, email, username, password);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of novoUtilizador method, of class RegistoUtilizadores.
+     */
+    @Test
+    public void testNovoUtilizador_6args() throws IOException {
+        System.out.println("novoUtilizador");
+        String nome = "Rita";
+        String email = "rita_susana@email.com";
+        String username = "rita";
+        String password = "1234";
+        int numeroCarateres = 4;
+        String codificadorTabela = "CA;0";
+        RegistoUtilizadores instance = new RegistoUtilizadores();
+        Utilizador expResult = new Utilizador(nome, email, username, password, numeroCarateres, codificadorTabela);
+        Utilizador result = instance.novoUtilizador(nome, email, username, password, numeroCarateres, codificadorTabela);
+        assertEquals(expResult, result);
+    }
+
+ }

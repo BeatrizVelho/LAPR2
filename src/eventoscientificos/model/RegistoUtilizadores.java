@@ -1,7 +1,13 @@
 package eventoscientificos.model;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import utils.codificador.aritmetico.Codificador;
+import utils.codificador.aritmetico.CA;
+import utils.codificador.aritmetico.NFN;
 
 /**
  * Representa uma instancia de RegistoUtilizadores que representa uma lista de
@@ -17,10 +23,16 @@ public class RegistoUtilizadores {
     private List<Utilizador> listaUtilizadores;
 
     /**
+     * Constrói um map com os dados da tabela.
+     */
+    public Map<String, Codificador> tabelasCodificacao;
+
+    /**
      * Constrói uma instância de RegistoUtilizadores sem parametros.
      */
     public RegistoUtilizadores() {
-
+        this.tabelasCodificacao = new HashMap<>();
+        this.tabelasCodificacao.put("NFN", new NFN());
         this.listaUtilizadores = new ArrayList<>();
     }
 
@@ -58,13 +70,58 @@ public class RegistoUtilizadores {
      * @return Utilizador
      */
     public Utilizador novoUtilizador(String nome, String email, String username, String password) {
-        Utilizador utilizador = new Utilizador(nome, email, username, password);
+        String novaPassword, codificadorTabela = "";
+        int numeroCarateres = password.length();
+        if (this.tabelasCodificacao.size() == 1) {
+            NFN nfn = (NFN) this.tabelasCodificacao.get("NFN");
+
+            novaPassword = nfn.codificar(password);
+        } else {
+            CA ca = (CA) this.tabelasCodificacao.get("CA");
+            double tabelaEscolhida = ((Math.random()) * ca.getSizeListaTabelasFreq() - 1) / 10;
+            codificadorTabela = ca.getClass().getSimpleName() + ";" + tabelaEscolhida;
+            novaPassword = ca.codificar(password);
+        }
+
+        Utilizador utilizador = new Utilizador(nome, email, username, novaPassword);
+        utilizador.setCodificadorTabela(codificadorTabela);
+        utilizador.setNumeroCarateres(numeroCarateres);
         if (!utilizador.validarUtilizador()) {
             throw new IllegalArgumentException(" Utilizador invalido");
         }
         if (!validarUtilizador(utilizador)) {
             throw new IllegalArgumentException("Utilizador ja consta na lista"
-                    + " de utilizadores da empresa");
+                                + " de utilizadores da empresa");
+        }
+        return utilizador;
+    }
+
+    /**
+     * Cria uma instancia de utilizador recebendo como parametros o nome, o
+     * email, o username, password de utilizador, numeroCarateres e
+     * codificadorTabela
+     *
+     * @param nome nome do utilizador a criar
+     * @param email email do utilizador a criar
+     * @param username username do utilizador a criar
+     * @param password password do utilizado a criar
+     * @param numeroCarateres numero carateres da password
+     * @param codificadorTabela tabela do codificador utilizador
+     * @return novo utilizador criado
+     */
+    public Utilizador novoUtilizador(String nome, String email, String username,
+                        String password, int numeroCarateres, String codificadorTabela) {
+
+        Utilizador utilizador = new Utilizador(nome, email, username, password);
+        utilizador.setNumeroCarateres(numeroCarateres);
+        utilizador.setCodificadorTabela(codificadorTabela);
+
+        if (!utilizador.validarUtilizador()) {
+            throw new IllegalArgumentException(" Utilizador invalido");
+        }
+        if (!validarUtilizador(utilizador)) {
+            throw new IllegalArgumentException("Utilizador ja consta na lista"
+                                + " de utilizadores da empresa");
         }
         return utilizador;
     }
@@ -96,13 +153,13 @@ public class RegistoUtilizadores {
      * Verifica se o utilizador passado por paraemtro já consta na lista de
      * utilizadores, ignorando o utilizador que lhe deu origem.
      *
-     * @return Verdadeiro se o utilizador passado por parametro não existir 
+     * @return Verdadeiro se o utilizador passado por parametro não existir
      */
     public boolean validarUtilizadorClone(
-            Utilizador utilizador, Utilizador utilizadorClone) {
+                        Utilizador utilizador, Utilizador utilizadorClone) {
         for (Utilizador outroUtilizador : this.listaUtilizadores) {
             if (utilizadorClone.equals(outroUtilizador)
-                    && !utilizador.equals(outroUtilizador)) {
+                                && !utilizador.equals(outroUtilizador)) {
                 return false;
             }
         }
@@ -113,21 +170,21 @@ public class RegistoUtilizadores {
     /**
      * Atualiza um utilizador na lista de utilizadores, substituindo o atual
      * pelo novo.
-     * 
+     *
      * @param utilizador Utilizador antigo.
      * @param utilizadorClone Utilizador novo.
-     * @return Verdadeiro se for possível realizar a atualização e falso caso 
+     * @return Verdadeiro se for possível realizar a atualização e falso caso
      * não seja.
      */
     public boolean atualizarUtilizador(
-            Utilizador utilizador, Utilizador utilizadorClone) {
-        return this.listaUtilizadores.remove(utilizador) 
-                && this.listaUtilizadores.add(utilizadorClone);
+                        Utilizador utilizador, Utilizador utilizadorClone) {
+        return this.listaUtilizadores.remove(utilizador)
+                            && this.listaUtilizadores.add(utilizadorClone);
     }
 
     /**
      * Devolve o número total de utilizadores na lista.
-     * 
+     *
      * @return Número total de utilizadores na lista.
      */
     public int getNumeroUtilizadores() {
@@ -136,9 +193,9 @@ public class RegistoUtilizadores {
 
     /**
      * Devolve um utilizador através da sua posição na lista.
-     * 
+     *
      * @param indice Posição na lista.
-     * 
+     *
      * @return Utilizador através da sua posição na lista.
      */
     public Utilizador getUtilizadorPeloID(int indice) {
@@ -156,12 +213,19 @@ public class RegistoUtilizadores {
     public Utilizador getUtilizador(String id) {
         for (Utilizador utilizador : this.listaUtilizadores) {
             if (utilizador.getEmail().equals(id)
-                    || utilizador.getUsername().equals(id)) {
+                                || utilizador.getUsername().equals(id)) {
                 return utilizador;
             }
         }
 
         return null;
+    }
+
+    /**
+     * Inicia a criação do codificador aritmético.
+     */
+    public void iniciarCodificadorAritmetico() throws IOException {
+        this.tabelasCodificacao.put("CodificadorAritmetico", new CA());
     }
 
 }
