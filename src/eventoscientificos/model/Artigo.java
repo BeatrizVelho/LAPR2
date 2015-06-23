@@ -41,24 +41,14 @@ public class Artigo {
     private AutorCorrespondente autorCorrespondente;
 
     /**
-     * Autor que realiza a submissão inicial.
+     * Autor que realiza a submissão.
      */
-    private Autor autorSubmissorInicial;
+    private Autor autorSubmissor;
 
     /**
-     * Autor que realiza a submissão final.
+     * Data de submissão do artigo.
      */
-    private Autor autorSubmissorFinal;
-
-    /**
-     * Data de submissão do artigo inicial.
-     */
-    private Data dataSubmissaoInicial;
-
-    /**
-     * Data de submissão do artigo final.
-     */
-    private Data dataSubmissaoFinal;
+    private Data dataSubmissao;
 
     /**
      * Titulo do artigo por omissão.
@@ -88,8 +78,8 @@ public class Artigo {
         setFicheiro(ficheiro);
         this.listaAutores = new ListaAutores();
         setAutorCorrespondente(getAutorCorrespondente());
-        setAutorSubmissorInicial(getAutorSubmissorInicial());
-        setAutorSubmissorFinal(getAutorSubmissorFinal());
+        setAutorSubmissor(getAutorSubmissor());
+        setAutorSubmissor(getAutorSubmissor());
     }
 
     public Artigo() {
@@ -149,17 +139,8 @@ public class Artigo {
      *
      * @return Autor que realiza a submissão inicial.
      */
-    public Autor getAutorSubmissorInicial() {
-        return this.autorSubmissorInicial;
-    }
-
-    /**
-     * Devolve o autor submissor que realiza a submissão final.
-     *
-     * @return Autor que realiza a submissão final.
-     */
-    public Autor getAutorSubmissorFinal() {
-        return this.autorSubmissorFinal;
+    public Autor getAutorSubmissor() {
+        return this.autorSubmissor;
     }
 
     /**
@@ -168,7 +149,7 @@ public class Artigo {
      * @return Lista de palavras chave do artigo.
      */
     public List<String> getPalavrasChave() {
-        return palavrasChave;
+        return this.palavrasChave;
     }
 
     /**
@@ -176,17 +157,8 @@ public class Artigo {
      *
      * @return Data de submissaão do artigo inicial.
      */
-    public Data getDataSubmissaoInicial() {
-        return dataSubmissaoInicial;
-    }
-
-    /**
-     * Devolve a data de submissão do artigo final.
-     *
-     * @return Data de submissaão do artigo final.
-     */
-    public Data getDataSubmissaoFinal() {
-        return dataSubmissaoFinal;
+    public Data getDataSubmissao() {
+        return this.dataSubmissao;
     }
 
     /**
@@ -241,21 +213,12 @@ public class Artigo {
     }
 
     /**
-     * Modifica o autor submissor da submissão inicial.
+     * Modifica o autor submissor da submissão.
      *
-     * @param autorSubmissorInicial Novo autor submissor inicial.
+     * @param autorSubmissor Novo autor submissor.
      */
-    public void setAutorSubmissorInicial(Autor autorSubmissorInicial) {
-        this.autorSubmissorInicial = autorSubmissorInicial;
-    }
-
-    /**
-     * Modifica o autor submissor da submissão final.
-     *
-     * @param autorSubmissorFinal Novo autor submissor final.
-     */
-    public void setAutorSubmissorFinal(Autor autorSubmissorFinal) {
-        this.autorSubmissorFinal = autorSubmissorFinal;
+    public void setAutorSubmissor(Autor autorSubmissor) {
+        this.autorSubmissor = autorSubmissor;
     }
 
     /**
@@ -268,21 +231,12 @@ public class Artigo {
     }
 
     /**
-     * Modifica a data de submissão do artigo inicial.
+     * Modifica a data de submissão do artigo.
      *
-     * @param dataSubmissaoInicial Nova data de submissão do artigo inicial.
+     * @param dataSubmissao Nova data de submissão do artigo.
      */
-    public void setDataSubmissaoInicial(Data dataSubmissaoInicial) {
-        this.dataSubmissaoInicial = dataSubmissaoInicial;
-    }
-
-    /**
-     * Modifica a data de submissão do artigo Final.
-     *
-     * @param dataSubmissaoFinal Nova data de submissão do artigo final.
-     */
-    public void setDataSubmissaoFinal(Data dataSubmissaoFinal) {
-        this.dataSubmissaoFinal = dataSubmissaoFinal;
+    public void setDataSubmissao(Data dataSubmissao) {
+        this.dataSubmissao = dataSubmissao;
     }
 
     /**
