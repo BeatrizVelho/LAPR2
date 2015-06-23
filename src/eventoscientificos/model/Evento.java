@@ -1053,4 +1053,14 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
                 hashMapSubmissoesAceites, hashMapSubmissoesRejeitadas);
     }
 
+    @Override
+    public boolean adicionarProcessoDecisao(ProcessoDecisao processoDecisao) {
+        this.processoDecisao = processoDecisao;
+        setEstado(new EventoEmSubmissaoCameraReadyState(this));
+        if(getEstado() instanceof EventoEmSubmissaoCameraReadyState) {
+            return true;
+        }
+        return false;
+    }
+
 }
