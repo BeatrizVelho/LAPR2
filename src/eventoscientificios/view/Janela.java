@@ -5,6 +5,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
@@ -35,29 +36,28 @@ public class Janela extends javax.swing.JFrame {
      * Creates new form Janela
      */
     public Janela() {
+        this.empresa = new Empresa();
+        
         try {
-            this.empresa = new Empresa();
             this.xmlParser = new XMLParser(this, empresa);
             this.xmlParser.lerFicheiroUtilizador();
             this.xmlParser.lerFicheiroLocal();
             this.xmlParser.lerFicheiroEvento();
-
-            addWindowListener(new WindowAdapter() {
-                @Override
-                public void windowClosing(WindowEvent e) {
-                    terminarPrograma();
-                }
-            });
-
-            initComponents();
-            setLocationRelativeTo(null);
-        } catch (ParserConfigurationException ex) {
-            Logger.getLogger(Janela.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(Janela.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SAXException ex) {
-            Logger.getLogger(Janela.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParserConfigurationException | IOException | SAXException
+                | ClassNotFoundException | InstantiationException
+                | IllegalAccessException | NoSuchMethodException
+                | IllegalArgumentException | InvocationTargetException ex) {
         }
+
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                terminarPrograma();
+            }
+        });
+
+        initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -280,6 +280,11 @@ public class Janela extends javax.swing.JFrame {
         gerirSubmissoes.add(uc15);
 
         uc22.setText("Alterar submissão final de artigo científico");
+        uc22.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uc22ActionPerformed(evt);
+            }
+        });
         gerirSubmissoes.add(uc22);
 
         barraMenu.add(gerirSubmissoes);
@@ -342,7 +347,7 @@ public class Janela extends javax.swing.JFrame {
     }//GEN-LAST:event_logoutActionPerformed
 
     private void uc5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc5ActionPerformed
-        // TODO add your handling code here:
+        new ReverArtigoUI(this, true, this.empresa);
     }//GEN-LAST:event_uc5ActionPerformed
 
     private void uc16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc16ActionPerformed
@@ -386,6 +391,10 @@ public class Janela extends javax.swing.JFrame {
     private void uc10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc10ActionPerformed
         new AlterarSubmissaoUI(this, true, this.empresa);
     }//GEN-LAST:event_uc10ActionPerformed
+
+    private void uc22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc22ActionPerformed
+        new AlterarSubmissaoFinalUI(this, true, this.empresa);
+    }//GEN-LAST:event_uc22ActionPerformed
 
     /**
      * @param args the command line arguments
