@@ -6,6 +6,7 @@
 package eventoscientificos.model;
 
 import eventoscientificos.model.mecanismo.distribuicao.MecanismoDistribuicao;
+import java.util.HashMap;
 
 /**
  * Representa uma instância de ProcessoDistribuicao através de
@@ -68,7 +69,7 @@ public class ProcessoDistribuicao {
     public ListaRevisoes distribuirRevisoes(Distribuivel distribuivel) {
         this.listaRevisoes = new ListaRevisoes();
         this.mecanismoDistribuicao.
-                            distribuirRevisoes(distribuivel, listaRevisoes);
+                distribuirRevisoes(distribuivel, listaRevisoes);
         if (listaRevisoes == null) {
             throw new NullPointerException("Não foi possível distribuir");
         } else {
@@ -99,7 +100,21 @@ public class ProcessoDistribuicao {
 
         ProcessoDistribuicao outroProcesso = (ProcessoDistribuicao) outroObjecto;
 
-        return this.listaRevisoes.equals(outroProcesso.listaRevisoes);
-               //                    && this.mecanismoDistribuicao.equals(outroProcesso.mecanismoDistribuicao);
+        return this.listaRevisoes.equals(outroProcesso.listaRevisoes)
+                && this.mecanismoDistribuicao.equals(outroProcesso.mecanismoDistribuicao);
+    }
+
+    /**
+     * Preenche os mapas com as palavras chaves e respetivas recomendações
+     * globais.
+     *
+     * @param hashMapSubmissoesAceites Mapa de submissões aceites.
+     * @param hashMapSubmissoesRejeitadas Mapa de submissões rejeitadas.
+     */
+    public void hashMapSubmissoes(HashMap hashMapSubmissoesAceites,
+            HashMap hashMapSubmissoesRejeitadas) {
+
+        this.listaRevisoes.hashMapSubmissoes(hashMapSubmissoesAceites,
+                hashMapSubmissoesRejeitadas);
     }
 }
