@@ -1,6 +1,6 @@
 package eventoscientificos.model;
 
-import eventoscientificos.model.mecanismo.decisao.MecanismoDecisao;
+
 import eventoscientificos.model.mecanismo.distribuicao.MecanismoDistribuicao;
 import java.util.ArrayList;
 import java.util.Date;
