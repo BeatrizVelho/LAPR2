@@ -1,6 +1,5 @@
 package eventoscientificos.model;
 
-
 import eventoscientificos.model.mecanismo.distribuicao.MecanismoDistribuicao;
 import java.util.ArrayList;
 import java.util.Date;
@@ -15,6 +14,11 @@ import java.util.TimerTask;
  * @author G01
  */
 public class Empresa {
+
+    /**
+     * Lista de administradores da empresa.
+     */
+    List<Administrador> listaAdministradores;
 
     /**
      * Utilizador autenticado da empresa.
@@ -50,12 +54,15 @@ public class Empresa {
      * Lista de mecanismo de decisão.
      */
     private List<MecanismoDecisao> listaMecanismoDecisao;
-    
+
     /**
      * Constrói uma instância de Empresa nao recebendo quaisquer valores por
      * parametro.
      */
-    public Empresa(){
+    public Empresa() {
+        this.listaAdministradores = new ArrayList<>();
+        this.listaAdministradores.add(new Administrador(
+                new Utilizador("Hulk", "hulk@marvel.com", "hulk@marvel.com", "green.man")));
         this.registoUtilizadores = new RegistoUtilizadores();
         this.registoEventos = new RegistoEventos();
         this.registoTiposConflito = new RegistoTiposConflito();
@@ -129,7 +136,7 @@ public class Empresa {
     public void schedule(TimerTask task, Date date) {
         this.temporizador.schedule(task, date);
     }
-    
+
     /**
      * Devolve a lista de mecanismos de distribuições que a empresa
      * disponibiliza para distribuir.
@@ -138,6 +145,17 @@ public class Empresa {
      */
     public List<MecanismoDecisao> getListaMecanismoDecisao() {
         return listaMecanismoDecisao;
+    }
+    
+    /**
+     * Verifica se o utilizador passado por parâmetro é administrador da empresa.
+     * 
+     * @param utilizador Utilizador a verificar.
+     * @return Verdadeiro se o utilizador está inserido na lista de administradores
+     * e falso se não está.
+     */
+    public boolean isAdministrador(Administrador administrador) {
+        return this.listaAdministradores.contains(administrador);
     }
 
 }
