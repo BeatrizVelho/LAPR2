@@ -113,16 +113,25 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Carregar artigo cient&#xed;fico por ficheiro"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="uc18ActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="uc19a">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Gerar estat&#xed;sticas de evento"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="uc19aActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="uc19b">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Gerar estat&#xed;sticas de t&#xf3;picos"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="uc19bActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="uc20">
               <Properties>

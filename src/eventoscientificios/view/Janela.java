@@ -183,12 +183,27 @@ public class Janela extends javax.swing.JFrame {
         administracao.add(uc12);
 
         uc18.setText("Carregar artigo científico por ficheiro");
+        uc18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uc18ActionPerformed(evt);
+            }
+        });
         administracao.add(uc18);
 
         uc19a.setText("Gerar estatísticas de evento");
+        uc19a.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uc19aActionPerformed(evt);
+            }
+        });
         administracao.add(uc19a);
 
         uc19b.setText("Gerar estatísticas de tópicos");
+        uc19b.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uc19bActionPerformed(evt);
+            }
+        });
         administracao.add(uc19b);
 
         uc20.setText("Análise estatística das revisões");
@@ -418,6 +433,18 @@ public class Janela extends javax.swing.JFrame {
         new SubmeterArtigoFinalUI(this, true, this.empresa);
     }//GEN-LAST:event_uc15ActionPerformed
 
+    private void uc18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc18ActionPerformed
+        new CarregarFicheiroUI(this, true, this.empresa);
+    }//GEN-LAST:event_uc18ActionPerformed
+
+    private void uc19aActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc19aActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_uc19aActionPerformed
+
+    private void uc19bActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc19bActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_uc19bActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -538,7 +565,7 @@ public class Janela extends javax.swing.JFrame {
      *
      * @param fileChooser JFileChooser no qual se pretende realizar a filtragem.
      */
-    public static void definirFiltroExtensaoBin(JFileChooser fileChooser) {
+    public static void definirFiltroExtensaoPDF(JFileChooser fileChooser) {
         fileChooser.setFileFilter(new FileFilter() {
 
             @Override
@@ -571,6 +598,44 @@ public class Janela extends javax.swing.JFrame {
     }
 
     /**
+     * Filtra os ficheiros possiveis de escolher no JFileChooser, aceitando
+     * assim apenas CSVs.
+     *
+     * @param fileChooser JFileChooser no qual se pretende realizar a filtragem.
+     */
+    public static void definirFiltroExtensaoCSV(JFileChooser fileChooser) {
+        fileChooser.setFileFilter(new FileFilter() {
+
+            @Override
+            public boolean accept(File f) {
+                if (f.isDirectory()) {
+                    return true;
+                }
+                String extensao = extensao(f);
+                if (extensao != null) {
+                    return extensao.equals("csv");
+                }
+                return false;
+            }
+
+            @Override
+            public String getDescription() {
+                return "*.csv";
+            }
+
+            private String extensao(File f) {
+                String ext = null;
+                String s = f.getName();
+                int i = s.lastIndexOf(".");
+                if (i != -1) {
+                    ext = s.substring(i + 1).toLowerCase();
+                }
+                return ext;
+            }
+        });
+    }
+
+    /**
      *
      */
     private void terminarPrograma() {
@@ -584,8 +649,9 @@ public class Janela extends javax.swing.JFrame {
                     "Ocorreu um erro ao guardar os dados.",
                     "Guardar Dados",
                     JOptionPane.ERROR_MESSAGE);
+        } finally {
+            dispose();
         }
-        dispose();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

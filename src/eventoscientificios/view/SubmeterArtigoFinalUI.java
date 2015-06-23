@@ -455,7 +455,7 @@ public class SubmeterArtigoFinalUI extends javax.swing.JDialog {
     private void btn_ficheiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ficheiroActionPerformed
         Janela.personalizarFileChooserEmPortugues();
         JFileChooser escolherFicheiro = new JFileChooser();
-        Janela.definirFiltroExtensaoBin(escolherFicheiro);
+        Janela.definirFiltroExtensaoPDF(escolherFicheiro);
         int opcao = escolherFicheiro.showOpenDialog(this);
 
         if (opcao == JFileChooser.APPROVE_OPTION) {
