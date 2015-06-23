@@ -189,17 +189,17 @@ public class RegistoUtilizadoresTest {
      * Test of novoUtilizador method, of class RegistoUtilizadores.
      */
     @Test
-    public void testNovoUtilizador_6args() throws IOException {
+    public void testNovoUtilizador_5args() throws IOException {
         System.out.println("novoUtilizador");
         String nome = "Rita";
         String email = "rita_susana@email.com";
         String username = "rita";
         String password = "1234";
         int numeroCarateres = 4;
-        String codificadorTabela = "CA;0";
+        String codificadorTabela = "CA;T001;4";
         RegistoUtilizadores instance = new RegistoUtilizadores();
-        Utilizador expResult = new Utilizador(nome, email, username, password, numeroCarateres, codificadorTabela);
-        Utilizador result = instance.novoUtilizador(nome, email, username, password, numeroCarateres, codificadorTabela);
+        Utilizador expResult = new Utilizador(nome, email, username, password);
+        Utilizador result = instance.novoUtilizador(nome, email, username, password, codificadorTabela);
         assertEquals(expResult, result);
     }
 

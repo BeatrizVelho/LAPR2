@@ -110,10 +110,9 @@ public class RegistoUtilizadores {
      * @return novo utilizador criado
      */
     public Utilizador novoUtilizador(String nome, String email, String username,
-                        String password, int numeroCarateres, String codificadorTabela) {
+                        String password, String codificadorTabela) {
 
         Utilizador utilizador = new Utilizador(nome, email, username, password);
-        utilizador.setNumeroCarateres(numeroCarateres);
         utilizador.setCodificadorTabela(codificadorTabela);
 
         if (!utilizador.validarUtilizador()) {
