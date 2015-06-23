@@ -5,7 +5,6 @@ import eventoscientificos.model.state.submissao.SubmissaoEmLicitacaoState;
 import eventoscientificos.model.state.submissao.SubmissaoEmSubmissaoState;
 import eventoscientificos.model.state.submissao.SubmissaoRejeitadaState;
 import eventoscientificos.model.state.submissao.SubmissaoState;
-import java.util.List;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -49,48 +48,6 @@ public class SubmissaoTest {
         Artigo expResult = this.artigoFinal;
         instance.setArtigoFinal(expResult);
         Artigo result = instance.getArtigoFinal();
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Teste do método set e get AutorCorrespondente, da classe Submissao.
-     */
-    @Test
-    public void testSetAndGetAutorCorrespondente() {
-        System.out.println("setAndGetAutorCorrespondente");
-        Submissao instance = new Submissao();
-        AutorCorrespondente expResult = new AutorCorrespondente(this.utilizador,
-                            new InstituicaoAfiliacao("ISEP"));
-        instance.setAutorCorrespondente(expResult);
-        AutorCorrespondente result = instance.getAutorCorrespondente();
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Teste do método set e get AutorSubmissorInicial, da classe Submissao.
-     */
-    @Test
-    public void testGetAutorSubmissorInicial() {
-        System.out.println("setAndGetAutorSubmissorInicial");
-        Submissao instance = new Submissao();
-        Autor expResult = new Autor(this.utilizador,
-                            new InstituicaoAfiliacao("ISEP"));
-        instance.setAutorSubmissorInicial(expResult);
-        Autor result = instance.getAutorSubmissorInicial();
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Teste do método set e get AutorSubmissorFinal, da classe Submissao.
-     */
-    @Test
-    public void testSetAndGetAutorSubmissorFinal() {
-        System.out.println("setAndgetAutorSubmissorFinal");
-        Submissao instance = new Submissao();
-        Autor expResult = new Autor(this.utilizador,
-                            new InstituicaoAfiliacao("ISEP"));
-        instance.setAutorSubmissorFinal(expResult);
-        Autor result = instance.getAutorSubmissorFinal();
         assertEquals(expResult, result);
     }
 
