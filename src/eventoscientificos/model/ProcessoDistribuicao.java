@@ -111,8 +111,9 @@ public class ProcessoDistribuicao {
      * @param hashMapSubmissoesAceites Mapa de submissões aceites.
      * @param hashMapSubmissoesRejeitadas Mapa de submissões rejeitadas.
      */
-    public void hashMapSubmissoes(HashMap hashMapSubmissoesAceites,
-            HashMap hashMapSubmissoesRejeitadas) {
+    public void hashMapSubmissoes(
+            HashMap<String, Integer> hashMapSubmissoesAceites,
+            HashMap<String, Integer> hashMapSubmissoesRejeitadas) {
 
         this.listaRevisoes.hashMapSubmissoes(hashMapSubmissoesAceites,
                 hashMapSubmissoesRejeitadas);
