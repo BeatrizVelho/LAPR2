@@ -1,5 +1,6 @@
 package eventoscientificios.view;
 
+import eventoscientificos.controllers.AlterarSubmissaoController;
 import eventoscientificos.model.Empresa;
 import java.awt.Frame;
 import java.io.File;
@@ -7,11 +8,12 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 /**
- * @author Pedro
+ * @author G01
  */
 public class AlterarSubmissaoUI extends javax.swing.JDialog {
 
     private Frame framePai;
+    private AlterarSubmissaoController controller;
 
     /**
      * Creates new form AlterarSubmissaoUI
@@ -19,6 +21,7 @@ public class AlterarSubmissaoUI extends javax.swing.JDialog {
     public AlterarSubmissaoUI(java.awt.Frame parent, boolean modal, Empresa empresa) {
         super(parent, modal);
         this.framePai = parent;
+        this.controller = new AlterarSubmissaoController(empresa);
         setResizable(false);
         initComponents();
         getRootPane().setDefaultButton(this.btn_selecionarSubmissivel);
@@ -54,6 +57,12 @@ public class AlterarSubmissaoUI extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtA_resumo = new javax.swing.JTextArea();
         lbl_resumo = new javax.swing.JLabel();
+        txt_palavraChave1 = new javax.swing.JTextField();
+        txt_palavraChave2 = new javax.swing.JTextField();
+        txt_palavraChave3 = new javax.swing.JTextField();
+        txt_palavraChave4 = new javax.swing.JTextField();
+        txt_palavraChave5 = new javax.swing.JTextField();
+        lbl_palavraChave = new javax.swing.JLabel();
         pnl_autorCorrespondente = new javax.swing.JPanel();
         btn_selecionarAutorCorrespondente = new javax.swing.JButton();
         cmb_autorCorrespondente = new javax.swing.JComboBox();
@@ -177,7 +186,7 @@ public class AlterarSubmissaoUI extends javax.swing.JDialog {
         pnl_listaAutoresLayout.setVerticalGroup(
             pnl_listaAutoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_listaAutoresLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(19, 19, 19)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnl_listaAutoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -202,6 +211,8 @@ public class AlterarSubmissaoUI extends javax.swing.JDialog {
 
         lbl_resumo.setText("Resumo:");
 
+        lbl_palavraChave.setText("Palavras-chave:");
+
         javax.swing.GroupLayout pnl_informacoesLayout = new javax.swing.GroupLayout(pnl_informacoes);
         pnl_informacoes.setLayout(pnl_informacoesLayout);
         pnl_informacoesLayout.setHorizontalGroup(
@@ -209,12 +220,26 @@ public class AlterarSubmissaoUI extends javax.swing.JDialog {
             .addGroup(pnl_informacoesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnl_informacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lbl_palavraChave)
                     .addComponent(lbl_titulo)
                     .addComponent(lbl_resumo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnl_informacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txt_titulo)
-                    .addComponent(jScrollPane1))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_informacoesLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(pnl_informacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(pnl_informacoesLayout.createSequentialGroup()
+                                .addComponent(txt_palavraChave1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txt_palavraChave2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txt_palavraChave3, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txt_palavraChave4, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txt_palavraChave5, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 666, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         pnl_informacoesLayout.setVerticalGroup(
@@ -228,6 +253,14 @@ public class AlterarSubmissaoUI extends javax.swing.JDialog {
                 .addGroup(pnl_informacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbl_resumo)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnl_informacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_palavraChave1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_palavraChave)
+                    .addComponent(txt_palavraChave2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_palavraChave3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_palavraChave4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_palavraChave5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -340,13 +373,13 @@ public class AlterarSubmissaoUI extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnl_selecionarSubmissao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnl_informacoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnl_informacoes, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnl_listaAutores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnl_listaAutores, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnl_autorCorrespondente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pnl_ficheiro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnl_autorCorrespondente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnl_ficheiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_cancelar)
@@ -456,6 +489,7 @@ public class AlterarSubmissaoUI extends javax.swing.JDialog {
     private javax.swing.JList jList_listaAutores;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lbl_palavraChave;
     private javax.swing.JLabel lbl_resumo;
     private javax.swing.JLabel lbl_titulo;
     private javax.swing.JPanel pnl_autorCorrespondente;
@@ -466,6 +500,11 @@ public class AlterarSubmissaoUI extends javax.swing.JDialog {
     private javax.swing.JPanel pnl_selecionarSubmissivel;
     private javax.swing.JTextArea txtA_resumo;
     private javax.swing.JTextField txt_ficheiro;
+    private javax.swing.JTextField txt_palavraChave1;
+    private javax.swing.JTextField txt_palavraChave2;
+    private javax.swing.JTextField txt_palavraChave3;
+    private javax.swing.JTextField txt_palavraChave4;
+    private javax.swing.JTextField txt_palavraChave5;
     private javax.swing.JTextField txt_titulo;
     // End of variables declaration//GEN-END:variables
 }

@@ -50,15 +50,15 @@
               <Component id="pnl_selecionarSubmissivel" max="32767" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Component id="pnl_selecionarSubmissao" max="32767" attributes="0"/>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Component id="pnl_informacoes" max="32767" attributes="0"/>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Component id="pnl_listaAutores" max="32767" attributes="0"/>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Component id="pnl_autorCorrespondente" max="32767" attributes="0"/>
-              <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
-              <Component id="pnl_ficheiro" max="32767" attributes="0"/>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="pnl_informacoes" min="-2" pref="169" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="pnl_listaAutores" pref="164" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="pnl_autorCorrespondente" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="pnl_ficheiro" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btn_cancelar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btn_submeter" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -216,7 +216,7 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                   <Component id="jScrollPane2" min="-2" pref="82" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -295,13 +295,30 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="lbl_palavraChave" min="-2" max="-2" attributes="0"/>
                       <Component id="lbl_titulo" min="-2" max="-2" attributes="0"/>
                       <Component id="lbl_resumo" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="txt_titulo" max="32767" attributes="0"/>
-                      <Component id="jScrollPane1" max="32767" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="txt_palavraChave1" min="-2" pref="125" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="txt_palavraChave2" min="-2" pref="125" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="txt_palavraChave3" min="-2" pref="125" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="txt_palavraChave4" min="-2" pref="125" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="txt_palavraChave5" min="-2" pref="125" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="jScrollPane1" min="-2" pref="666" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -319,6 +336,15 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="lbl_resumo" min="-2" max="-2" attributes="0"/>
                       <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="txt_palavraChave1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbl_palavraChave" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txt_palavraChave2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txt_palavraChave3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txt_palavraChave4" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txt_palavraChave5" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -353,6 +379,21 @@
         <Component class="javax.swing.JLabel" name="lbl_resumo">
           <Properties>
             <Property name="text" type="java.lang.String" value="Resumo:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txt_palavraChave1">
+        </Component>
+        <Component class="javax.swing.JTextField" name="txt_palavraChave2">
+        </Component>
+        <Component class="javax.swing.JTextField" name="txt_palavraChave3">
+        </Component>
+        <Component class="javax.swing.JTextField" name="txt_palavraChave4">
+        </Component>
+        <Component class="javax.swing.JTextField" name="txt_palavraChave5">
+        </Component>
+        <Component class="javax.swing.JLabel" name="lbl_palavraChave">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Palavras-chave:"/>
           </Properties>
         </Component>
       </SubComponents>
