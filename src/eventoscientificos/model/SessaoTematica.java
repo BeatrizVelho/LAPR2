@@ -6,6 +6,7 @@ import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmSubmissaoSt
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaFaseDecisaoState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaState;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import utils.Data;
 
@@ -885,19 +886,18 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
     }
 
     /**
-     * Preenche as listas recebidas por parâmetro, colocando as submissoes
-     * aceites no lista listaSubmissoesAceites e as submissoes rejeitadas na
-     * lista listaSubmissoesRejeitadas.
-     *
-     * @param listaSubmissoesAceites Lista para submissões aceites.
-     * @param listaSubmissoesRejeitadas Lista para submissões retiradas.
+     * Preenche os mapas com as palavras chaves e respetivas recomendações
+     * globais.
+     * 
+     * @param hashMapSubmissoesAceites Mapa de submissões aceites.
+     * @param hashMapSubmissoesRejeitadas Mapa de submissões rejeitadas.
      */
-    public void getSubmissoesAceitesRejeitadas(List<Submissao> listaSubmissoesAceites,
-            List<Submissao> listaSubmissoesRejeitadas) {
+    public void hashMapSubmissoesSessaoTematica(
+            HashMap<String, Integer> hashMapSubmissoesAceites,
+            HashMap<String, Integer> hashMapSubmissoesRejeitadas) {
 
-        this.listaSubmissoes.getSubmissoesAceitesRejeitadas(
-                listaSubmissoesAceites,
-                listaSubmissoesRejeitadas);
+        this.processoDistribuicao.hashMapSubmissoes(hashMapSubmissoesAceites,
+                hashMapSubmissoesRejeitadas);
     }
 
 }

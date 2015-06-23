@@ -1,7 +1,9 @@
 package eventoscientificos.model;
 
+import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmCameraReadyState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmSubmissaoCameraReadyState;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import utils.Data;
 
@@ -320,24 +322,22 @@ public class ListaSessoesTematicas {
     }
 
     /**
-     * Preenche as listas recebidas por parâmetro, colocando as submissoes
-     * aceites no lista listaSubmissoesAceites e as submissoes rejeitadas na
-     * lista listaSubmissoesRejeitadas.
+     * Preenche os mapas com as palavras chaves e respetivas recomendações
+     * globais.
      *
-     * @param listaSubmissoesAceites Lista para submissões aceites.
-     * @param listaSubmissoesRejeitadas Lista para submissões retiradas.
+     * @param hashMapSubmissoesAceites Mapa de submissões aceites.
+     * @param hashMapSubmissoesRejeitadas Mapa de submissões rejeitadas.
      */
-    public void getSubmissoesAceitesRejeitadas(
-            List<Submissao> listaSubmissoesAceites,
-            List<Submissao> listaSubmissoesRejeitadas) {
-        
+    public void hashMapSubmissoesSessaoTematica(
+            HashMap<String, Integer> hashMapSubmissoesAceites,
+            HashMap<String, Integer> hashMapSubmissoesRejeitadas) {
+
         for (SessaoTematica sessaoTematica : this.listaSessoesTematicas) {
             if (sessaoTematica.getEstado() instanceof SessaoTematicaEmSubmissaoCameraReadyState
-                    || sessaoTematica.getEstado() instanceof SessaoTematicaEmSubmissaoCameraReadyState) {
-                
-                sessaoTematica.getSubmissoesAceitesRejeitadas(
-                        listaSubmissoesAceites,
-                        listaSubmissoesRejeitadas);
+                    || sessaoTematica.getEstado() instanceof SessaoTematicaEmCameraReadyState) {
+
+                sessaoTematica.hashMapSubmissoesSessaoTematica(hashMapSubmissoesAceites,
+                        hashMapSubmissoesRejeitadas);
             }
         }
     }

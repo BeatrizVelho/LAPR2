@@ -8,6 +8,7 @@ import eventoscientificos.model.state.evento.EventoRegistadoState;
 import eventoscientificos.model.state.evento.EventoSessoesTematicasDefinidasState;
 import eventoscientificos.model.state.evento.EventoState;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import utils.Data;
 
@@ -1035,23 +1036,21 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
     }
 
     /**
-     * Preenche as listas recebidas por parâmetro, colocando as submissoes
-     * aceites no lista listaSubmissoesAceites e as submissoes rejeitadas na
-     * lista listaSubmissoesRejeitadas.
+     * Preenche os mapas com as palavras chaves e respetivas recomendações
+     * globais.
      *
-     * @param listaSubmissoesAceites Lista para submissões aceites.
-     * @param listaSubmissoesRejeitadas Lista para submissões retiradas.
+     * @param hashMapSubmissoesAceites Mapa de submissões aceites.
+     * @param hashMapSubmissoesRejeitadas Mapa de submissões rejeitadas.
      */
-    public void getSubmissoesAceitesRejeitadas(
-            List<Submissao> listaSubmissoesAceites,
-            List<Submissao> listaSubmissoesRejeitadas) {
+    public void hashMapSubmissoes(
+            HashMap<String, Integer> hashMapSubmissoesAceites,
+            HashMap<String, Integer> hashMapSubmissoesRejeitadas) {
 
-        this.listaSubmissoes.getSubmissoesAceitesRejeitadas(
-                listaSubmissoesAceites,
-                listaSubmissoesRejeitadas);
+        this.processoDistribuicao.hashMapSubmissoes(hashMapSubmissoesAceites,
+                hashMapSubmissoesRejeitadas);
 
-        this.listaSessoesTematicas.getSubmissoesAceitesRejeitadas(
-                listaSubmissoesAceites,
-                listaSubmissoesRejeitadas);
+        this.listaSessoesTematicas.hashMapSubmissoesSessaoTematica(
+                hashMapSubmissoesAceites, hashMapSubmissoesRejeitadas);
     }
+
 }

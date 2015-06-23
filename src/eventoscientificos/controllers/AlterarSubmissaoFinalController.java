@@ -17,17 +17,47 @@ import java.util.List;
 /**
  * @author G01
  */
-public class AlterarSubmissaoController {
+public class AlterarSubmissaoFinalController {
 
     /**
-     * Intancia de Empresa.
+     * Instância de empresa.
      */
     private Empresa empresa;
 
     /**
-     * Instância de Utilizador.
+     * Instânci de utilizador.
      */
     private Utilizador utilizador;
+
+    /**
+     * Lista de submissiveis.
+     */
+    private List<Submissivel> listaSubmissiveis;
+
+    /**
+     * Submissivel que tem a submissao pretendida para alterar.
+     */
+    private Submissivel submissivel;
+
+    /**
+     * Instância de lista de submissoes.
+     */
+    private ListaSubmissoes listaSubmissoes;
+
+    /**
+     * Lista de Submissoes do utilizador.
+     */
+    private List<Submissao> listaSubmissoesUtilizador;
+
+    /**
+     * Instancia de submissao.
+     */
+    private Submissao submissao;
+
+    /**
+     * Instância de submissao.
+     */
+    private Submissao submissaoClone;
 
     /**
      * Instância de artigo.
@@ -45,63 +75,27 @@ public class AlterarSubmissaoController {
     private RegistoUtilizadores registoUtilizadores;
 
     /**
-     * Instância de submissao.
-     */
-    private Submissao submissaoClone;
-
-    /**
-     * Instancia de submissao.
-     */
-    private Submissao submissao;
-
-    /**
-     * Instância de lista de submissões.
-     */
-    private ListaSubmissoes listaSubmissoes;
-
-    /**
-     * Lista de Submissiveis.
-     */
-    private List<Submissivel> listaSubmissiveis;
-
-    /**
-     * Submissivel que tem a submissao pretendida para alterar.
-     */
-    private Submissivel submissivel;
-
-    /**
-     * Lista de Submissoes do utilizador.
-     */
-    private List<Submissao> listaSubmissoesUtilizador;
-
-    /**
-     * Instância de autor.
-     */
-    private Autor autor;
-    
-    /**
      * Lista de autores registados.
      */
     private List<Autor> listaAutoresRegistados;
 
     /**
-     * Constrói uma instância de AlterarSubmissaoController recebendo uma
+     * Constrói uma instância de AlterarSubmissaoFinalController recebendo uma
      * empresa por parametro.
      *
      * @param empresa Empresa.
      */
-    public AlterarSubmissaoController(Empresa empresa) {
+    public AlterarSubmissaoFinalController(Empresa empresa) {
         this.empresa = empresa;
         this.utilizador = null;
-        this.artigoClone = null;
-        this.listaAutores = null;
-        this.registoUtilizadores = null;
+        this.listaSubmissiveis = null;
+        this.submissivel = null;
+        this.listaSubmissoes = null;
+        this.listaSubmissoesUtilizador = null;
         this.submissao = null;
         this.submissaoClone = null;
-        this.listaSubmissoes = null;
-        this.listaSubmissiveis = null;
-        this.listaSubmissoesUtilizador = null;
-        this.autor = null;
+        this.artigoClone = null;
+        this.listaAutores = null;
         this.listaAutoresRegistados = null;
     }
 
@@ -119,7 +113,7 @@ public class AlterarSubmissaoController {
         this.listaSubmissiveis = registoEventos.
                 getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador(this.utilizador);
 
-        return this.utilizador != null && registoEventos != null 
+        return this.utilizador != null && registoEventos != null
                 && this.listaSubmissiveis != null;
     }
 
@@ -149,7 +143,7 @@ public class AlterarSubmissaoController {
     public boolean selecionarSubmissao(int indice) {
         this.submissao = this.listaSubmissoesUtilizador.get(indice);
         this.submissaoClone = submissao.criarCloneSubmissao();
-        this.artigoClone = submissaoClone.getArtigoInicial();
+        this.artigoClone = submissaoClone.getArtigoFinal();
         this.listaAutores = artigoClone.getListaAutores();
 
         this.registoUtilizadores = this.empresa.getRegistoUtilizadores();
@@ -169,7 +163,7 @@ public class AlterarSubmissaoController {
         this.artigoClone.setTitulo(titulo);
         this.artigoClone.setResumo(resumo);
     }
-
+//
 //    /**
 //     * Verifica se o autor já existe na lista de autores.
 //     * 
@@ -180,13 +174,13 @@ public class AlterarSubmissaoController {
 //    public void alterarAutor(String nome, String email,
 //            String instituicaoAfiliacao) {
 //
-//        this.autor = this.listaAutores.g
+//        this.aut
 //        Autor autor = new Autor(nome, email,
 //                new InstituicaoAfiliacao(instituicaoAfiliacao));
 //        autor.validarAutor();
 //        this.listaAutores.n(autor);
 //    }
-
+    
     /**
      * Elimina um autor da lista de autores.
      *
@@ -213,7 +207,7 @@ public class AlterarSubmissaoController {
             this.listaAutores.novoAutor(utilizador,
                     new InstituicaoAfiliacao(instituicaoAfiliacao));
         }
-        
+
         return true;
     }
 
@@ -271,6 +265,4 @@ public class AlterarSubmissaoController {
     public boolean alterarSubmissao() {
         return this.listaSubmissoes.alterarSubmissao(this.submissao, this.artigoClone);
     }
-
 }
-
