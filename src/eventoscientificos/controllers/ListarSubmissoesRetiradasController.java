@@ -1,12 +1,12 @@
 package eventoscientificos.controllers;
 
 import eventoscientificos.model.Empresa;
-import eventoscientificos.model.ListaSubmissoes;
 import eventoscientificos.model.RegistoEventos;
 import eventoscientificos.model.Submissao;
 import eventoscientificos.model.Submissivel;
 import eventoscientificos.model.Utilizador;
 import java.util.List;
+import javax.swing.DefaultListModel;
 
 /**
  *
@@ -18,7 +18,12 @@ public class ListarSubmissoesRetiradasController {
      * Instância de empresa.
      */
     private Empresa empresa;
-    
+
+    /**
+     * Modelo da lista de submissões retiradas.
+     */
+    private DefaultListModel<Submissao> modeloLista;
+
     /**
      * Instância de listaSubmissiveisComSubRetiradas.
      */
@@ -31,7 +36,26 @@ public class ListarSubmissoesRetiradasController {
      */
     public ListarSubmissoesRetiradasController(Empresa empresa) {
         this.empresa = empresa;
+        this.modeloLista = new DefaultListModel();
         this.listaSubmissiveisComSubRetiradas = null;
+    }
+ 
+    /**
+     * Devolve a lista de submissiveis.
+     * 
+     * @return Lista de submissiveis.
+     */
+    public List<Submissivel> getListaSubmissiveis() {
+        return this.listaSubmissiveisComSubRetiradas;
+    }
+    
+    /**
+     * Devolve o modelo da lista de submissões retiradas.
+     *  
+     * @return Modelo da lista de submissões retiradas.
+     */
+    public DefaultListModel<Submissao> getModeloLista() {
+        return this.modeloLista;
     }
     
     /**
@@ -63,15 +87,13 @@ public class ListarSubmissoesRetiradasController {
      * e falso se não existir.
      */
     public boolean selecionarSubmissivel(int indice){
-        
         Submissivel submissivel = this.listaSubmissiveisComSubRetiradas.get(indice);
-        
-        List<Submissao> listaSubmissoesRetiradas = submissivel.getListaSubmissoesRetiradas();
+                
+        for (Submissao submissao : submissivel.getListaSubmissoesRetiradas()) {
+            this.modeloLista.addElement(submissao);
+        }
 
-        
-        return listaSubmissoesRetiradas != null;
+        return true;
     }
-    
-    
-    
+
 }
