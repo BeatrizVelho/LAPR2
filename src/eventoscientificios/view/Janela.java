@@ -37,16 +37,32 @@ public class Janela extends javax.swing.JFrame {
      */
     public Janela() {
         this.empresa = new Empresa();
-        
+
         try {
             this.xmlParser = new XMLParser(this, empresa);
             this.xmlParser.lerFicheiroUtilizador();
             this.xmlParser.lerFicheiroLocal();
             this.xmlParser.lerFicheiroEvento();
-        } catch (ParserConfigurationException | IOException | SAXException
-                | ClassNotFoundException | InstantiationException
-                | IllegalAccessException | NoSuchMethodException
-                | IllegalArgumentException | InvocationTargetException ex) {
+        } catch (ParserConfigurationException | IOException | SAXException | InstantiationException | IllegalAccessException | NoSuchMethodException | IllegalArgumentException | InvocationTargetException | ClassNotFoundException ex) {
+            Logger.getLogger(Janela.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Ocorreu um erro na leitura dos ficheiros XML.",
+                    "Ficheiros XML",
+                    JOptionPane.ERROR_MESSAGE);
+            // Reset
+            this.empresa = new Empresa();
+        }
+
+        try {
+            this.empresa.getRegistoUtilizadores().iniciarCodificadorAritmetico();
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Não foi possível carregar as tabelas de frequência do"
+                    + " codificador aritmético.",
+                    "Codificador Aritmético",
+                    JOptionPane.ERROR_MESSAGE);
         }
 
         addWindowListener(new WindowAdapter() {
@@ -646,8 +662,8 @@ public class Janela extends javax.swing.JFrame {
         } catch (ParserConfigurationException | TransformerException ex) {
             JOptionPane.showMessageDialog(
                     this,
-                    "Ocorreu um erro ao guardar os dados.",
-                    "Guardar Dados",
+                    "Ocorreu um erro ao guardar os ficheiros XML.",
+                    "Ficheiros XML",
                     JOptionPane.ERROR_MESSAGE);
         } finally {
             dispose();
