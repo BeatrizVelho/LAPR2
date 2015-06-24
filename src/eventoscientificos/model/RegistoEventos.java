@@ -120,6 +120,36 @@ public class RegistoEventos {
     }
 
     /**
+     * Devolve a lista de revisiveis que onde é possível gerar a análise
+     * estatística e onde o revisor em análise pertence à CP
+     *
+     * @param revisor revisor em análise
+     * @return lista de revisiveis
+     */
+    public List<Revisivel> getListaRevisiveisRevisor(Revisor revisor) {
+        Utilizador u = revisor.getUtilizador();
+        List<Revisivel> listaRevisiveis = new ArrayList<>();
+
+        for (Revisivel r : listaEventos) {
+            if (r.isStateValidoParaGerarAnaliseEstatisticas()) {
+                if (r.getCP().contains(u)) {
+                    listaRevisiveis.add(r);
+                }
+            }
+            for (Revisivel rev : ((Evento) r).getListaSessoesTematicas().
+                                getListaSessoesTematicas()) {
+                if (rev.isStateValidoParaGerarAnaliseEstatisticas()) {
+                    if (rev.getCP().contains(u)) {
+                        listaRevisiveis.add(rev);
+                    }
+
+                }
+            }
+        }
+        return listaRevisiveis;
+    }
+
+    /**
      * Devolve um evento através da sua posição na lista.
      *
      * @param indice Posição na lista.
