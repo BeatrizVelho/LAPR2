@@ -1,5 +1,6 @@
 package eventoscientificios.view;
 
+import eventoscientificos.controllers.CarregarFicheiroController;
 import eventoscientificos.model.Empresa;
 import java.awt.Frame;
 import java.io.File;
@@ -12,20 +13,32 @@ import javax.swing.JOptionPane;
 public class CarregarFicheiroUI extends javax.swing.JDialog {
 
     private Frame framePai;
-    
+    private CarregarFicheiroController controller;
+
     /**
      * Creates new form CarregarFicheiroUI
      */
     public CarregarFicheiroUI(java.awt.Frame parent, boolean modal, Empresa empresa) {
-        super(parent, modal);
+        super(parent, "Carregar Ficheiro", modal);
         this.framePai = parent;
+        this.controller = new CarregarFicheiroController(empresa);
+        this.controller.getListaEventosAceitarArtigos();
         setResizable(false);
         initComponents();
-        getRootPane().setDefaultButton(this.btn_selecionarSubmissivel);
+        getRootPane().setDefaultButton(this.btn_selecionarEvento);
         setLocationRelativeTo(null);
-        // Verificar se existem eventos/sessões que aceitem revisões de artigos.
-        setVisible(true);
-        pack();
+        if (this.controller.getListaEventosAceitarEventos().isEmpty()) {
+            JOptionPane.showMessageDialog(
+                    framePai,
+                    "Não existem eventos ou sessões temáticas a aceitar submissões"
+                    + "de artigos.",
+                    "Carregar Ficheiro",
+                    JOptionPane.ERROR_MESSAGE);
+            dispose();
+        } else {
+            setVisible(true);
+            pack();
+        }
     }
 
     /**
@@ -38,8 +51,8 @@ public class CarregarFicheiroUI extends javax.swing.JDialog {
     private void initComponents() {
 
         pnl_selecionarSubmissivel = new javax.swing.JPanel();
-        btn_selecionarSubmissivel = new javax.swing.JButton();
-        cmb_selecionarSubmissivel = new javax.swing.JComboBox();
+        btn_selecionarEvento = new javax.swing.JButton();
+        cmb_selecionarEvento = new javax.swing.JComboBox();
         btn_cancelar = new javax.swing.JButton();
         btn_importarSubmissao = new javax.swing.JButton();
         pnl_ficheiro = new javax.swing.JPanel();
@@ -50,10 +63,10 @@ public class CarregarFicheiroUI extends javax.swing.JDialog {
 
         pnl_selecionarSubmissivel.setBorder(javax.swing.BorderFactory.createTitledBorder("Selecione o evento para o qual pretende importar a submissão"));
 
-        btn_selecionarSubmissivel.setText("Selecionar");
-        btn_selecionarSubmissivel.addActionListener(new java.awt.event.ActionListener() {
+        btn_selecionarEvento.setText("Selecionar");
+        btn_selecionarEvento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_selecionarSubmissivelActionPerformed(evt);
+                btn_selecionarEventoActionPerformed(evt);
             }
         });
 
@@ -63,9 +76,9 @@ public class CarregarFicheiroUI extends javax.swing.JDialog {
             pnl_selecionarSubmissivelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_selecionarSubmissivelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(cmb_selecionarSubmissivel, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cmb_selecionarEvento, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btn_selecionarSubmissivel)
+                .addComponent(btn_selecionarEvento)
                 .addContainerGap())
         );
         pnl_selecionarSubmissivelLayout.setVerticalGroup(
@@ -73,8 +86,8 @@ public class CarregarFicheiroUI extends javax.swing.JDialog {
             .addGroup(pnl_selecionarSubmissivelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnl_selecionarSubmissivelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_selecionarSubmissivel)
-                    .addComponent(cmb_selecionarSubmissivel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_selecionarEvento)
+                    .addComponent(cmb_selecionarEvento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -159,14 +172,15 @@ public class CarregarFicheiroUI extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_selecionarSubmissivelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_selecionarSubmissivelActionPerformed
-        int indice = this.cmb_selecionarSubmissivel.getSelectedIndex();
+    private void btn_selecionarEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_selecionarEventoActionPerformed
+        int indice = this.cmb_selecionarEvento.getSelectedIndex();
+        this.controller.selecionarEvento(indice);
 
-        this.cmb_selecionarSubmissivel.setEnabled(false);
-        this.btn_selecionarSubmissivel.setEnabled(false);
+        this.cmb_selecionarEvento.setEnabled(false);
+        this.btn_selecionarEvento.setEnabled(false);
         this.btn_ficheiro.setEnabled(true);
         getRootPane().setDefaultButton(btn_ficheiro);
-    }//GEN-LAST:event_btn_selecionarSubmissivelActionPerformed
+    }//GEN-LAST:event_btn_selecionarEventoActionPerformed
 
     private void btn_ficheiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ficheiroActionPerformed
         Janela.personalizarFileChooserEmPortugues();
@@ -192,27 +206,34 @@ public class CarregarFicheiroUI extends javax.swing.JDialog {
     }//GEN-LAST:event_btn_ficheiroActionPerformed
 
     private void btn_importarSubmissaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_importarSubmissaoActionPerformed
-        String opcoes[] = {"Sim", "Não"};
-        int resposta = JOptionPane.showOptionDialog(
-                this,
-                "Pretende carregar o artigo a partir ficheiro?",
-                "Carregar Ficheiro", 0,
-                JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]);
-        if (resposta == 0) {
-
+        try {
+            String opcoes[] = {"Sim", "Não"};
+            int resposta = JOptionPane.showOptionDialog(
+                    this,
+                    "Pretende carregar o artigo a partir ficheiro?",
+                    "Carregar Ficheiro", 0,
+                    JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]);
+            if (resposta == 0) {
+                this.controller.submeterFicheiro(txt_ficheiro.getText());
+            }
+            dispose();
+        } catch (IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), 
+                    "Carregar Ficheiro", JOptionPane.ERROR_MESSAGE);
         }
-        dispose();
+
     }//GEN-LAST:event_btn_importarSubmissaoActionPerformed
 
     private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed
         dispose();
     }//GEN-LAST:event_btn_cancelarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_cancelar;
     private javax.swing.JButton btn_ficheiro;
     private javax.swing.JButton btn_importarSubmissao;
-    private javax.swing.JButton btn_selecionarSubmissivel;
-    private javax.swing.JComboBox cmb_selecionarSubmissivel;
+    private javax.swing.JButton btn_selecionarEvento;
+    private javax.swing.JComboBox cmb_selecionarEvento;
     private javax.swing.JPanel pnl_ficheiro;
     private javax.swing.JPanel pnl_selecionarSubmissivel;
     private javax.swing.JTextField txt_ficheiro;
