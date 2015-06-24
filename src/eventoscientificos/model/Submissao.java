@@ -268,4 +268,16 @@ public class Submissao {
     public boolean setEstadoRemovida() {
         return this.estado.setRemovida();
     }
+    
+    /**
+     * Devolve as características da submissão: título
+     * 
+     * @return Título do artigo 
+     */
+    @Override
+    public String toString() {
+        return String.format("%s", getEstado() instanceof SubmissaoEmCameraReadyState ?
+                getArtigoFinal().getTitulo() : 
+                getArtigoInicial().getTitulo());
+    }
 }
