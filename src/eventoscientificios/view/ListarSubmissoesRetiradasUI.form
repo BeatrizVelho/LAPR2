@@ -27,7 +27,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="pnl_selecionarSubmissivel" alignment="0" max="32767" attributes="0"/>
-                  <Component id="pnl_submissoesRetiradas" alignment="0" pref="819" max="32767" attributes="0"/>
+                  <Component id="pnl_submissoesRetiradas" alignment="0" pref="799" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       <Component id="btn_cancelar" min="-2" max="-2" attributes="0"/>
@@ -66,10 +66,10 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="cmb_selecionarSubmissivel" min="-2" pref="657" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="btn_selecionarSubmissivel" min="-2" max="-2" attributes="0"/>
+                  <Component id="cmb_selecionarSubmissivel" min="-2" pref="680" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
+                  <Component id="btn_selecionarSubmissivel" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -101,6 +101,9 @@
               <StringArray count="0"/>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox(this.controller.getListaSubmissiveis().toArray())"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>
