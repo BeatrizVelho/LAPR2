@@ -26,8 +26,8 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="pnl_selecionarSubmissivel" max="32767" attributes="0"/>
-                  <Component id="pnl_selecionarSubmissao" max="32767" attributes="0"/>
+                  <Component id="pnl_selecionarSubmissivel" pref="851" max="32767" attributes="0"/>
+                  <Component id="pnl_selecionarSubmissao" pref="851" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="0" pref="566" max="32767" attributes="0"/>
                       <Component id="btn_removerSubmissao" min="-2" max="-2" attributes="0"/>
@@ -43,9 +43,9 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Component id="pnl_selecionarSubmissivel" max="32767" attributes="0"/>
+              <Component id="pnl_selecionarSubmissivel" pref="90" max="32767" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Component id="pnl_selecionarSubmissao" max="32767" attributes="0"/>
+              <Component id="pnl_selecionarSubmissao" pref="90" max="32767" attributes="0"/>
               <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btn_cancelar" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -101,6 +101,9 @@
               <StringArray count="0"/>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox(this.controller.getListaSubmissiveis().toArray())"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="btn_selecionarSubmissivel">
           <Properties>
