@@ -1,7 +1,10 @@
 package eventoscientificos.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import utils.Data;
 
 /**
  * @author G01
@@ -44,6 +47,35 @@ public class ArtigoTest {
     }
 
     /**
+     * Test of getPalavrasChave method, of class Artigo.
+     */
+    @Test
+    public void testSetAndGetPalavrasChave() {
+        System.out.println("setAndgetPalavrasChave");
+        Artigo instance = this.artigo;
+        List<String> palavraChave = new ArrayList<>();
+        palavraChave.add("Cebola");
+        instance.setPalavrasChave(palavraChave);
+        int expResult = 1;
+        int result = instance.getPalavrasChave().size();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of getPalavrasChave method, of class Artigo.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetAndGetPalavrasChaveNull() {
+        System.out.println("setAndgetPalavrasChave");
+        Artigo instance = this.artigo;
+        List<String> palavraChave = new ArrayList<>();
+        instance.setPalavrasChave(palavraChave);
+        int expResult = 0;
+        int result = instance.getPalavrasChave().size();
+        assertEquals(expResult, result);
+    }
+
+    /**
      * Teste do método set e get ListaAutores, da classe Artigo.
      */
     @Test
@@ -59,11 +91,13 @@ public class ArtigoTest {
      * Teste do método setFicheiro, da classe Artigo.
      */
     @Test
-    public void testSetFicheiro() {
-        System.out.println("setFicheiro");
-        String ficheiro = "getNome, getEmail, getInstituicaoAfiliacao1234";
+    public void testGetAndSetFicheiro() {
+        System.out.println("getAndSetFicheiro");
         Artigo instance = this.artigo;
-        instance.setFicheiro(ficheiro);
+        String expResult = "ficheiro";
+        instance.setFicheiro(expResult);
+        String result = instance.getFicheiro();
+        assertEquals(expResult, result);
     }
 
     /**
@@ -85,7 +119,7 @@ public class ArtigoTest {
      * Teste do método set e get AutorSubmissorInicial, da classe Submissao.
      */
     @Test
-    public void testGetAutorSubmissor() {
+    public void testGetAndSetAutorSubmissor() {
         System.out.println("setAndGetAutorSubmissor");
         Artigo instance = new Artigo();
         Autor expResult = new Autor(
@@ -119,6 +153,47 @@ public class ArtigoTest {
         Artigo instance = this.artigo;
         boolean expResult = false;
         boolean result = instance.equals(outroObjeto);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of getDataSubmissao method, of class Artigo.
+     */
+    @Test
+    public void testSetAndGetDataSubmissao() {
+        System.out.println("setAndGetDataSubmissao");
+        Artigo instance = this.artigo;
+        Data expResult = new Data(2017, 05, 05);
+        instance.setDataSubmissao(expResult);
+        Data result = instance.getDataSubmissao();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of validarArtigo method, of class Artigo.
+     */
+    @Test
+    public void testValidarArtigo() {
+        System.out.println("validarArtigo");
+        Artigo instance = this.artigo;
+        boolean expResult = true;
+        boolean result = instance.validarArtigo();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of isAutor method, of class Artigo.
+     */
+    @Test
+    public void testIsAutor() {
+        System.out.println("isAutor");
+        Utilizador utilizador = new Utilizador("nome", "email@isep.com",
+                "username", "password");
+        Artigo instance = new Artigo();
+        instance.getListaAutores().novoAutor(utilizador,
+                new InstituicaoAfiliacao("ISEP"));
+        boolean expResult = true;
+        boolean result = instance.isAutor(utilizador);
         assertEquals(expResult, result);
     }
 
