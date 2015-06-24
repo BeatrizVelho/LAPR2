@@ -5,6 +5,7 @@ import eventoscientificos.model.state.submissao.SubmissaoCriadaState;
 import eventoscientificos.model.state.submissao.SubmissaoEmCameraReadyState;
 import eventoscientificos.model.state.submissao.SubmissaoEmSubmissaoState;
 import eventoscientificos.model.state.submissao.SubmissaoRemovidaState;
+import eventoscientificos.model.state.submissao.SubmissaoRevistaState;
 import eventoscientificos.model.state.submissao.SubmissaoState;
 
 /**
@@ -279,5 +280,19 @@ public class Submissao {
         return String.format("%s", getEstado() instanceof SubmissaoEmCameraReadyState ?
                 getArtigoFinal().getTitulo() : 
                 getArtigoInicial().getTitulo());
+    }
+    
+    /**
+     * Altera o estado da submissão para SubmissaoAceite.
+     */
+    public void alterarEstadoParaAceite(){
+            this.estado.setAceite();
+    }
+    
+    /**
+     * Altera o estado da submissão para SubmissaoRejeitada.
+     */
+    public void alterarEstadoParaRejeitado(){
+            this.estado.setRejeitada();
     }
 }
