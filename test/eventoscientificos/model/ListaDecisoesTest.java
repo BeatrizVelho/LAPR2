@@ -1,6 +1,8 @@
 package eventoscientificos.model;
 
 import eventoscientificos.model.state.submissao.SubmissaoRevistaState;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -10,7 +12,7 @@ import static org.junit.Assert.*;
 public class ListaDecisoesTest {
 
     public ListaDecisoesTest() {
-                
+
     }
 
     /**
@@ -42,5 +44,63 @@ public class ListaDecisoesTest {
         boolean result = instance.adicionarDecisao(decisao);
         assertEquals(expResult, result);
     }
-    
+
+    /**
+     * Teste do método getListaDecisoes, da classe ListaDecisoes.
+     */
+    @Test
+    public void testGetListaDecisoes() {
+        System.out.println("getListaDecisoes");
+        Submissao submissao = new Submissao();
+        int classificacao = 1;
+        Decisao decisao = new Decisao(classificacao, submissao);
+        ListaDecisoes instance = new ListaDecisoes();
+        instance.adicionarDecisao(decisao);
+        List<Decisao> expResult = new ArrayList<>();
+        expResult.add(decisao);
+        List<Decisao> result = instance.getListaDecisoes();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método equals, da classe ListaDecisoes.
+     */
+    @Test
+    public void testEquals() {
+        System.out.println("equals");
+        int classificacao = 2;
+        Submissao submissao = new Submissao();
+        Decisao decisao = new Decisao(classificacao, submissao);
+        
+        Object outroObjecto = new ListaDecisoes();
+        ListaDecisoes outraLista = (ListaDecisoes) outroObjecto;
+        outraLista.adicionarDecisao(decisao);
+        
+        ListaDecisoes instance = new ListaDecisoes();
+        instance.adicionarDecisao(decisao);
+        boolean expResult = true;
+        boolean result = instance.equals(outroObjecto);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método equalsNot, da classe ListaDecisoes.
+     */
+    @Test
+    public void testEqualsNot() {
+        System.out.println("equals");
+        int classificacao = 2;
+        Submissao submissao = new Submissao();
+        Decisao decisao = new Decisao(classificacao, submissao);
+        
+        Object outroObjecto = new ListaDecisoes();
+        ListaDecisoes outraLista = (ListaDecisoes) outroObjecto;
+        outraLista.adicionarDecisao(decisao);
+        
+        ListaDecisoes instance = new ListaDecisoes();
+        boolean expResult = false;
+        boolean result = instance.equals(outroObjecto);
+        assertEquals(expResult, result);
+    }
+
 }
