@@ -2,6 +2,7 @@ package eventoscientificios.view;
 
 import eventoscientificos.controllers.RetirarSubmissaoController;
 import eventoscientificos.model.Empresa;
+import eventoscientificos.model.Submissao;
 import java.awt.Frame;
 import javax.swing.JOptionPane;
 
@@ -15,21 +16,30 @@ public class RetirarSubmissaoUI extends javax.swing.JDialog {
 
     /**
      * Creates new form RetirarSubmissaoUI
+     *
      * @param parent
      * @param modal
      * @param empresa
      */
     public RetirarSubmissaoUI(java.awt.Frame parent, boolean modal, Empresa empresa) {
-        super(parent, modal);
+        super(parent, "Retirar Submissão", modal);
         this.framePai = parent;
         this.controller = new RetirarSubmissaoController(empresa);
+        this.controller.getListaSubmissiveisComArtigosUtilizadorParaRemover();
         setResizable(false);
         initComponents();
         getRootPane().setDefaultButton(this.btn_selecionarSubmissivel);
         setLocationRelativeTo(null);
-        // Verificar se existem eventos/sessões onde é possivel remover submissoes.
-        setVisible(true);
-        pack();
+        if (controller.getListaSubmissiveis().isEmpty()) {
+            JOptionPane.showMessageDialog(framePai, "Não existem eventos ou "
+                    + "sessões temáticas onde lhe é possível remover submissões.",
+                    "Remover Submissão",
+                    JOptionPane.ERROR_MESSAGE);
+            dispose();
+        } else {
+            setVisible(true);
+            pack();
+        }
     }
 
     /**
@@ -42,7 +52,7 @@ public class RetirarSubmissaoUI extends javax.swing.JDialog {
     private void initComponents() {
 
         pnl_selecionarSubmissivel = new javax.swing.JPanel();
-        cmb_selecionarSubmissivel = new javax.swing.JComboBox();
+        cmb_selecionarSubmissivel = new javax.swing.JComboBox(this.controller.getListaSubmissiveis().toArray());
         btn_selecionarSubmissivel = new javax.swing.JButton();
         pnl_selecionarSubmissao = new javax.swing.JPanel();
         cmb_selecionarSubmissao = new javax.swing.JComboBox();
@@ -139,8 +149,8 @@ public class RetirarSubmissaoUI extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnl_selecionarSubmissivel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnl_selecionarSubmissao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnl_selecionarSubmissivel, javax.swing.GroupLayout.DEFAULT_SIZE, 851, Short.MAX_VALUE)
+                    .addComponent(pnl_selecionarSubmissao, javax.swing.GroupLayout.DEFAULT_SIZE, 851, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 566, Short.MAX_VALUE)
                         .addComponent(btn_removerSubmissao)
@@ -152,9 +162,9 @@ public class RetirarSubmissaoUI extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnl_selecionarSubmissivel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnl_selecionarSubmissivel, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnl_selecionarSubmissao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnl_selecionarSubmissao, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_cancelar)
@@ -166,18 +176,25 @@ public class RetirarSubmissaoUI extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_selecionarSubmissivelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_selecionarSubmissivelActionPerformed
-        //int indice = this.cmb_selecionarSubmissivel.getSelectedIndex();
+        int indice = this.cmb_selecionarSubmissivel.getSelectedIndex();
+        this.controller.selecionarSubmissivel(indice);
         
+        for (Submissao submissao : this.controller.getListaSubmissoes()) {
+            this.cmb_selecionarSubmissao.addItem(submissao);
+        }
+
         this.cmb_selecionarSubmissivel.setEnabled(false);
         this.btn_selecionarSubmissivel.setEnabled(false);
         this.cmb_selecionarSubmissao.setEnabled(true);
         this.btn_selecionarSubmissao.setEnabled(true);
         getRootPane().setDefaultButton(this.btn_selecionarSubmissao);
+        
     }//GEN-LAST:event_btn_selecionarSubmissivelActionPerformed
 
     private void btn_selecionarSubmissaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_selecionarSubmissaoActionPerformed
-        //int indice = this.cmb_selecionarSubmissao.getSelectedItem();
-
+        int indice = this.cmb_selecionarSubmissao.getSelectedIndex();
+        this.controller.selecionaSubmissao(indice);
+        
         this.cmb_selecionarSubmissao.setEnabled(false);
         this.btn_selecionarSubmissao.setEnabled(false);
         this.btn_removerSubmissao.setEnabled(true);
@@ -190,6 +207,7 @@ public class RetirarSubmissaoUI extends javax.swing.JDialog {
                 this, "Pretende retirar a submissão selecionada?", "Retirar Submissão", 0,
                 JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]);
         if (resposta == 0) {
+            this.controller.removerSubmissao();
         }
         dispose();
     }//GEN-LAST:event_btn_removerSubmissaoActionPerformed
