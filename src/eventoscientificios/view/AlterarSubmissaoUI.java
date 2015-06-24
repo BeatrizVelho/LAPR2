@@ -1,6 +1,7 @@
 package eventoscientificios.view;
 
 import eventoscientificos.controllers.AlterarSubmissaoController;
+import eventoscientificos.model.Autor;
 import eventoscientificos.model.Empresa;
 import eventoscientificos.model.Submissao;
 import java.awt.Frame;
@@ -441,6 +442,11 @@ public class AlterarSubmissaoUI extends javax.swing.JDialog {
         }
 
         this.jList_listaAutores.setModel(this.controller.getModeloListaAutores());
+        
+        for (Autor autor : this.controller.getListaPossiveisAutoresCorrespondentes()) {
+            this.cmb_autorCorrespondente.addItem(autor);
+        }
+        
         this.txt_ficheiro.setText(this.controller.getArtigoFicheiro());
         validate();
         this.pnl_selecionarSubmissivel.setVisible(false);
@@ -464,11 +470,13 @@ public class AlterarSubmissaoUI extends javax.swing.JDialog {
     }//GEN-LAST:event_btn_editarAutorActionPerformed
 
     private void btn_eliminarAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminarAutorActionPerformed
-        // TODO add your handling code here:
+        int indice = this.jList_listaAutores.getSelectedIndex();
+        this.controller.apagarAutor(indice);
     }//GEN-LAST:event_btn_eliminarAutorActionPerformed
 
     private void btn_selecionarAutorCorrespondenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_selecionarAutorCorrespondenteActionPerformed
         int indice = this.cmb_autorCorrespondente.getSelectedIndex();
+        this.controller.alterarAutorCorrespondente(indice);
     }//GEN-LAST:event_btn_selecionarAutorCorrespondenteActionPerformed
 
     private void btn_escolherFicheiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_escolherFicheiroActionPerformed

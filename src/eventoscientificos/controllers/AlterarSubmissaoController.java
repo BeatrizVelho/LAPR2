@@ -14,6 +14,7 @@ import eventoscientificos.model.Submissao;
 import eventoscientificos.model.Submissivel;
 import eventoscientificos.model.Utilizador;
 import java.util.List;
+import javax.swing.DefaultListModel;
 
 /**
  * @author G01
@@ -79,6 +80,11 @@ public class AlterarSubmissaoController {
      * Lista de autores registados.
      */
     private List<Autor> listaAutoresRegistadosClone;
+
+    /**
+     * Modelo da lista 
+     */
+    private DefaultListModel<Autor> modeloListaAutoresRegistados;
 
     /**
      * Constrói uma instância de AlterarSubmissaoController recebendo uma
@@ -155,6 +161,15 @@ public class AlterarSubmissaoController {
      */
     public ModeloListaAutores getModeloListaAutores() {
         return this.modeloLista;
+    }
+
+    /**
+     * Devolve a lista de autores registados.
+     * 
+     * @return Lista de autores registados.
+     */
+    public List<Autor> getListaPossiveisAutoresCorrespondentes() {
+        return this.listaAutoresRegistadosClone;
     }
 
     /**
@@ -251,10 +266,13 @@ public class AlterarSubmissaoController {
     /**
      * Elimina um autor da lista de autores.
      *
-     * @param email Email do autor a ser eliminado.
+     * @param indice Posição do autor na lista.
+     * 
+     * @return Verdadeiro se o autor for removido com sucesso e falso caso não
+     * seja possível remover.
      */
-    public void apagarAutor(String email) {
-        this.listaAutoresClone.removerAutor(email);
+    public boolean apagarAutor(int indice) {
+        return this.listaAutoresClone.removerAutor(indice);
     }
 
     /**
