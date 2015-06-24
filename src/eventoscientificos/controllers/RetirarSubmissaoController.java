@@ -70,6 +70,24 @@ public class RetirarSubmissaoController {
         this.listaSubmissiveisParaRemover = re.getListaSubmissiveisComArtigosUtilizadorParaRemover(utilizador);
         return this.listaSubmissiveisParaRemover.size() > 0;
     }
+    
+    /**
+     * Devolve a lista de submissíveis.
+     * 
+     * @return Lista de Submissíveis.
+     */
+    public List<Submissivel> getListaSubmissiveis() {
+        return this.listaSubmissiveisParaRemover;
+    }
+    
+    /**
+     * Devolve a lista de Submissões.
+     * 
+     * @return Lista de Submissões.
+     */
+    public List<Submissao> getListaSubmissoes() {
+        return this.listaSubmissoesUtilizador;
+    }
 
     /**
      * Seleciona o Submissivel que contem a submissão a remover e apresenta
