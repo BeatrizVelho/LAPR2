@@ -321,4 +321,25 @@ public class SubmissaoTest {
         boolean result = instance.setEstadoRemovida();
         assertEquals(expResult, result);
     }
+
+    /**
+     * Teste do método alterarEstadoParaAceite, da classe Submissao.
+     */
+    @Test
+    public void testAlterarEstadoParaAceite() {
+        System.out.println("alterarEstadoParaAceite");
+        Submissao instance = new Submissao();
+        instance.alterarEstadoParaAceite();
+    }
+
+    /**
+     * Teste do método alterarEstadoParaRejeitado, da classe Submissao.
+     */
+    @Test
+    public void testAlterarEstadoParaRejeitado() {
+        System.out.println("alterarEstadoParaRejeitado");
+        Submissao instance = new Submissao();
+        instance.alterarEstadoParaRejeitado();
+    }
+
 }
