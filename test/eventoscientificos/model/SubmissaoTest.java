@@ -342,4 +342,21 @@ public class SubmissaoTest {
         instance.alterarEstadoParaRejeitado();
     }
 
+    /**
+     * Test of toString method, of class Submissao.
+     */
+    @Test
+    public void testToString() {
+        System.out.println("toString");
+        Submissao instance = new Submissao();
+        instance.setEstado(new SubmissaoEmSubmissaoState(instance));
+        Artigo artigo = new Artigo();
+        artigo.setTitulo("ISEP");
+        instance.adicionarArtigo(artigo);
+        instance.setEstado(new SubmissaoEmSubmissaoState(instance));
+        String expResult = "ISEP";
+        String result = instance.toString();
+        assertEquals(expResult, result);
+    }
+
 }
