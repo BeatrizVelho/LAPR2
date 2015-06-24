@@ -19,6 +19,6 @@ public interface Codificador {
      * @param password password a codificar
      * @return palavra codificada
      */
-    public String codificar(String password);
+    public String codificar(String password, int tabela);
 
 }
