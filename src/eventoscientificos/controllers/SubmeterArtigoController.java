@@ -127,7 +127,7 @@ public class SubmeterArtigoController {
         RegistoEventos registoEventos = this.empresa.getRegistoEventos();
         this.listaSubmissiveis
                 = registoEventos.getListaSubmissiveisAceitarArtigo();
-
+        
         return this.listaSubmissiveis != null;
     }
 
@@ -140,7 +140,7 @@ public class SubmeterArtigoController {
         this.submissao = listaSubmissoes.novaSubmissao();
         this.artigo = submissao.novoArtigo();
         this.listaAutores = artigo.getListaAutores();
-
+        
         return this.submissivel != null && this.listaSubmissoes != null
                 && this.submissao != null && this.artigo != null
                 && this.listaAutores != null;
@@ -152,14 +152,16 @@ public class SubmeterArtigoController {
      * @param titulo Titulo do Artigo.
      * @param resumo Resumo do Artigo.
      */
-    public boolean adicionarDadosArtigo(String titulo, String resumo) {
+    public boolean adicionarDadosArtigo(String titulo, String resumo,
+            List<String> palavrasChaves) {
         this.artigo.setTitulo(titulo);
         this.artigo.setResumo(resumo);
+        this.artigo.setPalavrasChave(palavrasChaves);
         this.registoUtilizadores = this.empresa.getRegistoUtilizadores();
-
+        
         Utilizador submissor = this.empresa.getUtilizadorAutenticado();
         this.novoAutor(submissor.getNome(), submissor.getEmail(), new InstituicaoAfiliacao("ISEP"));
-
+        
         return this.registoUtilizadores != null;
     }
 
@@ -173,20 +175,20 @@ public class SubmeterArtigoController {
      */
     public boolean novoAutor(
             String nome, String email, InstituicaoAfiliacao instituicaoAfiliacao) {
-
+        
         Utilizador utilizador = this.registoUtilizadores.getUtilizador(email);
-
+        
         if (utilizador == null) {
             if (!this.modeloLista.contains(new Autor(nome, email, instituicaoAfiliacao))) {
                 this.modeloLista.addElement(new Autor(nome, email, instituicaoAfiliacao));
             }
-
+            
             return this.listaAutores.novoAutor(nome, email, instituicaoAfiliacao);
         } else {
             if (!this.modeloLista.contains(new Autor(utilizador, instituicaoAfiliacao))) {
                 this.modeloLista.addElement(new Autor(utilizador, instituicaoAfiliacao));
             }
-
+            
             return this.listaAutores.novoAutor(utilizador, instituicaoAfiliacao);
         }
     }
@@ -209,7 +211,7 @@ public class SubmeterArtigoController {
         AutorCorrespondente autorCorrespondente = new AutorCorrespondente(
                 autor.getUtilizador(), autor.getInstituicaoAfiliacao());
         this.artigo.setAutorCorrespondente(autorCorrespondente);
-
+        
         return this.artigo.getAutorCorrespondente() != null;
     }
 
@@ -232,5 +234,5 @@ public class SubmeterArtigoController {
     public boolean adicionarSubmissao() {
         return this.listaSubmissoes.adicionarSubmissao(this.submissao);
     }
-
+    
 }
