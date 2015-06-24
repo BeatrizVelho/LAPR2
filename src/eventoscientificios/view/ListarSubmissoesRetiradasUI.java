@@ -8,6 +8,7 @@ package eventoscientificios.view;
 import eventoscientificos.controllers.ListarSubmissoesRetiradasController;
 import eventoscientificos.model.Empresa;
 import java.awt.Frame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,21 +21,29 @@ public class ListarSubmissoesRetiradasUI extends javax.swing.JDialog {
 
     /**
      * Creates new form ListarSubmissoesRetiradasUI
+     *
      * @param parent
      * @param modal
      * @param empresa
      */
     public ListarSubmissoesRetiradasUI(java.awt.Frame parent, boolean modal, Empresa empresa) {
-        super(parent, modal);
+        super(parent, "Lista Submissões Retiradas", modal);
         this.framePai = parent;
         this.controller = new ListarSubmissoesRetiradasController(empresa);
+        this.controller.getListaSubmissiveisComSubmissoesRetiradasOrganizadorProponente();
         setResizable(false);
         initComponents();
         getRootPane().setDefaultButton(this.btn_selecionarSubmissivel);
         setLocationRelativeTo(null);
-        // Verificar se existem eventos/sessões que aceitem revisões de artigos.
-        setVisible(true);
-        pack();
+        if (controller.getListaSubmissiveis().isEmpty()) {
+            JOptionPane.showMessageDialog(framePai, "Não existem eventos ou "
+                    + "sessões temáticas onde foram retiradas submissões",
+                    "Listar Submissões Retiradas", JOptionPane.ERROR_MESSAGE);
+            dispose();
+        } else {
+            setVisible(true);
+            pack();
+        }
     }
 
     /**
@@ -51,7 +60,7 @@ public class ListarSubmissoesRetiradasUI extends javax.swing.JDialog {
         cmb_selecionarSubmissivel = new javax.swing.JComboBox();
         pnl_submissoesRetiradas = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList_submissoesRetiradas = new javax.swing.JList();
+        jList_submissoesRetiradas = new javax.swing.JList(this.controller.getModeloLista());
         btn_cancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -124,7 +133,7 @@ public class ListarSubmissoesRetiradasUI extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pnl_selecionarSubmissivel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnl_submissoesRetiradas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnl_submissoesRetiradas, javax.swing.GroupLayout.DEFAULT_SIZE, 819, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btn_cancelar)))
@@ -136,7 +145,7 @@ public class ListarSubmissoesRetiradasUI extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(pnl_selecionarSubmissivel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnl_submissoesRetiradas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnl_submissoesRetiradas, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_cancelar)
                 .addContainerGap())
@@ -146,6 +155,9 @@ public class ListarSubmissoesRetiradasUI extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_selecionarSubmissivelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_selecionarSubmissivelActionPerformed
+        int indice = this.cmb_selecionarSubmissivel.getSelectedIndex();
+        this.controller.selecionarSubmissivel(indice);
+        
         this.cmb_selecionarSubmissivel.setEnabled(false);
         this.btn_selecionarSubmissivel.setEnabled(false);
         getRootPane().setDefaultButton(btn_cancelar);
