@@ -23,6 +23,30 @@ public class ListaAutores {
     }
 
     /**
+     * Compara dois objetos entre si. Comparando primariamente a posição de
+     * memória, seguida do conteudo e das classes as quais cada um deles
+     * pertence, e finalmente os seus atributos, lista de autores.
+     *
+     * @param outroObjeto lista de autores que vai ser comparada.
+     * @return Verdadeiro caso os objetos comparados sejam iguais e falso caso
+     * não o sejam.
+     */
+    @Override
+    public boolean equals(Object outroObjeto) {
+        if (this == outroObjeto) {
+            return true;
+        }
+
+        if (outroObjeto == null || this.getClass() != outroObjeto.getClass()) {
+            return false;
+        }
+
+        ListaAutores outraListaAutores = (ListaAutores) outroObjeto;
+
+        return this.listaAutores.equals(outraListaAutores.listaAutores);
+    }
+
+    /**
      * Cria um objeto do tipo Autor através de um nome, email e uma instituição
      * de afiliação.
      *
@@ -100,16 +124,12 @@ public class ListaAutores {
     /**
      * Remove um autor da lista de autores.
      *
-     * @param autor Autor a remover da lista de autores.
+     * @param indice Posição do autor que se pretende remover.
+     * 
      * @return Verdadeiro se for removido e falso se não for
      */
-    public boolean removerAutor(String email) {
-        for (Autor autor : this.listaAutores) {
-            if (autor.getEmail().equals(email)) {
-                return this.listaAutores.remove(autor);
-            }
-        }
-        return false;
+    public boolean removerAutor(int indice) {
+        return this.listaAutores.remove(this.listaAutores.get(indice));
     }
 
     /**
@@ -144,26 +164,23 @@ public class ListaAutores {
     }
 
     /**
-     * Compara dois objetos entre si. Comparando primariamente a posição de
-     * memória, seguida do conteudo e das classes as quais cada um deles
-     * pertence, e finalmente os seus atributos, lista de autores.
-     *
-     * @param outroObjeto lista de autores que vai ser comparada.
-     * @return Verdadeiro caso os objetos comparados sejam iguais e falso caso
-     * não o sejam.
+     * Devolve o número de autores existentes na lista de autores.
+     * 
+     * @return Número de autores existentes na lista de autores.
      */
-    @Override
-    public boolean equals(Object outroObjeto) {
-        if (this == outroObjeto) {
-            return true;
-        }
-
-        if (outroObjeto == null || this.getClass() != outroObjeto.getClass()) {
-            return false;
-        }
-
-        ListaAutores outraListaAutores = (ListaAutores) outroObjeto;
-
-        return this.listaAutores.equals(outraListaAutores.listaAutores);
+    public int getNumeroAutores() {
+        return this.listaAutores.size();
     }
+
+    /**
+     * Devolve um autor pela sua posição na lista de autores do artigo.
+     * 
+     * @param indice Posição do autor.
+     * 
+     * @return Autor na posição dada.
+     */
+    public Autor getAutorPeloID(int indice) {
+        return this.listaAutores.get(indice);
+    }
+
 }

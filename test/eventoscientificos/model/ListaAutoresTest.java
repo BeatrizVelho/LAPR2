@@ -1,7 +1,5 @@
 package eventoscientificos.model;
 
-import java.util.ArrayList;
-import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -85,6 +83,63 @@ public class ListaAutoresTest {
         instance.novoAutor(utilizador, new InstituicaoAfiliacao("isep"));
         boolean expResult = true;
         boolean result = instance.equals(outroObjeto);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método removerAutor, da classe ListaAutores.
+     */
+    @Test
+    public void testRemoverAutor() {
+        System.out.println("removerAutor");
+        ListaAutores instance = new ListaAutores();
+        Utilizador utilizador = this.utilizador;
+        instance.novoAutor(utilizador, new InstituicaoAfiliacao("isep"));
+        boolean expResult = true;
+        boolean result = instance.removerAutor(0);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método isAutor, da classe ListaAutores.
+     */
+    @Test
+    public void testIsAutor() {
+        System.out.println("isAutor");
+        ListaAutores instance = new ListaAutores();
+        Utilizador utilizador = this.utilizador;
+        instance.novoAutor(utilizador, new InstituicaoAfiliacao("isep"));
+        boolean expResult = true;
+        boolean result = instance.isAutor(utilizador);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método getNumeroAutores, da classe ListaAutores.
+     */
+    @Test
+    public void testGetNumeroAutores() {
+        System.out.println("getNumeroAutores");
+        ListaAutores instance = new ListaAutores();
+        Utilizador utilizador = this.utilizador;
+        instance.novoAutor(utilizador, new InstituicaoAfiliacao("isep"));
+        int expResult = 1;
+        int result = instance.getNumeroAutores();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Teste do método getAutorPeloID, da classe ListaAutores.
+     */
+    @Test
+    public void testGetAutorPeloID() {
+        System.out.println("getAutorPeloID");
+        ListaAutores instance = new ListaAutores();
+        Utilizador utilizador = this.utilizador;
+        instance.novoAutor(utilizador, new InstituicaoAfiliacao("isep"));
+        int indice = 0;
+        Autor expResult = new Autor(utilizador, new InstituicaoAfiliacao("isep"));
+        Autor result = instance.getAutorPeloID(indice);
         assertEquals(expResult, result);
     }
 
