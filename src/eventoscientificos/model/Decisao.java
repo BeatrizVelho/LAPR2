@@ -1,7 +1,9 @@
 package eventoscientificos.model;
 
 /**
- *
+ * Representa uma instância de uma decisão através de uma classificação
+ * e de uma submissão.
+ * 
  * @author G01
  */
 public class Decisao {
