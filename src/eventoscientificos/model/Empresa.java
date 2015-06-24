@@ -1,5 +1,6 @@
 package eventoscientificos.model;
 
+import eventoscientificos.model.mecanismo.decisao.MecanismoDecisao;
 import eventoscientificos.model.mecanismo.distribuicao.MecanismoDistribuicao;
 import java.util.ArrayList;
 import java.util.Date;
@@ -116,6 +117,16 @@ public class Empresa {
     public List<MecanismoDistribuicao> getListaMecanismoDistribuicao() {
         return listaMecanismoDistribuicao;
     }
+    
+    /**
+     * Devolve a lista de mecanismos de distribuições que a empresa
+     * disponibiliza para distribuir.
+     *
+     * @return Lista de mecanismos de distribuicao.
+     */
+    public List<MecanismoDecisao> getListaMecanismoDecisao() {
+        return this.listaMecanismoDecisao;
+    }
 
     /**
      * Modifica o Utilizador Autenticado.
@@ -135,16 +146,6 @@ public class Empresa {
      */
     public void schedule(TimerTask task, Date date) {
         this.temporizador.schedule(task, date);
-    }
-
-    /**
-     * Devolve a lista de mecanismos de distribuições que a empresa
-     * disponibiliza para distribuir.
-     *
-     * @return Lista de mecanismos de distribuicao.
-     */
-    public List<MecanismoDecisao> getListaMecanismoDecisao() {
-        return listaMecanismoDecisao;
     }
     
     /**

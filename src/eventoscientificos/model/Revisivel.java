@@ -24,4 +24,18 @@ public interface Revisivel {
      */
     public boolean isStateValidoParaRever(Utilizador u);
 
+    /**
+     * Devolve a Comissão de Programa.
+     *
+     * @return comissão de programa.
+     */
+    public CP getCP();
+
+    /**
+     * Verifica se determinado revísivel reune as condições necessárias para
+     * gerar a análise estatistica.
+     *
+     * @return verdadeiro se estiver e falso se não
+     */
+    public boolean isStateValidoParaGerarAnaliseEstatisticas();
 }

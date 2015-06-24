@@ -46,14 +46,14 @@ public class RegistoEventos {
      * @return Evento.
      */
     public Evento novoEvento(String titulo, String descricao, Local local,
-            Data dataInicioSubmissao, Data dataLimiteSubmissao,
-            Data dataInicioDistribuicao, Data dataFimRevisao,
-            Data dataFimSubmissaoCameraReady, Data dataInicio,
-            Data dataFim) {
+                        Data dataInicioSubmissao, Data dataLimiteSubmissao,
+                        Data dataInicioDistribuicao, Data dataFimRevisao,
+                        Data dataFimSubmissaoCameraReady, Data dataInicio,
+                        Data dataFim) {
 
         return new Evento(titulo, descricao, local, dataInicioSubmissao,
-                dataLimiteSubmissao, dataInicioDistribuicao, dataFimRevisao,
-                dataFimSubmissaoCameraReady, dataInicio, dataFim);
+                            dataLimiteSubmissao, dataInicioDistribuicao, dataFimRevisao,
+                            dataFimSubmissaoCameraReady, dataInicio, dataFim);
     }
 
     /**
@@ -87,6 +87,69 @@ public class RegistoEventos {
     }
 
     /**
+     * Devolve a lista de revisores existentes nos eventos e sessões temáticas
+     * da empresa.
+     *
+     * @return lista de todos os revisores
+     */
+    public List<Revisor> getListaTodosRevisores() {
+        List<Revisor> listaRevisores = new ArrayList<Revisor>();
+        CP cp = null;
+        for (Revisivel r : listaEventos) {
+            if ((cp = r.getCP()) != null) {
+                int dimensao = cp.getNumeroRevisores();
+                for (int i = 0; i < dimensao; i++) {
+                    if (!listaRevisores.contains(cp.getRevisorPeloID(i))) {
+                        listaRevisores.add(cp.getRevisorPeloID(i));
+                    }
+                }
+            }
+            for (Revisivel rev : ((Evento) r).getListaSessoesTematicas().
+                                getListaSessoesTematicas()) {
+                if ((cp = rev.getCP()) != null) {
+                    int dimensao = cp.getNumeroRevisores();
+                    for (int i = 0; i < dimensao; i++) {
+                        if (!listaRevisores.contains(cp.getRevisorPeloID(i))) {
+                            listaRevisores.add(cp.getRevisorPeloID(i));
+                        }
+                    }
+                }
+            }
+        }
+        return listaRevisores;
+    }
+
+    /**
+     * Devolve a lista de revisiveis que onde é possível gerar a análise
+     * estatística e onde o revisor em análise pertence à CP
+     *
+     * @param revisor revisor em análise
+     * @return lista de revisiveis
+     */
+    public List<Revisivel> getListaRevisiveisRevisor(Revisor revisor) {
+        Utilizador u = revisor.getUtilizador();
+        List<Revisivel> listaRevisiveis = new ArrayList<>();
+
+        for (Revisivel r : listaEventos) {
+            if (r.isStateValidoParaGerarAnaliseEstatisticas()) {
+                if (r.getCP().contains(u)) {
+                    listaRevisiveis.add(r);
+                }
+            }
+            for (Revisivel rev : ((Evento) r).getListaSessoesTematicas().
+                                getListaSessoesTematicas()) {
+                if (rev.isStateValidoParaGerarAnaliseEstatisticas()) {
+                    if (rev.getCP().contains(u)) {
+                        listaRevisiveis.add(rev);
+                    }
+
+                }
+            }
+        }
+        return listaRevisiveis;
+    }
+
+    /**
      * Devolve um evento através da sua posição na lista.
      *
      * @param indice Posição na lista.
@@ -109,7 +172,7 @@ public class RegistoEventos {
 
         for (Evento evento : this.listaEventos) {
             if (evento.isOrganizador(utilizador)
-                    && evento.isRegistadoOuSessoesTematicasDefinidas()) {
+                                && evento.isRegistadoOuSessoesTematicasDefinidas()) {
                 listaEventosOrganizador.add(evento);
             }
         }
@@ -131,7 +194,7 @@ public class RegistoEventos {
                 listaSubmissiveis.add(evento);
             }
             listaSubmissiveis.addAll(
-                    evento.getListaSubmissiveisAceitarArtigo());
+                                evento.getListaSubmissiveisAceitarArtigo());
         }
         return listaSubmissiveis;
     }
@@ -148,11 +211,11 @@ public class RegistoEventos {
 
         for (Evento evento : this.listaEventos) {
             if (evento.isStateValidoParaAlterar()
-                    && evento.isUtilizadorUmAutorSubmissao(utilizador)) {
+                                && evento.isUtilizadorUmAutorSubmissao(utilizador)) {
                 listaSubmissiveisUtilizador.add(evento);
             }
             listaSubmissiveisUtilizador.addAll(
-                    evento.getListaSubmissiveisAceitarAlteracaoArtigoComSubmissaoUtilizador(utilizador));
+                                evento.getListaSubmissiveisAceitarAlteracaoArtigoComSubmissaoUtilizador(utilizador));
         }
 
         return listaSubmissiveisUtilizador;
@@ -171,11 +234,11 @@ public class RegistoEventos {
 
         for (Evento evento : this.listaEventos) {
             if (evento.isSessoesTematicasDefinidas()
-                    && evento.isOrganizador(utilizador)) {
+                                && evento.isOrganizador(utilizador)) {
                 listaSemCPDefinida.add(evento);
             }
             List<CPDefinivel> listaSessoesTematicas
-                    = evento.getListaCPDefiniveisSemCPOrganizadorProponente(utilizador);
+                                = evento.getListaCPDefiniveisSemCPOrganizadorProponente(utilizador);
             listaSemCPDefinida.addAll(listaSessoesTematicas);
         }
 
@@ -309,17 +372,17 @@ public class RegistoEventos {
      * @return
      */
     public List<Submissivel> getListaSubmissiveisAceitarArtigoFinal(
-            Utilizador utilizador) {
+                        Utilizador utilizador) {
 
         List<Submissivel> listaSubmissiveis = new ArrayList<>();
 
         for (Evento evento : this.listaEventos) {
             if (evento.isStateValidoParaSubmeterArtigoFinal()
-                    && evento.isUtilizadorUmAutorSubmissaoInicial(utilizador)) {
+                                && evento.isUtilizadorUmAutorSubmissaoInicial(utilizador)) {
                 listaSubmissiveis.add(evento);
             }
             listaSubmissiveis.addAll(
-                    evento.getListaSubmissiveisAceitarArtigoFinal(utilizador));
+                                evento.getListaSubmissiveisAceitarArtigoFinal(utilizador));
         }
         return listaSubmissiveis;
     }
@@ -332,17 +395,17 @@ public class RegistoEventos {
      * @return Lista de Submissiveis.
      */
     public List<Submissivel> getListaSubmissiveisAceitarAlteracaoArtigoComSubmissaoUtilizador(
-            Utilizador utilizador) {
+                        Utilizador utilizador) {
         List<Submissivel> listaSubmissiveisUtilizador = new ArrayList<>();
 
         for (Evento evento : this.listaEventos) {
             if (evento.isStateValidoParaAlterar()
-                    && evento.isUtilizadorUmAutorSubmissao(utilizador)) {
+                                && evento.isUtilizadorUmAutorSubmissao(utilizador)) {
                 listaSubmissiveisUtilizador.add(evento);
             }
             listaSubmissiveisUtilizador.addAll(
-                    evento.getListaSubmissiveisAceitarAlteracaoArtigoComSubmissaoUtilizador(
-                            utilizador));
+                                evento.getListaSubmissiveisAceitarAlteracaoArtigoComSubmissaoUtilizador(
+                                                    utilizador));
         }
 
         return listaSubmissiveisUtilizador;
@@ -401,11 +464,11 @@ public class RegistoEventos {
 
         for (Evento evento : this.listaEventos) {
             if (evento.isOrganizador(utilizador)
-                    && evento.isEstadoValidoParaDecidir()) {
+                                && evento.isEstadoValidoParaDecidir()) {
                 listaDecidiveis.add(evento);
             }
             List<Decidivel> listaDecidiveisSessaoTematica
-                    = evento.getListaDecidivelOrganizadorProponente(utilizador);
+                                = evento.getListaDecidivelOrganizadorProponente(utilizador);
             listaDecidiveis.addAll(listaDecidiveisSessaoTematica);
         }
         return listaDecidiveis;
@@ -419,14 +482,14 @@ public class RegistoEventos {
      * @param hashMapSubmissoesRejeitadas Mapa de submissões rejeitadas.
      */
     public void hashMapSubmissoes(
-            HashMap<String, Integer> hashMapSubmissoesAceites,
-            HashMap<String, Integer> hashMapSubmissoesRejeitadas) {
+                        HashMap<String, Integer> hashMapSubmissoesAceites,
+                        HashMap<String, Integer> hashMapSubmissoesRejeitadas) {
         for (Evento evento : this.listaEventos) {
             if (evento.getEstado() instanceof EventoEmSubmissaoCameraReadyState
-                    || evento.getEstado() instanceof EventoEmCameraReadyState) {
+                                || evento.getEstado() instanceof EventoEmCameraReadyState) {
 
                 evento.hashMapSubmissoes(hashMapSubmissoesAceites,
-                        hashMapSubmissoesRejeitadas);
+                                    hashMapSubmissoesRejeitadas);
             }
         }
     }
