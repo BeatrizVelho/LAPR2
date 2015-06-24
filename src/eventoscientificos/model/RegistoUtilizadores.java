@@ -69,30 +69,33 @@ public class RegistoUtilizadores {
      * @param password password do utilizado a criar
      * @return Utilizador
      */
-    public Utilizador novoUtilizador(String nome, String email, String username, String password) throws IOException {
+    public Utilizador novoUtilizador(String nome, String email, String username, String password) {
         String novaPassword, codificadorTabela = "";
-        int numeroCarateres = password.length();
+        
         if (this.tabelasCodificacao.size() == 1) {
             NFN nfn = (NFN) this.tabelasCodificacao.get("NFN");
 
+            codificadorTabela = nfn.getClass().getSimpleName();
+            
             novaPassword = nfn.codificar(password, 0);
         } else {
             CA ca = (CA) this.tabelasCodificacao.get("CA");
-            iniciarCodificadorAritmetico();
+
             double tabelaEscolhida = ((Math.random()) * ca.getSizeListaTabelasFreq() - 1) / 10;
-            codificadorTabela = ca.getClass().getSimpleName() + ";" + tabelaEscolhida;
+            codificadorTabela = String.join(";", ca.getClass().getSimpleName(), "T00" + tabelaEscolhida, "" + password.length());
+
             novaPassword = ca.codificar(password, (int) tabelaEscolhida);
         }
 
         Utilizador utilizador = new Utilizador(nome, email, username, novaPassword);
         utilizador.setCodificadorTabela(codificadorTabela);
-        utilizador.setNumeroCarateres(numeroCarateres);
+
         if (!utilizador.validarUtilizador()) {
             throw new IllegalArgumentException(" Utilizador invalido");
         }
         if (!validarUtilizador(utilizador)) {
             throw new IllegalArgumentException("Utilizador ja consta na lista"
-                                + " de utilizadores da empresa");
+                    + " de utilizadores da empresa");
         }
         return utilizador;
     }
@@ -111,7 +114,7 @@ public class RegistoUtilizadores {
      * @return novo utilizador criado
      */
     public Utilizador novoUtilizador(String nome, String email, String username,
-                        String password, String codificadorTabela) {
+            String password, String codificadorTabela) {
 
         Utilizador utilizador = new Utilizador(nome, email, username, password);
         utilizador.setCodificadorTabela(codificadorTabela);
@@ -121,7 +124,7 @@ public class RegistoUtilizadores {
         }
         if (!validarUtilizador(utilizador)) {
             throw new IllegalArgumentException("Utilizador ja consta na lista"
-                                + " de utilizadores da empresa");
+                    + " de utilizadores da empresa");
         }
         return utilizador;
     }
@@ -156,10 +159,10 @@ public class RegistoUtilizadores {
      * @return Verdadeiro se o utilizador passado por parametro não existir
      */
     public boolean validarUtilizadorClone(
-                        Utilizador utilizador, Utilizador utilizadorClone) {
+            Utilizador utilizador, Utilizador utilizadorClone) {
         for (Utilizador outroUtilizador : this.listaUtilizadores) {
             if (utilizadorClone.equals(outroUtilizador)
-                                && !utilizador.equals(outroUtilizador)) {
+                    && !utilizador.equals(outroUtilizador)) {
                 return false;
             }
         }
@@ -177,9 +180,9 @@ public class RegistoUtilizadores {
      * não seja.
      */
     public boolean atualizarUtilizador(
-                        Utilizador utilizador, Utilizador utilizadorClone) {
+            Utilizador utilizador, Utilizador utilizadorClone) {
         return this.listaUtilizadores.remove(utilizador)
-                            && this.listaUtilizadores.add(utilizadorClone);
+                && this.listaUtilizadores.add(utilizadorClone);
     }
 
     /**
@@ -213,7 +216,7 @@ public class RegistoUtilizadores {
     public Utilizador getUtilizador(String id) {
         for (Utilizador utilizador : this.listaUtilizadores) {
             if (utilizador.getEmail().equals(id)
-                                || utilizador.getUsername().equals(id)) {
+                    || utilizador.getUsername().equals(id)) {
                 return utilizador;
             }
         }
