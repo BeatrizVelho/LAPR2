@@ -20,7 +20,7 @@ public class NFN implements Codificador {
      * @return palavra codificada
      */
     @Override
-    public String codificar(String password) {
+    public String codificar(String password, int tabela) {
         if (password.trim().isEmpty()) {
             throw new IllegalArgumentException("Password do utilizador não "
                                 + "pode estar vazia.");
