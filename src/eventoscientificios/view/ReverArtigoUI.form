@@ -27,8 +27,8 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="pnl_revisao" alignment="0" max="32767" attributes="0"/>
-                  <Component id="pnl_selecionarSubmissao" alignment="0" max="32767" attributes="0"/>
-                  <Component id="pnl_selecionarRevisivel" alignment="0" max="32767" attributes="0"/>
+                  <Component id="pnl_selecionarSubmissao" alignment="0" pref="866" max="32767" attributes="0"/>
+                  <Component id="pnl_selecionarRevisivel" alignment="0" pref="866" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       <Component id="btn_submeterRevisao" min="-2" max="-2" attributes="0"/>
@@ -44,9 +44,9 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Component id="pnl_selecionarRevisivel" max="32767" attributes="0"/>
+              <Component id="pnl_selecionarRevisivel" pref="90" max="32767" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Component id="pnl_selecionarSubmissao" max="32767" attributes="0"/>
+              <Component id="pnl_selecionarSubmissao" pref="90" max="32767" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Component id="pnl_revisao" max="32767" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>

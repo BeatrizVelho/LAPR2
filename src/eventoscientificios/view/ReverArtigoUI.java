@@ -2,6 +2,7 @@ package eventoscientificios.view;
 
 import eventoscientificos.controllers.ReverArtigoController;
 import eventoscientificos.model.Empresa;
+import eventoscientificos.model.Revisao;
 import java.awt.Frame;
 import javax.swing.JOptionPane;
 
@@ -17,16 +18,26 @@ public class ReverArtigoUI extends javax.swing.JDialog {
      * Creates new form ReverArtigoUI
      */
     public ReverArtigoUI(java.awt.Frame parent, boolean modal, Empresa empresa) {
-        super(parent, modal);
+        super(parent, "Rever Artigo", modal);
         this.framePai = parent;
         this.controller = new ReverArtigoController(empresa);
+        this.controller.getListaRevisiveisComArtigosPReverRevisor();
         setResizable(false);
         initComponents();
         getRootPane().setDefaultButton(this.btn_selecionarRevisivel);
         setLocationRelativeTo(null);
-        // Verificar se existem eventos/sessões que aceitem revisões de artigos.
-        setVisible(true);
-        pack();
+        if (controller.getListaRevisiveis().isEmpty()) {
+            JOptionPane.showMessageDialog(
+                    framePai,
+                    "Não existem eventos ou sessões temáticas com submissões por"
+                    + " rever.",
+                    "Rever Artigo",
+                    JOptionPane.ERROR_MESSAGE);
+            dispose();
+        } else {
+            setVisible(true);
+            pack();
+        }
     }
 
     /**
@@ -247,8 +258,8 @@ public class ReverArtigoUI extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pnl_revisao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnl_selecionarSubmissao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnl_selecionarRevisivel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnl_selecionarSubmissao, javax.swing.GroupLayout.DEFAULT_SIZE, 866, Short.MAX_VALUE)
+                    .addComponent(pnl_selecionarRevisivel, javax.swing.GroupLayout.DEFAULT_SIZE, 866, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btn_submeterRevisao)
@@ -260,9 +271,9 @@ public class ReverArtigoUI extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnl_selecionarRevisivel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnl_selecionarRevisivel, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnl_selecionarSubmissao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnl_selecionarSubmissao, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnl_revisao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -276,7 +287,12 @@ public class ReverArtigoUI extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_selecionarRevisivelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_selecionarRevisivelActionPerformed
-        //int indice = this.cmb_selecionarRevisivel.getSelectedIndex();
+        int indice = this.cmb_selecionarRevisivel.getSelectedIndex();
+        this.controller.selecionarRevisivel(indice);
+
+        for (Revisao revisao : this.controller.getlistaRevisoesRevisor()) {
+            this.cmb_selecionarSubmissao.addItem(revisao.getSubmissao());
+        }
 
         this.btn_selecionarRevisivel.setEnabled(false);
         this.cmb_selecionarRevisivel.setEnabled(false);
@@ -286,11 +302,13 @@ public class ReverArtigoUI extends javax.swing.JDialog {
     }//GEN-LAST:event_btn_selecionarRevisivelActionPerformed
 
     private void btn_selecionarSubmissaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_selecionarSubmissaoActionPerformed
-        //int indice = this.cmb_selecionarSubmissao.getSelectedIndex();
+        int indice = this.cmb_selecionarSubmissao.getSelectedIndex();
+        this.controller.selecionarRevisao(indice);
 
         this.pnl_selecionarRevisivel.setVisible(false);
         this.pnl_selecionarSubmissao.setVisible(false);
         this.pnl_revisao.setVisible(true);
+        this.btn_submeterRevisao.setVisible(true);
         getRootPane().setDefaultButton(this.btn_submeterRevisao);
         pack();
         setLocationRelativeTo(null);
@@ -304,13 +322,28 @@ public class ReverArtigoUI extends javax.swing.JDialog {
         int recomendacao = (Integer) this.cmb_recomendacao.getSelectedItem();
         String texto = this.txtA_texto.getText();
 
-        String opcoes[] = {"Sim", "Não"};
-        int resposta = JOptionPane.showOptionDialog(
-                null, "Pretende submeter a revisão?", "Rever Artigo", 0,
-                JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]);
-        if (resposta == 0) {
+        try {
+
+            this.controller.adicionarDadosRevisao(confianca, adequacao,
+                    originalidade, qualidade, recomendacao, texto);
+
+            String opcoes[] = {"Sim", "Não"};
+            int resposta = JOptionPane.showOptionDialog(
+                    null, "Pretende submeter a revisão?", "Rever Artigo", 0,
+                    JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]);
+            if (resposta == 0) {
+                this.controller.adicionarResultadoRevisao();
+            }
+            dispose();
+
+        } catch (IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(
+                    this.framePai,
+                    ex.getMessage(),
+                    "Texto Justificativo",
+                    JOptionPane.ERROR_MESSAGE);
+
         }
-        dispose();
     }//GEN-LAST:event_btn_submeterRevisaoActionPerformed
 
     private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed
