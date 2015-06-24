@@ -2,8 +2,11 @@ package eventoscientificios.view;
 
 import eventoscientificos.controllers.AlterarSubmissaoController;
 import eventoscientificos.model.Empresa;
+import eventoscientificos.model.Submissao;
 import java.awt.Frame;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -22,12 +25,24 @@ public class AlterarSubmissaoUI extends javax.swing.JDialog {
         super(parent, modal);
         this.framePai = parent;
         this.controller = new AlterarSubmissaoController(empresa);
+        this.controller.getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador();
         setResizable(false);
         initComponents();
-        getRootPane().setDefaultButton(this.btn_selecionarSubmissivel);
         setLocationRelativeTo(null);
-        setVisible(true);
-        pack();
+        getRootPane().setDefaultButton(this.btn_selecionarSubmissivel);
+        if (controller.getListaSubmissiveis().isEmpty()) {
+            JOptionPane.showMessageDialog(
+                    framePai,
+                    "Não existem eventos ou sessões temáticas onde lhe é "
+                    + "possível alterar submissões.",
+                    "Alterar submissão",
+                    JOptionPane.ERROR_MESSAGE);
+            dispose();
+        } else {
+            setVisible(true);
+            pack();
+        }
+
     }
 
     /**
@@ -40,7 +55,7 @@ public class AlterarSubmissaoUI extends javax.swing.JDialog {
     private void initComponents() {
 
         pnl_selecionarSubmissivel = new javax.swing.JPanel();
-        cmb_selecionarSubmissivel = new javax.swing.JComboBox();
+        cmb_selecionarSubmissivel = new javax.swing.JComboBox(this.controller.getListaSubmissiveis().toArray());
         btn_selecionarSubmissivel = new javax.swing.JButton();
         pnl_selecionarSubmissao = new javax.swing.JPanel();
         btn_selecionarSubmissao = new javax.swing.JButton();
@@ -239,7 +254,7 @@ public class AlterarSubmissaoUI extends javax.swing.JDialog {
                                 .addComponent(txt_palavraChave4, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txt_palavraChave5, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 666, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 666, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         pnl_informacoesLayout.setVerticalGroup(
@@ -391,7 +406,13 @@ public class AlterarSubmissaoUI extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_selecionarSubmissivelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_selecionarSubmissivelActionPerformed
-        
+        int indice = this.cmb_selecionarSubmissivel.getSelectedIndex();
+        this.controller.selecionarSubmissivel(indice);
+
+        for (Submissao submissao : this.controller.getListaSubmissoes()) {
+            this.cmb_selecionarSubmissao.addItem(submissao);
+        }
+
         this.cmb_selecionarSubmissivel.setEnabled(false);
         this.btn_selecionarSubmissivel.setEnabled(false);
         this.cmb_selecionarSubmissao.setEnabled(true);
@@ -400,7 +421,28 @@ public class AlterarSubmissaoUI extends javax.swing.JDialog {
     }//GEN-LAST:event_btn_selecionarSubmissivelActionPerformed
 
     private void btn_selecionarSubmissaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_selecionarSubmissaoActionPerformed
-        
+        int indice = this.cmb_selecionarSubmissao.getSelectedIndex();
+        this.controller.selecionarSubmissao(indice);
+        this.controller.getListaAutoresRegistados();
+
+        this.txt_titulo.setText(this.controller.getArtigoTitulo());
+        this.txtA_resumo.setText(this.controller.getArtigoResumo());
+
+        List<javax.swing.JTextField> listaJTextFieldPalavrasChave = new ArrayList();
+        listaJTextFieldPalavrasChave.add(txt_palavraChave1);
+        listaJTextFieldPalavrasChave.add(txt_palavraChave2);
+        listaJTextFieldPalavrasChave.add(txt_palavraChave3);
+        listaJTextFieldPalavrasChave.add(txt_palavraChave4);
+        listaJTextFieldPalavrasChave.add(txt_palavraChave5);
+
+        for (int i = 0; i < this.controller.getArtigoPalavrasChave().size(); i++) {
+            listaJTextFieldPalavrasChave.get(i).setText(
+                    this.controller.getArtigoPalavrasChave().get(i));
+        }
+
+        this.jList_listaAutores.setModel(this.controller.getModeloListaAutores());
+        this.txt_ficheiro.setText(this.controller.getArtigoFicheiro());
+        validate();
         this.pnl_selecionarSubmissivel.setVisible(false);
         this.pnl_selecionarSubmissao.setVisible(false);
         this.pnl_informacoes.setVisible(true);
@@ -446,18 +488,44 @@ public class AlterarSubmissaoUI extends javax.swing.JDialog {
                         JOptionPane.ERROR_MESSAGE);
             } else {
                 this.txt_ficheiro.setText(ficheiro.getAbsolutePath());
+                this.controller.alterarFicheiroPDF(this.txt_ficheiro.getText());
             }
         }
     }//GEN-LAST:event_btn_escolherFicheiroActionPerformed
 
     private void btn_submeterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_submeterActionPerformed
+        List<javax.swing.JTextField> listaTextFieldPalavrasChave
+                = new ArrayList();
+        listaTextFieldPalavrasChave.add(this.txt_palavraChave1);
+        listaTextFieldPalavrasChave.add(this.txt_palavraChave2);
+        listaTextFieldPalavrasChave.add(this.txt_palavraChave3);
+        listaTextFieldPalavrasChave.add(this.txt_palavraChave4);
+        listaTextFieldPalavrasChave.add(this.txt_palavraChave5);
+
         try {
+            List<String> palavrasChave = new ArrayList();
+            for (javax.swing.JTextField textFieldpalavraChave
+                    : listaTextFieldPalavrasChave) {
+
+                String palavraChave;
+                if (!(palavraChave
+                        = textFieldpalavraChave.getText()).isEmpty()) {
+                    palavrasChave.add(palavraChave);
+                }
+            }
+
+            this.controller.alterarDados(
+                    this.txt_titulo.getText(),
+                    this.txtA_resumo.getText(),
+                    palavrasChave);
+            
+            this.controller.validarSubmissao();
             String opcoes[] = {"Sim", "Não"};
             int resposta = JOptionPane.showOptionDialog(
                     null, "Pretende submeter a alteração do artigo?", "Alterar Submissão de Artigo", 0,
                     JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]);
             if (resposta == 0) {
-                
+                this.controller.alterarSubmissao();
             }
             dispose();
         } catch (IllegalArgumentException ex) {

@@ -110,6 +110,9 @@
               <StringArray count="0"/>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox(this.controller.getListaSubmissiveis().toArray())"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="btn_selecionarSubmissivel">
           <Properties>
@@ -316,7 +319,7 @@
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="txt_palavraChave5" min="-2" pref="125" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="jScrollPane1" min="-2" pref="666" max="-2" attributes="0"/>
+                              <Component id="jScrollPane1" alignment="0" min="-2" pref="666" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
