@@ -6,8 +6,11 @@ import eventoscientificos.model.Empresa;
 import eventoscientificos.model.InstituicaoAfiliacao;
 import java.awt.Frame;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  * @author G01
@@ -64,6 +67,12 @@ public class SubmeterArtigoUI extends javax.swing.JDialog {
         lbl_resumo = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         txt_resumo = new javax.swing.JTextArea();
+        jLabel1 = new javax.swing.JLabel();
+        txt_palavraPasse1 = new javax.swing.JTextField();
+        txt_palavraPasse2 = new javax.swing.JTextField();
+        txt_palavraPasse3 = new javax.swing.JTextField();
+        txt_palavraPasse4 = new javax.swing.JTextField();
+        txt_palavraPasse5 = new javax.swing.JTextField();
         pnl_listaAutores = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jList_autores = new javax.swing.JList(this.controller.getModeloLista());
@@ -108,22 +117,36 @@ public class SubmeterArtigoUI extends javax.swing.JDialog {
         txt_resumo.setPreferredSize(new java.awt.Dimension(702, 58));
         jScrollPane3.setViewportView(txt_resumo);
 
+        jLabel1.setText("Palavra-chave:");
+
         javax.swing.GroupLayout pnl_informacoesLayout = new javax.swing.GroupLayout(pnl_informacoes);
         pnl_informacoes.setLayout(pnl_informacoesLayout);
         pnl_informacoesLayout.setHorizontalGroup(
             pnl_informacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_informacoesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnl_informacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnl_informacoesLayout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(lbl_titulo))
-                    .addComponent(lbl_resumo))
+                .addGroup(pnl_informacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addComponent(lbl_resumo)
+                    .addComponent(lbl_titulo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnl_informacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_titulo)
-                    .addComponent(jScrollPane3))
-                .addGap(10, 10, 10))
+                    .addGroup(pnl_informacoesLayout.createSequentialGroup()
+                        .addGroup(pnl_informacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txt_titulo)
+                            .addComponent(jScrollPane3))
+                        .addGap(10, 10, 10))
+                    .addGroup(pnl_informacoesLayout.createSequentialGroup()
+                        .addComponent(txt_palavraPasse1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txt_palavraPasse2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txt_palavraPasse3, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txt_palavraPasse4, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txt_palavraPasse5, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         pnl_informacoesLayout.setVerticalGroup(
             pnl_informacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,6 +159,14 @@ public class SubmeterArtigoUI extends javax.swing.JDialog {
                 .addGroup(pnl_informacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbl_resumo)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pnl_informacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_palavraPasse5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_palavraPasse4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_palavraPasse3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_palavraPasse2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_palavraPasse1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -185,7 +216,7 @@ public class SubmeterArtigoUI extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(txt_ficheiro, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_escolherFicheiro, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
+                .addComponent(btn_escolherFicheiro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         pnl_ficheiroLayout.setVerticalGroup(
@@ -223,7 +254,7 @@ public class SubmeterArtigoUI extends javax.swing.JDialog {
             .addGroup(pnl_autorCorrespondenteLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(cmb_AutorCorrespondente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btn_selecionarAutorCorrespondente)
                 .addContainerGap())
         );
@@ -231,12 +262,10 @@ public class SubmeterArtigoUI extends javax.swing.JDialog {
             pnl_autorCorrespondenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_autorCorrespondenteLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnl_autorCorrespondenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnl_autorCorrespondenteLayout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(cmb_AutorCorrespondente))
-                    .addComponent(btn_selecionarAutorCorrespondente))
-                .addContainerGap())
+                .addGroup(pnl_autorCorrespondenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_selecionarAutorCorrespondente)
+                    .addComponent(cmb_AutorCorrespondente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         btn_submeter.setVisible(false);
@@ -263,9 +292,8 @@ public class SubmeterArtigoUI extends javax.swing.JDialog {
         pnl_submissivelLayout.setHorizontalGroup(
             pnl_submissivelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_submissivelLayout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(cmb_submissivel, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btn_selecionarSubmissivel)
                 .addContainerGap())
         );
@@ -276,7 +304,7 @@ public class SubmeterArtigoUI extends javax.swing.JDialog {
                 .addGroup(pnl_submissivelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmb_submissivel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_selecionarSubmissivel))
-                .addGap(0, 12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pnl_novoAutor.setVisible(false);
@@ -313,7 +341,7 @@ public class SubmeterArtigoUI extends javax.swing.JDialog {
                             .addComponent(txt_emailAutor)
                             .addComponent(txt_instituicaoAutor)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_novoAutorLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 49, Short.MAX_VALUE)
                         .addComponent(btn_adicionarAutor)))
                 .addContainerGap())
         );
@@ -376,23 +404,23 @@ public class SubmeterArtigoUI extends javax.swing.JDialog {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(pnl_listaAutores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pnl_novoAutor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(pnl_novoAutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnl_submissivel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pnl_informacoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(pnl_submissivel, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnl_informacoes, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnl_listaAutores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnl_novoAutor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(pnl_novoAutor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnl_listaAutores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnl_autorCorrespondente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnl_ficheiro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -502,9 +530,30 @@ public class SubmeterArtigoUI extends javax.swing.JDialog {
     }//GEN-LAST:event_btn_adicionarAutorActionPerformed
 
     private void btn_seguinteInformacoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_seguinteInformacoesActionPerformed
+        List<javax.swing.JTextField> listaTextFieldPalavrasChave
+                = new ArrayList();
+        listaTextFieldPalavrasChave.add(txt_palavraPasse1);
+        listaTextFieldPalavrasChave.add(txt_palavraPasse2);
+        listaTextFieldPalavrasChave.add(txt_palavraPasse3);
+        listaTextFieldPalavrasChave.add(txt_palavraPasse4);
+        listaTextFieldPalavrasChave.add(txt_palavraPasse5);
+        
         try {
+            List<String> palavrasChave = new ArrayList();
+            for (javax.swing.JTextField textFieldpalavraChave
+                    : listaTextFieldPalavrasChave) {
+                
+                String palavraChave;
+                if (!(palavraChave
+                        = textFieldpalavraChave.getText()).isEmpty()) {
+                    palavrasChave.add(palavraChave);
+                }
+            }
+            
             this.controller.adicionarDadosArtigo(
-                    this.txt_titulo.getText(), this.txt_resumo.getText());
+                    this.txt_titulo.getText(),
+                    this.txt_resumo.getText(),
+                    palavrasChave);
             this.pnl_informacoes.setVisible(false);
             this.btn_seguinteInformacoes.setVisible(false);
             this.pnl_listaAutores.setVisible(true);
@@ -550,6 +599,7 @@ public class SubmeterArtigoUI extends javax.swing.JDialog {
     private javax.swing.JComboBox cmb_AutorCorrespondente;
     private javax.swing.JComboBox cmb_submissivel;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JList jList_autores;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -569,6 +619,11 @@ public class SubmeterArtigoUI extends javax.swing.JDialog {
     private javax.swing.JTextField txt_ficheiro;
     private javax.swing.JTextField txt_instituicaoAutor;
     private javax.swing.JTextField txt_nomeAutor;
+    private javax.swing.JTextField txt_palavraPasse1;
+    private javax.swing.JTextField txt_palavraPasse2;
+    private javax.swing.JTextField txt_palavraPasse3;
+    private javax.swing.JTextField txt_palavraPasse4;
+    private javax.swing.JTextField txt_palavraPasse5;
     private javax.swing.JTextArea txt_resumo;
     private javax.swing.JTextField txt_titulo;
     // End of variables declaration//GEN-END:variables
