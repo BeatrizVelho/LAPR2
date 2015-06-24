@@ -846,4 +846,18 @@ public class SessaoTematicaTest {
         boolean result = instance.adicionarProcessoDecisao(processoDecisao);
         assertEquals(expResult, result);
     }
+    
+    /**
+     * Test of isStateValidoParaGerarAnaliseEstatisticas method, of class
+     * SessaoTematica.
+     */
+    @Test
+    public void testIsStateValidoParaGerarAnaliseEstatisticas() {
+        System.out.println("isStateValidoParaGerarAnaliseEstatisticas");
+        SessaoTematica instance = this.sessaoTematica;
+        this.sessaoTematica.setEstado(new SessaoTematicaEmSubmissaoCameraReadyState(sessaoTematica));
+        boolean expResult = true;
+        boolean result = instance.isStateValidoParaGerarAnaliseEstatisticas();
+        assertEquals(expResult, result);
+    }
 }

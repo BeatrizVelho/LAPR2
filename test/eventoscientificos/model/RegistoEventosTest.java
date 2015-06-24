@@ -15,6 +15,7 @@ import eventoscientificos.model.state.submissao.SubmissaoEmSubmissaoState;
 import eventoscientificos.model.state.submissao.SubmissaoRemovidaState;
 import eventoscientificos.model.state.submissao.SubmissaoRevistaState;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -375,14 +376,14 @@ public class RegistoEventosTest {
         RegistoEventos instance = new RegistoEventos();
         instance.adicionarEvento(this.evento);
         Evento expResult
-                = this.evento;
+                            = this.evento;
         Evento result = instance.getEventoPeloID(indice);
         assertEquals(expResult, result);
     }
 
     /**
-     * Teste do método getListaDecidivelOrganizadorProponente,
-     * da classe RegistoEventos.
+     * Teste do método getListaDecidivelOrganizadorProponente, da classe
+     * RegistoEventos.
      */
     @Test
     public void testGetListaDecidivelOrganizadorProponente() {
@@ -406,6 +407,27 @@ public class RegistoEventosTest {
 
         int expResult = 2;
         int result = (instance.getListaDecidivelOrganizadorProponente(this.utilizador)).size();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of getListaTodosRevisores method, of class RegistoEventos.
+     */
+    @Test
+    public void testGetListaTodosRevisores() {
+        System.out.println("getListaTodosRevisores");
+        RegistoEventos instance = new RegistoEventos();
+        instance.adicionarEvento(evento);
+        CP cp = new CP();
+        
+        cp.novoRevisor(utilizador);
+        this.evento.adicionarCP(new CP());
+        this.evento.getCP().novoRevisor(
+                            new Utilizador("fafa", "mmi@gmail.com", "mfmf", "1234"));
+        this.st.adicionarCP(cp);
+        this.evento.getListaSessoesTematicas().adicionarSessaoTematica(st);
+        int expResult = 2;
+        int result = instance.getListaTodosRevisores().size();
         assertEquals(expResult, result);
     }
 

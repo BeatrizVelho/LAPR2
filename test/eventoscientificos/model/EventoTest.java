@@ -1059,12 +1059,11 @@ public class EventoTest {
         lr.adicionarRevisao(r);
 
         Evento instance = this.evento;
-        float[] expResult = {1,5f,4f,3f,4f,2f};
+        float[] expResult = {1, 5f, 4f, 3f, 4f, 2f};
         float[] result = instance.getValoresTotaisEstatisticaEvento();
         assertArrayEquals(expResult, result, 0.00f);
 
     }
-
 
     /**
      * Test of isStateValidoParaGerarEstatisticasEvento method, of class Evento.
@@ -1077,7 +1076,7 @@ public class EventoTest {
         boolean expResult = true;
         boolean result = instance.isStateValidoParaGerarEstatisticasEvento();
         assertEquals(expResult, result);
-           }
+    }
 
     /**
      * Teste do método adicionarProcessoDecisao, da classe Evento.
@@ -1090,6 +1089,20 @@ public class EventoTest {
         boolean expResult = true;
         Evento instance = this.evento;
         boolean result = instance.adicionarProcessoDecisao(processoDecisao);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of isStateValidoParaGerarAnaliseEstatisticas method, of class
+     * Evento.
+     */
+    @Test
+    public void testIsStateValidoParaGerarAnaliseEstatisticas() {
+        System.out.println("isStateValidoParaGerarAnaliseEstatisticas");
+        Evento instance = this.evento;
+        this.evento.setEstado(new EventoEmSubmissaoCameraReadyState(evento));
+        boolean expResult = true;
+        boolean result = instance.isStateValidoParaGerarAnaliseEstatisticas();
         assertEquals(expResult, result);
     }
 
