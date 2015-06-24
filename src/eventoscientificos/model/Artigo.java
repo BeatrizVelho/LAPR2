@@ -227,6 +227,11 @@ public class Artigo {
      * @param palavrasChave Nova lista de palavras chave.
      */
     public void setPalavrasChave(List<String> palavrasChave) {
+        if(palavrasChave.isEmpty() || palavrasChave.size() > 5) {
+            throw new IllegalArgumentException("O artigo deve ter pelo menos uma"
+                    + "palavra chave e no máximo 5");   
+        }
+        
         this.palavrasChave = palavrasChave;
     }
 
