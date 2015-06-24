@@ -69,18 +69,19 @@ public class RegistoUtilizadores {
      * @param password password do utilizado a criar
      * @return Utilizador
      */
-    public Utilizador novoUtilizador(String nome, String email, String username, String password) {
+    public Utilizador novoUtilizador(String nome, String email, String username, String password) throws IOException {
         String novaPassword, codificadorTabela = "";
         int numeroCarateres = password.length();
         if (this.tabelasCodificacao.size() == 1) {
             NFN nfn = (NFN) this.tabelasCodificacao.get("NFN");
 
-            novaPassword = nfn.codificar(password);
+            novaPassword = nfn.codificar(password, 0);
         } else {
             CA ca = (CA) this.tabelasCodificacao.get("CA");
+            iniciarCodificadorAritmetico();
             double tabelaEscolhida = ((Math.random()) * ca.getSizeListaTabelasFreq() - 1) / 10;
             codificadorTabela = ca.getClass().getSimpleName() + ";" + tabelaEscolhida;
-            novaPassword = ca.codificar(password);
+            novaPassword = ca.codificar(password, (int) tabelaEscolhida);
         }
 
         Utilizador utilizador = new Utilizador(nome, email, username, novaPassword);

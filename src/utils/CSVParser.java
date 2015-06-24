@@ -27,7 +27,7 @@ public class CSVParser {
     /**
      * Caminho para o ficheiro .csv que contém as tabelas de frequência.
      */
-    private static final String ficheiro = "excel.csv";
+    private static final String ficheiro = "tabelas.csv";
     
     /**
      * Nome para o ficheiro de estátisticas de tópicos.

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ListaEventos>
+    <NumeroEventos>1</NumeroEventos>
+    <Eventos>
+        <Evento>
+            <Titulo>CDIO 2013</Titulo>
+            <Descricao>9th International CDIO Conference</Descricao>
+            <DataInicio>2013/6/9</DataInicio>
+            <DataInicio>2013/6/13</DataInicio>
+            <DataInicioSubmissao>2012/11/1</DataInicioSubmissao>
+            <DataFimSubmissao>2013/1/6</DataFimSubmissao>
+            <DataInicioDistribuicao>2013/1/7</DataInicioDistribuicao>
+            <DataLimiteRevisao>2013/3/18</DataLimiteRevisao>
+            <DataLmiteSubmissaoFinal>2013/4/14</DataLmiteSubmissaoFinal>
+            <EstadoEvento>EventoEmSubmissaoState</EstadoEvento>
+            <Local>1</Local>
+            <ListaOrganizadores>
+                <NumeroOrganizadores>2</NumeroOrganizadores>
+                <Organizadores>
+                    <Organizador>doris</Organizador>
+                    <Organizador>revere@harvard.edu</Organizador>
+                </Organizadores>
+            </ListaOrganizadores>
+            <CP>
+                <NumeroMembrosCP>3</NumeroMembrosCP>
+                <MembrosCP>
+                    <MembroCP>doris</MembroCP>
+                    <MembroCP>revere@harvard.edu</MembroCP>
+                    <MembroCP>fortin</MembroCP>
+                </MembrosCP>
+            </CP>
+            <ListaSessoesTematicas>
+                <NumeroSessoesTematicas>1</NumeroSessoesTematicas>
+                <SessoesTematicas>
+                    <SessaoTematica>
+                        <CodigoST>CDIO09-CA</CodigoST>
+                        <DescricaoST>Bla, bla, bla...</DescricaoST>
+                        <DataInicio>2013/6/10</DataInicio>
+                        <DataFim>2013/6/12</DataFim>
+                        <DataInicioSubmissao>2012/11/1</DataInicioSubmissao>
+                        <DataFimSubmissao>2013/1/6</DataFimSubmissao>
+                        <DataInicioDistribuicao>2013/1/7</DataInicioDistribuicao>
+                        <DataLimiteRevisao>2013/3/18</DataLimiteRevisao>
+                        <DataLmiteSubmissaoFinal>2013/4/14</DataLmiteSubmissaoFinal>
+                    </SessaoTematica>
+                </SessoesTematicas>
+            </ListaSessoesTematicas>
+        </Evento>
+    </Eventos>
+</ListaEventos>

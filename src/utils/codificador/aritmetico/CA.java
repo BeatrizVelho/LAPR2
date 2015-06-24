@@ -1,6 +1,7 @@
 package utils.codificador.aritmetico;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import nayuki.arithcode.FrequencyTable;
 import nayuki.arithcode.SimpleFrequencyTable;
@@ -24,7 +25,11 @@ public class CA implements Codificador {
      */
     public CA() throws IOException {
         CSVParser csvParser = new CSVParser();
+        System.out.println("Arroz");
         int[][] matrizTabelaFrequencia = csvParser.lerTabelasFrequencia();
+
+        this.listaTabelasFrequencia = new ArrayList();
+        System.out.println("Tomate");
         for (int i = 0; i < matrizTabelaFrequencia.length; i++) {
             listaTabelasFrequencia.add(new SimpleFrequencyTable(matrizTabelaFrequencia[i]));
         }
@@ -37,12 +42,53 @@ public class CA implements Codificador {
      * @return palavra codificada
      */
     @Override
-    public String codificar(String password) {
+    public String codificar(String password, int tabela) {
+//        int numeroDeCarateresTabela = 257;
+//        FrequencyTable tabelaEscolhida = listaTabelasFrequencia.get(tabela);
+//        double dimensaoIntervalo = 1, limiteInferior = 0.000000001, limiteSuperior = 1;
+//        boolean encontrado;
+////        int[] frequencias = null;
+//        // List<Character> letras = new ArrayList();
+////
+////        for (int i = 0; i < password.length(); i++) {
+////            if (!letras.contains(password.charAt(i))) {
+////                letras.add(password.charAt(i));
+////            }
+////        }
+////        frequencias = new int[letras.size()];
+//
+////        for (int i = 0; i < numeroDeCarateresTabela; i++) {
+////            int codigo = String.valueOf(letras.get(i)).codePointAt(0);
+////            int freq = tabelaEscolhida.get(codigo);
+////            dimensaoIntervalo += freq;
+////           // frequencias[i] = freq;
+////        }
+////        for (int i = 0; i < password.length(); i++) {
+////            int indiceSimbolo = 0;
+////            do {
+////                encontrado = false;
+////                char c = password.charAt(i);
+////                String.valueOf(c).
+////                int freq = tabelaEscolhida.get(indiceSimbolo);
+////                if (freq != String.valueOf(c).codePointAt(0)) {
+////                    limiteInferior = (dimensaoIntervalo * tabelaEscolhida.get(freq) / 10000.0) + limiteInferior;
+////                } else {
+////                    limiteSuperior = (dimensaoIntervalo * tabelaEscolhida.get(freq) / 10000.0) + limiteInferior;
+////                    dimensaoIntervalo = limiteSuperior - limiteInferior;
+////                    encontrado = true;
+////                }
+////                indiceSimbolo++;
+////            } while (encontrado == false);
+////        }
+//////return Double.toString(limiteInferior);
+////        return String.format("%.8f", limiteInferior);
+////    }
         return "";
     }
 
     /**
      * Devolve o tamanho de tabelas de frequência.
+     *
      * @return numero de tabelas
      */
     public int getSizeListaTabelasFreq() {
