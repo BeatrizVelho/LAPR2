@@ -52,7 +52,7 @@ public class ProcessoAnaliseEstatisticaTest {
         Artigo artigoFinal = new Artigo();
         Submissao submissao = new Submissao();
         submissao.setEstado(new SubmissaoAceiteState(submissao));
-        submissao.setArtigoInicial(new Artigo("titulo", "saude", "D:\\ISEP\\1.º Ano\\2.º Semestre"));
+        submissao.setArtigoInicial(new Artigo());
         submissao.setArtigoFinal(artigoFinal);
 
         Submissao submissao2 = new Submissao(submissao);
