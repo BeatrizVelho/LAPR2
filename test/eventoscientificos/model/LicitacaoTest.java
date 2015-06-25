@@ -1,9 +1,3 @@
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package eventoscientificos.model;
 
 import java.util.ArrayList;
@@ -50,8 +44,8 @@ public class LicitacaoTest {
         this.revisor = new Revisor(new Utilizador(
                             "Tiago", "1131658@isep.ipp.pt", "tiago", "1234"));
         this.submissao = new Submissao();
-        this.submissao.setArtigoFinal(new Artigo("titulo", "saude", "D:\\ISEP\\1.º Ano\\2.º Semestre"));
-        this.submissao.setArtigoInicial(new Artigo("titulo1234", "saude", "D:\\ISEP\\1.º Ano\\2.º Semestre"));
+        this.submissao.setArtigoFinal(new Artigo());
+        this.submissao.setArtigoInicial(new Artigo());
         conflito = new Conflito(revisor, submissao, new ArrayList());
         this.grauInteresse = 2;
 
