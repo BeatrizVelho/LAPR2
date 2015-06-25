@@ -121,7 +121,15 @@ public class Submissao {
      * em submissão.
      */
     public boolean alterarEstadoSubmissao() {
-        return this.estado.setEmSubmissao();
+        if (this.estado instanceof SubmissaoCriadaState) {
+            this.estado.setEmSubmissao();
+        }
+
+        if(this.estado instanceof SubmissaoAceiteState) {
+            this.estado.setEmCameraReady();
+        }
+        
+        return true;
     }
 
     /**
