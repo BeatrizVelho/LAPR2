@@ -470,4 +470,22 @@ public class RegistoEventosTest {
         assertEquals(expResult, result);
     }
 
+    /**
+     * Test of getTodosRevisores method, of class RegistoEventos.
+     */
+    @Test
+    public void testGetTodosRevisores() {
+        System.out.println("getTodosRevisores");
+        List<Evento> listaEventosApresentados = new ArrayList<>();
+        listaEventosApresentados.add(evento);
+        CP cp = new CP();
+        cp.novoRevisor(utilizador);
+        evento.adicionarCP(cp);
+        RegistoEventos instance = new RegistoEventos();
+        instance.adicionarEvento(evento);
+        int expResult = 1;
+        int result = instance.getTodosRevisores(listaEventosApresentados).size();
+        assertEquals(expResult, result);
+    }
+
 }
