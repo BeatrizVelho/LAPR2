@@ -13,6 +13,7 @@ import eventoscientificos.model.state.evento.EventoEmSubmissaoState;
 import eventoscientificos.model.state.submissao.SubmissaoEmSubmissaoState;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import utils.Data;
@@ -33,8 +34,10 @@ public class AlterarSubmissaoControllerTest {
 
         this.utilizador = new Utilizador(
                 "Pedro", "1140781@isep.ipp.pt", "pedro", "1234");
+        Utilizador utilizador1 = new Utilizador(
+                "Pedro123", "11111@isep.ipp.pt", "pedro123", "1234");
         this.empresa.setUtilizadorAutenticado(utilizador);
-        this.empresa.getRegistoUtilizadores().adicionaUtilizador(utilizador);
+        this.empresa.getRegistoUtilizadores().adicionaUtilizador(utilizador1);
         this.registoEventos = this.empresa.getRegistoEventos();
         this.evento = new Evento("titulo", "descricao", new Local("local"),
                 new Data(2016, 6, 8), new Data(2016, 6, 20),
@@ -53,6 +56,8 @@ public class AlterarSubmissaoControllerTest {
         artigoInicial.setPalavrasChave(palavrasChave);
         artigoInicial.getListaAutores().novoAutor(
                 utilizador, new InstituicaoAfiliacao("ISEP"));
+        artigoInicial.getListaAutores().novoAutor(
+                utilizador1, new InstituicaoAfiliacao("ISEP"));
         artigoInicial.setFicheiro("wasdfg");
         submissao.adicionarArtigo(artigoInicial);
         evento.getListaSubmissoes().adicionarSubmissao(submissao);
@@ -161,23 +166,6 @@ public class AlterarSubmissaoControllerTest {
     }
 
     /**
-     * Test of getListaPossiveisAutoresCorrespondentes method, of class
-     * AlterarSubmissaoController.
-     */
-    @Test
-    public void testGetListaPossiveisAutoresCorrespondentes() {
-        System.out.println("getListaPossiveisAutoresCorrespondentes");
-        AlterarSubmissaoController instance = new AlterarSubmissaoController(empresa);
-        instance.getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador();
-        instance.selecionarSubmissivel(0);
-        instance.selecionarSubmissao(0);
-        instance.getListaAutoresRegistados();
-        int expResult = 1;
-        int result = instance.getListaPossiveisAutoresCorrespondentes().size();
-        assertEquals(expResult, result);
-    }
-
-    /**
      * Test of getArtigoFicheiro method, of class AlterarSubmissaoController.
      */
     @Test
@@ -192,7 +180,7 @@ public class AlterarSubmissaoControllerTest {
         String result = instance.getArtigoFicheiro();
         assertEquals(expResult, result);
     }
-    
+
     /**
      * Test of getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador method,
      * of class AlterarSubmissaoController.
@@ -273,9 +261,9 @@ public class AlterarSubmissaoControllerTest {
         instance.selecionarSubmissivel(indice);
         instance.selecionarSubmissao(indice);
         instance.alterarDados(titulo, resumo, palavrasChave);
-        instance.alterarAutor(nome, email, instituicaoAfiliacao);
+        int indiceApagar = 1;
         boolean expResult = true;
-        boolean result = instance.apagarAutor(indice);
+        boolean result = instance.apagarAutor(indiceApagar);
         assertEquals(expResult, result);
     }
 
@@ -301,7 +289,6 @@ public class AlterarSubmissaoControllerTest {
         instance.selecionarSubmissivel(indice);
         instance.selecionarSubmissao(indice);
         instance.alterarDados(titulo, resumo, palavrasChave);
-        instance.alterarAutor(nome1, email1, instituicaoAfiliacao1);
         boolean expResult = true;
         boolean result = instance.novoAutor(nome, email, instituicaoAfiliacao);
         assertEquals(expResult, result);
@@ -330,7 +317,6 @@ public class AlterarSubmissaoControllerTest {
         instance.selecionarSubmissivel(indice);
         instance.selecionarSubmissao(indice);
         instance.alterarDados(titulo, resumo, palavrasChave);
-        instance.alterarAutor(nome1, email1, instituicaoAfiliacao1);
         instance.novoAutor(nome, email, instituicaoAfiliacao);
         boolean expResult = true;
         boolean result = instance.getListaAutoresRegistados();
@@ -360,7 +346,6 @@ public class AlterarSubmissaoControllerTest {
         instance.selecionarSubmissivel(indice);
         instance.selecionarSubmissao(indice);
         instance.alterarDados(titulo, resumo, palavrasChave);
-        instance.alterarAutor(nome1, email1, instituicaoAfiliacao1);
         instance.novoAutor(nome, email, instituicaoAfiliacao);
         instance.getListaAutoresRegistados();
         boolean expResult = true;
@@ -391,7 +376,6 @@ public class AlterarSubmissaoControllerTest {
         instance.selecionarSubmissivel(indice);
         instance.selecionarSubmissao(indice);
         instance.alterarDados(titulo, resumo, palavrasChave);
-        instance.alterarAutor(nome1, email1, instituicaoAfiliacao1);
         instance.novoAutor(nome, email, instituicaoAfiliacao);
         instance.getListaAutoresRegistados();
         instance.alterarAutorCorrespondente(indice);
@@ -423,7 +407,6 @@ public class AlterarSubmissaoControllerTest {
         instance.selecionarSubmissivel(indice);
         instance.selecionarSubmissao(indice);
         instance.alterarDados(titulo, resumo, palavrasChave);
-        instance.alterarAutor(nome1, email1, instituicaoAfiliacao1);
         instance.novoAutor(nome, email, instituicaoAfiliacao);
         instance.getListaAutoresRegistados();
         instance.alterarAutorCorrespondente(indice);
@@ -456,7 +439,6 @@ public class AlterarSubmissaoControllerTest {
         instance.selecionarSubmissivel(indice);
         instance.selecionarSubmissao(indice);
         instance.alterarDados(titulo, resumo, palavrasChave);
-        instance.alterarAutor(nome1, email1, instituicaoAfiliacao1);
         instance.novoAutor(nome, email, instituicaoAfiliacao);
         instance.getListaAutoresRegistados();
         instance.alterarAutorCorrespondente(indice);
@@ -468,16 +450,34 @@ public class AlterarSubmissaoControllerTest {
 
     }
 
-//    /**
-//     * Test of apagarAutor method, of class AlterarSubmissaoController.
-//     */
-//    @Test
-//    public void testApagarAutor() {
-//        System.out.println("apagarAutor");
-//        int indice = 0;
-//        AlterarSubmissaoController instance = null;
-//        boolean expResult = false;
-//        boolean result = instance.apagarAutor(indice);
-//        assertEquals(expResult, result);
-//    }
+    /**
+     * Test of getModeloListaAutoresRegistados method, of class
+     * AlterarSubmissaoController.
+     */
+    @Test
+    public void testGetModeloListaAutoresRegistados() {
+        System.out.println("getModeloListaAutoresRegistados");
+        AlterarSubmissaoController instance = new AlterarSubmissaoController(empresa);
+        int indice = 0;
+        String nome = "titulo";
+        String email = "email@mol.pt";
+        String instituicaoAfiliacao = "QQQ";
+        String nome1 = "beatriz12";
+        String email1 = "beatriz12@hotmail.com";
+        String instituicaoAfiliacao1 = "WWE";
+        String titulo = "titulo1";
+        String resumo = "resumo1";
+        List<String> palavrasChave = new ArrayList<>();
+        palavrasChave.add("bolachas");
+        String ficheiro = "C:\\Users\\Utilizador\\Downloads\\BTNext";
+        instance.getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador();
+        instance.selecionarSubmissivel(indice);
+        instance.selecionarSubmissao(indice);
+        instance.alterarDados(titulo, resumo, palavrasChave);
+        instance.novoAutor(nome, email, instituicaoAfiliacao);
+        DefaultComboBoxModel<Autor> expResult = new DefaultComboBoxModel<>();
+        DefaultComboBoxModel<Autor> result = instance.getModeloListaAutoresRegistados();
+        assertEquals(expResult.getClass().getSimpleName(), result.getClass().getSimpleName());
+    }
+
 }
