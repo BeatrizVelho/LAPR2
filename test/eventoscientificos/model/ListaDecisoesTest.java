@@ -63,6 +63,18 @@ public class ListaDecisoesTest {
     }
 
     /**
+     * Teste do método criarNotificacao, da classe ListaDecisoes.
+     */
+    @Test
+    public void testCriarNotificacao() {
+        System.out.println("criarNotificacao");
+        ListaDecisoes instance = new ListaDecisoes();
+        boolean expResult = true;
+        boolean result = instance.criarNotificacao();
+        assertEquals(expResult, result);
+    }
+
+    /**
      * Teste do método equals, da classe ListaDecisoes.
      */
     @Test
@@ -71,11 +83,11 @@ public class ListaDecisoesTest {
         int classificacao = 2;
         Submissao submissao = new Submissao();
         Decisao decisao = new Decisao(classificacao, submissao);
-        
+
         Object outroObjecto = new ListaDecisoes();
         ListaDecisoes outraLista = (ListaDecisoes) outroObjecto;
         outraLista.adicionarDecisao(decisao);
-        
+
         ListaDecisoes instance = new ListaDecisoes();
         instance.adicionarDecisao(decisao);
         boolean expResult = true;
@@ -92,11 +104,11 @@ public class ListaDecisoesTest {
         int classificacao = 2;
         Submissao submissao = new Submissao();
         Decisao decisao = new Decisao(classificacao, submissao);
-        
+
         Object outroObjecto = new ListaDecisoes();
         ListaDecisoes outraLista = (ListaDecisoes) outroObjecto;
         outraLista.adicionarDecisao(decisao);
-        
+
         ListaDecisoes instance = new ListaDecisoes();
         boolean expResult = false;
         boolean result = instance.equals(outroObjecto);
