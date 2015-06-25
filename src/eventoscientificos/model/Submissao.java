@@ -26,11 +26,6 @@ public class Submissao {
      * Estado da submissao.
      */
     private SubmissaoState estado;
-    
-    /**
-     * Autor correspondente da submissão.
-     */
-    private AutorCorrespondente autorCorrespondente;
 
     /**
      * Constói uma instância de Submissão.
@@ -75,15 +70,6 @@ public class Submissao {
      */
     public SubmissaoState getEstado() {
         return this.estado;
-    }
-    
-    /**
-     * Devolve o Autor Correspondente da submissão.
-     * 
-     * @return AutorCorrespondente.
-     */
-    public AutorCorrespondente getAutorCorrespondente(){
-        return this.artigoInicial.getAutorCorrespondente();
     }
 
     /**
