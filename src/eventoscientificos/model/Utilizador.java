@@ -29,11 +29,6 @@ public class Utilizador {
     private String password;
 
     /**
-     * Numero de caracteres da password.
-     */
-    private int numeroCarateres;
-
-    /**
      * Contém indicação do Codificador;Tabela.
      */
     private String codificadorTabela;
@@ -107,15 +102,13 @@ public class Utilizador {
      * @param email email do utilizador
      * @param username username do utilizador
      * @param password password do utilizador
-     * @param numeroCarateres numero carateres
      * @param codificadorTabela codificador tabela
      */
-    public Utilizador(String nome, String email, String username, String password, int numeroCarateres, String codificadorTabela) {
+    public Utilizador(String nome, String email, String username, String password, String codificadorTabela) {
         this.nome = nome;
         this.email = email;
         this.username = username;
         this.password = password;
-        this.numeroCarateres = numeroCarateres;
         this.codificadorTabela = codificadorTabela;
     }
 
@@ -153,15 +146,6 @@ public class Utilizador {
      */
     public String getPassword() {
         return this.password;
-    }
-
-    /**
-     * Devolve o número de carateres da password.
-     *
-     * @return numero de carateres da password
-     */
-    public int getNumeroCarateres() {
-        return numeroCarateres;
     }
 
     /**
@@ -249,15 +233,6 @@ public class Utilizador {
      */
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    /**
-     * Modifica o número de carateres da password.
-     *
-     * @param numeroCarateres numero de carateres da password
-     */
-    public void setNumeroCarateres(int numeroCarateres) {
-        this.numeroCarateres = numeroCarateres;
     }
 
     /**

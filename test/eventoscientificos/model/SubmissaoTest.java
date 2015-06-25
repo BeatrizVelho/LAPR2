@@ -358,34 +358,4 @@ public class SubmissaoTest {
         String result = instance.toString();
         assertEquals(expResult, result);
     }
-
-    /**
-     * Teste do método getAutorCorrespondente, da classe Submissao.
-     */
-    @Test
-    public void testGetAutorCorrespondente() {
-        System.out.println("getAutorCorrespondente");
-        Utilizador utilizador = new Utilizador
-        ("nome", "1140587@isep.ipp.pt", "username", "password");
-        InstituicaoAfiliacao instituicaoAfiliacao = new InstituicaoAfiliacao("ISEP");
-        
-        Autor autor = new Autor(utilizador, instituicaoAfiliacao);
-        Autor autorRegistado = new Autor(utilizador, instituicaoAfiliacao);
-        AutorCorrespondente autorCorrespondente = new AutorCorrespondente
-        (utilizador, instituicaoAfiliacao);
-
-        Artigo artigo = new Artigo
-        ("titulo", "saude", "D:\\ISEP\\1.º Ano\\2.º Semestre");
-        artigo.setAutorCorrespondente(autorCorrespondente);
-        
-        Submissao instance = new Submissao();
-        instance.adicionarArtigo(artigo);
-        instance.setArtigoInicial(artigo);
-        
-        AutorCorrespondente expResult = new AutorCorrespondente
-        (utilizador, instituicaoAfiliacao);
-        AutorCorrespondente result = instance.getAutorCorrespondente();
-        assertEquals(expResult, result);
-
-    }
 }

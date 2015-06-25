@@ -40,6 +40,11 @@ public class Empresa {
      * Registo de tipos de conflitos da empresa.
      */
     private RegistoTiposConflito registoTiposConflito;
+    
+    /**
+     * Registo de mecanismos de leitura de ficheiros da empresa.
+     */
+    private RegistoMecanismosLeitura registoMecanismosLeitura;
 
     /**
      * Temporizador que controla a agenda da empresa.
@@ -106,6 +111,15 @@ public class Empresa {
      */
     public RegistoTiposConflito getRegistoTiposConflito() {
         return this.registoTiposConflito;
+    }
+    
+    /**
+     * Devolve o Registo de Mecanismos de Leitura
+     *
+     * @return Registo de Mecanismos de Leitura.
+     */
+    public RegistoMecanismosLeitura getRegistoMecanismosLeitura() {
+        return this.registoMecanismosLeitura;
     }
 
     /**

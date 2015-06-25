@@ -180,22 +180,6 @@ public class UtilizadorTest {
     }
 
     /**
-     * Test of setNumeroCarateres and getNumeroCarateres method, of class
-     * Utilizador.
-     */
-    @Test
-    public void testSetAndGetNumeroCarateres() {
-        System.out.println("setAndGetNumeroCarateres");
-        int numeroCarateres = 10;
-        Utilizador instance = this.utilizador;
-        instance.setNumeroCarateres(numeroCarateres);
-        int expResult = 10;
-        int result = instance.getNumeroCarateres();
-        assertEquals(expResult, result);
-
-    }
-
-    /**
      * Test of setCodificadorTabela and getNumeroCarateresmethod, of class
      * Utilizador.
      */
