@@ -25,8 +25,8 @@ public class ConflitoTest {
         this.revisor = new Revisor(new Utilizador(
                             "Tiago", "1131658@isep.ipp.pt", "tiago", "1234"));
         this.submissao = new Submissao();
-        this.submissao.setArtigoFinal(new Artigo("titulo", "saude", "D:\\ISEP\\1.º Ano\\2.º Semestre"));
-        this.submissao.setArtigoInicial(new Artigo("titulo1234", "saude", "D:\\ISEP\\1.º Ano\\2.º Semestre"));
+        this.submissao.setArtigoFinal(new Artigo());
+        this.submissao.setArtigoInicial(new Artigo());
 
     }
 
