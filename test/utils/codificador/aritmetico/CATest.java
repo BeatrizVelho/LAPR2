@@ -32,7 +32,7 @@ public class CATest {
         CA instance = new CA();
         int tabela = 0;
         String password = "o";
-        String expResult = "0.02";
+        String expResult = "Ä";
         String result = instance.codificar(password, tabela);
         assertEquals(expResult, result);
     }
