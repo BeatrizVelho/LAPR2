@@ -72,6 +72,7 @@ public class Empresa {
         this.registoUtilizadores = new RegistoUtilizadores();
         this.registoEventos = new RegistoEventos();
         this.registoTiposConflito = new RegistoTiposConflito();
+        this.registoMecanismosLeitura = new RegistoMecanismosLeitura();
         this.listaMecanismoDistribuicao = new ArrayList<MecanismoDistribuicao>();
         this.listaMecanismoDecisao = new ArrayList<MecanismoDecisao>();
         this.temporizador = new Timer();

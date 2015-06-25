@@ -52,7 +52,7 @@ public class CarregarFicheiroUI extends javax.swing.JDialog {
 
         pnl_selecionarSubmissivel = new javax.swing.JPanel();
         btn_selecionarEvento = new javax.swing.JButton();
-        cmb_selecionarEvento = new javax.swing.JComboBox();
+        cmb_selecionarEvento = new javax.swing.JComboBox(this.controller.getListaEventosAceitarEventos().toArray());
         btn_cancelar = new javax.swing.JButton();
         btn_importarSubmissao = new javax.swing.JButton();
         pnl_ficheiro = new javax.swing.JPanel();
