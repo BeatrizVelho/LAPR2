@@ -1,26 +1,31 @@
 package eventoscientificos.model;
 
 /**
- * Representa uma instância de uma decisão através de uma classificação
- * e de uma submissão.
- * 
+ * Representa uma instância de uma decisão através de uma classificação e de uma
+ * submissão.
+ *
  * @author G01
  */
 public class Decisao {
-    
+
     /**
      * Classificação.
      */
     private int classificacao;
-    
+
     /**
      * Instância de submissão.
      */
     private Submissao submissao;
+    
+    /**
+     * Notificação de decisão.
+     */
+    private Notificacao notificacao;
 
     /**
      * Constrói uma instância de Decisao
-     * 
+     *
      * @param classificacao Classificação associado à submissão.
      * @param submissao Submissão associado à decisão.
      */
@@ -29,6 +34,43 @@ public class Decisao {
         this.submissao = submissao;
     }
     
+    /**
+     * Cria notificação a ser enviada para o autor.
+     * 
+     * @return Verdadeiro
+     */
+    public boolean criarNotificacao(){
+	Notificacao notificacao = new Notificacao(classificacao);
+	return enviarNotificacao(notificacao,submissao.getArtigoInicial().getAutorCorrespondente());
+    }
+
+    /**
+     * Modifica o estado da submissão mediante a classificação.
+     * 
+     * @param classificacao Classificação da decisão.
+     * @return Verdadeiro.
+     */
+    private boolean setEstadoSubmissao(int classificacao) {
+        if (classificacao > 2) {
+            this.submissao.alterarEstadoParaAceite();
+        } else {
+            this.submissao.alterarEstadoParaRejeitado();
+        }
+        return true;
+    }
+    
+    /**
+     * Envia notificação passando por parâmetro a notificação
+     * e o autor correspondente.
+     * 
+     * @param notificacao Notificação
+     * @param autorCorrespondente Autor Correspondente
+     * @return Verdadeiro
+     */
+    private boolean enviarNotificacao(Notificacao notificacao, AutorCorrespondente autorCorrespondente){
+        return autorCorrespondente.getUtilizador().addNotificacao(notificacao);
+    }
+
     /**
      * Compara dois objetos entre si. Comparando primariamente a posição de
      * memória, seguida do conteudo e das classes as quais cada um deles
@@ -53,5 +95,5 @@ public class Decisao {
         return this.classificacao == (outraDecisao.classificacao)
                 && this.submissao.equals(outraDecisao.submissao);
     }
-    
+
 }
