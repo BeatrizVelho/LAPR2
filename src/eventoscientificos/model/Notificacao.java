@@ -20,7 +20,4 @@ public class Notificacao {
     public Notificacao(int classificacao) {
         this.classificacao = classificacao;
     }
-    
-    
-    
 }

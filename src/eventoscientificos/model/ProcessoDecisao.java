@@ -45,7 +45,7 @@ public class ProcessoDecisao {
 
     /**
      * Retorna uma lista de decisões com as classificações das submissões.
-     * 
+     *
      * @param listaRevisoes Lista de revisões.
      * @return Lista de decisões.
      */
@@ -59,12 +59,21 @@ public class ProcessoDecisao {
 
     /**
      * Verifica se é possivel adicionar uma lista de decisões.
-     * 
+     *
      * @param listaDecisoes Lista de decisões.
      * @return Verdadeiro caso consiga adicionar e falso se não conseguir.
      */
     private boolean adicionarListaDecisoes(ListaDecisoes listaDecisoes) {
         return (this.listaDecisoes = listaDecisoes) != null;
+    }
+
+    /**
+     * Cria uma notificação para cada uma das decisões.
+     *
+     * @return Verdadeiro.
+     */
+    public boolean notificarSobreDecisao() {
+        return listaDecisoes.criarNotificacao();
     }
 
     /**
