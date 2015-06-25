@@ -5,7 +5,6 @@ import eventoscientificos.model.state.sessaotematica.SessaoTematicaFaseDecisaoSt
 import eventoscientificos.model.state.submissao.SubmissaoRemovidaState;
 import eventoscientificos.model.state.submissao.SubmissaoRevistaState;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -241,7 +240,7 @@ public class ListaSessoesTematicasTest {
                             new Data(2017, 5, 29), new Data(2017, 6, 1));
         ListaSessoesTematicas instance = this.listaSessoesTematicas;
         Submissao submissao = new Submissao();
-        submissao.setArtigoInicial(new Artigo("tituo", "resumo", "ficheiro"));
+        submissao.setArtigoInicial(new Artigo());
         submissao .getArtigoInicial().getListaAutores().novoAutor(utilizador, new InstituicaoAfiliacao("ISEP"));
         sessaoTematica.getListaSubmissoes().adicionarSubmissao(submissao);
         instance.adicionarSessaoTematica(sessaoTematica);
