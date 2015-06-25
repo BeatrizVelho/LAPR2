@@ -1,22 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package eventoscientificios.view;
 
 import eventoscientificos.controllers.CriarEventoController;
+import eventoscientificos.model.Administrador;
 import eventoscientificos.model.Empresa;
 import eventoscientificos.model.Local;
-import eventoscientificos.model.Organizador;
 import java.awt.Frame;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import utils.Data;
 
 /**
- *
- * @author Pedro
+ * @author G01
  */
 public class CriarEventoUI extends javax.swing.JDialog {
 
@@ -36,9 +30,20 @@ public class CriarEventoUI extends javax.swing.JDialog {
         this.framePai = parent;
         setResizable(false);
         initComponents();
-        setLocationRelativeTo(null);
         getRootPane().setDefaultButton(btn_criarEvento);
-        setVisible(true);
+        setLocationRelativeTo(null);
+        if (!empresa.isAdministrador(new Administrador(
+                empresa.getUtilizadorAutenticado()))) {
+            JOptionPane.showMessageDialog(
+                    framePai,
+                    "Não tem permissões para criar eventos.",
+                    "Criar Evento",
+                    JOptionPane.ERROR_MESSAGE);
+            dispose();
+        } else {
+            setVisible(true);
+            pack();
+        }
     }
 
     /**
