@@ -51,9 +51,14 @@ public class ListaSubmissoes {
      */
     public boolean validarSubmissao(Submissao submissao) {
         if (submissao.validarSubmissao()) {
-            return !this.listaSubmissoes.contains(submissao);
+            throw new IllegalArgumentException("A submissão não é valida");
         }
-        return false;
+
+        if (this.listaSubmissoes.contains(submissao)) {
+            throw new IllegalArgumentException("A submissão já existe na lista.");
+        }
+
+        return true;
     }
 
     /**
