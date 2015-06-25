@@ -173,8 +173,7 @@ public class MecanismoLeituraCSV1 implements MecanismoLeitura {
             if (artigo.getAutorCorrespondente() == null) {
                 throw new IllegalArgumentException(MecanismoLeitura.AUTOR_CORRESPONDENTE_NAO_CONSTA_NA_LISTA);
             }
-            
-            submissao.alterarEstadoSubmissao();
+
             submissao.adicionarArtigo(artigo);
             listaSubmissoes.validarSubmissao(submissao);
             listaSubmissoes.adicionarSubmissao(submissao);
