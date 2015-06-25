@@ -15,6 +15,7 @@ public class AlterarUtilizadorUI extends javax.swing.JDialog {
 
     /**
      * Creates new form NewJDialog
+     *
      * @param parent
      * @param modal
      * @param empresa
@@ -147,23 +148,24 @@ public class AlterarUtilizadorUI extends javax.swing.JDialog {
 
     private void btn_alterarDadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_alterarDadosActionPerformed
         try {
-            controller.alterarDadosUtilizador(
+            if (!controller.alterarDadosUtilizador(
                     txt_username.getText(),
                     new String(txt_password.getPassword()),
                     txt_nome.getText(),
-                    txt_email.getText());
-            
+                    txt_email.getText())) {
+                throw new IllegalArgumentException("Já existe um utilizador com"
+                        + " os dados que inseriu.");
+            }
+
             String opcoes[] = {"Sim", "Não"};
             int resposta = JOptionPane.showOptionDialog(
-                    null, "Confirma os dados?", "Alterar Utilizador", 0, 
+                    null, "Confirma os dados?", "Alterar Utilizador", 0,
                     JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]);
             if (resposta == 0) {
                 controller.atualizarUtilizador();
-                dispose();
-            } else {
-                dispose();
             }
-        } catch(IllegalArgumentException ex) {
+            dispose();
+        } catch (IllegalArgumentException ex) {
             JOptionPane.showMessageDialog(
                     framePai,
                     ex.getMessage(),

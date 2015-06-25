@@ -114,7 +114,8 @@ public class AlterarUtilizadorController {
         this.utilizadorClone.setNome(nome);
         this.utilizadorClone.setEmail(email);
 
-        return true;
+        return this.registoUtilizadores.validarUtilizadorClone(
+                this.utilizador, this.utilizadorClone);
     }
 
     /**
