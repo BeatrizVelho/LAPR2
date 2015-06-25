@@ -7,8 +7,8 @@ import eventoscientificos.model.RegistoUtilizadores;
  * Todas as classes que implementam esta Interface herdam as responsabilidade de
  * descodificar submissões a partir de ficheiros. A forma como a descodifica-
  * ção é feita, diz respeito à maneira como cada uma delas é implementada. Esta
- * interface disponibiliza também grande parte dos erros que possam acontecer
- * ao importar uma submissão.
+ * interface disponibiliza também grande parte dos erros que possam acontecer ao
+ * importar uma submissão.
  *
  * @author G01
  */
@@ -28,12 +28,8 @@ public interface MecanismoLeitura {
     String CAMINHO_FICHEIRO_VAZIO = "O caminho para o ficheiro não existe.\n";
     String SESSAO_TEMATICA_NAO_EXISTE = "A sessão temática à qual a submissão se destina, não existe.\n";
     String SESSAO_TEMATICA_NAO_ACEITA_SUBMISSAO = "A sessão temática à qual a submissão se destina não está dentro do periodo de submissão.\n";
-    String TOTAL_PALAVRAS_CHAVE = "O número total de palavas-chave da submissão, excede o limite.\n";
+    String TOTAL_PALAVRAS_CHAVE = "O número total de palavas-chave da submissão, deve estar entre 1 e 5.\n";
     String LISTA_AUTORES_FORMATO = "A lista de autores da submissão, não possui o formato correto.\n";
-    String AUTOR_NOME = "O nome do autor da submissão não existe.\n";
-    String AUTOR_EMAIL = "O email do autor da submisão não existe.\n";
-    String AUTOR_FILIACAO = "A instituição de afiliação do autor da submissão não existe.\n";
-    String AUTOR_EMAIL_FORMATO = "O email do autor não obdece ao formato\n";
     String AUTOR_CORRESPONDENTE_NAO_CONSTA_NA_LISTA = "O autor correspondente não consta na lista de autores.\n";
     String DATA_ADIANTADA = "A data de submissão é superior à data atual.\n";
 
