@@ -97,6 +97,10 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
      * Processo de Decisão.
      */
     private ProcessoDecisao processoDecisao;
+    /**
+     * Processo de análise estatística.
+     */
+    private ProcessoAnaliseEstatistica processoAnaliseEstatistica;
 
     /**
      * Estado da sessão temática.
@@ -927,5 +931,18 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
     @Override
     public boolean isStateValidoParaGerarAnaliseEstatisticas() {
         return this.estado.setEmSubmissaoCameraReady() || this.estado.setCameraReady();
+    }
+
+    /**
+     * Devolve um array com os valores totais da análise estatistica.
+     *
+     * @return array com os valores totais da análise estatística
+     */
+    public float[] getValoresTotaisEstatistica() {
+        float[] valoresTotais = null;
+        ListaRevisoes lr = this.processoDistribuicao.getListaRevisoes();
+        this.processoAnaliseEstatistica = new ProcessoAnaliseEstatistica(lr, this.listaSubmissoes, cp);
+        this.processoAnaliseEstatistica.getValoresEstatistica();
+        return valoresTotais;
     }
 }

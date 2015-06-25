@@ -21,6 +21,7 @@ import static org.junit.Assert.*;
 import utils.Data;
 
 /**
+ * Testa a classe SessaoTematica
  * @author G01
  */
 public class SessaoTematicaTest {
@@ -485,10 +486,10 @@ public class SessaoTematicaTest {
         instance.adicionarCP(new CP());
         instance.setEstado(new SessaoTematicaEmSubmissaoState(instance));
         instance.iniciarProcessoDetecao(listaTiposConflito);
-        Class <? extends SessaoTematicaState> expResult
-                = new SessaoTematicaEmLicitacaoState(instance).getClass();
-        Class <? extends SessaoTematicaState> result
-                = instance.getEstado().getClass();
+        Class<? extends SessaoTematicaState> expResult
+                            = new SessaoTematicaEmLicitacaoState(instance).getClass();
+        Class<? extends SessaoTematicaState> result
+                            = instance.getEstado().getClass();
         assertEquals(expResult, result);
     }
 
@@ -777,14 +778,14 @@ public class SessaoTematicaTest {
         boolean result = instance.isEstadoValidoParaDecidir();
         assertEquals(expResult, result);
     }
-    
+
     /**
      * Test of isStateValidoParaRemover method, of class SessaoTematica.
      */
     @Test
     public void testIsStateValidoParaRemover() {
         System.out.println("isStateValidoParaRemover");
-        Utilizador u = new Utilizador("fatima", "mail@isep.ipp.pt", "fafa","1235");
+        Utilizador u = new Utilizador("fatima", "mail@isep.ipp.pt", "fafa", "1235");
         SessaoTematica instance = this.sessaoTematica;
         instance.setEstado(new SessaoTematicaEmSubmissaoState(sessaoTematica));
         instance.getListaSubmissoes().adicionarSubmissao(submissao);
@@ -823,7 +824,7 @@ public class SessaoTematicaTest {
     /**
      * Teste do método novoProcessoDecisao, da classe SessaoTematica.
      */
-    @Test (expected = NullPointerException.class)
+    @Test(expected = NullPointerException.class)
     public void testNovoProcessoDecisao() {
         System.out.println("novoProcessoDecisao");
         SessaoTematica instance = this.sessaoTematica;
@@ -846,7 +847,7 @@ public class SessaoTematicaTest {
         boolean result = instance.adicionarProcessoDecisao(processoDecisao);
         assertEquals(expResult, result);
     }
-    
+
     /**
      * Test of isStateValidoParaGerarAnaliseEstatisticas method, of class
      * SessaoTematica.
@@ -859,5 +860,17 @@ public class SessaoTematicaTest {
         boolean expResult = true;
         boolean result = instance.isStateValidoParaGerarAnaliseEstatisticas();
         assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of getValoresTotaisEstatistica method, of class SessaoTematica.
+     */
+    @Test(expected = NullPointerException.class)
+    public void testGetValoresTotaisEstatistica() {
+        System.out.println("getValoresTotaisEstatistica");
+        SessaoTematica instance = this.sessaoTematica;
+        float[] expResult = null;
+        float[] result = instance.getValoresTotaisEstatistica();
+        assertArrayEquals(expResult, result, 0.0f);
     }
 }
