@@ -206,8 +206,10 @@ public class Submissao {
 
         Submissao outraSubmissao = (Submissao) outroObjecto;
 
-        return this.getArtigoInicial().equals(outraSubmissao.getArtigoInicial())
-                || this.getArtigoFinal().equals(outraSubmissao.getArtigoFinal());
+        return (getEstado() instanceof SubmissaoCriadaState
+                || getEstado() instanceof SubmissaoEmSubmissaoState)
+                        ? this.getArtigoInicial().equals(outraSubmissao.getArtigoInicial())
+                        : this.getArtigoFinal().equals(outraSubmissao.getArtigoFinal());
     }
 
     /**
@@ -268,30 +270,30 @@ public class Submissao {
     public boolean setEstadoRemovida() {
         return this.estado.setRemovida();
     }
-    
+
     /**
      * Devolve as características da submissão: título
-     * 
-     * @return Título do artigo 
+     *
+     * @return Título do artigo
      */
     @Override
     public String toString() {
-        return String.format("%s", getEstado() instanceof SubmissaoEmCameraReadyState ?
-                getArtigoFinal().getTitulo() : 
-                getArtigoInicial().getTitulo());
+        return String.format("%s", getEstado() instanceof SubmissaoEmCameraReadyState
+                ? getArtigoFinal().getTitulo()
+                : getArtigoInicial().getTitulo());
     }
-    
+
     /**
      * Altera o estado da submissão para SubmissaoAceite.
      */
-    public void alterarEstadoParaAceite(){
-            this.estado.setAceite();
+    public void alterarEstadoParaAceite() {
+        this.estado.setAceite();
     }
-    
+
     /**
      * Altera o estado da submissão para SubmissaoRejeitada.
      */
-    public void alterarEstadoParaRejeitado(){
-            this.estado.setRejeitada();
+    public void alterarEstadoParaRejeitado() {
+        this.estado.setRejeitada();
     }
 }
