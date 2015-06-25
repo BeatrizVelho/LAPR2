@@ -24,7 +24,7 @@ public class ListaDecisoes {
 
     /**
      * Devolve lista de decisões.
-     * 
+     *
      * @return listaDecisoes.
      */
     public List<Decisao> getListaDecisoes() {
@@ -52,7 +52,20 @@ public class ListaDecisoes {
         return listaDecisoes.add(decisao);
     }
     
-     /**
+    /**
+     * Cria uma notificação de cada Decisão.
+     * 
+     * @return Resultado da notificação.
+     */
+    public boolean criarNotificacao() {
+        boolean result = true;
+        for (Decisao element : listaDecisoes) {
+            result = result && element.criarNotificacao();
+        }
+        return result;
+    }
+
+    /**
      * Compara dois objetos entre si. Comparando primariamente a posição de
      * memória, seguida do conteudo e das classes as quais cada um deles
      * pertence, e finalmente os seus atributos, lista de decisões .
@@ -75,5 +88,5 @@ public class ListaDecisoes {
 
         return this.listaDecisoes.equals(outraLista.listaDecisoes);
     }
-    
+
 }
