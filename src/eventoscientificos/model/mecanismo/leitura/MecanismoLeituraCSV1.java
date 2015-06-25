@@ -136,7 +136,7 @@ public class MecanismoLeituraCSV1 implements MecanismoLeitura {
             artigo.setTitulo(titulo);
             artigo.setResumo(resumo);
             artigo.setPalavrasChave(listaPalavrasChave);
-            artigo.setFicheiro(ficheiro);
+            artigo.setFicheiro(caminhoFicheiro);
             artigo.setDataSubmissao(dataSubmissao);
 
             ListaAutores listaAutoresArtigo = artigo.getListaAutores();
@@ -173,8 +173,7 @@ public class MecanismoLeituraCSV1 implements MecanismoLeitura {
             if (artigo.getAutorCorrespondente() == null) {
                 throw new IllegalArgumentException(MecanismoLeitura.AUTOR_CORRESPONDENTE_NAO_CONSTA_NA_LISTA);
             }
-            
-            submissao.alterarEstadoSubmissao();
+
             submissao.adicionarArtigo(artigo);
             listaSubmissoes.validarSubmissao(submissao);
             listaSubmissoes.adicionarSubmissao(submissao);

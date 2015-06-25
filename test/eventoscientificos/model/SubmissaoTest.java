@@ -5,9 +5,12 @@ import eventoscientificos.model.state.submissao.SubmissaoEmLicitacaoState;
 import eventoscientificos.model.state.submissao.SubmissaoEmSubmissaoState;
 import eventoscientificos.model.state.submissao.SubmissaoRejeitadaState;
 import eventoscientificos.model.state.submissao.SubmissaoState;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
+import utils.Data;
 
 /**
  * @author G01
@@ -58,11 +61,9 @@ public class SubmissaoTest {
     public void testSetAndGetEstado() {
         System.out.println("setAndGetEstado");
         Submissao instance = new Submissao();
-        System.out.println(instance.getEstado());
         SubmissaoState expResult = new SubmissaoAceiteState(instance);
         instance.setEstado(expResult);
         SubmissaoState result = instance.getEstado();
-        System.out.println(instance.getEstado());
         assertEquals(expResult, result);
     }
 
@@ -75,7 +76,6 @@ public class SubmissaoTest {
         Submissao instance = new Submissao();
         boolean expResult = true;
         boolean result = instance.alterarEstadoSubmissao();
-        System.out.println(instance.getEstado());
         assertEquals(expResult, result);
     }
 
@@ -89,7 +89,6 @@ public class SubmissaoTest {
         Submissao instance = new Submissao();
         boolean expResult = true;
         boolean result = instance.adicionarArtigo(artigo);
-        System.out.println(instance.getEstado());
         assertEquals(expResult, result);
     }
 
@@ -102,10 +101,8 @@ public class SubmissaoTest {
         Artigo artigo = this.artigoFinal;
         Submissao instance = new Submissao();
         instance.setEstado(new SubmissaoAceiteState(instance));
-        System.out.println(instance.getEstado());
         boolean expResult = true;
         boolean result = instance.adicionarArtigo(artigo);
-        System.out.println(instance.getEstado());
         assertEquals(expResult, result);
     }
 
@@ -225,12 +222,18 @@ public class SubmissaoTest {
     public void testCriarCloneSubmissao() {
         System.out.println("criarCloneSubmissao");
         Submissao instance = new Submissao();
-        instance.setArtigoInicial(new Artigo("Teste", "123", "C:777"));
-        instance.setArtigoFinal(new Artigo());
+        Artigo artigo = new Artigo();
+        artigo.setTitulo("Era uma vez um teste...");
+        List<String> palavrasChave = new ArrayList();
+        palavrasChave.add("20 valores");
+        artigo.setPalavrasChave(palavrasChave);
+        artigo.setAutorCorrespondente(new AutorCorrespondente(this.utilizador, new InstituicaoAfiliacao("ISEP")));
+        artigo.setAutorSubmissor(new Autor(this.utilizador, new InstituicaoAfiliacao("ISEP")));
+        artigo.setDataSubmissao(Data.dataAtual());
+        instance.setArtigoInicial(artigo);
         Submissao novaInstance = instance.criarCloneSubmissao();
         novaInstance.setArtigoInicial(this.artigoInicial);
-        novaInstance.setArtigoFinal(this.artigoFinal);
-        boolean expResult = true;
+        boolean expResult = false;
         boolean result = instance.equals(novaInstance);
         assertEquals(expResult, result);
     }
@@ -295,7 +298,6 @@ public class SubmissaoTest {
     @Test
     public void testIsAutorArtigo() {
         System.out.println("isAutorArtigo");
-    //    Utilizador u = this.utilizador;
         Utilizador utilizador = new Utilizador("susana", "peixoto@gmail.com ", "susy", "1234");
         Submissao instance = new Submissao();
         instance.setEstado(new SubmissaoEmSubmissaoState(instance));

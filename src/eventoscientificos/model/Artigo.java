@@ -1,5 +1,6 @@
 package eventoscientificos.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import utils.Data;
 
@@ -66,27 +67,27 @@ public class Artigo {
     private static final String FICHEIRO_POR__OMISSAO = "Sem Ficheiro!";
 
     /**
-     * Constroi uma instancia de artigo com o titulo, o resumo e o ficheiro.
-     *
-     * @param titulo Titulo do artigo.
-     * @param resumo Resumo do artigo.
-     * @param ficheiro Caminho para o artigo.
+     * Constrói uma instância de artigo com os dados por omissão.
      */
-    public Artigo(String titulo, String resumo, String ficheiro) {
-        setTitulo(titulo);
-        setResumo(resumo);
-        setFicheiro(ficheiro);
-        this.listaAutores = new ListaAutores();
-        setAutorCorrespondente(getAutorCorrespondente());
-        setAutorSubmissor(getAutorSubmissor());
-        setAutorSubmissor(getAutorSubmissor());
-    }
-
     public Artigo() {
         this.titulo = TITULO_POR_OMISSAO;
         this.resumo = RESUMO_POR_OMISSAO;
         this.ficheiro = FICHEIRO_POR__OMISSAO;
         this.listaAutores = new ListaAutores();
+    }
+
+    /**
+     * Constrói uma cópia de um artigo com os mesmos atributos que o artigo
+     * passado por parametro.
+     * 
+     * @param artigo Artigo que vai ser copiado.
+     */
+    public Artigo(Artigo artigo) {
+        setTitulo(artigo.getTitulo());
+        setResumo(artigo.getResumo());
+        setPalavrasChave(new ArrayList((ArrayList)artigo.getPalavrasChave()));
+        this.listaAutores = new ListaAutores(artigo.getListaAutores());
+        setAutorCorrespondente(artigo.getAutorCorrespondente());
     }
 
     /**

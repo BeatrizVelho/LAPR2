@@ -40,8 +40,10 @@ public class Submissao {
      * @param submissao Submissao que irá ser copiada.
      */
     public Submissao(Submissao submissao) {
-        setArtigoInicial(submissao.getArtigoInicial());
-        setArtigoFinal(submissao.getArtigoFinal());
+        setArtigoInicial(new Artigo(submissao.getArtigoInicial()));
+        if (submissao.getArtigoFinal() != null) {
+            setArtigoFinal(new Artigo(submissao.getArtigoFinal()));
+        }
         setEstado(submissao.getEstado());
     }
 
@@ -115,18 +117,11 @@ public class Submissao {
     /**
      * Altera o estado da submissão para EmSubmissão.
      *
-     * @return Verdadeiro
+     * @return Verdadeiro se for possivel alterar o estado da submissão para
+     * em submissão.
      */
     public boolean alterarEstadoSubmissao() {
-        if (this.estado instanceof SubmissaoCriadaState) {
-            this.estado.setEmSubmissao();
-        }
-
-        if(this.estado instanceof SubmissaoAceiteState) {
-            this.estado.setEmCameraReady();
-        }
-        
-        return true;
+        return this.estado.setEmSubmissao();
     }
 
     /**
@@ -211,9 +206,9 @@ public class Submissao {
         }
 
         Submissao outraSubmissao = (Submissao) outroObjecto;
-
-        return (getEstado() instanceof SubmissaoCriadaState
-                || getEstado() instanceof SubmissaoEmSubmissaoState)
+        System.out.println(getEstado());
+        return (this.getEstado() instanceof SubmissaoCriadaState
+                || this.getEstado() instanceof SubmissaoEmSubmissaoState)
                         ? this.getArtigoInicial().equals(outraSubmissao.getArtigoInicial())
                         : this.getArtigoFinal().equals(outraSubmissao.getArtigoFinal());
     }

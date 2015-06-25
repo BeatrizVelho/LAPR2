@@ -56,6 +56,19 @@ public class Autor {
     }
 
     /**
+     * Constrói uma cópia de autor, com os mesmos atributos que o autor passado
+     * por parametro.
+     * 
+     * @param autor Autor que irá ser copiado.
+     */
+    public Autor(Autor autor) {
+        setNome(autor.getNome());
+        setEmail(autor.getEmail());
+        setInstituicaoAfiliacao(autor.getInstituicaoAfiliacao());
+        this.utilizador = autor.getUtilizador();
+    }
+    
+    /**
      * Devolve o nome do autor.
      *
      * @return Nome do autor.

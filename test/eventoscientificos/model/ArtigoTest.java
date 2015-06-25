@@ -17,7 +17,7 @@ public class ArtigoTest {
     private Artigo artigo;
 
     public ArtigoTest() {
-        this.artigo = new Artigo("titulo", "saude", "D:\\ISEP\\1.º Ano\\2.º Semestre");
+        this.artigo = new Artigo();
     }
 
     /**
@@ -149,8 +149,9 @@ public class ArtigoTest {
     @Test
     public void testEqualsNot() {
         System.out.println("equalsNot");
-        Object outroObjeto = new Artigo("titulo1234", "saude", "D:\\ISEP\\1.º Ano\\2.º Semestre");
+        Object outroObjeto = new Artigo();
         Artigo instance = this.artigo;
+        instance.setTitulo("E tudo o vento testou...");
         boolean expResult = false;
         boolean result = instance.equals(outroObjeto);
         assertEquals(expResult, result);
