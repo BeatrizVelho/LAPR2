@@ -5,8 +5,11 @@
  */
 package eventoscientificos.model;
 
+import eventoscientificos.model.state.evento.EventoEmCameraReadyState;
 import eventoscientificos.model.state.evento.EventoEmSubmissaoCameraReadyState;
 import eventoscientificos.model.state.submissao.SubmissaoAceiteState;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import utils.Data;
@@ -25,6 +28,68 @@ public class ProcessoAnaliseEstatisticaTest {
     private ListaRevisoes listaRev;
 
     public ProcessoAnaliseEstatisticaTest() {
+
+    }
+
+    /**
+     * Test of getValoresEstatistica method, of class
+     * ProcessoAnaliseEstatistica.
+     */
+    @Test
+    public void testGetValoresEstatistica() {
+        System.out.println("getValoresEstatistica");
+        Empresa empresa = inicializarModeloTeste();
+        RegistoEventos re = empresa.getRegistoEventos();
+        List<Evento> listaEventos = re.getListaEventosGerarAnaliseEstatistica();
+        System.out.println(re.getListaSubmissao().size());
+        re.getTodosRevisores(listaEventos);
+        ProcessoAnaliseEstatistica instance = new ProcessoAnaliseEstatistica(re.getListaRevisoes(), re.getListaSubmissao(), re.getListaRevisores());
+        int result = instance.getValoresEstatistica().length;
+        int expResult = re.getListaRevisores().size();
+        assertEquals(expResult, result);
+    }
+
+    public Empresa inicializarModeloTeste() {
+        Empresa empresa = new Empresa();
+        Utilizador u1 = new Utilizador("Beatriz Velho", "beatriz_velho@gmail.com", "beaVelho", "1234");
+        Utilizador u2 = new Utilizador("Soraia Freitas", "freitas.soraia@gmail.com", "SuFreitas", "2345");
+        Utilizador u3 = new Utilizador("Nuno Sousa", "sousa@isep.ipp.pt", "sousaN", "3456");
+        Utilizador u4 = new Utilizador("Susana Vieira", "vieirinha@isep.ipp.pt", "VieirinhaSusy", "3457");
+        Utilizador u5 = new Utilizador("Eduardo Ramalho", "eduardo_rama@hotmail.com", "edURamalho", "567810");
+        Utilizador u6 = new Utilizador("Laura Freitas", "lauraFreitas@sapo.ipp.pt", "lauraF", "9876");
+        Utilizador u7 = new Utilizador("Fernando Mesquita", "mesquita_fernando@gmail.com", "mesquita_fernando", "1010");
+
+        // criar objetos do tipo revisor
+        Revisor r1 = new Revisor(u1);
+        Revisor r2 = new Revisor(u2);
+        Revisor r3 = new Revisor(u3);
+        Revisor r4 = new Revisor(u4);
+        Revisor r5 = new Revisor(u5);
+        Revisor r6 = new Revisor(u6);
+        Revisor r7 = new Revisor(u7);
+
+        //CP evento1 e 2
+        List<Revisor> lr1 = new ArrayList<>();
+        lr1.add(r1);
+        lr1.add(r2);
+        lr1.add(r4);
+        lr1.add(r7);
+        lr1.add(r6);
+
+        List<Revisor> lr2 = new ArrayList<>();
+        lr2.add(r1);
+        lr2.add(r2);
+        lr2.add(r4);
+        lr2.add(r7);
+        lr2.add(r3);
+        lr2.add(r6);
+
+        CP cpe1 = new CP();
+        cpe1.getListaRevisores().addAll(lr1);
+        CP cpe2 = new CP();
+        cpe2.getListaRevisores().addAll(lr2);
+
+        // criar Data de inicio e de fim de evento
         String titulo = "sem titulo";
         String descricao = "descricao";
         Local local = new Local("local");
@@ -35,87 +100,122 @@ public class ProcessoAnaliseEstatisticaTest {
         Data dataFimSubmissaoCameraReady = new Data(2016, 8, 30);
         Data dataInicio = new Data(2016, 10, 9);
         Data dataFim = new Data(2017, 6, 10);
-        RegistoEventos instance = new RegistoEventos();
-        this.evento = new Evento(titulo, descricao, local, dataInicioSubmissao,
+
+        RegistoEventos instance = empresa.getRegistoEventos();
+
+        Evento evento1 = new Evento(titulo, descricao, local, dataInicioSubmissao,
                             dataFimSubmissao, dataInicioDistribuicao, dataFimRevisao,
                             dataFimSubmissaoCameraReady, dataInicio, dataFim);
-        this.evento.setEstado(new EventoEmSubmissaoCameraReadyState(evento));
+        evento1.adicionarCP(cpe1);
+        evento1.novoOrganizador(u7);
+        evento1.setEstado(new EventoEmCameraReadyState(evento1));
 
-        ProcessoDistribuicao pd = new ProcessoDistribuicao();
+        Evento evento2 = new Evento("MarVermelho", descricao, local, dataInicioSubmissao,
+                            dataFimSubmissao, dataInicioDistribuicao, dataFimRevisao,
+                            dataFimSubmissaoCameraReady, dataInicio, dataFim);
+        evento2.adicionarCP(cpe2);
+        evento2.novoOrganizador(u6);
+        evento2.setEstado(new EventoEmCameraReadyState(evento2));
 
-        this.utilizador = new Utilizador(
-                            "pedro", "1140781@isep.ipp.pt", "pedro", "12345");
-        Utilizador utilizador2 = new Utilizador(
-                            "fatima", "susana@isep.ipp.pt", "susana", "12345");
+        Evento evento3 = new Evento("MarVermelho", descricao, local, dataInicioSubmissao,
+                            dataFimSubmissao, dataInicioDistribuicao, dataFimRevisao,
+                            dataFimSubmissaoCameraReady, dataInicio, dataFim);
+        evento3.adicionarCP(cpe1);
+        evento3.novoOrganizador(u5);
+        evento3.setEstado(new EventoEmCameraReadyState(evento3));
 
-        Artigo artigoInicial = new Artigo();
-        Artigo artigoFinal = new Artigo();
-        Submissao submissao = new Submissao();
-        submissao.setEstado(new SubmissaoAceiteState(submissao));
-        submissao.setArtigoInicial(new Artigo("titulo", "saude", "D:\\ISEP\\1.º Ano\\2.º Semestre"));
-        submissao.setArtigoFinal(artigoFinal);
+        //adicionar eventos ao registoEventos
+        instance.adicionarEvento(evento2);
+        instance.adicionarEvento(evento1);
+        instance.adicionarEvento(evento3);
 
-        Submissao submissao2 = new Submissao(submissao);
-        submissao2.setEstado(new SubmissaoAceiteState(submissao));
+        //artigos
+        Artigo art1 = new Artigo();
+        art1.setTitulo("titulo");
+        art1.setResumo("nana");
+        art1.setFicheiro("fich1");
 
-        this.revisao = new Revisao(submissao, new Revisor(utilizador));
-        revisao.setAdequacaoArtigo(5);
-        revisao.setConfiancaRevisor(4);
-        revisao.setOriginalidadeArtigo(3);
-        revisao.setQualidadeArtigo(4);
-        revisao.setRecomendacaoGlobal(2);
-        revisao.setTextoJustificativo("ola");
+        Artigo art2 = new Artigo();
+        art2.setTitulo("Art");
+        art2.setResumo("fifi");
+        art2.setFicheiro("fich2");
 
-        Revisao revisao2 = new Revisao(submissao, new Revisor(utilizador2));
-        revisao2.setAdequacaoArtigo(5);
-        revisao2.setConfiancaRevisor(4);
-        revisao2.setOriginalidadeArtigo(3);
-        revisao2.setQualidadeArtigo(4);
-        revisao2.setRecomendacaoGlobal(2);
-        revisao2.setTextoJustificativo("mimi");
+        Artigo art3 = new Artigo();
+        art3.setTitulo("title");
+        art3.setResumo("xaxa");
+        art3.setFicheiro("fich3");
 
-        Revisao revisao3 = new Revisao(submissao2, new Revisor(utilizador));
-        revisao3.setAdequacaoArtigo(5);
-        revisao3.setConfiancaRevisor(4);
-        revisao3.setOriginalidadeArtigo(3);
-        revisao3.setQualidadeArtigo(4);
-        revisao3.setRecomendacaoGlobal(2);
-        revisao3.setTextoJustificativo("fafa");
+        //Submissões
+        Submissao sub1 = new Submissao();
+        sub1.setArtigoInicial(art1);
+        sub1.setArtigoFinal(new Artigo());
+        sub1.setEstado(new SubmissaoAceiteState(sub1));
 
-        Revisao revisao4 = new Revisao(submissao2, new Revisor(utilizador2));
-        revisao4.setAdequacaoArtigo(5);
-        revisao4.setConfiancaRevisor(4);
-        revisao4.setOriginalidadeArtigo(3);
-        revisao4.setQualidadeArtigo(4);
-        revisao4.setRecomendacaoGlobal(2);
-        revisao4.setTextoJustificativo("tatat");
+        Submissao sub2 = new Submissao();
+        sub2.setArtigoInicial(art2);
+        sub2.setArtigoFinal(new Artigo());
 
-        listaRev = new ListaRevisoes();
-        listaRev.getListaRevisoes().add(revisao);
-        listaRev.getListaRevisoes().add(revisao2);
-        listaRev.getListaRevisoes().add(revisao3);
-        listaRev.getListaRevisoes().add(revisao4);
+        Submissao sub3 = new Submissao();
+        sub3.setArtigoInicial(art3);
+        sub3.setArtigoFinal(new Artigo());
+        sub3.setEstado(new SubmissaoAceiteState(sub3));
+        //Revisoes
+        List<Revisao> listaRev1 = new ArrayList<>();
+        listaRev1.add(new Revisao(sub1, r1));
+        listaRev1.add(new Revisao(sub2, r1));
+        listaRev1.add(new Revisao(sub3, r3));
+        listaRev1.add(new Revisao(sub1, r4));
 
-        listaSubmissao = new ListaSubmissoes();
-        listaSubmissao.adicionarSubmissao(submissao);
-        listaSubmissao.adicionarSubmissao(submissao2);
+        listaRev1.get(0).adicionarDadosRevisao(5, 5, 5, 5, 2, "teste0");
+        listaRev1.get(1).adicionarDadosRevisao(5, 5, 5, 5, 2, "teste1");
+        listaRev1.get(2).adicionarDadosRevisao(5, 5, 5, 5, 2, "teste2");
+        listaRev1.get(3).adicionarDadosRevisao(5, 5, 5, 5, 2, "teste3");
 
-        CP cp = new CP();
-        cp.novoRevisor(utilizador);
-        cp.novoRevisor(utilizador2);
-        this.evento.adicionarCP(cp);
-    }
+        List<Revisao> listaRev2 = new ArrayList<>();
+        listaRev2.add(new Revisao(sub2, r4));
+        listaRev2.add(new Revisao(sub3, r6));
+        listaRev2.add(new Revisao(sub1, r7));
 
-    /**
-     * Test of getValoresEstatistica method, of class
-     * ProcessoAnaliseEstatistica.
-     */
-    @Test
-    public void testGetValoresEstatistica() {
-        System.out.println("getValoresEstatistica");
+        listaRev2.get(0).adicionarDadosRevisao(5, 5, 5, 5, 2, "teste4");
+        listaRev2.get(1).adicionarDadosRevisao(5, 5, 5, 5, 2, "teste5");
+        listaRev2.get(2).adicionarDadosRevisao(5, 5, 5, 5, 2, "teste6");
 
-        ProcessoAnaliseEstatistica instance = new ProcessoAnaliseEstatistica(listaRev, listaSubmissao, this.evento.getCP());
-        instance.getValoresEstatistica();
+        List<Revisao> listaRev3 = new ArrayList<>();
+        listaRev3.add(new Revisao(sub2, r6));
+        listaRev3.add(new Revisao(sub3, r2));
+        listaRev3.get(0).adicionarDadosRevisao(5, 5, 5, 5, 2, "teste7");
+        listaRev3.get(1).adicionarDadosRevisao(5, 5, 5, 5, 2, "teste8");
+
+        //iniciar o processo distribuicao e a lista de revisões.
+        evento1.adicionarProcessoDistribuicao(new ProcessoDistribuicao());
+        evento1.getProcessoDistribuicao().getListaRevisoes().getListaRevisoes().addAll(listaRev1);
+
+        evento2.adicionarProcessoDistribuicao(new ProcessoDistribuicao());
+        evento2.getProcessoDistribuicao().getListaRevisoes().getListaRevisoes().addAll(listaRev2);
+
+        evento3.adicionarProcessoDistribuicao(new ProcessoDistribuicao());
+        evento3.getProcessoDistribuicao().getListaRevisoes().getListaRevisoes().addAll(listaRev3);
+
+        evento1.getListaSubmissoes().adicionarSubmissao(sub1);
+        sub1.setEstado(new SubmissaoAceiteState(sub1));
+        evento1.getListaSubmissoes().adicionarSubmissao(sub2);
+        sub2.setEstado(new SubmissaoAceiteState(sub2));
+        evento1.getListaSubmissoes().adicionarSubmissao(sub3);
+        sub3.setEstado(new SubmissaoAceiteState(sub3));
+        evento2.getListaSubmissoes().adicionarSubmissao(sub1);
+        sub1.setEstado(new SubmissaoAceiteState(sub1));
+        evento2.getListaSubmissoes().adicionarSubmissao(sub2);
+        sub2.setEstado(new SubmissaoAceiteState(sub2));
+        evento2.getListaSubmissoes().adicionarSubmissao(sub3);
+        sub3.setEstado(new SubmissaoAceiteState(sub3));
+        evento3.getListaSubmissoes().adicionarSubmissao(sub1);
+        sub1.setEstado(new SubmissaoAceiteState(sub1));
+        evento3.getListaSubmissoes().adicionarSubmissao(sub2);
+        sub2.setEstado(new SubmissaoAceiteState(sub2));
+        evento3.getListaSubmissoes().adicionarSubmissao(sub3);
+        sub3.setEstado(new SubmissaoAceiteState(sub3));
+
+        return empresa;
     }
 
 }
