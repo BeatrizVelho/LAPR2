@@ -334,4 +334,19 @@ public class ListaSessoesTematicasTest {
         SessaoTematica result = instance.getSessaoTematicaComCodigoUnico(codigoUnico);
         assertEquals(expResult, result);
     }
+    
+    /**
+     * Test of getSessaoTematicaComCodigoUnico method, of class ListaSessoesTematicas.
+     */
+    @Test
+    public void testGetSessaoTematicaComCodigoUnicoNull() {
+        System.out.println("getSessaoTematicaComCodigoUnico");
+        String codigoUnico = "codigo";
+        ListaSessoesTematicas instance = new ListaSessoesTematicas(evento);
+        instance.adicionarSessaoTematica(this.sessaoTematica);
+        SessaoTematica expResult = null;
+        SessaoTematica result = instance.getSessaoTematicaComCodigoUnico(codigoUnico);
+        assertEquals(expResult, result);
+    }
+    
 }
