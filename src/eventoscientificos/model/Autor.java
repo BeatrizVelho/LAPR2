@@ -98,22 +98,22 @@ public class Autor {
      */
     public void setNome(String nome) {
         if (nome.trim().isEmpty()) {
-            throw new IllegalArgumentException("Nome do utilizador nao pode"
-                    + " estar vazio");
+            throw new IllegalArgumentException("Nome do autor nao pode estar"
+                    + " vazio");
         }
         if (nome.contains("[0-9]+")) {
 
-            throw new IllegalArgumentException("Nome do utilizador nao pode "
-                    + "conter numeros");
+            throw new IllegalArgumentException("Nome do autor nao pode conter"
+                    + " numeros");
         }
         if (nome.length() < 2) {
-            throw new IllegalArgumentException("Nome do utilizador tem de"
-                    + " ter pelo menos 2 letras");
+            throw new IllegalArgumentException("Nome do autor tem de ter pelo"
+                    + " menos 2 letras");
 
         }
         if (nome.contains("[()<>,;:.\\[\\]{}]\\\\\\\\")) {
-            throw new IllegalArgumentException("Nome do utilizador nao pode "
-                    + "conter caracteres");
+            throw new IllegalArgumentException("Nome do autor nao pode conter"
+                    + " caracteres");
         }
         this.nome = nome;
     }
@@ -125,17 +125,16 @@ public class Autor {
      */
     public void setEmail(String email) {
         if (email.trim().isEmpty()) {
-            throw new IllegalArgumentException("Email do utilizador não "
-                    + "pode estar vazio.");
+            throw new IllegalArgumentException("Email do autor não pode estar"
+                    + " vazio.");
         }
         if (email.contains("[()<>,;:.\\[\\]{}]\\\\\\\\")) {
-            throw new IllegalArgumentException("Email do "
-                    + "utilizador não pode conter "
+            throw new IllegalArgumentException("Email do autor não pode conter "
                     + "caracteres.");
         }
         if (!(email.matches(".+@.+\\..{2,}"))) {
-            throw new IllegalArgumentException("Email do utilizador"
-                    + " tem de obedecer a estrutura");
+            throw new IllegalArgumentException("Email do autor tem de obedecer"
+                    + " a estrutura");
         }
 
         this.email = email;

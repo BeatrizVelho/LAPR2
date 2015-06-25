@@ -5,7 +5,6 @@ import eventoscientificos.model.state.submissao.SubmissaoCriadaState;
 import eventoscientificos.model.state.submissao.SubmissaoEmCameraReadyState;
 import eventoscientificos.model.state.submissao.SubmissaoEmSubmissaoState;
 import eventoscientificos.model.state.submissao.SubmissaoRemovidaState;
-import eventoscientificos.model.state.submissao.SubmissaoRevistaState;
 import eventoscientificos.model.state.submissao.SubmissaoState;
 
 /**
@@ -27,6 +26,11 @@ public class Submissao {
      * Estado da submissao.
      */
     private SubmissaoState estado;
+    
+    /**
+     * Autor correspondente da submissão.
+     */
+    private AutorCorrespondente autorCorrespondente;
 
     /**
      * Constói uma instância de Submissão.
@@ -71,6 +75,15 @@ public class Submissao {
      */
     public SubmissaoState getEstado() {
         return this.estado;
+    }
+    
+    /**
+     * Devolve o Autor Correspondente da submissão.
+     * 
+     * @return AutorCorrespondente.
+     */
+    public AutorCorrespondente getAutorCorrespondente(){
+        return this.artigoInicial.getAutorCorrespondente();
     }
 
     /**
@@ -207,10 +220,8 @@ public class Submissao {
 
         Submissao outraSubmissao = (Submissao) outroObjecto;
 
-        return (getEstado() instanceof SubmissaoCriadaState 
-                || getEstado() instanceof SubmissaoEmSubmissaoState) 
-                ? this.getArtigoInicial().equals(outraSubmissao.getArtigoInicial())
-                : this.getArtigoFinal().equals(outraSubmissao.getArtigoFinal());
+        return this.getArtigoInicial().equals(outraSubmissao.getArtigoInicial())
+                || this.getArtigoFinal().equals(outraSubmissao.getArtigoFinal());
     }
 
     /**
