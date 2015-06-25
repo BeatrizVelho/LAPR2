@@ -39,8 +39,11 @@ public interface MecanismoLeitura {
      * @param registoUtilizadores Registo de utilizadores da empresa.
      * @param evento Evento ao qual a submissão se destina.
      * @param ficheiro Caminho para o ficheiro.
+     * 
+     * @return Verdadeiro se a submissão for importada com sucesso e falso caso
+     * não o seja.
      */
-    void lerFicheiroSubmissao(
+    boolean lerFicheiroSubmissao(
             RegistoUtilizadores registoUtilizadores,
             Evento evento, String ficheiro);
 
