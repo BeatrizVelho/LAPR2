@@ -5,11 +5,14 @@
  */
 package eventoscientificios.view;
 
-import eventoscientificos.controllers.SubmeterArtigoController;
 import eventoscientificos.controllers.SubmeterArtigoFinalController;
+import eventoscientificos.model.Autor;
 import eventoscientificos.model.Empresa;
+import eventoscientificos.model.Submissao;
 import java.awt.Frame;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -30,16 +33,26 @@ public class SubmeterArtigoFinalUI extends javax.swing.JDialog {
      * @param empresa
      */
     public SubmeterArtigoFinalUI(java.awt.Frame parent, boolean modal, Empresa empresa) {
-        super(parent, modal);
+        super(parent, "Submeter artigo científico final", modal);
         this.framePai = parent;
         this.controller = new SubmeterArtigoFinalController(empresa);
+        this.controller.getListaSubmissiveisAceitarArtigoFinal();
         setResizable(false);
         initComponents();
         getRootPane().setDefaultButton(this.btn_selecionarSubmissivel);
         setLocationRelativeTo(null);
-        // Verificar se existem eventos/sessões que aceitem revisões de artigos.
-        setVisible(true);
-        pack();
+        if (controller.getListaSubmissiveis().isEmpty()) {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Não existem eventos ou sessões temáticas onde lhe é "
+                    + "possível submeter artigos finais.",
+                    "Submeter Artigo Final",
+                    JOptionPane.ERROR_MESSAGE);
+            dispose();
+        } else {
+            setVisible(true);
+            pack();
+        }
     }
 
     /**
@@ -52,7 +65,7 @@ public class SubmeterArtigoFinalUI extends javax.swing.JDialog {
     private void initComponents() {
 
         pnl_selecionarSubmissivel = new javax.swing.JPanel();
-        cmb_selecionarSubmissivel = new javax.swing.JComboBox();
+        cmb_selecionarSubmissivel = new javax.swing.JComboBox(this.controller.getListaSubmissiveis().toArray());
         btn_selecionarSubmissivel = new javax.swing.JButton();
         pnl_selecionarSubmissao = new javax.swing.JPanel();
         btn_selecionarSubmissao = new javax.swing.JButton();
@@ -113,7 +126,7 @@ public class SubmeterArtigoFinalUI extends javax.swing.JDialog {
                 .addGroup(pnl_selecionarSubmissivelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmb_selecionarSubmissivel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_selecionarSubmissivel))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pnl_selecionarSubmissao.setBorder(javax.swing.BorderFactory.createTitledBorder("Selecione a submissão para a qual quer submeter a versão final"));
@@ -355,12 +368,12 @@ public class SubmeterArtigoFinalUI extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnl_listaAutores, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnl_listaAutores, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 839, Short.MAX_VALUE)
                     .addComponent(pnl_selecionarSubmissivel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnl_selecionarSubmissao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnl_informacoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnl_selecionarAutorCorrespondente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnl_ficheiro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnl_selecionarAutorCorrespondente, javax.swing.GroupLayout.DEFAULT_SIZE, 839, Short.MAX_VALUE)
+                    .addComponent(pnl_ficheiro, javax.swing.GroupLayout.DEFAULT_SIZE, 839, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btn_seguinteInfo)
@@ -382,11 +395,11 @@ public class SubmeterArtigoFinalUI extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnl_informacoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnl_listaAutores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnl_listaAutores, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnl_selecionarAutorCorrespondente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnl_selecionarAutorCorrespondente, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnl_ficheiro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnl_ficheiro, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_cancelar)
@@ -400,7 +413,12 @@ public class SubmeterArtigoFinalUI extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_selecionarSubmissivelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_selecionarSubmissivelActionPerformed
-        //int indice = this.cmb_selecionarSubmissivel.getSelectedIndex();
+        int indice = this.cmb_selecionarSubmissivel.getSelectedIndex();
+        this.controller.selecionarSubmissivel(indice);
+
+        for (Submissao submissao : this.controller.getListaSubmissoes()) {
+            this.cmb_selecionarSubmissao.addItem(submissao);
+        }
 
         this.cmb_selecionarSubmissivel.setEnabled(false);
         this.btn_selecionarSubmissivel.setEnabled(false);
@@ -410,7 +428,8 @@ public class SubmeterArtigoFinalUI extends javax.swing.JDialog {
     }//GEN-LAST:event_btn_selecionarSubmissivelActionPerformed
 
     private void btn_selecionarSubmissaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_selecionarSubmissaoActionPerformed
-        //int indice = this.cmb_selecionarSubmissivel.getSelectedIndex();
+        int indice = this.cmb_selecionarSubmissao.getSelectedIndex();
+        this.controller.selecionarSubmissaoAceite(indice);
 
         this.pnl_selecionarSubmissivel.setVisible(false);
         this.pnl_selecionarSubmissao.setVisible(false);
@@ -423,18 +442,51 @@ public class SubmeterArtigoFinalUI extends javax.swing.JDialog {
 
     private void btn_seguinteInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_seguinteInfoActionPerformed
 
-        this.pnl_informacoes.setVisible(false);
-        this.btn_seguinteInfo.setVisible(false);
-        this.pnl_listaAutores.setVisible(true);
-        this.btn_seguinteAutores.setVisible(true);
-        getRootPane().setDefaultButton(this.btn_seguinteAutores);
-        pack();
-        setLocationRelativeTo(null);
+        List<javax.swing.JTextField> listaTextFieldPalavrasChave
+                = new ArrayList();
+        listaTextFieldPalavrasChave.add(txt_palavraChave1);
+        listaTextFieldPalavrasChave.add(txt_palavraChave2);
+        listaTextFieldPalavrasChave.add(txt_palavraChave3);
+        listaTextFieldPalavrasChave.add(txt_palavraChave4);
+        listaTextFieldPalavrasChave.add(txt_palavraChave5);
+
+        try {
+            List<String> palavrasChave = new ArrayList();
+            for (javax.swing.JTextField textFieldpalavraChave
+                    : listaTextFieldPalavrasChave) {
+
+                String palavraChave;
+                if (!(palavraChave
+                        = textFieldpalavraChave.getText()).isEmpty()) {
+                    palavrasChave.add(palavraChave);
+                }
+            }
+
+            this.controller.adicionarDadosArtigoFinal(this.txt_titulo.getText(),
+                    this.txtA_resumo.getText(), palavrasChave);
+            this.pnl_informacoes.setVisible(false);
+            this.btn_seguinteInfo.setVisible(false);
+            this.pnl_listaAutores.setVisible(true);
+            this.btn_seguinteAutores.setVisible(true);
+            getRootPane().setDefaultButton(this.btn_seguinteAutores);
+            pack();
+            setLocationRelativeTo(null);
+        } catch (IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(
+                    this.framePai,
+                    ex.getMessage(),
+                    "Dados do artigo",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+
     }//GEN-LAST:event_btn_seguinteInfoActionPerformed
 
     private void btn_seguinteAutoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_seguinteAutoresActionPerformed
-        //int indice = this.cmb_selecionarAutorCorrespondente.getSelectedIndex();
+        this.controller.getListaAutoresRegistados();
 
+        for (Autor autor : this.controller.getListaAutores()) {
+            this.cmb_selecionarAutorCorrespondente.addItem(autor);
+        }
         this.pnl_listaAutores.setVisible(false);
         this.btn_seguinteAutores.setVisible(false);
         this.pnl_selecionarAutorCorrespondente.setVisible(true);
@@ -444,6 +496,9 @@ public class SubmeterArtigoFinalUI extends javax.swing.JDialog {
     }//GEN-LAST:event_btn_seguinteAutoresActionPerformed
 
     private void btn_selecionarAutorCorrespondenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_selecionarAutorCorrespondenteActionPerformed
+        int indice = this.cmb_selecionarAutorCorrespondente.getSelectedIndex();
+        this.controller.adicionarAutorCorrespondente(indice);
+
         this.pnl_selecionarAutorCorrespondente.setVisible(false);
         this.pnl_ficheiro.setVisible(true);
         this.btn_submeter.setVisible(true);
@@ -469,20 +524,40 @@ public class SubmeterArtigoFinalUI extends javax.swing.JDialog {
                         JOptionPane.ERROR_MESSAGE);
             } else {
                 this.txt_ficheiro.setText(ficheiro.getAbsolutePath());
-
+                this.controller.adicionarFicheiroPDF(this.txt_ficheiro.getText());
                 getRootPane().setDefaultButton(this.btn_submeter);
             }
         }
     }//GEN-LAST:event_btn_ficheiroActionPerformed
 
     private void btn_submeterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_submeterActionPerformed
-        String opcoes[] = {"Sim", "Não"};
-        int resposta = JOptionPane.showOptionDialog(
-                null, "Pretende submeter  versão final do artigo?", "Submeter artigo final", 0,
-                JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]);
-        if (resposta == 0) {
+        try {
+            if (!this.controller.validarSubmissao()) {
+                throw new IllegalArgumentException("A submissão já se encontra submetida.");
+            }
+            String opcoes[] = {"Sim", "Não"};
+            int resposta = JOptionPane.showOptionDialog(
+                    null, "Pretende submeter  versão final do artigo?", "Submeter artigo final", 0,
+                    JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]);
+            if (resposta == 0) {
+                this.controller.adicionarSubmissao();
+            }
+            dispose();
+        } catch (IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(
+                    this,
+                    ex.getMessage(),
+                    "Submeter Artigo Final",
+                    JOptionPane.ERROR_MESSAGE);
+        } catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(
+                    this,
+                    ex.getMessage(),
+                    "Submeter Artigo Final",
+                    JOptionPane.ERROR_MESSAGE);
+            dispose();
         }
-        dispose();
+
     }//GEN-LAST:event_btn_submeterActionPerformed
 
     private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed

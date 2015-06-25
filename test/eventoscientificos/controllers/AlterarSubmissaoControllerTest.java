@@ -254,80 +254,58 @@ public class AlterarSubmissaoControllerTest {
         instance.alterarDados(titulo, resumo, palavrasChave);
     }
 
-//    /**
-//     * Test of alterarAutor method, of class AlterarSubmissaoController.
-//     */
-//    @Test
-//    public void testAlterarAutor() {
-//        System.out.println("alterarAutor");
-//        String nome = "beatriz12";
-//        String email = "beatriz12@hotmail.com";
-//        String instituicaoAfiliacao = "WWE";
-//        int indice = 0;
-//        String titulo = "titulo1";
-//        String resumo = "resumo1";
-//        List<String> palavrasChave = new ArrayList<>();
-//        palavrasChave.add("bolachas");
-//        AlterarSubmissaoController instance = new AlterarSubmissaoController(empresa);
-//        instance.getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador();
-//        instance.selecionarSubmissivel(indice);
-//        instance.selecionarSubmissao(indice);
-//        instance.alterarDados(titulo, resumo, palavrasChave);
-//        instance.alterarAutor(nome, email, instituicaoAfiliacao);
-//    }
-//
-//    /**
-//     * Test of apagarAutor method, of class AlterarSubmissaoController.
-//     */
-//    @Test
-//    public void testApagarAutor() {
-//        System.out.println("apagarAutor");
-//        int indice = 0;
-//        AlterarSubmissaoController instance = new AlterarSubmissaoController(empresa);
-//        String nome = "beatriz12";
-//        String email = "beatriz12@hotmail.com";
-//        String instituicaoAfiliacao = "WWE";
-//        String titulo = "titulo1";
-//        String resumo = "resumo1";
-//        List<String> palavrasChave = new ArrayList<>();
-//        palavrasChave.add("bolachas");
-//        instance.getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador();
-//        instance.selecionarSubmissivel(indice);
-//        instance.selecionarSubmissao(indice);
-//        instance.alterarDados(titulo, resumo, palavrasChave);
-//        instance.alterarAutor(nome, email, instituicaoAfiliacao);
-//        boolean expResult = true;
-//        boolean result = instance.apagarAutor(indice);
-//        assertEquals(expResult, result);
-//    }
-//
-//    /**
-//     * Test of novoAutor method, of class AlterarSubmissaoController.
-//     */
-//    @Test
-//    public void testNovoAutor() {
-//        System.out.println("novoAutor");
-//        int indice = 0;
-//        String nome = "titulo";
-//        String email = "email@mol.pt";
-//        String instituicaoAfiliacao = "QQQ";
-//        AlterarSubmissaoController instance = new AlterarSubmissaoController(empresa);
-//        String nome1 = "beatriz12";
-//        String email1 = "beatriz12@hotmail.com";
-//        String instituicaoAfiliacao1 = "WWE";
-//        String titulo = "titulo1";
-//        String resumo = "resumo1";
-//        List<String> palavrasChave = new ArrayList<>();
-//        palavrasChave.add("bolachas");
-//        instance.getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador();
-//        instance.selecionarSubmissivel(indice);
-//        instance.selecionarSubmissao(indice);
-//        instance.alterarDados(titulo, resumo, palavrasChave);
-//        instance.alterarAutor(nome1, email1, instituicaoAfiliacao1);
-//        boolean expResult = true;
-//        boolean result = instance.novoAutor(nome, email, instituicaoAfiliacao);
-//        assertEquals(expResult, result);
-//    }
+    /**
+     * Test of apagarAutor method, of class AlterarSubmissaoController.
+     */
+    @Test
+    public void testApagarAutor() {
+        System.out.println("apagarAutor");
+        int indice = 0;
+        AlterarSubmissaoController instance = new AlterarSubmissaoController(empresa);
+        String nome = "beatriz12";
+        String email = "beatriz12@hotmail.com";
+        String instituicaoAfiliacao = "WWE";
+        String titulo = "titulo1";
+        String resumo = "resumo1";
+        List<String> palavrasChave = new ArrayList<>();
+        palavrasChave.add("bolachas");
+        instance.getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador();
+        instance.selecionarSubmissivel(indice);
+        instance.selecionarSubmissao(indice);
+        instance.alterarDados(titulo, resumo, palavrasChave);
+        instance.alterarAutor(nome, email, instituicaoAfiliacao);
+        boolean expResult = true;
+        boolean result = instance.apagarAutor(indice);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of novoAutor method, of class AlterarSubmissaoController.
+     */
+    @Test
+    public void testNovoAutor() {
+        System.out.println("novoAutor");
+        int indice = 0;
+        String nome = "titulo";
+        String email = "email@mol.pt";
+        String instituicaoAfiliacao = "QQQ";
+        AlterarSubmissaoController instance = new AlterarSubmissaoController(empresa);
+        String nome1 = "beatriz12";
+        String email1 = "beatriz12@hotmail.com";
+        String instituicaoAfiliacao1 = "WWE";
+        String titulo = "titulo1";
+        String resumo = "resumo1";
+        List<String> palavrasChave = new ArrayList<>();
+        palavrasChave.add("bolachas");
+        instance.getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador();
+        instance.selecionarSubmissivel(indice);
+        instance.selecionarSubmissao(indice);
+        instance.alterarDados(titulo, resumo, palavrasChave);
+        instance.alterarAutor(nome1, email1, instituicaoAfiliacao1);
+        boolean expResult = true;
+        boolean result = instance.novoAutor(nome, email, instituicaoAfiliacao);
+        assertEquals(expResult, result);
+    }
 
     /**
      * Test of getListaAutoresRegistados method, of class
@@ -489,4 +467,17 @@ public class AlterarSubmissaoControllerTest {
         assertEquals(expResult, result);
 
     }
+
+//    /**
+//     * Test of apagarAutor method, of class AlterarSubmissaoController.
+//     */
+//    @Test
+//    public void testApagarAutor() {
+//        System.out.println("apagarAutor");
+//        int indice = 0;
+//        AlterarSubmissaoController instance = null;
+//        boolean expResult = false;
+//        boolean result = instance.apagarAutor(indice);
+//        assertEquals(expResult, result);
+//    }
 }

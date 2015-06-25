@@ -6,7 +6,6 @@ import eventoscientificos.model.Autor;
 import eventoscientificos.model.AutorCorrespondente;
 import eventoscientificos.model.Empresa;
 import eventoscientificos.model.InstituicaoAfiliacao;
-import eventoscientificos.model.ListaAutores;
 import eventoscientificos.model.ListaSubmissoes;
 import eventoscientificos.model.RegistoEventos;
 import eventoscientificos.model.RegistoUtilizadores;
@@ -25,12 +24,12 @@ public class AlterarSubmissaoController {
      * Intancia de Empresa.
      */
     private Empresa empresa;
-    
+
     /**
      * Instância de registo eventos.
      */
     private RegistoUtilizadores registoUtilizadores;
-    
+
     /**
      * Lista de Submissiveis.
      */
@@ -40,7 +39,7 @@ public class AlterarSubmissaoController {
      * Submissivel que tem a submissao pretendida para alterar.
      */
     private Submissivel submissivel;
-    
+
     /**
      * Instância de lista de submissões.
      */
@@ -55,34 +54,29 @@ public class AlterarSubmissaoController {
      * Instancia de submissao.
      */
     private Submissao submissao;
-    
+
     /**
      * Instância de submissao.
      */
     private Submissao submissaoClone;
-    
+
     /**
      * Instância de artigo.
      */
     private Artigo artigoClone;
 
     /**
-     * Instância de lista de autores.
-     */
-    private ListaAutores listaAutoresClone;
-
-    /**
      * Modelo da lista de autores.
      */
     private ModeloListaAutores modeloLista;
-    
+
     /**
      * Lista de autores registados.
      */
     private List<Autor> listaAutoresRegistadosClone;
 
     /**
-     * Modelo da lista 
+     * Modelo da lista
      */
     private DefaultListModel<Autor> modeloListaAutoresRegistados;
 
@@ -93,7 +87,7 @@ public class AlterarSubmissaoController {
      * @param empresa Empresa.
      */
     public AlterarSubmissaoController(Empresa empresa) {
-        this.empresa = empresa;;
+        this.empresa = empresa;
         this.registoUtilizadores = empresa.getRegistoUtilizadores();
         this.listaSubmissiveis = null;
         this.submissivel = null;
@@ -102,7 +96,6 @@ public class AlterarSubmissaoController {
         this.submissao = null;
         this.submissaoClone = null;
         this.artigoClone = null;
-        this.listaAutoresClone = null;
         this.modeloLista = null;
         this.listaAutoresRegistadosClone = null;
     }
@@ -110,7 +103,7 @@ public class AlterarSubmissaoController {
     /**
      * Devolve a lista de submissiveis a aceitar artigos com submissão do
      * utilizador.
-     * 
+     *
      * @return Lista de submissíveis a aceitar artigos com submissão do
      * utilizador.
      */
@@ -120,7 +113,7 @@ public class AlterarSubmissaoController {
 
     /**
      * Devolve a lista de submissões do utilizador dentro de um submissivel.
-     * 
+     *
      * @return Lista de submissões do utilizador dentro de um submissivel.
      */
     public List<Submissao> getListaSubmissoes() {
@@ -129,7 +122,7 @@ public class AlterarSubmissaoController {
 
     /**
      * Devolve o titulo do artigo.
-     * 
+     *
      * @return Titulo do artigo.
      */
     public String getArtigoTitulo() {
@@ -138,7 +131,7 @@ public class AlterarSubmissaoController {
 
     /**
      * Devolve o resumo do artigo
-     * 
+     *
      * @return Resumo do artigo.
      */
     public String getArtigoResumo() {
@@ -147,7 +140,7 @@ public class AlterarSubmissaoController {
 
     /**
      * Devolve as palavras-chave do artigo.
-     * 
+     *
      * @return Lista de palavras-chave do artigo.
      */
     public List<String> getArtigoPalavrasChave() {
@@ -156,7 +149,7 @@ public class AlterarSubmissaoController {
 
     /**
      * Devolve o modelo da lista de autores do artigo.
-     * 
+     *
      * @return Modelo da lista de autores do artigo.
      */
     public ModeloListaAutores getModeloListaAutores() {
@@ -165,7 +158,7 @@ public class AlterarSubmissaoController {
 
     /**
      * Devolve a lista de autores registados.
-     * 
+     *
      * @return Lista de autores registados.
      */
     public List<Autor> getListaPossiveisAutoresCorrespondentes() {
@@ -174,7 +167,7 @@ public class AlterarSubmissaoController {
 
     /**
      * Devolve o caminho para o ficheiro que contém o artigo científico.
-     * 
+     *
      * @return Caminho para o ficheiro que contém o artigo científico.
      */
     public String getArtigoFicheiro() {
@@ -192,7 +185,7 @@ public class AlterarSubmissaoController {
         Utilizador utilizadorAutenticado = this.empresa.getUtilizadorAutenticado();
         RegistoEventos registoEventos = this.empresa.getRegistoEventos();
 
-        this.listaSubmissiveis 
+        this.listaSubmissiveis
                 = registoEventos.getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador(
                         utilizadorAutenticado);
 
@@ -227,12 +220,11 @@ public class AlterarSubmissaoController {
         this.submissao = this.listaSubmissoesUtilizador.get(indice);
         this.submissaoClone = this.submissao.criarCloneSubmissao();
         this.artigoClone = this.submissaoClone.getArtigoInicial();
-        this.listaAutoresClone = this.artigoClone.getListaAutores();
-        this.modeloLista = new ModeloListaAutores(this.listaAutoresClone);
+        this.modeloLista = new ModeloListaAutores(this.artigoClone.getListaAutores());
+        this.registoUtilizadores = this.empresa.getRegistoUtilizadores();
 
         return this.submissao != null && this.submissaoClone != null
-                && this.artigoClone != null && this.listaAutoresClone != null
-                && this.registoUtilizadores != null;
+                && this.artigoClone != null && this.registoUtilizadores != null;
     }
 
     /**
@@ -249,8 +241,26 @@ public class AlterarSubmissaoController {
     }
 
     /**
+     * Adiciona um autor à lista de autores.
+     *
+     * @param nome Nome do autor.
+     * @param email Email do autor.
+     * @param instituicaoAfiliacao Instituicao de afiliacao do autor.
+     *
+     * @return Verdadeiro se o autor for adicionado e falso se não for.
+     */
+    public boolean novoAutor(String nome, String email,
+            String instituicaoAfiliacao) {
+
+        Utilizador utilizador = this.registoUtilizadores.getUtilizador(email);
+
+        return this.modeloLista.addElement(
+                nome, email, instituicaoAfiliacao, utilizador);
+    }
+
+    /**
      * Verifica se o autor já existe na lista de autores.
-     * 
+     *
      * @param nome Nome do autor.
      * @param email Email do autor
      * @param instituicaoAfiliacao Instituicao de afiliacao do autor.
@@ -267,33 +277,12 @@ public class AlterarSubmissaoController {
      * Elimina um autor da lista de autores.
      *
      * @param indice Posição do autor na lista.
-     * 
+     *
      * @return Verdadeiro se o autor for removido com sucesso e falso caso não
      * seja possível remover.
      */
     public boolean apagarAutor(int indice) {
-        return this.listaAutoresClone.removerAutor(indice);
-    }
-
-    /**
-     * Adiciona um autor à lista de autores.
-     *
-     * @param nome Nome do autor.
-     * @param email Email do autor.
-     * @param instituicaoAfiliacao Instituicao de afiliacao do autor.
-     */
-    public boolean novoAutor(String nome, String email,
-            String instituicaoAfiliacao) {
-        Utilizador utilizador = this.registoUtilizadores.getUtilizador(email);
-        if (utilizador == null) {
-            this.listaAutoresClone.novoAutor(nome, email,
-                    new InstituicaoAfiliacao(instituicaoAfiliacao));
-        } else {
-            this.listaAutoresClone.novoAutor(utilizador,
-                    new InstituicaoAfiliacao(instituicaoAfiliacao));
-        }
-        
-        return true;
+        return this.modeloLista.removeElement(indice);
     }
 
     /**
@@ -302,7 +291,9 @@ public class AlterarSubmissaoController {
      * @return Lista de autores rgistados.
      */
     public boolean getListaAutoresRegistados() {
-        this.listaAutoresRegistadosClone = this.listaAutoresClone.getListaAutoresRegistados();
+        this.listaAutoresRegistadosClone
+                = this.artigoClone.getListaAutores().getListaAutoresRegistados();
+        
         return this.listaAutoresRegistadosClone != null;
     }
 
@@ -310,15 +301,15 @@ public class AlterarSubmissaoController {
      * Modifica o autor correspondente.
      *
      * @param indice Indice do autor nomeado a autor correspondente.
-     * 
+     *
      * @return Verdadeiro.
      */
     public boolean alterarAutorCorrespondente(int indice) {
         Autor autor = this.listaAutoresRegistadosClone.get(indice);
-        AutorCorrespondente autorCorrespondente = 
-                new AutorCorrespondente(autor.getUtilizador(), autor.getInstituicaoAfiliacao());
+        AutorCorrespondente autorCorrespondente
+                = new AutorCorrespondente(autor.getUtilizador(), autor.getInstituicaoAfiliacao());
         this.artigoClone.setAutorCorrespondente(autorCorrespondente);
-        
+
         return true;
     }
 
@@ -326,13 +317,13 @@ public class AlterarSubmissaoController {
      * Modifica o ficheiro.
      *
      * @param ficheiro Novo Ficheiro.
-     * 
+     *
      * @return Verdadeiro se o ficheiro for um caminho válido e falso caso não
      * seja.
      */
     public boolean alterarFicheiroPDF(String ficheiro) {
         this.artigoClone.setFicheiro(ficheiro);
-        
+
         return true;
     }
 
@@ -344,17 +335,17 @@ public class AlterarSubmissaoController {
      */
     public boolean validarSubmissao() {
         this.submissaoClone.validarSubmissao();
-         
+
         if (!this.listaSubmissoes.validarCloneSubmissao(this.submissaoClone, this.submissao)) {
             throw new IllegalArgumentException("A submissão já existe na lista.");
         }
-        
+
         return true;
     }
 
     /**
      * Altera uma Submissão.
-     * 
+     *
      * @return Verdadeiro se a submissão foi alterada e falso se não foi.
      */
     public boolean alterarSubmissao() {
@@ -362,4 +353,3 @@ public class AlterarSubmissaoController {
     }
 
 }
-
