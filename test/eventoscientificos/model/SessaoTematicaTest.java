@@ -848,29 +848,4 @@ public class SessaoTematicaTest {
         assertEquals(expResult, result);
     }
 
-    /**
-     * Test of isStateValidoParaGerarAnaliseEstatisticas method, of class
-     * SessaoTematica.
-     */
-    @Test
-    public void testIsStateValidoParaGerarAnaliseEstatisticas() {
-        System.out.println("isStateValidoParaGerarAnaliseEstatisticas");
-        SessaoTematica instance = this.sessaoTematica;
-        this.sessaoTematica.setEstado(new SessaoTematicaEmSubmissaoCameraReadyState(sessaoTematica));
-        boolean expResult = true;
-        boolean result = instance.isStateValidoParaGerarAnaliseEstatisticas();
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of getValoresTotaisEstatistica method, of class SessaoTematica.
-     */
-    @Test(expected = NullPointerException.class)
-    public void testGetValoresTotaisEstatistica() {
-        System.out.println("getValoresTotaisEstatistica");
-        SessaoTematica instance = this.sessaoTematica;
-        float[] expResult = null;
-        float[] result = instance.getValoresTotaisEstatistica();
-        assertArrayEquals(expResult, result, 0.0f);
-    }
 }

@@ -413,11 +413,11 @@ public class RegistoEventosTest {
     }
 
     /**
-     * Test of getListaRevisiveisRevisor method, of class RegistoEventos.
+     * Test of getListaEventosRevisor method, of class RegistoEventos.
      */
     @Test
-    public void testGetListaRevisiveis() {
-        System.out.println("getListaRevisiveisRevisor");
+    public void testGetListaEventosGerarAnaliseEstatistica() {
+        System.out.println("getListaEventosGerarAnaliseEstatistica");
         Revisor revisor = new Revisor(utilizador);
         RegistoEventos instance = new RegistoEventos();
 
@@ -426,17 +426,17 @@ public class RegistoEventosTest {
         this.evento.getListaSessoesTematicas().adicionarSessaoTematica(st);
         this.evento.setEstado(new EventoEmSubmissaoCameraReadyState(evento));
 
-        int expResult = 2;
-        int result = instance.getListaRevisiveis().size();
+        int expResult = 1;
+        int result = instance.getListaEventosGerarAnaliseEstatistica().size();
         assertEquals(expResult, result);
     }
 
     /**
-     * Test of getListaRevisiveisRevisor method, of class RegistoEventos.
+     * Test of getListaEventosRevisor method, of class RegistoEventos.
      */
     @Test
-    public void testGetListaRevisiveisRevisor() {
-        System.out.println("getListaRevisiveisRevisor");
+    public void testGetListaEventosRevisor() {
+        System.out.println("getListaEventosRevisor");
         Revisor revisor = new Revisor(utilizador);
         RegistoEventos instance = new RegistoEventos();
         instance.adicionarEvento(evento);
@@ -449,9 +449,9 @@ public class RegistoEventosTest {
         this.evento.getCP().novoRevisor(
                             new Utilizador("fafa", "mmi@gmail.com", "mfmf", "1234"));
         this.evento.getListaSessoesTematicas().adicionarSessaoTematica(st);
-
-        int expResult = 1;
-        int result = instance.getListaRevisiveisRevisor(revisor).size();
+        List<Evento> listaEventos = instance.getListaEventosGerarAnaliseEstatistica();
+        int expResult = 0;
+        int result = instance.getListaEventosRevisor(revisor, listaEventos).size();
         assertEquals(expResult, result);
     }
 

@@ -1,5 +1,7 @@
 package eventoscientificos.model;
 
+import java.util.List;
+
 /**
  * Todas as classes que implementam esta interface, herdam a responsabilidade de
  * permitir a revisão de submissões.
@@ -31,18 +33,5 @@ public interface Revisivel {
      */
     public CP getCP();
 
-    /**
-     * Verifica se determinado revísivel reune as condições necessárias para
-     * gerar a análise estatistica.
-     *
-     * @return verdadeiro se estiver e falso se não
-     */
-    public boolean isStateValidoParaGerarAnaliseEstatisticas();
 
-    /**
-     * Devolve um array com os valores totais da análise estatistica.
-     *
-     * @return array com os valores totais da análise estatística
-     */
-    public float[] getValoresTotaisEstatistica();
 }

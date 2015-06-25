@@ -13,7 +13,8 @@ import java.util.List;
 import utils.Data;
 
 /**
- * Constrói uma instância de Evento através 
+ * Constrói uma instância de Evento através
+ *
  * @author G01
  */
 public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, Distribuivel, Decidivel, Revisivel {
@@ -1075,7 +1076,7 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
      *
      * @return verdadeiro se estiver e falso se não
      */
-    @Override
+  
     public boolean isStateValidoParaGerarAnaliseEstatisticas() {
         return this.estado.setEmSubmissaoCameraReady() || this.estado.setCameraReady();
     }
@@ -1091,6 +1092,18 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
         this.processoAnaliseEstatistica = new ProcessoAnaliseEstatistica(lr, this.listaSubmissoes, cp);
         this.processoAnaliseEstatistica.getValoresEstatistica();
         return valoresTotais;
+    }
+/**
+ * Devolve a lista de emails dos organizadores do evento
+ * @return lista de email dos organizadores do evento
+ */
+   
+    public List<String> notificarOrganizador() {
+        List<String> listaEmailOrganizadores = new ArrayList<>();
+        for (Organizador o : listaOrganizadores) {
+            listaEmailOrganizadores.add(o.getUtilizador().getEmail());
+        }
+        return listaEmailOrganizadores;
     }
 
 }
