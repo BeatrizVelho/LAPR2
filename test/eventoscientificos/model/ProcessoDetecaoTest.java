@@ -36,8 +36,8 @@ public class ProcessoDetecaoTest {
                 "fatima", "ola@iml.com", "fafa", "1234"));
         Submissao s = new Submissao();
         s = new Submissao();
-        s.setArtigoFinal(new Artigo("titulo", "saude", "D:\\ISEP\\1.º Ano\\2.º Semestre"));
-        s.setArtigoInicial(new Artigo("titulo1234", "saude", "D:\\ISEP\\1.º Ano\\2.º Semestre"));
+        s.setArtigoFinal(new Artigo());
+        s.setArtigoInicial(new Artigo());
         this.conflito = new Conflito(r, s, new ArrayList<TipoConflito>());
         this.sessaoTematica = sessaoTematica;
     }

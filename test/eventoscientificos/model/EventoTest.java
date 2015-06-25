@@ -596,8 +596,8 @@ public class EventoTest {
         Revisor revisor = new Revisor(new Utilizador(
                             "Tiago", "1131658@isep.ipp.pt", "tiago", "1234"));
         Submissao submissao = new Submissao();
-        submissao.setArtigoFinal(new Artigo("titulo", "saude", "D:\\ISEP\\1.º Ano\\2.º Semestre"));
-        submissao.setArtigoInicial(new Artigo("titulo1234", "saude", "D:\\ISEP\\1.º Ano\\2.º Semestre"));
+        submissao.setArtigoFinal(new Artigo());
+        submissao.setArtigoInicial(new Artigo());
 
         Conflito c = new Conflito(revisor, submissao, new ArrayList());
         Evento instance = this.evento;

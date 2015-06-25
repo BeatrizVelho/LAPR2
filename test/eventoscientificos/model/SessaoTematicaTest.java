@@ -1,5 +1,6 @@
 package eventoscientificos.model;
 
+import eventoscientificos.model.mecanismo.decisao.MecanismoDecisao1;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaCPDefinidaState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaCriadaState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmDetecaoState;
@@ -457,7 +458,7 @@ public class SessaoTematicaTest {
         System.out.println("setEmSubmissao");
         SessaoTematica instance = this.sessaoTematica;
         instance.setEstado(new SessaoTematicaCPDefinidaState(instance));
-        boolean expResult = false;
+        boolean expResult = true;
         boolean result = instance.setEmSubmissao();
         assertEquals(expResult, result);
     }
@@ -514,8 +515,8 @@ public class SessaoTematicaTest {
         Revisor revisor = new Revisor(new Utilizador(
                             "Tiago", "1131658@isep.ipp.pt", "tiago", "1234"));
         Submissao submissao = new Submissao();
-        submissao.setArtigoFinal(new Artigo("titulo", "saude", "D:\\ISEP\\1.º Ano\\2.º Semestre"));
-        submissao.setArtigoInicial(new Artigo("titulo1234", "saude", "D:\\ISEP\\1.º Ano\\2.º Semestre"));
+        submissao.setArtigoFinal(new Artigo());
+        submissao.setArtigoInicial(new Artigo());
 
         Conflito c = new Conflito(revisor, submissao, new ArrayList());
         SessaoTematica instance = this.sessaoTematica;
@@ -802,7 +803,7 @@ public class SessaoTematicaTest {
         System.out.println("getNumeroProponentes");
         SessaoTematica instance = this.sessaoTematica;
         instance.novoProponente(this.utilizador);
-        int expResult = 1;
+        int expResult = 2;
         int result = instance.getNumeroProponentes();
         assertEquals(expResult, result);
     }
@@ -813,7 +814,7 @@ public class SessaoTematicaTest {
     @Test
     public void testGetProponentePeloID() {
         System.out.println("getProponentePeloID");
-        int indice = 0;
+        int indice = 1;
         SessaoTematica instance = this.sessaoTematica;
         instance.novoProponente(this.utilizador);
         Proponente expResult = new Proponente(this.utilizador);
@@ -828,9 +829,13 @@ public class SessaoTematicaTest {
     public void testNovoProcessoDecisao() {
         System.out.println("novoProcessoDecisao");
         SessaoTematica instance = this.sessaoTematica;
-        this.sessaoTematica.setEstado(new SessaoTematicaFaseDecisaoState(sessaoTematica));
+        instance.setEstado(new SessaoTematicaFaseDecisaoState(sessaoTematica));
         ProcessoDecisao expResult = new ProcessoDecisao();
+        expResult.adicionarMecanismoDecisao(new MecanismoDecisao1());
+        expResult.classificarSubmissoes(new ListaRevisoes());
         ProcessoDecisao result = instance.novoProcessoDecisao();
+        result.adicionarMecanismoDecisao(new MecanismoDecisao1());
+        result.classificarSubmissoes(new ListaRevisoes());
         assertEquals(expResult, result);
     }
 
