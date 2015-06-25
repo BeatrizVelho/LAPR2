@@ -822,19 +822,6 @@ public class SessaoTematicaTest {
     }
 
     /**
-     * Teste do método novoProcessoDecisao, da classe SessaoTematica.
-     */
-    @Test(expected = NullPointerException.class)
-    public void testNovoProcessoDecisao() {
-        System.out.println("novoProcessoDecisao");
-        SessaoTematica instance = this.sessaoTematica;
-        this.sessaoTematica.setEstado(new SessaoTematicaFaseDecisaoState(sessaoTematica));
-        ProcessoDecisao expResult = new ProcessoDecisao();
-        ProcessoDecisao result = instance.novoProcessoDecisao();
-        assertEquals(expResult, result);
-    }
-
-    /**
      * Teste do método adicionarProcessoDecisao, da classe SessaoTematica.
      */
     @Test

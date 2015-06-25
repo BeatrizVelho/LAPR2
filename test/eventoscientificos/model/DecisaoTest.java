@@ -45,5 +45,26 @@ public class DecisaoTest {
         boolean result = instance.equals(outroObjecto);
         assertEquals(expResult, result);
     }
+
+    /**
+     * Teste do método criarNotificacao, da classe Decisao.
+     */
+    @Test(expected = NullPointerException.class)
+    public void testCriarNotificacao() {
+        System.out.println("criarNotificacao");
+        InstituicaoAfiliacao instituicao = new InstituicaoAfiliacao("nome");
+        Submissao submissao = new Submissao();
+        Utilizador utilizador = new Utilizador("nome",
+                "1140587@isep.ipp.pt",
+                "username",
+                "password");
+        AutorCorrespondente autorCorrespondente = new AutorCorrespondente(utilizador, instituicao);
+        Notificacao notificacao = new Notificacao(this.classificacao);
+        submissao.getArtigoInicial().setAutorCorrespondente(autorCorrespondente);
+        Decisao instance = new Decisao(this.classificacao, submissao);
+        boolean expResult = false;
+        boolean result = instance.criarNotificacao();
+        assertEquals(expResult, result);
+    }
     
 }

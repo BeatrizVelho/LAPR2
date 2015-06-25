@@ -1,5 +1,7 @@
 package eventoscientificos.model;
 
+import java.util.List;
+
 /**
  * Representa uma instância de um utilizador através de um nome, de um email, de
  * um username e de uma password.
@@ -34,6 +36,11 @@ public class Utilizador {
     private String codificadorTabela;
 
     /**
+     * Lista de notificações.
+     */
+    List<Notificacao> listaNotificacoes;
+
+    /**
      * Nome do Utilizador por omissão.
      */
     private static final String NOME_POR_OMISSAO = "Sem nome";
@@ -63,7 +70,7 @@ public class Utilizador {
      * @param password Password do utilizador.
      */
     public Utilizador(
-                        String nome, String email, String username, String password) {
+            String nome, String email, String username, String password) {
         setNome(nome);
         setEmail(email);
         setUsername(username);
@@ -75,10 +82,10 @@ public class Utilizador {
      */
     public Utilizador() {
         this(
-                            Utilizador.NOME_POR_OMISSAO,
-                            Utilizador.EMAIL_POR_OMISSAO,
-                            Utilizador.USERNAME_POR_OMISSAO,
-                            Utilizador.PASSWORD_POR_OMISSAO);
+                Utilizador.NOME_POR_OMISSAO,
+                Utilizador.EMAIL_POR_OMISSAO,
+                Utilizador.USERNAME_POR_OMISSAO,
+                Utilizador.PASSWORD_POR_OMISSAO);
     }
 
     /**
@@ -88,10 +95,10 @@ public class Utilizador {
      */
     public Utilizador(Utilizador utilizador) {
         this(
-                            utilizador.getNome(),
-                            utilizador.getEmail(),
-                            utilizador.getUsername(),
-                            utilizador.getPassword());
+                utilizador.getNome(),
+                utilizador.getEmail(),
+                utilizador.getUsername(),
+                utilizador.getPassword());
     }
 
     /**
@@ -103,13 +110,17 @@ public class Utilizador {
      * @param username username do utilizador
      * @param password password do utilizador
      * @param codificadorTabela codificador tabela
+     * @param listaNotificacoes lista notificações
      */
-    public Utilizador(String nome, String email, String username, String password, String codificadorTabela) {
+    public Utilizador(String nome, String email, String username,
+            String password, String codificadorTabela,
+            List<Notificacao> listaNotificacoes) {
         this.nome = nome;
         this.email = email;
         this.username = username;
         this.password = password;
         this.codificadorTabela = codificadorTabela;
+        this.listaNotificacoes = listaNotificacoes;
     }
 
     /**
@@ -165,21 +176,21 @@ public class Utilizador {
     public void setNome(String nome) {
         if (nome.trim().isEmpty()) {
             throw new IllegalArgumentException("Nome do utilizador nao pode"
-                                + " estar vazio");
+                    + " estar vazio");
         }
         if (nome.contains("[0-9]+")) {
 
             throw new IllegalArgumentException("Nome do utilizador nao pode "
-                                + "conter numeros");
+                    + "conter numeros");
         }
         if (nome.length() < 2) {
             throw new IllegalArgumentException("Nome do utilizador tem de"
-                                + " ter pelo menos 2 letras");
+                    + " ter pelo menos 2 letras");
 
         }
         if (nome.contains("[()<>,;:.\\[\\]{}]\\\\\\\\")) {
             throw new IllegalArgumentException("Nome do utilizador nao pode "
-                                + "conter caracteres");
+                    + "conter caracteres");
         }
         this.nome = nome;
     }
@@ -192,16 +203,16 @@ public class Utilizador {
     public void setEmail(String email) {
         if (email.trim().isEmpty()) {
             throw new IllegalArgumentException("Email do utilizador não "
-                                + "pode estar vazio.");
+                    + "pode estar vazio.");
         }
         if (email.contains("[()<>,;:.\\[\\]{}]\\\\\\\\")) {
             throw new IllegalArgumentException("Email do "
-                                + "utilizador não pode conter "
-                                + "caracteres.");
+                    + "utilizador não pode conter "
+                    + "caracteres.");
         }
         if (!(email.matches(".+@.+\\..{2,}"))) {
             throw new IllegalArgumentException("Email do utilizador"
-                                + " tem de obedecer a estrutura");
+                    + " tem de obedecer a estrutura");
         }
 
         this.email = email;
@@ -215,12 +226,12 @@ public class Utilizador {
     public void setUsername(String username) {
         if (username.trim().isEmpty()) {
             throw new IllegalArgumentException("Username do utilizador não "
-                                + "pode estar vazio.");
+                    + "pode estar vazio.");
         }
         if (username.contains("[()<>,;:.\\[\\]{}]\\\\\\\\")) {
             throw new IllegalArgumentException("Username do "
-                                + "utilizador não pode conter "
-                                + "caracteres.");
+                    + "utilizador não pode conter "
+                    + "caracteres.");
         }
 
         this.username = username;
@@ -252,9 +263,19 @@ public class Utilizador {
      */
     public boolean validarUtilizador() {
         return !(this.nome.equals(NOME_POR_OMISSAO)
-                            || this.email.equals(EMAIL_POR_OMISSAO)
-                            || this.username.equals(USERNAME_POR_OMISSAO)
-                            || this.password.equals(PASSWORD_POR_OMISSAO));
+                || this.email.equals(EMAIL_POR_OMISSAO)
+                || this.username.equals(USERNAME_POR_OMISSAO)
+                || this.password.equals(PASSWORD_POR_OMISSAO));
+    }
+    
+    /**
+     * Adiciona notificações à lista de notificações.
+     *
+     * @param notificacao Notificação.
+     * @return Verdadeiro
+     */
+    public boolean addNotificacao(Notificacao notificacao) {
+        return listaNotificacoes.add(notificacao);
     }
 
     /**
@@ -290,10 +311,10 @@ public class Utilizador {
     @Override
     public String toString() {
         return String.format(""
-                            + "O utlizador esta registado com os seguintes "
-                            + "dados: nome %s, username %s, o email %s "
-                            + "e as password %s", this.nome,
-                            this.username, this.email, this.password);
+                + "O utlizador esta registado com os seguintes "
+                + "dados: nome %s, username %s, o email %s "
+                + "e as password %s", this.nome,
+                this.username, this.email, this.password);
     }
 
     /**

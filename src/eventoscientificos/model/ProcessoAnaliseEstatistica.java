@@ -18,18 +18,17 @@ public class ProcessoAnaliseEstatistica {
     /**
      * Lista de revisoes.
      */
-    private ListaRevisoes listaRevisoes;
+    private List<Revisao> listaRevisoes;
 
     /**
      * Lista de submissoes.
      */
-    private ListaSubmissoes listaSubmissoes;
+    private List<Submissao> listaSubmissoes;
 
     /**
-     * Comissão de programa.
+     * Lista de todos os revisores.
      */
-    private CP cp;
-
+    private List<Revisor> listaRevisores;
     /**
      * Matriz de médias classificações dos revisores por submissão.
      */
@@ -64,11 +63,12 @@ public class ProcessoAnaliseEstatistica {
      *
      * @param lr lista de revisões
      * @param listaSubmissoes lista de submissões
+     * @param listaRevisores lista de todos os revisores dos eventos da empresa
      */
-    public ProcessoAnaliseEstatistica(ListaRevisoes lr, ListaSubmissoes listaSubmissoes, CP cp) {
+    public ProcessoAnaliseEstatistica(List<Revisao> lr, List<Submissao> listaSubmissoes, List<Revisor> listaRevisores) {
         this.listaRevisoes = lr;
         this.listaSubmissoes = listaSubmissoes;
-        this.cp = cp;
+        this.listaRevisores = listaRevisores;
     }
 
     /**
@@ -79,7 +79,7 @@ public class ProcessoAnaliseEstatistica {
         if (listaSubmissoesAceites.size() > 0) {
             matrizSubmissoesRevisor();
             preencherMatrizMediasRevisorArtigo(listaSubmissoesAceites);
-            calcularMediaTodosArtigos();
+            // calcularMediaTodosArtigos();
             preencherMatrizDiferencasClassRevisorMediaArtigo();
             calcularVecMediaDesvioPorRevisorTodosArtigos();
             preencherMatrizDiferencasClassRevisorMediaArtigo();
@@ -87,7 +87,7 @@ public class ProcessoAnaliseEstatistica {
             preencherVetorDesvioPadraoPorRevisor();
             return testesHipoteses();
         } else {
-            throw new IllegalArgumentException("Não há submissoes aceites");
+            throw new IllegalStateException("Não há submissoes aceites");
         }
     }
 
@@ -98,7 +98,7 @@ public class ProcessoAnaliseEstatistica {
      */
     private List<Submissao> listaSubmissoesAceites() {
         List<Submissao> listaSubmissoesAceites = new ArrayList<>();
-        for (Submissao s : listaSubmissoes.getListaSubmissoes()) {
+        for (Submissao s : listaSubmissoes) {
             if (s.isStateAceite() && !listaSubmissoesAceites.contains(s)) {
                 listaSubmissoesAceites.add(s);
 
@@ -112,12 +112,12 @@ public class ProcessoAnaliseEstatistica {
      * submissão analisada
      */
     private void matrizSubmissoesRevisor() {
-        this.matrizMediasRevisorSubmissao = new double[listaSubmissoesAceites().size()][cp.getNumeroRevisores()];
+        this.matrizMediasRevisorSubmissao = new double[listaSubmissoesAceites().size()][listaRevisores.size()];
         for (Submissao s : listaSubmissoesAceites()) {
             int linha = listaSubmissoesAceites().indexOf(s);
-            for (Revisao r : listaRevisoes.getListaRevisoes()) {
+            for (Revisao r : listaRevisoes) {
                 if (r.getSubmissao().equals(s)) {
-                    int coluna = cp.getListaRevisores().indexOf(r.getRevisor());
+                    int coluna = listaRevisores.indexOf(r.getRevisor());
                     matrizMediasRevisorSubmissao[linha][coluna] = 1;
                     System.out.println(matrizMediasRevisorSubmissao[linha][coluna]);
                 }
@@ -143,49 +143,46 @@ public class ProcessoAnaliseEstatistica {
      */
     private void preencherMatrizMediasRevisorArtigo(List<Submissao> listaSubmissoesAceites) {
         double somaMediaClass = 0, numeroRevisoesContabilizadas = 0;
-        this.matrizMediasRevisorSubmissao = new double[listaSubmissoesAceites.size()][cp.getNumeroRevisores()];
         for (Submissao s : listaSubmissoesAceites) {
             int linha = listaSubmissoesAceites.indexOf(s);
-            for (Revisao r : listaRevisoes.getListaRevisoes()) {
+            for (Revisao r : listaRevisoes) {
                 if (r.getSubmissao().equals(s)) {
                     Revisor revisor = r.getRevisor();
-                    int coluna = cp.getListaRevisores().indexOf(revisor);
+                    int coluna = listaRevisores.indexOf(revisor);
                     double mediaClassificacao = (r.getAdequacaoArtigo()
                                         + r.getConfiancaRevisor()
                                         + r.getOriginalidadeArtigo()
                                         + r.getQualidadeArtigo()
-                                        + r.getQualidadeArtigo()
-                                        + r.getRecomendacaoGlobal()) / 6;
+                                        + r.getRecomendacaoGlobal()) / 5;
                     this.matrizMediasRevisorSubmissao[linha][coluna] = mediaClassificacao;
                     somaMediaClass += mediaClassificacao;
                     numeroRevisoesContabilizadas++;
                 }
             }
         }
-        this.mediaArtigos = somaMediaClass / listaSubmissoesAceites.size() * numeroRevisoesContabilizadas;
+        this.mediaArtigos = (double) (somaMediaClass / numeroRevisoesContabilizadas);
     }
 
-    /**
-     * Devolve a média total das classificações de todos os artigos.
-     *
-     * @return media total dos artigos
-     */
-    private void calcularMediaTodosArtigos() {
-        int contaNrRevisoesTotal = 0;
-        this.mediaArtigos = 0;
-        double somaTotal = 0;
-        for (int i = 0; i < matrizMediasRevisorSubmissao.length; i++) {
-
-            for (int j = 0; j < matrizMediasRevisorSubmissao[0].length; j++) {
-                if (matrizMediasRevisorSubmissao[i][j] != -100) {
-                    somaTotal += matrizMediasRevisorSubmissao[i][j];
-                    contaNrRevisoesTotal++;
-                }
-            }
-        }
-        this.mediaArtigos += somaTotal / contaNrRevisoesTotal;
-    }
-
+//    /**
+//     * Devolve a média total das classificações de todos os artigos.
+//     *
+//     * @return media total dos artigos
+//     */
+//    private void calcularMediaTodosArtigos() {
+//        int contaNrRevisoesTotal = 0;
+//        this.mediaArtigos = 0;
+//        double somaTotal = 0;
+//        for (int i = 0; i < matrizMediasRevisorSubmissao.length; i++) {
+//
+//            for (int j = 0; j < matrizMediasRevisorSubmissao[0].length; j++) {
+//                if (matrizMediasRevisorSubmissao[i][j] != -100) {
+//                    somaTotal += matrizMediasRevisorSubmissao[i][j];
+//                    contaNrRevisoesTotal++;
+//                }
+//            }
+//        }
+//        this.mediaArtigos += somaTotal / contaNrRevisoesTotal;
+//    }
     /**
      * Preenche a matriz das diferenças entre a classificação média atribuida
      * pelo revisor e a classificação média do artigo [d=xi-xt].
@@ -210,18 +207,19 @@ public class ProcessoAnaliseEstatistica {
     private void calcularVecMediaDesvioPorRevisorTodosArtigos() {
 
         this.mediaDesvio = new double[matrizDiferencasClassRevisorComMediaArtigo[0].length];
-        this.nrRevisoes = new int[matrizMediasRevisorSubmissao[0].length];
+        this.nrRevisoes = new int[matrizDiferencasClassRevisorComMediaArtigo[0].length];
         for (int i = 0; i < matrizDiferencasClassRevisorComMediaArtigo[0].length; i++) {
             double somaColuna = 0;
             int nrRevisoes = 0;
             for (int j = 0; j < matrizDiferencasClassRevisorComMediaArtigo.length; j++) {
-                if (matrizDiferencasClassRevisorComMediaArtigo[i][j] != -100) {
-                    somaColuna += matrizDiferencasClassRevisorComMediaArtigo[i][j];
+                if (matrizDiferencasClassRevisorComMediaArtigo[j][i] != -100) {
+                    somaColuna += matrizDiferencasClassRevisorComMediaArtigo[j][i];
                     nrRevisoes++;
                 }
-                this.nrRevisoes[i] = nrRevisoes;
+
             }
             mediaDesvio[i] = somaColuna / nrRevisoes;
+            this.nrRevisoes[i] = nrRevisoes;
         }
     }
 

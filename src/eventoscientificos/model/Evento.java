@@ -104,10 +104,7 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
      */
     private ProcessoDecisao processoDecisao;
 
-    /**
-     * Processo de análise estatística.
-     */
-    private ProcessoAnaliseEstatistica processoAnaliseEstatistica;
+   
 
     /**
      * CP do evento.
@@ -1079,18 +1076,18 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
     public boolean isStateValidoParaGerarAnaliseEstatisticas() {
         return this.estado.setEmSubmissaoCameraReady() || this.estado.setCameraReady();
     }
-
-    /**
-     * Devolve um array com os valores totais da análise estatistica.
-     *
-     * @return array com os valores totais da análise estatística
-     */
-    public String[] getValoresTotaisEstatistica() {
-        String[] valoresTotais = null;
-        ListaRevisoes lr = this.processoDistribuicao.getListaRevisoes();
-        this.processoAnaliseEstatistica = new ProcessoAnaliseEstatistica(lr, this.listaSubmissoes, cp);
-        return valoresTotais = this.processoAnaliseEstatistica.getValoresEstatistica();
-    }
+//
+//    /**
+//     * Devolve um array com os valores totais da análise estatistica.
+//     *
+//     * @return array com os valores totais da análise estatística
+//     */
+//    public String[] getValoresTotaisEstatistica() {
+//        String[] valoresTotais = null;
+//        ListaRevisoes lr = this.processoDistribuicao.getListaRevisoes();
+//        this.processoAnaliseEstatistica = new ProcessoAnaliseEstatistica(lr, this.listaSubmissoes, List <Revisor> listaRevisoes);
+//        return valoresTotais = this.processoAnaliseEstatistica.getValoresEstatistica();
+//    }
 
     /**
      * Devolve a lista de emails dos organizadores do evento
