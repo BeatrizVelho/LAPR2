@@ -56,6 +56,14 @@ public class ReverArtigoController {
         this.empresa = empresa;
     }
 
+    public List<Revisivel> getListaRevisiveis() {
+        return this.listaRevisiveis;
+    }
+    
+    public List<Revisao> getListaRevisoesRevisor() {
+        return this.listaRevisoesRevisor;
+    }
+
     /**
      * Devolve uma lista de Revisiveis no qual o utilizador no sistema é revisor
      * e tem artigos por rever
