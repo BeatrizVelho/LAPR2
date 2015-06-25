@@ -21,6 +21,10 @@ public class AlterarSubmissaoUI extends javax.swing.JDialog {
 
     /**
      * Creates new form AlterarSubmissaoUI
+     *
+     * @param parent
+     * @param modal
+     * @param empresa
      */
     public AlterarSubmissaoUI(java.awt.Frame parent, boolean modal, Empresa empresa) {
         super(parent, modal);
@@ -33,7 +37,7 @@ public class AlterarSubmissaoUI extends javax.swing.JDialog {
         getRootPane().setDefaultButton(this.btn_selecionarSubmissivel);
         if (controller.getListaSubmissiveis().isEmpty()) {
             JOptionPane.showMessageDialog(
-                    framePai,
+                    this.framePai,
                     "Não existem eventos ou sessões temáticas onde lhe é "
                     + "possível alterar submissões.",
                     "Alterar submissão",
@@ -65,7 +69,6 @@ public class AlterarSubmissaoUI extends javax.swing.JDialog {
         jScrollPane2 = new javax.swing.JScrollPane();
         jList_listaAutores = new javax.swing.JList();
         btn_eliminarAutor = new javax.swing.JButton();
-        btn_editarAutor = new javax.swing.JButton();
         btn_novoAutor = new javax.swing.JButton();
         pnl_informacoes = new javax.swing.JPanel();
         txt_titulo = new javax.swing.JTextField();
@@ -168,13 +171,6 @@ public class AlterarSubmissaoUI extends javax.swing.JDialog {
             }
         });
 
-        btn_editarAutor.setText("Editar Autor");
-        btn_editarAutor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_editarAutorActionPerformed(evt);
-            }
-        });
-
         btn_novoAutor.setText("Novo Autor");
         btn_novoAutor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -194,8 +190,6 @@ public class AlterarSubmissaoUI extends javax.swing.JDialog {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btn_novoAutor)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_editarAutor)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_eliminarAutor)))
                 .addContainerGap())
         );
@@ -207,7 +201,6 @@ public class AlterarSubmissaoUI extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnl_listaAutoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_eliminarAutor)
-                    .addComponent(btn_editarAutor)
                     .addComponent(btn_novoAutor))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -442,11 +435,9 @@ public class AlterarSubmissaoUI extends javax.swing.JDialog {
         }
 
         this.jList_listaAutores.setModel(this.controller.getModeloListaAutores());
-        
-        for (Autor autor : this.controller.getListaPossiveisAutoresCorrespondentes()) {
-            this.cmb_autorCorrespondente.addItem(autor);
-        }
-        
+
+        this.cmb_autorCorrespondente.setModel(this.controller.getModeloListaAutoresRegistados());
+
         this.txt_ficheiro.setText(this.controller.getArtigoFicheiro());
         validate();
         this.pnl_selecionarSubmissivel.setVisible(false);
@@ -462,16 +453,20 @@ public class AlterarSubmissaoUI extends javax.swing.JDialog {
     }//GEN-LAST:event_btn_selecionarSubmissaoActionPerformed
 
     private void btn_novoAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_novoAutorActionPerformed
-        // TODO add your handling code here:
+        new NovoAutor(this.framePai, true, this.controller);
     }//GEN-LAST:event_btn_novoAutorActionPerformed
 
-    private void btn_editarAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editarAutorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_editarAutorActionPerformed
-
     private void btn_eliminarAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminarAutorActionPerformed
-        int indice = this.jList_listaAutores.getSelectedIndex();
-        this.controller.apagarAutor(indice);
+        try {
+            int indice = this.jList_listaAutores.getSelectedIndex();
+            this.controller.apagarAutor(indice);
+        } catch (IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(
+                    this,
+                    ex.getMessage(),
+                    "Submeter Ficheiro",
+                    JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btn_eliminarAutorActionPerformed
 
     private void btn_selecionarAutorCorrespondenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_selecionarAutorCorrespondenteActionPerformed
@@ -490,7 +485,7 @@ public class AlterarSubmissaoUI extends javax.swing.JDialog {
 
             if (!ficheiro.getName().endsWith(".pdf")) {
                 JOptionPane.showMessageDialog(
-                        this.framePai,
+                        this,
                         "O ficheiro deve ter o formato PDF.",
                         "Submeter Ficheiro",
                         JOptionPane.ERROR_MESSAGE);
@@ -526,11 +521,11 @@ public class AlterarSubmissaoUI extends javax.swing.JDialog {
                     this.txt_titulo.getText(),
                     this.txtA_resumo.getText(),
                     palavrasChave);
-            
+
             this.controller.validarSubmissao();
             String opcoes[] = {"Sim", "Não"};
             int resposta = JOptionPane.showOptionDialog(
-                    null, "Pretende submeter a alteração do artigo?", "Alterar Submissão de Artigo", 0,
+                    this, "Pretende submeter a alteração do artigo?", "Alterar Submissão de Artigo", 0,
                     JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]);
             if (resposta == 0) {
                 this.controller.alterarSubmissao();
@@ -538,7 +533,7 @@ public class AlterarSubmissaoUI extends javax.swing.JDialog {
             dispose();
         } catch (IllegalArgumentException ex) {
             JOptionPane.showMessageDialog(
-                    this.framePai,
+                    this,
                     ex.getMessage(),
                     "Alterar Submissão de Artigo",
                     JOptionPane.ERROR_MESSAGE);
@@ -551,7 +546,6 @@ public class AlterarSubmissaoUI extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_cancelar;
-    private javax.swing.JButton btn_editarAutor;
     private javax.swing.JButton btn_eliminarAutor;
     private javax.swing.JButton btn_escolherFicheiro;
     private javax.swing.JButton btn_novoAutor;

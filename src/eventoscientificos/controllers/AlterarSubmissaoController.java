@@ -13,12 +13,16 @@ import eventoscientificos.model.Submissao;
 import eventoscientificos.model.Submissivel;
 import eventoscientificos.model.Utilizador;
 import java.util.List;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
+import javax.swing.event.ListDataEvent;
+import javax.swing.event.ListDataListener;
 
 /**
  * @author G01
  */
-public class AlterarSubmissaoController {
+public class AlterarSubmissaoController implements ControllerAutor {
 
     /**
      * Intancia de Empresa.
@@ -71,14 +75,9 @@ public class AlterarSubmissaoController {
     private ModeloListaAutores modeloLista;
 
     /**
-     * Lista de autores registados.
-     */
-    private List<Autor> listaAutoresRegistadosClone;
-
-    /**
      * Modelo da lista
      */
-    private DefaultListModel<Autor> modeloListaAutoresRegistados;
+    private DefaultComboBoxModel<Autor> modeloListaAutoresRegistados;
 
     /**
      * Constrói uma instância de AlterarSubmissaoController recebendo uma
@@ -97,7 +96,6 @@ public class AlterarSubmissaoController {
         this.submissaoClone = null;
         this.artigoClone = null;
         this.modeloLista = null;
-        this.listaAutoresRegistadosClone = null;
     }
 
     /**
@@ -157,12 +155,12 @@ public class AlterarSubmissaoController {
     }
 
     /**
-     * Devolve a lista de autores registados.
+     * Devolve o modelo da lista de autores registados do artigo.
      *
-     * @return Lista de autores registados.
+     * @return Modelo da lista de autores do artigo.
      */
-    public List<Autor> getListaPossiveisAutoresCorrespondentes() {
-        return this.listaAutoresRegistadosClone;
+    public DefaultComboBoxModel<Autor> getModeloListaAutoresRegistados() {
+        return this.modeloListaAutoresRegistados;
     }
 
     /**
@@ -221,6 +219,24 @@ public class AlterarSubmissaoController {
         this.submissaoClone = this.submissao.criarCloneSubmissao();
         this.artigoClone = this.submissaoClone.getArtigoInicial();
         this.modeloLista = new ModeloListaAutores(this.artigoClone.getListaAutores());
+        this.modeloListaAutoresRegistados = new DefaultComboBoxModel<Autor>();
+        this.modeloLista.addListDataListener(new ListDataListener() {
+
+            @Override
+            public void intervalAdded(ListDataEvent e) {
+                getListaAutoresRegistados();
+            }
+
+            @Override
+            public void intervalRemoved(ListDataEvent e) {
+                getListaAutoresRegistados();
+            }
+
+            @Override
+            public void contentsChanged(ListDataEvent e) {
+            }
+        });
+
         this.registoUtilizadores = this.empresa.getRegistoUtilizadores();
 
         return this.submissao != null && this.submissaoClone != null
@@ -249,6 +265,7 @@ public class AlterarSubmissaoController {
      *
      * @return Verdadeiro se o autor for adicionado e falso se não for.
      */
+    @Override
     public boolean novoAutor(String nome, String email,
             String instituicaoAfiliacao) {
 
@@ -256,21 +273,6 @@ public class AlterarSubmissaoController {
 
         return this.modeloLista.addElement(
                 nome, email, instituicaoAfiliacao, utilizador);
-    }
-
-    /**
-     * Verifica se o autor já existe na lista de autores.
-     *
-     * @param nome Nome do autor.
-     * @param email Email do autor
-     * @param instituicaoAfiliacao Instituicao de afiliacao do autor.
-     */
-    public void alterarAutor(String nome, String email,
-            String instituicaoAfiliacao) {
-
-        Autor autor = new Autor(nome, email,
-                new InstituicaoAfiliacao(instituicaoAfiliacao));
-        autor.validarAutor();
     }
 
     /**
@@ -282,6 +284,12 @@ public class AlterarSubmissaoController {
      * seja possível remover.
      */
     public boolean apagarAutor(int indice) {
+        if (this.empresa.getUtilizadorAutenticado().equals(
+                this.modeloLista.getElementAt(indice).getUtilizador())) {
+            throw new IllegalArgumentException("Não se pode remover a si próprio"
+                    + " da lista.");
+        }
+
         return this.modeloLista.removeElement(indice);
     }
 
@@ -291,10 +299,14 @@ public class AlterarSubmissaoController {
      * @return Lista de autores rgistados.
      */
     public boolean getListaAutoresRegistados() {
-        this.listaAutoresRegistadosClone
-                = this.artigoClone.getListaAutores().getListaAutoresRegistados();
-        
-        return this.listaAutoresRegistadosClone != null;
+        this.modeloListaAutoresRegistados.removeAllElements();
+
+        for (Autor autor
+                : this.artigoClone.getListaAutores().getListaAutoresRegistados()) {
+            this.modeloListaAutoresRegistados.addElement(autor);
+        }
+
+        return this.modeloListaAutoresRegistados != null;
     }
 
     /**
@@ -305,7 +317,7 @@ public class AlterarSubmissaoController {
      * @return Verdadeiro.
      */
     public boolean alterarAutorCorrespondente(int indice) {
-        Autor autor = this.listaAutoresRegistadosClone.get(indice);
+        Autor autor = this.modeloListaAutoresRegistados.getElementAt(indice);
         AutorCorrespondente autorCorrespondente
                 = new AutorCorrespondente(autor.getUtilizador(), autor.getInstituicaoAfiliacao());
         this.artigoClone.setAutorCorrespondente(autorCorrespondente);
@@ -336,7 +348,7 @@ public class AlterarSubmissaoController {
     public boolean validarSubmissao() {
         this.submissaoClone.validarSubmissao();
 
-        if (!this.listaSubmissoes.validarCloneSubmissao(this.submissaoClone, this.submissao)) {
+        if (!this.listaSubmissoes.validarCloneSubmissao(this.submissao, this.submissaoClone)) {
             throw new IllegalArgumentException("A submissão já existe na lista.");
         }
 
