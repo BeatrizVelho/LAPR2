@@ -501,4 +501,50 @@ public class RegistoEventos {
         }
         return listaEmail;
     }
+
+    /**
+     * Devolve uma matriz com os resultados dos revisores por submissão do
+     * evento
+     *
+     * @return matriz dos resultados sob a forma textual
+     */
+    public ArrayList<ArrayList<String>> getValoresTotaisAnaliseEstatistica(List<Evento> listaEventosApresentados) {
+        int numeroDeEventos = 0;
+        ArrayList<ArrayList<String>> matrizValores = new ArrayList<ArrayList<String>>();
+        for (Evento e : listaEventosApresentados) {
+            String[] valoresFinais = e.getValoresTotaisEstatistica();
+            ArrayList<String> linha = matrizValores.get(numeroDeEventos);
+            for (int i = 0; i < valoresFinais.length; i++) {
+                String resultado = valoresFinais[i];
+                linha.add(resultado);
+            }
+            numeroDeEventos++;
+        }
+        return matrizValores;
+    }
+
+    /**
+     * Devolve uma lista de revisores existentes em todos os eventos que cumprem
+     * as condições necessárias de aceitação.
+     * 
+     * @param listaEventosApresentados lista de eventos selecionados anteriormente
+     */
+    public List<Revisor> getTodosRevisores(List<Evento> listaEventosApresentados) {
+        List<Revisor> listaRevisores = new ArrayList<>();
+        CP cp;
+        for (Evento e : listaEventosApresentados) {
+            if ((cp = e.getCP()) != null) {
+                int numeroRevisores = e.getCP().getNumeroRevisores();
+                for (int i = 0; i < numeroRevisores; i++) {
+                    Revisor revisor = cp.getRevisorPeloID(i);
+                    if (!listaRevisores.contains(revisor)) {
+                        listaRevisores.add(revisor);
+                    }
+
+                }
+            }
+        }
+   return listaRevisores;
+    }
+
 }

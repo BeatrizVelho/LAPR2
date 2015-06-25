@@ -1076,7 +1076,6 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
      *
      * @return verdadeiro se estiver e falso se não
      */
-  
     public boolean isStateValidoParaGerarAnaliseEstatisticas() {
         return this.estado.setEmSubmissaoCameraReady() || this.estado.setCameraReady();
     }
@@ -1086,18 +1085,18 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
      *
      * @return array com os valores totais da análise estatística
      */
-    public float[] getValoresTotaisEstatistica() {
-        float[] valoresTotais = null;
+    public String[] getValoresTotaisEstatistica() {
+        String[] valoresTotais = null;
         ListaRevisoes lr = this.processoDistribuicao.getListaRevisoes();
         this.processoAnaliseEstatistica = new ProcessoAnaliseEstatistica(lr, this.listaSubmissoes, cp);
-        this.processoAnaliseEstatistica.getValoresEstatistica();
-        return valoresTotais;
+        return valoresTotais = this.processoAnaliseEstatistica.getValoresEstatistica();
     }
-/**
- * Devolve a lista de emails dos organizadores do evento
- * @return lista de email dos organizadores do evento
- */
-   
+
+    /**
+     * Devolve a lista de emails dos organizadores do evento
+     *
+     * @return lista de email dos organizadores do evento
+     */
     public List<String> notificarOrganizador() {
         List<String> listaEmailOrganizadores = new ArrayList<>();
         for (Organizador o : listaOrganizadores) {

@@ -9,7 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *Constrói um instância de ProcessoAnaliseEstatistica através 
+ * Constrói um instância de ProcessoAnaliseEstatistica através
+ *
  * @author G01
  */
 public class ProcessoAnaliseEstatistica {
@@ -73,7 +74,7 @@ public class ProcessoAnaliseEstatistica {
     /**
      * Devolve os valores de estatística de cada submissao do artigo.
      */
-    public void getValoresEstatistica() {
+    public String[] getValoresEstatistica() {
         List<Submissao> listaSubmissoesAceites = listaSubmissoesAceites();
         if (listaSubmissoesAceites.size() > 0) {
             matrizSubmissoesRevisor();
@@ -84,9 +85,9 @@ public class ProcessoAnaliseEstatistica {
             preencherMatrizDiferencasClassRevisorMediaArtigo();
             calcularVecMediaDesvioPorRevisorTodosArtigos();
             preencherVetorDesvioPadraoPorRevisor();
-            testesHipoteses();
+            return testesHipoteses();
         } else {
-            System.out.println("Não há submissoes aceites");
+            throw new IllegalArgumentException("Não há submissoes aceites");
         }
     }
 
@@ -253,7 +254,7 @@ public class ProcessoAnaliseEstatistica {
      * Testes de hipótese
      *
      */
-    private void testesHipoteses() {
+    private String[] testesHipoteses() {
         String[] vecHipoteses = new String[this.vecDesvioPadraoRevisor.length];
         for (int j = 0; j < this.vecDesvioPadraoRevisor.length; j++) {
 
@@ -272,5 +273,6 @@ public class ProcessoAnaliseEstatistica {
                 vecHipoteses[j] = "Não é possivel analisar pois tem menos de 30 revisões";
             }
         }
+        return vecHipoteses;
     }
 }

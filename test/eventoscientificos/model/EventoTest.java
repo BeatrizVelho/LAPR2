@@ -1109,13 +1109,13 @@ public class EventoTest {
     /**
      * Test of getValoresTotaisEstatistica method, of class Evento.
      */
-    @Test(expected = NullPointerException.class)
+    @Test
     public void testGetValoresTotaisEstatistica() {
         System.out.println("getValoresTotaisEstatistica");
         Evento instance = this.evento;
-        float[] expResult = null;
-        float[] result = instance.getValoresTotaisEstatistica();
-        assertArrayEquals(expResult, result, 0.0f);
+        String[] expResult = null;
+        String[] result = instance.getValoresTotaisEstatistica();
+        assertArrayEquals(expResult, result);
     }
 
     /**
