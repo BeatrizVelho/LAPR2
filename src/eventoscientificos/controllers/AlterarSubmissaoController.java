@@ -18,6 +18,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
+import utils.Data;
 
 /**
  * @author G01
@@ -361,6 +362,12 @@ public class AlterarSubmissaoController implements ControllerAutor {
      * @return Verdadeiro se a submissão foi alterada e falso se não foi.
      */
     public boolean alterarSubmissao() {
+        Autor autorSubmissor = new Autor(
+                this.empresa.getUtilizadorAutenticado(),
+                new InstituicaoAfiliacao("ISEP"));
+        
+        this.artigoClone.setAutorSubmissor(autorSubmissor);
+        this.artigoClone.setDataSubmissao(Data.dataAtual());
         return this.listaSubmissoes.alterarSubmissao(this.submissao, this.artigoClone);
     }
 
