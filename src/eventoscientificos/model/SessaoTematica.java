@@ -922,27 +922,4 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
         return false;
     }
 
-    /**
-     * Verifica se determinado revísivel reune as condições necessárias para
-     * gerar a análise estatistica.
-     *
-     * @return verdadeiro se estiver e falso se não
-     */
-    @Override
-    public boolean isStateValidoParaGerarAnaliseEstatisticas() {
-        return this.estado.setEmSubmissaoCameraReady() || this.estado.setCameraReady();
-    }
-
-    /**
-     * Devolve um array com os valores totais da análise estatistica.
-     *
-     * @return array com os valores totais da análise estatística
-     */
-    public float[] getValoresTotaisEstatistica() {
-        float[] valoresTotais = null;
-        ListaRevisoes lr = this.processoDistribuicao.getListaRevisoes();
-        this.processoAnaliseEstatistica = new ProcessoAnaliseEstatistica(lr, this.listaSubmissoes, cp);
-        this.processoAnaliseEstatistica.getValoresEstatistica();
-        return valoresTotais;
-    }
 }

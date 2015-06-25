@@ -1,5 +1,6 @@
 package eventoscientificos.model;
 
+import com.sun.javafx.scene.control.skin.VirtualFlow;
 import eventoscientificos.model.state.evento.EventoEmCameraReadyState;
 import eventoscientificos.model.state.evento.EventoEmSubmissaoCameraReadyState;
 import java.util.ArrayList;
@@ -87,56 +88,36 @@ public class RegistoEventos {
     }
 
     /**
-     * Devolve a lista de revisiveis que onde o revisor em análise pertence à CP
+     * Devolve a lista de eventos que onde o revisor em análise pertence à CP
      *
      * @param revisor revisor a procurar
-     * @return lista de revisiveis
+     * @return lista de eventos
      */
-    public List<Revisivel> getListaRevisiveisRevisor(Revisor revisor) {
+    public List<Evento> getListaEventosRevisor(Revisor revisor, List<Evento> listaEventosApresentados) {
         Utilizador u = revisor.getUtilizador();
-        List<Revisivel> listaRevisiveis = new ArrayList<>();
-
-        for (Revisivel r : listaEventos) {
-            if (r.isStateValidoParaGerarAnaliseEstatisticas()) {
-                if (r.getCP().contains(u)) {
-                    listaRevisiveis.add(r);
-                }
-            }
-            for (Revisivel rev : ((Evento) r).getListaSessoesTematicas().
-                                getListaSessoesTematicas()) {
-                if (rev.isStateValidoParaGerarAnaliseEstatisticas()) {
-                    if (rev.getCP().contains(u)) {
-                        listaRevisiveis.add(rev);
-                    }
-
-                }
+        List<Evento> listaEventosRevisor = new ArrayList<>();
+        for (Evento e : listaEventosApresentados) {
+            if (e.getCP().contains(u)) {
+                listaEventosRevisor.add(e);
             }
         }
-        return listaRevisiveis;
+        return listaEventosRevisor;
     }
 
     /**
-     * Devolve a lista de revisiveis que onde é possível gerar a análise
-     * estatística 
+     * Devolve a lista de eventos que onde é possível gerar a análise
+     * estatística
      *
-     * @return lista de revisiveis
+     * @return lista de eventos
      */
-    public List<Revisivel> getListaRevisiveis() {
-        List<Revisivel> listaRevisiveis = new ArrayList<>();
-
-        for (Revisivel r : listaEventos) {
-            if (r.isStateValidoParaGerarAnaliseEstatisticas()) {
-                listaRevisiveis.add(r);
-            }
-
-            for (Revisivel rev : ((Evento) r).getListaSessoesTematicas().
-                                getListaSessoesTematicas()) {
-                if (rev.isStateValidoParaGerarAnaliseEstatisticas()) {
-                    listaRevisiveis.add(rev);
-                }
+    public List<Evento> getListaEventosGerarAnaliseEstatistica() {
+        List<Evento> listaEventos = new ArrayList<>();
+        for (Evento evento : this.listaEventos) {
+            if (evento.isStateValidoParaGerarAnaliseEstatisticas()) {
+                listaEventos.add(evento);
             }
         }
-        return listaRevisiveis;
+        return listaEventos;
     }
 
     /**
@@ -483,22 +464,41 @@ public class RegistoEventos {
             }
         }
     }
-    
+
     /**
      * Devolve uma lista de eventos que estão a aceitar submissões de artigos.
-     * 
+     *
      * @return Lista de eventos.
      */
     public List<Evento> getListaEventosAceitarArtigos() {
         List<Evento> listaEventos = new ArrayList<>();
-        
-        for(Evento evento : this.listaEventos) {
-            if(evento.isStateValidoParaSubmeter()) {
+
+        for (Evento evento : this.listaEventos) {
+            if (evento.isStateValidoParaSubmeter()) {
                 listaEventos.add(evento);
             }
         }
-        
+
         return listaEventos;
     }
 
+    /**
+     * Devolve a lista de emails dos organizadores dos eventos ao qual o revisor
+     * pertence
+     *
+     * @param listaEventos lista de eventos nos quais tem o revisor como membro
+     * de CP
+     * @return lista de emails dos organizadores
+     */
+    public List<String> notificarOrganizador(List<Evento> listaEventos) {
+        List<String> listaEmail = new ArrayList<>();
+        for (Evento evento : listaEventos) {
+            for (String email : evento.notificarOrganizador()) {
+                if (!listaEmail.contains(email)) {
+                    listaEmail.add(email);
+                }
+            }
+        }
+        return listaEmail;
+    }
 }
