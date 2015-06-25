@@ -50,7 +50,7 @@ public class ListaSubmissoes {
      * se tiver.
      */
     public boolean validarSubmissao(Submissao submissao) {
-        if (submissao.validarSubmissao()) {
+        if (!submissao.validarSubmissao()) {
             throw new IllegalArgumentException("A submissão não é valida");
         }
 
