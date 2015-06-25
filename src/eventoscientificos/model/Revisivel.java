@@ -38,4 +38,11 @@ public interface Revisivel {
      * @return verdadeiro se estiver e falso se não
      */
     public boolean isStateValidoParaGerarAnaliseEstatisticas();
+
+    /**
+     * Devolve um array com os valores totais da análise estatistica.
+     *
+     * @return array com os valores totais da análise estatística
+     */
+    public float[] getValoresTotaisEstatistica();
 }

@@ -87,43 +87,9 @@ public class RegistoEventos {
     }
 
     /**
-     * Devolve a lista de revisores existentes nos eventos e sessões temáticas
-     * da empresa.
+     * Devolve a lista de revisiveis que onde o revisor em análise pertence à CP
      *
-     * @return lista de todos os revisores
-     */
-    public List<Revisor> getListaTodosRevisores() {
-        List<Revisor> listaRevisores = new ArrayList<Revisor>();
-        CP cp = null;
-        for (Revisivel r : listaEventos) {
-            if ((cp = r.getCP()) != null) {
-                int dimensao = cp.getNumeroRevisores();
-                for (int i = 0; i < dimensao; i++) {
-                    if (!listaRevisores.contains(cp.getRevisorPeloID(i))) {
-                        listaRevisores.add(cp.getRevisorPeloID(i));
-                    }
-                }
-            }
-            for (Revisivel rev : ((Evento) r).getListaSessoesTematicas().
-                                getListaSessoesTematicas()) {
-                if ((cp = rev.getCP()) != null) {
-                    int dimensao = cp.getNumeroRevisores();
-                    for (int i = 0; i < dimensao; i++) {
-                        if (!listaRevisores.contains(cp.getRevisorPeloID(i))) {
-                            listaRevisores.add(cp.getRevisorPeloID(i));
-                        }
-                    }
-                }
-            }
-        }
-        return listaRevisores;
-    }
-
-    /**
-     * Devolve a lista de revisiveis que onde é possível gerar a análise
-     * estatística e onde o revisor em análise pertence à CP
-     *
-     * @param revisor revisor em análise
+     * @param revisor revisor a procurar
      * @return lista de revisiveis
      */
     public List<Revisivel> getListaRevisiveisRevisor(Revisor revisor) {
@@ -143,6 +109,30 @@ public class RegistoEventos {
                         listaRevisiveis.add(rev);
                     }
 
+                }
+            }
+        }
+        return listaRevisiveis;
+    }
+
+    /**
+     * Devolve a lista de revisiveis que onde é possível gerar a análise
+     * estatística 
+     *
+     * @return lista de revisiveis
+     */
+    public List<Revisivel> getListaRevisiveis() {
+        List<Revisivel> listaRevisiveis = new ArrayList<>();
+
+        for (Revisivel r : listaEventos) {
+            if (r.isStateValidoParaGerarAnaliseEstatisticas()) {
+                listaRevisiveis.add(r);
+            }
+
+            for (Revisivel rev : ((Evento) r).getListaSessoesTematicas().
+                                getListaSessoesTematicas()) {
+                if (rev.isStateValidoParaGerarAnaliseEstatisticas()) {
+                    listaRevisiveis.add(rev);
                 }
             }
         }
