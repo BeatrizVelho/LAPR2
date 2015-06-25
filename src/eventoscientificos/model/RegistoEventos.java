@@ -1,5 +1,6 @@
 package eventoscientificos.model;
 
+import com.sun.javafx.scene.control.skin.VirtualFlow;
 import eventoscientificos.model.state.evento.EventoEmCameraReadyState;
 import eventoscientificos.model.state.evento.EventoEmSubmissaoCameraReadyState;
 import java.util.ArrayList;
@@ -87,66 +88,36 @@ public class RegistoEventos {
     }
 
     /**
-     * Devolve a lista de revisores existentes nos eventos e sessões temáticas
-     * da empresa.
+     * Devolve a lista de eventos que onde o revisor em análise pertence à CP
      *
-     * @return lista de todos os revisores
+     * @param revisor revisor a procurar
+     * @return lista de eventos
      */
-    public List<Revisor> getListaTodosRevisores() {
-        List<Revisor> listaRevisores = new ArrayList<Revisor>();
-        CP cp = null;
-        for (Revisivel r : listaEventos) {
-            if ((cp = r.getCP()) != null) {
-                int dimensao = cp.getNumeroRevisores();
-                for (int i = 0; i < dimensao; i++) {
-                    if (!listaRevisores.contains(cp.getRevisorPeloID(i))) {
-                        listaRevisores.add(cp.getRevisorPeloID(i));
-                    }
-                }
-            }
-            for (Revisivel rev : ((Evento) r).getListaSessoesTematicas().
-                                getListaSessoesTematicas()) {
-                if ((cp = rev.getCP()) != null) {
-                    int dimensao = cp.getNumeroRevisores();
-                    for (int i = 0; i < dimensao; i++) {
-                        if (!listaRevisores.contains(cp.getRevisorPeloID(i))) {
-                            listaRevisores.add(cp.getRevisorPeloID(i));
-                        }
-                    }
-                }
+    public List<Evento> getListaEventosRevisor(Revisor revisor, List<Evento> listaEventosApresentados) {
+        Utilizador u = revisor.getUtilizador();
+        List<Evento> listaEventosRevisor = new ArrayList<>();
+        for (Evento e : listaEventosApresentados) {
+            if (e.getCP().contains(u)) {
+                listaEventosRevisor.add(e);
             }
         }
-        return listaRevisores;
+        return listaEventosRevisor;
     }
 
     /**
-     * Devolve a lista de revisiveis que onde é possível gerar a análise
-     * estatística e onde o revisor em análise pertence à CP
+     * Devolve a lista de eventos que onde é possível gerar a análise
+     * estatística
      *
-     * @param revisor revisor em análise
-     * @return lista de revisiveis
+     * @return lista de eventos
      */
-    public List<Revisivel> getListaRevisiveisRevisor(Revisor revisor) {
-        Utilizador u = revisor.getUtilizador();
-        List<Revisivel> listaRevisiveis = new ArrayList<>();
-
-        for (Revisivel r : listaEventos) {
-            if (r.isStateValidoParaGerarAnaliseEstatisticas()) {
-                if (r.getCP().contains(u)) {
-                    listaRevisiveis.add(r);
-                }
-            }
-            for (Revisivel rev : ((Evento) r).getListaSessoesTematicas().
-                                getListaSessoesTematicas()) {
-                if (rev.isStateValidoParaGerarAnaliseEstatisticas()) {
-                    if (rev.getCP().contains(u)) {
-                        listaRevisiveis.add(rev);
-                    }
-
-                }
+    public List<Evento> getListaEventosGerarAnaliseEstatistica() {
+        List<Evento> listaEventos = new ArrayList<>();
+        for (Evento evento : this.listaEventos) {
+            if (evento.isStateValidoParaGerarAnaliseEstatisticas()) {
+                listaEventos.add(evento);
             }
         }
-        return listaRevisiveis;
+        return listaEventos;
     }
 
     /**
@@ -493,22 +464,41 @@ public class RegistoEventos {
             }
         }
     }
-    
+
     /**
      * Devolve uma lista de eventos que estão a aceitar submissões de artigos.
-     * 
+     *
      * @return Lista de eventos.
      */
     public List<Evento> getListaEventosAceitarArtigos() {
         List<Evento> listaEventos = new ArrayList<>();
-        
-        for(Evento evento : this.listaEventos) {
-            if(evento.isStateValidoParaSubmeter()) {
+
+        for (Evento evento : this.listaEventos) {
+            if (evento.isStateValidoParaSubmeter()) {
                 listaEventos.add(evento);
             }
         }
-        
+
         return listaEventos;
     }
 
+    /**
+     * Devolve a lista de emails dos organizadores dos eventos ao qual o revisor
+     * pertence
+     *
+     * @param listaEventos lista de eventos nos quais tem o revisor como membro
+     * de CP
+     * @return lista de emails dos organizadores
+     */
+    public List<String> notificarOrganizador(List<Evento> listaEventos) {
+        List<String> listaEmail = new ArrayList<>();
+        for (Evento evento : listaEventos) {
+            for (String email : evento.notificarOrganizador()) {
+                if (!listaEmail.contains(email)) {
+                    listaEmail.add(email);
+                }
+            }
+        }
+        return listaEmail;
+    }
 }

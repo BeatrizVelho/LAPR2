@@ -97,6 +97,10 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
      * Processo de Decisão.
      */
     private ProcessoDecisao processoDecisao;
+    /**
+     * Processo de análise estatística.
+     */
+    private ProcessoAnaliseEstatistica processoAnaliseEstatistica;
 
     /**
      * Estado da sessão temática.
@@ -918,14 +922,4 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
         return false;
     }
 
-    /**
-     * Verifica se determinado revísivel reune as condições necessárias para
-     * gerar a análise estatistica.
-     *
-     * @return verdadeiro se estiver e falso se não
-     */
-    @Override
-    public boolean isStateValidoParaGerarAnaliseEstatisticas() {
-        return this.estado.setEmSubmissaoCameraReady() || this.estado.setCameraReady();
-    }
 }

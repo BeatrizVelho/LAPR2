@@ -173,6 +173,11 @@ public class MecanismoLeituraCSV1 implements MecanismoLeitura {
             if (artigo.getAutorCorrespondente() == null) {
                 throw new IllegalArgumentException(MecanismoLeitura.AUTOR_CORRESPONDENTE_NAO_CONSTA_NA_LISTA);
             }
+            
+            submissao.alterarEstadoSubmissao();
+            submissao.adicionarArtigo(artigo);
+            listaSubmissoes.validarSubmissao(submissao);
+            listaSubmissoes.adicionarSubmissao(submissao);
         } catch (FileNotFoundException ex) {
             errorLog += MecanismoLeitura.FICHEIRO;
         } catch (IllegalArgumentException ex) {
@@ -187,6 +192,7 @@ public class MecanismoLeituraCSV1 implements MecanismoLeitura {
                 return false;
             } catch (FileNotFoundException ex) {
                 // Não foi possível gravar o ficheiro...???
+                return false;
             }
         }
 

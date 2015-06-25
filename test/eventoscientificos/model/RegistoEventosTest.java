@@ -46,16 +46,16 @@ public class RegistoEventosTest {
         Data dataFim = new Data(2017, 6, 10);
         RegistoEventos instance = new RegistoEventos();
         this.evento = new Evento(titulo, descricao, local, dataInicioSubmissao,
-                dataFimSubmissao, dataInicioDistribuicao, dataFimRevisao,
-                dataFimSubmissaoCameraReady, dataInicio, dataFim);
+                            dataFimSubmissao, dataInicioDistribuicao, dataFimRevisao,
+                            dataFimSubmissaoCameraReady, dataInicio, dataFim);
 
         this.utilizador = new Utilizador(
-                "pedro", "1140781@isep.ipp.pt", "pedro", "12345");
+                            "pedro", "1140781@isep.ipp.pt", "pedro", "12345");
         this.st = new SessaoTematica(
-                "#123456", "Uma descrição", new Data(2016, 5, 9),
-                new Data(2016, 6, 21), new Data(2016, 7, 8),
-                new Data(2016, 7, 20), new Data(2016, 9, 24),
-                new Data(2017, 5, 28), new Data(2017, 6, 8));
+                            "#123456", "Uma descrição", new Data(2016, 5, 9),
+                            new Data(2016, 6, 21), new Data(2016, 7, 8),
+                            new Data(2016, 7, 20), new Data(2016, 9, 24),
+                            new Data(2017, 5, 28), new Data(2017, 6, 8));
 
         Artigo artigoInicial = new Artigo();
         Artigo artigoFinal = new Artigo();
@@ -85,9 +85,9 @@ public class RegistoEventosTest {
         RegistoEventos instance = new RegistoEventos();
         Evento expResult = this.evento;
         Evento result = instance.novoEvento(
-                titulo, descricao, local, dataInicioSubmissao, dataFimSubmissao,
-                dataInicioDistribuicao, dataFimRevisao, dataFimSubmissaoCameraReady,
-                dataInicio, dataFim);
+                            titulo, descricao, local, dataInicioSubmissao, dataFimSubmissao,
+                            dataInicioDistribuicao, dataFimRevisao, dataFimSubmissaoCameraReady,
+                            dataInicio, dataFim);
         assertEquals(expResult, result);
     }
 
@@ -159,7 +159,7 @@ public class RegistoEventosTest {
         List<Evento> expResult = new ArrayList();
         expResult.add(this.evento);
         List<Evento> result
-                = instance.getListaEventosOrganizador(this.utilizador);
+                            = instance.getListaEventosOrganizador(this.utilizador);
         assertEquals(expResult, result);
     }
 
@@ -230,9 +230,9 @@ public class RegistoEventosTest {
         evento.setEstado(new EventoEmSubmissaoState(evento));
         instance.adicionarEvento(evento);
         instance.adicionarEvento(new Evento("sem titulo", "descricao",
-                new Local("local"), new Data(2016, 6, 8), new Data(2016, 6, 20),
-                new Data(2016, 7, 30), new Data(2016, 8, 15), new Data(2016, 8, 30),
-                new Data(2016, 10, 9), new Data(2017, 6, 10)));
+                            new Local("local"), new Data(2016, 6, 8), new Data(2016, 6, 20),
+                            new Data(2016, 7, 30), new Data(2016, 8, 15), new Data(2016, 8, 30),
+                            new Data(2016, 10, 9), new Data(2017, 6, 10)));
         int expResult = 1;
         int result = instance.getListaSubmissiveisAceitarArtigo().size();
         assertEquals(expResult, result);
@@ -263,7 +263,7 @@ public class RegistoEventosTest {
     @Test
     public void testGetListaSubmissiveisComSubmissoesRetiradasOrganizadorProponente() {
         System.out.println(
-                "getListaSubmissiveisComSubmissoesRetiradasOrganizadorProponente");
+                            "getListaSubmissiveisComSubmissoesRetiradasOrganizadorProponente");
         Submissao submissao = new Submissao();
         submissao.setEstado(new SubmissaoRemovidaState(submissao));
 
@@ -378,7 +378,7 @@ public class RegistoEventosTest {
         RegistoEventos instance = new RegistoEventos();
         instance.adicionarEvento(this.evento);
         Evento expResult
-                = this.evento;
+                            = this.evento;
         Evento result = instance.getEventoPeloID(indice);
         assertEquals(expResult, result);
     }
@@ -413,32 +413,30 @@ public class RegistoEventosTest {
     }
 
     /**
-     * Test of getListaTodosRevisores method, of class RegistoEventos.
+     * Test of getListaEventosRevisor method, of class RegistoEventos.
      */
     @Test
-    public void testGetListaTodosRevisores() {
-        System.out.println("getListaTodosRevisores");
+    public void testGetListaEventosGerarAnaliseEstatistica() {
+        System.out.println("getListaEventosGerarAnaliseEstatistica");
+        Revisor revisor = new Revisor(utilizador);
         RegistoEventos instance = new RegistoEventos();
-        instance.adicionarEvento(evento);
-        CP cp = new CP();
 
-        cp.novoRevisor(utilizador);
-        this.evento.adicionarCP(new CP());
-        this.evento.getCP().novoRevisor(
-                new Utilizador("fafa", "mmi@gmail.com", "mfmf", "1234"));
-        this.st.adicionarCP(cp);
+        instance.adicionarEvento(evento);
+        this.st.setEstado(new SessaoTematicaEmCameraReadyState(st));
         this.evento.getListaSessoesTematicas().adicionarSessaoTematica(st);
-        int expResult = 2;
-        int result = instance.getListaTodosRevisores().size();
+        this.evento.setEstado(new EventoEmSubmissaoCameraReadyState(evento));
+
+        int expResult = 1;
+        int result = instance.getListaEventosGerarAnaliseEstatistica().size();
         assertEquals(expResult, result);
     }
 
     /**
-     * Test of getListaRevisiveisRevisor method, of class RegistoEventos.
+     * Test of getListaEventosRevisor method, of class RegistoEventos.
      */
     @Test
-    public void testGetListaRevisiveisRevisor() {
-        System.out.println("getListaRevisiveisRevisor");
+    public void testGetListaEventosRevisor() {
+        System.out.println("getListaEventosRevisor");
         Revisor revisor = new Revisor(utilizador);
         RegistoEventos instance = new RegistoEventos();
         instance.adicionarEvento(evento);
@@ -449,11 +447,11 @@ public class RegistoEventosTest {
         this.st.setEstado(new SessaoTematicaEmCameraReadyState(st));
         this.evento.adicionarCP(new CP());
         this.evento.getCP().novoRevisor(
-                new Utilizador("fafa", "mmi@gmail.com", "mfmf", "1234"));
+                            new Utilizador("fafa", "mmi@gmail.com", "mfmf", "1234"));
         this.evento.getListaSessoesTematicas().adicionarSessaoTematica(st);
-
-        int expResult = 1;
-        int result = instance.getListaRevisiveisRevisor(revisor).size();
+        List<Evento> listaEventos = instance.getListaEventosGerarAnaliseEstatistica();
+        int expResult = 0;
+        int result = instance.getListaEventosRevisor(revisor, listaEventos).size();
         assertEquals(expResult, result);
     }
 

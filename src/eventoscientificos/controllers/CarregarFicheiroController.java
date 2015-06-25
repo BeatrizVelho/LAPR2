@@ -9,16 +9,34 @@ import eventoscientificos.model.mecanismo.leitura.MecanismoLeitura;
 import java.util.List;
 
 /**
+ * Representa uma instância de CarregarFicheiroController, através de uma
+ * empresa, uma lista de eventos e um evento.
+ * 
  * @author G01
  */
 public class CarregarFicheiroController {
 
+    /**
+     * Empresa que contém os dados.
+     */
     private Empresa empresa;
 
+    /**
+     * Lista de eventos a aceitar artigos.
+     */
     private List<Evento> listaEventosAceitarEventos;
 
+    /**
+     * Lista de eventos a aceitar artigos.
+     */
     private Evento evento;
 
+    /**
+     * Constrói uma instância de CarregarFicheiroController através de uma
+     * empresa.
+     * 
+     * @param empresa 
+     */
     public CarregarFicheiroController(Empresa empresa) {
         this.empresa = empresa;
         this.listaEventosAceitarEventos = null;
@@ -34,19 +52,43 @@ public class CarregarFicheiroController {
         return listaEventosAceitarEventos;
     }
 
+    /**
+     * Trata de criar uma lista de eventos que estejam a aceitar artigos e 
+     * guarda-a.
+     * 
+     * @return Verdadeiro se for possível obter a lista e falso caso não seja.
+     */
     public boolean getListaEventosAceitarArtigos() {
         RegistoEventos registoEventos = this.empresa.getRegistoEventos();
         this.listaEventosAceitarEventos
                 = registoEventos.getListaEventosAceitarArtigos();
 
-        return registoEventos != null && this.listaEventosAceitarEventos != null;
+        return this.listaEventosAceitarEventos != null;
     }
 
+    /**
+     * Seleciona o evento para o qual se destina a submissão por ficheiro.
+     * 
+     * @param indice Posição do evento na lista.
+     * 
+     * @return Verdadeiro se o evento for selecionado com sucesso e falso caso
+     * não seja.
+     */
     public boolean selecionarEvento(int indice) {
         this.evento = this.listaEventosAceitarEventos.get(indice);
+        
         return this.evento != null;
     }
 
+    /**
+     * Tenta carregar a submissão de um artigo para dentro de um evento ou 
+     * sessão temática que exista no mesmo.
+     * 
+     * @param ficheiro Ficheiro do qual é extraida a submissão.
+     * 
+     * @return Verdadeiro se a submissão do ficheiro ocorrer com sucesso e falso
+     * caso falhe.
+     */
     public boolean submeterFicheiro(String ficheiro) {
         RegistoMecanismosLeitura registoMecanismosLeitura
                 = this.empresa.getRegistoMecanismosLeitura();
@@ -60,9 +102,7 @@ public class CarregarFicheiroController {
 
         RegistoUtilizadores registoUtilizadores = this.empresa.getRegistoUtilizadores();
 
-        mecanismoLeitura.lerFicheiroSubmissao(
+        return mecanismoLeitura.lerFicheiroSubmissao(
                 registoUtilizadores, this.evento, ficheiro);
-
-        return true;
     }
 }

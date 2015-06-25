@@ -16,6 +16,10 @@ public class ReverArtigoUI extends javax.swing.JDialog {
 
     /**
      * Creates new form ReverArtigoUI
+     * 
+     * @param parent
+     * @param modal
+     * @param empresa
      */
     public ReverArtigoUI(java.awt.Frame parent, boolean modal, Empresa empresa) {
         super(parent, "Rever Artigo", modal);
@@ -290,7 +294,7 @@ public class ReverArtigoUI extends javax.swing.JDialog {
         int indice = this.cmb_selecionarRevisivel.getSelectedIndex();
         this.controller.selecionarRevisivel(indice);
 
-        for (Revisao revisao : this.controller.getlistaRevisoesRevisor()) {
+        for (Revisao revisao : this.controller.getListaRevisoesRevisor()) {
             this.cmb_selecionarSubmissao.addItem(revisao.getSubmissao());
         }
 
@@ -298,7 +302,7 @@ public class ReverArtigoUI extends javax.swing.JDialog {
         this.cmb_selecionarRevisivel.setEnabled(false);
         this.btn_selecionarSubmissao.setEnabled(true);
         this.cmb_selecionarSubmissao.setEnabled(true);
-        getRootPane().setDefaultButton(btn_selecionarSubmissao);
+        getRootPane().setDefaultButton(this.btn_selecionarSubmissao);
     }//GEN-LAST:event_btn_selecionarRevisivelActionPerformed
 
     private void btn_selecionarSubmissaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_selecionarSubmissaoActionPerformed
@@ -323,7 +327,6 @@ public class ReverArtigoUI extends javax.swing.JDialog {
         String texto = this.txtA_texto.getText();
 
         try {
-
             this.controller.adicionarDadosRevisao(confianca, adequacao,
                     originalidade, qualidade, recomendacao, texto);
 
@@ -335,14 +338,12 @@ public class ReverArtigoUI extends javax.swing.JDialog {
                 this.controller.adicionarResultadoRevisao();
             }
             dispose();
-
         } catch (IllegalArgumentException ex) {
             JOptionPane.showMessageDialog(
                     this.framePai,
                     ex.getMessage(),
                     "Texto Justificativo",
                     JOptionPane.ERROR_MESSAGE);
-
         }
     }//GEN-LAST:event_btn_submeterRevisaoActionPerformed
 

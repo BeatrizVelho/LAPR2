@@ -128,7 +128,7 @@ public class CP {
 
     /**
      * Devolve o número de revisores existentes na CP.
-     * 
+     *
      * @return Número de revisores existentes na CP.
      */
     public int getNumeroRevisores() {
@@ -137,13 +137,21 @@ public class CP {
 
     /**
      * Devolve um revisor pela sua posição na lista de revisores da CP.
-     * 
+     *
      * @param indice Posição do revisor.
-     * 
+     *
      * @return Revisor na posição dada.
      */
     public Revisor getRevisorPeloID(int indice) {
         return this.listaRevisores.get(indice);
     }
 
+    /**
+     * Devolve a lista de revisores
+     *
+     * @return devolve a lista de revisores
+     */
+    public List<Revisor> getListaRevisores() {
+        return listaRevisores;
+    }
 }
