@@ -122,6 +122,10 @@ public class Submissao {
             this.estado.setEmSubmissao();
         }
 
+        if(this.estado instanceof SubmissaoAceiteState) {
+            this.estado.setEmCameraReady();
+        }
+        
         return true;
     }
 
@@ -131,11 +135,13 @@ public class Submissao {
      * @return Verdadeiro se o artigo for válido e falso se não for.
      */
     public boolean validarSubmissao() {
-        if (this.estado instanceof SubmissaoEmSubmissaoState) {
+        if (this.estado instanceof SubmissaoEmSubmissaoState ||
+                this.estado instanceof SubmissaoCriadaState) {
             this.artigoInicial.validarArtigo();
         }
 
-        if (this.estado instanceof SubmissaoEmCameraReadyState) {
+        if (this.estado instanceof SubmissaoEmCameraReadyState || 
+                this.estado instanceof SubmissaoAceiteState) {
             this.artigoFinal.validarArtigo();
         }
 
