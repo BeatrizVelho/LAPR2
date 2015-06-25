@@ -342,4 +342,20 @@ public class ListaSessoesTematicas {
         }
     }
 
+    /**
+     * Devolve a Sessao Tematica com o codigo unico recebido por parametro.
+     *
+     * @param codigoUnico Codigo da sessao tematica a procurar.
+     * @return Sessao Tematica correspondente ao codigo unico e null se não
+     * encontrar nenhuma Sessao Tematica.
+     */
+    public SessaoTematica getSessaoTematicaComCodigoUnico(String codigoUnico) {
+        for (SessaoTematica sessaoTematica : this.listaSessoesTematicas) {
+            if (sessaoTematica.getCodigoUnico().equals(codigoUnico)) {
+                return sessaoTematica;
+            }
+        }
+
+        return null;
+    }
 }
