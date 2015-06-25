@@ -57,7 +57,7 @@ public class ListarSubmissoesRetiradasUI extends javax.swing.JDialog {
 
         pnl_selecionarSubmissivel = new javax.swing.JPanel();
         btn_selecionarSubmissivel = new javax.swing.JButton();
-        cmb_selecionarSubmissivel = new javax.swing.JComboBox();
+        cmb_selecionarSubmissivel = new javax.swing.JComboBox(this.controller.getListaSubmissiveis().toArray());
         pnl_submissoesRetiradas = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList_submissoesRetiradas = new javax.swing.JList(this.controller.getModeloLista());
@@ -80,10 +80,10 @@ public class ListarSubmissoesRetiradasUI extends javax.swing.JDialog {
             pnl_selecionarSubmissivelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_selecionarSubmissivelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(cmb_selecionarSubmissivel, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cmb_selecionarSubmissivel, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_selecionarSubmissivel)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnl_selecionarSubmissivelLayout.setVerticalGroup(
             pnl_selecionarSubmissivelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,7 +133,7 @@ public class ListarSubmissoesRetiradasUI extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pnl_selecionarSubmissivel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnl_submissoesRetiradas, javax.swing.GroupLayout.DEFAULT_SIZE, 819, Short.MAX_VALUE)
+                    .addComponent(pnl_submissoesRetiradas, javax.swing.GroupLayout.DEFAULT_SIZE, 799, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btn_cancelar)))

@@ -223,7 +223,16 @@ public class SubmeterArtigoController {
      */
     public boolean adicionarFicheiroPDF(String ficheiro) {
         this.artigo.setFicheiro(ficheiro);
-        return this.listaSubmissoes.validarSubmissao(this.submissao);
+        return true;
+    }
+
+    /**
+     * Verifica se a submissão já existe no evento ou sessão temática.
+     * 
+     * @return Verdadeiro se não existir e falso caso exista.
+     */
+    public boolean validarSubmissao() {
+        return this.listaSubmissoes.validarSubmissao(submissao);
     }
 
     /**

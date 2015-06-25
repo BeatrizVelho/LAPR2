@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 
 /**
  * @author G01
@@ -38,7 +37,7 @@ public class SubmeterArtigoUI extends javax.swing.JDialog {
         setLocationRelativeTo(null);
         if (controller.getListaSubmissiveis().isEmpty()) {
             JOptionPane.showMessageDialog(
-                    framePai,
+                    this,
                     "Não existem eventos ou sessões temáticas onde lhe é "
                     + "possível submeter artigos.",
                     "Submeter Artigo",
@@ -445,7 +444,7 @@ public class SubmeterArtigoUI extends javax.swing.JDialog {
 
             if (!ficheiro.getName().endsWith(".pdf")) {
                 JOptionPane.showMessageDialog(
-                        this.framePai,
+                        this,
                         "O ficheiro deve ter o formato PDF.",
                         "Submeter Ficheiro",
                         JOptionPane.ERROR_MESSAGE);
@@ -459,6 +458,9 @@ public class SubmeterArtigoUI extends javax.swing.JDialog {
 
     private void btn_submeterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_submeterActionPerformed
         try {
+            if (!this.controller.validarSubmissao()) {
+                throw new NullPointerException("A submissão já se encontra submetida.");
+            }
             String opcoes[] = {"Sim", "Não"};
             int resposta = JOptionPane.showOptionDialog(
                     null, "Pretende submeter o artigo?", "Submeter artigo", 0,
@@ -469,10 +471,17 @@ public class SubmeterArtigoUI extends javax.swing.JDialog {
             dispose();
         } catch (IllegalArgumentException ex) {
             JOptionPane.showMessageDialog(
-                    this.framePai,
+                    this,
                     ex.getMessage(),
                     "Submeter Artigo",
                     JOptionPane.ERROR_MESSAGE);
+        } catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(
+                    this,
+                    ex.getMessage(),
+                    "Submeter Artigo",
+                    JOptionPane.ERROR_MESSAGE);
+                dispose();
         }
     }//GEN-LAST:event_btn_submeterActionPerformed
 

@@ -207,8 +207,10 @@ public class Submissao {
 
         Submissao outraSubmissao = (Submissao) outroObjecto;
 
-        return this.getArtigoInicial().equals(outraSubmissao.getArtigoInicial())
-                || this.getArtigoFinal().equals(outraSubmissao.getArtigoFinal());
+        return (getEstado() instanceof SubmissaoCriadaState 
+                || getEstado() instanceof SubmissaoEmSubmissaoState) 
+                ? this.getArtigoInicial().equals(outraSubmissao.getArtigoInicial())
+                : this.getArtigoFinal().equals(outraSubmissao.getArtigoFinal());
     }
 
     /**
