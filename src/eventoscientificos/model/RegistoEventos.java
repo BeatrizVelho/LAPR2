@@ -493,5 +493,22 @@ public class RegistoEventos {
             }
         }
     }
+    
+    /**
+     * Devolve uma lista de eventos que estão a aceitar submissões de artigos.
+     * 
+     * @return Lista de eventos.
+     */
+    public List<Evento> getListaEventosAceitarArtigos() {
+        List<Evento> listaEventos = new ArrayList<>();
+        
+        for(Evento evento : this.listaEventos) {
+            if(evento.isStateValidoParaSubmeter()) {
+                listaEventos.add(evento);
+            }
+        }
+        
+        return listaEventos;
+    }
 
 }
