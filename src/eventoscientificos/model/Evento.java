@@ -13,6 +13,7 @@ import java.util.List;
 import utils.Data;
 
 /**
+ * Constrói uma instância de Evento através 
  * @author G01
  */
 public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, Distribuivel, Decidivel, Revisivel {

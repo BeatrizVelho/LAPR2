@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ *Constrói um instância de ProcessoAnaliseEstatistica através 
  * @author G01
  */
 public class ProcessoAnaliseEstatistica {
