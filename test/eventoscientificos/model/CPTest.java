@@ -1,11 +1,13 @@
 package eventoscientificos.model;
 
+import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
+ * Testa a classe CP.
  *
- * @author Tiago Ferreira
+ * @author G01
  */
 public class CPTest {
 
@@ -21,7 +23,7 @@ public class CPTest {
         CP instance = new CP();
         boolean expResult = true;
         boolean result = instance.novoRevisor(new Utilizador(
-                "Tiago", "1131658@isep.ipp.pt", "tiago", "1234"));
+                            "Tiago", "1131658@isep.ipp.pt", "tiago", "1234"));
         assertEquals(expResult, result);
     }
 
@@ -33,10 +35,10 @@ public class CPTest {
         System.out.println("novoRevisorLista");
         CP instance = new CP();
         instance.novoRevisor(new Utilizador(
-                "Tiago", "1131658@isep.ipp.pt", "tiago", "1234"));
+                            "Tiago", "1131658@isep.ipp.pt", "tiago", "1234"));
 
         instance.novoRevisor(new Utilizador(
-                "Tiago", "1131658@isep.ipp.pt", "tiago", "1234"));
+                            "Tiago", "1131658@isep.ipp.pt", "tiago", "1234"));
     }
 
     /**
@@ -59,7 +61,7 @@ public class CPTest {
         System.out.println("equalsNot");
         CP outraCP = new CP();
         outraCP.novoRevisor(new Utilizador(
-                "tiago", "1131658@isep.ipp.pt", "tiago", "1234"));
+                            "tiago", "1131658@isep.ipp.pt", "tiago", "1234"));
         CP instance = new CP();
         boolean expResult = false;
         assertEquals(expResult, instance.equals(outraCP));
@@ -73,7 +75,7 @@ public class CPTest {
         System.out.println("validarCPVazia");
         CP instance = new CP();
         instance.novoRevisor(new Utilizador(
-                "tiago", "1131658@isep.ipp.pt", "tiago", "1234"));
+                            "tiago", "1131658@isep.ipp.pt", "tiago", "1234"));
         boolean expResult = true;
         boolean result = instance.validarCP();
         assertEquals(expResult, result);
@@ -99,10 +101,10 @@ public class CPTest {
         System.out.println("contains");
         CP instance = new CP();
         instance.novoRevisor(new Utilizador(
-                "Tiago", "1131658@isep.ipp.pt", "tiago", "1234"));
+                            "Tiago", "1131658@isep.ipp.pt", "tiago", "1234"));
 
         Utilizador utilizador = new Utilizador(
-                "Tiago", "1131658@isep.ipp.pt", "tiago", "1234");
+                            "Tiago", "1131658@isep.ipp.pt", "tiago", "1234");
         boolean expResult = true;
         boolean result = instance.contains(utilizador);
         assertEquals(expResult, result);
@@ -129,7 +131,7 @@ public class CPTest {
     public void testGetNumeroRevisores() {
         System.out.println("getNumeroRevisores");
         Utilizador utilizador = new Utilizador(
-                "Pedro", "1140781@isep.ipp.pt", "pedro", "1234");
+                            "Pedro", "1140781@isep.ipp.pt", "pedro", "1234");
         CP instance = new CP();
         instance.novoRevisor(utilizador);
         int expResult = 1;
@@ -143,12 +145,26 @@ public class CPTest {
     public void testGetRevisorPeloIndice() {
         System.out.println("getRevisorPeloIndice");
         Utilizador utilizador = new Utilizador(
-                "Pedro", "1140781@isep.ipp.pt", "pedro", "1234");
+                            "Pedro", "1140781@isep.ipp.pt", "pedro", "1234");
         CP instance = new CP();
         instance.novoRevisor(utilizador);
         int indice = 0;
         Revisor expResult = new Revisor(utilizador);
         Revisor result = instance.getRevisorPeloID(indice);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of getListaRevisores method, of class CP.
+     */
+    @Test
+    public void testGetListaRevisores() {
+        System.out.println("getListaRevisores");
+        CP instance = new CP();
+        instance.novoRevisor(new Utilizador(
+                            "Fafa", "faf@isep.ipp.pt", "fafa", "1234"));
+        int expResult = 1;
+        int result = instance.getListaRevisores().size();
         assertEquals(expResult, result);
     }
 
