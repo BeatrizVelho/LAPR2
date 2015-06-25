@@ -5,6 +5,7 @@ import eventoscientificos.model.state.sessaotematica.SessaoTematicaFaseDecisaoSt
 import eventoscientificos.model.state.submissao.SubmissaoRemovidaState;
 import eventoscientificos.model.state.submissao.SubmissaoRevistaState;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -316,6 +317,21 @@ public class ListaSessoesTematicasTest {
         listaSessoesTematicas.adicionarSessaoTematica(sessaoTematica);
         int expResult = 1;
         int result = listaSessoesTematicas.getListaDecidivelOrganizadorProponente(utilizador).size();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of getSessaoTematicaComCodigoUnico method, of class ListaSessoesTematicas.
+     */
+    @Test
+    public void testGetSessaoTematicaComCodigoUnico() {
+        System.out.println("getSessaoTematicaComCodigoUnico");
+        String codigoUnico = "codigo";
+        ListaSessoesTematicas instance = new ListaSessoesTematicas(evento);
+        instance.adicionarSessaoTematica(this.sessaoTematica);
+        this.sessaoTematica.setCodigoUnico("codigo");
+        SessaoTematica expResult = this.sessaoTematica;
+        SessaoTematica result = instance.getSessaoTematicaComCodigoUnico(codigoUnico);
         assertEquals(expResult, result);
     }
 }
