@@ -23,6 +23,39 @@ public class ListaAutores {
     }
 
     /**
+     * Constrói uma cópia de uma lista de autores, com os mesmos atributos.
+     * 
+     * @param listaAutores Lista de autores que vai ser copiada.
+     */
+    public ListaAutores(ListaAutores listaAutores) {
+        List<Autor> cloneLista = new ArrayList();
+        
+        for(Autor autor : listaAutores.getListaAutores()) {
+            cloneLista.add(new Autor(autor));
+        }
+        
+        setListaAutores(cloneLista);
+    }
+
+    /**
+     * Devolve a lista de autores.
+     * 
+     * @return Lista de autores.
+     */
+    private List<Autor> getListaAutores() {
+        return this.listaAutores;
+    }
+
+    /**
+     * Modifica a lista de autores.
+     * 
+     * @param listaAutores Nova lista de autores.
+     */
+    private void setListaAutores(List<Autor> listaAutores) {
+        this.listaAutores = new ArrayList(listaAutores);
+    }
+
+    /**
      * Compara dois objetos entre si. Comparando primariamente a posição de
      * memória, seguida do conteudo e das classes as quais cada um deles
      * pertence, e finalmente os seus atributos, lista de autores.

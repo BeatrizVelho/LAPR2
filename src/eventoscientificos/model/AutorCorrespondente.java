@@ -20,5 +20,15 @@ public class AutorCorrespondente extends Autor {
         
         super(utilizador, instituicaoAfiliacao);
     }
+
+    /**
+     * Constrói uma cópia de um autor correspondente através de um outro passado
+     * por parametro.
+     * 
+     * @param autorCorrespondente Autor correspondente que irá ser copiado.
+     */
+    public AutorCorrespondente(AutorCorrespondente autorCorrespondente) {
+        super(autorCorrespondente);
+    }
     
 }
