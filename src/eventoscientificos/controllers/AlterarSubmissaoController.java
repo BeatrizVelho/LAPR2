@@ -13,9 +13,7 @@ import eventoscientificos.model.Submissao;
 import eventoscientificos.model.Submissivel;
 import eventoscientificos.model.Utilizador;
 import java.util.List;
-import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.DefaultListModel;
 import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
 import utils.Data;
@@ -76,7 +74,7 @@ public class AlterarSubmissaoController implements ControllerAutor {
     private ModeloListaAutores modeloLista;
 
     /**
-     * Modelo da lista
+     * Modelo da lista de autores registados.
      */
     private DefaultComboBoxModel<Autor> modeloListaAutoresRegistados;
 
