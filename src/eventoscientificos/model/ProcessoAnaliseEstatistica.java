@@ -82,8 +82,6 @@ public class ProcessoAnaliseEstatistica {
             // calcularMediaTodosArtigos();
             preencherMatrizDiferencasClassRevisorMediaArtigo();
             calcularVecMediaDesvioPorRevisorTodosArtigos();
-            preencherMatrizDiferencasClassRevisorMediaArtigo();
-            calcularVecMediaDesvioPorRevisorTodosArtigos();
             preencherVetorDesvioPadraoPorRevisor();
             return testesHipoteses();
         } else {
