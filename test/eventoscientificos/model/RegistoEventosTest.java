@@ -511,7 +511,51 @@ public class RegistoEventosTest {
         assertEquals(expResult, result);
     }
 
-   
+    /**
+     * Test of getListaRevisores method, of class RegistoEventos.
+     */
+    @Test
+    public void testGetListaRevisores() {
+        System.out.println("getListaRevisores");
+        Empresa empresa = inicializarModeloTeste();
+        RegistoEventos instance = empresa.getRegistoEventos();
+        List<Evento> listaEv = instance.getListaEventosGerarAnaliseEstatistica();
+        instance.getTodosRevisores(listaEv);
+        int expResult = 6;
+        int result = instance.getListaRevisores().size();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of getListaRevisoes method, of class RegistoEventos.
+     */
+    @Test
+    public void testGetListaRevisoes() {
+        System.out.println("getListaRevisoes");
+        Empresa empresa = inicializarModeloTeste();
+        RegistoEventos instance = empresa.getRegistoEventos();
+        List<Evento> listaEv = instance.getListaEventosGerarAnaliseEstatistica();
+        instance.getTodosRevisores(listaEv);
+        int expResult = 9;
+        int result = instance.getListaRevisoes().size();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of getListaSubmissao method, of class RegistoEventos.
+     */
+    @Test
+    public void testGetListaSubmissao() {
+        System.out.println("getListaSubmissao");
+        Empresa empresa = inicializarModeloTeste();
+        RegistoEventos instance = empresa.getRegistoEventos();
+        List<Evento> listaEv = instance.getListaEventosGerarAnaliseEstatistica();
+        instance.getTodosRevisores(listaEv);
+        int expResult = 1;
+        int result = instance.getListaSubmissao().size();
+        assertEquals(expResult, result);
+    }
+
     public Empresa inicializarModeloTeste() {
         Empresa empresa = new Empresa();
         Utilizador u1 = new Utilizador("Beatriz Velho", "beatriz_velho@gmail.com", "beaVelho", "1234");
@@ -680,4 +724,5 @@ public class RegistoEventosTest {
 
         return empresa;
     }
+
 }
