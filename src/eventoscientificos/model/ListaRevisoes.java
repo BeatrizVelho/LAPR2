@@ -189,4 +189,13 @@ public class ListaRevisoes {
     public Revisao getRevisaoPeloID(int indice) {
          return this.listaRevisoes.get(indice);
     }
+    
+    /**
+     * Devolve o número de revisões.
+     * 
+     * @return Número de revisões.
+     */
+    public int numeroRevisoes() {
+        return this.listaRevisoes.size();
+    }
 }
