@@ -70,7 +70,6 @@ public class DistribuirRevisoesArtigoController {
      * Devolve a uma lista de distribuiveis onde o utilizador em sistema está
      * nomeado como organizador ou proponente
      *
-     * @param u utilizador em sistema
      * @return verdadeiro se encontrar distribuiveis diferentes
      */
     public boolean getListaDistribuiveisOrganizadorProponente() {
@@ -85,8 +84,8 @@ public class DistribuirRevisoesArtigoController {
      * Seleciona o distribuivel da lista de distribuiveis onde o utilizador
      * pretende efetuar a distribuição
      *
-     * @param d distribuivel onde pretende efetuar a distribuição de submissões
-     * @return verdadeiro se criar o novo processo com sucesso e falso se não
+     * @param indice indice do distribuivel na lista de detetáveis
+     * @return verdadeiro se for importado os mecanismos de distribuição da empresa com sucesso e falso se não
      * for possivel criá-lo
      */
     public boolean selecionarDistribuivel(int indice) {

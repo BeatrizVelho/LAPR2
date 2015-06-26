@@ -97,8 +97,8 @@ public class ReverArtigoController {
     /**
      * Seleciona a revisão da lista de revisões e cria um clone da mesma.
      *
-     * @param indiceRevisao
-     * @return
+     * @param indiceRevisao indice da revisão na lista de revisões
+     * @return verdadeiro se for efetuada uma revisão clone com sucesso
      */
     public boolean selecionarRevisao(int indiceRevisao) {
         this.revisao = this.listaRevisoesRevisor.get(indiceRevisao);

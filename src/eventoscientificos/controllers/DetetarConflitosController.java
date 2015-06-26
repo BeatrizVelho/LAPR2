@@ -30,8 +30,8 @@ public class DetetarConflitosController extends TimerTask {
      * Constrói uma instância de DetetarConflitosController através de uma
      * empresa e de um detetável.
      * 
-     * @param empresa
-     * @param detetavel 
+     * @param empresa empresa 
+     * @param detetavel evento/sessão temática onde vai detetar conflitos
      */
     public DetetarConflitosController(Empresa empresa, Detetavel detetavel) {
         this.empresa = empresa;

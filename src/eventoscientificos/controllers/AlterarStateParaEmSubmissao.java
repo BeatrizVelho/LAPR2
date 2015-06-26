@@ -20,7 +20,7 @@ public class AlterarStateParaEmSubmissao extends TimerTask {
      * Constrói uma instância de AlterarStateParaEmSubmissao recebendo um
      * submissível.
      * 
-     * @param submissivel 
+     * @param submissivel submissivel
      */
     public AlterarStateParaEmSubmissao(Submissivel submissivel) {
         this.submissivel = submissivel;
