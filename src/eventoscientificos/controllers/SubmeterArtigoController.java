@@ -134,6 +134,10 @@ public class SubmeterArtigoController {
 
     /**
      * Cria uma nova submissão no submissível selecionado.
+     * @param indice indice do submíssivel na lista de submissiveis
+     * @return verdadeiro se selecionar se submissivel, a lista de submissoes,
+     * submissao, o artigo e a lista de autores foram instanciadas e falso 
+     * se não forem
      */
     public boolean selecionarSubmissivel(int indice) {
         this.submissivel = this.listaSubmissiveis.get(indice);
@@ -152,6 +156,9 @@ public class SubmeterArtigoController {
      *
      * @param titulo Titulo do Artigo.
      * @param resumo Resumo do Artigo.
+     * @param palavrasChaves palavras-chave do artigo
+     * @return verdadeiro se o registoUtilizadores for instanciado 
+     * e falso se não for
      */
     public boolean adicionarDadosArtigo(String titulo, String resumo,
             List<String> palavrasChaves) {
@@ -173,6 +180,7 @@ public class SubmeterArtigoController {
      * @param nome Nome do autor.
      * @param email Email do autor.
      * @param instituicaoAfiliacao Instituição de Afiliação do autor.
+     * @return verdadeiro se for instanciado um novo autor e falso se não for
      */
     public boolean novoAutor(
             String nome, String email, InstituicaoAfiliacao instituicaoAfiliacao) {

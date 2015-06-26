@@ -46,32 +46,32 @@ public class AlterarUtilizadorController {
     }
 
     /**
-     * 
-     * @return 
+     * Devolve nome do utilizador
+     * @return nome do utilizador
      */
     public String getUtilizadorNome() {
         return this.utilizadorClone.getNome();
     }
 
     /**
-     * 
-     * @return 
+     * Devolve o email do utilizador
+     * @return email do utilizador
      */
     public String getUtilizadorEmail() {
         return this.utilizadorClone.getEmail();
     }
     
     /**
-     * 
-     * @return 
+     * Devolve o username do utilizador
+     * @return username do utilizador
      */
     public String getUtilizadorUsername() {
         return this.utilizadorClone.getUsername();
     }
     
     /**
-     * 
-     * @return 
+     * Devolve a password do uilizador
+     * @return password do uilizador
      */
     public String getUtilizadorPassword() {
         return this.utilizadorClone.getPassword();

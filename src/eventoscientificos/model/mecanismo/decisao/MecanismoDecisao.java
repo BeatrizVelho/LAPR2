@@ -14,6 +14,8 @@ public interface MecanismoDecisao {
     
     /**
      * Classifica submissões.
+     * @param listaRevisoes lista de revisoes 
+     * @return lista de decisoes
      */
     public ListaDecisoes classificarSubmissoes (ListaRevisoes listaRevisoes);
     

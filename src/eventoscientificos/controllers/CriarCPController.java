@@ -85,7 +85,8 @@ public class CriarCPController {
      * Manda criar uma lista de eventos/sessão temáticas que se encontrem sem CP
      * definida e onde o utilizador é organizador/proponente.
      *
-     * @return
+     * @return verdadeiro se a lista CPDefinivel estiver preenchida e falso se
+     * não estiver
      */
     public boolean getListaCPDefiniveisSemCPOrganizadorProponente() {
         RegistoEventos registoEventos = this.empresa.getRegistoEventos();
@@ -93,18 +94,18 @@ public class CriarCPController {
         Utilizador utilizador = this.empresa.getUtilizadorAutenticado();
 
         this.listaCPDefinivel
-                = registoEventos.getListaCPDefiniveisSemCPOrganizadorProponente(
-                        utilizador);
+                            = registoEventos.getListaCPDefiniveisSemCPOrganizadorProponente(
+                                                utilizador);
 
         return this.listaCPDefinivel != null;
     }
 
     /**
-     * Seleciona um evento/sessão temática da lista de CPDefiniveis pelo indice.
+     * Seleciona um CPDefinivel (evento/sessão temática) da lista de
+     * CPDefiniveis pelo indice.
      *
      * @param indice Indice do evento/sessão temática selecionado.
-     *
-     * @return
+     * @return verdadeiro se selecionar um CPDefinivel e falso se não 
      */
     public boolean selecionarCPDefinivel(int indice) {
 
@@ -115,20 +116,20 @@ public class CriarCPController {
         this.registoUtilizadores = empresa.getRegistoUtilizadores();
 
         return this.CPDefinivel != null && this.CP != null
-                && this.registoUtilizadores != null;
+                            && this.registoUtilizadores != null;
     }
 
     /**
      * Cria uma instancia de Revisor recebendo como parametro uma String id
      *
      * @param id Id de utilizador do revisor.
-     * @return
+     * @return verdadeuro se criar com sucesso um revisor e falso se não criar
      */
     public boolean novoRevisor(String id) {
         Utilizador utilizador = this.registoUtilizadores.getUtilizador(id);
 
-        if (utilizador != null 
-                && !this.modeloLista.contains(new Revisor(utilizador))) {
+        if (utilizador != null
+                            && !this.modeloLista.contains(new Revisor(utilizador))) {
             this.modeloLista.addElement(new Revisor(utilizador));
         }
 
@@ -144,7 +145,7 @@ public class CriarCPController {
     public boolean validarCP() {
         if (!this.CP.validarCP()) {
             throw new IllegalArgumentException("Deve introduzir pelo menos um "
-                    + "revisor.");
+                                + "revisor.");
         }
 
         return true;

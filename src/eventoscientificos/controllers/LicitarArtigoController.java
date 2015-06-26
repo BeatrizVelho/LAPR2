@@ -1,4 +1,3 @@
-
 package eventoscientificos.controllers;
 
 import eventoscientificos.model.Conflito;
@@ -11,11 +10,11 @@ import eventoscientificos.model.RegistoTiposConflito;
 import eventoscientificos.model.Revisor;
 import eventoscientificos.model.Submissao;
 import java.util.List;
+
 /**
- * Representa uma instância de LicitarArtigoController através de Empresa, 
- * Revisor, RegistoTiposConflito, List<Licitavel> listaLicitaveis, 
- * List<Licitacao> listaLicitacaoTemporaria, List<Submissao> listaSubmissoes,
- * Licitacao.
+ * Representa uma instância de LicitarArtigoController através de Empresa,
+ * Revisor, RegistoTiposConflito, listaLicitaveis, listaLicitacaoTemporaria, 
+ * listaSubmissoes e Licitacao.
  *
  * @author G01
  */
@@ -61,6 +60,7 @@ public class LicitarArtigoController {
 
     /**
      * Constrói uma instância de LicitarArtigoController.
+     * @param empresa empresa
      */
     public LicitarArtigoController(Empresa empresa) {
         this.empresa = empresa;
@@ -98,17 +98,15 @@ public class LicitarArtigoController {
      * Devolve uma nova licitação associada ao revisor e a submissão recebidas
      * por parâmetro.
      *
+     * @param revisor revisor 
+     * @param s submissao
      * @return verdadeiro se instanciar uma nova licitação e falso se não o
      * fizer
      */
     public boolean novaLicitacao(Revisor revisor, Submissao s) {
         Conflito conflito = this.licitavel.getConflitoRevisorSubmissao(revisor, s);
         this.licitacao = this.licitavel.getListaLicitacoes().novaLicitacao(revisor, s, 0, conflito);
-        if (licitacao != null) {
-            return true;
-        } else {
-            return false;
-        }
+        return licitacao != null;
     }
 
     /**

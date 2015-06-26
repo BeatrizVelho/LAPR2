@@ -63,7 +63,7 @@ public class DefinirSessaoTematicaController {
      * Constrói uma instância de DefinirSessaoTematicaController através de uma
      * empresa.
      *
-     * @param empresa
+     * @param empresa empresa
      */
     public DefinirSessaoTematicaController(Empresa empresa) {
         this.empresa = empresa;
