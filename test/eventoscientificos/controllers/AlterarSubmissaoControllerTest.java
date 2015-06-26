@@ -2,6 +2,7 @@ package eventoscientificos.controllers;
 
 import eventoscientificos.model.Artigo;
 import eventoscientificos.model.Autor;
+import eventoscientificos.model.AutorCorrespondente;
 import eventoscientificos.model.Empresa;
 import eventoscientificos.model.Evento;
 import eventoscientificos.model.InstituicaoAfiliacao;
@@ -50,6 +51,7 @@ public class AlterarSubmissaoControllerTest {
         Artigo artigoInicial = submissao.novoArtigo();
         artigoInicial.setTitulo("titulo");
         artigoInicial.setResumo("resumo");
+        artigoInicial.setFicheiro("wasdfg");
         List<String> palavrasChave = new ArrayList<>();
         palavrasChave.add("gato");
         palavrasChave.add("banho");
@@ -58,7 +60,10 @@ public class AlterarSubmissaoControllerTest {
                 utilizador, new InstituicaoAfiliacao("ISEP"));
         artigoInicial.getListaAutores().novoAutor(
                 utilizador1, new InstituicaoAfiliacao("ISEP"));
-        artigoInicial.setFicheiro("wasdfg");
+        artigoInicial.setAutorCorrespondente(new AutorCorrespondente(utilizador, new InstituicaoAfiliacao("ISEP")));
+        artigoInicial.setDataSubmissao(Data.dataAtual());
+        artigoInicial.setAutorSubmissor(new Autor(utilizador, new InstituicaoAfiliacao("ISEP")));
+        
         submissao.adicionarArtigo(artigoInicial);
         evento.getListaSubmissoes().adicionarSubmissao(submissao);
 
@@ -104,7 +109,6 @@ public class AlterarSubmissaoControllerTest {
         instance.getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador();
         instance.selecionarSubmissivel(0);
         instance.selecionarSubmissao(0);
-        instance.getArtigoTitulo();
         String expResult = "titulo";
         String result = instance.getArtigoTitulo();
         assertEquals(expResult, result);
@@ -120,7 +124,6 @@ public class AlterarSubmissaoControllerTest {
         instance.getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador();
         instance.selecionarSubmissivel(0);
         instance.selecionarSubmissao(0);
-        instance.getArtigoTitulo();
         instance.getArtigoTitulo();
         String expResult = "resumo";
         String result = instance.getArtigoResumo();
