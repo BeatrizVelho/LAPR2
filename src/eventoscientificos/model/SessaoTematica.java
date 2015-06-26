@@ -1,7 +1,6 @@
 package eventoscientificos.model;
 
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaCriadaState;
-import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmRevisaoState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmSubmissaoCameraReadyState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmSubmissaoState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaFaseDecisaoState;
@@ -296,7 +295,8 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
      *
      * @return processo de decisão
      */
-    public ProcessoDecisao getProcessoDDecisao() {
+    @Override
+    public ProcessoDecisao getProcessoDecisao() {
         return this.processoDecisao;
     }
 
@@ -447,6 +447,16 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
     }
 
     /**
+     * Modifica o processo de decissão da sessão temática.
+     * 
+     * @param processoDecisao Novo processo de decisão.
+     */
+    @Override
+    public void setProcessoDecisao(ProcessoDecisao processoDecisao) {
+        this.processoDecisao = processoDecisao;
+    }
+
+    /**
      * Modifica o estado da sessão temática.
      *
      * @param estado Novo estado da sessão temática.
@@ -593,9 +603,11 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
      * Adiciona uma nova CP à sessão temática.
      *
      * @param cp CP a adicionar à sessão temática.
+     * 
      * @return Verdadeiro caso a CP tenha sido adicionada à sessão temática e
      * falso se a adição falhar.
      */
+    @Override
     public boolean adicionarCP(CP cp) {
         setCP(cp);
 
@@ -777,6 +789,8 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
      * Verifica se evento se encontra reune as condições necessárias para ser
      * possível distribuir
      *
+     * @param u Utilizador.
+     * 
      * @return verdadeiro cumprir as condições necessárias distribuir e falso se
      * não estiver
      */
@@ -795,6 +809,8 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
      * Verifica se o revisivel contém as condições necessárias para as
      * submissões serem revistas pelos revisores
      *
+     * @param u Utilizador.
+     * 
      * @return verdadeiro cumprir as condições necessárias para rever e falso se
      * não estiver
      */
@@ -818,10 +834,7 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
      * existir.
      */
     public boolean temSubmissoesRetiradas(Utilizador utilizador) {
-        if (isProponente(utilizador) && this.listaSubmissoes.temSubmissoesRetiradas()) {
-            return true;
-        }
-        return false;
+        return isProponente(utilizador) && this.listaSubmissoes.temSubmissoesRetiradas();
     }
 
     /**
@@ -869,6 +882,8 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
      * Verifica se determinado Submissivel cumpre os critérios necessários para
      * remover.
      *
+     * @param u Utilizador.
+     * 
      * @return verdadeiro se a sessão temática reunir as condições necessárias
      * de remoção e falso se não for possível remover.
      */

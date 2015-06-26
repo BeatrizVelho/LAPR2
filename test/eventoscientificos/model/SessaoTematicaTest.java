@@ -236,6 +236,22 @@ public class SessaoTematicaTest {
     }
 
     /**
+     * Teste dos métodos set e get do processo de decisão da classe SessaoTematica.
+     */
+    @Test
+    public void testSetAndGetProcessoDecisao() {
+        System.out.println("setAndGetProcessoDecisao");
+        SessaoTematica instance = this.sessaoTematica;
+        ProcessoDecisao processoDecisao = new ProcessoDecisao();
+        processoDecisao.adicionarMecanismoDecisao(new MecanismoDecisao1());
+        processoDecisao.classificarSubmissoes(new ListaRevisoes());
+        instance.setProcessoDecisao(processoDecisao);
+        ProcessoDecisao expResult = processoDecisao;
+        ProcessoDecisao result = instance.getProcessoDecisao();
+        assertEquals(expResult, result);
+    }
+
+    /**
      * Teste do método setCodigoUnico, da classe SessaoTematica.
      */
     @Test(expected = IllegalArgumentException.class)
