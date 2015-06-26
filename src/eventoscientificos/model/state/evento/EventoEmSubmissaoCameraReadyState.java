@@ -25,7 +25,7 @@ public class EventoEmSubmissaoCameraReadyState implements EventoState {
      * Constroi uma instância de EventoEmCameraReadyState recebendo um Evento
      * como parametro.
      *
-     * @param Evento objeto evento
+     * @param e objeto evento
      */
     public EventoEmSubmissaoCameraReadyState(Evento e) {
         this.e = e;

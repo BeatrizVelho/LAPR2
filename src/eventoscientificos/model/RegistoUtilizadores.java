@@ -71,12 +71,12 @@ public class RegistoUtilizadores {
      */
     public Utilizador novoUtilizador(String nome, String email, String username, String password) {
         String novaPassword, codificadorTabela = "";
-        
+
         if (this.tabelasCodificacao.size() == 1) {
             NFN nfn = (NFN) this.tabelasCodificacao.get("NFN");
 
             codificadorTabela = nfn.getClass().getSimpleName();
-            
+
             novaPassword = nfn.codificar(password, 0);
         } else {
             CA ca = (CA) this.tabelasCodificacao.get("CA");
@@ -95,7 +95,7 @@ public class RegistoUtilizadores {
         }
         if (!validarUtilizador(utilizador)) {
             throw new IllegalArgumentException("Utilizador ja consta na lista"
-                    + " de utilizadores da empresa");
+                                + " de utilizadores da empresa");
         }
         return utilizador;
     }
@@ -109,12 +109,11 @@ public class RegistoUtilizadores {
      * @param email email do utilizador a criar
      * @param username username do utilizador a criar
      * @param password password do utilizado a criar
-     * @param numeroCarateres numero carateres da password
      * @param codificadorTabela tabela do codificador utilizador
      * @return novo utilizador criado
      */
     public Utilizador novoUtilizador(String nome, String email, String username,
-            String password, String codificadorTabela) {
+                        String password, String codificadorTabela) {
 
         Utilizador utilizador = new Utilizador(nome, email, username, password);
         utilizador.setCodificadorTabela(codificadorTabela);
@@ -124,7 +123,7 @@ public class RegistoUtilizadores {
         }
         if (!validarUtilizador(utilizador)) {
             throw new IllegalArgumentException("Utilizador ja consta na lista"
-                    + " de utilizadores da empresa");
+                                + " de utilizadores da empresa");
         }
         return utilizador;
     }
@@ -156,13 +155,15 @@ public class RegistoUtilizadores {
      * Verifica se o utilizador passado por paraemtro já consta na lista de
      * utilizadores, ignorando o utilizador que lhe deu origem.
      *
+     * @param utilizador utilizador
+     * @param utilizadorClone utilizador clone
      * @return Verdadeiro se o utilizador passado por parametro não existir
      */
     public boolean validarUtilizadorClone(
-            Utilizador utilizador, Utilizador utilizadorClone) {
+                        Utilizador utilizador, Utilizador utilizadorClone) {
         for (Utilizador outroUtilizador : this.listaUtilizadores) {
             if (utilizadorClone.equals(outroUtilizador)
-                    && !utilizador.equals(outroUtilizador)) {
+                                && !utilizador.equals(outroUtilizador)) {
                 return false;
             }
         }
@@ -180,9 +181,9 @@ public class RegistoUtilizadores {
      * não seja.
      */
     public boolean atualizarUtilizador(
-            Utilizador utilizador, Utilizador utilizadorClone) {
+                        Utilizador utilizador, Utilizador utilizadorClone) {
         return this.listaUtilizadores.remove(utilizador)
-                && this.listaUtilizadores.add(utilizadorClone);
+                            && this.listaUtilizadores.add(utilizadorClone);
     }
 
     /**
@@ -216,7 +217,7 @@ public class RegistoUtilizadores {
     public Utilizador getUtilizador(String id) {
         for (Utilizador utilizador : this.listaUtilizadores) {
             if (utilizador.getEmail().equals(id)
-                    || utilizador.getUsername().equals(id)) {
+                                || utilizador.getUsername().equals(id)) {
                 return utilizador;
             }
         }
@@ -226,6 +227,7 @@ public class RegistoUtilizadores {
 
     /**
      * Inicia a criação do codificador aritmético.
+     * @throws java.io.IOException
      */
     public void iniciarCodificadorAritmetico() throws IOException {
         this.tabelasCodificacao.put("CodificadorAritmetico", new CA());

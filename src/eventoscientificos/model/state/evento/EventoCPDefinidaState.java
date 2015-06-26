@@ -20,7 +20,7 @@ public class EventoCPDefinidaState implements EventoState {
      * Constroi uma instância de EventoCPDefinidaState recebendo um Evento como
      * parametro.
      *
-     * @param Evento objeto evento
+     * @param evento evento
      */
     public EventoCPDefinidaState(Evento evento) {
         this.e = evento;

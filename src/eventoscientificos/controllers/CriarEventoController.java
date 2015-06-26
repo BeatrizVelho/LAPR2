@@ -83,7 +83,7 @@ public class CriarEventoController {
      * @param dataFimSubmissaoCameraReady Data Dim de Submissao de Camera Ready.
      * @param dataInicio Data de Início do Evento.
      * @param dataFim Data de Fim do Evento.
-     * @return 
+     * @return verdadeiro se instanciar um novo evento e falso se não ocorrer
      */
     public boolean novoEvento(String titulo, String descricao, Local local,
             Data dataInicioSubmissao, Data dataFimSubmissao,

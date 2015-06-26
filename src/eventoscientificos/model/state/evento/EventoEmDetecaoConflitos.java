@@ -25,7 +25,7 @@ public class EventoEmDetecaoConflitos implements EventoState {
      * Constroi uma instância de EventoEmDetecaoConflitos recebendo um Evento
      * como parametro.
      *
-     * @param Evento objeto evento
+     * @param e objeto evento
      */
     public EventoEmDetecaoConflitos(Evento e) {
         this.e = e;

@@ -24,7 +24,7 @@ public class EventoCriadoState implements EventoState {
      * Constroi uma instância de EventoCriadoState recebendo um Evento como
      * parametro.
      *
-     * @param Evento objeto evento
+     * @param e objeto evento
      */
     public EventoCriadoState(Evento e) {
         this.e = e;

@@ -35,7 +35,7 @@ public class CarregarFicheiroController {
      * Constrói uma instância de CarregarFicheiroController através de uma
      * empresa.
      * 
-     * @param empresa 
+     * @param empresa empresa a instanciar
      */
     public CarregarFicheiroController(Empresa empresa) {
         this.empresa = empresa;

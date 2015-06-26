@@ -25,7 +25,7 @@ public class EventoEmSubmissaoState implements EventoState {
      * Constroi uma instância de EventoEmSubmissaoState recebendo um Evento como
      * parametro.
      *
-     * @param Evento objeto evento
+     * @param e objeto evento
      */
     public EventoEmSubmissaoState(Evento e) {
         this.e = e;

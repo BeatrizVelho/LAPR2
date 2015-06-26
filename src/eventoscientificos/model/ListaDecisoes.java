@@ -88,5 +88,24 @@ public class ListaDecisoes {
 
         return this.listaDecisoes.equals(outraLista.listaDecisoes);
     }
+    
+     /**
+     * Devolve a decisao correspondente ao indice.
+     * 
+     * @param indice Indie da decisao.
+     * @return Decisao.
+     */
+    public Decisao getDecisaoPeloID(int indice) {
+         return this.listaDecisoes.get(indice);
+    }
+    
+    /**
+     * Devolve o número de Decisões.
+     * 
+     * @return Número de Decisões.
+     */
+    public int numeroDecisoes() {
+        return this.listaDecisoes.size();
+    }
 
 }
