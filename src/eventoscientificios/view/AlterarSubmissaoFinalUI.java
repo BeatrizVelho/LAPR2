@@ -2,8 +2,11 @@ package eventoscientificios.view;
 
 import eventoscientificos.controllers.AlterarSubmissaoFinalController;
 import eventoscientificos.model.Empresa;
+import eventoscientificos.model.Submissao;
 import java.awt.Frame;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -22,12 +25,23 @@ public class AlterarSubmissaoFinalUI extends javax.swing.JDialog {
         super(parent, modal);
         this.framePai = parent;
         this.controller = new AlterarSubmissaoFinalController(empresa);
+        this.controller.getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador();
         setResizable(false);
         initComponents();
-        getRootPane().setDefaultButton(this.btn_selecionarSubmissivel);
         setLocationRelativeTo(null);
-        setVisible(true);
-        pack();
+        getRootPane().setDefaultButton(this.btn_selecionarSubmissivel);
+        if (controller.getListaSubmissiveis().isEmpty()) {
+            JOptionPane.showMessageDialog(
+                    this.framePai,
+                    "Não existem eventos ou sessões temáticas onde lhe é "
+                    + "possível alterar submissões.",
+                    "Alterar submissão",
+                    JOptionPane.ERROR_MESSAGE);
+            dispose();
+        } else {
+            setVisible(true);
+            pack();
+        }
     }
 
     /**
@@ -49,7 +63,6 @@ public class AlterarSubmissaoFinalUI extends javax.swing.JDialog {
         jScrollPane2 = new javax.swing.JScrollPane();
         jList_listaAutores = new javax.swing.JList();
         btn_eliminarAutor = new javax.swing.JButton();
-        btn_editarAutor = new javax.swing.JButton();
         btn_novoAutor = new javax.swing.JButton();
         pnl_informacoes = new javax.swing.JPanel();
         txt_titulo = new javax.swing.JTextField();
@@ -152,13 +165,6 @@ public class AlterarSubmissaoFinalUI extends javax.swing.JDialog {
             }
         });
 
-        btn_editarAutor.setText("Editar Autor");
-        btn_editarAutor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_editarAutorActionPerformed(evt);
-            }
-        });
-
         btn_novoAutor.setText("Novo Autor");
         btn_novoAutor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -178,8 +184,6 @@ public class AlterarSubmissaoFinalUI extends javax.swing.JDialog {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btn_novoAutor)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_editarAutor)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_eliminarAutor)))
                 .addContainerGap())
         );
@@ -191,7 +195,6 @@ public class AlterarSubmissaoFinalUI extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnl_listaAutoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_eliminarAutor)
-                    .addComponent(btn_editarAutor)
                     .addComponent(btn_novoAutor))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -352,12 +355,12 @@ public class AlterarSubmissaoFinalUI extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnl_listaAutores, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnl_informacoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnl_selecionarSubmissao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnl_listaAutores, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 837, Short.MAX_VALUE)
+                    .addComponent(pnl_informacoes, javax.swing.GroupLayout.DEFAULT_SIZE, 837, Short.MAX_VALUE)
+                    .addComponent(pnl_selecionarSubmissao, javax.swing.GroupLayout.DEFAULT_SIZE, 837, Short.MAX_VALUE)
                     .addComponent(pnl_selecionarSubmissivel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnl_autorCorrespondente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnl_ficheiro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnl_autorCorrespondente, javax.swing.GroupLayout.DEFAULT_SIZE, 837, Short.MAX_VALUE)
+                    .addComponent(pnl_ficheiro, javax.swing.GroupLayout.DEFAULT_SIZE, 837, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btn_submeter)
@@ -371,15 +374,15 @@ public class AlterarSubmissaoFinalUI extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(pnl_selecionarSubmissivel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnl_selecionarSubmissao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnl_selecionarSubmissao, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnl_informacoes, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
+                .addComponent(pnl_informacoes, javax.swing.GroupLayout.PREFERRED_SIZE, 169, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnl_listaAutores, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
+                .addComponent(pnl_listaAutores, javax.swing.GroupLayout.PREFERRED_SIZE, 164, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnl_autorCorrespondente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnl_autorCorrespondente, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnl_ficheiro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnl_ficheiro, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_cancelar)
@@ -391,7 +394,13 @@ public class AlterarSubmissaoFinalUI extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_selecionarSubmissivelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_selecionarSubmissivelActionPerformed
-        
+        int indice = this.cmb_selecionarSubmissivel.getSelectedIndex();
+        this.controller.selecionarSubmissivel(indice);
+
+        for (Submissao submissao : this.controller.getListaSubmissoes()) {
+            this.cmb_selecionarSubmissao.addItem(submissao);
+        }
+
         this.cmb_selecionarSubmissivel.setEnabled(false);
         this.btn_selecionarSubmissivel.setEnabled(false);
         this.cmb_selecionarSubmissao.setEnabled(true);
@@ -400,7 +409,29 @@ public class AlterarSubmissaoFinalUI extends javax.swing.JDialog {
     }//GEN-LAST:event_btn_selecionarSubmissivelActionPerformed
 
     private void btn_selecionarSubmissaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_selecionarSubmissaoActionPerformed
-        
+        int indice = this.cmb_selecionarSubmissao.getSelectedIndex();
+        this.controller.selecionarSubmissao(indice);
+        this.controller.getListaAutoresRegistados();
+
+        this.txt_titulo.setText(this.controller.getArtigoTitulo());
+        this.txtA_resumo.setText(this.controller.getArtigoResumo());
+
+        List<javax.swing.JTextField> listaJTextFieldPalavrasChave = new ArrayList();
+        listaJTextFieldPalavrasChave.add(txt_palavraChave1);
+        listaJTextFieldPalavrasChave.add(txt_palavraChave2);
+        listaJTextFieldPalavrasChave.add(txt_palavraChave3);
+        listaJTextFieldPalavrasChave.add(txt_palavraChave4);
+        listaJTextFieldPalavrasChave.add(txt_palavraChave5);
+
+        for (int i = 0; i < this.controller.getArtigoPalavrasChave().size(); i++) {
+            listaJTextFieldPalavrasChave.get(i).setText(
+                    this.controller.getArtigoPalavrasChave().get(i));
+        }
+
+        this.jList_listaAutores.setModel(this.controller.getModeloListaAutores());
+
+        this.cmb_autorCorrespondente.setModel(this.controller.getModeloListaAutoresRegistados());
+
         this.pnl_selecionarSubmissivel.setVisible(false);
         this.pnl_selecionarSubmissao.setVisible(false);
         this.pnl_informacoes.setVisible(true);
@@ -414,19 +445,25 @@ public class AlterarSubmissaoFinalUI extends javax.swing.JDialog {
     }//GEN-LAST:event_btn_selecionarSubmissaoActionPerformed
 
     private void btn_novoAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_novoAutorActionPerformed
-        // TODO add your handling code here:
+        new NovoAutor(this.framePai, true, this.controller);
     }//GEN-LAST:event_btn_novoAutorActionPerformed
 
-    private void btn_editarAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editarAutorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_editarAutorActionPerformed
-
     private void btn_eliminarAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminarAutorActionPerformed
-        // TODO add your handling code here:
+        try {
+            int indice = this.jList_listaAutores.getSelectedIndex();
+            this.controller.apagarAutor(indice);
+        } catch (IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(
+                    this,
+                    ex.getMessage(),
+                    "Submeter Ficheiro",
+                    JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btn_eliminarAutorActionPerformed
 
     private void btn_selecionarAutorCorrespondenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_selecionarAutorCorrespondenteActionPerformed
         int indice = this.cmb_autorCorrespondente.getSelectedIndex();
+        this.controller.alterarAutorCorrespondente(indice);
     }//GEN-LAST:event_btn_selecionarAutorCorrespondenteActionPerformed
 
     private void btn_escolherFicheiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_escolherFicheiroActionPerformed
@@ -446,18 +483,44 @@ public class AlterarSubmissaoFinalUI extends javax.swing.JDialog {
                         JOptionPane.ERROR_MESSAGE);
             } else {
                 this.txt_ficheiro.setText(ficheiro.getAbsolutePath());
+                this.controller.alterarFicheiroPDF(this.txt_ficheiro.getText());
             }
         }
     }//GEN-LAST:event_btn_escolherFicheiroActionPerformed
 
     private void btn_submeterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_submeterActionPerformed
+        List<javax.swing.JTextField> listaTextFieldPalavrasChave
+                = new ArrayList();
+        listaTextFieldPalavrasChave.add(this.txt_palavraChave1);
+        listaTextFieldPalavrasChave.add(this.txt_palavraChave2);
+        listaTextFieldPalavrasChave.add(this.txt_palavraChave3);
+        listaTextFieldPalavrasChave.add(this.txt_palavraChave4);
+        listaTextFieldPalavrasChave.add(this.txt_palavraChave5);
+        
         try {
+             List<String> palavrasChave = new ArrayList();
+            for (javax.swing.JTextField textFieldpalavraChave
+                    : listaTextFieldPalavrasChave) {
+
+                String palavraChave;
+                if (!(palavraChave
+                        = textFieldpalavraChave.getText()).isEmpty()) {
+                    palavrasChave.add(palavraChave);
+                }
+            }
+
+            this.controller.alterarDados(
+                    this.txt_titulo.getText(),
+                    this.txtA_resumo.getText(),
+                    palavrasChave);
+
+            this.controller.validarSubmissao();
             String opcoes[] = {"Sim", "Não"};
             int resposta = JOptionPane.showOptionDialog(
-                    null, "Pretende submeter a alteração do artigo?", "Alterar Submissão de Artigo", 0,
+                    this, "Pretende submeter a alteração do artigo?", "Alterar Submissão de Artigo", 0,
                     JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]);
             if (resposta == 0) {
-                
+                this.controller.alterarSubmissao();
             }
             dispose();
         } catch (IllegalArgumentException ex) {
@@ -475,7 +538,6 @@ public class AlterarSubmissaoFinalUI extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_cancelar;
-    private javax.swing.JButton btn_editarAutor;
     private javax.swing.JButton btn_eliminarAutor;
     private javax.swing.JButton btn_escolherFicheiro;
     private javax.swing.JButton btn_novoAutor;
