@@ -6,7 +6,6 @@ import eventoscientificos.model.Autor;
 import eventoscientificos.model.AutorCorrespondente;
 import eventoscientificos.model.Empresa;
 import eventoscientificos.model.InstituicaoAfiliacao;
-import eventoscientificos.model.ListaAutores;
 import eventoscientificos.model.ListaSubmissoes;
 import eventoscientificos.model.RegistoEventos;
 import eventoscientificos.model.RegistoUtilizadores;
@@ -22,7 +21,7 @@ import utils.Data;
 /**
  * @author G01
  */
-public class AlterarSubmissaoFinalController {
+public class AlterarSubmissaoFinalController implements ControllerAutor {
 
     /**
      * Instância de empresa.
