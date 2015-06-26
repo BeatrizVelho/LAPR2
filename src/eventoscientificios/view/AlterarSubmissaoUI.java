@@ -1,7 +1,6 @@
 package eventoscientificios.view;
 
 import eventoscientificos.controllers.AlterarSubmissaoController;
-import eventoscientificos.model.Autor;
 import eventoscientificos.model.Empresa;
 import eventoscientificos.model.Submissao;
 import java.awt.Frame;
