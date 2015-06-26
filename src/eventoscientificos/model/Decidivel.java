@@ -8,9 +8,25 @@ package eventoscientificos.model;
  * @author G01
  */
 public interface Decidivel {
+
+    /**
+     * Devolve o Processo de Decisão de um decidivel.
+     * 
+     * @return Processo de decisão de um decidível.
+     */
+    ProcessoDecisao getProcessoDecisao();
+
+    /**
+     * Modifica o processo de decisão um decidivel.
+     * 
+     * @param processoDecisao Novo processo de decisão de um decidível.
+     */
+    void setProcessoDecisao(ProcessoDecisao processoDecisao);
     
     /**
      * Constrói instância de ProcessoDecisao.
+     * 
+     * @return Processo de decisão.
      */
     public ProcessoDecisao novoProcessoDecisao();
     
