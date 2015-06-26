@@ -179,4 +179,14 @@ public class ListaRevisoes {
             }
         }
     }
+    
+    /**
+     * Devolve a revisao correspondente ao indice.
+     * 
+     * @param indice Indie da revisao.
+     * @return Revisao.
+     */
+    public Revisao getRevisaoPeloID(int indice) {
+         return this.listaRevisoes.get(indice);
+    }
 }
