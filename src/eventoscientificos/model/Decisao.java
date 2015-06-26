@@ -17,7 +17,7 @@ public class Decisao {
      * Instância de submissão.
      */
     private Submissao submissao;
-    
+
     /**
      * Notificação de decisão.
      */
@@ -33,20 +33,38 @@ public class Decisao {
         this.classificacao = classificacao;
         this.submissao = submissao;
     }
-    
+
+    /**
+     * Devolve a classificação da decisão.
+     *
+     * @return Classificação da decisão.
+     */
+    public int getClassificacao() {
+        return this.classificacao;
+    }
+
+    /**
+     * Devolve a Submissão.
+     * 
+     * @return Submissão.
+     */
+    public Submissao getSubmissao() {
+        return this.submissao;
+    }
+
     /**
      * Cria notificação a ser enviada para o autor.
-     * 
+     *
      * @return Verdadeiro
      */
-    public boolean criarNotificacao(){
-	Notificacao notificacao = new Notificacao(classificacao);
-	return enviarNotificacao(notificacao,submissao.getArtigoInicial().getAutorCorrespondente());
+    public boolean criarNotificacao() {
+        Notificacao notificacao = new Notificacao(classificacao);
+        return enviarNotificacao(notificacao, submissao.getArtigoInicial().getAutorCorrespondente());
     }
 
     /**
      * Modifica o estado da submissão mediante a classificação.
-     * 
+     *
      * @param classificacao Classificação da decisão.
      * @return Verdadeiro.
      */
@@ -58,16 +76,16 @@ public class Decisao {
         }
         return true;
     }
-    
+
     /**
-     * Envia notificação passando por parâmetro a notificação
-     * e o autor correspondente.
-     * 
+     * Envia notificação passando por parâmetro a notificação e o autor
+     * correspondente.
+     *
      * @param notificacao Notificação
      * @param autorCorrespondente Autor Correspondente
      * @return Verdadeiro
      */
-    private boolean enviarNotificacao(Notificacao notificacao, AutorCorrespondente autorCorrespondente){
+    private boolean enviarNotificacao(Notificacao notificacao, AutorCorrespondente autorCorrespondente) {
         return autorCorrespondente.getUtilizador().addNotificacao(notificacao);
     }
 
