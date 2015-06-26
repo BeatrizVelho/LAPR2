@@ -23,7 +23,7 @@ public class EventoFaseDecisaoState implements EventoState {
      * Constroi uma instância de EventoFaseDecisaoState recebendo um Evento como
      * parametro.
      *
-     * @param Evento objeto evento
+     * @param e objeto evento
      */
     public EventoFaseDecisaoState(Evento e) {
         this.e = e;
