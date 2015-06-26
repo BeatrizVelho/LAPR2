@@ -602,23 +602,20 @@ public class SessaoTematicaTest {
         boolean expResult = true;
         boolean result = this.sessaoTematica.isStateValidoParaLicitar(this.utilizador);
         assertEquals(expResult, result);
-
     }
-//
-//    /**
-//     * Test of isRegistada method, of class SessaoTematica.
-//     */
-//    @Test
-//    public void testIsRegistada() {
-//        System.out.println("isRegistada");
-//        SessaoTematica instance = null;
-//        boolean expResult = false;
-//        boolean result = instance.isRegistada();
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
+
+    /**
+     * Test of isRegistada method, of class SessaoTematica.
+     */
+    @Test
+    public void testIsRegistada() {
+        System.out.println("isRegistada");
+        SessaoTematica instance = this.sessaoTematica;
+        instance.setEstado(new SessaoTematicaRegistadaState(instance));
+        boolean expResult = true;
+        boolean result = instance.isRegistada();
+        assertEquals(expResult, result);
+    }
 
     /**
      * Teste do método isStateValidoParaSubmeter, da classe SessaoTematica.

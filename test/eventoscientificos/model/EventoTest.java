@@ -1,5 +1,6 @@
 package eventoscientificos.model;
 
+import eventoscientificos.model.mecanismo.decisao.MecanismoDecisao1;
 import eventoscientificos.model.state.evento.EventoCriadoState;
 import eventoscientificos.model.state.evento.EventoEmDetecaoConflitos;
 import eventoscientificos.model.state.evento.EventoEmDistribuicaoState;
@@ -622,6 +623,22 @@ public class EventoTest {
         ProcessoDetecao expResult
                             = new ProcessoDetecao(instance, new ArrayList());
         ProcessoDetecao result = instance.getProcessoDetecao();
+        assertEquals(expResult, result);
+    }
+    
+    /**
+     * Teste dos métodos set e get do processo de decisão da classe Evento.
+     */
+    @Test
+    public void testSetAndGetProcessoDecisao() {
+        System.out.println("setAndGetProcessoDecisao");
+        Evento instance = this.evento;
+        ProcessoDecisao processoDecisao = new ProcessoDecisao();
+        processoDecisao.adicionarMecanismoDecisao(new MecanismoDecisao1());
+        processoDecisao.classificarSubmissoes(new ListaRevisoes());
+        instance.setProcessoDecisao(processoDecisao);
+        ProcessoDecisao expResult = processoDecisao;
+        ProcessoDecisao result = instance.getProcessoDecisao();
         assertEquals(expResult, result);
     }
 

@@ -17,7 +17,8 @@ import utils.Data;
  *
  * @author G01
  */
-public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, Distribuivel, Decidivel, Revisivel {
+public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel,
+        Distribuivel, Decidivel, Revisivel {
 
     /**
      * Título do Evento.
@@ -742,6 +743,16 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
     public ProcessoDetecao getProcessoDetecao() {
         return this.processoDetecao;
     }
+    
+    /**
+     * Devolve o processo de decisão do evento.
+     * 
+     * @return Processo de decisão do evento.
+     */
+    @Override
+    public ProcessoDecisao getProcessoDecisao() {
+        return this.processoDecisao;
+    }
 
     /**
      * Devolve o processo de distribuição.
@@ -762,6 +773,16 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel, D
     @Override
     public void setProcessoDetecao(ProcessoDetecao processoDetecao) {
         this.processoDetecao = processoDetecao;
+    }
+
+    /**
+     * Modifica o processo de decisão do evento.
+     * 
+     * @param processoDecisao Processo de decisão do evento.
+     */
+    @Override
+    public void setProcessoDecisao(ProcessoDecisao processoDecisao) {
+        this.processoDecisao = processoDecisao;
     }
 
     /**
