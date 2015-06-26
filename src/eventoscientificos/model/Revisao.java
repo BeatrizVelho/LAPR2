@@ -161,6 +161,15 @@ public class Revisao {
     }
 
     /**
+     * Devolve o texto justificativo da revisão
+     *
+     * @return texto justificativo da revisão.
+     */
+    public String getTextoJustificativo() {
+        return textoJustificativo;
+    }
+
+    /**
      * Modifica o valor de Adequação do Artigo.
      *
      * @param adequacaoArtigo novo valor da adequação do artigo.
@@ -272,7 +281,7 @@ public class Revisao {
 
     /**
      * Adiciona à revisão os valores de revisão atribuidos pelo revisor ao
-     * artigo e altera o estado da revisão para revista. 
+     * artigo e altera o estado da revisão para revista.
      *
      * @param revisao revisão à qual vai se adicionar os novos valores
      * @return verdadeiro se modificar todos os valores correctamente e falso se
