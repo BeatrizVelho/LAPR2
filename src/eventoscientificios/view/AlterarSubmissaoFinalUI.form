@@ -26,12 +26,12 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="pnl_listaAutores" alignment="1" max="32767" attributes="0"/>
-                  <Component id="pnl_informacoes" alignment="0" max="32767" attributes="0"/>
-                  <Component id="pnl_selecionarSubmissao" alignment="0" max="32767" attributes="0"/>
+                  <Component id="pnl_listaAutores" alignment="1" pref="837" max="32767" attributes="0"/>
+                  <Component id="pnl_informacoes" alignment="0" pref="837" max="32767" attributes="0"/>
+                  <Component id="pnl_selecionarSubmissao" alignment="0" pref="837" max="32767" attributes="0"/>
                   <Component id="pnl_selecionarSubmissivel" alignment="1" max="32767" attributes="0"/>
-                  <Component id="pnl_autorCorrespondente" alignment="0" max="32767" attributes="0"/>
-                  <Component id="pnl_ficheiro" alignment="0" max="32767" attributes="0"/>
+                  <Component id="pnl_autorCorrespondente" alignment="0" pref="837" max="32767" attributes="0"/>
+                  <Component id="pnl_ficheiro" alignment="0" pref="837" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       <Component id="btn_submeter" min="-2" max="-2" attributes="0"/>
@@ -49,15 +49,15 @@
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Component id="pnl_selecionarSubmissivel" max="32767" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Component id="pnl_selecionarSubmissao" max="32767" attributes="0"/>
+              <Component id="pnl_selecionarSubmissao" pref="90" max="32767" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Component id="pnl_informacoes" pref="169" max="32767" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Component id="pnl_listaAutores" pref="164" max="32767" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Component id="pnl_autorCorrespondente" max="32767" attributes="0"/>
+              <Component id="pnl_autorCorrespondente" pref="90" max="32767" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Component id="pnl_ficheiro" max="32767" attributes="0"/>
+              <Component id="pnl_ficheiro" pref="90" max="32767" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btn_cancelar" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -204,8 +204,6 @@
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           <Component id="btn_novoAutor" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btn_editarAutor" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="btn_eliminarAutor" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -221,7 +219,6 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btn_eliminarAutor" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btn_editarAutor" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btn_novoAutor" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
@@ -253,14 +250,6 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_eliminarAutorActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="btn_editarAutor">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Editar Autor"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_editarAutorActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_novoAutor">

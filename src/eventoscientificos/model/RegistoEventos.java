@@ -89,14 +89,29 @@ public class RegistoEventos {
         return !this.listaEventos.contains(evento);
     }
 
+    /**
+     * Devolve a lista de Revisores de todos os eventos agregados.
+     *
+     * @return lista de revisores.
+     */
     public List<Revisor> getListaRevisores() {
         return listaRevisores;
     }
 
+    /**
+     * Devolve a lista de revisões de todos os eventos agregados.
+     *
+     * @return lista de revisoes.
+     */
     public List<Revisao> getListaRevisoes() {
         return listaRevisoes;
     }
 
+    /**
+     * Devolve a lista de submissões de todos os eventos agregados.
+     *
+     * @return lista de submissoes.
+     */
     public List<Submissao> getListaSubmissao() {
         return listaSubmissao;
     }
@@ -549,11 +564,10 @@ public class RegistoEventos {
      *
      * @return matriz dos resultados sob a forma textual
      */
-    public String [] getValoresTotaisAnaliseEstatistica(List<Evento> listaEventosApresentados) {
-                          this.processoAnaliseEstatistica = new ProcessoAnaliseEstatistica(this.listaRevisoes, this.listaSubmissao, listaRevisores);
-            return this.processoAnaliseEstatistica.getValoresEstatistica();
-            
-        
+    public String[] getValoresTotaisAnaliseEstatistica(List<Evento> listaEventosApresentados) {
+        this.processoAnaliseEstatistica = new ProcessoAnaliseEstatistica(this.listaRevisoes, this.listaSubmissao, listaRevisores);
+        return this.processoAnaliseEstatistica.getValoresEstatistica();
+
     }
 
     /**

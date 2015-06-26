@@ -10,7 +10,8 @@ import eventoscientificos.model.Local;
 import eventoscientificos.model.RegistoEventos;
 import eventoscientificos.model.Submissao;
 import eventoscientificos.model.Utilizador;
-import eventoscientificos.model.state.evento.EventoEmSubmissaoState;
+import eventoscientificos.model.state.evento.EventoEmSubmissaoCameraReadyState;
+import eventoscientificos.model.state.submissao.SubmissaoEmCameraReadyState;
 import eventoscientificos.model.state.submissao.SubmissaoEmSubmissaoState;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +23,7 @@ import utils.Data;
 /**
  * @author G01
  */
-public class AlterarSubmissaoControllerTest {
+public class AlterarSubmissaoFinalControllerTest {
 
     private Empresa empresa;
     private Evento evento;
@@ -30,7 +31,7 @@ public class AlterarSubmissaoControllerTest {
     private Utilizador utilizador;
     private RegistoEventos registoEventos;
 
-    public AlterarSubmissaoControllerTest() {
+    public AlterarSubmissaoFinalControllerTest() {
         this.empresa = new Empresa();
 
         this.utilizador = new Utilizador(
@@ -45,40 +46,43 @@ public class AlterarSubmissaoControllerTest {
                 new Data(2016, 7, 7), new Data(2016, 9, 10),
                 new Data(2016, 9, 11), new Data(2016, 10, 1),
                 new Data(2017, 6, 10));
-        this.evento.setEstado(new EventoEmSubmissaoState(evento));
+        this.evento.setEstado(new EventoEmSubmissaoCameraReadyState(evento));
         this.submissao = new Submissao();
-        submissao.setEstado(new SubmissaoEmSubmissaoState(submissao));
-        Artigo artigoInicial = submissao.novoArtigo();
-        artigoInicial.setTitulo("titulo");
-        artigoInicial.setResumo("resumo");
-        artigoInicial.setFicheiro("wasdfg");
+        submissao.setEstado(new SubmissaoEmCameraReadyState(submissao));
+        Artigo artigoFinal = submissao.novoArtigo();
+        artigoFinal.setTitulo("titulo");
+        artigoFinal.setResumo("resumo");
+        artigoFinal.setFicheiro("wasdfg");
         List<String> palavrasChave = new ArrayList<>();
         palavrasChave.add("gato");
         palavrasChave.add("banho");
-        artigoInicial.setPalavrasChave(palavrasChave);
-        artigoInicial.getListaAutores().novoAutor(
+        artigoFinal.setPalavrasChave(palavrasChave);
+        artigoFinal.getListaAutores().novoAutor(
                 utilizador, new InstituicaoAfiliacao("ISEP"));
-        artigoInicial.getListaAutores().novoAutor(
+        artigoFinal.getListaAutores().novoAutor(
                 utilizador1, new InstituicaoAfiliacao("ISEP"));
-        artigoInicial.setAutorCorrespondente(new AutorCorrespondente(utilizador, new InstituicaoAfiliacao("ISEP")));
-        artigoInicial.setDataSubmissao(Data.dataAtual());
-        artigoInicial.setAutorSubmissor(new Autor(utilizador, new InstituicaoAfiliacao("ISEP")));
+        artigoFinal.setAutorCorrespondente(new AutorCorrespondente(utilizador, new InstituicaoAfiliacao("ISEP")));
+        artigoFinal.setDataSubmissao(Data.dataAtual());
+        artigoFinal.setAutorSubmissor(new Autor(utilizador, new InstituicaoAfiliacao("ISEP")));
         
-        submissao.adicionarArtigo(artigoInicial);
+        submissao.setEstado(new SubmissaoEmSubmissaoState(submissao));
+        submissao.adicionarArtigo(artigoFinal);
+        submissao.setEstado(new SubmissaoEmCameraReadyState(submissao));
+        submissao.adicionarArtigo(artigoFinal);
         evento.getListaSubmissoes().adicionarSubmissao(submissao);
 
         this.registoEventos.adicionarEvento(evento);
-
     }
 
     /**
-     * Test of getListaSubmissiveis method, of class AlterarSubmissaoController.
+     * Test of getListaSubmissiveis method, of class
+     * AlterarSubmissaoFinalController.
      */
     @Test
     public void testGetListaSubmissiveis() {
         System.out.println("getListaSubmissiveis");
-        AlterarSubmissaoController instance
-                = new AlterarSubmissaoController(empresa);
+        AlterarSubmissaoFinalController instance
+                = new AlterarSubmissaoFinalController(empresa);
         instance.getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador();
         int expResult = 1;
         int result = instance.getListaSubmissiveis().size();
@@ -86,12 +90,14 @@ public class AlterarSubmissaoControllerTest {
     }
 
     /**
-     * Test of getListaSubmissoes method, of class AlterarSubmissaoController.
+     * Test of getListaSubmissoes method, of class
+     * AlterarSubmissaoFinalController.
      */
     @Test
     public void testGetListaSubmissoes() {
         System.out.println("getListaSubmissoes");
-        AlterarSubmissaoController instance = new AlterarSubmissaoController(empresa);
+        AlterarSubmissaoFinalController instance
+                = new AlterarSubmissaoFinalController(empresa);
         instance.getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador();
         instance.selecionarSubmissivel(0);
         int expResult = 1;
@@ -105,7 +111,8 @@ public class AlterarSubmissaoControllerTest {
     @Test
     public void testGetArtigoTitulo() {
         System.out.println("getArtigoTitulo");
-        AlterarSubmissaoController instance = new AlterarSubmissaoController(empresa);
+        AlterarSubmissaoFinalController instance
+                = new AlterarSubmissaoFinalController(empresa);
         instance.getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador();
         instance.selecionarSubmissivel(0);
         instance.selecionarSubmissao(0);
@@ -120,7 +127,8 @@ public class AlterarSubmissaoControllerTest {
     @Test
     public void testGetArtigoResumo() {
         System.out.println("getArtigoResumo");
-        AlterarSubmissaoController instance = new AlterarSubmissaoController(empresa);
+        AlterarSubmissaoFinalController instance
+                = new AlterarSubmissaoFinalController(empresa);
         instance.getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador();
         instance.selecionarSubmissivel(0);
         instance.selecionarSubmissao(0);
@@ -137,7 +145,8 @@ public class AlterarSubmissaoControllerTest {
     @Test
     public void testGetArtigoPalavrasChave() {
         System.out.println("getArtigoPalavrasChave");
-        AlterarSubmissaoController instance = new AlterarSubmissaoController(empresa);
+        AlterarSubmissaoFinalController instance
+                = new AlterarSubmissaoFinalController(empresa);
         instance.getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador();
         instance.selecionarSubmissivel(0);
         instance.selecionarSubmissao(0);
@@ -159,7 +168,8 @@ public class AlterarSubmissaoControllerTest {
     @Test
     public void testGetModeloListaAutores() {
         System.out.println("getModeloListaAutores");
-        AlterarSubmissaoController instance = new AlterarSubmissaoController(empresa);
+        AlterarSubmissaoFinalController instance
+                = new AlterarSubmissaoFinalController(empresa);
         instance.getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador();
         instance.selecionarSubmissivel(0);
         instance.selecionarSubmissao(0);
@@ -174,7 +184,8 @@ public class AlterarSubmissaoControllerTest {
     @Test
     public void testGetArtigoFicheiro() {
         System.out.println("getArtigoFicheiro");
-        AlterarSubmissaoController instance = new AlterarSubmissaoController(empresa);
+        AlterarSubmissaoFinalController instance
+                = new AlterarSubmissaoFinalController(empresa);
         instance.getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador();
         instance.selecionarSubmissivel(0);
         instance.selecionarSubmissao(0);
@@ -191,7 +202,8 @@ public class AlterarSubmissaoControllerTest {
     @Test
     public void testGetListaSubmissiveisAceitarArtigoComSubmissaoUtilizador() {
         System.out.println("getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador");
-        AlterarSubmissaoController instance = new AlterarSubmissaoController(empresa);
+        AlterarSubmissaoFinalController instance
+                = new AlterarSubmissaoFinalController(empresa);
         boolean expResult = true;
         boolean result = instance.getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador();
         assertEquals(expResult, result);
@@ -205,7 +217,8 @@ public class AlterarSubmissaoControllerTest {
     public void testSelecionarSubmissivel() {
         System.out.println("selecionarSubmissivel");
         int indice = 0;
-        AlterarSubmissaoController instance = new AlterarSubmissaoController(empresa);
+        AlterarSubmissaoFinalController instance
+                = new AlterarSubmissaoFinalController(empresa);
         instance.getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador();
         boolean expResult = true;
         boolean result = instance.selecionarSubmissivel(indice);
@@ -219,7 +232,8 @@ public class AlterarSubmissaoControllerTest {
     public void testSelecionarSubmissao() {
         System.out.println("selecionarSubmissao");
         int indice = 0;
-        AlterarSubmissaoController instance = new AlterarSubmissaoController(empresa);
+        AlterarSubmissaoFinalController instance
+                = new AlterarSubmissaoFinalController(empresa);
         instance.getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador();
         instance.selecionarSubmissivel(indice);
         boolean expResult = true;
@@ -238,7 +252,8 @@ public class AlterarSubmissaoControllerTest {
         String resumo = "resumo1";
         List<String> palavrasChave = new ArrayList<>();
         palavrasChave.add("bolachas");
-        AlterarSubmissaoController instance = new AlterarSubmissaoController(empresa);
+        AlterarSubmissaoFinalController instance
+                = new AlterarSubmissaoFinalController(empresa);
         instance.getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador();
         instance.selecionarSubmissivel(indice);
         instance.selecionarSubmissao(indice);
@@ -252,7 +267,8 @@ public class AlterarSubmissaoControllerTest {
     public void testApagarAutor() {
         System.out.println("apagarAutor");
         int indice = 0;
-        AlterarSubmissaoController instance = new AlterarSubmissaoController(empresa);
+        AlterarSubmissaoFinalController instance
+                = new AlterarSubmissaoFinalController(empresa);
         String nome = "beatriz12";
         String email = "beatriz12@hotmail.com";
         String instituicaoAfiliacao = "WWE";
@@ -280,7 +296,8 @@ public class AlterarSubmissaoControllerTest {
         String nome = "titulo";
         String email = "email@mol.pt";
         String instituicaoAfiliacao = "QQQ";
-        AlterarSubmissaoController instance = new AlterarSubmissaoController(empresa);
+        AlterarSubmissaoFinalController instance
+                = new AlterarSubmissaoFinalController(empresa);
         String nome1 = "beatriz12";
         String email1 = "beatriz12@hotmail.com";
         String instituicaoAfiliacao1 = "WWE";
@@ -304,7 +321,8 @@ public class AlterarSubmissaoControllerTest {
     @Test
     public void testGetListaAutoresRegistados() {
         System.out.println("getListaAutoresRegistados");
-        AlterarSubmissaoController instance = new AlterarSubmissaoController(empresa);
+        AlterarSubmissaoFinalController instance
+                = new AlterarSubmissaoFinalController(empresa);
         int indice = 0;
         String nome = "titulo";
         String email = "email@mol.pt";
@@ -334,7 +352,8 @@ public class AlterarSubmissaoControllerTest {
     public void testAlterarAutorCorrespondente() {
         System.out.println("alterarAutorCorrespondente");
         int indice = 0;
-        AlterarSubmissaoController instance = new AlterarSubmissaoController(empresa);
+        AlterarSubmissaoFinalController instance
+                = new AlterarSubmissaoFinalController(empresa);
         String nome = "titulo";
         String email = "email@mol.pt";
         String instituicaoAfiliacao = "QQQ";
@@ -363,7 +382,8 @@ public class AlterarSubmissaoControllerTest {
     public void testAlterarFicheiroPDF() {
         System.out.println("alterarFicheiroPDF");
         String ficheiro = "C:\\Users\\Utilizador\\Downloads\\BTNext";
-        AlterarSubmissaoController instance = new AlterarSubmissaoController(empresa);
+        AlterarSubmissaoFinalController instance
+                = new AlterarSubmissaoFinalController(empresa);
         int indice = 0;
         String nome = "titulo";
         String email = "email@mol.pt";
@@ -393,7 +413,8 @@ public class AlterarSubmissaoControllerTest {
     @Test
     public void testValidarSubmissao() {
         System.out.println("validarSubmissao");
-        AlterarSubmissaoController instance = new AlterarSubmissaoController(empresa);
+        AlterarSubmissaoFinalController instance
+                = new AlterarSubmissaoFinalController(empresa);
         int indice = 0;
         String nome = "titulo";
         String email = "email@mol.pt";
@@ -425,7 +446,8 @@ public class AlterarSubmissaoControllerTest {
     @Test
     public void testAlterarSubmissao() {
         System.out.println("alterarSubmissao");
-        AlterarSubmissaoController instance = new AlterarSubmissaoController(empresa);
+        AlterarSubmissaoFinalController instance
+                = new AlterarSubmissaoFinalController(empresa);
         int indice = 0;
         String nome = "titulo";
         String email = "email@mol.pt";
@@ -460,7 +482,8 @@ public class AlterarSubmissaoControllerTest {
     @Test
     public void testGetModeloListaAutoresRegistados() {
         System.out.println("getModeloListaAutoresRegistados");
-        AlterarSubmissaoController instance = new AlterarSubmissaoController(empresa);
+        AlterarSubmissaoFinalController instance
+                = new AlterarSubmissaoFinalController(empresa);
         int indice = 0;
         String nome = "titulo";
         String email = "email@mol.pt";
