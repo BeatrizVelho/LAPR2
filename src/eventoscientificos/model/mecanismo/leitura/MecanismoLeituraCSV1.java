@@ -167,6 +167,7 @@ public class MecanismoLeituraCSV1 implements MecanismoLeitura {
             for (Autor autor : listaAutoresRegistados) {
                 if (autor.getEmail().equals(autorCorrespondente)) {
                     artigo.setAutorCorrespondente(new AutorCorrespondente(autor.getUtilizador(), autor.getInstituicaoAfiliacao()));
+                    artigo.setAutorSubmissor(autor);
                 }
             }
 
