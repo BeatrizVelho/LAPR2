@@ -1,18 +1,39 @@
 package utils;
 
+import eventoscientificos.model.Artigo;
+import eventoscientificos.model.Autor;
+import eventoscientificos.model.AutorCorrespondente;
 import eventoscientificos.model.CP;
+import eventoscientificos.model.Decidivel;
+import eventoscientificos.model.Decisao;
+import eventoscientificos.model.Distribuivel;
 import eventoscientificos.model.Empresa;
 import eventoscientificos.model.Evento;
+import eventoscientificos.model.InstituicaoAfiliacao;
+import eventoscientificos.model.ListaAutores;
+import eventoscientificos.model.ListaDecisoes;
+import eventoscientificos.model.ListaRevisoes;
 import eventoscientificos.model.ListaSessoesTematicas;
+import eventoscientificos.model.ListaSubmissoes;
 import eventoscientificos.model.Local;
+import eventoscientificos.model.ProcessoDecisao;
 import eventoscientificos.model.RegistoEventos;
 import eventoscientificos.model.RegistoUtilizadores;
+import eventoscientificos.model.Revisao;
+import eventoscientificos.model.Revisor;
 import eventoscientificos.model.SessaoTematica;
+import eventoscientificos.model.Submissao;
 import eventoscientificos.model.Utilizador;
+import eventoscientificos.model.state.submissao.SubmissaoState;
 import java.awt.Frame;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -54,35 +75,32 @@ public class XMLParser {
     /**
      * Caminho para o ficheiro .xml dos utilizadores.
      */
-    private String caminhoFicheiroUtilizador = "TestSet02_Utilizador.xml";
+    private final String caminhoFicheiroUtilizador = "TestSet02_Utilizador.xml";
 
-    /**
-     * Caminho para o ficheiro .xml dos eventos e locais.
-     */
-    private String caminhoFicheiroEvento = "TestSet02_Evento.xml";
-    private String caminhoFicheiroLocal = "TestSet02_Local.xml";
+    private final String caminhoFicheiroEvento;
+    private final String caminhoFicheiroLocal = "TestSet02_Local.xml";
 
     /**
      * Tags passíveis de serem encontradas no ficheiro .xml dos utilizadores.
      */
-    private String listaUtilizadoresTag = "ListaUtilizadores";
-    private String numeroElementosTag = "NumeroElementos";
-    private String utilizadoresTag = "Utilizadores";
-    private String utilizadorTag = "Utilizador";
-    private String usernameTag = "Username";
-    private String nomeTag = "Nome";
-    private String emailTag = "Email";
-    private String passwordTag = "Password";
+    private final String listaUtilizadoresTag = "ListaUtilizadores";
+    private final String numeroElementosTag = "NumeroElementos";
+    private final String utilizadoresTag = "Utilizadores";
+    private final String utilizadorTag = "Utilizador";
+    private final String usernameTag = "Username";
+    private final String nomeTag = "Nome";
+    private final String emailTag = "Email";
+    private final String passwordTag = "Password";
 
     /**
      * Tags passíveis de serem encontradas no ficheiro .xml dos locais.
      */
-    private String listaLocaisTag = "ListaLocais";
-    private String numElementosTag = "NumElementos";
-    private String locaisTag = "Locais";
-    private String localTag = "Local";
-    private String localIDTag = "LocalID";
-    private String designacaoTag = "Designacao";
+    private final String listaLocaisTag = "ListaLocais";
+    private final String numElementosTag = "NumElementos";
+    private final String locaisTag = "Locais";
+    private final String localTag = "Local";
+    private final String localIDTag = "LocalID";
+    private final String designacaoTag = "Designacao";
 
     /**
      * Tags passíveis de serem encontradas no ficheiro .xml dos eventos.
@@ -90,95 +108,99 @@ public class XMLParser {
     /**
      * Evento
      */
-    private String listaEventosTag = "ListaEventos";
-    private String numeroEventosTag = "NumeroEventos";
-    private String eventosTag = "Eventos";
-    private String eventoTag = "Evento";
-    private String tituloTag = "Titulo";
-    private String descricaoTag = "Descricao";
-    private String dataInicioTag = "DataInicio";
-    private String dataFimTag = "DataFim";
-    private String dataInicioSubmissaoTag = "DataInicioSubmissao";
-    private String dataFimSubmissaoTag = "DataFimSubmissao";
-    private String dataInicioDistribuicaoTag = "DataInicioDistribuicao";
-    private String dataLimiteRevisaoTag = "DataLimiteRevisao";
-    private String dataLimiteSubmissaoFinalTag = "DataLmiteSubmissaoFinal";
-    private String estadoEventoTag = "EstadoEvento";
-    private String listaOrganizadoresTag = "ListaOrganizadores";
-    private String numeroOrganizadoresTag = "NumeroOrganizadores";
-    private String organizadoresTag = "Organizadores";
-    private String organizadorTag = "Organizador";
-    private String cpTag = "CP";
-    private String numeroMembrosCPTag = "NumeroMembrosCP";
-    private String membrosCPTag = "MembrosCP";
-    private String membroCPTag = "MembroCP";
+    private final String listaEventosTag = "ListaEventos";
+    private final String numeroEventosTag = "NumeroEventos";
+    private final String eventosTag = "Eventos";
+    private final String eventoTag = "Evento";
+    private final String tituloTag = "Titulo";
+    private final String descricaoTag = "Descricao";
+    private final String dataInicioTag = "DataInicio";
+    private final String dataFimTag = "DataFim";
+    private final String dataInicioSubmissaoTag = "DataInicioSubmissao";
+    private final String dataFimSubmissaoTag = "DataFimSubmissao";
+    private final String dataInicioDistribuicaoTag = "DataInicioDistribuicao";
+    private final String dataLimiteRevisaoTag = "DataLimiteRevisao";
+    private final String dataLimiteSubmissaoFinalTag = "DataLmiteSubmissaoFinal";
+    private final String estadoEventoTag = "EstadoEvento";
+    private final String listaOrganizadoresTag = "ListaOrganizadores";
+    private final String numeroOrganizadoresTag = "NumeroOrganizadores";
+    private final String organizadoresTag = "Organizadores";
+    private final String organizadorTag = "Organizador";
+    private final String cpTag = "CP";
+    private final String numeroMembrosCPTag = "NumeroMembrosCP";
+    private final String membrosCPTag = "MembrosCP";
+    private final String membroCPTag = "MembroCP";
 
     /**
      * Sessão Temática
      */
-    private String listaSessoesTematicasTag = "ListaSessoesTematicas";
-    private String numeroSessoesTematicasTag = "NumeroSessoesTematicas";
-    private String sessoesTematicasTag = "SessoesTematicas";
-    private String sessaoTematicaTag = "SessaoTematica";
-    private String codigoSTTag = "CodigoST";
-    private String descricaoSTTag = "DescricaoST";
-    private String listaProponentesTag = "ListaProponentes";
-    private String numeroProponentesTag = "NumeroProponentes";
-    private String proponentesTag = "Proponentes";
-    private String proponenteTag = "Proponente";
-    private String CPSessaoTag = "CPSessao";
-    private String numeroMembrosCPSTTag = "NumeroMembrosCPST";
-    private String membrosCPSessaoTag = "MembrosCPSessao";
-    private String membroCPSessaoTag = "MembroCPSessao";
+    private final String listaSessoesTematicasTag = "ListaSessoesTematicas";
+    private final String numeroSessoesTematicasTag = "NumeroSessoesTematicas";
+    private final String sessoesTematicasTag = "SessoesTematicas";
+    private final String sessaoTematicaTag = "SessaoTematica";
+    private final String codigoSTTag = "CodigoST";
+    private final String descricaoSTTag = "DescricaoST";
+    private final String listaProponentesTag = "ListaProponentes";
+    private final String numeroProponentesTag = "NumeroProponentes";
+    private final String proponentesTag = "Proponentes";
+    private final String proponenteTag = "Proponente";
+    private final String CPSessaoTag = "CPSessao";
+    private final String numeroMembrosCPSTTag = "NumeroMembrosCPST";
+    private final String membrosCPSessaoTag = "MembrosCPSessao";
+    private final String membroCPSessaoTag = "MembroCPSessao";
 
     /**
      * Lista de Submissões Evento/Sessão Temática
      */
-    private String listaSubmissoesEventoTag = "ListaSubmissoesEvento";
-    private String listaSubmissoesTag = "ListaSubmissoes";
-    private String numeroSubmissoesTag = "NumeroSubmissoes";
-    private String submissoesTag = "Submissoes";
-    private String submissaoTag = "Submissao";
+    private final String listaSubmissoesEventoTag = "ListaSubmissoesEvento";
+    private final String listaSubmissoesTag = "ListaSubmissoes";
+    private final String numeroSubmissoesTag = "NumeroSubmissoes";
+    private final String submissoesTag = "Submissoes";
+    private final String submissaoTag = "Submissao";
+    private final String estadoSubmissaoTag = "EstadoSubmissao";
 
     /**
      * Artigo
      */
-    private String artigoTag = "Artigo";
-    private String autorCorrespondenteTag = "AutorCorrespondente";
-    private String autorSubmissorTag = "Autor Submissor";
-    private String dataSubmissaoTag = "DataSubmissao";
-    private String tituloArtigoTag = "TituloArtigo";
-    private String resumoTag = "Resumo";
-    private String listaAutoresTag = "ListaAutores";
-    private String numeroAutoresTag = "NumeroAutores";
-    private String autoresTag = "Autores";
-    private String autorTag = "Autor";
-    private String nomeAutorTag = "NomeAutor";
-    private String emailAutorTag = "EmailAutor";
-    private String filiacaoTag = "Filiacao";
-    private String usernameAutorTag = "UsernameAutor";
-    private String palavrasChaveTag = "PalavrasChave";
+    private final String artigoTag = "Artigo";
+    private final String artigoInicialAttr = "INICIAL";
+    private final String artigoFinalAttr = "FINAL";
+    private final String autorCorrespondenteTag = "AutorCorrespondente";
+    private final String autorSubmissorTag = "AutorSubmissao";
+    private final String dataSubmissaoTag = "DataSubmissao";
+    private final String tituloArtigoTag = "TituloArtigo";
+    private final String resumoTag = "Resumo";
+    private final String listaAutoresTag = "ListaAutores";
+    private final String numeroAutoresTag = "NumeroAutores";
+    private final String autoresTag = "Autores";
+    private final String autorTag = "Autor";
+    private final String nomeAutorTag = "NomeAutor";
+    private final String emailAutorTag = "EmailAutor";
+    private final String filiacaoAutorTag = "Filiacao";
+    private final String usernameAutorTag = "UsernameAutor";
+    private final String palavrasChaveTag = "PalavrasChave";
+    private final String ficheiroTag = "Ficheiro";
 
     /**
      * Lista Revisões.
      */
-    private String listaRevisoesTag = "ListaRevisoes";
-    private String numeroRevisoesTag = "NumeroRevisoes";
-    private String revisoesTag = "Revisoes";
-    private String revisaoTag = "Revisao";
-    private String revisorTag = "Revisor";
-    private String estadoRevisaoTag = "EstadoRevisao";
-    private String confiancaTag = "Confianca";
-    private String adequacaoTag = "Adequacao";
-    private String originalidadeTag = "Originalidade";
-    private String apresentacaoTag = "Apresentacao";
-    private String recomendacaoTag = "Recomendacao";
-    private String justificacaoTag = "Justificacao";
+    private final String listaRevisoesTag = "ListaRevisoes";
+    private final String numeroRevisoesTag = "NumeroRevisoes";
+    private final String revisoesTag = "Revisoes";
+    private final String revisaoTag = "Revisao";
+    private final String revisorTag = "Revisor";
+    private final String estadoRevisaoTag = "EstadoRevisao";
+    private final String confiancaTag = "Confianca";
+    private final String adequacaoTag = "Adequacao";
+    private final String originalidadeTag = "Originalidade";
+    private final String apresentacaoTag = "Apresentacao";
+    private final String recomendacaoTag = "Recomendacao";
+    private final String justificacaoTag = "Justificacao";
 
     /**
      * Decisao
      */
-    private String decisaoTag = "Decisao";
+    private final String decisaoTag = "Decisao";
 
     /**
      * Representa uma instância de um parser de XML, recebendo uma empresa.
@@ -187,20 +209,26 @@ public class XMLParser {
      * @param empresa Empresa onde é guardada a informação.
      */
     public XMLParser(java.awt.Frame parent, Empresa empresa) {
+        this.caminhoFicheiroEvento = "TestSet02_Evento.xml";
         this.framePai = parent;
         this.empresa = empresa;
     }
 
     /**
      * Lê o ficheiro XML que contém os dados dos utilizadores da aplicação.
+     * @throws javax.xml.parsers.ParserConfigurationException
+     * @throws java.io.IOException
+     * @throws org.xml.sax.SAXException
      */
-    public void lerFicheiroUtilizador() throws ParserConfigurationException, IOException, SAXException {
+    public void lerFicheiroUtilizador() throws ParserConfigurationException,
+            IOException, SAXException {
         RegistoUtilizadores registoUtilizadores
                 = this.empresa.getRegistoUtilizadores();
 
         Document doc = lerFicheiro(caminhoFicheiroUtilizador);
 
-        if (Integer.parseInt(doc.getElementsByTagName(numeroElementosTag).item(0).getTextContent()) > 0) {
+        if (Integer.parseInt(doc.getElementsByTagName(
+                numeroElementosTag).item(0).getTextContent()) > 0) {
             NodeList utilizadoresNodeList = doc.getElementsByTagName(utilizadorTag);
 
             for (int i = 0; i < utilizadoresNodeList.getLength(); i++) {
@@ -209,11 +237,19 @@ public class XMLParser {
                 if (utilizadorNode.getNodeType() == Node.ELEMENT_NODE) {
                     Element utilizadorElement = (Element) utilizadorNode;
 
+                    int separador = utilizadorElement.getElementsByTagName(
+                            passwordTag).item(0).getTextContent().lastIndexOf(";");
                     registoUtilizadores.adicionaUtilizador(registoUtilizadores.novoUtilizador(
-                            utilizadorElement.getElementsByTagName(nomeTag).item(0).getTextContent(),
-                            utilizadorElement.getElementsByTagName(emailTag).item(0).getTextContent(),
-                            utilizadorElement.getElementsByTagName(usernameTag).item(0).getTextContent(),
-                            utilizadorElement.getElementsByTagName(passwordTag).item(0).getTextContent()));
+                            utilizadorElement.getElementsByTagName(
+                                    nomeTag).item(0).getTextContent(),
+                            utilizadorElement.getElementsByTagName(
+                                    emailTag).item(0).getTextContent(),
+                            utilizadorElement.getElementsByTagName(
+                                    usernameTag).item(0).getTextContent(),
+                            utilizadorElement.getElementsByTagName(
+                                    passwordTag).item(0).getTextContent().substring(separador + 1),
+                            utilizadorElement.getElementsByTagName(
+                                    passwordTag).item(0).getTextContent().substring(0, separador)));
                 }
             }
         }
@@ -221,13 +257,19 @@ public class XMLParser {
 
     /**
      * Lê o ficheiro .xml que contém os dados sobre os locais da aplicação.
+     * 
+     * @throws javax.xml.parsers.ParserConfigurationException
+     * @throws java.io.IOException
+     * @throws org.xml.sax.SAXException
      */
-    public void lerFicheiroLocal() throws ParserConfigurationException, IOException, SAXException {
+    public void lerFicheiroLocal() throws ParserConfigurationException,
+            IOException, SAXException {
         this.locais = new HashMap();
 
         Document doc = lerFicheiro(caminhoFicheiroLocal);
 
-        if (Integer.parseInt(doc.getElementsByTagName(numElementosTag).item(0).getTextContent()) > 0) {
+        if (Integer.parseInt(doc.getElementsByTagName(
+                numElementosTag).item(0).getTextContent()) > 0) {
             NodeList nodeList = doc.getElementsByTagName(localTag);
 
             for (int i = 0; i < nodeList.getLength(); i++) {
@@ -237,8 +279,10 @@ public class XMLParser {
                     Element element = (Element) node;
 
                     this.locais.put(
-                            element.getElementsByTagName(localIDTag).item(0).getTextContent(),
-                            element.getElementsByTagName(designacaoTag).item(0).getTextContent());
+                            element.getElementsByTagName(
+                                    localIDTag).item(0).getTextContent(),
+                            element.getElementsByTagName(
+                                    designacaoTag).item(0).getTextContent());
                 }
             }
         }
@@ -250,8 +294,17 @@ public class XMLParser {
      * @throws javax.xml.parsers.ParserConfigurationException
      * @throws java.io.IOException
      * @throws org.xml.sax.SAXException
+     * @throws java.lang.ClassNotFoundException
+     * @throws java.lang.InstantiationException
+     * @throws java.lang.IllegalAccessException
+     * @throws java.lang.NoSuchMethodException
+     * @throws java.lang.reflect.InvocationTargetException
      */
-    public void lerFicheiroEvento() throws ParserConfigurationException, IOException, SAXException {
+    public void lerFicheiroEvento() throws ParserConfigurationException,
+            IOException, SAXException, ClassNotFoundException,
+            InstantiationException, IllegalAccessException,
+            NoSuchMethodException, IllegalArgumentException,
+            InvocationTargetException {
         RegistoEventos registoEventos = this.empresa.getRegistoEventos();
         RegistoUtilizadores registoUtilizadores = this.empresa.getRegistoUtilizadores();
 
@@ -340,7 +393,7 @@ public class XMLParser {
                                                 listaSessoesTematicas.adicionarSessaoTematica(sessaoTematica);
 
                                                 if (Integer.parseInt(eventoElement.getElementsByTagName(numeroMembrosCPTag).item(0).getTextContent()) > 0) {
-                                                    NodeList membrosCPSTNodeList = sessaoTematicaElement.getElementsByTagName(membrosCPSessaoTag);
+                                                    NodeList membrosCPSTNodeList = sessaoTematicaElement.getElementsByTagName(membroCPSessaoTag);
                                                     CP cp = sessaoTematica.novaCP();
 
                                                     for (int k = 0; k < membrosCPSTNodeList.getLength(); k++) {
@@ -360,7 +413,85 @@ public class XMLParser {
                                                     sessaoTematica.adicionarCP(cp);
 
                                                     if (sessaoTematica.setEmSubmissao() && Integer.parseInt(sessaoTematicaElement.getElementsByTagName(numeroSubmissoesTag).item(0).getTextContent()) > 0) {
-                                                        // Descodificar Submissões...
+                                                        NodeList submissoesSTNodeList = sessaoTematicaElement.getElementsByTagName(submissaoTag);
+                                                        ListaSubmissoes listaSubmissoes = sessaoTematica.getListaSubmissoes();
+
+                                                        for (int k = 0; k < submissoesSTNodeList.getLength(); k++) {
+                                                            Node submissaoSTNode = submissoesSTNodeList.item(k);
+                                                            Submissao submissao = listaSubmissoes.novaSubmissao();
+
+                                                            if (submissaoSTNode.getNodeType() == Node.ELEMENT_NODE) {
+                                                                Element submissaoElement = (Element) submissaoSTNode;
+
+                                                                String estadoSubmissao = submissaoElement.getElementsByTagName(estadoSubmissaoTag).item(0).getTextContent();
+                                                                atribuirEstadoASubmissao(submissao, estadoSubmissao);
+
+                                                                NodeList artigoNodeList = submissaoElement.getElementsByTagName(artigoTag);
+
+                                                                for (int l = 0; l < artigoNodeList.getLength(); l++) {
+                                                                    Node artigoNode = artigoNodeList.item(l);
+                                                                    Artigo artigo = submissao.novoArtigo();
+
+                                                                    if (artigoNode.getNodeType() == Node.ELEMENT_NODE) {
+                                                                        Element artigoElement = (Element) artigoNode;
+
+                                                                        artigo.setTitulo(artigoElement.getElementsByTagName(tituloArtigoTag).item(0).getTextContent());
+                                                                        artigo.setResumo(artigoElement.getElementsByTagName(resumoTag).item(0).getTextContent());
+
+                                                                        lerListaAutores(registoUtilizadores, artigo, artigoElement);
+
+                                                                        String[] palavrasChave = artigoElement.getElementsByTagName(palavrasChaveTag).item(0).getTextContent().split("/");
+                                                                        List<String> listaPalavrasChave = new ArrayList();
+
+                                                                        for (int m = 0; m < palavrasChave.length; m++) {
+                                                                            listaPalavrasChave.add(palavrasChave[m]);
+                                                                        }
+
+                                                                        artigo.setPalavrasChave(listaPalavrasChave);
+                                                                        artigo.setFicheiro(artigoElement.getElementsByTagName(ficheiroTag).item(0).getTextContent());
+
+                                                                        artigo.setDataSubmissao(Data.converterString(artigoElement.getElementsByTagName(dataSubmissaoTag).item(0).getTextContent()));
+
+                                                                        String tipo = artigoElement.getAttribute("tipo");
+
+                                                                        if (tipo.equals(artigoInicialAttr)) {
+                                                                            submissao.setArtigoInicial(artigo);
+                                                                        } else if (tipo.equals(artigoFinalAttr)) {
+                                                                            submissao.setArtigoFinal(artigo);
+                                                                        }
+                                                                    }
+                                                                }
+                                                                if (Integer.parseInt(eventoElement.getElementsByTagName(numeroRevisoesTag).item(0).getTextContent()) > 0) {
+                                                                    NodeList revisoesNodeList = submissaoElement.getElementsByTagName(revisaoTag);
+
+                                                                    /*ListaRevisoes listaRevisoes = sessaoTematica.getProcessoDistribuicao().getListaRevisoes();
+
+                                                                     for (int l = 0; l < revisoesNodeList.getLength(); l++) {
+                                                                     Node revisaoNode = revisoesNodeList.item(0);
+
+                                                                     if (revisaoNode.getNodeType() == Node.ELEMENT_NODE) {
+                                                                     Element revisaoElement = (Element) revisaoNode;
+
+                                                                     Utilizador utilizador = registoUtilizadores.getUtilizador(revisaoElement.getElementsByTagName(revisorTag).item(l).getTextContent());
+
+                                                                     if (cp.contains(utilizador)) {
+                                                                     Revisor revisor = new Revisor(utilizador);
+                                                                     Revisao revisao = listaRevisoes.novaRevisao(submissao, revisor);
+
+                                                                     revisao.setAdequacaoArtigo(Integer.parseInt(revisaoElement.getElementsByTagName(adequacaoTag).item(0).getTextContent()));
+                                                                     revisao.setConfiancaRevisor(Integer.parseInt(revisaoElement.getElementsByTagName(confiancaTag).item(0).getTextContent()));
+                                                                     revisao.setOriginalidadeArtigo(Integer.parseInt(revisaoElement.getElementsByTagName(originalidadeTag).item(0).getTextContent()));
+                                                                     revisao.setQualidadeArtigo(Integer.parseInt(revisaoElement.getElementsByTagName(apresentacaoTag).item(0).getTextContent()));
+                                                                     revisao.setRecomendacaoGlobal(Integer.parseInt(revisaoElement.getElementsByTagName(recomendacaoTag).item(0).getTextContent()));
+                                                                     revisao.setTextoJustificativo(revisaoElement.getElementsByTagName(justificacaoTag).item(0).getTextContent());
+
+                                                                     listaRevisoes.adicionarRevisao(revisao);
+                                                                     }
+                                                                     }
+                                                                     }*/
+                                                                }
+                                                            }
+                                                        }
                                                     }
                                                 }
 
@@ -385,7 +516,80 @@ public class XMLParser {
                                                         evento.adicionarCP(cp);
 
                                                         if (evento.setEmSubmissao() && Integer.parseInt(eventoElement.getElementsByTagName(numeroSubmissoesTag).item(0).getTextContent()) > 0) {
-                                                            // Descodificar Submissões...
+                                                            NodeList submissoesSTNodeList = sessaoTematicaElement.getElementsByTagName(submissaoTag);
+                                                            ListaSubmissoes listaSubmissoes = sessaoTematica.getListaSubmissoes();
+
+                                                            for (int k = 0; k < submissoesSTNodeList.getLength(); k++) {
+                                                                Node submissaoSTNode = submissoesSTNodeList.item(k);
+                                                                Submissao submissao = listaSubmissoes.novaSubmissao();
+
+                                                                if (submissaoSTNode.getNodeType() == Node.ELEMENT_NODE) {
+                                                                    Element submissaoElement = (Element) submissaoSTNode;
+
+                                                                    String estadoSubmissao = submissaoElement.getElementsByTagName(estadoSubmissaoTag).item(0).getTextContent();
+                                                                    atribuirEstadoASubmissao(submissao, estadoSubmissao);
+
+                                                                    NodeList artigoNodeList = submissaoElement.getElementsByTagName(artigoTag);
+
+                                                                    for (int l = 0; l < artigoNodeList.getLength(); l++) {
+                                                                        Node artigoNode = artigoNodeList.item(l);
+                                                                        Artigo artigo = submissao.novoArtigo();
+
+                                                                        if (artigoNode.getNodeType() == Node.ELEMENT_NODE) {
+                                                                            Element artigoElement = (Element) artigoNode;
+
+                                                                            artigo.setTitulo(artigoElement.getElementsByTagName(tituloArtigoTag).item(0).getTextContent());
+                                                                            artigo.setResumo(artigoElement.getElementsByTagName(resumoTag).item(0).getTextContent());
+
+                                                                            lerListaAutores(registoUtilizadores, artigo, artigoElement);
+
+                                                                            List<String> listaPalavrasChave = new ArrayList();
+                                                                            listaPalavrasChave.addAll(Arrays.asList(artigoElement.getElementsByTagName(palavrasChaveTag).item(0).getTextContent().split("/")));
+                                                                            artigo.setPalavrasChave(listaPalavrasChave);
+                                                                            artigo.setFicheiro(artigoElement.getElementsByTagName(ficheiroTag).item(0).getTextContent());
+                                                                            artigo.setDataSubmissao(Data.converterString(artigoElement.getElementsByTagName(dataSubmissaoTag).item(0).getTextContent()));
+
+                                                                            String tipo = artigoElement.getAttribute("tipo");
+
+                                                                            if (tipo.equals(artigoInicialAttr)) {
+                                                                                submissao.setArtigoInicial(artigo);
+                                                                            } else if (tipo.equals(artigoFinalAttr)) {
+                                                                                submissao.setArtigoFinal(artigo);
+                                                                            }
+                                                                        }
+                                                                    }
+
+                                                                    if (Integer.parseInt(eventoElement.getElementsByTagName(numeroRevisoesTag).item(0).getTextContent()) > 0) {
+                                                                        NodeList revisoesNodeList = sessaoTematicaElement.getElementsByTagName(revisaoTag);
+
+                                                                        /*ListaRevisoes listaRevisoes = sessaoTematica.getProcessoDistribuicao().getListaRevisoes();
+
+                                                                         for (int l = 0; l < revisoesNodeList.getLength(); l++) {
+                                                                         Node revisaoNode = revisoesNodeList.item(0);
+
+                                                                         if (revisaoNode.getNodeType() == Node.ELEMENT_NODE) {
+                                                                         Element revisaoElement = (Element) revisaoNode;
+
+                                                                         Utilizador utilizador = registoUtilizadores.getUtilizador(revisaoElement.getElementsByTagName(revisorTag).item(l).getTextContent());
+
+                                                                         if (cp.contains(utilizador)) {
+                                                                         Revisor revisor = new Revisor(utilizador);
+                                                                         Revisao revisao = listaRevisoes.novaRevisao(submissao, revisor);
+
+                                                                         revisao.setAdequacaoArtigo(Integer.parseInt(revisaoElement.getElementsByTagName(adequacaoTag).item(0).getTextContent()));
+                                                                         revisao.setConfiancaRevisor(Integer.parseInt(revisaoElement.getElementsByTagName(confiancaTag).item(0).getTextContent()));
+                                                                         revisao.setOriginalidadeArtigo(Integer.parseInt(revisaoElement.getElementsByTagName(originalidadeTag).item(0).getTextContent()));
+                                                                         revisao.setQualidadeArtigo(Integer.parseInt(revisaoElement.getElementsByTagName(apresentacaoTag).item(0).getTextContent()));
+                                                                         revisao.setRecomendacaoGlobal(Integer.parseInt(revisaoElement.getElementsByTagName(recomendacaoTag).item(0).getTextContent()));
+                                                                         revisao.setTextoJustificativo(revisaoElement.getElementsByTagName(justificacaoTag).item(0).getTextContent());
+
+                                                                         listaRevisoes.adicionarRevisao(revisao);
+                                                                         }
+                                                                         }
+                                                                         }*/
+                                                                    }
+                                                                }
+                                                            }
                                                         }
                                                     }
                                                 }
@@ -401,11 +605,98 @@ public class XMLParser {
         }
     }
 
+    private void lerListaAutores(
+            RegistoUtilizadores registoUtilizadores,
+            Artigo artigo, Element artigoElement) {
+        NodeList autoresNodeList = artigoElement.getElementsByTagName(autorTag);
+        ListaAutores listaAutores = artigo.getListaAutores();
+
+        for (int m = 0; m < autoresNodeList.getLength(); m++) {
+            Node autorNode = autoresNodeList.item(m);
+
+            if (autorNode.getNodeType() == Node.ELEMENT_NODE) {
+                Element autorElement = (Element) autorNode;
+
+                Utilizador utilizador = registoUtilizadores.getUtilizador(
+                        autorElement.getElementsByTagName(
+                                emailAutorTag).item(0).getTextContent());
+
+                if (utilizador == null) {
+                    listaAutores.novoAutor(
+                            autorElement.getElementsByTagName(
+                                    nomeAutorTag).item(0).getTextContent(),
+                            autorElement.getElementsByTagName(
+                                    emailAutorTag).item(0).getTextContent(),
+                            new InstituicaoAfiliacao(
+                                    autorElement.getElementsByTagName(
+                                            filiacaoAutorTag).item(0).getTextContent()));
+                } else {
+                    listaAutores.novoAutor(utilizador,
+                            new InstituicaoAfiliacao(
+                                    autorElement.getElementsByTagName(
+                                            filiacaoAutorTag).item(0).getTextContent()));
+                }
+            }
+        }
+
+        List<Autor> listaAutoresRegistados = listaAutores.getListaAutoresRegistados();
+
+        Utilizador utilizadorAutorCorrespondente
+                = registoUtilizadores.getUtilizador(
+                        artigoElement.getElementsByTagName(
+                                autorCorrespondenteTag).item(0).getTextContent());
+        int indice = listaAutoresRegistados.indexOf(new Autor(
+                utilizadorAutorCorrespondente,
+                new InstituicaoAfiliacao("Dummy")));
+        artigo.setAutorCorrespondente(
+                new AutorCorrespondente(utilizadorAutorCorrespondente,
+                        listaAutoresRegistados.get(
+                                indice).getInstituicaoAfiliacao()));
+
+        String th = artigoElement.getElementsByTagName(
+                autorSubmissorTag).item(0).getTextContent();
+        Utilizador utilizadorAutorSubmissor
+                = registoUtilizadores.getUtilizador(th);
+
+        indice = listaAutoresRegistados.indexOf(new Autor(
+                utilizadorAutorSubmissor, new InstituicaoAfiliacao("Dummy")));
+        Autor autor = listaAutoresRegistados.get(indice);
+        artigo.setAutorSubmissor(autor);
+    }
+
+    /**
+     * 
+     * @param submissao Submissão cujo estado vai ser alterado.
+     * @param estadoSubmissao Estado destino à submissão.
+     * 
+     * @throws ClassNotFoundException
+     * @throws NoSuchMethodException
+     * @throws InstantiationException
+     * @throws IllegalAccessException
+     * @throws IllegalArgumentException
+     * @throws InvocationTargetException 
+     */
+    private void atribuirEstadoASubmissao(
+            Submissao submissao, String estadoSubmissao)
+            throws ClassNotFoundException, NoSuchMethodException,
+            InstantiationException, IllegalAccessException,
+            IllegalArgumentException, InvocationTargetException {
+        Constructor constructor = Class.forName(
+                "eventoscientificos.model.state.submissao."
+                + estadoSubmissao).getConstructor(Submissao.class);
+
+        submissao.setEstado((SubmissaoState) constructor.newInstance(submissao));
+    }
+
     /**
      * Cria uma árvore com toda a informação sobre os utilizadores e guarda tudo
      * num ficheiro em formato XML.
+     *
+     * @throws javax.xml.parsers.ParserConfigurationException
+     * @throws javax.xml.transform.TransformerException
      */
-    public void escreverFicheiroUtilizador() throws ParserConfigurationException, TransformerException {
+    public void escreverFicheiroUtilizador()
+            throws ParserConfigurationException, TransformerException {
         RegistoUtilizadores registoUtilizadores = this.empresa.getRegistoUtilizadores();
 
         DocumentBuilderFactory docBuilderF = DocumentBuilderFactory.newInstance();
@@ -415,7 +706,9 @@ public class XMLParser {
         Element listaUtilizadoresElement = doc.createElement(listaUtilizadoresTag);
         doc.appendChild(listaUtilizadoresElement);
 
-        listaUtilizadoresElement.appendChild(doc.createElement(numeroElementosTag)).setTextContent(String.valueOf(registoUtilizadores.getNumeroUtilizadores()));
+        listaUtilizadoresElement.appendChild(doc.createElement(
+                numeroElementosTag)).setTextContent(
+                        String.valueOf(registoUtilizadores.getNumeroUtilizadores()));
 
         Element utilizadoresElement = doc.createElement(utilizadoresTag);
         listaUtilizadoresElement.appendChild(utilizadoresElement);
@@ -426,10 +719,16 @@ public class XMLParser {
 
             Utilizador utilizador = registoUtilizadores.getUtilizadorPeloID(i);
 
-            utilizadorElement.appendChild(doc.createElement(usernameTag)).setTextContent(utilizador.getUsername());
-            utilizadorElement.appendChild(doc.createElement(nomeTag)).setTextContent(utilizador.getNome());
-            utilizadorElement.appendChild(doc.createElement(emailTag)).setTextContent(utilizador.getEmail());
-            utilizadorElement.appendChild(doc.createElement(passwordTag)).setTextContent(utilizador.getPassword());
+            utilizadorElement.appendChild(doc.createElement(
+                    usernameTag)).setTextContent(utilizador.getUsername());
+            utilizadorElement.appendChild(doc.createElement(
+                    nomeTag)).setTextContent(utilizador.getNome());
+            utilizadorElement.appendChild(doc.createElement(
+                    emailTag)).setTextContent(utilizador.getEmail());
+            utilizadorElement.appendChild(doc.createElement(
+                    passwordTag)).setTextContent(String.join(";",
+                                    utilizador.getCodificadorTabela(),
+                                    utilizador.getPassword()));
         }
 
         escreverFicheiro(doc, caminhoFicheiroUtilizador);
@@ -438,8 +737,12 @@ public class XMLParser {
     /**
      * Cria uma árvore com toda a informação sobre os locais e guarda tudo num
      * ficheiro em formato XML.
+     *
+     * @throws javax.xml.parsers.ParserConfigurationException
+     * @throws javax.xml.transform.TransformerException
      */
-    public void escreverFicheiroLocal() throws ParserConfigurationException, TransformerException {
+    public void escreverFicheiroLocal()
+            throws ParserConfigurationException, TransformerException {
         RegistoEventos registoEventos = this.empresa.getRegistoEventos();
 
         DocumentBuilderFactory docBuilderF = DocumentBuilderFactory.newInstance();
@@ -449,7 +752,9 @@ public class XMLParser {
         Element listaLocaisElement = doc.createElement(listaLocaisTag);
         doc.appendChild(listaLocaisElement);
 
-        listaLocaisElement.appendChild(doc.createElement(numElementosTag)).setTextContent(String.valueOf(registoEventos.getNumeroEventos()));
+        listaLocaisElement.appendChild(doc.createElement(
+                numElementosTag)).setTextContent(
+                        String.valueOf(registoEventos.getNumeroEventos()));
 
         Element locaisElement = doc.createElement(locaisTag);
         listaLocaisElement.appendChild(locaisElement);
@@ -460,8 +765,10 @@ public class XMLParser {
 
             Evento e = registoEventos.getEventoPeloID(i);
 
-            localElement.appendChild(doc.createElement(localIDTag)).setTextContent(String.valueOf(i + 1));
-            localElement.appendChild(doc.createElement(designacaoTag)).setTextContent(e.getLocal().toString());
+            localElement.appendChild(doc.createElement(
+                    localIDTag)).setTextContent(String.valueOf(i + 1));
+            localElement.appendChild(doc.createElement(
+                    designacaoTag)).setTextContent(e.getLocal().toString());
         }
 
         escreverFicheiro(doc, caminhoFicheiroLocal);
@@ -470,162 +777,496 @@ public class XMLParser {
     /**
      * Cria uma árvore com toda a informação sobre os eventos e guarda tudo num
      * ficheiro em formato XML.
+     *
+     * @throws javax.xml.parsers.ParserConfigurationException
+     * @throws javax.xml.transform.TransformerException
      */
-    public void escreverFicheiroEvento() throws ParserConfigurationException, TransformerException {
-            RegistoEventos registoEventos = this.empresa.getRegistoEventos();
+    public void escreverFicheiroEvento()
+            throws ParserConfigurationException, TransformerException {
+        DocumentBuilderFactory docBuilderF = DocumentBuilderFactory.newInstance();
+        DocumentBuilder docBuilder = docBuilderF.newDocumentBuilder();
+        Document doc = docBuilder.newDocument();
 
-            DocumentBuilderFactory docBuilderF = DocumentBuilderFactory.newInstance();
-            DocumentBuilder docBuilder = docBuilderF.newDocumentBuilder();
-            Document doc = docBuilder.newDocument();
+        doc.appendChild(escreverRegistoEventos(doc, doc.createElement(listaEventosTag), this.empresa.getRegistoEventos()));
+        
+        escreverFicheiro(doc, "teste.xml");
+    }
 
-            Element listaEventos = doc.createElement(listaEventosTag);
-            doc.appendChild(listaEventos);
+    /**
+     * Constrói uma arvore que guarda o registo de eventos.
+     * 
+     * @param doc Documento XML.
+     * @param registoEventosElement Elemento que guarda o registo de eventos.
+     * @param registoEventos Registo de eventos de onde é extraida a informação.
+     * 
+     * @return Elemento preenchido.
+     */
+    private Element escreverRegistoEventos(Document doc,
+            Element registoEventosElement, RegistoEventos registoEventos) {
+        registoEventosElement.appendChild(doc.createElement(
+                numeroEventosTag)).setTextContent(
+                        String.valueOf(registoEventos.getNumeroEventos()));
+        Element eventos = doc.createElement(eventosTag);
+        registoEventosElement.appendChild(eventos);
 
-            Element numeroEventos = doc.createElement(numeroEventosTag);
-            numeroEventos.setTextContent(String.valueOf(registoEventos.getNumeroEventos()));
-            listaEventos.appendChild(numeroEventos);
+        for (int i = 0; i < registoEventos.getNumeroEventos(); i++) {
+            eventos.appendChild(escreverEvento(
+                    doc, doc.createElement(eventoTag),
+                    registoEventos.getEventoPeloID(i), i));
+        }
+        
+        return registoEventosElement;
+    }
 
-            Element eventos = doc.createElement(eventosTag);
-            listaEventos.appendChild(eventos);
+    /**
+     * Constrói uma árvore que guarda a informação de um evento.
+     * 
+     * @param doc Documento XML.
+     * @param eventoElement Elemento que guarda o evento.
+     * @param evento Evento de onde é extraida a informação.
+     * @param i Número do local.
+     * 
+     * @return Elemento preenchido.
+     */
+    private Element escreverEvento(Document doc,
+            Element eventoElement, Evento evento, int i) {
+        eventoElement.appendChild(doc.createElement(
+                tituloTag)).setTextContent(
+                        evento.getTitulo());
+        eventoElement.appendChild(doc.createElement(
+                descricaoTag)).setTextContent(
+                        evento.getDescricao());
+        eventoElement.appendChild(doc.createElement(
+                dataInicioTag)).setTextContent(
+                        evento.getDataInicio().toString());
+        eventoElement.appendChild(doc.createElement(
+                dataInicioTag)).setTextContent(
+                        evento.getDataFim().toString());
+        eventoElement.appendChild(doc.createElement(
+                dataInicioSubmissaoTag)).setTextContent(
+                        evento.getDataInicioSubmissao().toString());
+        eventoElement.appendChild(doc.createElement(
+                dataFimSubmissaoTag)).setTextContent(
+                        evento.getDataFimSubmissao().toString());
+        eventoElement.appendChild(doc.createElement(
+                dataInicioDistribuicaoTag)).setTextContent(
+                        evento.getDataInicioDistribuicao().toString());
+        eventoElement.appendChild(doc.createElement(
+                dataLimiteRevisaoTag)).setTextContent(
+                        evento.getDataFimRevisao().toString());
+        eventoElement.appendChild(doc.createElement(
+                dataLimiteSubmissaoFinalTag)).setTextContent(
+                        evento.getDataFimSubmissaoCameraReady().toString());
+        eventoElement.appendChild(doc.createElement(
+                estadoEventoTag)).setTextContent(
+                        evento.getEstado().getClass().getSimpleName());
+        eventoElement.appendChild(doc.createElement(
+                localTag)).setTextContent(
+                        String.valueOf(i + 1));
+        eventoElement.appendChild(escreverOrganizadores(doc,
+                doc.createElement(listaOrganizadoresTag), evento));
+        eventoElement.appendChild(escreverCP(doc,
+                doc.createElement(cpTag), evento.getCP()));
+        eventoElement.appendChild(
+                escreverListaSessoesTematicas(doc,
+                        doc.createElement(listaSessoesTematicasTag),
+                        evento.getListaSessoesTematicas()));
+        eventoElement.appendChild(
+                escreverListaSubmissoes(doc,
+                        doc.createElement(listaSubmissoesEventoTag),
+                        evento.getListaSubmissoes(), evento));
 
-            for (int i = 0; i < registoEventos.getNumeroEventos(); i++) {
-                Evento e = registoEventos.getEventoPeloID(i);
+        return eventoElement;
+    }
 
-                Element evento = doc.createElement(eventoTag);
-                eventos.appendChild(evento);
+    /**
+     * Constrói uma árvore que guarda a informação da lista de organizadores.
+     *
+     * @param doc Documento XML.
+     * @param listaOrganizadoresElement Elemento que guarda a lista de
+     * organizadores.
+     * @param evento Evento de onde é extraida a informação.
+     *
+     * @return Elemento preenchido
+     */
+    private Element escreverOrganizadores(Document doc,
+            Element listaOrganizadoresElement, Evento evento) {
+        listaOrganizadoresElement.appendChild(doc.createElement(
+                numeroOrganizadoresTag)).setTextContent(
+                        String.valueOf(evento.getNumeroOrganizadores()));
 
-                Element titulo = doc.createElement(tituloTag);
-                titulo.setTextContent(e.getTitulo());
-                evento.appendChild(titulo);
-                Element descricao = doc.createElement(descricaoTag);
-                descricao.setTextContent(e.getDescricao());
-                evento.appendChild(descricao);
-                Element dataInicio = doc.createElement(dataInicioTag);
-                dataInicio.setTextContent(e.getDataInicio().toString());
-                evento.appendChild(dataInicio);
-                Element dataFim = doc.createElement(dataInicioTag);
-                dataFim.setTextContent(e.getDataFim().toString());
-                evento.appendChild(dataFim);
-                Element dataInicioSubmissao = doc.createElement(dataInicioSubmissaoTag);
-                dataInicioSubmissao.setTextContent(e.getDataInicioSubmissao().toString());
-                evento.appendChild(dataInicioSubmissao);
-                Element dataFimSubmissao = doc.createElement(dataFimSubmissaoTag);
-                dataFimSubmissao.setTextContent(e.getDataFimSubmissao().toString());
-                evento.appendChild(dataFimSubmissao);
-                Element dataInicioDistribuicao = doc.createElement(dataInicioDistribuicaoTag);
-                dataInicioDistribuicao.setTextContent(e.getDataInicioDistribuicao().toString());
-                evento.appendChild(dataInicioDistribuicao);
-                Element dataLimiteRevisao = doc.createElement(dataLimiteRevisaoTag);
-                dataLimiteRevisao.setTextContent(e.getDataFimRevisao().toString());
-                evento.appendChild(dataLimiteRevisao);
-                Element dataLimiteSubmissaoFinal = doc.createElement(dataLimiteSubmissaoFinalTag);
-                dataLimiteSubmissaoFinal.setTextContent(e.getDataFimSubmissaoCameraReady().toString());
-                evento.appendChild(dataLimiteSubmissaoFinal);
-                Element estadoEvento = doc.createElement(estadoEventoTag);
-                estadoEvento.setTextContent(e.getEstado().getClass().getSimpleName());
-                evento.appendChild(estadoEvento);
-                Element local = doc.createElement(localTag);
-                local.setTextContent(String.valueOf(i + 1));
-                evento.appendChild(local);
+        Element organizadores = doc.createElement(organizadoresTag);
+        listaOrganizadoresElement.appendChild(organizadores);
 
-                // Leitura dos organizadores do evento.
-                Element listaOrganizadores = doc.createElement(listaOrganizadoresTag);
-                evento.appendChild(listaOrganizadores);
+        for (int i = 0; i < evento.getNumeroOrganizadores(); i++) {
+            organizadores.appendChild(doc.createElement(
+                    organizadorTag)).setTextContent(
+                            evento.getOrganizadorPeloID(i).getUtilizador().getUsername());
+        }
 
-                Element numeroOrganizadores = doc.createElement(numeroOrganizadoresTag);
-                numeroOrganizadores.setTextContent(String.valueOf(e.getNumeroOrganizadores()));
-                listaOrganizadores.appendChild(numeroOrganizadores);
+        return listaOrganizadoresElement;
+    }
 
-                Element organizadores = doc.createElement(organizadoresTag);
-                listaOrganizadores.appendChild(organizadores);
+    /**
+     * Constrói uma árvore que guarda a informação da CP.
+     *
+     * @param doc Documento XML.
+     * @param CPElement Elemento que guarda a CP.
+     * @param cp CP de onde é extraiada a informação.
+     *
+     * @return Elemento preenchido.
+     */
+    private Element escreverCP(Document doc, Element CPElement, CP cp) {
+        CPElement.appendChild(doc.createElement(
+                numeroMembrosCPTag)).setTextContent(
+                        String.valueOf(cp.getNumeroRevisores()));
 
-                for (int j = 0; j < e.getNumeroOrganizadores(); j++) {
-                    Element organizador = doc.createElement(organizadorTag);
-                    organizador.setTextContent(e.getOrganizadorPeloID(j).getUtilizador().getUsername());
-                    organizadores.appendChild(organizador);
+        Element membrosCP = doc.createElement(membrosCPTag);
+        CPElement.appendChild(membrosCP);
+
+        for (int i = 0; i < cp.getNumeroRevisores(); i++) {
+            membrosCP.appendChild(doc.createElement(
+                    membroCPTag)).setTextContent(
+                            cp.getRevisorPeloID(i).getUtilizador().getUsername());
+        }
+
+        return CPElement;
+    }
+
+    /**
+     * Constrói uma árvore que guarda a informação da lista de sessões
+     * temáticas.
+     *
+     * @param doc Documento XML.
+     * @param listaSessoesTematicasElement Elemento que guarda a informação da
+     * lista de sessões temáticas.
+     * @param listaSessoesTematicas Lista de sessões temáticas de onde é
+     * extraida a informação.
+     *
+     * @return Elemento preenchido.
+     */
+    private Element escreverListaSessoesTematicas(Document doc,
+            Element listaSessoesTematicasElement,
+            ListaSessoesTematicas listaSessoesTematicas) {
+        listaSessoesTematicasElement.appendChild(doc.createElement(numeroSessoesTematicasTag)).setTextContent(String.valueOf(listaSessoesTematicas.getNumeroSessoesTematicas()));
+
+        Element sessoesTematicas = doc.createElement(sessoesTematicasTag);
+        listaSessoesTematicasElement.appendChild(sessoesTematicas);
+
+        for (int j = 0; j < listaSessoesTematicas.getNumeroSessoesTematicas(); j++) {
+            sessoesTematicas.appendChild(escreverSessaoTematica(doc,
+                    doc.createElement(sessaoTematicaTag),
+                    listaSessoesTematicas.getSessoesTematicasPeloID(j)));
+        }
+        return listaSessoesTematicasElement;
+    }
+
+    /**
+     * Constrói uma árvore que guarda a informação de uma sessão temática.
+     *
+     * @param doc Documento XML.
+     * @param sessaoTematicaElement Elemento que guarda a sessão temática.
+     * @param sessaoTematica Sessão temática de onde é extraida a informação.
+     *
+     * @return Elemento preenchido.
+     */
+    private Element escreverSessaoTematica(Document doc,
+            Element sessaoTematicaElement, SessaoTematica sessaoTematica) {
+        sessaoTematicaElement.appendChild(doc.createElement(
+                codigoSTTag)).setTextContent(
+                        sessaoTematica.getCodigoUnico());
+        sessaoTematicaElement.appendChild(doc.createElement(
+                descricaoSTTag)).setTextContent(
+                        sessaoTematica.getDescricao());
+        sessaoTematicaElement.appendChild(doc.createElement(
+                dataInicioTag)).setTextContent(
+                        sessaoTematica.getDataInicio().toString());
+        sessaoTematicaElement.appendChild(doc.createElement(
+                dataFimTag)).setTextContent(
+                        sessaoTematica.getDataFim().toString());
+        sessaoTematicaElement.appendChild(doc.createElement(
+                dataInicioSubmissaoTag)).setTextContent(
+                        sessaoTematica.getDataInicioSubmissao().toString());
+        sessaoTematicaElement.appendChild(doc.createElement(
+                dataFimSubmissaoTag)).setTextContent(
+                        sessaoTematica.getDataFimSubmissao().toString());
+        sessaoTematicaElement.appendChild(doc.createElement(
+                dataInicioDistribuicaoTag)).setTextContent(
+                        sessaoTematica.getDataInicioDistribuicao().toString());
+        sessaoTematicaElement.appendChild(doc.createElement(
+                dataLimiteRevisaoTag)).setTextContent(
+                        sessaoTematica.getDataFimRevisao().toString());
+        sessaoTematicaElement.appendChild(doc.createElement(
+                dataLimiteSubmissaoFinalTag)).setTextContent(
+                        sessaoTematica.getDataFimSubmissaoCameraReady().toString());
+        sessaoTematicaElement.appendChild(escreverProponentes(
+                doc, doc.createElement(listaProponentesTag), sessaoTematica));
+        sessaoTematicaElement.appendChild(escreverCP(
+                doc, doc.createElement(CPSessaoTag), sessaoTematica.getCP()));
+        sessaoTematicaElement.appendChild(escreverListaSubmissoes(
+                doc, doc.createElement(listaSubmissoesTag),
+                sessaoTematica.getListaSubmissoes(), sessaoTematica));
+
+        return sessaoTematicaElement;
+    }
+
+    /**
+     * Constrói uma árvore que guarda a informação da lista de proponentes.
+     *
+     * @param doc Documento XML.
+     * @param listaProponentesElement Elemento que guarda a lista de
+     * proponentes.
+     * @param sessaoTematica Sessão temática de onde é extraida a informação.
+     *
+     * @return Elemento preenchido
+     */
+    private Element escreverProponentes(Document doc,
+            Element listaProponentesElement, SessaoTematica sessaoTematica) {
+        listaProponentesElement.appendChild(doc.createElement(
+                numeroProponentesTag)).setTextContent(
+                        String.valueOf(sessaoTematica.getNumeroProponentes()));
+
+        Element proponentes = doc.createElement(proponentesTag);
+        listaProponentesElement.appendChild(proponentes);
+
+        for (int i = 0; i < sessaoTematica.getNumeroProponentes(); i++) {
+            proponentes.appendChild(doc.createElement(
+                    proponenteTag)).setTextContent(
+                            sessaoTematica.getProponentePeloID(i).getUtilizador().getUsername());
+        }
+
+        return listaProponentesElement;
+    }
+
+    /**
+     * Constrói uma árvore que guarda a informação da lista de submissões.
+     *
+     * @param doc Documento XML.
+     * @param listaSubmissoesElement Elemento que guarda a lista de submissões.
+     * @param listaSubmissoes Lista de submissões de onde é extraida a
+     * informação.
+     * @param distribuivel Evento ou sessão temática.
+     *
+     * @return Elemento preenchido.
+     */
+    private Element escreverListaSubmissoes(Document doc,
+            Element listaSubmissoesElement, ListaSubmissoes listaSubmissoes,
+            Distribuivel distribuivel) {
+        listaSubmissoesElement.appendChild(doc.createElement(
+                numeroSubmissoesTag)).setTextContent(
+                        String.valueOf(listaSubmissoes.getNumeroSubmissoes()));
+
+        Element submissoesElement = doc.createElement(submissoesTag);
+        listaSubmissoesElement.appendChild(submissoesElement);
+
+        for (int i = 0; i < listaSubmissoes.getNumeroSubmissoes(); i++) {
+            submissoesElement.appendChild(escreverSubmissao(
+                    doc, doc.createElement(submissaoTag),
+                    listaSubmissoes.getSubmissaoPeloID(i), distribuivel));
+        }
+
+        return listaSubmissoesElement;
+    }
+
+    /**
+     * Constrói uma árvore que guarda a informação de uma submissão.
+     *
+     * @param doc Documento XML.
+     * @param submissaoElement Elemento que guarda a submissão.
+     * @param submissao Submissão de onde é extraida a informação.
+     * @param distribuivel Evento ou sessão temática.
+     *
+     * @return Elemento preenchido.
+     */
+    private Element escreverSubmissao(Document doc,
+            Element submissaoElement, Submissao submissao,
+            Distribuivel distribuivel) {
+        submissaoElement.appendChild(
+                doc.createElement(estadoSubmissaoTag)).setTextContent(
+                        submissao.getEstado().getClass().getSimpleName());
+        submissaoElement.appendChild(escreverArtigo(
+                doc, doc.createElement(artigoTag),
+                submissao.getArtigoInicial(), artigoInicialAttr));
+        if (submissao.isStateEmCameraReady()) {
+            submissaoElement.appendChild(escreverArtigo(
+                    doc, doc.createElement(artigoTag),
+                    submissao.getArtigoInicial(), artigoFinalAttr));
+        }
+
+        if (distribuivel.getProcessoDistribuicao() != null) {
+            submissaoElement.appendChild(escreverListaRevisoes(doc,
+                    doc.createElement(listaRevisoesTag), submissao, distribuivel));
+        }
+
+        if (((Decidivel) distribuivel).getProcessoDecisao() != null) {
+            ListaDecisoes listaDecisoes
+                    = ((Decidivel) distribuivel).getProcessoDecisao().getListaDecisoes();
+
+            for (int i = 0; i < listaDecisoes.numeroDecisoes(); i++) {
+                Decisao decisao;
+                if ((decisao
+                        = listaDecisoes.getDecisaoPeloID(i)).getSubmissao().equals(submissao)) {
+                    submissaoElement.appendChild(doc.createElement(
+                            decisaoTag)).setTextContent(
+                                    String.valueOf(decisao.getClassificacao()));
                 }
-
-                // Leitura da comissão do evento.
-                Element CP = doc.createElement(cpTag);
-                evento.appendChild(CP);
-                CP comissaoPrograma = e.getCP();
-
-                Element numeroMembrosCP = doc.createElement(numeroMembrosCPTag);
-                numeroMembrosCP.setTextContent(String.valueOf(comissaoPrograma.getNumeroRevisores()));
-                CP.appendChild(numeroMembrosCP);
-
-                Element membrosCP = doc.createElement(membrosCPTag);
-                CP.appendChild(membrosCP);
-
-                for (int j = 0; j < comissaoPrograma.getNumeroRevisores(); j++) {
-                    Element membroCP = doc.createElement(membroCPTag);
-                    membroCP.setTextContent(comissaoPrograma.getRevisorPeloID(j).getUtilizador().getUsername());
-                    membrosCP.appendChild(membroCP);
-                }
-
-                // Leitura das sessões temáticas do evento.
-                Element listaSessoesTematicas = doc.createElement(listaSessoesTematicasTag);
-                evento.appendChild(listaSessoesTematicas);
-
-                ListaSessoesTematicas listaSTs = e.getListaSessoesTematicas();
-
-                Element numeroSessoesTematica = doc.createElement(numeroSessoesTematicasTag);
-                numeroSessoesTematica.setTextContent(String.valueOf(listaSTs.getNumeroSessoesTematicas()));
-                listaSessoesTematicas.appendChild(numeroSessoesTematica);
-
-                Element sessoesTematicas = doc.createElement(sessoesTematicasTag);
-                listaSessoesTematicas.appendChild(sessoesTematicas);
-
-                for (int j = 0; j < listaSTs.getNumeroSessoesTematicas(); j++) {
-                    Element sessaoTematica = doc.createElement(sessaoTematicaTag);
-                    sessoesTematicas.appendChild(sessaoTematica);
-
-                    SessaoTematica s = listaSTs.getSessoesTematicasPeloID(j);
-
-                    Element codigoST = doc.createElement(codigoSTTag);
-                    codigoST.setTextContent(s.getCodigoUnico());
-                    sessaoTematica.appendChild(codigoST);
-
-                    Element descricaoST = doc.createElement(descricaoSTTag);
-                    descricaoST.setTextContent(s.getDescricao());
-                    sessaoTematica.appendChild(descricaoST);
-
-                    Element dataInicioST = doc.createElement(dataInicioTag);
-                    dataInicioST.setTextContent(s.getDataInicio().toString());
-                    sessaoTematica.appendChild(dataInicioST);
-
-                    Element dataFimST = doc.createElement(dataFimTag);
-                    dataFimST.setTextContent(s.getDataFim().toString());
-                    sessaoTematica.appendChild(dataFimST);
-
-                    Element dataInicioSubmissaoST = doc.createElement(dataInicioSubmissaoTag);
-                    dataInicioSubmissaoST.setTextContent(s.getDataInicioSubmissao().toString());
-                    sessaoTematica.appendChild(dataInicioSubmissaoST);
-
-                    Element dataFimSubmissaoST = doc.createElement(dataFimSubmissaoTag);
-                    dataFimSubmissaoST.setTextContent(s.getDataFimSubmissao().toString());
-                    sessaoTematica.appendChild(dataFimSubmissaoST);
-
-                    Element dataInicioDistribuicaoST = doc.createElement(dataInicioDistribuicaoTag);
-                    dataInicioDistribuicaoST.setTextContent(s.getDataInicioDistribuicao().toString());
-                    sessaoTematica.appendChild(dataInicioDistribuicaoST);
-
-                    Element dataLimiteRevisaoST = doc.createElement(dataLimiteRevisaoTag);
-                    dataLimiteRevisaoST.setTextContent(s.getDataFimRevisao().toString());
-                    sessaoTematica.appendChild(dataLimiteRevisaoST);
-
-                    Element dataLimiteSubmissaoFinalST = doc.createElement(dataLimiteSubmissaoFinalTag);
-                    dataLimiteSubmissaoFinalST.setTextContent(s.getDataFimSubmissaoCameraReady().toString());
-                    sessaoTematica.appendChild(dataLimiteSubmissaoFinalST);
-
-                }
-
-                //e.getListaSessoesTematicas();
-                Element listasubmissoes = doc.createElement(listaSubmissoesEventoTag);
-                //e.getListaSubmissoes();
             }
+        }
 
-            escreverFicheiro(doc, "teste.xml");
+        return submissaoElement;
+    }
+
+    /**
+     * Constrói a árvore que guarda a lista de revisões de uma submissão.
+     *
+     * @param doc Documento XML.
+     * @param listaRevisoesElement Elemento que guarda a lista de revisões.
+     * @param submissao Submissão da qual é extraida a informação.
+     * @param distribuivel Distribuivel que contém a lista de revisões.
+     *
+     * @return Elemento preenchido.
+     */
+    private Element escreverListaRevisoes(Document doc,
+            Element listaRevisoesElement, Submissao submissao,
+            Distribuivel distribuivel) {
+        ListaRevisoes listaRevisoes
+                = distribuivel.getProcessoDistribuicao().getListaRevisoes();
+
+        listaRevisoesElement.appendChild(doc.createElement(
+                numeroRevisoesTag)).setTextContent(
+                        String.valueOf(listaRevisoes.numeroRevisoes()));
+
+        Element revisoesElement = doc.createElement(revisoesTag);
+        listaRevisoesElement.appendChild(revisoesElement);
+
+        for (int i = 0; i < listaRevisoes.numeroRevisoes(); i++) {
+            if (listaRevisoes.getRevisaoPeloID(i).getSubmissao().equals(submissao)) {
+                revisoesElement.appendChild(escreverRevisao(
+                        doc, doc.createElement(revisaoTag),
+                        listaRevisoes.getRevisaoPeloID(i)));
+            }
+        }
+
+        return listaRevisoesElement;
+    }
+
+    /**
+     * Constrói a árvore que guarda uma revisão de uma submissão.
+     *
+     * @param doc Documento XML.
+     * @param revisaoElement Elemento que guarda a revisão.
+     * @param revisao Revisão de onde é extraida a informação.
+     *
+     * @return Elemento preenchido.
+     */
+    private Element escreverRevisao(Document doc,
+            Element revisaoElement, Revisao revisao) {
+        revisaoElement.appendChild(doc.createElement(
+                revisorTag)).setTextContent(
+                        revisao.getRevisor().getUtilizador().getUsername());
+        revisaoElement.appendChild(doc.createElement(
+                estadoRevisaoTag)).setTextContent(
+                        (revisao.getRecomendacaoGlobal() == -1)
+                                ? "RevisaoStateConcluida"
+                                : "RevisaoStatePorConcluir");
+        revisaoElement.appendChild(doc.createElement(
+                confiancaTag)).setTextContent(
+                        String.valueOf(revisao.getConfiancaRevisor()));
+        revisaoElement.appendChild(doc.createElement(
+                adequacaoTag)).setTextContent(
+                        String.valueOf(revisao.getAdequacaoArtigo()));
+        revisaoElement.appendChild(doc.createElement(
+                originalidadeTag)).setTextContent(
+                        String.valueOf(revisao.getOriginalidadeArtigo()));
+        revisaoElement.appendChild(doc.createElement(
+                apresentacaoTag)).setTextContent(
+                        String.valueOf(revisao.getQualidadeArtigo()));
+        revisaoElement.appendChild(doc.createElement(
+                recomendacaoTag)).setTextContent(
+                        String.valueOf(revisao.getRecomendacaoGlobal()));
+        revisaoElement.appendChild(doc.createElement(
+                justificacaoTag)).setTextContent(
+                        revisao.getTextoJustificativo());
+
+        return revisaoElement;
+    }
+
+    /**
+     * Constrói a arvore que contém a lista de autores de um artigo.
+     *
+     * @param doc Documento XML.
+     * @param listaAutoresElement Elemento que guarda a lista de autores.
+     * @param artigo Artigo de onde é extraida a informação que se pretende
+     * guardar
+     *
+     * @return Elemento preenchido.
+     */
+    private Element escreverListaAutores(Document doc,
+            Element listaAutoresElement, Artigo artigo) {
+        ListaAutores listaAutores = artigo.getListaAutores();
+        listaAutoresElement.appendChild(doc.createElement(
+                numeroAutoresTag)).setTextContent(String.valueOf(
+                                listaAutores.getNumeroAutores()));
+
+        Element autoresElement = doc.createElement(autoresTag);
+        listaAutoresElement.appendChild(autoresElement);
+
+        for (int i = 0; i < listaAutores.getNumeroAutores(); i++) {
+            Element autorElement = doc.createElement(autorTag);
+            autoresElement.appendChild(autorElement);
+
+            Autor autor = listaAutores.getAutorPeloID(i);
+
+            autorElement.appendChild(doc.createElement(
+                    nomeAutorTag)).setTextContent(autor.getNome());
+            autorElement.appendChild(doc.createElement(
+                    emailAutorTag)).setTextContent(autor.getEmail());
+            autorElement.appendChild(doc.createElement(
+                    filiacaoAutorTag)).setTextContent(
+                            autor.getInstituicaoAfiliacao().toString());
+            autorElement.appendChild(doc.createElement(
+                    usernameAutorTag)).setTextContent(
+                            autor.getUtilizador().getUsername());
+        }
+
+        return listaAutoresElement;
+    }
+
+    /**
+     * Constrói a arvore que contém o artigo de uma submissão.
+     *
+     * @param doc Documento XML.
+     * @param artigoElement Elemento que guarda o artigo.
+     * @param artigo Artigo de onde é extraida a informação.
+     * @param tipo Tipo de artigo (inicial/final).
+     *
+     * @return Elemento preenchido.
+     */
+    private Element escreverArtigo(Document doc,
+            Element artigoElement, Artigo artigo, String tipo) {
+        artigoElement.setAttribute("tipo", tipo);
+        artigoElement.appendChild(doc.createElement(
+                autorCorrespondenteTag)).setTextContent(
+                        artigo.getAutorCorrespondente().getEmail());
+        artigoElement.appendChild(doc.createElement(
+                autorSubmissorTag)).setTextContent(
+                        artigo.getAutorSubmissor().getEmail());
+        artigoElement.appendChild(doc.createElement(
+                dataSubmissaoTag)).setTextContent(
+                        artigo.getDataSubmissao().toString());
+        artigoElement.appendChild(doc.createElement(
+                tituloArtigoTag)).setTextContent(artigo.getTitulo());
+        artigoElement.appendChild(doc.createElement(
+                resumoTag)).setTextContent(artigo.getResumo());
+        artigoElement.appendChild(escreverListaAutores(
+                doc, doc.createElement(listaAutoresTag), artigo));
+        artigoElement.appendChild(doc.createElement(
+                ficheiroTag)).setTextContent(artigo.getFicheiro());
+        artigoElement.appendChild(doc.createElement(
+                palavrasChaveTag)).setTextContent(
+                        String.join(";", artigo.getPalavrasChave()));
+
+        return artigoElement;
     }
 
     /**
