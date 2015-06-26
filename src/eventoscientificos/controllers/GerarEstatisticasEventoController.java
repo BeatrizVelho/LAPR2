@@ -47,8 +47,17 @@ public class GerarEstatisticasEventoController {
     public float[] getEstatisticas() {
         return this.estatisticas;
     }
+
+    /**
+     * Devolve a lista de eventos.
+     * 
+     * @return Lista de Eventos.
+     */
+    public List<Evento> getListaEventos() {
+        return this.listaEventos;
+    }
     
-        /**
+    /**
      * Devolve uma lista de Eventos em que o utilizador autenticado é um
      * Organizador e cujas as submissões se encontrem decidas
      *
