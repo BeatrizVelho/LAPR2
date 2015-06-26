@@ -40,6 +40,15 @@ public class GerarEstatisticasEventoController {
     }
 
     /**
+     * Devolve o vetor de esttísticas.
+     * 
+     * @return Vetor de float.
+     */
+    public float[] getEstatisticas() {
+        return this.estatisticas;
+    }
+    
+        /**
      * Devolve uma lista de Eventos em que o utilizador autenticado é um
      * Organizador e cujas as submissões se encontrem decidas
      *
@@ -62,7 +71,7 @@ public class GerarEstatisticasEventoController {
      */
     public boolean selecionarEventosEGerarEstatisticas(int indice) {
         Evento evento = this.listaEventos.get(indice);
-        float[] estatisticas = evento.getValoresTotaisEstatisticaEvento();
+        this.estatisticas = evento.getValoresTotaisEstatisticaEvento();
         return estatisticas.length > 0;
     }
 

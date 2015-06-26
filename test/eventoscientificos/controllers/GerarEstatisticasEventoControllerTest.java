@@ -17,6 +17,7 @@ import eventoscientificos.model.Submissao;
 import eventoscientificos.model.Utilizador;
 import eventoscientificos.model.state.evento.EventoEmSubmissaoCameraReadyState;
 import eventoscientificos.model.state.submissao.SubmissaoAceiteState;
+import org.junit.Assert;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import utils.Data;
@@ -121,6 +122,21 @@ public class GerarEstatisticasEventoControllerTest {
         instance.getListaEventosOrganizadorDecididos();
         boolean result = instance.selecionarEventosEGerarEstatisticas(indice);
         assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of getEstatisticas method, of class GerarEstatisticasEventoController.
+     */
+    @Test
+    public void testGetEstatisticas() {
+        System.out.println("getEstatisticas");
+        GerarEstatisticasEventoController instance = new GerarEstatisticasEventoController(empresa);
+        int indice = 0;
+        instance.getListaEventosOrganizadorDecididos();
+        instance.selecionarEventosEGerarEstatisticas(indice);
+        float[] expResult = {0f, 5f, 4f, 3f, 4f, 2f};
+        float[] result = instance.getEstatisticas();
+        Assert.assertArrayEquals(expResult, result, 0.00f);
     }
 
 }

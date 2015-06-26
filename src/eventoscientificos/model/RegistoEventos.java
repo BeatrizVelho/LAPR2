@@ -22,6 +22,28 @@ public class RegistoEventos {
     private List<Evento> listaEventos;
 
     /**
+     * Lista de eventos nos quais é possível gerar estatistica.
+     */
+    private List<Evento> listaEventosEstatistica;
+
+    /**
+     * Lista de submissões de todos os eventos.
+     */
+    private List<Submissao> listaSubmissao;
+
+    /**
+     * Processo de análise estatística.
+     */
+    private ProcessoAnaliseEstatistica processoAnaliseEstatistica;
+
+    /**
+     * Lista de todos os revisores dos eventos da empresa.
+     */
+    private List<Revisor> listaRevisores;
+
+    private List<Revisao> listaRevisoes;
+
+    /**
      * Constrói uma instância de RegistoEventos sem parametros.
      */
     public RegistoEventos() {
@@ -65,6 +87,18 @@ public class RegistoEventos {
      */
     public boolean validarEvento(Evento evento) {
         return !this.listaEventos.contains(evento);
+    }
+
+    public List<Revisor> getListaRevisores() {
+        return listaRevisores;
+    }
+
+    public List<Revisao> getListaRevisoes() {
+        return listaRevisoes;
+    }
+
+    public List<Submissao> getListaSubmissao() {
+        return listaSubmissao;
     }
 
     /**
@@ -111,13 +145,20 @@ public class RegistoEventos {
      * @return lista de eventos
      */
     public List<Evento> getListaEventosGerarAnaliseEstatistica() {
-        List<Evento> listaEventos = new ArrayList<>();
+        this.listaEventosEstatistica = new ArrayList<>();
+        List<Evento> listaEvento = new ArrayList<>();
+        this.listaSubmissao = new ArrayList<>();
         for (Evento evento : this.listaEventos) {
             if (evento.isStateValidoParaGerarAnaliseEstatisticas()) {
-                listaEventos.add(evento);
+                listaEvento.add(evento);
+                for (Submissao s : evento.getListaSubmissoes().getListaSubmissoes()) {
+                    if (!listaSubmissao.contains(s)) {
+                        listaSubmissao.add(s);
+                    }
+                }
             }
         }
-        return listaEventos;
+        return listaEvento;
     }
 
     /**
@@ -508,29 +549,23 @@ public class RegistoEventos {
      *
      * @return matriz dos resultados sob a forma textual
      */
-    public ArrayList<ArrayList<String>> getValoresTotaisAnaliseEstatistica(List<Evento> listaEventosApresentados) {
-        int numeroDeEventos = 0;
-        ArrayList<ArrayList<String>> matrizValores = new ArrayList<ArrayList<String>>();
-        for (Evento e : listaEventosApresentados) {
-            String[] valoresFinais = e.getValoresTotaisEstatistica();
-            ArrayList<String> linha = matrizValores.get(numeroDeEventos);
-            for (int i = 0; i < valoresFinais.length; i++) {
-                String resultado = valoresFinais[i];
-                linha.add(resultado);
-            }
-            numeroDeEventos++;
-        }
-        return matrizValores;
+    public String [] getValoresTotaisAnaliseEstatistica(List<Evento> listaEventosApresentados) {
+                          this.processoAnaliseEstatistica = new ProcessoAnaliseEstatistica(this.listaRevisoes, this.listaSubmissao, listaRevisores);
+            return this.processoAnaliseEstatistica.getValoresEstatistica();
+            
+        
     }
 
     /**
      * Devolve uma lista de revisores existentes em todos os eventos que cumprem
      * as condições necessárias de aceitação.
-     * 
-     * @param listaEventosApresentados lista de eventos selecionados anteriormente
+     *
+     * @param listaEventosApresentados lista de eventos selecionados
+     * anteriormente
      */
-    public List<Revisor> getTodosRevisores(List<Evento> listaEventosApresentados) {
-        List<Revisor> listaRevisores = new ArrayList<>();
+    public boolean getTodosRevisores(List<Evento> listaEventosApresentados) {
+        this.listaRevisores = new ArrayList<>();
+        this.listaRevisoes = new ArrayList<>();
         CP cp;
         for (Evento e : listaEventosApresentados) {
             if ((cp = e.getCP()) != null) {
@@ -543,8 +578,9 @@ public class RegistoEventos {
 
                 }
             }
+            listaRevisoes.addAll(e.getProcessoDistribuicao().getListaRevisoes().getListaRevisoes());
         }
-   return listaRevisores;
+        return this.listaRevisoes.size() > 0 && this.listaRevisores.size() > 0 && this.listaSubmissao.size() > 0;
     }
 
 }
