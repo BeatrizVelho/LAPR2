@@ -1,12 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package eventoscientificios.view;
 
 import eventoscientificos.controllers.SubmeterArtigoFinalController;
-import eventoscientificos.model.Autor;
 import eventoscientificos.model.Empresa;
 import eventoscientificos.model.Submissao;
 import java.awt.Frame;
@@ -17,8 +11,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author Pedro
+ * @author G01
  */
 public class SubmeterArtigoFinalUI extends javax.swing.JDialog {
 
@@ -43,7 +36,7 @@ public class SubmeterArtigoFinalUI extends javax.swing.JDialog {
         setLocationRelativeTo(null);
         if (controller.getListaSubmissiveis().isEmpty()) {
             JOptionPane.showMessageDialog(
-                    this,
+                    this.framePai,
                     "Não existem eventos ou sessões temáticas onde lhe é "
                     + "possível submeter artigos finais.",
                     "Submeter Artigo Final",
@@ -484,9 +477,8 @@ public class SubmeterArtigoFinalUI extends javax.swing.JDialog {
     private void btn_seguinteAutoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_seguinteAutoresActionPerformed
         this.controller.getListaAutoresRegistados();
 
-        for (Autor autor : this.controller.getListaAutores()) {
-            this.cmb_selecionarAutorCorrespondente.addItem(autor);
-        }
+        this.cmb_selecionarAutorCorrespondente.setModel(
+                this.controller.getModeloListaAutoresRegistados());
         this.pnl_listaAutores.setVisible(false);
         this.btn_seguinteAutores.setVisible(false);
         this.pnl_selecionarAutorCorrespondente.setVisible(true);

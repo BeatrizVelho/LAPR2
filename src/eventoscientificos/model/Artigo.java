@@ -85,9 +85,12 @@ public class Artigo {
     public Artigo(Artigo artigo) {
         setTitulo(artigo.getTitulo());
         setResumo(artigo.getResumo());
+        setFicheiro(artigo.getFicheiro());
         setPalavrasChave(new ArrayList((ArrayList)artigo.getPalavrasChave()));
         this.listaAutores = new ListaAutores(artigo.getListaAutores());
         setAutorCorrespondente(artigo.getAutorCorrespondente());
+        setAutorSubmissor(new Autor(artigo.getAutorSubmissor()));
+        setDataSubmissao(Data.dataAtual());
     }
 
     /**

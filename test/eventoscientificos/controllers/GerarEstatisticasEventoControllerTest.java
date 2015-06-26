@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package eventoscientificos.controllers;
 
 import eventoscientificos.model.Artigo;
@@ -17,12 +12,15 @@ import eventoscientificos.model.Submissao;
 import eventoscientificos.model.Utilizador;
 import eventoscientificos.model.state.evento.EventoEmSubmissaoCameraReadyState;
 import eventoscientificos.model.state.submissao.SubmissaoAceiteState;
+import java.util.List;
+import org.junit.Assert;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import utils.Data;
 
 /**
- *Teste à classe GerarEstatisticasEventoController
+ * Teste à classe GerarEstatisticasEventoController
+ *
  * @author G01
  */
 public class GerarEstatisticasEventoControllerTest {
@@ -37,15 +35,15 @@ public class GerarEstatisticasEventoControllerTest {
 
     public GerarEstatisticasEventoControllerTest() {
         this.utilizador = new Utilizador(
-                            "fatima", "ola@iml.com", "fafa", "1234");
+                "fatima", "ola@iml.com", "fafa", "1234");
         this.revisor = new Revisor(utilizador);
         this.empresa = new Empresa();
         this.empresa.setUtilizadorAutenticado(utilizador);
         this.evento = new Evento("titulo", "descricao", new Local("local"),
-                            new Data(2016, 6, 8), new Data(2016, 6, 20),
-                            new Data(2016, 7, 7), new Data(2016, 9, 10),
-                            new Data(2016, 9, 11), new Data(2016, 10, 1),
-                            new Data(2017, 6, 10));
+                new Data(2016, 6, 8), new Data(2016, 6, 20),
+                new Data(2016, 7, 7), new Data(2016, 9, 10),
+                new Data(2016, 9, 11), new Data(2016, 10, 1),
+                new Data(2017, 6, 10));
         this.evento.setEstado(new EventoEmSubmissaoCameraReadyState(evento));
         this.evento.novoOrganizador(utilizador);
 
@@ -120,6 +118,39 @@ public class GerarEstatisticasEventoControllerTest {
         boolean expResult = true;
         instance.getListaEventosOrganizadorDecididos();
         boolean result = instance.selecionarEventosEGerarEstatisticas(indice);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of getEstatisticas method, of class
+     * GerarEstatisticasEventoController.
+     */
+    @Test
+    public void testGetEstatisticas() {
+        System.out.println("getEstatisticas");
+        GerarEstatisticasEventoController instance = new GerarEstatisticasEventoController(empresa);
+        int indice = 0;
+        instance.getListaEventosOrganizadorDecididos();
+        instance.selecionarEventosEGerarEstatisticas(indice);
+        float[] expResult = {0f, 5f, 4f, 3f, 4f, 2f};
+        float[] result = instance.getEstatisticas();
+        Assert.assertArrayEquals(expResult, result, 0.00f);
+    }
+
+    /**
+     * Test of getListaEventos method, of class
+     * GerarEstatisticasEventoController.
+     */
+    @Test
+    public void testGetListaEventos() {
+        System.out.println("getListaEventos");
+        GerarEstatisticasEventoController instance = new GerarEstatisticasEventoController(empresa);;
+        int indice = 0;
+        instance.getListaEventosOrganizadorDecididos();
+        instance.selecionarEventosEGerarEstatisticas(indice);
+        instance.getEstatisticas();
+        int expResult = 1;
+        int result = instance.getListaEventos().size();
         assertEquals(expResult, result);
     }
 

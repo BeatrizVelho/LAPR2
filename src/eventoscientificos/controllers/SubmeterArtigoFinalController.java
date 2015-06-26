@@ -1,11 +1,11 @@
 package eventoscientificos.controllers;
 
+import eventoscientificios.view.ModeloListaAutores;
 import eventoscientificos.model.Artigo;
 import eventoscientificos.model.Autor;
 import eventoscientificos.model.AutorCorrespondente;
 import eventoscientificos.model.Empresa;
 import eventoscientificos.model.InstituicaoAfiliacao;
-import eventoscientificos.model.ListaAutores;
 import eventoscientificos.model.ListaSubmissoes;
 import eventoscientificos.model.RegistoEventos;
 import eventoscientificos.model.RegistoUtilizadores;
@@ -13,6 +13,10 @@ import eventoscientificos.model.Submissao;
 import eventoscientificos.model.Submissivel;
 import eventoscientificos.model.Utilizador;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.event.ListDataEvent;
+import javax.swing.event.ListDataListener;
+import utils.Data;
 
 /**
  * @author G01
@@ -23,47 +27,47 @@ public class SubmeterArtigoFinalController {
      * Instância de empresa.
      */
     private Empresa empresa;
-    
+
     /**
-     * Lista de Submissiveis  que estão a aceitar a submissão de artigos finais.
+     * Modelo da lista de autores.
+     */
+    private ModeloListaAutores modeloLista;
+
+    /**
+     * Lista de Submissiveis que estão a aceitar a submissão de artigos finais.
      */
     private List<Submissivel> listaSubmissivesAceitarArtigoFinal;
-    
+
     /**
      * Instância de Submissivel.
      */
     private Submissivel submissivel;
-    
+
     /**
      * Lista de submissões aceites do utilizador.
      */
     private List<Submissao> listaSubmissoesAceiteUtilizador;
-    
+
     /**
      * Instância de submissao.
      */
     private Submissao submissao;
-    
+
     /*
-    Instância de artigo.
-    */
+     Instância de artigo.
+     */
     private Artigo artigo;
-    
+
     /**
      * Instância de registo de utilizadores.
      */
     private RegistoUtilizadores registoUtilizadores;
-    
+
     /**
-     * Instância de lista de autores.
+     * Modelo da lista de autores registados.
      */
-    private ListaAutores listaAutores;
-    
-    /**
-     * Lista de autores registados.
-     */
-    private List<Autor> listaAutoresRegistados;
-    
+    private DefaultComboBoxModel<Autor> modeloListaAutoresRegistados;
+
     /**
      * Instância de Lista de Submissões.
      */
@@ -71,14 +75,13 @@ public class SubmeterArtigoFinalController {
 
     /**
      * Constrói uma instância de SubmeterArtigoFinalController.
-     * 
+     *
      * @param empresa Empresa.
      */
     public SubmeterArtigoFinalController(Empresa empresa) {
         this.empresa = empresa;
+        this.modeloLista = null;
         this.artigo = null;
-        this.listaAutores = null;
-        this.listaAutoresRegistados = null;
         this.listaSubmissivesAceitarArtigoFinal = null;
         this.listaSubmissoes = null;
         this.listaSubmissoesAceiteUtilizador = null;
@@ -86,12 +89,49 @@ public class SubmeterArtigoFinalController {
         this.submissao = null;
         this.submissivel = null;
     }
+    
+    /**
+     * Devolve a lista de submissiveis.
+     *
+     * @return Lista submissiveis.
+     */
+    public List<Submissivel> getListaSubmissiveis() {
+        return this.listaSubmissivesAceitarArtigoFinal;
+    }
+    
+    /**
+     * Devolve uma lista de submissoes aceites do utilizador.
+     *
+     * @return Lista de Submissoes.
+     */
+    public List<Submissao> getListaSubmissoes() {
+        return this.listaSubmissoesAceiteUtilizador;
+    }
+    
+    /**
+     * Devolve o modelo da lista de autores do artigo.
+     *
+     * @return Modelo da lista de autores do artigo.
+     */
+    public ModeloListaAutores getModeloListaAutores() {
+        return this.modeloLista;
+    }
 
     /**
-     * Devolve uma lista de Submissiveis que estão a aceitar submissoes de artigos
-     * finais
-     * 
-     * @return Lista de Submissiveis.
+     * Devolve o modelo da lista de autores registados do artigo.
+     *
+     * @return Modelo da lista de autores do artigo.
+     */
+    public DefaultComboBoxModel<Autor> getModeloListaAutoresRegistados() {
+        return this.modeloListaAutoresRegistados;
+    }
+
+    /**
+     * Preenche a lista de sumissiveis que estao a aceitar a submissao de
+     * artigos finais.
+     *
+     * @return Verdadeiro se o registo eventos e lista de submissiveis for
+     * diferente de null e falso se não for.
      */
     public boolean getListaSubmissiveisAceitarArtigoFinal() {
         RegistoEventos registoEventos = this.empresa.getRegistoEventos();
@@ -100,12 +140,17 @@ public class SubmeterArtigoFinalController {
                 = registoEventos.getListaSubmissiveisAceitarArtigoFinal(
                         this.empresa.getUtilizadorAutenticado());
 
-        return registoEventos != null && listaSubmissivesAceitarArtigoFinal != null;
+        return this.listaSubmissivesAceitarArtigoFinal != null;
     }
 
     /**
-     * 
-     * @param indice Indice do submissivel selecionado
+     * Prenche a lista de submissoes aceites do utilizador.
+     *
+     * @param indice Indice do submissivel selecionado.
+     *
+     * @return Verdadeiro se o submissivel, lista de submissoes e lista de
+     * submissoes aceites do utilizador for diferente de null e falso se não
+     * for.
      */
     public boolean selecionarSubmissivel(int indice) {
         this.submissivel = this.listaSubmissivesAceitarArtigoFinal.get(indice);
@@ -119,14 +164,36 @@ public class SubmeterArtigoFinalController {
 
     /**
      * Cria um novo artigo na submissão selecionada.
-     * 
+     *
      * @param indice Indice da submissao.
+     *
+     * @return Verdadeiro se a submissao for diferente de null e falso se for
+     * igual a null.
      */
     public boolean selecionarSubmissaoAceite(int indice) {
         this.submissao = this.listaSubmissoesAceiteUtilizador.get(indice);
         this.artigo = this.submissao.novoArtigo();
 
-        return this.submissao != null;
+        this.modeloLista = new ModeloListaAutores(this.artigo.getListaAutores());
+        this.modeloListaAutoresRegistados = new DefaultComboBoxModel<Autor>();
+        this.modeloLista.addListDataListener(new ListDataListener() {
+
+            @Override
+            public void intervalAdded(ListDataEvent e) {
+                getListaAutoresRegistados();
+            }
+
+            @Override
+            public void intervalRemoved(ListDataEvent e) {
+                getListaAutoresRegistados();
+            }
+
+            @Override
+            public void contentsChanged(ListDataEvent e) {
+            }
+        });
+
+        return this.submissao != null && this.artigo != null;
     }
 
     /**
@@ -134,10 +201,16 @@ public class SubmeterArtigoFinalController {
      *
      * @param titulo Titulo do Artigo.
      * @param resumo Resumo do Artigo.
+     * @param palavrasChave Palavras Chave do Artigo.
+     *
+     * @return Verdadeiro se o registo de utilizadores for diferente de null e
+     * falso se não for.
      */
-    public boolean adicionarDadosArtigoFinal(String titulo, String resumo) {
+    public boolean adicionarDadosArtigoFinal(String titulo, String resumo,
+            List<String> palavrasChave) {
         this.artigo.setTitulo(titulo);
         this.artigo.setResumo(resumo);
+        this.artigo.setPalavrasChave(palavrasChave);
         this.registoUtilizadores = this.empresa.getRegistoUtilizadores();
 
         return this.registoUtilizadores != null;
@@ -150,58 +223,103 @@ public class SubmeterArtigoFinalController {
      * @param nome Nome do autor.
      * @param email Email do autor.
      * @param instituicaoAfiliacao Instituição de Afiliação do autor.
+     *
+     * @return Verdaeiro se o autor for adicionado e falso se não for.
      */
-    public boolean novoAutor(String nome, String email, String instituicaoAfiliacao) {
+    public boolean novoAutor(
+            String nome, String email, String instituicaoAfiliacao) {
+
         Utilizador utilizador = this.registoUtilizadores.getUtilizador(email);
 
-        if (utilizador == null) {
-            return this.listaAutores.novoAutor(
-                    nome, email, new InstituicaoAfiliacao(instituicaoAfiliacao));
-        } else {
-            return this.listaAutores.novoAutor(utilizador,
-                    new InstituicaoAfiliacao(instituicaoAfiliacao));
-        }
+        return this.modeloLista.addElement(
+                nome, email, instituicaoAfiliacao, utilizador);
     }
 
     /**
-     * Devolveuma lista de autores registados.
-     * 
-     * @return Lista de autores registados.
+     * Elimina um autor da lista de autores.
+     *
+     * @param indice Posição do autor na lista.
+     *
+     * @return Verdadeiro se o autor for removido com sucesso e falso caso não
+     * seja possível remover.
      */
-    public boolean getListaAutoresRegistados() {
-       this.listaAutoresRegistados = this.listaAutores.getListaAutoresRegistados();
-       return this.listaAutoresRegistados != null;
+    public boolean apagarAutor(int indice) {
+        if (this.empresa.getUtilizadorAutenticado().equals(
+                this.modeloLista.getElementAt(indice).getUtilizador())) {
+            throw new IllegalArgumentException("Não se pode remover a si próprio"
+                    + " da lista.");
+        }
+
+        return this.modeloLista.removeElement(indice);
     }
 
-     /**
+    /**
+     * Preenche a lista de autores registados.
+     *
+     * @return Verdadeira se a lista de autores registados for diferente de null
+     * e falso se for igual a null.
+     */
+    public boolean getListaAutoresRegistados() {
+        this.modeloListaAutoresRegistados.removeAllElements();
+
+        for (Autor autor
+                : this.artigo.getListaAutores().getListaAutoresRegistados()) {
+            this.modeloListaAutoresRegistados.addElement(autor);
+        }
+
+        return this.modeloListaAutoresRegistados != null;
+    }
+
+    /**
      * Modifica o autor correspondente da submissão.
+     *
+     * @param indice Indice do autor correspondente.
+     *
+     * @return Verdadeiro se o autor correspondente for diferente de null e
+     * falso se não for.
      */
     public boolean adicionarAutorCorrespondente(int indice) {
-        Autor autor = this.listaAutoresRegistados.get(indice);
+        Autor autor = this.modeloListaAutoresRegistados.getElementAt(indice);
         AutorCorrespondente autorCorrespondente = new AutorCorrespondente(
                 autor.getUtilizador(), autor.getInstituicaoAfiliacao());
         this.artigo.setAutorCorrespondente(autorCorrespondente);
 
-        return autorCorrespondente != null;
+        return true;
     }
-    
+
     /**
      * Modifica o ficheiro da submissão.
-     * 
+     *
      * @param ficheiro Ficheiro da submissão.
      * @return Verdadeiro se o ficheiro for válido e falso se não for.
      */
     public boolean adicionarFicheiroPDF(String ficheiro) {
         this.artigo.setFicheiro(ficheiro);
-        return this.listaSubmissoes.validarSubmissao(this.submissao);
+
+        return true;
     }
-    
+
+    /**
+     * Verifica se a submissão já existe no evento ou sessão temática.
+     *
+     * @return Verdadeiro se não existir e falso caso exista.
+     */
+    public boolean validarSubmissao() {
+        return submissao.validarSubmissao();
+    }
+
     /**
      * Adiciona uma submissão ao Submissível selecionado.
-     * 
+     *
      * @return Verdaeiro se a submissao for adicionada e falso se não for.
      */
     public boolean adicionarSubmissao() {
+        Autor autorSubmissor = new Autor(
+                this.empresa.getUtilizadorAutenticado(),
+                new InstituicaoAfiliacao("ISEP"));
+        
+        this.artigo.setAutorSubmissor(autorSubmissor);
+        this.artigo.setDataSubmissao(Data.dataAtual());
         return this.listaSubmissoes.adicionarSubmissao(this.submissao);
     }
 }
