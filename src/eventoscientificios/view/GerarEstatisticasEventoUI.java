@@ -1,7 +1,9 @@
 package eventoscientificios.view;
 
+import eventoscientificos.controllers.GerarEstatisticasEventoController;
 import eventoscientificos.model.Empresa;
 import java.awt.Frame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -10,6 +12,7 @@ import java.awt.Frame;
 public class GerarEstatisticasEventoUI extends javax.swing.JDialog {
 
     private Frame framePai;
+    private GerarEstatisticasEventoController controller;
 
     /**
      * Creates new form GerarEstatisticasEventoUI
@@ -20,13 +23,24 @@ public class GerarEstatisticasEventoUI extends javax.swing.JDialog {
     public GerarEstatisticasEventoUI(java.awt.Frame parent, boolean modal, Empresa empresa) {
         super(parent, modal);
         this.framePai = parent;
+        this.controller = new GerarEstatisticasEventoController(empresa);
+        this.controller.getListaEventosOrganizadorDecididos();
         this.setResizable(true);
         initComponents();
         getRootPane().setDefaultButton(this.btn_selecionarEvento);
         setLocationRelativeTo(null);
-        // Verificar se existem eventos/sessões que aceitem revisões de artigos.
-        setVisible(true);
-        pack();
+        if (controller.getListaEventos().isEmpty()) {
+            JOptionPane.showMessageDialog(
+                    this.framePai,
+                    "Não existem eventos onde já tenha sido feito o processo de"
+                            + " decisão.",
+                    "Gerar Estatísticas de Eventos",
+                    JOptionPane.ERROR_MESSAGE);
+            dispose();
+        } else {
+            setVisible(true);
+            pack();
+        }
     }
 
     /**
@@ -44,6 +58,21 @@ public class GerarEstatisticasEventoUI extends javax.swing.JDialog {
         cmb_selecionarEvento = new javax.swing.JComboBox();
         lbl_selecionarEvento = new javax.swing.JLabel();
         lbl_descricao = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtA_descricao = new javax.swing.JTextArea();
+        pnl_resultado = new javax.swing.JPanel();
+        lbl_confianca = new javax.swing.JLabel();
+        lbl_adequacao = new javax.swing.JLabel();
+        lbl_qualidade = new javax.swing.JLabel();
+        lbl_recomendacao = new javax.swing.JLabel();
+        lbl_originalidade = new javax.swing.JLabel();
+        txt_originalidade = new javax.swing.JTextField();
+        txt_confianca = new javax.swing.JTextField();
+        txt_adequacao = new javax.swing.JTextField();
+        txt_qualidade = new javax.swing.JTextField();
+        txt_recomendacao = new javax.swing.JTextField();
+        txt_submissoes = new javax.swing.JTextField();
+        lbl_submissoes = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -71,51 +100,149 @@ public class GerarEstatisticasEventoUI extends javax.swing.JDialog {
 
         lbl_selecionarEvento.setText("Selecione o evento do qual pretende gerar as estatísticas:");
 
-        lbl_descricao.setText("Descrição");
+        lbl_descricao.setText("Descrição:");
+
+        txtA_descricao.setColumns(20);
+        txtA_descricao.setFont(new java.awt.Font("Arial Unicode MS", 0, 12)); // NOI18N
+        txtA_descricao.setLineWrap(true);
+        txtA_descricao.setRows(3);
+        txtA_descricao.setText("       Realiza a soma de todos os parametros das várias revisões            realizadas pelos revisores, divindo os mesmos pelo total número                                              de revisões realizadas.");
+        txtA_descricao.setWrapStyleWord(true);
+        txtA_descricao.setEnabled(false);
+        jScrollPane1.setViewportView(txtA_descricao);
+
+        pnl_resultado.setVisible(false);
+        pnl_resultado.setBorder(javax.swing.BorderFactory.createTitledBorder("Resultado"));
+        pnl_resultado.setToolTipText("");
+
+        lbl_confianca.setText("Confiança do revisor:");
+
+        lbl_adequacao.setText("Adequação do artigo:");
+
+        lbl_qualidade.setText("Qualidade do artigo:");
+
+        lbl_recomendacao.setText("Recomendação global: ");
+
+        lbl_originalidade.setText("Originalidade do artigo:");
+
+        txt_originalidade.setEnabled(false);
+
+        txt_confianca.setEnabled(false);
+
+        txt_adequacao.setEnabled(false);
+
+        txt_qualidade.setEnabled(false);
+
+        txt_recomendacao.setEnabled(false);
+
+        txt_submissoes.setEnabled(false);
+
+        lbl_submissoes.setText("Número de submissões aceites:");
+
+        javax.swing.GroupLayout pnl_resultadoLayout = new javax.swing.GroupLayout(pnl_resultado);
+        pnl_resultado.setLayout(pnl_resultadoLayout);
+        pnl_resultadoLayout.setHorizontalGroup(
+            pnl_resultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_resultadoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnl_resultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(pnl_resultadoLayout.createSequentialGroup()
+                        .addComponent(lbl_qualidade)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txt_qualidade, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE))
+                    .addGroup(pnl_resultadoLayout.createSequentialGroup()
+                        .addGroup(pnl_resultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbl_confianca)
+                            .addComponent(lbl_adequacao))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnl_resultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txt_confianca)
+                            .addComponent(txt_adequacao))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pnl_resultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_resultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(lbl_originalidade, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(lbl_recomendacao))
+                    .addComponent(lbl_submissoes, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnl_resultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(txt_recomendacao, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addComponent(txt_originalidade)
+                    .addComponent(txt_submissoes))
+                .addContainerGap())
+        );
+        pnl_resultadoLayout.setVerticalGroup(
+            pnl_resultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_resultadoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnl_resultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_confianca)
+                    .addComponent(lbl_originalidade)
+                    .addComponent(txt_originalidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_confianca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pnl_resultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_adequacao)
+                    .addComponent(lbl_recomendacao)
+                    .addComponent(txt_adequacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_recomendacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pnl_resultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_qualidade)
+                    .addComponent(txt_qualidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_submissoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_submissoes))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(181, 181, 181)
+                                .addComponent(lbl_descricao))
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(lbl_selecionarEvento)))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(cmb_selecionarEvento, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btn_cancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(181, 181, 181)
-                        .addComponent(lbl_descricao)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btn_selecionarEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btn_gerar, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(cmb_selecionarEvento, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_cancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(btn_selecionarEvento, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btn_gerar, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(pnl_resultado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lbl_selecionarEvento)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lbl_descricao)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbl_selecionarEvento)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cmb_selecionarEvento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_gerar)
                     .addComponent(btn_selecionarEvento))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btn_cancelar)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(pnl_resultado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -123,6 +250,7 @@ public class GerarEstatisticasEventoUI extends javax.swing.JDialog {
 
     private void btn_selecionarEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_selecionarEventoActionPerformed
         int indice = this.cmb_selecionarEvento.getSelectedIndex();
+        this.controller.selecionarEventosEGerarEstatisticas(indice);
         
         this.cmb_selecionarEvento.setEnabled(false);
         this.btn_selecionarEvento.setEnabled(false);
@@ -131,7 +259,15 @@ public class GerarEstatisticasEventoUI extends javax.swing.JDialog {
     }//GEN-LAST:event_btn_selecionarEventoActionPerformed
 
     private void btn_gerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_gerarActionPerformed
-        // TODO add your handling code here:
+        float[] estatisticas = this.controller.getEstatisticas();
+
+        this.pnl_resultado.setVisible(true);
+        this.txt_submissoes.setText(String.valueOf(estatisticas[0]));
+        this.txt_confianca.setText(String.valueOf(estatisticas[2]));
+        this.txt_adequacao.setText(String.valueOf(estatisticas[1]));
+        this.txt_originalidade.setText(String.valueOf(estatisticas[3]));
+        this.txt_qualidade.setText(String.valueOf(estatisticas[4]));
+        this.txt_recomendacao.setText(String.valueOf(estatisticas[5]));
     }//GEN-LAST:event_btn_gerarActionPerformed
 
     private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed
@@ -142,7 +278,22 @@ public class GerarEstatisticasEventoUI extends javax.swing.JDialog {
     private javax.swing.JButton btn_gerar;
     private javax.swing.JButton btn_selecionarEvento;
     private javax.swing.JComboBox cmb_selecionarEvento;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lbl_adequacao;
+    private javax.swing.JLabel lbl_confianca;
     private javax.swing.JLabel lbl_descricao;
+    private javax.swing.JLabel lbl_originalidade;
+    private javax.swing.JLabel lbl_qualidade;
+    private javax.swing.JLabel lbl_recomendacao;
     private javax.swing.JLabel lbl_selecionarEvento;
+    private javax.swing.JLabel lbl_submissoes;
+    private javax.swing.JPanel pnl_resultado;
+    private javax.swing.JTextArea txtA_descricao;
+    private javax.swing.JTextField txt_adequacao;
+    private javax.swing.JTextField txt_confianca;
+    private javax.swing.JTextField txt_originalidade;
+    private javax.swing.JTextField txt_qualidade;
+    private javax.swing.JTextField txt_recomendacao;
+    private javax.swing.JTextField txt_submissoes;
     // End of variables declaration//GEN-END:variables
 }
