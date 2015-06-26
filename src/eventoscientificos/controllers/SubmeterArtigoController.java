@@ -14,6 +14,7 @@ import eventoscientificos.model.Submissivel;
 import eventoscientificos.model.Utilizador;
 import java.util.List;
 import javax.swing.DefaultListModel;
+import utils.Data;
 
 /**
  * Representa uma instância de SubmeterArtigoController através de uma empresa.
@@ -212,7 +213,7 @@ public class SubmeterArtigoController {
                 autor.getUtilizador(), autor.getInstituicaoAfiliacao());
         this.artigo.setAutorCorrespondente(autorCorrespondente);
         
-        return this.artigo.getAutorCorrespondente() != null;
+        return true;
     }
 
     /**
@@ -241,6 +242,12 @@ public class SubmeterArtigoController {
      * @return Verdaeiro se a submissao for adicionada e falso se não for.
      */
     public boolean adicionarSubmissao() {
+        Autor autorSubmissor = new Autor(
+                this.empresa.getUtilizadorAutenticado(),
+                new InstituicaoAfiliacao("ISEP"));
+        
+        this.artigo.setAutorSubmissor(autorSubmissor);
+        this.artigo.setDataSubmissao(Data.dataAtual());
         return this.listaSubmissoes.adicionarSubmissao(this.submissao);
     }
     
