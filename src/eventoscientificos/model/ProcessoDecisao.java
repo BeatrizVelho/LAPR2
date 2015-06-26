@@ -29,6 +29,15 @@ public class ProcessoDecisao {
     }
 
     /**
+     * Devolve a lista de decisões.
+     * 
+     * @return Lista de decisões.
+     */
+    public ListaDecisoes getListaDecisoes() {
+        return this.listaDecisoes;
+    }
+
+    /**
      * Adiciona um Mecanismo de Decisão ao processo de decisão.
      *
      * @param mecanismoDecisao Mecanismo de decisão a adicionar.
