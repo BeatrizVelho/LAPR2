@@ -21,6 +21,7 @@ public interface Revisivel {
      * Verifica se o revisivel contém as condições necessárias para as
      * submissões serem revistas pelos revisores
      *
+     * @param u utilizador
      * @return verdadeiro cumprir as condições necessárias para rever e falso se
      * não estiver
      */

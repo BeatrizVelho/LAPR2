@@ -99,7 +99,7 @@ public class Revisao {
     /**
      * Devolve o revisor associado à revisão.
      *
-     * @return
+     * @return Revisor
      */
     public Revisor getRevisor() {
         return this.revisor;
@@ -259,12 +259,12 @@ public class Revisao {
     /**
      * Adiciona os dados da revisão introduzidos pelo utilizador.
      *
-     * @param adequacao
-     * @param confianca
-     * @param originalidade
-     * @param qualidade
-     * @param recomendacao
-     * @param textoJustificativo
+     * @param adequacao adequação
+     * @param confianca confiança
+     * @param originalidade originalidade
+     * @param qualidade qualidade
+     * @param recomendacao recomendação
+     * @param textoJustificativo texto justificativo 
      * @return
      */
     public boolean adicionarDadosRevisao(int adequacao, int confianca,

@@ -19,6 +19,7 @@ public interface Licitavel {
     /**
      * Valida se o licitável se encontra em periodo de licitação
      *
+     * @param utilizador utilizador
      * @return verdadeiro se estiver em periodo de licitação e falso se não
      * estiver
      */
@@ -49,6 +50,7 @@ public interface Licitavel {
 
     /**
      * Devolve a Comissão de Programa (CP).
+     * @return CP
      */
     public CP getCP();
 

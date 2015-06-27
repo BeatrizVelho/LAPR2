@@ -92,7 +92,7 @@ public class DecidirSubmissoesArtigosController {
      * Adiciona mecanismo de mecanismo de decisao selecionado previamente ao
      * processo de decisão.
      *
-     * @param id Identificação
+     * @param md mecanismo de decisao
      * @return ListaDecisoes.
      */
     public boolean adicionarMecanismoDecisao(MecanismoDecisao md) {
