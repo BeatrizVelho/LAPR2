@@ -35,8 +35,6 @@ public class Utilizador {
      */
     private String codificadorTabela;
 
-
-
     /**
      * Nome do Utilizador por omissão.
      */
@@ -95,7 +93,8 @@ public class Utilizador {
                 utilizador.getNome(),
                 utilizador.getEmail(),
                 utilizador.getUsername(),
-                utilizador.getPassword());
+                utilizador.getPassword(),
+                utilizador.getCodificadorTabela());
     }
 
     /**
@@ -107,7 +106,7 @@ public class Utilizador {
      * @param username username do utilizador
      * @param password password do utilizador
      * @param codificadorTabela codificador tabela
-         */
+     */
     public Utilizador(String nome, String email, String username,
             String password, String codificadorTabela) {
         this.nome = nome;
@@ -115,7 +114,7 @@ public class Utilizador {
         this.username = username;
         this.password = password;
         this.codificadorTabela = codificadorTabela;
-        }
+    }
 
     /**
      * Devolve o nome do utilizador.
@@ -261,8 +260,7 @@ public class Utilizador {
                 || this.username.equals(USERNAME_POR_OMISSAO)
                 || this.password.equals(PASSWORD_POR_OMISSAO));
     }
-    
-   
+
     /**
      * Compara dois objetos entre si. Comparando primariamente a posição de
      * memória, seguida do conteudo e das classes as quais cada um deles
