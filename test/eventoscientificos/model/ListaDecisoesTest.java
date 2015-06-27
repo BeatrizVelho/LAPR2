@@ -8,6 +8,7 @@ import static org.junit.Assert.*;
 
 /**
  * Teste à classe ListaDecisoes.
+ *
  * @author G01
  */
 public class ListaDecisoesTest {
@@ -113,6 +114,39 @@ public class ListaDecisoesTest {
         ListaDecisoes instance = new ListaDecisoes();
         boolean expResult = false;
         boolean result = instance.equals(outroObjecto);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of getDecisaoPeloID method, of class ListaDecisoes.
+     */
+    @Test
+    public void testGetDecisaoPeloID() {
+        System.out.println("getDecisaoPeloID");
+        int indice = 1;
+        ListaDecisoes instance = new ListaDecisoes();
+        Decisao decisao = new Decisao(1, new Submissao());
+        instance.adicionarDecisao(decisao);
+
+        Decisao decisao1 = new Decisao(0, new Submissao());
+        instance.adicionarDecisao(decisao1);
+
+        Decisao expResult = decisao1;
+        Decisao result = instance.getDecisaoPeloID(indice);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of numeroDecisoes method, of class ListaDecisoes.
+     */
+    @Test
+    public void testNumeroDecisoes() {
+        System.out.println("numeroDecisoes");
+        ListaDecisoes instance = new ListaDecisoes();
+        Decisao decisao = new Decisao(1, new Submissao());
+        instance.adicionarDecisao(decisao);
+        int expResult = 1;
+        int result = instance.numeroDecisoes();
         assertEquals(expResult, result);
     }
 
