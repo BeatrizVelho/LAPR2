@@ -6,6 +6,7 @@ import java.util.HashMap;
 import utils.CSVParser;
 
 /**
+ * Representa instância da classe GerarEstatisticasTopicosController
  * @author G01
  */
 public class GerarEstatisticasTopicosController {

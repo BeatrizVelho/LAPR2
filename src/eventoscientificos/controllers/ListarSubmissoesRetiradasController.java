@@ -9,6 +9,7 @@ import java.util.List;
 import javax.swing.DefaultListModel;
 
 /**
+ * Representa instância da classe ListarSubmissoesRetiradasController
  *
  * @author G01
  */
@@ -71,7 +72,7 @@ public class ListarSubmissoesRetiradasController {
         Utilizador utilizador = this.empresa.getUtilizadorAutenticado();
 
         this.listaSubmissiveisComSubRetiradas = registoEventos.
-                getListaSubmissiveisComSubmissoesRetiradasOrganizadorProponente(utilizador);
+                            getListaSubmissiveisComSubmissoesRetiradasOrganizadorProponente(utilizador);
 
         return listaSubmissiveisComSubRetiradas != null;
     }

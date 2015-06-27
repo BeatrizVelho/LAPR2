@@ -7,8 +7,8 @@ import static org.junit.Assert.*;
 import utils.Data;
 
 /**
- *
- * @author Pedro
+ * Teste à classe SessaoTematicaCPDefinidaState
+ * @author G01
  */
 public class SessaoTematicaCPDefinidaStateTest {
 

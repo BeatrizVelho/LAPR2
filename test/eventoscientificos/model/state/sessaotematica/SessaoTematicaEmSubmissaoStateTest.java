@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
 import utils.Data;
 
 /**
- *
+ *Teste à classe SessaoTematicaEmSubmissaoStateS
  * @author G01
  */
 public class SessaoTematicaEmSubmissaoStateTest {
@@ -15,15 +15,15 @@ public class SessaoTematicaEmSubmissaoStateTest {
 
     public SessaoTematicaEmSubmissaoStateTest() {
         SessaoTematica sessaoTematica = new SessaoTematica(
-                "#12345",
-                "Um descrição",
-                new Data(2015, 5, 22),
-                new Data(2015, 5, 28),
-                new Data(2015, 6, 10),
-                new Data(2015, 6, 20),
-                new Data(2015, 6, 24),
-                new Data(2015, 6, 28),
-                new Data(2015, 7, 7));
+                            "#12345",
+                            "Um descrição",
+                            new Data(2015, 5, 22),
+                            new Data(2015, 5, 28),
+                            new Data(2015, 6, 10),
+                            new Data(2015, 6, 20),
+                            new Data(2015, 6, 24),
+                            new Data(2015, 6, 28),
+                            new Data(2015, 7, 7));
         sessaoTematica.setEstado(
                             new SessaoTematicaEmSubmissaoState(sessaoTematica));
 
@@ -43,8 +43,7 @@ public class SessaoTematicaEmSubmissaoStateTest {
     }
 
     /**
-     * Teste do método setRegistada, da classe
-     * SessaoTematicaEmSubmissaoState.
+     * Teste do método setRegistada, da classe SessaoTematicaEmSubmissaoState.
      */
     @Test
     public void testSetRegistada() {
@@ -56,8 +55,7 @@ public class SessaoTematicaEmSubmissaoStateTest {
     }
 
     /**
-     * Test do método setCPDefinida, da classe
-     * SessaoTematicaEmSubmissaoState.
+     * Test do método setCPDefinida, da classe SessaoTematicaEmSubmissaoState.
      */
     @Test
     public void testSetCPDefinida() {
@@ -69,8 +67,7 @@ public class SessaoTematicaEmSubmissaoStateTest {
     }
 
     /**
-     * Teste do método setEmSubmissao, da classe
-     * SessaoTematicaEmSubmissaoState.
+     * Teste do método setEmSubmissao, da classe SessaoTematicaEmSubmissaoState.
      */
     @Test
     public void testSetEmSubmissao() {
@@ -120,8 +117,7 @@ public class SessaoTematicaEmSubmissaoStateTest {
     }
 
     /**
-     * Teste do método setEmRevisao, da classe
-     * SessaoTematicaEmSubmissaoState.
+     * Teste do método setEmRevisao, da classe SessaoTematicaEmSubmissaoState.
      */
     @Test
     public void testSetEmRevisao() {
@@ -133,8 +129,7 @@ public class SessaoTematicaEmSubmissaoStateTest {
     }
 
     /**
-     * Teste do método setFaseDecisao, da classe
-     * SessaoTematicaEmSubmissaoState.
+     * Teste do método setFaseDecisao, da classe SessaoTematicaEmSubmissaoState.
      */
     @Test
     public void testSetFaseDecisao() {
@@ -159,8 +154,7 @@ public class SessaoTematicaEmSubmissaoStateTest {
     }
 
     /**
-     * Teste do método setCameraReady, da classe
-     * SessaoTematicaEmSubmissaoState.
+     * Teste do método setCameraReady, da classe SessaoTematicaEmSubmissaoState.
      */
     @Test
     public void testSetCameraReady() {
@@ -172,8 +166,7 @@ public class SessaoTematicaEmSubmissaoStateTest {
     }
 
     /**
-     * Teste do método validarEstado, da classe
-     * SessaoTematicaEmSubmissaoState.
+     * Teste do método validarEstado, da classe SessaoTematicaEmSubmissaoState.
      */
     @Test
     public void testValidarEstado() {
@@ -236,7 +229,7 @@ public class SessaoTematicaEmSubmissaoStateTest {
         System.out.println("isStateValidoParaSubmeterNot");
         sessaoTematica.setEstado(new SessaoTematicaCPDefinidaState(sessaoTematica));
         SessaoTematicaState instance = sessaoTematica.getEstado();
-        boolean expResult = false;
+        boolean expResult = true;
         boolean result = instance.isStateValidoParaSubmeter();
         assertEquals(expResult, result);
     }

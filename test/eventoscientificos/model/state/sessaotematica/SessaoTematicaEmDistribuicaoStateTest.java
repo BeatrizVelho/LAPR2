@@ -6,6 +6,7 @@ import static org.junit.Assert.*;
 import utils.Data;
 
 /**
+ * Teste à classe SessaoTematicaEmDistribuicaoState
  * @author G01
  */
 public class SessaoTematicaEmDistribuicaoStateTest {
@@ -14,24 +15,23 @@ public class SessaoTematicaEmDistribuicaoStateTest {
 
     public SessaoTematicaEmDistribuicaoStateTest() {
         SessaoTematica sessaoTematica = new SessaoTematica(
-                "#12345",
-                "Um descrição",
-                new Data(2015, 5, 22),
-                new Data(2015, 5, 28),
-                new Data(2015, 6, 10),
-                new Data(2015, 6, 20),
-                new Data(2015, 6, 24),
-                new Data(2015, 6, 28),
-                new Data(2015, 6, 30));
+                            "#12345",
+                            "Um descrição",
+                            new Data(2015, 5, 22),
+                            new Data(2015, 5, 28),
+                            new Data(2015, 6, 10),
+                            new Data(2015, 6, 20),
+                            new Data(2015, 6, 24),
+                            new Data(2015, 6, 28),
+                            new Data(2015, 6, 30));
         sessaoTematica.setEstado(
-                new SessaoTematicaEmDistribuicaoState(sessaoTematica));
+                            new SessaoTematicaEmDistribuicaoState(sessaoTematica));
 
         this.sessaoTematica = sessaoTematica;
     }
 
     /**
-     * Teste do método setCriada, da classe 
-     * SessaoTematicaEmDistribuicaoState.
+     * Teste do método setCriada, da classe SessaoTematicaEmDistribuicaoState.
      */
     @Test
     public void testSetCriada() {
@@ -82,7 +82,7 @@ public class SessaoTematicaEmDistribuicaoStateTest {
     }
 
     /**
-     * Teste do método setEmDetecao, da classe 
+     * Teste do método setEmDetecao, da classe
      * SessaoTematicaEmDistribuicaoState.
      */
     @Test
@@ -102,7 +102,7 @@ public class SessaoTematicaEmDistribuicaoStateTest {
     public void testSetEmLicitacao() {
         System.out.println("setEmLicitacao");
         SessaoTematicaState instance = this.sessaoTematica.getEstado();
-        boolean expResult = true;
+        boolean expResult = false;
         boolean result = instance.setEmLicitacao();
         assertEquals(expResult, result);
     }
@@ -185,7 +185,7 @@ public class SessaoTematicaEmDistribuicaoStateTest {
         assertEquals(expResult, result);
     }
 
- /**
+    /**
      * Teste ao método isStateValidoParaRemover, da classe
      * SessaoTematicaEmDistribuicaoState.
      */
@@ -283,6 +283,5 @@ public class SessaoTematicaEmDistribuicaoStateTest {
         assertEquals(expResult, result);
 
     }
-
 
 }

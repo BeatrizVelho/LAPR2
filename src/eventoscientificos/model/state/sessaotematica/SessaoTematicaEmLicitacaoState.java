@@ -154,8 +154,7 @@ public class SessaoTematicaEmLicitacaoState implements SessaoTematicaState {
      */
     @Override
     public boolean validarEstado() {
-        return this.sessaoTematica.getDataInicioDistribuicao().isMaior(
-                Data.dataAtual());
+        return Data.dataAtual().isMaior(this.sessaoTematica.getDataInicioDistribuicao());
     }
 
     /**

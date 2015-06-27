@@ -6,7 +6,8 @@ import static org.junit.Assert.*;
 import utils.Data;
 
 /**
- * @author Pedro
+ * Teste à classe SessaoTematicaEmLicitacaoState
+ * @author G01
  */
 public class SessaoTematicaEmLicitacaoStateTest {
 
@@ -14,17 +15,17 @@ public class SessaoTematicaEmLicitacaoStateTest {
 
     public SessaoTematicaEmLicitacaoStateTest() {
         SessaoTematica sessaoTematica = new SessaoTematica(
-                "#12345",
-                "Um descrição",
-                new Data(2015, 5, 22),
-                new Data(2015, 5, 28),
-                new Data(2015, 6, 10),
-                new Data(2015, 6, 20),
-                new Data(2015, 6, 24),
-                new Data(2015, 6, 28),
-                new Data(2015, 6, 30));
+                            "#12345",
+                            "Um descrição",
+                            new Data(2015, 5, 22),
+                            new Data(2015, 5, 28),
+                            new Data(2015, 6, 10),
+                            new Data(2015, 6, 20),
+                            new Data(2015, 6, 24),
+                            new Data(2015, 6, 28),
+                            new Data(2015, 6, 30));
         sessaoTematica.setEstado(
-                new SessaoTematicaEmLicitacaoState(sessaoTematica));
+                            new SessaoTematicaEmLicitacaoState(sessaoTematica));
 
         this.sessaoTematica = sessaoTematica;
     }
@@ -42,8 +43,7 @@ public class SessaoTematicaEmLicitacaoStateTest {
     }
 
     /**
-     * Teste do método setRegistada, da classe
-     * SessaoTematicaEmLicitacaoState.
+     * Teste do método setRegistada, da classe SessaoTematicaEmLicitacaoState.
      */
     @Test
     public void testSetRegistada() {
@@ -55,8 +55,7 @@ public class SessaoTematicaEmLicitacaoStateTest {
     }
 
     /**
-     * Teste do método setCPDefinida, da classe
-     * SessaoTematicaEmLicitacaoState.
+     * Teste do método setCPDefinida, da classe SessaoTematicaEmLicitacaoState.
      */
     @Test
     public void testSetCPDefinida() {
@@ -68,8 +67,7 @@ public class SessaoTematicaEmLicitacaoStateTest {
     }
 
     /**
-     * Teste do método setEmSubmissao, da classe
-     * SessaoTematicaEmLicitacaoState.
+     * Teste do método setEmSubmissao, da classe SessaoTematicaEmLicitacaoState.
      */
     @Test
     public void testSetEmSubmissao() {
@@ -119,8 +117,7 @@ public class SessaoTematicaEmLicitacaoStateTest {
     }
 
     /**
-     * Teste do método setEmRevisao, da classe
-     * SessaoTematicaEmLicitacaoState.
+     * Teste do método setEmRevisao, da classe SessaoTematicaEmLicitacaoState.
      */
     @Test
     public void testSetEmRevisao() {
@@ -132,8 +129,7 @@ public class SessaoTematicaEmLicitacaoStateTest {
     }
 
     /**
-     * Teste do método setFaseDecisao, da classe
-     * SessaoTematicaEmLicitacaoState.
+     * Teste do método setFaseDecisao, da classe SessaoTematicaEmLicitacaoState.
      */
     @Test
     public void testSetFaseDecisao() {
@@ -158,8 +154,7 @@ public class SessaoTematicaEmLicitacaoStateTest {
     }
 
     /**
-     * Teste do método setCameraReady, da classe
-     * SessaoTematicaEmLicitacaoState.
+     * Teste do método setCameraReady, da classe SessaoTematicaEmLicitacaoState.
      */
     @Test
     public void testSetCameraReady() {
@@ -171,8 +166,7 @@ public class SessaoTematicaEmLicitacaoStateTest {
     }
 
     /**
-     * Teste do método validarEstado, da classe
-     * SessaoTematicaEmLicitacaoState.
+     * Teste do método validarEstado, da classe SessaoTematicaEmLicitacaoState.
      */
     @Test
     public void testValidarEstado() {
@@ -281,6 +275,5 @@ public class SessaoTematicaEmLicitacaoStateTest {
         assertEquals(expResult, result);
 
     }
-
 
 }

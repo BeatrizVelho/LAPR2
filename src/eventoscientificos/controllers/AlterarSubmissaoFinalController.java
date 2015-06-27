@@ -19,6 +19,7 @@ import javax.swing.event.ListDataListener;
 import utils.Data;
 
 /**
+ * Representa instância da classe AlterarSubmissaoFinalController
  * @author G01
  */
 public class AlterarSubmissaoFinalController implements ControllerAutor {
