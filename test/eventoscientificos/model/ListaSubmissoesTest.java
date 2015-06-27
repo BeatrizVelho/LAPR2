@@ -10,17 +10,18 @@ import static org.junit.Assert.*;
 
 /**
  * Teste à classe ListaSubmissoes
+ *
  * @author G01
  */
 public class ListaSubmissoesTest {
-    
+
     private Submissao submissao;
-    
+
     public ListaSubmissoesTest() {
         this.submissao = new Submissao();
         this.submissao.setArtigoInicial(new Artigo());
         this.submissao.setArtigoFinal(new Artigo());
-        
+
     }
 
     /**
@@ -113,12 +114,12 @@ public class ListaSubmissoesTest {
         System.out.println("getListaSubmissoesUtilizadorEmPeriodoSubmissao");
         Artigo artigo = new Artigo();
         artigo.getListaAutores().novoAutor(new Utilizador(
-                            "pedro", "1140781@isep.ipp.pt", "pedro", "12345"),
-                            new InstituicaoAfiliacao("ISEP"));
+                "pedro", "1140781@isep.ipp.pt", "pedro", "12345"),
+                new InstituicaoAfiliacao("ISEP"));
         this.submissao = new Submissao();
         this.submissao.setArtigoInicial(artigo);
         Utilizador utilizador
-                            = new Utilizador("pedro", "1140781@isep.ipp.pt", "pedro", "12345");
+                = new Utilizador("pedro", "1140781@isep.ipp.pt", "pedro", "12345");
         ListaSubmissoes instance = new ListaSubmissoes();
         instance.adicionarSubmissao(this.submissao);
         int expResult = 1;
@@ -142,7 +143,7 @@ public class ListaSubmissoesTest {
         artigo.setAutorCorrespondente(new AutorCorrespondente(new Utilizador("Noe", "Noe@email.com", "NaoENoe", "1234"), new InstituicaoAfiliacao("Matosinhos")));
         this.submissao.setArtigoInicial(artigo);
         Submissao submissaoClone = submissao.criarCloneSubmissao();
-        
+
         ListaSubmissoes instance = new ListaSubmissoes();
         instance.adicionarSubmissao(submissaoClone);
         boolean expResult = true;
@@ -157,7 +158,7 @@ public class ListaSubmissoesTest {
     public void testValidarCloneSubmissaoFalse() {
         System.out.println("validarCloneSubmissao");
         this.submissao = new Submissao();
-        
+
         Artigo artigo = new Artigo();
         List<String> listaPC = new ArrayList<>();
         listaPC.add("ola");
@@ -174,11 +175,11 @@ public class ListaSubmissoesTest {
         art1.setAutorSubmissor(new Autor(new Utilizador("Noe", "Noe@email.com", "NaoENoe", "1234"), new InstituicaoAfiliacao("NaoENoe")));
         art1.setAutorCorrespondente(new AutorCorrespondente(new Utilizador("Noe", "Noe@email.com", "NaoENoe", "1234"), new InstituicaoAfiliacao("Matosinhos")));
         sub2.setArtigoInicial(art1);
-        
+
         ListaSubmissoes instance = new ListaSubmissoes();
         instance.adicionarSubmissao(submissao);
         instance.adicionarSubmissao(sub2);
-        
+
         Submissao submissaoClone = submissao.criarCloneSubmissao();
         submissaoClone.getArtigoInicial().setTitulo("Ananás");
         boolean expResult = false;
@@ -193,7 +194,7 @@ public class ListaSubmissoesTest {
     public void testIsUtilizadorUmAutorSubmissao() {
         System.out.println("isUtilizadorUmAutorSubmissao");
         Utilizador utilizador = new Utilizador(
-                            "Susana", "email@gmail.com", "susus", "1234");
+                "Susana", "email@gmail.com", "susus", "1234");
         Submissao submissao = new Submissao();
         submissao.setEstado(new SubmissaoEmSubmissaoState(submissao));
         submissao.setArtigoInicial(new Artigo());
@@ -214,7 +215,7 @@ public class ListaSubmissoesTest {
         ListaSubmissoes instance = new ListaSubmissoes();
         this.submissao.setEstado(new SubmissaoCriadaState(submissao));
         instance.adicionarSubmissao(submissao);
-        
+
         boolean expResult = false;
         boolean result = instance.temSubmissoesRetiradas();
         assertEquals(expResult, result);
@@ -259,7 +260,7 @@ public class ListaSubmissoesTest {
         System.out.println("containsAutorNaListaAutoresArtigoInicial");
         Artigo artigoInicial = new Artigo();
         Utilizador u = new Utilizador(
-                            "Nome", "mail@isep.ipp.pt", "Username", "1234");
+                "Nome", "mail@isep.ipp.pt", "Username", "1234");
         artigoInicial.getListaAutores().novoAutor(u, new InstituicaoAfiliacao("MatosinhosSport"));
         this.submissao.setArtigoInicial(artigoInicial);
         ListaSubmissoes instance = new ListaSubmissoes();
@@ -267,7 +268,7 @@ public class ListaSubmissoesTest {
         boolean expResult = true;
         boolean result = instance.containsAutorNaListaAutoresArtigoInicial(u);
         assertEquals(expResult, result);
-        
+
     }
 
     /**
@@ -277,23 +278,23 @@ public class ListaSubmissoesTest {
     public void testGetListaSubmissoesUtilizador() {
         System.out.println("getListaSubmissoesUtilizador");
         Utilizador u = new Utilizador(
-                            "Nana", "molly@isep.ipp.pt", "User2", "1234");
+                "Nana", "molly@isep.ipp.pt", "User2", "1234");
         Submissao s = new Submissao();
         s.setEstado(new SubmissaoEmSubmissaoState(s));
         s.setArtigoInicial(new Artigo());
         s.getArtigoInicial().getListaAutores().novoAutor(u, new InstituicaoAfiliacao("Porto"));
-        
+
         Utilizador ut = new Utilizador(
-                            "fafa", "money@isep.ipp.pt", "Username", "1234");
+                "fafa", "money@isep.ipp.pt", "Username", "1234");
         Submissao sub = new Submissao();
         sub.setEstado(new SubmissaoEmSubmissaoState(sub));
         sub.setArtigoInicial(new Artigo());
         sub.getArtigoInicial().getListaAutores().novoAutor(ut, new InstituicaoAfiliacao("Maia"));
-        
+
         ListaSubmissoes instance = new ListaSubmissoes();
         instance.adicionarSubmissao(sub);
         instance.adicionarSubmissao(s);
-        
+
         int expResult = 1;
         int result = instance.getListaSubmissoesUtilizador(u).size();
         assertEquals(expResult, result);
@@ -325,5 +326,24 @@ public class ListaSubmissoesTest {
         Submissao result = instance.getSubmissaoPeloID(indice);
         assertEquals(expResult, result);
     }
-    
+
+    /**
+     * Test of isUtilizadorUmAutorSubmissaoInicial method, of class
+     * ListaSubmissoes.
+     */
+    @Test
+    public void testIsUtilizadorUmAutorSubmissaoInicial() {
+        System.out.println("isUtilizadorUmAutorSubmissaoInicial");
+        Utilizador utilizador = new Utilizador(
+                "bea", "1140587@isep.ipp.pt", "bea", "12345");;
+        ListaSubmissoes instance = new ListaSubmissoes();
+        Submissao submissao = new Submissao();
+        Artigo artigo = new Artigo();
+        artigo.getListaAutores().novoAutor(utilizador, new InstituicaoAfiliacao("ISEP"));
+        instance.getListaSubmissoes().add(submissao);
+        boolean expResult = false;
+        boolean result = instance.isUtilizadorUmAutorSubmissaoInicial(utilizador);
+        assertEquals(expResult, result);
+    }
+
 }
