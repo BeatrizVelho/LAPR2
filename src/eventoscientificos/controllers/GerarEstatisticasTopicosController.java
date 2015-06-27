@@ -40,7 +40,7 @@ public class GerarEstatisticasTopicosController {
      * globais nos respetivos mapas dependendo se a submissão foi aceite ou
      * rejeitada.
      */
-    public void getHashMap() {
+    public boolean getHashMap() {
 
         RegistoEventos registoEventos = this.empresa.getRegistoEventos();
 
@@ -50,6 +50,9 @@ public class GerarEstatisticasTopicosController {
 
         registoEventos.hashMapSubmissoes(hashMapSubmissoesAceites,
                 hashMapSubmissoesRejeitadas);
+        
+        return this.hashMapSubmissoesAceites.size() > 0 
+                && this.hashMapSubmissoesRejeitadas.size() > 0;
     }
 
     /**
