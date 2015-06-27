@@ -153,7 +153,6 @@ public class SessaoTematicaEmCameraReadyState implements SessaoTematicaState {
      */
     @Override
     public boolean validarEstado() {
-        // Adicionar validações de negócio.
         return true;
     }
     /**
