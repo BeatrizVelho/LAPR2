@@ -25,6 +25,7 @@ public class RegistarUtilizadorController {
     /**
      * Constrói uma instância de RegistarUtilizadorController recebendo uma
      * empresa por parametro.
+     * @param empresa empresa
      */
     public RegistarUtilizadorController(Empresa empresa) {
         this.registoUtilizadores = empresa.getRegistoUtilizadores();

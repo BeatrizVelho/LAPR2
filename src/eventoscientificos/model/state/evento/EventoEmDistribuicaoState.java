@@ -25,7 +25,7 @@ public class EventoEmDistribuicaoState implements EventoState {
      * Constroi uma instância de EventoEmDistribuicaoState recebendo um Evento
      * como parametro.
      *
-     * @param Evento objeto evento
+     * @param e evento
      */
     public EventoEmDistribuicaoState(Evento e) {
         this.e = e;

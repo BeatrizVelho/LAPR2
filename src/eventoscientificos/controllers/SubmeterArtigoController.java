@@ -214,6 +214,8 @@ public class SubmeterArtigoController {
 
     /**
      * Modifica o autor correspondente da submissão.
+     * @param indice indice da posição do autor correspondente na lista de autores
+     * @return verdadeiro 
      */
     public boolean adicionarAutorCorrespondente(int indice) {
         Autor autor = this.listaAutoresRegistados.get(indice);

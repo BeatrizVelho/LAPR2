@@ -44,8 +44,8 @@ public class ListaLicitacoes {
      * @param revisor revisor licitador
      * @param submissao submissao a licitar
      * @param grauInteresse grau de interesse na revisão do submissao em questão
-     * @param conflitos lista de conflitos entre o revisor e o submissao
-     * @return
+     * @param conflito conflito
+     * @return licitação
      */
     public Licitacao novaLicitacao(Revisor revisor, Submissao submissao, int grauInteresse, Conflito conflito) {
         return new Licitacao(revisor, submissao, grauInteresse, conflito);
