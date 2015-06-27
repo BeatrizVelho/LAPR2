@@ -109,7 +109,7 @@ public class SessaoTematicaEmDistribuicaoState implements SessaoTematicaState {
     public boolean setEmRevisao() {
         if (validarEstado()) {
             this.sessaoTematica.setEstado(
-                                new SessaoTematicaEmDistribuicaoState(this.sessaoTematica));
+                    new SessaoTematicaEmRevisaoState(this.sessaoTematica));
             return true;
         }
 
@@ -156,8 +156,7 @@ public class SessaoTematicaEmDistribuicaoState implements SessaoTematicaState {
      */
     @Override
     public boolean validarEstado() {
-        // Adicionar validações de negócio.
-        return true;
+        return this.sessaoTematica.getProcessoDistribuicao() != null;
     }
 
     /**
