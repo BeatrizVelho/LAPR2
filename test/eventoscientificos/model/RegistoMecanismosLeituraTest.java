@@ -12,8 +12,8 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- *
- * @author Beatriz
+ * Teste à classe RegistoMecanismosLeitura
+ * @author G01
  */
 public class RegistoMecanismosLeituraTest {
     

@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
 import utils.Data;
 
 /**
- *
+ *Testa à classe ProcessoAnaliseEstatistica
  * @author G01
  */
 public class ProcessoAnaliseEstatisticaTest {

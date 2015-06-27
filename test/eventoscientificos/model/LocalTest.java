@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 /**
+ * Teste à classe Local
  * @author G01
  */
 public class LocalTest {

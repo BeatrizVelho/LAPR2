@@ -4,6 +4,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
+ * Teste à classe Revisor
  *
  * @author G01
  */
@@ -19,9 +20,9 @@ public class RevisorTest {
     public void testGetUtilizador() {
         System.out.println("getUtilizador");
         Revisor instance = new Revisor(new Utilizador(
-                "Tiago", "1131658@isep.ipp.pt", "tiago", "1234"));
+                            "Tiago", "1131658@isep.ipp.pt", "tiago", "1234"));
         Utilizador expResult = new Utilizador(
-                "Tiago", "1131658@isep.ipp.pt", "tiago", "1234");
+                            "Tiago", "1131658@isep.ipp.pt", "tiago", "1234");
         Utilizador result = instance.getUtilizador();
         assertEquals(expResult, result);
     }
@@ -32,12 +33,11 @@ public class RevisorTest {
     public void testToString() {
         System.out.println("toString");
         Revisor instance = new Revisor(new Utilizador(
-                "Beatriz", "1140587@isep.ipp.pt", "bea", "1234"));
+                            "Beatriz", "1140587@isep.ipp.pt", "bea", "1234"));
         String expResult = "Beatriz (1140587@isep.ipp.pt)";
         String result = instance.toString();
         assertEquals(expResult, result);
     }
-
 
     /**
      * Teste do método validarProponente, da classe Revisor.
@@ -46,7 +46,7 @@ public class RevisorTest {
     public void testValidarRevisor() {
         System.out.println("validarRevisor");
         Revisor instance = new Revisor(new Utilizador(
-                "Tiago", "1131658@isep.ipp.pt", "tiago", "1234"));
+                            "Tiago", "1131658@isep.ipp.pt", "tiago", "1234"));
         boolean expResult = true;
         boolean result = instance.validarRevisor();
         assertEquals(expResult, result);
@@ -71,9 +71,9 @@ public class RevisorTest {
     public void testEquals() {
         System.out.println("equals");
         Object outroObjeto = new Revisor(new Utilizador(
-                "Tiago", "1131658@isep.ipp.pt", "tiago", "1234"));
+                            "Tiago", "1131658@isep.ipp.pt", "tiago", "1234"));
         Revisor instance = new Revisor(new Utilizador(
-                "Tiago", "1131658@isep.ipp.pt", "tiago", "1234"));
+                            "Tiago", "1131658@isep.ipp.pt", "tiago", "1234"));
         boolean expResult = true;
         boolean result = instance.equals(outroObjeto);
         assertEquals(expResult, result);
@@ -86,9 +86,9 @@ public class RevisorTest {
     public void testEqualsNot() {
         System.out.println("equalsNot");
         Object outroObjeto = new Revisor(new Utilizador(
-                "Miguel", "0000000@isep.ipp.pt", "miguel", "4321"));
+                            "Miguel", "0000000@isep.ipp.pt", "miguel", "4321"));
         Revisor instance = new Revisor(new Utilizador(
-                "Tiago", "1131658@isep.ipp.pt", "tiago", "1234"));
+                            "Tiago", "1131658@isep.ipp.pt", "tiago", "1234"));
         boolean expResult = false;
         boolean result = instance.equals(outroObjeto);
         assertEquals(expResult, result);

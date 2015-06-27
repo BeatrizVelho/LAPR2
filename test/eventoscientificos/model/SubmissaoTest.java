@@ -13,6 +13,7 @@ import static org.junit.Assert.*;
 import utils.Data;
 
 /**
+ * Teste à classe Submissão
  * @author G01
  */
 public class SubmissaoTest {
