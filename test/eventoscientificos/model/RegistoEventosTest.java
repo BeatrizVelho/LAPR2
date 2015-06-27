@@ -10,11 +10,13 @@ import eventoscientificos.model.state.evento.EventoRegistadoState;
 import eventoscientificos.model.state.evento.EventoSessoesTematicasDefinidasState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmCameraReadyState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmSubmissaoCameraReadyState;
+import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmSubmissaoState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaFaseDecisaoState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaRegistadaState;
 import eventoscientificos.model.state.submissao.SubmissaoAceiteState;
 import eventoscientificos.model.state.submissao.SubmissaoEmCameraReadyState;
 import eventoscientificos.model.state.submissao.SubmissaoEmSubmissaoState;
+import eventoscientificos.model.state.submissao.SubmissaoRejeitadaState;
 import eventoscientificos.model.state.submissao.SubmissaoRemovidaState;
 import eventoscientificos.model.state.submissao.SubmissaoRevistaState;
 import java.util.ArrayList;
@@ -47,16 +49,16 @@ public class RegistoEventosTest {
         Data dataFim = new Data(2017, 6, 10);
         RegistoEventos instance = new RegistoEventos();
         this.evento = new Evento(titulo, descricao, local, dataInicioSubmissao,
-                            dataFimSubmissao, dataInicioDistribuicao, dataFimRevisao,
-                            dataFimSubmissaoCameraReady, dataInicio, dataFim);
+                dataFimSubmissao, dataInicioDistribuicao, dataFimRevisao,
+                dataFimSubmissaoCameraReady, dataInicio, dataFim);
 
         this.utilizador = new Utilizador(
-                            "pedro", "1140781@isep.ipp.pt", "pedro", "12345");
+                "pedro", "1140781@isep.ipp.pt", "pedro", "12345");
         this.st = new SessaoTematica(
-                            "#123456", "Uma descrição", new Data(2016, 5, 9),
-                            new Data(2016, 6, 21), new Data(2016, 7, 8),
-                            new Data(2016, 7, 20), new Data(2016, 9, 24),
-                            new Data(2017, 5, 28), new Data(2017, 6, 8));
+                "#123456", "Uma descrição", new Data(2016, 5, 9),
+                new Data(2016, 6, 21), new Data(2016, 7, 8),
+                new Data(2016, 7, 20), new Data(2016, 9, 24),
+                new Data(2017, 5, 28), new Data(2017, 6, 8));
 
         Artigo artigoInicial = new Artigo();
         Artigo artigoFinal = new Artigo();
@@ -86,9 +88,9 @@ public class RegistoEventosTest {
         RegistoEventos instance = new RegistoEventos();
         Evento expResult = this.evento;
         Evento result = instance.novoEvento(
-                            titulo, descricao, local, dataInicioSubmissao, dataFimSubmissao,
-                            dataInicioDistribuicao, dataFimRevisao, dataFimSubmissaoCameraReady,
-                            dataInicio, dataFim);
+                titulo, descricao, local, dataInicioSubmissao, dataFimSubmissao,
+                dataInicioDistribuicao, dataFimRevisao, dataFimSubmissaoCameraReady,
+                dataInicio, dataFim);
         assertEquals(expResult, result);
     }
 
@@ -160,7 +162,7 @@ public class RegistoEventosTest {
         List<Evento> expResult = new ArrayList();
         expResult.add(this.evento);
         List<Evento> result
-                            = instance.getListaEventosOrganizador(this.utilizador);
+                = instance.getListaEventosOrganizador(this.utilizador);
         assertEquals(expResult, result);
     }
 
@@ -231,9 +233,9 @@ public class RegistoEventosTest {
         evento.setEstado(new EventoEmSubmissaoState(evento));
         instance.adicionarEvento(evento);
         instance.adicionarEvento(new Evento("sem titulo", "descricao",
-                            new Local("local"), new Data(2016, 6, 8), new Data(2016, 6, 20),
-                            new Data(2016, 7, 30), new Data(2016, 8, 15), new Data(2016, 8, 30),
-                            new Data(2016, 10, 9), new Data(2017, 6, 10)));
+                new Local("local"), new Data(2016, 6, 8), new Data(2016, 6, 20),
+                new Data(2016, 7, 30), new Data(2016, 8, 15), new Data(2016, 8, 30),
+                new Data(2016, 10, 9), new Data(2017, 6, 10)));
         int expResult = 1;
         int result = instance.getListaSubmissiveisAceitarArtigo().size();
         assertEquals(expResult, result);
@@ -264,7 +266,7 @@ public class RegistoEventosTest {
     @Test
     public void testGetListaSubmissiveisComSubmissoesRetiradasOrganizadorProponente() {
         System.out.println(
-                            "getListaSubmissiveisComSubmissoesRetiradasOrganizadorProponente");
+                "getListaSubmissiveisComSubmissoesRetiradasOrganizadorProponente");
         Submissao submissao = new Submissao();
         submissao.setEstado(new SubmissaoRemovidaState(submissao));
 
@@ -379,14 +381,14 @@ public class RegistoEventosTest {
         RegistoEventos instance = new RegistoEventos();
         instance.adicionarEvento(this.evento);
         Evento expResult
-                            = this.evento;
+                = this.evento;
         Evento result = instance.getEventoPeloID(indice);
         assertEquals(expResult, result);
     }
 
     /**
      * Teste do método getListaDecidiveisOrganizadorProponente, da classe
- RegistoEventos.
+     * RegistoEventos.
      */
     @Test
     public void testGetListaDecidivelOrganizadorProponente() {
@@ -442,7 +444,7 @@ public class RegistoEventosTest {
         this.st.setEstado(new SessaoTematicaEmCameraReadyState(st));
         this.evento.adicionarCP(new CP());
         this.evento.getCP().novoRevisor(
-                            new Utilizador("fafa", "mmi@gmail.com", "mfmf", "1234"));
+                new Utilizador("fafa", "mmi@gmail.com", "mfmf", "1234"));
         this.evento.getListaSessoesTematicas().adicionarSessaoTematica(st);
         List<Evento> listaEventos = instance.getListaEventosGerarAnaliseEstatistica();
         int expResult = 0;
@@ -474,7 +476,7 @@ public class RegistoEventosTest {
         Empresa empresa = inicializarModeloTeste();
         RegistoEventos instance = empresa.getRegistoEventos();
         List<Evento> listaEventosApresentados
-                            = instance.getListaEventosGerarAnaliseEstatistica();
+                = instance.getListaEventosGerarAnaliseEstatistica();
         boolean expResult = true;
         boolean result = instance.getTodosRevisores(listaEventosApresentados);
         assertEquals(expResult, result);
@@ -611,22 +613,22 @@ public class RegistoEventosTest {
         RegistoEventos instance = empresa.getRegistoEventos();
 
         Evento evento1 = new Evento(titulo, descricao, local, dataInicioSubmissao,
-                            dataFimSubmissao, dataInicioDistribuicao, dataFimRevisao,
-                            dataFimSubmissaoCameraReady, dataInicio, dataFim);
+                dataFimSubmissao, dataInicioDistribuicao, dataFimRevisao,
+                dataFimSubmissaoCameraReady, dataInicio, dataFim);
         evento1.adicionarCP(cpe1);
         evento1.novoOrganizador(u7);
         evento1.setEstado(new EventoEmCameraReadyState(evento1));
 
         Evento evento2 = new Evento("MarVermelho", descricao, local, dataInicioSubmissao,
-                            dataFimSubmissao, dataInicioDistribuicao, dataFimRevisao,
-                            dataFimSubmissaoCameraReady, dataInicio, dataFim);
+                dataFimSubmissao, dataInicioDistribuicao, dataFimRevisao,
+                dataFimSubmissaoCameraReady, dataInicio, dataFim);
         evento2.adicionarCP(cpe2);
         evento2.novoOrganizador(u6);
         evento2.setEstado(new EventoEmCameraReadyState(evento2));
 
         Evento evento3 = new Evento("MarVermelho", descricao, local, dataInicioSubmissao,
-                            dataFimSubmissao, dataInicioDistribuicao, dataFimRevisao,
-                            dataFimSubmissaoCameraReady, dataInicio, dataFim);
+                dataFimSubmissao, dataInicioDistribuicao, dataFimRevisao,
+                dataFimSubmissaoCameraReady, dataInicio, dataFim);
         evento3.adicionarCP(cpe1);
         evento3.novoOrganizador(u5);
         evento3.setEstado(new EventoEmCameraReadyState(evento3));
@@ -723,6 +725,171 @@ public class RegistoEventosTest {
         sub3.setEstado(new SubmissaoAceiteState(sub3));
 
         return empresa;
+    }
+
+    /**
+     * Test of getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador method,
+     * of class RegistoEventos.
+     */
+    @Test
+    public void testGetListaSubmissiveisAceitarArtigoComSubmissaoUtilizador() {
+        System.out.println("getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador");
+        RegistoEventos instance = new RegistoEventos();
+        Evento evento = new Evento("titulo", "descricao", new Local("local"),
+                new Data(2016, 6, 8), new Data(2016, 6, 20),
+                new Data(2016, 7, 7), new Data(2016, 8, 15),
+                new Data(2016, 9, 10), new Data(2016, 10, 1),
+                new Data(2017, 6, 10));
+        SessaoTematica sessaoTematica = new SessaoTematica("#123456", "Uma descrição",
+                new Data(2016, 6, 9), new Data(2016, 6, 21),
+                new Data(2016, 7, 8), new Data(2016, 8, 16),
+                new Data(2016, 9, 11), new Data(2016, 10, 2),
+                new Data(2017, 5, 20));
+        sessaoTematica.setEstado(new SessaoTematicaEmSubmissaoState(sessaoTematica));
+        Utilizador utilizador = new Utilizador(
+                "pedro", "1140781@isep.ipp.pt", "pedro", "12345");
+        SessaoTematica sessaoTematica1 = new SessaoTematica(
+                "#1234567", "Uma descrição", new Data(2016, 6, 9),
+                new Data(2016, 6, 21), new Data(2016, 7, 8),
+                new Data(2016, 7, 9), new Data(2017, 3, 25),
+                new Data(2017, 5, 29), new Data(2017, 6, 1));
+        Submissao submissao = new Submissao();
+        submissao.setArtigoInicial(new Artigo());
+        submissao.getArtigoInicial().getListaAutores().novoAutor(utilizador, new InstituicaoAfiliacao("ISEP"));
+        sessaoTematica.getListaSubmissoes().adicionarSubmissao(submissao);
+        evento.getListaSessoesTematicas().adicionarSessaoTematica(sessaoTematica);
+        evento.getListaSessoesTematicas().adicionarSessaoTematica(sessaoTematica1);
+        instance.adicionarEvento(evento);
+        int expResult = 1;
+        int result = instance.getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador(utilizador).size();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of getListaSubmissiveisAceitarArtigoFinal method, of class
+     * RegistoEventos.
+     */
+    @Test
+    public void testGetListaSubmissiveisAceitarArtigoFinal() {
+        System.out.println("getListaSubmissiveisAceitarArtigoFinal");
+        RegistoEventos instance = new RegistoEventos();
+
+        Utilizador utilizador = new Utilizador(
+                "Bea", "1140781@isep.ipp.pt", "bea", "12345");;
+        Evento evento = this.evento;
+        SessaoTematica st = new SessaoTematica(
+                "#A9D24R",
+                "LAPR2",
+                new Data(2015, 5, 22),
+                new Data(2015, 5, 28),
+                new Data(2015, 6, 10),
+                new Data(2015, 6, 20),
+                new Data(2015, 6, 24),
+                new Data(2015, 6, 28),
+                new Data(2015, 6, 30));
+        st.setEstado(new SessaoTematicaEmSubmissaoCameraReadyState(st));
+        evento.setEstado(new EventoEmSubmissaoCameraReadyState(evento));
+        Submissao submissao = new Submissao();
+        submissao.setEstado(new SubmissaoEmSubmissaoState(submissao));
+        Artigo artigo = new Artigo();
+        artigo.getListaAutores().novoAutor(utilizador, new InstituicaoAfiliacao("ISEP"));
+        submissao.setArtigoInicial(artigo);
+        st.getListaSubmissoes().adicionarSubmissao(submissao);
+        submissao.setEstado(new SubmissaoAceiteState(submissao));
+        evento.getListaSessoesTematicas().adicionarSessaoTematica(st);
+        evento.getListaSubmissoes().adicionarSubmissao(submissao);
+        instance.adicionarEvento(evento);
+        int expResult = 2;
+        int result = instance.getListaSubmissiveisAceitarArtigoFinal(utilizador).size();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of getListaSubmissiveisAceitarAlteracaoArtigoComSubmissaoUtilizador
+     * method, of class RegistoEventos.
+     */
+    @Test
+    public void testGetListaSubmissiveisAceitarAlteracaoArtigoComSubmissaoUtilizador() {
+        System.out.println("getListaSubmissiveisAceitarAlteracaoArtigoComSubmissaoUtilizador");
+        RegistoEventos instance = new RegistoEventos();
+
+        Utilizador utilizador = this.utilizador;
+        Evento evento = this.evento;
+        SessaoTematica st = new SessaoTematica(
+                "#A9D24R",
+                "LAPR2",
+                new Data(2015, 5, 22),
+                new Data(2015, 5, 28),
+                new Data(2015, 6, 10),
+                new Data(2015, 6, 20),
+                new Data(2015, 6, 24),
+                new Data(2015, 6, 28),
+                new Data(2015, 6, 30));
+        st.setEstado(new SessaoTematicaEmSubmissaoState(st));
+        evento.setEstado(new EventoEmSubmissaoCameraReadyState(evento));
+        Submissao submissao = new Submissao();
+
+        Artigo artigo = new Artigo();
+        artigo.getListaAutores().novoAutor(utilizador, new InstituicaoAfiliacao("ISEP"));
+        submissao.setArtigoInicial(artigo);
+        st.getListaSubmissoes().adicionarSubmissao(submissao);
+        submissao.setEstado(new SubmissaoAceiteState(submissao));
+        submissao.setEstado(new SubmissaoEmSubmissaoState(submissao));
+        evento.getListaSessoesTematicas().adicionarSessaoTematica(st);
+        evento.getListaSubmissoes().adicionarSubmissao(submissao);
+        instance.adicionarEvento(evento);
+        int expResult = 2;
+        int result = instance.getListaSubmissiveisAceitarAlteracaoArtigoComSubmissaoUtilizador(utilizador).size();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of hashMapSubmissoes method, of class RegistoEventos.
+     */
+    @Test
+    public void testHashMapSubmissoes() {
+        Evento evento = new Evento("titulo", "descricao", new Local("local"),
+                new Data(2016, 6, 8), new Data(2016, 6, 20),
+                new Data(2016, 7, 7), new Data(2016, 8, 15),
+                new Data(2016, 9, 10), new Data(2016, 10, 1),
+                new Data(2017, 6, 10));
+
+        List<String> palavrasChaves = new ArrayList<>();
+        palavrasChaves.add("praia");
+        Submissao submissao = new Submissao();
+        Artigo artigo = new Artigo();
+        artigo.getListaAutores().novoAutor(new Utilizador("nome", "sad@isep.pt", "isernamo", "FVD"), new InstituicaoAfiliacao("ISEP"));
+        artigo.setPalavrasChave(palavrasChaves);
+        submissao.setArtigoInicial(artigo);
+
+        Revisao revisao = new Revisao(submissao, new Revisor(new Utilizador(
+                "bea", "1140781@isep.ipp.pt", "pedro", "12345")));
+        revisao.setRecomendacaoGlobal(1);
+        submissao.setEstado(new SubmissaoAceiteState(submissao));
+
+        List<String> palavrasChaves1 = new ArrayList<>();
+        palavrasChaves1.add("sumo");
+        Submissao submissao1 = new Submissao();
+        Artigo artigo1 = new Artigo();
+        artigo1.setTitulo("isep");
+        artigo1.getListaAutores().novoAutor(new Utilizador("nome", "sad@isep.pt", "isernamo", "FVD"), new InstituicaoAfiliacao("ISEP"));
+        artigo1.setPalavrasChave(palavrasChaves1);
+        submissao1.setArtigoInicial(artigo1);
+        Revisao revisao1 = new Revisao(submissao1, new Revisor(new Utilizador(
+                "bea", "1140781@isep.ipp.pt", "pedro", "12345")));
+        revisao1.setRecomendacaoGlobal(0);
+        submissao1.setEstado(new SubmissaoRejeitadaState(submissao1));
+
+        ProcessoDistribuicao processo = new ProcessoDistribuicao();
+        processo.getListaRevisoes().adicionarRevisao(revisao);
+        processo.getListaRevisoes().adicionarRevisao(revisao1);
+        evento.adicionarProcessoDistribuicao(processo);
+
+        evento.setEstado(new EventoEmSubmissaoCameraReadyState(evento));
+
+        HashMap<String, Integer> hashMapSubmissoesAceites = new HashMap<>();
+        HashMap<String, Integer> hashMapSubmissoesRejeitadas = new HashMap<>();
+        evento.hashMapSubmissoes(hashMapSubmissoesAceites, hashMapSubmissoesRejeitadas);
     }
 
 }
