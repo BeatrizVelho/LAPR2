@@ -35,10 +35,7 @@ public class Utilizador {
      */
     private String codificadorTabela;
 
-    /**
-     * Lista de notificações.
-     */
-    List<Notificacao> listaNotificacoes;
+
 
     /**
      * Nome do Utilizador por omissão.
@@ -110,18 +107,15 @@ public class Utilizador {
      * @param username username do utilizador
      * @param password password do utilizador
      * @param codificadorTabela codificador tabela
-     * @param listaNotificacoes lista notificações
-     */
+         */
     public Utilizador(String nome, String email, String username,
-            String password, String codificadorTabela,
-            List<Notificacao> listaNotificacoes) {
+            String password, String codificadorTabela) {
         this.nome = nome;
         this.email = email;
         this.username = username;
         this.password = password;
         this.codificadorTabela = codificadorTabela;
-        this.listaNotificacoes = listaNotificacoes;
-    }
+        }
 
     /**
      * Devolve o nome do utilizador.
@@ -268,16 +262,7 @@ public class Utilizador {
                 || this.password.equals(PASSWORD_POR_OMISSAO));
     }
     
-    /**
-     * Adiciona notificações à lista de notificações.
-     *
-     * @param notificacao Notificação.
-     * @return Verdadeiro
-     */
-    public boolean addNotificacao(Notificacao notificacao) {
-        return listaNotificacoes.add(notificacao);
-    }
-
+   
     /**
      * Compara dois objetos entre si. Comparando primariamente a posição de
      * memória, seguida do conteudo e das classes as quais cada um deles
