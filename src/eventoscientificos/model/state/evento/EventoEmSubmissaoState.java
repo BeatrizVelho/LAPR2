@@ -167,27 +167,28 @@ public class EventoEmSubmissaoState implements EventoState {
      */
     @Override
     public boolean validarEstado() {
-        return e.getDataFimSubmissao().isMaior(Data.dataAtual());
+        return Data.dataAtual().isMaior(e.getDataFimSubmissao());
     }
- /**
+
+    /**
      * Valida se o evento se encontra num estado válido para ser removido
      *
      * @return verdadeiro se estiver no estado correto e falso se não estiver
      */
     @Override
     public boolean isStateValidoParaRemover() {
-              return (!(setCriado() || setRegistado() || setSessoesTematicasDefinidas() || setCPDefinida() || setCameraReady()));
+        return (!(setCriado() || setRegistado() || setSessoesTematicasDefinidas() || setCPDefinida() || setCameraReady()));
 
     }
 
-      /**
+    /**
      * Valida se o evento se encontra num estado válido para submeter artigos
      *
      * @return verdadeiro se estiver no estado correto e falso se não estiver
      */
     @Override
     public boolean isStateValidoParaSubmeter() {
-                return setEmSubmissao();
+        return setEmSubmissao();
 
     }
 
@@ -199,7 +200,7 @@ public class EventoEmSubmissaoState implements EventoState {
      */
     @Override
     public boolean isStateValidoParaAlterar() {
-              return setEmSubmissao();
+        return setEmSubmissao();
 
     }
 

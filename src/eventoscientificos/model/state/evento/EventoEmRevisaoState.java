@@ -1,12 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package eventoscientificos.model.state.evento;
 
 import eventoscientificos.model.Evento;
-import utils.Data;
+import eventoscientificos.model.Submissao;
+import eventoscientificos.model.state.submissao.SubmissaoRevistaState;
 
 /**
  * Representa uma instância de EventoEmRevisaoState tendo acesso ao respetivo
@@ -167,29 +163,34 @@ public class EventoEmRevisaoState implements EventoState {
      */
     @Override
     public boolean validarEstado() {
-        // implementar qd houver método no evento/st que pesquise na lista 
-        //se submissões em estado revista
+        for (Submissao submissao : e.getListaSubmissoes().getListaSubmissoes()) {
+            if (submissao.getEstado() instanceof SubmissaoRevistaState) {
+                return true;
+            }
+        }
+
         return false;
     }
- /**
+
+    /**
      * Valida se o evento se encontra num estado válido para ser removido
      *
      * @return verdadeiro se estiver no estado correto e falso se não estiver
      */
     @Override
     public boolean isStateValidoParaRemover() {
-               return (!(setCriado() || setRegistado() || setSessoesTematicasDefinidas() || setCPDefinida() || setCameraReady()));
+        return (!(setCriado() || setRegistado() || setSessoesTematicasDefinidas() || setCPDefinida() || setCameraReady()));
 
     }
 
-      /**
+    /**
      * Valida se o evento se encontra num estado válido para submeter artigos
      *
      * @return verdadeiro se estiver no estado correto e falso se não estiver
      */
     @Override
     public boolean isStateValidoParaSubmeter() {
-               return setEmSubmissao();
+        return setEmSubmissao();
 
     }
 
@@ -201,7 +202,7 @@ public class EventoEmRevisaoState implements EventoState {
      */
     @Override
     public boolean isStateValidoParaAlterar() {
-               return setEmSubmissao();
+        return setEmSubmissao();
 
     }
 

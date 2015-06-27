@@ -17,7 +17,7 @@ import utils.Data;
  * @author G01
  */
 public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
-                    Licitavel, Distribuivel, Revisivel, Decidivel {
+        Licitavel, Distribuivel, Revisivel, Decidivel {
 
     /**
      * Código único da sessão temática.
@@ -123,15 +123,15 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
      * @param dataFim Data de fim da sessão temática.
      */
     public SessaoTematica(
-                        String codigoUnico,
-                        String descricao,
-                        Data dataInicioSubmissao,
-                        Data dataFimSubmissao,
-                        Data dataInicioDistribuicao,
-                        Data dataFimRevisao,
-                        Data dataFimSubmissaoCameraReady,
-                        Data dataInicio,
-                        Data dataFim) {
+            String codigoUnico,
+            String descricao,
+            Data dataInicioSubmissao,
+            Data dataFimSubmissao,
+            Data dataInicioDistribuicao,
+            Data dataFimRevisao,
+            Data dataFimSubmissaoCameraReady,
+            Data dataInicio,
+            Data dataFim) {
         setCodigoUnico(codigoUnico);
         setDescricao(descricao);
         setDataInicioSubmissao(dataInicioSubmissao);
@@ -308,7 +308,7 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
     public void setCodigoUnico(String codigoUnico) {
         if (codigoUnico.trim().isEmpty()) {
             throw new IllegalArgumentException("O código único da sessão "
-                                + "temática não pode estar vazio.");
+                    + "temática não pode estar vazio.");
         }
 
         this.codigoUnico = codigoUnico;
@@ -322,7 +322,7 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
     public void setDescricao(String descricao) {
         if (descricao.trim().isEmpty()) {
             throw new IllegalArgumentException("A descrição da sessão temática"
-                                + "não pode estar vazia.");
+                    + "não pode estar vazia.");
         }
 
         this.descricao = descricao;
@@ -337,7 +337,7 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
     public void setDataInicioSubmissao(Data dataInicioSubmissao) {
         if (dataInicioSubmissao == null) {
             throw new NullPointerException("A data de inicio de submissão não "
-                                + "pode estar vazia.");
+                    + "pode estar vazia.");
         }
 
         this.dataInicioSubmissao = dataInicioSubmissao;
@@ -352,7 +352,7 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
     public void setDataFimSubmissao(Data dataFinalSubmissao) {
         if (dataFinalSubmissao == null) {
             throw new NullPointerException("A data de fim de submissão não pode"
-                                + "estar vazia.");
+                    + "estar vazia.");
         }
 
         this.dataFimSubmissao = dataFinalSubmissao;
@@ -367,7 +367,7 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
     public void setDataInicioDistribuicao(Data dataInicioDistribuicao) {
         if (dataInicioDistribuicao == null) {
             throw new NullPointerException("A data de início de distribuição "
-                                + "não pode estar vazia.");
+                    + "não pode estar vazia.");
         }
 
         this.dataInicioDistribuicao = dataInicioDistribuicao;
@@ -376,7 +376,7 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
     public void setDataFimRevisao(Data dataFimRevisao) {
         if (dataFimRevisao == null) {
             throw new NullPointerException("A data de fim de revisão não pode "
-                                + "estar vazia.");
+                    + "estar vazia.");
         }
 
         this.dataFimRevisao = dataFimRevisao;
@@ -389,10 +389,10 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
      * CameraReady da sessão temática.
      */
     public void setDataFimSubmissaoCameraReady(
-                        Data dataFimSubmissaoCameraReady) {
+            Data dataFimSubmissaoCameraReady) {
         if (dataFimSubmissaoCameraReady == null) {
             throw new NullPointerException("A data de fim de submissão "
-                                + "CameraReady não pode estar vazia.");
+                    + "CameraReady não pode estar vazia.");
         }
 
         this.dataFimSubmissaoCameraReady = dataFimSubmissaoCameraReady;
@@ -406,7 +406,7 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
     public void setDataInicio(Data dataInicio) {
         if (dataInicio == null) {
             throw new NullPointerException("A data de início não pode estar"
-                                + "vazia.");
+                    + "vazia.");
         }
 
         this.dataInicio = dataInicio;
@@ -420,7 +420,7 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
     public void setDataFim(Data dataFim) {
         if (dataFim == null) {
             throw new NullPointerException("A data de fim não pode estar"
-                                + "vazia.");
+                    + "vazia.");
         }
 
         this.dataFim = dataFim;
@@ -448,7 +448,7 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
 
     /**
      * Modifica o processo de decissão da sessão temática.
-     * 
+     *
      * @param processoDecisao Novo processo de decisão.
      */
     @Override
@@ -474,8 +474,8 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
     @Override
     public String toString() {
         return String.format("    %s - %s",
-                            this.getCodigoUnico(),
-                            this.getDescricao());
+                this.getCodigoUnico(),
+                this.getDescricao());
     }
 
     /**
@@ -500,7 +500,7 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
         SessaoTematica outraSessaoTematica = (SessaoTematica) outroObjeto;
 
         return this.getCodigoUnico().equals(
-                            outraSessaoTematica.getCodigoUnico());
+                outraSessaoTematica.getCodigoUnico());
     }
 
     /**
@@ -516,12 +516,12 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
 
         if (!proponente.validarProponente()) {
             throw new IllegalArgumentException("Não introduziu um proponente"
-                                + "válido.");
+                    + "válido.");
         }
 
         if (!validarProponente(proponente)) {
             throw new IllegalArgumentException("O proponente introduzido já"
-                                + "se encontra na lista.");
+                    + "se encontra na lista.");
         }
 
         return adicionarProponente(proponente);
@@ -603,7 +603,7 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
      * Adiciona uma nova CP à sessão temática.
      *
      * @param cp CP a adicionar à sessão temática.
-     * 
+     *
      * @return Verdadeiro caso a CP tenha sido adicionada à sessão temática e
      * falso se a adição falhar.
      */
@@ -671,7 +671,7 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
      * @return ProcessoDetecao.
      */
     private ProcessoDetecao novoProcessoDetecao(
-                        List<TipoConflito> listaTiposConflito) {
+            List<TipoConflito> listaTiposConflito) {
         this.estado.setEmDetecao();
 
         return new ProcessoDetecao(this, listaTiposConflito);
@@ -702,7 +702,7 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
     @Override
     public Conflito getConflitoRevisorSubmissao(Revisor revisor, Submissao submissao) {
         return this.processoDetecao.getListaConflito()
-                            .validarExistenciaConflito(revisor, submissao);
+                .validarExistenciaConflito(revisor, submissao);
     }
 
     /**
@@ -740,7 +740,7 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
     @Override
     public boolean isStateValidoParaAlterar() {
         return getEstado() instanceof SessaoTematicaEmSubmissaoState
-                            || getEstado() instanceof SessaoTematicaEmSubmissaoCameraReadyState;
+                || getEstado() instanceof SessaoTematicaEmSubmissaoCameraReadyState;
     }
 
     /**
@@ -790,7 +790,7 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
      * possível distribuir
      *
      * @param u Utilizador.
-     * 
+     *
      * @return verdadeiro cumprir as condições necessárias distribuir e falso se
      * não estiver
      */
@@ -810,7 +810,7 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
      * submissões serem revistas pelos revisores
      *
      * @param u Utilizador.
-     * 
+     *
      * @return verdadeiro cumprir as condições necessárias para rever e falso se
      * não estiver
      */
@@ -883,7 +883,7 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
      * remover.
      *
      * @param u Utilizador.
-     * 
+     *
      * @return verdadeiro se a sessão temática reunir as condições necessárias
      * de remoção e falso se não for possível remover.
      */
@@ -913,11 +913,11 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
      * @param hashMapSubmissoesRejeitadas Mapa de submissões rejeitadas.
      */
     public void hashMapSubmissoesSessaoTematica(
-                        HashMap<String, Integer> hashMapSubmissoesAceites,
-                        HashMap<String, Integer> hashMapSubmissoesRejeitadas) {
+            HashMap<String, Integer> hashMapSubmissoesAceites,
+            HashMap<String, Integer> hashMapSubmissoesRejeitadas) {
 
         this.processoDistribuicao.hashMapSubmissoes(hashMapSubmissoesAceites,
-                            hashMapSubmissoesRejeitadas);
+                hashMapSubmissoesRejeitadas);
     }
 
     /**
@@ -937,4 +937,27 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
         return false;
     }
 
+    /**
+     * Método que altera o estado do Evento para em distribuição.
+     */
+    @Override
+    public boolean setEmDistribuicao() {
+        return this.estado.setEmDistribuicao();
+    }
+
+    /**
+     * Método que altera o estado do Evento para em decisão.
+     */
+    @Override
+    public boolean setEmDecisao() {
+        return this.estado.setFaseDecisao();
+    }
+
+    /**
+     * Método que altera o estado do Evento para em submissao camera ready
+     */
+    @Override
+    public boolean setEmSubmissaoCameraReady() {
+        return this.estado.setEmSubmissaoCameraReady();
+    }
 }
