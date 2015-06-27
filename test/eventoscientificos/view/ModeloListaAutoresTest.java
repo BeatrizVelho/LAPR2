@@ -1,5 +1,6 @@
-package eventoscientificios.view;
+package eventoscientificos.view;
 
+import eventoscientificos.view.ModeloListaAutores;
 import eventoscientificos.model.Autor;
 import eventoscientificos.model.InstituicaoAfiliacao;
 import eventoscientificos.model.ListaAutores;

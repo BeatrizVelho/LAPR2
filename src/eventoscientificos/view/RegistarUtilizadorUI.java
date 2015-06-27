@@ -1,4 +1,4 @@
-package eventoscientificios.view;
+package eventoscientificos.view;
 
 import eventoscientificos.controllers.RegistarUtilizadorController;
 import eventoscientificos.model.Empresa;
@@ -52,7 +52,6 @@ public class RegistarUtilizadorUI extends javax.swing.JDialog {
         txt_password = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(345, 345));
 
         lbl_username.setText("Username:");
 
