@@ -63,14 +63,14 @@ public class ListaDecisoesTest {
     }
 
     /**
-     * Teste do método criarNotificacao, da classe ListaDecisoes.
+     * Teste do método notificarSobreDecisao, da classe ListaDecisoes.
      */
     @Test
     public void testCriarNotificacao() {
         System.out.println("criarNotificacao");
         ListaDecisoes instance = new ListaDecisoes();
         boolean expResult = true;
-        boolean result = instance.criarNotificacao();
+        boolean result = instance.notificarSobreDecisao();
         assertEquals(expResult, result);
     }
 

@@ -787,7 +787,8 @@ public class XMLParser {
         DocumentBuilder docBuilder = docBuilderF.newDocumentBuilder();
         Document doc = docBuilder.newDocument();
 
-        doc.appendChild(escreverRegistoEventos(doc, doc.createElement(listaEventosTag), this.empresa.getRegistoEventos()));
+        doc.appendChild(escreverRegistoEventos(doc,
+                doc.createElement(listaEventosTag), this.empresa.getRegistoEventos()));
         
         escreverFicheiro(doc, "teste.xml");
     }
@@ -865,8 +866,10 @@ public class XMLParser {
                         String.valueOf(i + 1));
         eventoElement.appendChild(escreverOrganizadores(doc,
                 doc.createElement(listaOrganizadoresTag), evento));
-        eventoElement.appendChild(escreverCP(doc,
-                doc.createElement(cpTag), evento.getCP()));
+        if (evento.getCP() != null) {
+            eventoElement.appendChild(escreverCP(doc,
+                    doc.createElement(cpTag), evento.getCP()));
+        }
         eventoElement.appendChild(
                 escreverListaSessoesTematicas(doc,
                         doc.createElement(listaSessoesTematicasTag),
@@ -1001,8 +1004,10 @@ public class XMLParser {
                         sessaoTematica.getDataFimSubmissaoCameraReady().toString());
         sessaoTematicaElement.appendChild(escreverProponentes(
                 doc, doc.createElement(listaProponentesTag), sessaoTematica));
-        sessaoTematicaElement.appendChild(escreverCP(
-                doc, doc.createElement(CPSessaoTag), sessaoTematica.getCP()));
+        if (sessaoTematica.getCP() != null) {
+            sessaoTematicaElement.appendChild(escreverCP(
+                   doc, doc.createElement(CPSessaoTag), sessaoTematica.getCP()));
+        }
         sessaoTematicaElement.appendChild(escreverListaSubmissoes(
                 doc, doc.createElement(listaSubmissoesTag),
                 sessaoTematica.getListaSubmissoes(), sessaoTematica));

@@ -14,10 +14,10 @@ import eventoscientificos.model.Revisao;
 public class MecanismoDecisao1 implements MecanismoDecisao {
 
     /**
-     * Constrói uma isntância de MecanismoDecisao1.
+     * Constrói uma instância de MecanismoDecisao1.
      */
     public MecanismoDecisao1() {
-    }
+            }
 
     /**
      * Devolve uma lista de decisões com as classificações de cada revisão.

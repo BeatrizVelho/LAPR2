@@ -117,18 +117,18 @@ public class Submissao {
     /**
      * Altera o estado da submissão para EmSubmissão.
      *
-     * @return Verdadeiro se for possivel alterar o estado da submissão para
-     * em submissão.
+     * @return Verdadeiro se for possivel alterar o estado da submissão para em
+     * submissão.
      */
     public boolean alterarEstadoSubmissao() {
         if (this.estado instanceof SubmissaoCriadaState) {
             this.estado.setEmSubmissao();
         }
 
-        if(this.estado instanceof SubmissaoAceiteState) {
+        if (this.estado instanceof SubmissaoAceiteState) {
             this.estado.setEmCameraReady();
         }
-        
+
         return true;
     }
 
@@ -138,13 +138,13 @@ public class Submissao {
      * @return Verdadeiro se o artigo for válido e falso se não for.
      */
     public boolean validarSubmissao() {
-        if (this.estado instanceof SubmissaoEmSubmissaoState ||
-                this.estado instanceof SubmissaoCriadaState) {
+        if (this.estado instanceof SubmissaoEmSubmissaoState
+                            || this.estado instanceof SubmissaoCriadaState) {
             this.artigoInicial.validarArtigo();
         }
 
-        if (this.estado instanceof SubmissaoEmCameraReadyState || 
-                this.estado instanceof SubmissaoAceiteState) {
+        if (this.estado instanceof SubmissaoEmCameraReadyState
+                            || this.estado instanceof SubmissaoAceiteState) {
             this.artigoFinal.validarArtigo();
         }
 
@@ -182,12 +182,12 @@ public class Submissao {
 
     public boolean isAutorEmPeriodoSubmissao(Utilizador utilizador) {
         if (this.estado instanceof SubmissaoEmSubmissaoState
-                && this.getArtigoInicial().isAutor(utilizador)) {
+                            && this.getArtigoInicial().isAutor(utilizador)) {
             return true;
         }
 
         if (this.estado instanceof SubmissaoEmCameraReadyState
-                && this.getArtigoFinal().isAutor(utilizador)) {
+                            && this.getArtigoFinal().isAutor(utilizador)) {
             return true;
         }
 
@@ -216,9 +216,9 @@ public class Submissao {
         Submissao outraSubmissao = (Submissao) outroObjecto;
         System.out.println(getEstado());
         return (this.getEstado() instanceof SubmissaoCriadaState
-                || this.getEstado() instanceof SubmissaoEmSubmissaoState)
-                        ? this.getArtigoInicial().equals(outraSubmissao.getArtigoInicial())
-                        : this.getArtigoFinal().equals(outraSubmissao.getArtigoFinal());
+                            || this.getEstado() instanceof SubmissaoEmSubmissaoState)
+                                                ? this.getArtigoInicial().equals(outraSubmissao.getArtigoInicial())
+                                                : this.getArtigoFinal().equals(outraSubmissao.getArtigoFinal());
     }
 
     /**
@@ -233,7 +233,7 @@ public class Submissao {
 
     public boolean isAutorArtigoInicial(Utilizador utilizador) {
         if (this.estado instanceof SubmissaoAceiteState
-                && getArtigoInicial().isAutor(utilizador)) {
+                            && getArtigoInicial().isAutor(utilizador)) {
             return true;
         }
         return false;
@@ -288,8 +288,8 @@ public class Submissao {
     @Override
     public String toString() {
         return String.format("%s", getEstado() instanceof SubmissaoEmCameraReadyState
-                ? getArtigoFinal().getTitulo()
-                : getArtigoInicial().getTitulo());
+                            ? getArtigoFinal().getTitulo()
+                            : getArtigoInicial().getTitulo());
     }
 
     /**
@@ -304,5 +304,12 @@ public class Submissao {
      */
     public void alterarEstadoParaRejeitado() {
         this.estado.setRejeitada();
+    }
+/**
+ * Verifica se a submissão se encontra num estado válido para decidir submissão.
+ * @return verdadeiro se a submissão se encontrar no estado aceite e falso se não.
+ */
+    boolean isStateValidoParaDecidir() {
+        return estado.setAceite();
     }
 }

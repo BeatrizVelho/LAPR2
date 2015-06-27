@@ -36,11 +36,6 @@ public class Utilizador {
     private String codificadorTabela;
 
     /**
-     * Lista de notificações.
-     */
-    List<Notificacao> listaNotificacoes;
-
-    /**
      * Nome do Utilizador por omissão.
      */
     private static final String NOME_POR_OMISSAO = "Sem nome";
@@ -98,7 +93,8 @@ public class Utilizador {
                 utilizador.getNome(),
                 utilizador.getEmail(),
                 utilizador.getUsername(),
-                utilizador.getPassword());
+                utilizador.getPassword(),
+                utilizador.getCodificadorTabela());
     }
 
     /**
@@ -110,17 +106,14 @@ public class Utilizador {
      * @param username username do utilizador
      * @param password password do utilizador
      * @param codificadorTabela codificador tabela
-     * @param listaNotificacoes lista notificações
      */
     public Utilizador(String nome, String email, String username,
-            String password, String codificadorTabela,
-            List<Notificacao> listaNotificacoes) {
+            String password, String codificadorTabela) {
         this.nome = nome;
         this.email = email;
         this.username = username;
         this.password = password;
         this.codificadorTabela = codificadorTabela;
-        this.listaNotificacoes = listaNotificacoes;
     }
 
     /**
@@ -266,16 +259,6 @@ public class Utilizador {
                 || this.email.equals(EMAIL_POR_OMISSAO)
                 || this.username.equals(USERNAME_POR_OMISSAO)
                 || this.password.equals(PASSWORD_POR_OMISSAO));
-    }
-    
-    /**
-     * Adiciona notificações à lista de notificações.
-     *
-     * @param notificacao Notificação.
-     * @return Verdadeiro
-     */
-    public boolean addNotificacao(Notificacao notificacao) {
-        return listaNotificacoes.add(notificacao);
     }
 
     /**

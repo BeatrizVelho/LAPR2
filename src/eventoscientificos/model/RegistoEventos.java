@@ -486,16 +486,24 @@ public class RegistoEventos {
      * @return Lista de evento/sessao temática onde o utilizador é
      * organizador/proponente.
      */
-    public List<Decidivel> getListaDecidivelOrganizadorProponente(Utilizador utilizador) {
+    public List<Decidivel> getListaDecidiveisOrganizadorProponente(Utilizador utilizador) {
         List<Decidivel> listaDecidiveis = new ArrayList<>();
-
         for (Evento evento : this.listaEventos) {
+            boolean submissoesAceites = false;
+            int indice = 0;
             if (evento.isOrganizador(utilizador)
                                 && evento.isEstadoValidoParaDecidir()) {
-                listaDecidiveis.add(evento);
+                do {
+                    Submissao s = evento.getListaSubmissoes().getListaSubmissoes().get(indice);
+                    if (s.isStateValidoParaDecidir()) {
+                        listaDecidiveis.add(evento);
+                        submissoesAceites = true;
+                    }
+                } while (submissoesAceites != true);
             }
-            List<Decidivel> listaDecidiveisSessaoTematica
-                                = evento.getListaDecidivelOrganizadorProponente(utilizador);
+            indice++;
+            List< Decidivel> listaDecidiveisSessaoTematica
+                                = evento.getListaSessoesTematicas().getListaDecidivelOrganizadorProponente(utilizador);
             listaDecidiveis.addAll(listaDecidiveisSessaoTematica);
         }
         return listaDecidiveis;

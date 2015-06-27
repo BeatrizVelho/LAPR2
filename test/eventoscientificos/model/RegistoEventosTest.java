@@ -385,8 +385,8 @@ public class RegistoEventosTest {
     }
 
     /**
-     * Teste do método getListaDecidivelOrganizadorProponente, da classe
-     * RegistoEventos.
+     * Teste do método getListaDecidiveisOrganizadorProponente, da classe
+ RegistoEventos.
      */
     @Test
     public void testGetListaDecidivelOrganizadorProponente() {
@@ -409,7 +409,7 @@ public class RegistoEventosTest {
         instance.adicionarEvento(evento);
 
         int expResult = 2;
-        int result = (instance.getListaDecidivelOrganizadorProponente(this.utilizador)).size();
+        int result = (instance.getListaDecidiveisOrganizadorProponente(this.utilizador)).size();
         assertEquals(expResult, result);
     }
 

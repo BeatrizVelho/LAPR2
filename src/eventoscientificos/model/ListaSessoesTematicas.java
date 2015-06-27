@@ -66,11 +66,11 @@ public class ListaSessoesTematicas {
         }
 
         ListaSessoesTematicas outraListaSessoesTematicas
-                = (ListaSessoesTematicas) outroObjeto;
+                            = (ListaSessoesTematicas) outroObjeto;
 
         return this.evento.equals(outraListaSessoesTematicas.evento)
-                && this.listaSessoesTematicas.equals(
-                        outraListaSessoesTematicas.listaSessoesTematicas);
+                            && this.listaSessoesTematicas.equals(
+                                                outraListaSessoesTematicas.listaSessoesTematicas);
     }
 
     /**
@@ -94,15 +94,15 @@ public class ListaSessoesTematicas {
      * @return Sessão Temática.
      */
     public SessaoTematica novaSessaoTematica(
-            String codigoUnico, String descricao,
-            Data dataInicioSubmissao, Data dataFimSubmissao,
-            Data dataFimRevisao, Data dataInicioDistribuicao,
-            Data dataFimSubmissaoCameraReady, Data dataInicio,
-            Data dataFim) {
+                        String codigoUnico, String descricao,
+                        Data dataInicioSubmissao, Data dataFimSubmissao,
+                        Data dataFimRevisao, Data dataInicioDistribuicao,
+                        Data dataFimSubmissaoCameraReady, Data dataInicio,
+                        Data dataFim) {
         return new SessaoTematica(
-                codigoUnico, descricao, dataInicioSubmissao, dataFimSubmissao,
-                dataFimRevisao, dataInicioDistribuicao,
-                dataFimSubmissaoCameraReady, dataInicio, dataFim);
+                            codigoUnico, descricao, dataInicioSubmissao, dataFimSubmissao,
+                            dataFimRevisao, dataInicioDistribuicao,
+                            dataFimSubmissaoCameraReady, dataInicio, dataFim);
     }
 
     /**
@@ -147,41 +147,41 @@ public class ListaSessoesTematicas {
      */
     public boolean validarSessaoTematica(SessaoTematica sessaoTematica) {
         if (this.evento.getDataInicioSubmissao().isMaior(
-                sessaoTematica.getDataInicioSubmissao())) {
+                            sessaoTematica.getDataInicioSubmissao())) {
             throw new IllegalArgumentException("A data de inicio de submissão "
-                    + "da sessão temática não pode ser menor que a do evento");
+                                + "da sessão temática não pode ser menor que a do evento");
         }
 
         if (this.evento.getDataFimSubmissao().isMaior(
-                sessaoTematica.getDataFimSubmissao())) {
+                            sessaoTematica.getDataFimSubmissao())) {
             throw new IllegalArgumentException("A data de fim de submissão da "
-                    + "sessão temática não pode ser menor que a do evento");
+                                + "sessão temática não pode ser menor que a do evento");
         }
 
         if (this.evento.getDataInicioDistribuicao().isMaior(
-                sessaoTematica.getDataInicioDistribuicao())) {
+                            sessaoTematica.getDataInicioDistribuicao())) {
             throw new IllegalArgumentException("A data de inicio de distribuição"
-                    + " da sessão temática não pode ser menor que a do evento");
+                                + " da sessão temática não pode ser menor que a do evento");
         }
 
         if (this.evento.getDataFimRevisao().isMaior(
-                sessaoTematica.getDataFimRevisao())) {
+                            sessaoTematica.getDataFimRevisao())) {
             throw new IllegalArgumentException("A data de fim de revisão da "
-                    + "sessão temática não pode ser menor que a do evento");
+                                + "sessão temática não pode ser menor que a do evento");
         }
 
         if (this.evento.getDataFimSubmissaoCameraReady().isMaior(
-                sessaoTematica.getDataFimSubmissaoCameraReady())) {
+                            sessaoTematica.getDataFimSubmissaoCameraReady())) {
             throw new IllegalArgumentException("A data de fim de submissão "
-                    + "Camera Ready da sessão temática não pode ser menor que a "
-                    + "do evento");
+                                + "Camera Ready da sessão temática não pode ser menor que a "
+                                + "do evento");
         }
 
         if (this.evento.getDataInicio().isMaior(sessaoTematica.getDataInicio())
-                || sessaoTematica.getDataFim().isMaior(
-                        this.evento.getDataFim())) {
+                            || sessaoTematica.getDataFim().isMaior(
+                                                this.evento.getDataFim())) {
             throw new IllegalArgumentException("A sessão temática deve ocorrer "
-                    + "dentro do periodo do evento.");
+                                + "dentro do periodo do evento.");
         }
 
         return !this.listaSessoesTematicas.contains(sessaoTematica);
@@ -224,7 +224,7 @@ public class ListaSessoesTematicas {
      * @return Lista de Submissiveis.
      */
     public List<Submissivel> getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador(
-            Utilizador utilizador) {
+                        Utilizador utilizador) {
         List<Submissivel> listaSubmissiveisUtilizador = new ArrayList<>();
 
         for (SessaoTematica sessaoTematica : this.listaSessoesTematicas) {
@@ -246,7 +246,7 @@ public class ListaSessoesTematicas {
         List<CPDefinivel> listaSemCPDefinida = new ArrayList();
         for (SessaoTematica sessaoTematica : this.listaSessoesTematicas) {
             if (sessaoTematica.isRegistada()
-                    && sessaoTematica.isProponente(utilizador)) {
+                                && sessaoTematica.isProponente(utilizador)) {
                 listaSemCPDefinida.add(sessaoTematica);
             }
         }
@@ -280,7 +280,7 @@ public class ListaSessoesTematicas {
      * @return Lista de Submissiveis.
      */
     public List<Submissivel> getListaSubmissiveisAceitarAlteracaoArtigoComSubmissaoUtilizador(
-            Utilizador utilizador) {
+                        Utilizador utilizador) {
         List<Submissivel> listaSubmissiveisUtilizador = new ArrayList<>();
 
         for (SessaoTematica sessaoTematica : this.listaSessoesTematicas) {
@@ -296,7 +296,7 @@ public class ListaSessoesTematicas {
 
         for (SessaoTematica sessaoTematica : this.listaSessoesTematicas) {
             if (sessaoTematica.isStateValidoParaSubmeterArtigoFinal()
-                    && sessaoTematica.isUtilizadorUmAutorSubmissaoInicial(utilizador)) {
+                                && sessaoTematica.isUtilizadorUmAutorSubmissaoInicial(utilizador)) {
                 listaSusmissiveisUtilizador.add(sessaoTematica);
             }
         }
@@ -314,9 +314,18 @@ public class ListaSessoesTematicas {
         List<Decidivel> listaDecidivel = new ArrayList<>();
 
         for (SessaoTematica sessaoTematica : this.listaSessoesTematicas) {
+            boolean submissoesAceites = false;
+            int indice = 0;
             if (sessaoTematica.isProponente(utilizador) && sessaoTematica.isEstadoValidoParaDecidir()) {
-                listaDecidivel.add(sessaoTematica);
+                do {
+                    Submissao s = sessaoTematica.getListaSubmissoes().getListaSubmissoes().get(indice);
+                    if (s.isStateValidoParaDecidir()) {
+                        listaDecidivel.add(sessaoTematica);
+                        submissoesAceites = true;
+                    }
+                } while (submissoesAceites != true);
             }
+            indice++;
         }
         return listaDecidivel;
     }
@@ -329,15 +338,15 @@ public class ListaSessoesTematicas {
      * @param hashMapSubmissoesRejeitadas Mapa de submissões rejeitadas.
      */
     public void hashMapSubmissoesSessaoTematica(
-            HashMap<String, Integer> hashMapSubmissoesAceites,
-            HashMap<String, Integer> hashMapSubmissoesRejeitadas) {
+                        HashMap<String, Integer> hashMapSubmissoesAceites,
+                        HashMap<String, Integer> hashMapSubmissoesRejeitadas) {
 
         for (SessaoTematica sessaoTematica : this.listaSessoesTematicas) {
             if (sessaoTematica.getEstado() instanceof SessaoTematicaEmSubmissaoCameraReadyState
-                    || sessaoTematica.getEstado() instanceof SessaoTematicaEmCameraReadyState) {
+                                || sessaoTematica.getEstado() instanceof SessaoTematicaEmCameraReadyState) {
 
                 sessaoTematica.hashMapSubmissoesSessaoTematica(hashMapSubmissoesAceites,
-                        hashMapSubmissoesRejeitadas);
+                                    hashMapSubmissoesRejeitadas);
             }
         }
     }

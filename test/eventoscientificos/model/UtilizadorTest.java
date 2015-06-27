@@ -162,21 +162,6 @@ public class UtilizadorTest {
         assertEquals(expResult, result);
 
     }
-    
-    /**
-     * Teste do método addNotificacao, da classe Utilizador.
-     */
-    @Test(expected = NullPointerException.class)
-    public void testAddNotificacao() {
-        System.out.println("addNotificacao");
-        Notificacao notificacao = null;
-        Utilizador instance = new Utilizador(
-                            "luis", "1140356@isep.ipp.pt", "politico", "12345");
-        boolean expResult = false;
-        boolean result = instance.addNotificacao(notificacao);
-        assertEquals(expResult, result);
-
-    }
 
     /**
      * teste ao metodo criarCloneUtilizador da classe Utilizador.
