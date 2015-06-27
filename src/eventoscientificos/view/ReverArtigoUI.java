@@ -332,7 +332,10 @@ public class ReverArtigoUI extends javax.swing.JDialog {
 
             String opcoes[] = {"Sim", "Não"};
             int resposta = JOptionPane.showOptionDialog(
-                    null, "Pretende submeter a revisão?", "Rever Artigo", 0,
+                    null,
+                    "Pretende submeter a revisão?",
+                    "Rever Artigo",
+                    0,
                     JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]);
             if (resposta == 0) {
                 this.controller.adicionarResultadoRevisao();
