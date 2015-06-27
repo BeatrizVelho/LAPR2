@@ -1,6 +1,7 @@
 package eventoscientificios.view;
 
 import eventoscientificos.controllers.CarregarFicheiroController;
+import eventoscientificos.model.Administrador;
 import eventoscientificos.model.Empresa;
 import java.awt.Frame;
 import java.io.File;
@@ -27,7 +28,16 @@ public class CarregarFicheiroUI extends javax.swing.JDialog {
         initComponents();
         getRootPane().setDefaultButton(this.btn_selecionarEvento);
         setLocationRelativeTo(null);
-        if (this.controller.getListaEventosAceitarEventos().isEmpty()) {
+        if (!empresa.isAdministrador(new Administrador(
+                empresa.getUtilizadorAutenticado()))) {
+            JOptionPane.showMessageDialog(
+                    framePai,
+                    "Não tem permissões para submeter artigos a partir de"
+                    + "ficheiros.",
+                    "Carregar Ficheiro",
+                    JOptionPane.ERROR_MESSAGE);
+            dispose();
+        } else if (this.controller.getListaEventosAceitarEventos().isEmpty()) {
             JOptionPane.showMessageDialog(
                     framePai,
                     "Não existem eventos ou sessões temáticas a aceitar submissões"
@@ -214,12 +224,27 @@ public class CarregarFicheiroUI extends javax.swing.JDialog {
                     "Carregar Ficheiro", 0,
                     JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]);
             if (resposta == 0) {
-                this.controller.submeterFicheiro(txt_ficheiro.getText());
+                if (this.controller.submeterFicheiro(txt_ficheiro.getText())) {
+                    JOptionPane.showMessageDialog(
+                            this,
+                            "Submissão importada com sucesso.",
+                            "Carregar Ficheiro",
+                            JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(
+                            this,
+                            "Não foi possível importar a submissão.",
+                            "Carregar Ficheiro",
+                            JOptionPane.ERROR_MESSAGE);
+                }
             }
             dispose();
         } catch (IllegalArgumentException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), 
-                    "Carregar Ficheiro", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(
+                    this,
+                    ex.getMessage(),
+                    "Carregar Ficheiro",
+                    JOptionPane.ERROR_MESSAGE);
         }
 
     }//GEN-LAST:event_btn_importarSubmissaoActionPerformed
