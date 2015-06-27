@@ -1,24 +1,7 @@
 package utils.codificador.aritmetico;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.math.BigDecimal;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
-import nayuki.arithcode.ArithmeticCoderBase;
-import nayuki.arithcode.ArithmeticCompress;
-import nayuki.arithcode.ArithmeticEncoder;
-import nayuki.arithcode.BitOutputStream;
-import nayuki.arithcode.FrequencyTable;
-import nayuki.arithcode.SimpleFrequencyTable;
 import utils.CSVParser;
 
 /**
@@ -36,6 +19,7 @@ public class CA implements Codificador {
 
     /**
      * Constrói uma instância de CodificadorAritmetico.
+     * @throws java.io.IOException
      */
     public CA() throws IOException {
         this.listaTabelasProbabilidades = new CSVParser().lerTabelasFrequencia();
