@@ -170,8 +170,7 @@ public class EventoEmDistribuicaoState implements EventoState {
      */
     @Override
     public boolean validarEstado() {
-        // implementar quando UC8 completo (precisa-se do processo distribuição)
-        return false;
+     return e.getProcessoDistribuicao()!=null;
 
     }
  /**

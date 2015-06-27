@@ -166,7 +166,7 @@ public class EventoCriadoState implements EventoState {
      */
     @Override
     public boolean validarEstado() {
-        return this.e.temOrganizadores();
+        return true;
     }
 
     /**
