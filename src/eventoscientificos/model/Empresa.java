@@ -166,7 +166,7 @@ public class Empresa {
     /**
      * Verifica se o utilizador passado por parâmetro é administrador da empresa.
      * 
-     * @param utilizador Utilizador a verificar.
+     * @param administrador administrador
      * @return Verdadeiro se o utilizador está inserido na lista de administradores
      * e falso se não está.
      */

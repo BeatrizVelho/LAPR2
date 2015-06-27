@@ -1,4 +1,4 @@
-package eventoscientificios.view;
+package eventoscientificos.view;
 
 import eventoscientificos.controllers.ReverArtigoController;
 import eventoscientificos.model.Empresa;
@@ -54,7 +54,7 @@ public class ReverArtigoUI extends javax.swing.JDialog {
     private void initComponents() {
 
         pnl_selecionarRevisivel = new javax.swing.JPanel();
-        cmb_selecionarRevisivel = new javax.swing.JComboBox();
+        cmb_selecionarRevisivel = new javax.swing.JComboBox(this.controller.getListaRevisiveis().toArray());
         btn_selecionarRevisivel = new javax.swing.JButton();
         pnl_selecionarSubmissao = new javax.swing.JPanel();
         btn_selecionarSubmissao = new javax.swing.JButton();

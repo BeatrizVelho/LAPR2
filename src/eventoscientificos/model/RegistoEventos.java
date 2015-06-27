@@ -61,6 +61,7 @@ public class RegistoEventos {
      * @param dataInicioSubmissao Data de inicio de submissao do evento.
      * @param dataLimiteSubmissao Data limite de submissao do evento.
      * @param dataInicioDistribuicao Data de inicio de distribuicao do evento.
+     * @param dataFimRevisao data final de revisao
      * @param dataFimSubmissaoCameraReady Data fim de submissao camera ready do
      * evento.
      * @param dataInicio Data de inicio do evento.
@@ -140,6 +141,7 @@ public class RegistoEventos {
      * Devolve a lista de eventos que onde o revisor em análise pertence à CP
      *
      * @param revisor revisor a procurar
+     * @param listaEventosApresentados lista de eventos apresentados
      * @return lista de eventos
      */
     public List<Evento> getListaEventosRevisor(Revisor revisor, List<Evento> listaEventosApresentados) {
@@ -230,7 +232,7 @@ public class RegistoEventos {
      * Devolve uma lista de submissiveis nas quais o utilizador é autor de
      * alguma submissao.
      *
-     * @param utilizador
+     * @param utilizador utilizador
      * @return Lista de Submissiveis.
      */
     public List<Submissivel> getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador(Utilizador utilizador) {
@@ -325,8 +327,8 @@ public class RegistoEventos {
     /**
      * Devolve uma lista de revisiveis onde o revisor tem submissoes a rever
      *
-     * @param u
-     * @return
+     * @param u utilizador
+     * @return lista de revisiveis
      */
     public List<Revisivel> getListaRevisiveisComArtigosPReverRevisor(Utilizador u) {
         List<Revisivel> listaRevisiveis = new ArrayList<>();
@@ -395,8 +397,8 @@ public class RegistoEventos {
      * Devolve uma lista de submissiveis nas quais o utilizador é autor de
      * alguma submissao.
      *
-     * @param utilizador
-     * @return
+     * @param utilizador utilizador
+     * @return lista de submissiveis
      */
     public List<Submissivel> getListaSubmissiveisAceitarArtigoFinal(
                         Utilizador utilizador) {
@@ -418,7 +420,7 @@ public class RegistoEventos {
      * Devolve uma lista de submissiveis nas quais o utilizador é autor de
      * alguma submissao.
      *
-     * @param utilizador
+     * @param utilizador utilizador
      * @return Lista de Submissiveis.
      */
     public List<Submissivel> getListaSubmissiveisAceitarAlteracaoArtigoComSubmissaoUtilizador(
@@ -465,6 +467,7 @@ public class RegistoEventos {
      * Devolve uma lista com todos os eventos nos quais o utilizador autenticdo
      * é uma organizador e estão em submissãoCameraReady
      *
+     * @param u utilizador
      * @return lista de eventos
      */
     public List<Evento> getListaEventosOrganizadorEmSubmissaoCameraReady(Utilizador u) {
@@ -570,6 +573,7 @@ public class RegistoEventos {
      * Devolve uma matriz com os resultados dos revisores por submissão do
      * evento
      *
+     * @param listaEventosApresentados lista de eventos apresentados
      * @return matriz dos resultados sob a forma textual
      */
     public String[] getValoresTotaisAnaliseEstatistica(List<Evento> listaEventosApresentados) {
@@ -584,6 +588,9 @@ public class RegistoEventos {
      *
      * @param listaEventosApresentados lista de eventos selecionados
      * anteriormente
+     * @return verdadeiro se as listas de listaRevisores e a listas submissões
+     * estiverem preenchidas.
+     *
      */
     public boolean getTodosRevisores(List<Evento> listaEventosApresentados) {
         this.listaRevisores = new ArrayList<>();
@@ -602,7 +609,7 @@ public class RegistoEventos {
             }
             listaRevisoes.addAll(e.getProcessoDistribuicao().getListaRevisoes().getListaRevisoes());
         }
-        return this.listaRevisoes.size() > 0 && this.listaRevisores.size() > 0 && this.listaSubmissao.size() > 0;
+        return this.listaRevisores.size() > 0 && this.listaSubmissao.size() > 0;
     }
 
 }

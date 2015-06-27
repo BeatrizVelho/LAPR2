@@ -73,6 +73,7 @@ public class ProcessoAnaliseEstatistica {
 
     /**
      * Devolve os valores de estatística de cada submissao do artigo.
+     * @return 
      */
     public String[] getValoresEstatistica() {
         List<Submissao> listaSubmissoesAceites = listaSubmissoesAceites();

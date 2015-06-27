@@ -86,6 +86,7 @@ public class ListaSubmissoes {
      * Adiciona à lista de submissoes a submissao passada por parametro.
      *
      * @param submissao Submissao de artigo
+     * @return verdareiro se a lista de submissoes 
      */
     public boolean adicionarSubmissao(Submissao submissao) {
         submissao.alterarEstadoSubmissao();

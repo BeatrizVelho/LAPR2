@@ -1,4 +1,4 @@
-package eventoscientificios.view;
+package eventoscientificos.view;
 
 import eventoscientificos.controllers.RetirarSubmissaoController;
 import eventoscientificos.model.Empresa;

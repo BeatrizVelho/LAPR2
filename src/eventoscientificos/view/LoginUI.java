@@ -1,4 +1,4 @@
-package eventoscientificios.view;
+package eventoscientificos.view;
 
 import eventoscientificos.controllers.LoginController;
 import eventoscientificos.model.Empresa;

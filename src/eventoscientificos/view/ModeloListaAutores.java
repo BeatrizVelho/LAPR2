@@ -1,4 +1,4 @@
-package eventoscientificios.view;
+package eventoscientificos.view;
 
 import eventoscientificos.model.Autor;
 import eventoscientificos.model.InstituicaoAfiliacao;
