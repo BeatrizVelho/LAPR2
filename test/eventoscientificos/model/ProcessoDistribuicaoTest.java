@@ -7,7 +7,13 @@ package eventoscientificos.model;
 
 import eventoscientificos.model.mecanismo.distribuicao.MecanismoDistribuicao;
 import eventoscientificos.model.mecanismo.distribuicao.MecanismoDistribuicaoTodasSubmissoesPorRevisor;
+import eventoscientificos.model.state.evento.EventoEmSubmissaoCameraReadyState;
+import eventoscientificos.model.state.submissao.SubmissaoAceiteState;
 import eventoscientificos.model.state.submissao.SubmissaoEmLicitacaoState;
+import eventoscientificos.model.state.submissao.SubmissaoRejeitadaState;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import utils.Data;
@@ -185,5 +191,54 @@ public class ProcessoDistribuicaoTest {
         boolean expResult = false;
         boolean result = instance.equals(outroObjecto);
         assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of hashMapSubmissoes method, of class ProcessoDistribuicao.
+     */
+    @Test
+    public void testHashMapSubmissoes() {
+                Evento evento = new Evento("titulo", "descricao", new Local("local"),
+                new Data(2016, 6, 8), new Data(2016, 6, 20),
+                new Data(2016, 7, 7), new Data(2016, 8, 15),
+                new Data(2016, 9, 10), new Data(2016, 10, 1),
+                new Data(2017, 6, 10));
+
+        List<String> palavrasChaves = new ArrayList<>();
+        palavrasChaves.add("praia");
+        Submissao submissao = new Submissao();
+        Artigo artigo = new Artigo();
+        artigo.getListaAutores().novoAutor(new Utilizador("nome", "sad@isep.pt", "isernamo", "FVD"), new InstituicaoAfiliacao("ISEP"));
+        artigo.setPalavrasChave(palavrasChaves);
+        submissao.setArtigoInicial(artigo);
+
+        Revisao revisao = new Revisao(submissao, new Revisor(new Utilizador(
+                "bea", "1140781@isep.ipp.pt", "pedro", "12345")));
+        revisao.setRecomendacaoGlobal(1);
+        submissao.setEstado(new SubmissaoAceiteState(submissao));
+
+        List<String> palavrasChaves1 = new ArrayList<>();
+        palavrasChaves1.add("sumo");
+        Submissao submissao1 = new Submissao();
+        Artigo artigo1 = new Artigo();
+        artigo1.setTitulo("isep");
+        artigo1.getListaAutores().novoAutor(new Utilizador("nome", "sad@isep.pt", "isernamo", "FVD"), new InstituicaoAfiliacao("ISEP"));
+        artigo1.setPalavrasChave(palavrasChaves1);
+        submissao1.setArtigoInicial(artigo1);
+        Revisao revisao1 = new Revisao(submissao1, new Revisor(new Utilizador(
+                "bea", "1140781@isep.ipp.pt", "pedro", "12345")));
+        revisao1.setRecomendacaoGlobal(0);
+        submissao1.setEstado(new SubmissaoRejeitadaState(submissao1));
+
+        ProcessoDistribuicao processo = new ProcessoDistribuicao();
+        processo.getListaRevisoes().adicionarRevisao(revisao);
+        processo.getListaRevisoes().adicionarRevisao(revisao1);
+        evento.adicionarProcessoDistribuicao(processo);
+
+        evento.setEstado(new EventoEmSubmissaoCameraReadyState(evento));
+
+        HashMap<String, Integer> hashMapSubmissoesAceites = new HashMap<>();
+        HashMap<String, Integer> hashMapSubmissoesRejeitadas = new HashMap<>();
+        evento.hashMapSubmissoes(hashMapSubmissoesAceites, hashMapSubmissoesRejeitadas);
     }
 }
