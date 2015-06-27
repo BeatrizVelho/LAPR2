@@ -16,9 +16,9 @@ public class LoginUI extends javax.swing.JDialog {
     /**
      * Creates new form LoginUI
      *
-     * @param parent
-     * @param modal
-     * @param empresa
+     * @param parent parent
+     * @param modal modal
+     * @param empresa empresa
      */
     public LoginUI(java.awt.Frame parent, boolean modal, Empresa empresa) {
         super(parent, "Login", modal);

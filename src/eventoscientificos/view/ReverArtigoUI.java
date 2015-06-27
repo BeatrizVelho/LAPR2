@@ -17,9 +17,9 @@ public class ReverArtigoUI extends javax.swing.JDialog {
     /**
      * Creates new form ReverArtigoUI
      * 
-     * @param parent
-     * @param modal
-     * @param empresa
+     * @param parent parent
+     * @param modal modal
+     * @param empresa empresa
      */
     public ReverArtigoUI(java.awt.Frame parent, boolean modal, Empresa empresa) {
         super(parent, "Rever Artigo", modal);

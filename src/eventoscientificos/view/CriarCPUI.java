@@ -22,9 +22,9 @@ public class CriarCPUI extends javax.swing.JDialog {
     /**
      * Creates new form CriarCPUI
      *
-     * @param parent
-     * @param modal
-     * @param empresa
+     * @param parent parent
+     * @param modal modal
+     * @param empresa empresa
      */
     public CriarCPUI(java.awt.Frame parent, boolean modal, Empresa empresa) {
         super(parent, "Criar CP", modal);
