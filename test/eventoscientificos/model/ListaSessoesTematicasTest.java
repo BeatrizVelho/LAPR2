@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
 import utils.Data;
 
 /**
- *
+ *Teste à classe ListaSessoesTematicas.
  * @author G01
  */
 public class ListaSessoesTematicasTest {

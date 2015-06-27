@@ -299,7 +299,7 @@ public class EventoTest {
     /**
      * Teste do método setDataInicioSubmissao, da classe Evento.
      */
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testSetDataInicioSubmissaoDatePassed() {
         System.out.println("setDataInicioSubmissaoDatePassed");
         Data dataInicioSubmissao = new Data(1, 1, 1);
@@ -487,7 +487,7 @@ public class EventoTest {
         List<TipoConflito> listaTiposConflito = new ArrayList();
         Evento instance = this.evento;
         instance.adicionarCP(new CP());
-        instance.setEstado(new EventoEmSubmissaoState(instance));
+        instance.setEstado(new EventoEmLicitacaoState(evento));
         instance.iniciarProcessoDetecao(listaTiposConflito);
         Class<? extends EventoState> expResult
                             = new EventoEmLicitacaoState(instance).getClass();

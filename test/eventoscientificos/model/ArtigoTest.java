@@ -7,6 +7,7 @@ import static org.junit.Assert.*;
 import utils.Data;
 
 /**
+ * Teste a classe Artigo
  * @author G01
  */
 public class ArtigoTest {
