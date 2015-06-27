@@ -1,15 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package eventoscientificos.model.state.evento;
 
 import eventoscientificos.model.Evento;
-import utils.Data;
 
 /**
- *
  * @author G01
  */
 public class EventoFaseDecisaoState implements EventoState {
@@ -141,7 +134,7 @@ public class EventoFaseDecisaoState implements EventoState {
     @Override
     public boolean setEmSubmissaoCameraReady() {
         if (validarEstado()) {
-            e.setEstado(new EventoEmCameraReadyState(e));
+            e.setEstado(new EventoEmSubmissaoCameraReadyState(e));
             return true;
         }
         return false;
@@ -166,11 +159,7 @@ public class EventoFaseDecisaoState implements EventoState {
      */
     @Override
     public boolean validarEstado() {
-        if (this.e.getProcessoDecisao() != null) {
-            return true;
-        }
-
-        return false;
+        return this.e.getProcessoDecisao() != null;
     }
 
     /**
