@@ -2,17 +2,13 @@ package utils;
 
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Representa uma instância de CSVParser.
@@ -52,14 +48,14 @@ public class CSVParser {
      * @return Matriz de inteiros com as tabelas de frequência.
      * @throws IOException Lançada no caso do ficheiro não ser encontrado.
      */
-    public int[][] lerTabelasFrequencia() throws IOException {
+    public double[][] lerTabelasFrequencia() throws IOException {
         CSVReader csv = new CSVReader(
                 new FileReader(new File(ficheiro)), separador);
 
         String[] proximaLinha = csv.readNext();
         int totalTabelas = proximaLinha.length - 2;
 
-        int[][] matrizTabelasFrequencia = new int[totalTabelas][257];
+        double[][] matrizTabelasFrequencia = new double[totalTabelas][257];
 
         while ((proximaLinha = csv.readNext()) != null) {
 
@@ -70,10 +66,8 @@ public class CSVParser {
                 for (int tabela = 0; tabela < totalTabelas; tabela++) {
                     int coluna = tabela + 2;
 
-                    double probabilidade = Double.parseDouble(
-                            proximaLinha[coluna].replace(",", ".")) * 10000;
-
-                    matrizTabelasFrequencia[tabela][simbolo] = (int) probabilidade;
+                    matrizTabelasFrequencia[tabela][simbolo] 
+                            = Double.parseDouble(proximaLinha[coluna].replace(",", "."));
                 }
             }
         }
