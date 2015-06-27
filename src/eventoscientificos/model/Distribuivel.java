@@ -55,4 +55,13 @@ public interface Distribuivel {
      * @return comissão de programa.
      */
     public CP getCP();
+    
+    /**
+     * Altera o estado do distribuivel quando o mesmo atinge a data de inicio de 
+     * distribuicao.
+     * 
+     * @return Verdadeiro se for possível alterar o estado e falso caso não 
+     * seja.
+     */
+    boolean setEmDistribuicao();
 }
