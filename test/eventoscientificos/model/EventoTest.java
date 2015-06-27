@@ -12,10 +12,13 @@ import eventoscientificos.model.state.evento.EventoFaseDecisaoState;
 import eventoscientificos.model.state.evento.EventoRegistadoState;
 import eventoscientificos.model.state.evento.EventoSessoesTematicasDefinidasState;
 import eventoscientificos.model.state.evento.EventoState;
+import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmSubmissaoCameraReadyState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmSubmissaoState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaFaseDecisaoState;
 import eventoscientificos.model.state.submissao.SubmissaoAceiteState;
+import eventoscientificos.model.state.submissao.SubmissaoEmCameraReadyState;
 import eventoscientificos.model.state.submissao.SubmissaoEmSubmissaoState;
+import eventoscientificos.model.state.submissao.SubmissaoRejeitadaState;
 import eventoscientificos.model.state.submissao.SubmissaoRemovidaState;
 import eventoscientificos.model.state.submissao.SubmissaoRevistaState;
 import java.util.ArrayList;
@@ -42,20 +45,20 @@ public class EventoTest {
 
     public EventoTest() {
         this.evento = new Evento("titulo", "descricao", new Local("local"),
-                            new Data(2016, 6, 8), new Data(2016, 6, 20),
-                            new Data(2016, 7, 7), new Data(2016, 8, 15),
-                            new Data(2016, 9, 10), new Data(2016, 10, 1),
-                            new Data(2017, 6, 10));
+                new Data(2016, 6, 8), new Data(2016, 6, 20),
+                new Data(2016, 7, 7), new Data(2016, 8, 15),
+                new Data(2016, 9, 10), new Data(2016, 10, 1),
+                new Data(2017, 6, 10));
         this.utilizador = new Utilizador(
-                            "Pedro", "1140781@isep.ipp.pt", "pedro", "12345");
+                "Pedro", "1140781@isep.ipp.pt", "pedro", "12345");
         this.artigoInicial = new Artigo();
         this.artigoFinal = new Artigo();
         this.submissao = new Submissao();
         submissao.setArtigoInicial(artigoInicial);
         submissao.setArtigoFinal(artigoFinal);
         this.licitacao = new Licitacao(new Revisor(new Utilizador(
-                            "fatima", "ola@iml.com", "fafa", "1234")),
-                            this.submissao, 0, null);
+                "fatima", "ola@iml.com", "fafa", "1234")),
+                this.submissao, 0, null);
         this.revisao = new Revisao(submissao, new Revisor(utilizador));
 
         this.r = new Revisao(submissao, new Revisor(utilizador));
@@ -236,7 +239,7 @@ public class EventoTest {
         System.out.println("getListaSessoesTematicas");
         Evento instance = this.evento;
         ListaSessoesTematicas expResult
-                            = new ListaSessoesTematicas(this.evento);
+                = new ListaSessoesTematicas(this.evento);
         ListaSessoesTematicas result = instance.getListaSessoesTematicas();
         assertEquals(expResult, result);
     }
@@ -382,10 +385,10 @@ public class EventoTest {
     public void testEqualsNot() {
         System.out.println("equalsNot");
         Object outroObjeto = new Evento("sem titulo", "descricao", new Local("local"),
-                            new Data(2016, 6, 8), new Data(2016, 6, 20),
-                            new Data(2016, 7, 7), new Data(2016, 8, 15),
-                            new Data(2016, 9, 10), new Data(2016, 11, 1),
-                            new Data(2017, 6, 10));
+                new Data(2016, 6, 8), new Data(2016, 6, 20),
+                new Data(2016, 7, 7), new Data(2016, 8, 15),
+                new Data(2016, 9, 10), new Data(2016, 11, 1),
+                new Data(2017, 6, 10));
         Evento instance = this.evento;
         boolean expResult = false;
         boolean result = instance.equals(outroObjeto);
@@ -401,7 +404,7 @@ public class EventoTest {
         Evento instance = this.evento;
         boolean expResult = true;
         boolean result = instance.novoOrganizador(new Utilizador("Bea",
-                            "1140587@isep.ipp.pt", "beatriz", "111"));
+                "1140587@isep.ipp.pt", "beatriz", "111"));
         assertEquals(expResult, result);
     }
 
@@ -413,9 +416,9 @@ public class EventoTest {
         System.out.println("novoOrganizadorExists");
         Evento instance = this.evento;
         instance.novoOrganizador(new Utilizador(
-                            "Beatriz", "1140587@isep.ipp.pt", "bea", "1234"));
+                "Beatriz", "1140587@isep.ipp.pt", "bea", "1234"));
         instance.novoOrganizador(new Utilizador(
-                            "Beatriz", "1140587@isep.ipp.pt", "bea", "1234"));
+                "Beatriz", "1140587@isep.ipp.pt", "bea", "1234"));
     }
 
     /**
@@ -477,22 +480,22 @@ public class EventoTest {
     public void testIniciarProcessoDetecao() {
         System.out.println("iniciarProcessoDetecao");
         Evento evento = new Evento("titulo", "descricao", new Local("local"),
-                            new Data(2015, 5, 22),
-                            new Data(2015, 5, 28),
-                            new Data(2015, 6, 10),
-                            new Data(2015, 6, 18),
-                            new Data(2015, 6, 24),
-                            new Data(2015, 6, 28),
-                            new Data(2015, 6, 30));
+                new Data(2015, 5, 22),
+                new Data(2015, 5, 28),
+                new Data(2015, 6, 10),
+                new Data(2015, 6, 18),
+                new Data(2015, 6, 24),
+                new Data(2015, 6, 28),
+                new Data(2015, 6, 30));
         List<TipoConflito> listaTiposConflito = new ArrayList();
         Evento instance = this.evento;
         instance.adicionarCP(new CP());
         instance.setEstado(new EventoEmLicitacaoState(evento));
         instance.iniciarProcessoDetecao(listaTiposConflito);
         Class<? extends EventoState> expResult
-                            = new EventoEmLicitacaoState(instance).getClass();
+                = new EventoEmLicitacaoState(instance).getClass();
         Class<? extends EventoState> result
-                            = instance.getEstado().getClass();
+                = instance.getEstado().getClass();
         assertEquals(expResult, result);
     }
 
@@ -544,9 +547,9 @@ public class EventoTest {
         System.out.println("getListaCPDefiniveisSemCPOrganizadorProponente");
         Utilizador utilizador = new Utilizador(this.utilizador);
         Evento instance = new Evento("titulo", "descricao", new Local("local"),
-                            new Data(2016, 6, 8), new Data(2016, 6, 20),
-                            new Data(2016, 7, 7), new Data(2016, 7, 14), new Data(2016, 8, 1),
-                            new Data(2017, 6, 10), new Data(2018, 6, 10));
+                new Data(2016, 6, 8), new Data(2016, 6, 20),
+                new Data(2016, 7, 7), new Data(2016, 7, 14), new Data(2016, 8, 1),
+                new Data(2017, 6, 10), new Data(2018, 6, 10));
         Proponente prop = new Proponente(utilizador);
         List<CPDefinivel> expResult = new ArrayList<>();
         List<CPDefinivel> result = instance.getListaCPDefiniveisSemCPOrganizadorProponente(utilizador);
@@ -573,14 +576,14 @@ public class EventoTest {
         System.out.println("getListaSubmissiveisAceitarArtigo");
         ListaSessoesTematicas listaSessoesTematicas = new ListaSessoesTematicas(this.evento);
         SessaoTematica instance = new SessaoTematica("#A9D24R",
-                            "LAPR2",
-                            new Data(2015, 5, 22),
-                            new Data(2015, 5, 28),
-                            new Data(2015, 6, 10),
-                            new Data(2015, 6, 20),
-                            new Data(2015, 6, 24),
-                            new Data(2015, 6, 28),
-                            new Data(2017, 6, 8));
+                "LAPR2",
+                new Data(2015, 5, 22),
+                new Data(2015, 5, 28),
+                new Data(2015, 6, 10),
+                new Data(2015, 6, 20),
+                new Data(2015, 6, 24),
+                new Data(2015, 6, 28),
+                new Data(2017, 6, 8));
         listaSessoesTematicas.adicionarSessaoTematica(instance);
         instance.setEstado(new SessaoTematicaEmSubmissaoState(instance));
         int expResult = 1;
@@ -595,7 +598,7 @@ public class EventoTest {
     public void testGetConflitoRevisorSubmissao() {
         System.out.println("getConflitoRevisorSubmissao");
         Revisor revisor = new Revisor(new Utilizador(
-                            "Tiago", "1131658@isep.ipp.pt", "tiago", "1234"));
+                "Tiago", "1131658@isep.ipp.pt", "tiago", "1234"));
         Submissao submissao = new Submissao();
         submissao.setArtigoFinal(new Artigo());
         submissao.setArtigoInicial(new Artigo());
@@ -619,13 +622,13 @@ public class EventoTest {
         System.out.println("setAndGetProcessoDetecao");
         Evento instance = this.evento;
         instance.setProcessoDetecao(
-                            new ProcessoDetecao(instance, new ArrayList()));
+                new ProcessoDetecao(instance, new ArrayList()));
         ProcessoDetecao expResult
-                            = new ProcessoDetecao(instance, new ArrayList());
+                = new ProcessoDetecao(instance, new ArrayList());
         ProcessoDetecao result = instance.getProcessoDetecao();
         assertEquals(expResult, result);
     }
-    
+
     /**
      * Teste dos métodos set e get do processo de decisão da classe Evento.
      */
@@ -741,7 +744,7 @@ public class EventoTest {
         submissao.setEstado(new SubmissaoEmSubmissaoState(submissao));
         submissao.setArtigoInicial(this.artigoInicial);
         submissao.getArtigoInicial().getListaAutores().novoAutor(
-                            utilizador, new InstituicaoAfiliacao("ISEP"));
+                utilizador, new InstituicaoAfiliacao("ISEP"));
         ListaSubmissoes instance = new ListaSubmissoes();
         instance.adicionarSubmissao(submissao);
         boolean expResult = true;
@@ -749,34 +752,6 @@ public class EventoTest {
         assertEquals(expResult, result);
     }
 
-//    /**
-//     * Teste do método getListaSubmissiveisAceitarAlteracaoArtigoComSubmissaoUtilizador,
-//     * da classe Evento.
-//     */
-//    @Test
-//    public void testGetListaSubmissiveisAceitarArtigoComSubmissaoUtilizador() {
-//        System.out.println("getListaSubmissiveisAceitarAlteracaoArtigoComSubmissaoUtilizador");
-//        SessaoTematica sessaoTematica = this.sessaoTematica;
-//        sessaoTematica.setEstado(new SessaoTematicaEmSubmissaoState(sessaoTematica));
-//        Utilizador utilizador = new Utilizador(
-//                "pedro", "1140781@isep.ipp.pt", "pedro", "12345");
-//        Autor autor = new Autor(utilizador, new InstituicaoAfiliacao("ISEP"));
-//        SessaoTematica sessaoTematica1 = new SessaoTematica(
-//                            "#1234567", "Uma descrição", new Data(2016, 6, 9),
-//                            new Data(2016, 6, 21), new Data(2016, 7, 8),
-//                            new Data(2016, 7, 9), new Data(2017, 3, 25),
-//                            new Data(2017, 5, 29));
-//        ListaSessoesTematicas instance = new ListaSessoesTematicas(evento);
-//        Submissao submissao = new Submissao();
-//        submissao.setArtigoInicial(new Artigo("tituo", "resumo", "ficheiro"));
-//        submissao .getArtigoInicial().getListaAutores().adicionarAutor(autor);
-//        sessaoTematica.getListaSubmissoes().adicionarSubmissao(submissao);
-//        instance.adicionarSessaoTematica(sessaoTematica);
-//        instance.adicionarSessaoTematica(sessaoTematica1);
-//        int expResult = 1;
-//        int result = instance.getListaSubmissiveisAceitarAlteracaoArtigoComSubmissaoUtilizador(utilizador).size();
-//        assertEquals(expResult, result);
-//    }
     /**
      * Teste do método temOrganizadores, da classe Evento.
      */
@@ -785,7 +760,7 @@ public class EventoTest {
         System.out.println("temOrganizadores");
         Evento instance = this.evento;
         this.evento.novoOrganizador(new Utilizador(
-                            "nome", "email@isep.ipp.pt", "username", "password"));
+                "nome", "email@isep.ipp.pt", "username", "password"));
         boolean expResult = true;
         boolean result = instance.temOrganizadores();
         assertEquals(expResult, result);
@@ -864,7 +839,7 @@ public class EventoTest {
     public void testTemSubmissoesRetiradas() {
         System.out.println("temSubmissoesRetiradas");
         Utilizador utilizador = new Utilizador(
-                            "Pedro", "1140781@isep.ipp.pt", "pedro", "1234");
+                "Pedro", "1140781@isep.ipp.pt", "pedro", "1234");
         Proponente proponente = new Proponente(utilizador);
         evento.novoOrganizador(utilizador);
         this.submissao.setEstado(new SubmissaoRemovidaState(submissao));
@@ -1006,14 +981,14 @@ public class EventoTest {
         submissao.setEstado(new SubmissaoRevistaState(submissao));
 
         SessaoTematica sessaoTematica = new SessaoTematica("#A9D24R",
-                            "LAPR2",
-                            new Data(2015, 5, 22),
-                            new Data(2015, 5, 28),
-                            new Data(2015, 6, 10),
-                            new Data(2015, 6, 20),
-                            new Data(2015, 6, 24),
-                            new Data(2015, 6, 28),
-                            new Data(2017, 6, 8));
+                "LAPR2",
+                new Data(2015, 5, 22),
+                new Data(2015, 5, 28),
+                new Data(2015, 6, 10),
+                new Data(2015, 6, 20),
+                new Data(2015, 6, 24),
+                new Data(2015, 6, 28),
+                new Data(2017, 6, 8));
         sessaoTematica.setEstado(new SessaoTematicaFaseDecisaoState(sessaoTematica));
         sessaoTematica.novoProponente(utilizador);
         sessaoTematica.getListaSubmissoes().adicionarSubmissao(submissao);
@@ -1110,7 +1085,7 @@ public class EventoTest {
         assertEquals(expResult, result);
     }
 
-        /**
+    /**
      * Test of notificarOrganizador method, of class Evento.
      */
     @Test
@@ -1122,6 +1097,158 @@ public class EventoTest {
         int result = instance.notificarOrganizador().size();
         assertEquals(expResult, result);
 
+    }
+
+    /**
+     * Test of getListaSubmissiveisAceitarAlteracaoArtigoComSubmissaoUtilizador
+     * method, of class Evento.
+     */
+    @Test
+    public void testGetListaSubmissiveisAceitarAlteracaoArtigoComSubmissaoUtilizador() {
+        System.out.println("getListaSubmissiveisAceitarAlteracaoArtigoComSubmissaoUtilizador");
+        Utilizador utilizador = this.utilizador;
+        Evento instance = this.evento;
+        SessaoTematica st = new SessaoTematica(
+                "#A9D24R",
+                "LAPR2",
+                new Data(2015, 5, 22),
+                new Data(2015, 5, 28),
+                new Data(2015, 6, 10),
+                new Data(2015, 6, 20),
+                new Data(2015, 6, 24),
+                new Data(2015, 6, 28),
+                new Data(2015, 6, 30));
+        st.setEstado(new SessaoTematicaEmSubmissaoState(st));
+        instance.setEstado(new EventoEmSubmissaoCameraReadyState(evento));
+        Submissao submissao = new Submissao();
+
+        Artigo artigo = new Artigo();
+        artigo.getListaAutores().novoAutor(utilizador, new InstituicaoAfiliacao("ISEP"));
+        submissao.setArtigoInicial(artigo);
+        st.getListaSubmissoes().adicionarSubmissao(submissao);
+        submissao.setEstado(new SubmissaoAceiteState(submissao));
+        submissao.setEstado(new SubmissaoEmSubmissaoState(submissao));
+        evento.getListaSessoesTematicas().adicionarSessaoTematica(st);
+        instance.getListaSubmissoes().adicionarSubmissao(submissao);
+        int expResult = 1;
+        int result = instance.getListaSubmissiveisAceitarAlteracaoArtigoComSubmissaoUtilizador(utilizador).size();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of isUtilizadorUmAutorSubmissaoInicial method, of class Evento.
+     */
+    @Test
+    public void testIsUtilizadorUmAutorSubmissaoInicial() {
+        System.out.println("isUtilizadorUmAutorSubmissaoInicial");
+        Utilizador utilizador = this.utilizador;
+        Evento instance = this.evento;
+        Submissao submissao = new Submissao();
+        submissao.setEstado(new SubmissaoAceiteState(submissao));
+        Artigo artigo = new Artigo();
+        artigo.getListaAutores().novoAutor(utilizador, new InstituicaoAfiliacao("ISEP"));
+        submissao.setArtigoInicial(artigo);
+        instance.getListaSubmissoes().adicionarSubmissao(submissao);
+        boolean expResult = true;
+        boolean result = instance.isUtilizadorUmAutorSubmissaoInicial(utilizador);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of getListaSubmissiveisAceitarArtigoFinal method, of class Evento.
+     */
+    @Test
+    public void testGetListaSubmissiveisAceitarArtigoFinal() {
+        System.out.println("getListaSubmissiveisAceitarArtigoFinal");
+        Utilizador utilizador = this.utilizador;
+        Evento instance = this.evento;
+        SessaoTematica st = new SessaoTematica(
+                "#A9D24R",
+                "LAPR2",
+                new Data(2015, 5, 22),
+                new Data(2015, 5, 28),
+                new Data(2015, 6, 10),
+                new Data(2015, 6, 20),
+                new Data(2015, 6, 24),
+                new Data(2015, 6, 28),
+                new Data(2015, 6, 30));
+        st.setEstado(new SessaoTematicaEmSubmissaoCameraReadyState(st));
+        instance.setEstado(new EventoEmSubmissaoCameraReadyState(evento));
+        Submissao submissao = new Submissao();
+        submissao.setEstado(new SubmissaoEmSubmissaoState(submissao));
+        Artigo artigo = new Artigo();
+        artigo.getListaAutores().novoAutor(utilizador, new InstituicaoAfiliacao("ISEP"));
+        submissao.setArtigoInicial(artigo);
+        st.getListaSubmissoes().adicionarSubmissao(submissao);
+        submissao.setEstado(new SubmissaoAceiteState(submissao));
+        evento.getListaSessoesTematicas().adicionarSessaoTematica(st);
+        instance.getListaSubmissoes().adicionarSubmissao(submissao);
+        int expResult = 1;
+        int result = instance.getListaSubmissiveisAceitarArtigoFinal(utilizador).size();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of isStateValidoParaSubmeterArtigoFinal method, of class Evento.
+     */
+    @Test
+    public void testIsStateValidoParaSubmeterArtigoFinal() {
+        System.out.println("isStateValidoParaSubmeterArtigoFinal");
+        Evento instance = this.evento;
+        instance.setEstado(new EventoEmSubmissaoCameraReadyState(evento));
+        boolean expResult = true;
+        boolean result = instance.isStateValidoParaSubmeterArtigoFinal();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of hashMapSubmissoes method, of class Evento.
+     */
+    @Test
+    public void testHashMapSubmissoes() {
+        System.out.println("hashMapSubmissoes");
+        Evento evento = new Evento("titulo", "descricao", new Local("local"),
+                new Data(2016, 6, 8), new Data(2016, 6, 20),
+                new Data(2016, 7, 7), new Data(2016, 8, 15),
+                new Data(2016, 9, 10), new Data(2016, 10, 1),
+                new Data(2017, 6, 10));
+
+        List<String> palavrasChaves = new ArrayList<>();
+        palavrasChaves.add("praia");
+        Submissao submissao = new Submissao();
+        Artigo artigo = new Artigo();
+        artigo.getListaAutores().novoAutor(new Utilizador("nome", "sad@isep.pt", "isernamo", "FVD"), new InstituicaoAfiliacao("ISEP"));
+        artigo.setPalavrasChave(palavrasChaves);
+        submissao.setArtigoInicial(artigo);
+
+        Revisao revisao = new Revisao(submissao, new Revisor(new Utilizador(
+                "bea", "1140781@isep.ipp.pt", "pedro", "12345")));
+        revisao.setRecomendacaoGlobal(1);
+        submissao.setEstado(new SubmissaoAceiteState(submissao));
+
+        List<String> palavrasChaves1 = new ArrayList<>();
+        palavrasChaves1.add("sumo");
+        Submissao submissao1 = new Submissao();
+        Artigo artigo1 = new Artigo();
+        artigo1.setTitulo("isep");
+        artigo1.getListaAutores().novoAutor(new Utilizador("nome", "sad@isep.pt", "isernamo", "FVD"), new InstituicaoAfiliacao("ISEP"));
+        artigo1.setPalavrasChave(palavrasChaves1);
+        submissao1.setArtigoInicial(artigo1);
+        Revisao revisao1 = new Revisao(submissao1, new Revisor(new Utilizador(
+                "bea", "1140781@isep.ipp.pt", "pedro", "12345")));
+        revisao1.setRecomendacaoGlobal(0);
+        submissao1.setEstado(new SubmissaoRejeitadaState(submissao1));
+
+        ProcessoDistribuicao processo = new ProcessoDistribuicao();
+        processo.getListaRevisoes().adicionarRevisao(revisao);
+        processo.getListaRevisoes().adicionarRevisao(revisao1);
+        evento.adicionarProcessoDistribuicao(processo);
+
+        evento.setEstado(new EventoEmSubmissaoCameraReadyState(evento));
+
+        HashMap<String, Integer> hashMapSubmissoesAceites = new HashMap<>();
+        HashMap<String, Integer> hashMapSubmissoesRejeitadas = new HashMap<>();
+        evento.hashMapSubmissoes(hashMapSubmissoesAceites, hashMapSubmissoesRejeitadas);
     }
 
 }
