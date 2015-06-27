@@ -114,6 +114,9 @@
           <StringArray count="0"/>
         </Property>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox(this.controller.getListaEventos().toArray())"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="lbl_selecionarEvento">
       <Properties>
@@ -140,7 +143,7 @@
             </Property>
             <Property name="lineWrap" type="boolean" value="true"/>
             <Property name="rows" type="int" value="3"/>
-            <Property name="text" type="java.lang.String" value="       Realiza a soma de todos os parametros das v&#xe1;rias revis&#xf5;es            realizadas pelos revisores, divindo os mesmos pelo total n&#xfa;mero                                              de revis&#xf5;es realizadas."/>
+            <Property name="text" type="java.lang.String" value="       Realiza a soma de todos os parametros das v&#xe1;rias revis&#xf5;es            realizadas pelos revisores, divindo os mesmos pelo n&#xfa;mero total                                              de revis&#xf5;es realizadas."/>
             <Property name="wrapStyleWord" type="boolean" value="true"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
