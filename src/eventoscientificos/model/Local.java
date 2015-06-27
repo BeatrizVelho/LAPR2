@@ -35,7 +35,7 @@ public class Local {
      */
     public void setNomeLocal(String nomeLocal) {
         if (nomeLocal == null || nomeLocal.trim().isEmpty()) {
-            throw new IllegalArgumentException("Nome do local não pode estar vazio!");
+            throw new NullPointerException("Nome do local não pode estar vazio!");
         }
         this.nomeLocal = nomeLocal;
     }
