@@ -62,6 +62,7 @@ public interface Submissivel {
      * Verifica se determinado Submissivel cumpre os critérios necessários para
      * remover.
      *
+     * @param u utilizador
      * @return verdadeiro se poder remover e falso se não for possível remover.
      */
     boolean isStateValidoParaRemover(Utilizador u);

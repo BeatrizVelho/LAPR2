@@ -3,7 +3,6 @@ package eventoscientificos.model;
 import eventoscientificos.model.state.evento.EventoCriadoState;
 import eventoscientificos.model.state.evento.EventoEmSubmissaoCameraReadyState;
 import eventoscientificos.model.state.evento.EventoEmSubmissaoState;
-import eventoscientificos.model.state.evento.EventoFaseDecisaoState;
 import eventoscientificos.model.state.evento.EventoRegistadoState;
 import eventoscientificos.model.state.evento.EventoSessoesTematicasDefinidasState;
 import eventoscientificos.model.state.evento.EventoState;
@@ -710,7 +709,7 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel,
      * Devolve uma lista de submissiveis nas quais o utilizador é autor de
      * alguma submissao submissao.
      *
-     * @param utilizador
+     * @param utilizador utilizador 
      * @return Lista de Submissiveis.
      */
     public List<Submissivel> getListaSubmissiveisAceitarAlteracaoArtigoComSubmissaoUtilizador(

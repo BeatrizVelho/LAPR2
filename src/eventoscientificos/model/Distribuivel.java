@@ -37,6 +37,7 @@ public interface Distribuivel {
      * Verifica se o distribuivel contém as condições necessárias para
      * distribuir as suas submissões pelos revisores
      *
+     * @param u utilizador
      * @return verdadeiro cumprir as condições necessárias para distribuir e
      * falso se não estiver
      */

@@ -13,7 +13,7 @@ public class Local {
     /**
      * Constrói uma instância de local, recebendo como parâmetro o nome do Local.
      *
-     * @param nomeLocal
+     * @param nomeLocal nome do local
      */
     public Local(String nomeLocal) {
         setNomeLocal(nomeLocal);

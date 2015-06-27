@@ -19,7 +19,7 @@ public class CA implements Codificador {
 
     /**
      * Constrói uma instância de CodificadorAritmetico.
-     * @throws java.io.IOException
+     * @throws java.io.IOException exceção
      */
     public CA() throws IOException {
         this.listaTabelasProbabilidades = new CSVParser().lerTabelasFrequencia();

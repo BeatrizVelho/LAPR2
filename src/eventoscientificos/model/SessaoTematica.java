@@ -117,6 +117,7 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
      * @param dataFimSubmissao Data de fim de submissão da sessão temática.
      * @param dataInicioDistribuicao Data de início de distribuição da sessão
      * temática.
+     * @param dataFimRevisao data fim de revisão
      * @param dataFimSubmissaoCameraReady Data de fim de submissão de artigo
      * final da sessão temática.
      * @param dataInicio Data de início da sessão temática.

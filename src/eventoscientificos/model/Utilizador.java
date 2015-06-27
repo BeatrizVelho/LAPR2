@@ -304,7 +304,7 @@ public class Utilizador {
      * Método que através dos atributos de Utilizador instancia um novo
      * Utilizador (um clone) usando o construtor cópia.
      *
-     * @return
+     * @return utilizador
      */
     public Utilizador criarCloneUtilizador() {
         return new Utilizador(this);

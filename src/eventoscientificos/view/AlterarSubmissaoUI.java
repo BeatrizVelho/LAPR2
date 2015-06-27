@@ -21,9 +21,9 @@ public class AlterarSubmissaoUI extends javax.swing.JDialog {
     /**
      * Creates new form AlterarSubmissaoUI
      *
-     * @param parent
-     * @param modal
-     * @param empresa
+     * @param parent parent
+     * @param modal modal
+     * @param empresa empresa
      */
     public AlterarSubmissaoUI(java.awt.Frame parent, boolean modal, Empresa empresa) {
         super(parent, modal);

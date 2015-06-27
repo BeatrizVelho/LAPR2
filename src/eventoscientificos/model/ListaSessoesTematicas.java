@@ -220,7 +220,7 @@ public class ListaSessoesTematicas {
      * passado por parametro é autor e que estão a permitir a alteração de
      * submissões.
      *
-     * @param utilizador
+     * @param utilizador utilizador
      * @return Lista de Submissiveis.
      */
     public List<Submissivel> getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador(
@@ -276,7 +276,7 @@ public class ListaSessoesTematicas {
      * passado por parametro é autor e que estão a permitir a alteração de
      * submissões.
      *
-     * @param utilizador
+     * @param utilizador utilizador
      * @return Lista de Submissiveis.
      */
     public List<Submissivel> getListaSubmissiveisAceitarAlteracaoArtigoComSubmissaoUtilizador(

@@ -22,9 +22,9 @@ public class SubmeterArtigoUI extends javax.swing.JDialog {
     /**
      * Creates new form SubmeterArtigoUI
      *
-     * @param parent
-     * @param modal
-     * @param empresa
+     * @param parent parent
+     * @param modal modal
+     * @param empresa empresa
      */
     public SubmeterArtigoUI(java.awt.Frame parent, boolean modal, Empresa empresa) {
         super(parent, "Submeter artigo científico", modal);
