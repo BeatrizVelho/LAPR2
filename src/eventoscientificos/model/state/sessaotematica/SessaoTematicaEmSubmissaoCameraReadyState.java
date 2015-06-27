@@ -22,7 +22,7 @@ public class SessaoTematicaEmSubmissaoCameraReadyState implements SessaoTematica
      * @param sessaoTematica Sessão Temática que adota o estado.
      */
     public SessaoTematicaEmSubmissaoCameraReadyState(
-                        SessaoTematica sessaoTematica) {
+            SessaoTematica sessaoTematica) {
         this.sessaoTematica = sessaoTematica;
     }
 
@@ -145,7 +145,7 @@ public class SessaoTematicaEmSubmissaoCameraReadyState implements SessaoTematica
     public boolean setCameraReady() {
         if (validarEstado()) {
             this.sessaoTematica.setEstado(
-                                new SessaoTematicaEmDistribuicaoState(this.sessaoTematica));
+                    new SessaoTematicaEmCameraReadyState(this.sessaoTematica));
             return true;
         }
 
