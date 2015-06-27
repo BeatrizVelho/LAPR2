@@ -81,8 +81,8 @@ public class ProcessoDecisao {
      *
      * @return Verdadeiro.
      */
-    public boolean notificarSobreDecisao() {
-        return listaDecisoes.criarNotificacao();
+    public boolean notificarSobreDecisoes() {
+        return listaDecisoes.notificarSobreDecisao();
     }
 
     /**

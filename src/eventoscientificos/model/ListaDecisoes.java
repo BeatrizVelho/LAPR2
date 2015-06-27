@@ -53,14 +53,14 @@ public class ListaDecisoes {
     }
     
     /**
-     * Cria uma notificação de cada Decisão.
+     * Cria uma notificação para cada Decisão.
      * 
      * @return Resultado da notificação.
      */
-    public boolean criarNotificacao() {
-        boolean result = true;
+    public boolean notificarSobreDecisao() {
+        boolean result = false;
         for (Decisao element : listaDecisoes) {
-            result = result && element.criarNotificacao();
+            result = element.criarNotificacao();
         }
         return result;
     }
