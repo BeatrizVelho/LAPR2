@@ -237,4 +237,16 @@ public class RegistoUtilizadores {
         this.tabelasCodificacao.put("CA", new CA());
     }
 
+    /**
+     * Codifica uma password através de uma tabela de probabilidades.
+     * 
+     * @param password Password a codificar.
+     * @param tabela Tabela de codificação.
+     * 
+     * @return Password codificada.
+     */
+    public String codificarPassword(String password, int tabela) {
+        return this.tabelasCodificacao.get("CA").codificar(password, tabela);
+    }
+
 }
