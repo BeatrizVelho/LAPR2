@@ -38,4 +38,12 @@ public interface Decidivel {
      */
     public boolean adicionarProcessoDecisao(ProcessoDecisao processoDecisao);
     
+    /**
+     * Altera o estado do decidivel quando o mesmo atinge a data de fim de 
+     * revisão.
+     * 
+     * @return Verdadeiro se for possível alterar o estado e falso caso não 
+     * seja.
+     */
+    boolean setEmDecisao();
 }
