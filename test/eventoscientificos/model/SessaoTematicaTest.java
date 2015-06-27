@@ -1,6 +1,7 @@
 package eventoscientificos.model;
 
 import eventoscientificos.model.mecanismo.decisao.MecanismoDecisao1;
+import eventoscientificos.model.state.evento.EventoEmSubmissaoCameraReadyState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaCPDefinidaState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaCriadaState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmDetecaoState;
@@ -12,7 +13,9 @@ import eventoscientificos.model.state.sessaotematica.SessaoTematicaEmSubmissaoSt
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaFaseDecisaoState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaRegistadaState;
 import eventoscientificos.model.state.sessaotematica.SessaoTematicaState;
+import eventoscientificos.model.state.submissao.SubmissaoAceiteState;
 import eventoscientificos.model.state.submissao.SubmissaoEmSubmissaoState;
+import eventoscientificos.model.state.submissao.SubmissaoRejeitadaState;
 import eventoscientificos.model.state.submissao.SubmissaoRemovidaState;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,22 +41,22 @@ public class SessaoTematicaTest {
 
     public SessaoTematicaTest() {
         this.sessaoTematica = new SessaoTematica(
-                            "#A9D24R",
-                            "LAPR2",
-                            new Data(2015, 5, 22),
-                            new Data(2015, 5, 28),
-                            new Data(2015, 6, 10),
-                            new Data(2015, 6, 20),
-                            new Data(2015, 6, 24),
-                            new Data(2015, 6, 28),
-                            new Data(2015, 6, 30));
+                "#A9D24R",
+                "LAPR2",
+                new Data(2015, 5, 22),
+                new Data(2015, 5, 28),
+                new Data(2015, 6, 10),
+                new Data(2015, 6, 20),
+                new Data(2015, 6, 24),
+                new Data(2015, 6, 28),
+                new Data(2015, 6, 30));
         this.utilizador = new Utilizador(
-                            "Pedro", "1140781@isep.ipp.pt", "pedro", "1234");
+                "Pedro", "1140781@isep.ipp.pt", "pedro", "1234");
         this.sessaoTematica.novoProponente(new Utilizador(
-                            "Beatriz", "1140587@isep.ipp.pt", "beatriz", "1234"));
+                "Beatriz", "1140587@isep.ipp.pt", "beatriz", "1234"));
         this.licitacao = new Licitacao(new Revisor(new Utilizador(
-                            "fatima", "ola@iml.com", "fafa", "1234")),
-                            new Submissao(), 0, null);
+                "fatima", "ola@iml.com", "fafa", "1234")),
+                new Submissao(), 0, null);
         this.artigoInicial = new Artigo();
         this.artigoFinal = new Artigo();
         this.submissao = new Submissao();
@@ -204,10 +207,10 @@ public class SessaoTematicaTest {
         System.out.println("setAndGetEstado");
         SessaoTematica instance = this.sessaoTematica;
         SessaoTematicaState estado
-                            = new SessaoTematicaCriadaState(this.sessaoTematica);
+                = new SessaoTematicaCriadaState(this.sessaoTematica);
         Class<? extends SessaoTematicaState> expResult = estado.getClass();
         Class<? extends SessaoTematicaState> result
-                            = instance.getEstado().getClass();
+                = instance.getEstado().getClass();
         assertEquals(expResult, result);
     }
 
@@ -384,10 +387,10 @@ public class SessaoTematicaTest {
     public void testEqualsNot() {
         System.out.println("equalsNot");
         Object outroObjeto = new SessaoTematica("#1234", "Sem descrição",
-                            new Data(2016, 1, 1), new Data(2016, 1, 7),
-                            new Data(2016, 1, 9), new Data(2016, 1, 26),
-                            new Data(2016, 2, 4), new Data(2016, 2, 6),
-                            new Data(2016, 2, 8));
+                new Data(2016, 1, 1), new Data(2016, 1, 7),
+                new Data(2016, 1, 9), new Data(2016, 1, 26),
+                new Data(2016, 2, 4), new Data(2016, 2, 6),
+                new Data(2016, 2, 8));
         SessaoTematica instance = this.sessaoTematica;
         boolean expResult = false;
         boolean result = instance.equals(outroObjeto);
@@ -461,7 +464,7 @@ public class SessaoTematicaTest {
         System.out.println("adicionarCP");
         SessaoTematica instance = this.sessaoTematica;
         sessaoTematica.setEstado(
-                            new SessaoTematicaRegistadaState(sessaoTematica));
+                new SessaoTematicaRegistadaState(sessaoTematica));
         CP cp = new CP();
         boolean expResult = true;
         boolean result = instance.adicionarCP(cp);
@@ -506,9 +509,9 @@ public class SessaoTematicaTest {
         instance.setEstado(new SessaoTematicaEmSubmissaoState(instance));
         instance.iniciarProcessoDetecao(listaTiposConflito);
         Class<? extends SessaoTematicaState> expResult
-                            = new SessaoTematicaEmLicitacaoState(instance).getClass();
+                = new SessaoTematicaEmLicitacaoState(instance).getClass();
         Class<? extends SessaoTematicaState> result
-                            = instance.getEstado().getClass();
+                = instance.getEstado().getClass();
         assertEquals(expResult, result);
     }
 
@@ -531,7 +534,7 @@ public class SessaoTematicaTest {
     public void testGetConflitoRevisorSubmissao() {
         System.out.println("getConflitoRevisorSubmissao");
         Revisor revisor = new Revisor(new Utilizador(
-                            "Tiago", "1131658@isep.ipp.pt", "tiago", "1234"));
+                "Tiago", "1131658@isep.ipp.pt", "tiago", "1234"));
         Submissao submissao = new Submissao();
         submissao.setArtigoFinal(new Artigo());
         submissao.setArtigoInicial(new Artigo());
@@ -736,7 +739,7 @@ public class SessaoTematicaTest {
     public void testTemSubmissoesRetiradas() {
         System.out.println("temSubmissoesRetiradas");
         Utilizador utilizador = new Utilizador(
-                            "Pedro", "1140781@isep.ipp.pt", "pedro", "1234");
+                "Pedro", "1140781@isep.ipp.pt", "pedro", "1234");
         Proponente proponente = new Proponente(utilizador);
         sessaoTematica.novoProponente(utilizador);
         this.submissao.setEstado(new SubmissaoRemovidaState(submissao));
@@ -864,4 +867,91 @@ public class SessaoTematicaTest {
         assertEquals(expResult, result);
     }
 
+    /**
+     * Test of isStateValidoParaSubmeterArtigoFinal method, of class
+     * SessaoTematica.
+     */
+    @Test
+    public void testIsStateValidoParaSubmeterArtigoFinal() {
+        System.out.println("isStateValidoParaSubmeterArtigoFinal");
+        SessaoTematica instance = this.sessaoTematica;
+        instance.setEstado(new SessaoTematicaEmSubmissaoCameraReadyState(sessaoTematica));
+        boolean expResult = true;
+        boolean result = instance.isStateValidoParaSubmeterArtigoFinal();
+        assertEquals(expResult, result);
+
+    }
+
+    /**
+     * Test of isUtilizadorUmAutorSubmissaoInicial method, of class
+     * SessaoTematica.
+     */
+    @Test
+    public void testIsUtilizadorUmAutorSubmissaoInicial() {
+        System.out.println("isUtilizadorUmAutorSubmissaoInicial");
+        SessaoTematica instance = this.sessaoTematica;
+
+        Utilizador utilizador = new Utilizador(
+                "bea", "11405431@isep.ipp.pt", "bea", "12345");
+        Submissao submissao = new Submissao();
+        submissao.setEstado(new SubmissaoAceiteState(submissao));
+        Artigo artigo = new Artigo();
+        artigo.getListaAutores().novoAutor(utilizador, new InstituicaoAfiliacao("ISEP"));
+        submissao.setArtigoInicial(artigo);
+        instance.getListaSubmissoes().adicionarSubmissao(submissao);
+
+        boolean expResult = true;
+        boolean result = instance.isUtilizadorUmAutorSubmissaoInicial(utilizador);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of hashMapSubmissoesSessaoTematica method, of class SessaoTematica.
+     */
+    @Test
+    public void testHashMapSubmissoesSessaoTematica() {
+        System.out.println("hashMapSubmissoesSessaoTematica");
+        Evento evento = new Evento("titulo", "descricao", new Local("local"),
+                new Data(2016, 6, 8), new Data(2016, 6, 20),
+                new Data(2016, 7, 7), new Data(2016, 8, 15),
+                new Data(2016, 9, 10), new Data(2016, 10, 1),
+                new Data(2017, 6, 10));
+
+        List<String> palavrasChaves = new ArrayList<>();
+        palavrasChaves.add("praia");
+        Submissao submissao = new Submissao();
+        Artigo artigo = new Artigo();
+        artigo.getListaAutores().novoAutor(new Utilizador("nome", "sad@isep.pt", "isernamo", "FVD"), new InstituicaoAfiliacao("ISEP"));
+        artigo.setPalavrasChave(palavrasChaves);
+        submissao.setArtigoInicial(artigo);
+
+        Revisao revisao = new Revisao(submissao, new Revisor(new Utilizador(
+                "bea", "1140781@isep.ipp.pt", "pedro", "12345")));
+        revisao.setRecomendacaoGlobal(1);
+        submissao.setEstado(new SubmissaoAceiteState(submissao));
+
+        List<String> palavrasChaves1 = new ArrayList<>();
+        palavrasChaves1.add("sumo");
+        Submissao submissao1 = new Submissao();
+        Artigo artigo1 = new Artigo();
+        artigo1.setTitulo("isep");
+        artigo1.getListaAutores().novoAutor(new Utilizador("nome", "sad@isep.pt", "isernamo", "FVD"), new InstituicaoAfiliacao("ISEP"));
+        artigo1.setPalavrasChave(palavrasChaves1);
+        submissao1.setArtigoInicial(artigo1);
+        Revisao revisao1 = new Revisao(submissao1, new Revisor(new Utilizador(
+                "bea", "1140781@isep.ipp.pt", "pedro", "12345")));
+        revisao1.setRecomendacaoGlobal(0);
+        submissao1.setEstado(new SubmissaoRejeitadaState(submissao1));
+
+        ProcessoDistribuicao processo = new ProcessoDistribuicao();
+        processo.getListaRevisoes().adicionarRevisao(revisao);
+        processo.getListaRevisoes().adicionarRevisao(revisao1);
+        evento.adicionarProcessoDistribuicao(processo);
+
+        evento.setEstado(new EventoEmSubmissaoCameraReadyState(evento));
+
+        HashMap<String, Integer> hashMapSubmissoesAceites = new HashMap<>();
+        HashMap<String, Integer> hashMapSubmissoesRejeitadas = new HashMap<>();
+        evento.hashMapSubmissoes(hashMapSubmissoesAceites, hashMapSubmissoesRejeitadas);
+    }
 }
