@@ -47,6 +47,7 @@ public class AlterarUtilizadorController {
 
     /**
      * Devolve nome do utilizador
+     *
      * @return nome do utilizador
      */
     public String getUtilizadorNome() {
@@ -55,22 +56,25 @@ public class AlterarUtilizadorController {
 
     /**
      * Devolve o email do utilizador
+     *
      * @return email do utilizador
      */
     public String getUtilizadorEmail() {
         return this.utilizadorClone.getEmail();
     }
-    
+
     /**
      * Devolve o username do utilizador
+     *
      * @return username do utilizador
      */
     public String getUtilizadorUsername() {
         return this.utilizadorClone.getUsername();
     }
-    
+
     /**
      * Devolve a password do uilizador
+     *
      * @return password do uilizador
      */
     public String getUtilizadorPassword() {
@@ -104,13 +108,27 @@ public class AlterarUtilizadorController {
      * @param password Password do utilizador.
      * @param nome Nome do utilizador.
      * @param email Email do utilizador.
-     * 
+     *
      * @return Verdadeiro se for possível alterar os dados do utilizador.
      */
     public boolean alterarDadosUtilizador(
             String username, String password, String nome, String email) {
         this.utilizadorClone.setUsername(username);
-        this.utilizadorClone.setPassword(password);
+
+        String codificacao[] = utilizador.getCodificadorTabela().split(";");
+        String passwordCodificada;
+        switch (codificacao[0]) {
+            case "CA":
+                int tabela = Integer.parseInt(codificacao[1].substring(3)) - 1;
+                passwordCodificada
+                        = this.empresa.getRegistoUtilizadores().codificarPassword(
+                                password, tabela);
+                break;
+            default:
+                passwordCodificada = password;
+        }
+
+        this.utilizadorClone.setPassword(passwordCodificada);
         this.utilizadorClone.setNome(nome);
         this.utilizadorClone.setEmail(email);
 
