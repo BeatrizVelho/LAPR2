@@ -17,6 +17,7 @@ public class AlterarUtilizadorControllerTest {
         this.empresa = new Empresa();
         this.utilizador = new Utilizador(
                 "Beatriz", "1140587@isep.ipp.pt", "beatrizVelho", "isep2014");
+        this.utilizador.setCodificadorTabela("NFN");
         empresa.setUtilizadorAutenticado(utilizador);
         empresa.getRegistoUtilizadores().adicionaUtilizador(utilizador);
 
@@ -113,11 +114,15 @@ public class AlterarUtilizadorControllerTest {
     @Test
     public void testAtualizarUtilizador() {
         System.out.println("atualizarUtilizador");
-        AlterarUtilizadorController instance = null;
-        boolean expResult = false;
+        String username = "Joao";
+        String password = "12345";
+        String nome = "JoaoPedro";
+        String email = "joao@isep.ipp.pt";
+        AlterarUtilizadorController instance = new AlterarUtilizadorController(empresa);
+        instance.criarCloneUtilizador();
+        instance.alterarDadosUtilizador(username, password, nome, email);
+        boolean expResult = true;
         boolean result = instance.atualizarUtilizador();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 }
