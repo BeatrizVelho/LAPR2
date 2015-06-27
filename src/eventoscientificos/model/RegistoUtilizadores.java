@@ -69,7 +69,8 @@ public class RegistoUtilizadores {
      * @param password password do utilizado a criar
      * @return Utilizador
      */
-    public Utilizador novoUtilizador(String nome, String email, String username, String password) {
+    public Utilizador novoUtilizador(String nome, String email,
+            String username, String password) {
         String novaPassword, codificadorTabela = "";
 
         if (this.tabelasCodificacao.size() == 1) {
@@ -81,10 +82,10 @@ public class RegistoUtilizadores {
         } else {
             CA ca = (CA) this.tabelasCodificacao.get("CA");
 
-            double tabelaEscolhida = ((Math.random()) * ca.getSizeListaTabelasFreq() - 1) / 10;
-            codificadorTabela = String.join(";", ca.getClass().getSimpleName(), "T00" + tabelaEscolhida, "" + password.length());
+            int tabelaEscolhida = (int) (Math.random() * ca.getSizeListaTabelasFreq());
+            codificadorTabela = String.join(";", ca.getClass().getSimpleName(), "T00" + (tabelaEscolhida + 1), "" + password.length());
 
-            novaPassword = ca.codificar(password, (int) tabelaEscolhida);
+            novaPassword = ca.codificar(password, tabelaEscolhida);
         }
 
         Utilizador utilizador = new Utilizador(nome, email, username, novaPassword);
@@ -93,10 +94,12 @@ public class RegistoUtilizadores {
         if (!utilizador.validarUtilizador()) {
             throw new IllegalArgumentException(" Utilizador invalido");
         }
+
         if (!validarUtilizador(utilizador)) {
             throw new IllegalArgumentException("Utilizador ja consta na lista"
-                                + " de utilizadores da empresa");
+                    + " de utilizadores da empresa");
         }
+
         return utilizador;
     }
 
@@ -113,7 +116,7 @@ public class RegistoUtilizadores {
      * @return novo utilizador criado
      */
     public Utilizador novoUtilizador(String nome, String email, String username,
-                        String password, String codificadorTabela) {
+            String password, String codificadorTabela) {
 
         Utilizador utilizador = new Utilizador(nome, email, username, password);
         utilizador.setCodificadorTabela(codificadorTabela);
@@ -123,7 +126,7 @@ public class RegistoUtilizadores {
         }
         if (!validarUtilizador(utilizador)) {
             throw new IllegalArgumentException("Utilizador ja consta na lista"
-                                + " de utilizadores da empresa");
+                    + " de utilizadores da empresa");
         }
         return utilizador;
     }
@@ -160,10 +163,10 @@ public class RegistoUtilizadores {
      * @return Verdadeiro se o utilizador passado por parametro não existir
      */
     public boolean validarUtilizadorClone(
-                        Utilizador utilizador, Utilizador utilizadorClone) {
+            Utilizador utilizador, Utilizador utilizadorClone) {
         for (Utilizador outroUtilizador : this.listaUtilizadores) {
             if (utilizadorClone.equals(outroUtilizador)
-                                && !utilizador.equals(outroUtilizador)) {
+                    && !utilizador.equals(outroUtilizador)) {
                 return false;
             }
         }
@@ -181,9 +184,9 @@ public class RegistoUtilizadores {
      * não seja.
      */
     public boolean atualizarUtilizador(
-                        Utilizador utilizador, Utilizador utilizadorClone) {
+            Utilizador utilizador, Utilizador utilizadorClone) {
         return this.listaUtilizadores.remove(utilizador)
-                            && this.listaUtilizadores.add(utilizadorClone);
+                && this.listaUtilizadores.add(utilizadorClone);
     }
 
     /**
@@ -217,7 +220,7 @@ public class RegistoUtilizadores {
     public Utilizador getUtilizador(String id) {
         for (Utilizador utilizador : this.listaUtilizadores) {
             if (utilizador.getEmail().equals(id)
-                                || utilizador.getUsername().equals(id)) {
+                    || utilizador.getUsername().equals(id)) {
                 return utilizador;
             }
         }
@@ -227,10 +230,11 @@ public class RegistoUtilizadores {
 
     /**
      * Inicia a criação do codificador aritmético.
+     *
      * @throws java.io.IOException
      */
     public void iniciarCodificadorAritmetico() throws IOException {
-        this.tabelasCodificacao.put("CodificadorAritmetico", new CA());
+        this.tabelasCodificacao.put("CA", new CA());
     }
 
 }
