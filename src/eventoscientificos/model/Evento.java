@@ -791,9 +791,7 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel,
     @Override
     public void iniciarProcessoDetecao(List<TipoConflito> listaTiposConflito) {
         ProcessoDetecao processoDetecao = novoProcessoDetecao(listaTiposConflito);
-
         processoDetecao.detetarConflitos();
-
         adicionarProcessoDetecao(processoDetecao);
     }
 
