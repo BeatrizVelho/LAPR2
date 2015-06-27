@@ -1,4 +1,3 @@
-
 package eventoscientificos.controllers;
 
 import eventoscientificos.model.Artigo;
@@ -10,15 +9,19 @@ import eventoscientificos.model.Licitacao;
 import eventoscientificos.model.Local;
 import eventoscientificos.model.Revisor;
 import eventoscientificos.model.Submissao;
+import eventoscientificos.model.TipoConflito;
 import eventoscientificos.model.Utilizador;
+import eventoscientificos.model.state.evento.EventoEmDetecaoConflitos;
 import eventoscientificos.model.state.evento.EventoEmLicitacaoState;
 import java.util.ArrayList;
+import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import utils.Data;
 
 /**
- *Teste à classe LicitarArtigoController
+ * Teste à classe LicitarArtigoController
+ *
  * @author G01
  */
 public class LicitarArtigoControllerTest {
@@ -43,9 +46,13 @@ public class LicitarArtigoControllerTest {
                             new Data(2017, 6, 10));
         CP cp = new CP();
         cp.novoRevisor(utilizador);
-        this.evento.setCP(cp);
-        this.evento.setEstado(new EventoEmLicitacaoState(evento));
         this.empresa.getRegistoEventos().adicionarEvento(evento);
+        this.evento.setCP(cp);
+        List<TipoConflito> listTC = new ArrayList<TipoConflito>();
+        listTC.add(new TipoConflito("Parente"));
+        listTC.add(new TipoConflito("Autor"));
+        this.evento.setEstado(new EventoEmDetecaoConflitos(evento));
+        this.evento.iniciarProcessoDetecao(listTC);
 
         Artigo artigoInicial = new Artigo();
         Artigo artigoFinal = new Artigo();
@@ -93,9 +100,11 @@ public class LicitarArtigoControllerTest {
         System.out.println("novaLicitacao");
         Revisor revisor = this.revisor;
         Submissao s = this.submissao;
+
         LicitarArtigoController instance = new LicitarArtigoController(this.empresa);
         instance.getListaLicitaveisComArtigosPorLicitarRevisor();
         instance.selecionarLicitavel(0);
+
         boolean expResult = true;
         boolean result = instance.novaLicitacao(revisor, s);
         assertEquals(expResult, result);
@@ -125,11 +134,13 @@ public class LicitarArtigoControllerTest {
     @Test
     public void testAdicionarListaLicitacoesTemporaria() {
         System.out.println("adicionarListaLicitacoesTemporaria");
+        int grauInteresse = 0;
+        Conflito conflito = new Conflito(revisor, submissao, new ArrayList());
         LicitarArtigoController instance = new LicitarArtigoController(this.empresa);
         instance.getListaLicitaveisComArtigosPorLicitarRevisor();
         instance.selecionarLicitavel(0);
         instance.novaLicitacao(revisor, this.submissao);
-        instance.novaLicitacao(revisor, this.submissao);
+        //    instance.inserirDadosLicitacao(grauInteresse, conflito);
         boolean expResult = true;
         boolean result = instance.adicionarListaLicitacoesTemporaria();
         assertEquals(expResult, result);

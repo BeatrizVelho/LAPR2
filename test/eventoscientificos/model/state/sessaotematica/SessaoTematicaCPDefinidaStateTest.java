@@ -16,15 +16,15 @@ public class SessaoTematicaCPDefinidaStateTest {
 
     public SessaoTematicaCPDefinidaStateTest() {
         SessaoTematica sessaoTematica = new SessaoTematica(
-                "#A9D24R",
-                "LAPR2",
-                new Data(2015, 5, 22),
-                new Data(2015, 5, 28),
-                new Data(2015, 6, 10),
-                new Data(2015, 6, 20),
-                new Data(2015, 6, 24),
-                new Data(2015, 6, 28),
-                new Data(2015, 7, 7));
+                            "#A9D24R",
+                            "LAPR2",
+                            new Data(2015, 5, 22),
+                            new Data(2015, 5, 28),
+                            new Data(2015, 6, 10),
+                            new Data(2015, 6, 20),
+                            new Data(2015, 6, 24),
+                            new Data(2015, 6, 28),
+                            new Data(2015, 7, 7));
         sessaoTematica.setEstado(
                             new SessaoTematicaRegistadaState(sessaoTematica));
         sessaoTematica.adicionarCP(new CP());
@@ -45,8 +45,7 @@ public class SessaoTematicaCPDefinidaStateTest {
     }
 
     /**
-     * Teste do método setRegistada, da classe
-     * SessaoTematicaCPDefinidaState.
+     * Teste do método setRegistada, da classe SessaoTematicaCPDefinidaState.
      */
     @Test
     public void testSetRegistada() {
@@ -58,8 +57,7 @@ public class SessaoTematicaCPDefinidaStateTest {
     }
 
     /**
-     * Test do método setCPDefinida, da classe
-     * SessaoTematicaCPDefinidaState.
+     * Test do método setCPDefinida, da classe SessaoTematicaCPDefinidaState.
      */
     @Test
     public void testSetCPDefinida() {
@@ -71,12 +69,12 @@ public class SessaoTematicaCPDefinidaStateTest {
     }
 
     /**
-     * Teste do método setEmSubmissao, da classe
-     * SessaoTematicaCPDefinidaState.
+     * Teste do método setEmSubmissao, da classe SessaoTematicaCPDefinidaState.
      */
     @Test
     public void testSetEmSubmissao() {
         System.out.println("setEmSubmissao");
+        this.sessaoTematica.setDataInicioSubmissao(new Data(2017, 4, 22));
         SessaoTematicaState instance = this.sessaoTematica.getEstado();
         boolean expResult = false;
         boolean result = instance.setEmSubmissao();
@@ -96,8 +94,7 @@ public class SessaoTematicaCPDefinidaStateTest {
     }
 
     /**
-     * Teste do méotodo setEmLicitacao, da classe
-     * SessaoTematicaCPDefinidaState.
+     * Teste do méotodo setEmLicitacao, da classe SessaoTematicaCPDefinidaState.
      */
     @Test
     public void testSetEmLicitacao() {
@@ -122,8 +119,7 @@ public class SessaoTematicaCPDefinidaStateTest {
     }
 
     /**
-     * Teste do método setEmRevisao, da classe
-     * SessaoTematicaCPDefinidaState.
+     * Teste do método setEmRevisao, da classe SessaoTematicaCPDefinidaState.
      */
     @Test
     public void testSetEmRevisao() {
@@ -135,8 +131,7 @@ public class SessaoTematicaCPDefinidaStateTest {
     }
 
     /**
-     * Teste do método setFaseDecisao, da classe
-     * SessaoTematicaCPDefinidaState.
+     * Teste do método setFaseDecisao, da classe SessaoTematicaCPDefinidaState.
      */
     @Test
     public void testSetFaseDecisao() {
@@ -161,8 +156,7 @@ public class SessaoTematicaCPDefinidaStateTest {
     }
 
     /**
-     * Teste do método setCameraReady, da classe
-     * SessaoTematicaCPDefinidaState.
+     * Teste do método setCameraReady, da classe SessaoTematicaCPDefinidaState.
      */
     @Test
     public void testSetCameraReady() {
@@ -174,12 +168,12 @@ public class SessaoTematicaCPDefinidaStateTest {
     }
 
     /**
-     * Teste do método validarEstado, da classe
-     * SessaoTematicaCPDefinidaState.
+     * Teste do método validarEstado, da classe SessaoTematicaCPDefinidaState.
      */
     @Test
     public void testValidarEstado() {
         System.out.println("validarEstado");
+        this.sessaoTematica.setDataInicioSubmissao(new Data(2017, 4, 22));
         SessaoTematicaState instance = this.sessaoTematica.getEstado();
         boolean expResult = false;
         boolean result = instance.validarEstado();
@@ -237,6 +231,7 @@ public class SessaoTematicaCPDefinidaStateTest {
     @Test
     public void testIsStateValidoParaSubmeterNot() {
         System.out.println("isStateValidoParaSubmeterNot");
+        this.sessaoTematica.setDataInicioSubmissao(new Data(2017, 4, 22));
         SessaoTematicaState instance = sessaoTematica.getEstado();
         boolean expResult = false;
         boolean result = instance.isStateValidoParaSubmeter();
@@ -250,6 +245,7 @@ public class SessaoTematicaCPDefinidaStateTest {
     @Test
     public void testIsStateValidoParaAlterar() {
         System.out.println("isStateValidoParaAlterar");
+        this.sessaoTematica.setDataInicioSubmissao(new Data(2017, 4, 22));
         SessaoTematicaState instance = sessaoTematica.getEstado();
         boolean expResult = false;
         boolean result = instance.isStateValidoParaAlterar();

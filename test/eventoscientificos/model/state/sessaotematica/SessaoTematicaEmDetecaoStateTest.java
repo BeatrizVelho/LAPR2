@@ -14,15 +14,15 @@ public class SessaoTematicaEmDetecaoStateTest {
 
     public SessaoTematicaEmDetecaoStateTest() {
         SessaoTematica sessaoTematica = new SessaoTematica(
-                "#12345",
-                "Um descrição",
-                new Data(2015, 5, 22),
-                new Data(2015, 5, 28),
-                new Data(2015, 6, 10),
-                new Data(2015, 6, 20),
-                new Data(2015, 6, 24),
-                new Data(2015, 6, 28),
-                new Data(2015, 7, 7));
+                            "#12345",
+                            "Um descrição",
+                            new Data(2015, 5, 22),
+                            new Data(2015, 5, 28),
+                            new Data(2015, 6, 10),
+                            new Data(2015, 6, 20),
+                            new Data(2015, 6, 24),
+                            new Data(2015, 6, 28),
+                            new Data(2015, 7, 7));
         sessaoTematica.setEstado(
                             new SessaoTematicaEmDetecaoState(sessaoTematica));
 
@@ -42,8 +42,7 @@ public class SessaoTematicaEmDetecaoStateTest {
     }
 
     /**
-     * Teste do método setRegistada, da classe
-     * SessaoTematicaEmDetecaoState.
+     * Teste do método setRegistada, da classe SessaoTematicaEmDetecaoState.
      */
     @Test
     public void testSetRegistada() {
@@ -55,8 +54,7 @@ public class SessaoTematicaEmDetecaoStateTest {
     }
 
     /**
-     * Test do método setCPDefinida, da classe
-     * SessaoTematicaEmDetecaoState.
+     * Test do método setCPDefinida, da classe SessaoTematicaEmDetecaoState.
      */
     @Test
     public void testSetCPDefinida() {
@@ -68,8 +66,7 @@ public class SessaoTematicaEmDetecaoStateTest {
     }
 
     /**
-     * Teste do método setEmSubmissao, da classe
-     * SessaoTematicaEmDetecaoState.
+     * Teste do método setEmSubmissao, da classe SessaoTematicaEmDetecaoState.
      */
     @Test
     public void testSetEmSubmissao() {
@@ -93,14 +90,14 @@ public class SessaoTematicaEmDetecaoStateTest {
     }
 
     /**
-     * Teste do méotodo setEmLicitacao, da classe
-     * SessaoTematicaEmDetecaoState.
+     * Teste do méotodo setEmLicitacao, da classe SessaoTematicaEmDetecaoState.
      */
     @Test
     public void testSetEmLicitacao() {
         System.out.println("setEmLicitacao");
+        this.sessaoTematica.setEstado(new SessaoTematicaEmDetecaoState(sessaoTematica));
         SessaoTematicaState instance = this.sessaoTematica.getEstado();
-        boolean expResult = true;
+        boolean expResult = false;
         boolean result = instance.setEmLicitacao();
         assertEquals(expResult, result);
     }
@@ -119,8 +116,7 @@ public class SessaoTematicaEmDetecaoStateTest {
     }
 
     /**
-     * Teste do método setEmRevisao, da classe
-     * SessaoTematicaEmDetecaoState.
+     * Teste do método setEmRevisao, da classe SessaoTematicaEmDetecaoState.
      */
     @Test
     public void testSetEmRevisao() {
@@ -132,8 +128,7 @@ public class SessaoTematicaEmDetecaoStateTest {
     }
 
     /**
-     * Teste do método setFaseDecisao, da classe
-     * SessaoTematicaEmDetecaoState.
+     * Teste do método setFaseDecisao, da classe SessaoTematicaEmDetecaoState.
      */
     @Test
     public void testSetFaseDecisao() {
@@ -158,8 +153,7 @@ public class SessaoTematicaEmDetecaoStateTest {
     }
 
     /**
-     * Teste do método setCameraReady, da classe
-     * SessaoTematicaEmDetecaoState.
+     * Teste do método setCameraReady, da classe SessaoTematicaEmDetecaoState.
      */
     @Test
     public void testSetCameraReady() {
@@ -171,14 +165,13 @@ public class SessaoTematicaEmDetecaoStateTest {
     }
 
     /**
-     * Teste do método validarEstado, da classe
-     * SessaoTematicaEmDetecaoState.
+     * Teste do método validarEstado, da classe SessaoTematicaEmDetecaoState.
      */
     @Test
     public void testValidarEstado() {
         System.out.println("validarEstado");
         SessaoTematicaState instance = this.sessaoTematica.getEstado();
-        boolean expResult = true;
+        boolean expResult = false;
         boolean result = instance.validarEstado();
         assertEquals(expResult, result);
     }
