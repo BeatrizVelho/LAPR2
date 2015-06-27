@@ -1,6 +1,7 @@
 package eventoscientificos.model.state.sessaotematica;
 
 import eventoscientificos.model.SessaoTematica;
+import utils.Data;
 
 /**
  * Representa uma instância de SessaoTematicaEmRevisaoState atráves de uma
@@ -116,7 +117,7 @@ public class SessaoTematicaEmRevisaoState implements SessaoTematicaState {
     public boolean setFaseDecisao() {
         if (validarEstado()) {
             this.sessaoTematica.setEstado(
-                                new SessaoTematicaEmDistribuicaoState(this.sessaoTematica));
+                    new SessaoTematicaFaseDecisaoState(this.sessaoTematica));
             return true;
         }
 
@@ -151,8 +152,7 @@ public class SessaoTematicaEmRevisaoState implements SessaoTematicaState {
      */
     @Override
     public boolean validarEstado() {
-        // Adicionar validações de negócio.
-        return true;
+        return Data.dataAtual().isMaior(this.sessaoTematica.getDataFimRevisao());
     }
 
     /**
