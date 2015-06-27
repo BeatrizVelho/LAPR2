@@ -166,28 +166,32 @@ public class EventoFaseDecisaoState implements EventoState {
      */
     @Override
     public boolean validarEstado() {
-        // implementar qd houver no evento/st o processo de decisão
-        return false;
+       if(this.e.getDataFimSubmissaoCameraReady().isMaior(Data.dataAtual())) {
+           return true;
+       }
+       
+       return false;
     }
- /**
+
+    /**
      * Valida se o evento se encontra num estado válido para ser removido
      *
      * @return verdadeiro se estiver no estado correto e falso se não estiver
      */
     @Override
     public boolean isStateValidoParaRemover() {
-              return (!(setCriado() || setRegistado() || setSessoesTematicasDefinidas() || setCPDefinida() || setCameraReady()));
+        return (!(setCriado() || setRegistado() || setSessoesTematicasDefinidas() || setCPDefinida() || setCameraReady()));
 
     }
 
-      /**
+    /**
      * Valida se o evento se encontra num estado válido para submeter artigos
      *
      * @return verdadeiro se estiver no estado correto e falso se não estiver
      */
     @Override
     public boolean isStateValidoParaSubmeter() {
-               return setEmSubmissao();
+        return setEmSubmissao();
 
     }
 
@@ -199,7 +203,7 @@ public class EventoFaseDecisaoState implements EventoState {
      */
     @Override
     public boolean isStateValidoParaAlterar() {
-               return setEmSubmissao();
+        return setEmSubmissao();
 
     }
 
