@@ -9,6 +9,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,98 +32,47 @@ public class CA implements Codificador {
     /**
      * Lista de tabelas de frequências.
      */
-    List<FrequencyTable> listaTabelasFrequencia;
+    double[][] listaTabelasProbabilidades;
 
     /**
      * Constrói uma instância de CodificadorAritmetico.
      */
     public CA() throws IOException {
-        CSVParser csvParser = new CSVParser();
-         int[][] matrizTabelaFrequencia = csvParser.lerTabelasFrequencia();
-
-        this.listaTabelasFrequencia = new ArrayList();
-            for (int i = 0; i < matrizTabelaFrequencia.length; i++) {
-            listaTabelasFrequencia.add(new SimpleFrequencyTable(matrizTabelaFrequencia[i]));
-        }
+        this.listaTabelasProbabilidades = new CSVParser().lerTabelasFrequencia();
     }
 
     /**
-     * Codifica a palavra recebida por parãmetro
+     * Codifica a password recebida por parametro, aritméticamente.
      *
-     * @param password password a codificar
-     * @return palavra codificada
+     * @param password Password a codificar.
+     * @param tabela Tabela utilizada na codificação.
+     * 
+     * @return Password codificada.
      */
     @Override
     public String codificar(String password, int tabela) {
-//        int numeroDeCarateresTabela = 257;
-      FrequencyTable tabelaEscolhida = listaTabelasFrequencia.get(tabela);
-//        double dimensaoIntervalo = 1, limiteInferior = 0.000000001, limiteSuperior = 1;
-//        boolean encontrado;
-////        int[] frequencias = null;
-//        // List<Character> letras = new ArrayList();
-////
-////        for (int i = 0; i < password.length(); i++) {
-////            if (!letras.contains(password.charAt(i))) {
-////                letras.add(password.charAt(i));
-////            }
-////        }
-////        frequencias = new int[letras.size()];
-//
-////        for (int i = 0; i < numeroDeCarateresTabela; i++) {
-////            int codigo = String.valueOf(letras.get(i)).codePointAt(0);
-////            int freq = tabelaEscolhida.get(codigo);
-////            dimensaoIntervalo += freq;
-////           // frequencias[i] = freq;
-////        }
-//        for (int i = 0; i < password.length(); i++) {
-//            int indiceSimbolo = 0;
-//            do {
-//                encontrado = false;
-//                char c = password.charAt(i);
-//             //   String.valueOf(c).
-//                int freq = tabelaEscolhida.get(indiceSimbolo);
-//                if (freq != String.valueOf(c).codePointAt(0)) {
-//                    limiteInferior = (dimensaoIntervalo * tabelaEscolhida.get(freq) / 10000.0) + limiteInferior;
-//                } else {
-//                    limiteSuperior = (dimensaoIntervalo * tabelaEscolhida.get(freq) / 10000.0) + limiteInferior;
-//                    dimensaoIntervalo = limiteSuperior - limiteInferior;
-//                    encontrado = true;
-//                }
-//                indiceSimbolo++;
-//            } while (encontrado == false);
-//        }
-////return Double.toString(limiteInferior);
-//        return String.format("%.8f", limiteInferior);
-      
-        InputStream in = new ByteArrayInputStream(password.getBytes(StandardCharsets.UTF_8));
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        BitOutputStream out = new BitOutputStream(byteArrayOutputStream);
-        try {
-            ArithmeticEncoder enc = new ArithmeticEncoder(out);
-            while (true) {
-                int b = in.read();
-                if (b == -1) {
-                    break;
-                }
-                enc.write(tabelaEscolhida, b);
-            }
-            //enc.write(tabelaEscolhida, 256);  // EOF
-            enc.finish();
-        }       
-        catch (Exception ex) {
-            System.out.println(ex);
-        }
-        finally {
-            try {
-                if (out != null) out.close();
-                if (in != null)in.close();
-            }
-            catch (Exception ex) {
-                System.out.println(ex);
-            }
+        char[] sequenciaCarateres = password.toCharArray();
+        
+        double[] intervalos = new double[256];
+        
+        for (int i = 1; i < intervalos.length; i++) {
+            intervalos[i] = (double) Math.round((intervalos[i - 1] + this.listaTabelasProbabilidades[tabela][i - 1]) * 10000000) / 10000000;
         }
         
-        return byteArrayOutputStream.toString();
+        BigDecimal f = new BigDecimal(0);
+        BigDecimal g = new BigDecimal(1);
+        for (int i = 0; i < sequenciaCarateres.length; i++) {
+            double probabilidade = this.listaTabelasProbabilidades[tabela][sequenciaCarateres[i]];
+            double intervalo = intervalos[sequenciaCarateres[i]];
+            
+            BigDecimal pG = g.multiply(new BigDecimal(probabilidade));
+            BigDecimal qG = g.multiply(new BigDecimal(intervalo));
+            
+            f = f.add(qG);
+            g = pG;
+        }
+
+        return String.valueOf(f.doubleValue());
     }
 
     /**
@@ -131,7 +81,7 @@ public class CA implements Codificador {
      * @return numero de tabelas
      */
     public int getSizeListaTabelasFreq() {
-        return listaTabelasFrequencia.size();
+        return listaTabelasProbabilidades.length;
     }
 
 }

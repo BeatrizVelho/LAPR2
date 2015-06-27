@@ -1,18 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package utils.codificador.aritmetico;
 
-import eventoscientificos.model.Empresa;
 import java.io.IOException;
-import java.util.List;
-import nayuki.arithcode.FrequencyTable;
-import nayuki.arithcode.SimpleFrequencyTable;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import utils.CSVParser;
 
 /**
  *
@@ -24,21 +14,21 @@ public class CATest {
     }
 
     /**
-     * Test of codificar method, of class CA.
+     * Teste do método codificar, da class CA.
      */
     @Test
     public void testCodificar() throws IOException {
         System.out.println("codificar");
         CA instance = new CA();
-        int tabela = 0;
-        String password = "o";
-        String expResult = "Ä";
+        int tabela = 2;
+        String password = "((";
+        String expResult = "0.005025";
         String result = instance.codificar(password, tabela);
         assertEquals(expResult, result);
     }
-
+    
     /**
-     * Test of getSizeListaTabelasFreq method, of class CA.
+     * Teste do método getSizeListaTabelasFreq, da classe CA.
      */
     @Test
     public void testGetSizeListaTabelasFreq() throws IOException {
