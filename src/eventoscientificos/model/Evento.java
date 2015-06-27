@@ -1022,7 +1022,7 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel,
      * @return Verdadeiro se está no estado FaseDecisao e falso se não está.
      */
     public boolean isEstadoValidoParaDecidir() {
-        return this.estado instanceof EventoFaseDecisaoState;
+        return this.estado.setFaseDecisao();
     }
 
     /**

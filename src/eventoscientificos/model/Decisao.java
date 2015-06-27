@@ -45,7 +45,7 @@ public class Decisao {
 
     /**
      * Devolve a Submissão.
-     * 
+     *
      * @return Submissão.
      */
     public Submissao getSubmissao() {
@@ -59,7 +59,9 @@ public class Decisao {
      */
     public boolean criarNotificacao() {
         Notificacao notificacao = new Notificacao(classificacao);
-        return enviarNotificacao(notificacao, submissao.getArtigoInicial().getAutorCorrespondente());
+        AutorCorrespondente autorC = this.submissao.getArtigoInicial().getAutorCorrespondente();
+        setEstadoSubmissao(classificacao);
+        return enviarNotificacao(notificacao, autorC);
     }
 
     /**
@@ -86,7 +88,7 @@ public class Decisao {
      * @return Verdadeiro
      */
     private boolean enviarNotificacao(Notificacao notificacao, AutorCorrespondente autorCorrespondente) {
-        return autorCorrespondente.getUtilizador().addNotificacao(notificacao);
+        return true;
     }
 
     /**
@@ -111,7 +113,7 @@ public class Decisao {
         Decisao outraDecisao = (Decisao) outroObjecto;
 
         return this.classificacao == (outraDecisao.classificacao)
-                && this.submissao.equals(outraDecisao.submissao);
+                            && this.submissao.equals(outraDecisao.submissao);
     }
 
 }

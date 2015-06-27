@@ -66,14 +66,14 @@ public class ProcessoDecisaoTest {
     }
 
     /**
-     * Teste do método notificarSobreDecisao, da classe ProcessoDecisao.
+     * Teste do método notificarSobreDecisoes, da classe ProcessoDecisao.
      */
     @Test
     public void testNotificarSobreDecisao() {
         System.out.println("notificarSobreDecisao");
         ProcessoDecisao instance = new ProcessoDecisao();
         boolean expResult = true;
-        boolean result = instance.notificarSobreDecisao();
+        boolean result = instance.notificarSobreDecisoes();
         assertEquals(expResult, result);
     }
 
