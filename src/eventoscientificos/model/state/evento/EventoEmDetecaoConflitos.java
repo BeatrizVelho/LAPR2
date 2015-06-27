@@ -169,14 +169,15 @@ public class EventoEmDetecaoConflitos implements EventoState {
     public boolean validarEstado() {
         return this.e.getProcessoDetecao() != null;
     }
- /**
+
+    /**
      * Valida se o evento se encontra num estado válido para ser removido
      *
      * @return verdadeiro se estiver no estado correto e falso se não estiver
      */
     @Override
     public boolean isStateValidoParaRemover() {
-               return (!(setCriado() || setRegistado() || setSessoesTematicasDefinidas() || setCPDefinida() || setCameraReady()));
+        return (!(setCriado() || setRegistado() || setSessoesTematicasDefinidas() || setCPDefinida() || setCameraReady()));
 
     }
 
@@ -187,7 +188,7 @@ public class EventoEmDetecaoConflitos implements EventoState {
      */
     @Override
     public boolean isStateValidoParaSubmeter() {
-                return setEmSubmissao();
+        return setEmSubmissao();
 
     }
 
@@ -199,7 +200,7 @@ public class EventoEmDetecaoConflitos implements EventoState {
      */
     @Override
     public boolean isStateValidoParaAlterar() {
-                return setEmSubmissao();
+        return setEmSubmissao();
 
     }
 

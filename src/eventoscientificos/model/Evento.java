@@ -727,12 +727,8 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel,
      */
     @Override
     public Conflito getConflitoRevisorSubmissao(Revisor revisor, Submissao submissao) {
-        if (this.processoDecisao != null) {
-            return this.processoDetecao.getListaConflito().validarExistenciaConflito(
+        return this.processoDetecao.getListaConflito().validarExistenciaConflito(
                                 revisor, submissao);
-        } else {
-            throw new NullPointerException("Processo Deteção por instanciar ");
-        }
     }
 
     /**
