@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package eventoscientificos.model;
 
 import java.io.IOException;
@@ -195,7 +190,6 @@ public class RegistoUtilizadoresTest {
         String email = "rita_susana@email.com";
         String username = "rita";
         String password = "1234";
-        int numeroCarateres = 4;
         String codificadorTabela = "CA;T001;4";
         RegistoUtilizadores instance = new RegistoUtilizadores();
         Utilizador expResult = new Utilizador(nome, email, username, password);
@@ -203,4 +197,17 @@ public class RegistoUtilizadoresTest {
         assertEquals(expResult, result);
     }
 
- }
+    /**
+     * Teste ao método codificarPassword, da classe Registo Utilizadores.
+     */
+    @Test
+    public void testCodificarPassword() throws IOException {
+        System.out.println("codificarPassword");
+        Empresa empresa = new Empresa();
+        empresa.getRegistoUtilizadores().iniciarCodificadorAritmetico();
+        String expResult = "0.0";
+        String result = empresa.getRegistoUtilizadores().codificarPassword("!!", 0);
+        assertEquals(expResult, result);
+    }
+
+}

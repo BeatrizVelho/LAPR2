@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package eventoscientificios.view;
+package eventoscientificos.view;
 
 import eventoscientificos.controllers.CriarCPController;
 import eventoscientificos.model.Empresa;

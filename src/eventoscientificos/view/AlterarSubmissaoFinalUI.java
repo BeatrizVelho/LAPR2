@@ -1,6 +1,6 @@
-package eventoscientificios.view;
+package eventoscientificos.view;
 
-import eventoscientificos.controllers.AlterarSubmissaoController;
+import eventoscientificos.controllers.AlterarSubmissaoFinalController;
 import eventoscientificos.model.Empresa;
 import eventoscientificos.model.Submissao;
 import java.awt.Frame;
@@ -13,22 +13,18 @@ import javax.swing.JOptionPane;
 /**
  * @author G01
  */
-public class AlterarSubmissaoUI extends javax.swing.JDialog {
+public class AlterarSubmissaoFinalUI extends javax.swing.JDialog {
 
     private Frame framePai;
-    private AlterarSubmissaoController controller;
+    private AlterarSubmissaoFinalController controller;
 
     /**
      * Creates new form AlterarSubmissaoUI
-     *
-     * @param parent
-     * @param modal
-     * @param empresa
      */
-    public AlterarSubmissaoUI(java.awt.Frame parent, boolean modal, Empresa empresa) {
+    public AlterarSubmissaoFinalUI(java.awt.Frame parent, boolean modal, Empresa empresa) {
         super(parent, modal);
         this.framePai = parent;
-        this.controller = new AlterarSubmissaoController(empresa);
+        this.controller = new AlterarSubmissaoFinalController(empresa);
         this.controller.getListaSubmissiveisAceitarArtigoComSubmissaoUtilizador();
         setResizable(false);
         initComponents();
@@ -46,7 +42,6 @@ public class AlterarSubmissaoUI extends javax.swing.JDialog {
             setVisible(true);
             pack();
         }
-
     }
 
     /**
@@ -59,7 +54,7 @@ public class AlterarSubmissaoUI extends javax.swing.JDialog {
     private void initComponents() {
 
         pnl_selecionarSubmissivel = new javax.swing.JPanel();
-        cmb_selecionarSubmissivel = new javax.swing.JComboBox(this.controller.getListaSubmissiveis().toArray());
+        cmb_selecionarSubmissivel = new javax.swing.JComboBox();
         btn_selecionarSubmissivel = new javax.swing.JButton();
         pnl_selecionarSubmissao = new javax.swing.JPanel();
         btn_selecionarSubmissao = new javax.swing.JButton();
@@ -247,7 +242,7 @@ public class AlterarSubmissaoUI extends javax.swing.JDialog {
                                 .addComponent(txt_palavraChave4, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txt_palavraChave5, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 666, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 666, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         pnl_informacoesLayout.setVerticalGroup(
@@ -360,12 +355,12 @@ public class AlterarSubmissaoUI extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnl_listaAutores, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnl_informacoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnl_selecionarSubmissao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnl_listaAutores, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 837, Short.MAX_VALUE)
+                    .addComponent(pnl_informacoes, javax.swing.GroupLayout.DEFAULT_SIZE, 837, Short.MAX_VALUE)
+                    .addComponent(pnl_selecionarSubmissao, javax.swing.GroupLayout.DEFAULT_SIZE, 837, Short.MAX_VALUE)
                     .addComponent(pnl_selecionarSubmissivel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnl_autorCorrespondente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnl_ficheiro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnl_autorCorrespondente, javax.swing.GroupLayout.DEFAULT_SIZE, 837, Short.MAX_VALUE)
+                    .addComponent(pnl_ficheiro, javax.swing.GroupLayout.DEFAULT_SIZE, 837, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btn_submeter)
@@ -379,15 +374,15 @@ public class AlterarSubmissaoUI extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(pnl_selecionarSubmissivel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnl_selecionarSubmissao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnl_selecionarSubmissao, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnl_informacoes, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnl_listaAutores, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnl_autorCorrespondente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnl_autorCorrespondente, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnl_ficheiro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnl_ficheiro, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_cancelar)
@@ -437,8 +432,6 @@ public class AlterarSubmissaoUI extends javax.swing.JDialog {
 
         this.cmb_autorCorrespondente.setModel(this.controller.getModeloListaAutoresRegistados());
 
-        this.txt_ficheiro.setText(this.controller.getArtigoFicheiro());
-        validate();
         this.pnl_selecionarSubmissivel.setVisible(false);
         this.pnl_selecionarSubmissao.setVisible(false);
         this.pnl_informacoes.setVisible(true);
@@ -484,7 +477,7 @@ public class AlterarSubmissaoUI extends javax.swing.JDialog {
 
             if (!ficheiro.getName().endsWith(".pdf")) {
                 JOptionPane.showMessageDialog(
-                        this,
+                        this.framePai,
                         "O ficheiro deve ter o formato PDF.",
                         "Submeter Ficheiro",
                         JOptionPane.ERROR_MESSAGE);
@@ -503,9 +496,9 @@ public class AlterarSubmissaoUI extends javax.swing.JDialog {
         listaTextFieldPalavrasChave.add(this.txt_palavraChave3);
         listaTextFieldPalavrasChave.add(this.txt_palavraChave4);
         listaTextFieldPalavrasChave.add(this.txt_palavraChave5);
-
+        
         try {
-            List<String> palavrasChave = new ArrayList();
+             List<String> palavrasChave = new ArrayList();
             for (javax.swing.JTextField textFieldpalavraChave
                     : listaTextFieldPalavrasChave) {
 
@@ -532,7 +525,7 @@ public class AlterarSubmissaoUI extends javax.swing.JDialog {
             dispose();
         } catch (IllegalArgumentException ex) {
             JOptionPane.showMessageDialog(
-                    this,
+                    this.framePai,
                     ex.getMessage(),
                     "Alterar Submissão de Artigo",
                     JOptionPane.ERROR_MESSAGE);

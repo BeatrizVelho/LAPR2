@@ -104,6 +104,9 @@
               <StringArray count="0"/>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox(this.controller.getListaRevisiveis().toArray())"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="btn_selecionarRevisivel">
           <Properties>

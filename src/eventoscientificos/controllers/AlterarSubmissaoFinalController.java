@@ -1,6 +1,6 @@
 package eventoscientificos.controllers;
 
-import eventoscientificios.view.ModeloListaAutores;
+import eventoscientificos.view.ModeloListaAutores;
 import eventoscientificos.model.Artigo;
 import eventoscientificos.model.Autor;
 import eventoscientificos.model.AutorCorrespondente;

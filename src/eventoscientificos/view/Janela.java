@@ -1,4 +1,4 @@
-package eventoscientificios.view;
+package eventoscientificos.view;
 
 import eventoscientificos.model.Empresa;
 import java.awt.event.WindowAdapter;
@@ -130,7 +130,6 @@ public class Janela extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Sistema de Gestão de Eventos Cientificos");
-        setPreferredSize(new java.awt.Dimension(900, 650));
         setResizable(false);
 
         boasVindas.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
