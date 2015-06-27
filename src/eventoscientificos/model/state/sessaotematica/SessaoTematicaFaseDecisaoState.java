@@ -129,7 +129,7 @@ public class SessaoTematicaFaseDecisaoState implements SessaoTematicaState {
     public boolean setEmSubmissaoCameraReady() {
         if (validarEstado()) {
             this.sessaoTematica.setEstado(
-                                new SessaoTematicaEmDistribuicaoState(this.sessaoTematica));
+                    new SessaoTematicaEmSubmissaoCameraReadyState(this.sessaoTematica));
             return true;
         }
 
@@ -154,8 +154,7 @@ public class SessaoTematicaFaseDecisaoState implements SessaoTematicaState {
      */
     @Override
     public boolean validarEstado() {
-        // Adicionar validações de negócio.
-        return true;
+        return this.sessaoTematica.getProcessoDecisao() != null;
     }
 
     /**
