@@ -231,10 +231,22 @@ public class RegistoUtilizadores {
     /**
      * Inicia a criação do codificador aritmético.
      *
-     * @throws java.io.IOException
+     * @throws java.io.IOException 
      */
     public void iniciarCodificadorAritmetico() throws IOException {
         this.tabelasCodificacao.put("CA", new CA());
+    }
+
+    /**
+     * Codifica uma password através de uma tabela de probabilidades.
+     * 
+     * @param password Password a codificar.
+     * @param tabela Tabela de codificação.
+     * 
+     * @return Password codificada.
+     */
+    public String codificarPassword(String password, int tabela) {
+        return this.tabelasCodificacao.get("CA").codificar(password, tabela);
     }
 
 }

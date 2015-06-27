@@ -19,12 +19,12 @@ public class ProcessoDecisaoTest {
     /**
      * Teste do método adicionarMecanismoDecisao, da classe ProcessoDecisao.
      */
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testAdicionarMecanismoDecisao() {
         System.out.println("adicionarMecanismoDecisao");
-        MecanismoDecisao mecanismoDecisao = null;
+        MecanismoDecisao mecanismoDecisao = new MecanismoDecisao1();
         ProcessoDecisao instance = new ProcessoDecisao();
-        boolean expResult = false;
+        boolean expResult = true;
         boolean result = instance.adicionarMecanismoDecisao(mecanismoDecisao);
         assertEquals(expResult, result);
     }
@@ -37,9 +37,9 @@ public class ProcessoDecisaoTest {
         System.out.println("classificarSubmissoes");
         Submissao submissao = new Submissao();
         Utilizador utilizador = new Utilizador("nome",
-                "1140587@isep.ipp.pt",
-                "username",
-                "password");
+                            "1140587@isep.ipp.pt",
+                            "username",
+                            "password");
         Revisor revisor = new Revisor(utilizador);
 
         int classificacao = 1;
@@ -71,7 +71,19 @@ public class ProcessoDecisaoTest {
     @Test
     public void testNotificarSobreDecisao() {
         System.out.println("notificarSobreDecisao");
+
+        Submissao submissao = new Submissao();
+        Utilizador utilizador = new Utilizador("nome",
+                            "1140587@isep.ipp.pt",
+                            "username",
+                            "password");
+        submissao.setArtigoInicial(new Artigo());
+        submissao.getArtigoInicial().setAutorCorrespondente(new AutorCorrespondente(utilizador, new InstituicaoAfiliacao("Matosinhos")));
+        int classificacao = 1;
+        Decisao decisao = new Decisao(classificacao, submissao);
+
         ProcessoDecisao instance = new ProcessoDecisao();
+        instance.getListaDecisoes().adicionarDecisao(decisao);
         boolean expResult = true;
         boolean result = instance.notificarSobreDecisoes();
         assertEquals(expResult, result);
@@ -85,9 +97,9 @@ public class ProcessoDecisaoTest {
         System.out.println("equals");
         Submissao submissao = new Submissao();
         Utilizador utilizador = new Utilizador("nome",
-                "1140587@isep.ipp.pt",
-                "username",
-                "password");
+                            "1140587@isep.ipp.pt",
+                            "username",
+                            "password");
 
         Revisor revisor = new Revisor(utilizador);
 
@@ -125,9 +137,9 @@ public class ProcessoDecisaoTest {
         System.out.println("equalsNot");
         Submissao submissao = new Submissao();
         Utilizador utilizador = new Utilizador("nome",
-                "1140587@isep.ipp.pt",
-                "username",
-                "password");
+                            "1140587@isep.ipp.pt",
+                            "username",
+                            "password");
 
         Revisor revisor = new Revisor(utilizador);
         Revisao revisao = new Revisao(submissao, revisor);

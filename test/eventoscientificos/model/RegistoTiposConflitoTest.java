@@ -7,6 +7,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
+ * Teste à classe RegistoTiposConflito
  * @author G01
  */
 public class RegistoTiposConflitoTest {

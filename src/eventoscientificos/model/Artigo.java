@@ -79,14 +79,14 @@ public class Artigo {
     /**
      * Constrói uma cópia de um artigo com os mesmos atributos que o artigo
      * passado por parametro.
-     * 
+     *
      * @param artigo Artigo que vai ser copiado.
      */
     public Artigo(Artigo artigo) {
         setTitulo(artigo.getTitulo());
         setResumo(artigo.getResumo());
         setFicheiro(artigo.getFicheiro());
-        setPalavrasChave(new ArrayList((ArrayList)artigo.getPalavrasChave()));
+        setPalavrasChave(artigo.getPalavrasChave());
         this.listaAutores = new ListaAutores(artigo.getListaAutores());
         setAutorCorrespondente(artigo.getAutorCorrespondente());
         setAutorSubmissor(new Autor(artigo.getAutorSubmissor()));
@@ -173,7 +173,7 @@ public class Artigo {
     public void setTitulo(String titulo) {
         if (titulo.trim().isEmpty()) {
             throw new IllegalArgumentException("O titulo do artigo não"
-                    + " pode estar vazio.");
+                                + " pode estar vazio.");
         }
 
         this.titulo = titulo;
@@ -187,7 +187,7 @@ public class Artigo {
     public void setResumo(String resumo) {
         if (resumo.trim().isEmpty()) {
             throw new IllegalArgumentException("O resumo do artigo"
-                    + " não pode estar vazio.");
+                                + " não pode estar vazio.");
         }
 
         this.resumo = resumo;
@@ -201,7 +201,7 @@ public class Artigo {
     public void setFicheiro(String ficheiro) {
         if (ficheiro.trim().isEmpty()) {
             throw new IllegalArgumentException(
-                    "Não submeteu um ficheiro válido.");
+                                "Não submeteu um ficheiro válido.");
         }
 
         this.ficheiro = ficheiro;
@@ -231,11 +231,11 @@ public class Artigo {
      * @param palavrasChave Nova lista de palavras chave.
      */
     public void setPalavrasChave(List<String> palavrasChave) {
-        if(palavrasChave.isEmpty() || palavrasChave.size() > 5) {
+        if (palavrasChave.isEmpty() || palavrasChave.size() > 5) {
             throw new IllegalArgumentException("O artigo deve ter pelo menos uma"
-                    + "palavra chave e no máximo 5");   
+                                + "palavra chave e no máximo 5");
         }
-        
+
         this.palavrasChave = palavrasChave;
     }
 
@@ -250,7 +250,7 @@ public class Artigo {
 
     /**
      * Verifica se o artigo é válido.
-     * 
+     *
      * @return Verdadeiro se o artigo é válido e falso se não é.
      */
     public boolean validarArtigo() {
@@ -259,7 +259,7 @@ public class Artigo {
 
     /**
      * Verifica se o utilizador passado por parâmetro está inserido na lista.
-     * 
+     *
      * @param utilizador Utilizador a verificar.
      * @return Verdadeiro se já existe na lista de autores e falso se não está.
      */

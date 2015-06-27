@@ -24,9 +24,9 @@ public class DefinirSessaoTematicaUI extends javax.swing.JDialog {
     /**
      * Creates new form UI
      *
-     * @param parent
-     * @param modal
-     * @param empresa
+     * @param parent parent
+     * @param modal modal
+     * @param empresa empresa
      */
     public DefinirSessaoTematicaUI(java.awt.Frame parent, boolean modal, Empresa empresa) {
         super(parent, "Criar Sessao Temática", modal);

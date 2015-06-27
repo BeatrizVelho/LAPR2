@@ -5,6 +5,7 @@ import eventoscientificos.model.RegistoTiposConflito;
 import eventoscientificos.model.TipoConflito;
 
 /**
+ * Representa instância da classe DefinirTipoConflitoController
  * @author G01
  */
 public class DefinirTipoConflitoController {

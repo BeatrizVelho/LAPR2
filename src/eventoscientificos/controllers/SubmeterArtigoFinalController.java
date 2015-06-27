@@ -19,6 +19,8 @@ import javax.swing.event.ListDataListener;
 import utils.Data;
 
 /**
+ * Representa instância da classe SubmeterArtigoFinalController
+ * 
  * @author G01
  */
 public class SubmeterArtigoFinalController {

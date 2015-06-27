@@ -20,9 +20,9 @@ public class CriarEventoUI extends javax.swing.JDialog {
     /**
      * Creates new form CriarEventoUI
      *
-     * @param parent
-     * @param modal
-     * @param empresa
+     * @param parent parent
+     * @param modal modal
+     * @param empresa empresa
      */
     public CriarEventoUI(java.awt.Frame parent, boolean modal, Empresa empresa) {
         super(parent, "Criar Evento", modal);

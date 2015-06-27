@@ -4,6 +4,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
+ * Teste à classe Utilizador
  * @author G01
  */
 public class UtilizadorTest {

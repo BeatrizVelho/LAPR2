@@ -16,9 +16,9 @@ public class GerarEstatisticasEventoUI extends javax.swing.JDialog {
 
     /**
      * Creates new form GerarEstatisticasEventoUI
-     * @param parent
-     * @param modal
-     * @param empresa
+     * @param parent parent
+     * @param modal modal
+     * @param empresa empresa
      */
     public GerarEstatisticasEventoUI(java.awt.Frame parent, boolean modal, Empresa empresa) {
         super(parent, modal);
@@ -55,7 +55,7 @@ public class GerarEstatisticasEventoUI extends javax.swing.JDialog {
         btn_gerar = new javax.swing.JButton();
         btn_cancelar = new javax.swing.JButton();
         btn_selecionarEvento = new javax.swing.JButton();
-        cmb_selecionarEvento = new javax.swing.JComboBox();
+        cmb_selecionarEvento = new javax.swing.JComboBox(this.controller.getListaEventos().toArray());
         lbl_selecionarEvento = new javax.swing.JLabel();
         lbl_descricao = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -106,7 +106,7 @@ public class GerarEstatisticasEventoUI extends javax.swing.JDialog {
         txtA_descricao.setFont(new java.awt.Font("Arial Unicode MS", 0, 12)); // NOI18N
         txtA_descricao.setLineWrap(true);
         txtA_descricao.setRows(3);
-        txtA_descricao.setText("       Realiza a soma de todos os parametros das várias revisões            realizadas pelos revisores, divindo os mesmos pelo total número                                              de revisões realizadas.");
+        txtA_descricao.setText("       Realiza a soma de todos os parametros das várias revisões            realizadas pelos revisores, divindo os mesmos pelo número total                                              de revisões realizadas.");
         txtA_descricao.setWrapStyleWord(true);
         txtA_descricao.setEnabled(false);
         jScrollPane1.setViewportView(txtA_descricao);

@@ -19,9 +19,9 @@ public class NovoAutor extends javax.swing.JDialog {
     /**
      * Creates new form NovoAutor
      *
-     * @param parent
-     * @param modal
-     * @param controller
+     * @param parent parent
+     * @param modal modal
+     * @param controller controller
      */
     public NovoAutor(java.awt.Frame parent, boolean modal, ControllerAutor controller) {
         super(parent, modal);

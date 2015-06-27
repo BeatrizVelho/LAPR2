@@ -19,6 +19,9 @@ public interface MecanismoDistribuicao {
 
     /**
      * Distribui as revisões.
+     * @param distribuivel distribuivel
+     * @param lr lista revisoes 
+     * @return verdadeiro se distribuir e flso se não
      */
     public boolean distribuirRevisoes(Distribuivel distribuivel, ListaRevisoes lr);
 }

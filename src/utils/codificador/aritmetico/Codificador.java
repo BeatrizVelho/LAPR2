@@ -17,6 +17,7 @@ public interface Codificador {
      * Codifica a palavra recebida por parãmetro
      *
      * @param password password a codificar
+     * @param tabela indice da tabela
      * @return palavra codificada
      */
     public String codificar(String password, int tabela);

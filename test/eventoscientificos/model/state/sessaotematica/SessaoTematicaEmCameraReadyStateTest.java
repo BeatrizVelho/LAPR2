@@ -6,6 +6,7 @@ import static org.junit.Assert.*;
 import utils.Data;
 
 /**
+ * Teste à classe SessaoTematicaEmCameraReadyState
  * @author G01
  */
 public class SessaoTematicaEmCameraReadyStateTest {

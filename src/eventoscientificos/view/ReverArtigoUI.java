@@ -17,9 +17,9 @@ public class ReverArtigoUI extends javax.swing.JDialog {
     /**
      * Creates new form ReverArtigoUI
      * 
-     * @param parent
-     * @param modal
-     * @param empresa
+     * @param parent parent
+     * @param modal modal
+     * @param empresa empresa
      */
     public ReverArtigoUI(java.awt.Frame parent, boolean modal, Empresa empresa) {
         super(parent, "Rever Artigo", modal);
@@ -332,7 +332,10 @@ public class ReverArtigoUI extends javax.swing.JDialog {
 
             String opcoes[] = {"Sim", "Não"};
             int resposta = JOptionPane.showOptionDialog(
-                    null, "Pretende submeter a revisão?", "Rever Artigo", 0,
+                    null,
+                    "Pretende submeter a revisão?",
+                    "Rever Artigo",
+                    0,
                     JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]);
             if (resposta == 0) {
                 this.controller.adicionarResultadoRevisao();

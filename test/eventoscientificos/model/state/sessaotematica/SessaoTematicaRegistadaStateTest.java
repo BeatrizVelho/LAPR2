@@ -1,14 +1,13 @@
 package eventoscientificos.model.state.sessaotematica;
 
-import eventoscientificos.model.state.sessaotematica.SessaoTematicaState;
-import eventoscientificos.model.state.sessaotematica.SessaoTematicaRegistadaState;
-import eventoscientificos.model.CP;
 import eventoscientificos.model.SessaoTematica;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import utils.Data;
 
 /**
+ * Teste à classe SessaoTematicaRegistadaState
+ *
  * @author G01
  */
 public class SessaoTematicaRegistadaStateTest {
@@ -17,17 +16,17 @@ public class SessaoTematicaRegistadaStateTest {
 
     public SessaoTematicaRegistadaStateTest() {
         SessaoTematica sessaoTematica = new SessaoTematica(
-                "#A9D24R",
-                "LAPR2",
-                new Data(2015, 5, 22),
-                new Data(2015, 5, 28),
-                new Data(2015, 6, 20),
-                new Data(2015, 6, 24),
-                new Data(2015, 6, 28),
-                new Data(2016, 7, 1),
-                new Data(2015, 7, 7));
+                            "#A9D24R",
+                            "LAPR2",
+                            new Data(2015, 5, 22),
+                            new Data(2015, 5, 28),
+                            new Data(2015, 6, 20),
+                            new Data(2015, 6, 24),
+                            new Data(2015, 6, 28),
+                            new Data(2016, 7, 1),
+                            new Data(2015, 7, 7));
         sessaoTematica.setEstado(
-                new SessaoTematicaRegistadaState(sessaoTematica));
+                            new SessaoTematicaRegistadaState(sessaoTematica));
 
         this.sessaoTematica = sessaoTematica;
     }

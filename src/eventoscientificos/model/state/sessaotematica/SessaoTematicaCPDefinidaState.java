@@ -69,7 +69,7 @@ public class SessaoTematicaCPDefinidaState implements SessaoTematicaState {
                                 new SessaoTematicaEmSubmissaoState(this.sessaoTematica));
             return true;
         }
-        
+
         return false;
     }
 
@@ -177,7 +177,7 @@ public class SessaoTematicaCPDefinidaState implements SessaoTematicaState {
     @Override
     public boolean isStateValidoParaSubmeter() {
         return setEmSubmissao();
-        
+
     }
 
     /**
@@ -189,7 +189,7 @@ public class SessaoTematicaCPDefinidaState implements SessaoTematicaState {
     @Override
     public boolean isStateValidoParaAlterar() {
         return setEmSubmissao();
-        
+
     }
 
     /**

@@ -166,11 +166,11 @@ public class EventoFaseDecisaoState implements EventoState {
      */
     @Override
     public boolean validarEstado() {
-       if(this.e.getDataFimSubmissaoCameraReady().isMaior(Data.dataAtual())) {
-           return true;
-       }
-       
-       return false;
+        if (this.e.getProcessoDecisao() != null) {
+            return true;
+        }
+
+        return false;
     }
 
     /**

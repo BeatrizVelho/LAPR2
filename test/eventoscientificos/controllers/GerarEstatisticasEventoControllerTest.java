@@ -46,7 +46,6 @@ public class GerarEstatisticasEventoControllerTest {
                 new Data(2017, 6, 10));
         this.evento.setEstado(new EventoEmSubmissaoCameraReadyState(evento));
         this.evento.novoOrganizador(utilizador);
-
         Artigo artigoInicial = new Artigo();
         Artigo artigoFinal = new Artigo();
         this.submissao = new Submissao();

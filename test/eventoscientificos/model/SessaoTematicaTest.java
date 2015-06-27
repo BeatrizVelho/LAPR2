@@ -23,6 +23,7 @@ import utils.Data;
 
 /**
  * Testa a classe SessaoTematica
+ *
  * @author G01
  */
 public class SessaoTematicaTest {
@@ -236,7 +237,8 @@ public class SessaoTematicaTest {
     }
 
     /**
-     * Teste dos métodos set e get do processo de decisão da classe SessaoTematica.
+     * Teste dos métodos set e get do processo de decisão da classe
+     * SessaoTematica.
      */
     @Test
     public void testSetAndGetProcessoDecisao() {
@@ -838,17 +840,13 @@ public class SessaoTematicaTest {
     /**
      * Teste do método novoProcessoDecisao, da classe SessaoTematica.
      */
-    @Test(expected = NullPointerException.class)
+    @Test
     public void testNovoProcessoDecisao() {
         System.out.println("novoProcessoDecisao");
         SessaoTematica instance = this.sessaoTematica;
         instance.setEstado(new SessaoTematicaFaseDecisaoState(sessaoTematica));
         ProcessoDecisao expResult = new ProcessoDecisao();
-        expResult.adicionarMecanismoDecisao(new MecanismoDecisao1());
-        expResult.classificarSubmissoes(new ListaRevisoes());
         ProcessoDecisao result = instance.novoProcessoDecisao();
-        result.adicionarMecanismoDecisao(new MecanismoDecisao1());
-        result.classificarSubmissoes(new ListaRevisoes());
         assertEquals(expResult, result);
     }
 

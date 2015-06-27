@@ -1,7 +1,10 @@
 package eventoscientificos.view;
 
+import eventoscientificos.controllers.GerarEstatisticasTopicosController;
+import eventoscientificos.model.Administrador;
 import eventoscientificos.model.Empresa;
 import java.awt.Frame;
+import javax.swing.JOptionPane;
 
 /**
  * @author G01
@@ -9,22 +12,34 @@ import java.awt.Frame;
 public class GerarEstatisticasTopicosUI extends javax.swing.JDialog {
     
     private Frame framePai;
+    private GerarEstatisticasTopicosController controller;
 
     /**
      * Creates new form GerarEstatisticasTopicosUI
-     * @param parent
-     * @param modal
-     * @param empresa
+     * @param parent parent
+     * @param modal modal
+     * @param empresa empresa
      */
     public GerarEstatisticasTopicosUI(java.awt.Frame parent, boolean modal, Empresa empresa) {
         super(parent, modal);
+        this.framePai = parent;
+        this.controller = new GerarEstatisticasTopicosController(empresa);
         setResizable(false);
         initComponents();
         getRootPane().setDefaultButton(this.btn_gerar);
         setLocationRelativeTo(null);
-        // Verificar se existem eventos/sessões que aceitem revisões de artigos.
-        setVisible(true);
-        pack();
+        if (!empresa.isAdministrador(new Administrador(
+                empresa.getUtilizadorAutenticado()))) {
+            JOptionPane.showMessageDialog(
+                    framePai,
+                    "Não tem permissões para criar eventos.",
+                    "Criar Evento",
+                    JOptionPane.ERROR_MESSAGE);
+            dispose();
+        } else {
+            setVisible(true);
+            pack();
+        }
     }
 
     /**
@@ -112,7 +127,8 @@ public class GerarEstatisticasTopicosUI extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_gerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_gerarActionPerformed
-        // TODO add your handling code here:
+        this.controller.getHashMap();
+        this.controller.gerarFicheiroCSV();
     }//GEN-LAST:event_btn_gerarActionPerformed
 
     private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed

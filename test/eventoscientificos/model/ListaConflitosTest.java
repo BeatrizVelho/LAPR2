@@ -7,6 +7,8 @@ import static org.junit.Assert.*;
 import utils.Data;
 
 /**
+ * Teste á classe ListaConflitos.
+ * 
  * @author G01
  */
 public class ListaConflitosTest {

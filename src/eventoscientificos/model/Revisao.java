@@ -265,7 +265,7 @@ public class Revisao {
      * @param qualidade qualidade
      * @param recomendacao recomendação
      * @param textoJustificativo texto justificativo 
-     * @return
+     * @return verddeira se for adicionada com sucesso e falso se não
      */
     public boolean adicionarDadosRevisao(int adequacao, int confianca,
                         int originalidade, int qualidade, int recomendacao,
@@ -283,7 +283,7 @@ public class Revisao {
      * Adiciona à revisão os valores de revisão atribuidos pelo revisor ao
      * artigo e altera o estado da revisão para revista.
      *
-     * @param revisao revisão à qual vai se adicionar os novos valores
+     * @param revisaoClone revisaoClone
      * @return verdadeiro se modificar todos os valores correctamente e falso se
      * não o conseguir.
      */

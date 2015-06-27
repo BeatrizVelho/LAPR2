@@ -18,6 +18,9 @@ public class CarregarFicheiroUI extends javax.swing.JDialog {
 
     /**
      * Creates new form CarregarFicheiroUI
+     * @param parent parent
+     * @param modal modal
+     * @param empresa empresa
      */
     public CarregarFicheiroUI(java.awt.Frame parent, boolean modal, Empresa empresa) {
         super(parent, "Carregar Ficheiro", modal);

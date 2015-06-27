@@ -7,6 +7,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
+ * Teste à classe ListaDecisoes.
  * @author G01
  */
 public class ListaDecisoesTest {
@@ -69,7 +70,7 @@ public class ListaDecisoesTest {
     public void testCriarNotificacao() {
         System.out.println("criarNotificacao");
         ListaDecisoes instance = new ListaDecisoes();
-        boolean expResult = true;
+        boolean expResult = false;
         boolean result = instance.notificarSobreDecisao();
         assertEquals(expResult, result);
     }

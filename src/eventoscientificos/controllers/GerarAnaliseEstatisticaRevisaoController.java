@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * Representa instância da classe GerarAnaliseEstatisticaRevisaoController
  * @author G01
  */
 public class GerarAnaliseEstatisticaRevisaoController {

@@ -30,7 +30,7 @@ public class ProcessoDecisao {
 
     /**
      * Devolve a lista de decisões.
-     * 
+     *
      * @return Lista de decisões.
      */
     public ListaDecisoes getListaDecisoes() {
@@ -108,6 +108,6 @@ public class ProcessoDecisao {
         ProcessoDecisao outroProcesso = (ProcessoDecisao) outroObjecto;
 
         return this.listaDecisoes.equals(outroProcesso.listaDecisoes)
-                && this.mecanismoDecisao.equals(outroProcesso.mecanismoDecisao);
+                            && this.mecanismoDecisao.getClass().getSimpleName().equalsIgnoreCase(outroProcesso.mecanismoDecisao.getClass().getSimpleName());
     }
 }
