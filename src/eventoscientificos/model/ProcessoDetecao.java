@@ -26,8 +26,8 @@ public class ProcessoDetecao {
     /**
      * Constrói uma instância de Processo de Deteção
      *
-     * @param detetavel
-     * @param listaTiposConflito
+     * @param detetavel detetavel
+     * @param listaTiposConflito lista de tipos de conflitos
      */
     public ProcessoDetecao(
             Detetavel detetavel, List<TipoConflito> listaTiposConflito) {

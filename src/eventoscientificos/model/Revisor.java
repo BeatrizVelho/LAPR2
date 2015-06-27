@@ -25,7 +25,7 @@ public class Revisor {
     /**
      * Devolve o utilizador que assume o papel de revisor.
      *
-     * @return
+     * @return utilizador
      */
     public Utilizador getUtilizador() {
         return this.utilizador;

@@ -231,7 +231,7 @@ public class RegistoUtilizadores {
     /**
      * Inicia a criação do codificador aritmético.
      *
-     * @throws java.io.IOException
+     * @throws java.io.IOException 
      */
     public void iniciarCodificadorAritmetico() throws IOException {
         this.tabelasCodificacao.put("CA", new CA());
