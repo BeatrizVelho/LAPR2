@@ -3,6 +3,7 @@ package eventoscientificos.model.state.evento;
 import eventoscientificos.model.Evento;
 import eventoscientificos.model.Submissao;
 import eventoscientificos.model.state.submissao.SubmissaoRevistaState;
+import utils.Data;
 
 /**
  * Representa uma instância de EventoEmRevisaoState tendo acesso ao respetivo
@@ -163,13 +164,7 @@ public class EventoEmRevisaoState implements EventoState {
      */
     @Override
     public boolean validarEstado() {
-        for (Submissao submissao : e.getListaSubmissoes().getListaSubmissoes()) {
-            if (submissao.getEstado() instanceof SubmissaoRevistaState) {
-                return true;
-            }
-        }
-
-        return false;
+      return Data.dataAtual().isMaior(e.getDataFimRevisao());
     }
 
     /**

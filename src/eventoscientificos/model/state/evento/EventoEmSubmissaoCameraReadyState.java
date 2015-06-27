@@ -167,9 +167,7 @@ public class EventoEmSubmissaoCameraReadyState implements EventoState {
      */
     @Override
     public boolean validarEstado() {
-        //implementar quando tiver o método que deteta se fora introduzido o 
-        //artigo final
-        return false;
+    return Data.dataAtual().isMaior(e.getDataFimSubmissaoCameraReady());
     }
 
     /**
