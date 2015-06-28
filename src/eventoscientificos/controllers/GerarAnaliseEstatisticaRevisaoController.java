@@ -4,7 +4,6 @@ import eventoscientificos.model.Empresa;
 import eventoscientificos.model.Evento;
 import eventoscientificos.model.RegistoEventos;
 import eventoscientificos.model.Revisor;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
