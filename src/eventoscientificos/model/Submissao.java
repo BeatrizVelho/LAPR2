@@ -214,7 +214,6 @@ public class Submissao {
         }
 
         Submissao outraSubmissao = (Submissao) outroObjecto;
-        System.out.println(getEstado());
         return (this.getEstado() instanceof SubmissaoCriadaState
                             || this.getEstado() instanceof SubmissaoEmSubmissaoState)
                                                 ? this.getArtigoInicial().equals(outraSubmissao.getArtigoInicial())
