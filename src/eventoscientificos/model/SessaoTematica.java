@@ -68,10 +68,12 @@ public class SessaoTematica implements CPDefinivel, Submissivel, Detetavel,
      * Lista de proponentes da sessão temática.
      */
     private List<Proponente> listaProponentes;
+    
     /**
      * Lista de Licitações da sessão temática.
      */
     private ListaLicitacoes listaLicitacoes;
+    
     /**
      * CP de sessão temática.
      */
