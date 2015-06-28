@@ -230,6 +230,12 @@ public class Submissao {
         return this.estado instanceof SubmissaoRemovidaState;
     }
 
+    /**
+     * Verifica se um autor é autor do artigo inicla.
+     * 
+     * @param utilizador Utilizador que é autor.
+     * @return Verdadeiro se for autor e falso caso não seja.
+     */
     public boolean isAutorArtigoInicial(Utilizador utilizador) {
         if (this.estado instanceof SubmissaoAceiteState
                             && getArtigoInicial().isAutor(utilizador)) {
@@ -273,16 +279,16 @@ public class Submissao {
      * os requisitos necessários para a mudança
      *
      * @return verdadeiro se mudar de estado para removida e falso se não
-     * mudar.F
+     * mudar.
      */
     public boolean setEstadoRemovida() {
         return this.estado.setRemovida();
     }
 
     /**
-     * Devolve as características da submissão: título
+     * Devolve as características da submissão: título.
      *
-     * @return Título do artigo
+     * @return Título do artigo.
      */
     @Override
     public String toString() {
