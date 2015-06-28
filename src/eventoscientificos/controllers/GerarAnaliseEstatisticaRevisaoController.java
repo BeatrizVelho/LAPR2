@@ -9,6 +9,7 @@ import java.util.List;
 
 /**
  * Representa instância da classe GerarAnaliseEstatisticaRevisaoController
+ *
  * @author G01
  */
 public class GerarAnaliseEstatisticaRevisaoController {
@@ -45,6 +46,24 @@ public class GerarAnaliseEstatisticaRevisaoController {
      */
     public GerarAnaliseEstatisticaRevisaoController(Empresa empresa) {
         this.empresa = empresa;
+    }
+
+    /**
+     * Devolve um vetor do tipo string com os resultados dos revisores.
+     *
+     * @return Vetor do tipo string
+     */
+    public String[] getResultadosFinais() {
+        return this.resultadosFinais;
+    }
+
+    /**
+     * Devolve a lista de emails dos organizadores.
+     * 
+     * @return Lista de emails.
+     */
+    public List<String> getListaEmail() {
+        return this.listaEmail;
     }
 
     /**
