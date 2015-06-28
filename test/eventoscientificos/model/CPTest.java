@@ -168,4 +168,20 @@ public class CPTest {
         assertEquals(expResult, result);
     }
 
+    /**
+     * Test of getRevisorPeloID method, of class CP.
+     */
+    @Test
+    public void testGetRevisorPeloID() {
+        System.out.println("getRevisorPeloID");
+        
+        int indice = 0;
+        CP instance = new CP();
+        Revisor expResult = new Revisor(new Utilizador(
+                            "bea", "1140587@isep.ipp.pt", "bea", "1234"));
+        instance.getListaRevisores().add(expResult);
+        Revisor result = instance.getRevisorPeloID(indice);
+        assertEquals(expResult, result);
+    }
+
 }

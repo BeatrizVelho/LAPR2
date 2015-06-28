@@ -162,26 +162,6 @@ public class ProcessoAnaliseEstatistica {
         this.mediaArtigos = (double) (somaMediaClass / numeroRevisoesContabilizadas);
     }
 
-//    /**
-//     * Devolve a média total das classificações de todos os artigos.
-//     *
-//     * @return media total dos artigos
-//     */
-//    private void calcularMediaTodosArtigos() {
-//        int contaNrRevisoesTotal = 0;
-//        this.mediaArtigos = 0;
-//        double somaTotal = 0;
-//        for (int i = 0; i < matrizMediasRevisorSubmissao.length; i++) {
-//
-//            for (int j = 0; j < matrizMediasRevisorSubmissao[0].length; j++) {
-//                if (matrizMediasRevisorSubmissao[i][j] != -100) {
-//                    somaTotal += matrizMediasRevisorSubmissao[i][j];
-//                    contaNrRevisoesTotal++;
-//                }
-//            }
-//        }
-//        this.mediaArtigos += somaTotal / contaNrRevisoesTotal;
-//    }
     /**
      * Preenche a matriz das diferenças entre a classificação média atribuida
      * pelo revisor e a classificação média do artigo [d=xi-xt].

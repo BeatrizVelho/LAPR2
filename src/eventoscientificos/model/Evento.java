@@ -1093,18 +1093,6 @@ public class Evento implements CPDefinivel, Submissivel, Detetavel, Licitavel,
     public boolean isStateValidoParaGerarAnaliseEstatisticas() {
         return this.estado.setEmSubmissaoCameraReady() || this.estado.setCameraReady();
     }
-//
-//    /**
-//     * Devolve um array com os valores totais da análise estatistica.
-//     *
-//     * @return array com os valores totais da análise estatística
-//     */
-//    public String[] getValoresTotaisEstatistica() {
-//        String[] valoresTotais = null;
-//        ListaRevisoes lr = this.processoDistribuicao.getListaRevisoes();
-//        this.processoAnaliseEstatistica = new ProcessoAnaliseEstatistica(lr, this.listaSubmissoes, List <Revisor> listaRevisoes);
-//        return valoresTotais = this.processoAnaliseEstatistica.getValoresEstatistica();
-//    }
 
     /**
      * Devolve a lista de emails dos organizadores do evento
