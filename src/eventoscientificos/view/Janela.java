@@ -6,8 +6,6 @@ import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
@@ -43,10 +41,12 @@ public class Janela extends javax.swing.JFrame {
             this.xmlParser.lerFicheiroUtilizador();
             this.xmlParser.lerFicheiroLocal();
             this.xmlParser.lerFicheiroEvento();
-        } catch (ParserConfigurationException | IOException | SAXException | InstantiationException | IllegalAccessException | NoSuchMethodException | IllegalArgumentException | InvocationTargetException | ClassNotFoundException ex) {
-            Logger.getLogger(Janela.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParserConfigurationException | IOException | SAXException
+                | InstantiationException | IllegalAccessException
+                | NoSuchMethodException | IllegalArgumentException
+                | InvocationTargetException | ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(
-                    this,
+                    Janela.this,
                     "Ocorreu um erro na leitura dos ficheiros XML.",
                     "Ficheiros XML",
                     JOptionPane.ERROR_MESSAGE);
@@ -58,7 +58,7 @@ public class Janela extends javax.swing.JFrame {
             this.empresa.getRegistoUtilizadores().iniciarCodificadorAritmetico();
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(
-                    this,
+                    Janela.this,
                     "Não foi possível carregar as tabelas de frequência do"
                     + " codificador aritmético.",
                     "Codificador Aritmético",
@@ -399,7 +399,7 @@ public class Janela extends javax.swing.JFrame {
     }//GEN-LAST:event_uc16ActionPerformed
 
     private void uc20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc20ActionPerformed
-        // TODO add your handling code here:
+        new GerarAnaliseEstatisticaRevisaoUI(this, true, this.empresa);
     }//GEN-LAST:event_uc20ActionPerformed
 
     private void uc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc1ActionPerformed
@@ -453,11 +453,11 @@ public class Janela extends javax.swing.JFrame {
     }//GEN-LAST:event_uc18ActionPerformed
 
     private void uc19aActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc19aActionPerformed
-        // TODO add your handling code here:
+        new GerarEstatisticasEventoUI(this, true, this.empresa);
     }//GEN-LAST:event_uc19aActionPerformed
 
     private void uc19bActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uc19bActionPerformed
-        // TODO add your handling code here:
+        new GerarEstatisticasTopicosUI(this, true, this.empresa);
     }//GEN-LAST:event_uc19bActionPerformed
 
     /**
