@@ -1,6 +1,6 @@
-# Sistema de Gestão de Eventos Científicos #
+# Sistema de Organização e Gestão de Eventos Científicos #
 
-### Padrão adotado para a implementação(codificação, testes e commits) ###
+### Padrão adotado para a implementação (codificação, testes e commits) ###
 ###### A implementação do projeto será por *Use Cases*, estando os mesmos neste momento listados como issues, o facto de um determinado membro escolher implementar um *Use Case* especifico não significa que seja o único a trabalhar no mesmo, mas assume a responsabilidade de garantir que o mesmo contém tudo o que lhe é necessário para funcionar corretamente. ###
 
 ## Codificação ##
